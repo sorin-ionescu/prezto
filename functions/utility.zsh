@@ -46,6 +46,11 @@ function calc() {
   echo "scale=4; $@" | bc -l
 }
 
+function slit() {
+  # Print columns 1 2 3 ... n.
+  awk "{ print $(for n; do echo -n "\$$n,"; done | sed 's/,$//') }"
+}
+
 function pmine() {
   ps "$@" -u "$USER" -o pid,%cpu,%mem,command
 }
