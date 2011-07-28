@@ -2,16 +2,9 @@ setopt correct        # Correct commands.
 setopt correct_all    # Correct all arguments.
 
 # The 'ls' Family
-# ------------------------------------------------------------------------------
 if [[ "$DISABLE_COLOR" != 'true' ]]; then
-  if (( ${+commands[dircolors]} )); then
-    dircolors="${commands[dircolors]}"
-  fi
-  if (( ${+commands[gdircolors]} )); then
-    dircolors="${commands[gdircolors]}"
-  fi
-  if [[ -x "$dircolors" ]] && [[ -e "$HOME/.dir_colors" ]]; then
-    eval $("$dircolors" "$HOME/.dir_colors")
+  if [[ -f "$HOME/.dir_colors" ]] && ( (( $+commands[dircolors] )) || ( (( $+plugins[(er)gnu-utils] )) && (( $+commands[gdircolors] )) ) ); then
+    eval $("${commands[dircolors]:-$commands[gdircolors]}" "$HOME/.dir_colors")
     alias ls='ls -hF --group-directories-first --color=auto'
   else
     export CLICOLOR=1
@@ -20,6 +13,7 @@ if [[ "$DISABLE_COLOR" != 'true' ]]; then
   fi
 fi
 
+alias l1='ls -1A'            # Show files in one column.
 alias ll='ls -lh'            # Show human readable.
 alias la='ls -lhA'           # Show hidden files.
 alias lx='ls -lhXB'          # Sort by extension.
@@ -32,7 +26,6 @@ alias lr='ls -lhR'           # Recursive ls.
 alias sl='ls'                # I often screw this up.
 
 # General
-# ------------------------------------------------------------------------------
 alias cd='nocorrect cd'
 alias cp='nocorrect cp -i'
 alias find='noglob find'
@@ -43,43 +36,54 @@ alias mkdir='nocorrect mkdir -p'
 alias mv='nocorrect mv -i'
 alias rm='nocorrect rm -i'
 alias scp='nocorrect scp'
-alias du='du -kh'
 alias df='df -kh'
-alias pu='pushd'
+alias du='du -kh'
 alias po='popd'
+alias pu='pushd'
 alias _='sudo'
-alias o='open'
+alias b="$BROWSER"
 alias e="$EDITOR"
 alias v="$PAGER"
-alias b="$BROWSER"
 alias history='fc -l 1'
-alias get='curl -C - -O'
-alias afind='ack -il'
 alias type='type -a'
 alias ssh='ssh -X'
+
+# Mac OS X
+if [[ "$OSTYPE" != darwin* ]]; then
+  alias open='xdg-open'
+  alias get='wget --continue --progress=bar'
+
+  if (( $+commands[xclip] )); then
+    alias pbcopy='xclip -selection clipboard -in'
+    alias pbpaste='xclip -selection clipboard -out'
+  fi
+
+  if (( $+commands[xsel] )); then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+  fi
+else
+  alias get='curl --continue-at - --location --progress-bar --remote-name'
+fi
+
+alias o='open'
 alias pbc='pbcopy'
 alias pbp='pbpaste'
-alias print-path='echo -e ${PATH//:/\\n}'
-alias t="t --task-dir ~/.tasks --list todo.txt --delete-if-empty"
 
-(( $+commands[ebuild] )) && alias ebuild='nocorrect ebuild'
-(( $+commands[gist] )) && alias gist='nocorrect gist'
-(( $+commands[heroku] )) && alias heroku='nocorrect heroku'
-(( $+commands[hpodder] )) && alias hpodder='nocorrect hpodder'
-(( $+commands[mysql] )) && alias mysql='nocorrect mysql'
-
-if [[ -x "${commands[htop]}" ]]; then
+# Top
+if (( $+commands[htop] )); then
   alias top=htop
 else
   alias topm='top -o vsize'
   alias topc='top -o cpu'
 fi
 
+# Diff/Make
 if [[ "$DISABLE_COLOR" != 'true' ]]; then
-  if [[ -x "${commands[colordiff]}" ]]; then
+  if (( $+commands[colordiff] )); then
     alias diff='colordiff -u'
     compdef colordiff=diff
-  elif [[ -x "${commands[git]}" ]]; then
+  elif (( $+commands[git] )); then
     function diff() {
       git --no-pager diff --color=always --no-ext-diff --no-index "$@";
     }
@@ -88,7 +92,7 @@ if [[ "$DISABLE_COLOR" != 'true' ]]; then
     alias diff='diff -u'
   fi
 
-  if [[ -x "${commands[colormake]}" ]]; then
+  if (( $+commands[colormake] )); then
     alias make='colormake'
     compdef colormake=make
   fi
@@ -98,5 +102,17 @@ fi
 alias sl="screen -list"
 alias sr="screen -a -A -U -D -R"
 alias sn="screen -U -S"
-alias tl="tmux list-sessions"
+
+if (( $+commands[tmux] )); then
+  alias tl="tmux list-sessions"
+  alias ta="tmux attach-session"
+fi
+
+# Miscellaneous
+(( $+commands[ack] )) && alias afind='ack -il'
+(( $+commands[ebuild] )) && alias ebuild='nocorrect ebuild'
+(( $+commands[gist] )) && alias gist='nocorrect gist'
+(( $+commands[heroku] )) && alias heroku='nocorrect heroku'
+(( $+commands[hpodder] )) && alias hpodder='nocorrect hpodder'
+(( $+commands[mysql] )) && alias mysql='nocorrect mysql'
 
