@@ -1,19 +1,20 @@
-# Rails 3 aliases, backwards-compatible with Rails 2.
+# Aliases (compatible with Rails 2)
+alias rc='_rails-command console'
+alias rd='_rails-command destroy'
+alias rdb='_rails-command dbconsole'
+alias rdbm='rake db:migrate db:test:clone'
+alias rg='_rails-command generate'
+alias rp='_rails-command plugin'
+alias rs='_rails-command server'
+alias rsd='_rails-command server --debugger'
+alias devlog='tail -f log/development.log'
 
-function _rails_command () {
-  if [ -e "script/server" ]; then
+# Functions
+function _rails-command() {
+  if [[ -e "script/server" ]]; then
     ruby script/$@
   else
     ruby script/rails $@
   fi
 }
 
-alias rc='_rails_command console'
-alias rd='_rails_command destroy'
-alias rdb='_rails_command dbconsole'
-alias rdbm='rake db:migrate db:test:clone'
-alias rg='_rails_command generate'
-alias rp='_rails_command plugin'
-alias rs='_rails_command server'
-alias rsd='_rails_command server --debugger'
-alias devlog='tail -f log/development.log'

@@ -1,3 +1,4 @@
+# Aliases
 alias ss='thin --stats "/thin/stats" start'
 alias sg='ruby script/generate'
 alias sd='ruby script/destroy'
@@ -8,6 +9,8 @@ alias sc='ruby script/console'
 alias sd='ruby script/server --debugger'
 alias devlog='tail -f log/development.log'
 
-function remote_console() {
-  /usr/bin/env ssh $1 "( cd $2 && ruby script/console production )"
+# Functions
+function rails-remote-console() {
+  /usr/bin/env ssh "$1" "( cd "$2" && ruby script/console production )"
 }
+

@@ -3,7 +3,7 @@
 # cloudapp
 # Zach Holman / @holman
 #
-# Uploads a file from the command line to CloudApp, drops it into your 
+# Uploads a file from the command line to CloudApp, drops it into your
 # clipboard (on a Mac, at least).
 #
 # Example:
@@ -37,8 +37,7 @@ end
 email,password = File.read(config_file).split("\n")
 
 class HTTParty::Response
-  # Apparently HTTPOK.ok? IS NOT OKAY WTFFFFFFFFFFUUUUUUUUUUUUUU
-  # LETS MONKEY PATCH IT I FEEL OKAY ABOUT IT
+  # Apparently 'HTTPOK.ok?' is not ok; monkey patch it.
   def ok? ; true end
 end
 
@@ -50,7 +49,7 @@ end
 CloudApp.authenticate(email,password)
 url = CloudApp::Item.create(:upload, {:file => ARGV[0]}).url
 
-# Say it for good measure.
+# Say it for good measure
 puts "Uploaded to #{url}."
 
 # Get the embed link.
@@ -58,3 +57,4 @@ url = "#{url}/#{ARGV[0].split('/').last}"
 
 # Copy it to your (Mac's) clipboard.
 `echo '#{url}' | tr -d "\n" | pbcopy`
+
