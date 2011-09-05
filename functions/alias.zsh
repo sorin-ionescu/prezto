@@ -98,16 +98,6 @@ if ! check-bool "$DISABLE_COLOR"; then
   fi
 fi
 
-# Terminal Multiplexer
-alias sl="screen -list"
-alias sr="screen -a -A -U -D -R"
-alias sn="screen -U -S"
-
-if (( $+commands[tmux] )); then
-  alias tl="tmux list-sessions"
-  alias ta="tmux attach-session"
-fi
-
 # Miscellaneous
 (( $+commands[ack] )) && alias afind='ack -il'
 (( $+commands[ebuild] )) && alias ebuild='nocorrect ebuild'
