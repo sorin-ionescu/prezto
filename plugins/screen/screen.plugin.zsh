@@ -11,7 +11,7 @@ alias sr="screen -a -A -U -D -R"
 alias sn="screen -U -S"
 
 # Auto
-if (( $SHLVL == 1 )) && ! check-bool "$DISABLE_AUTO_SCREEN"; then
+if (( $SHLVL == 1 )) && check-bool "$AUTO_SCREEN"; then
   (( SHLVL += 1 )) && export SHLVL
   session="$(screen -list 2> /dev/null | sed '1d;$d' | awk '{print $1}' | head -1)"
   if [[ -n "$session" ]]; then
