@@ -41,7 +41,7 @@ function _bundler-within-bundled-project() {
 }
 
 function _bundler-run() {
-  if _bundler-installed && __bundler-within-bundled-project; then
+  if _bundler-installed && _bundler-within-bundled-project; then
     bundle exec $@
   else
     $@
