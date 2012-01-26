@@ -19,7 +19,7 @@ function upgrade_zsh() {
   current_path=`pwd`
   cd ~/.oh-my-zsh
 
-  zstyle -t ':omz:plugin:upgrade' auto-commit || nocommit='--no-commit'
+  zstyle -t ':omz:plugin:update-omz' auto-commit || local nocommit='--no-commit'
 
   if git pull $nocommit --strategy=recursive -X ours origin master; then
     zstyle -t ':omz:plugin:upgrade' color && printf '\033[0;34m%s\033[0m\n'
