@@ -16,8 +16,8 @@
 #   auto-upgrade will check for updates 6 hours from the last successful upgrade
 
 function upgrade_zsh() {
-  current_path=`pwd`
   cd ~/.oh-my-zsh
+  current_path=$PWD
 
   zstyle -t ':omz:plugin:update-omz' auto-commit || local nocommit='--no-commit'
 
