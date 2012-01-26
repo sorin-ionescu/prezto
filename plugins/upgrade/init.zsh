@@ -30,7 +30,7 @@ function upgrade_zsh() {
     zstyle -t ':omz:plugin:update-omz' color && printf "$FG[red]"
   fi
 
-  cd $current_path
+  cd "$current_path"
 }
 
 if zstyle -t ':omz:plugin:upgrade' auto-upgrade; then
