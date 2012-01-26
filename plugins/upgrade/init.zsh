@@ -22,10 +22,12 @@ function upgrade_zsh() {
   zstyle -t ':omz:plugin:upgrade' auto-commit || nocommit='--no-commit'
 
   if git pull $nocommit --strategy=recursive -X ours origin master; then
-    printf '\033[0;34m%s\033[0m\n' 'Hooray! oh-my-zsh is up-to-date :)'
+    zstyle -t ':omz:plugin:upgrade' color && printf '\033[0;34m%s\033[0m\n'
+    printf 'Hooray! oh-my-zsh is up-to-date :)'
     touch ~/.zsh-upgrade
   else
-    printf '\033[0;31m%s\033[0m\n' 'Oh no! There was an error upgrading oh-my-zsh :('
+    zstyle -t ':omz:plugin:upgrade' color && printf '\033[0;31m%s\033[0m\n'
+    printf 'Oh no! There was an error upgrading oh-my-zsh :('
   fi
 
   cd $current_path
