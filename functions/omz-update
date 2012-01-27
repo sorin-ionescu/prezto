@@ -1,0 +1,49 @@
+# Sorin Ionescu <sorin.ionescu@gmail.com>
+
+local remote_name
+local remote_branch
+local auto_commit
+local use_color
+
+zstyle -s ':omz:updater:remote' name 'remote_name'
+zstyle -s ':omz:updater:remote' branch 'remote_branch'
+zstyle -t ':omz:updater:auto' commit && auto_commit='yes'
+zstyle -t ':omz:updater:*' color && use_color='yes'
+
+if ! git \
+      --git-dir="${OMZ}/.git" \
+      --work-tree="$OMZ" \
+      pull \
+      "${auto_commit:---no-commit}" \
+      --strategy=recursive \
+      -X ours \
+      "${remote_name:-origin}" \
+      "${remote_branch:-master}" 2> /dev/null
+then
+  is-true "$use_color" && printf "$FG[red]"
+  print 'There was an error updating. Try again later?'
+  is-true "$use_color" && printf "$FG[none]"
+  return 1
+fi
+
+is-true "$use_color" && printf "$FG[green]"
+printf '%s' \
+'          __                                        __       __
+  ____   / /_     ____ ___   __  __   ____   _____ / /_     / /
+ / __ \ / __ \   / __ `__ \ / / / /  /_  /  / ___// __ \   / /
+/ /_/ // / / /  / / / / / // /_/ /    / /_ (__  )/ / / /  /_/
+\____//_/ /_/  /_/ /_/ /_/ \__, /    /___//____//_/ /_/  (_)
+                          /____/
+'
+is-true "$use_color" && printf "$FG[cyan]"
+print
+print 'Oh My Zsh has been updated to the latest version.'
+print 'Follow us on Twitter: http://twitter.com/ohmyzsh.'
+if ! is-true "$auto_commit"; then
+  is-true "$use_color" && printf "$FG[yellow]"
+  print
+  print 'Updates must be manually commited.'
+fi
+print
+is-true "$use_color" && printf "$FG[none]"
+return 0

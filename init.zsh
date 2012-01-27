@@ -88,6 +88,21 @@ zstyle -a ':omz:prompt' theme 'prompt_argv'
 prompt "$prompt_argv[@]"
 unset prompt_argv
 
+# Auto-update Zsh every week.
+omz_update="$HOME/.zomzupdate"
+if zstyle -t ':omz:updater:auto' update; then
+  # Initialize the update reminder.
+  if [[ ! -f "$omz_update" ]]; then
+    touch "$omz_update"
+  fi
+
+  # Check for update every 7 days.
+  if [ "$omz_update"(Nmd+7)  ]; then
+    update-omz && touch "$omz_update"
+  fi
+fi
+unset omz_update
+
 # Compile the completion dump, to increase startup speed.
 dump_file="$HOME/.zcompdump"
 if [[ "$dump_file" -nt "${dump_file}.zwc" || ! -f "${dump_file}.zwc" ]]; then
