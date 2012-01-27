@@ -15,7 +15,7 @@
 #
 #   ( [ ! -f ~/.omz-update ] || [ ~/.omz-update(Nmh+6) ] ) && update-omz && touch ~/.omz-update
 
-current_path=$PWD
+local current_path=$PWD
 cd $OMZ_HOME
 
 zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
