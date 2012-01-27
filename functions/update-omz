@@ -1,11 +1,19 @@
 # Update OMZ
 # Jonathan Dahan <jonathan@jedahan.com>
 
-# To auto-commit changes from upstream without review (dangerous!), add to your zshrc:
+# There are two options that can be added to your zshrc
 #
-# zstyle ':omz:function:update-omz' auto-commit 'yes'
+# If upstream is a branch other than origin, add
 #
-# This will still favor local changes when there are conflicts
+#   zstyle ':omz:function:update-omz' upstream 'my-upstream-branch'
+#
+# To automatically commit from upstream, add
+#
+#   zstyle ':omz:function:update-omz' auto-commit 'yes'
+#
+# If you really need auto-updating and do not care about losing data, try
+#
+#   ( [ ! -f ~/.omz-update ] || [ ~/.omz-update(Nmh+6) ] ) && update-omz && touch ~/.omz-update
 
 current_path=$PWD
 cd $OMZ_HOME
