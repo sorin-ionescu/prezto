@@ -7,7 +7,7 @@
 # This will still favor local changes when there are conflicts
 
 current_path=$PWD
-cd $HOME/.oh-my-zsh
+cd $OMZ_HOME
 
 zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
 
