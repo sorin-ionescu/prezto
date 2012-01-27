@@ -1,5 +1,8 @@
 # Initializes Oh My Zsh.
 
+# Set the path to OMZ.
+export OMZ="${0:h}"
+
 # Check for the minimum supported version.
 min_zsh_version='4.3.10'
 if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
@@ -18,9 +21,9 @@ zstyle -a ':omz:load' plugin 'plugins'
 
 # Add functions to fpath.
 fpath=(
-  ${0:h}/themes/*(/FN)
-  ${plugins:+${0:h}/plugins/${^plugins}/{functions,completions}(/FN)}
-  ${0:h}/{functions,completions}(/FN)
+  ${OMZ}/themes/*(/FN)
+  ${plugins:+${OMZ}/plugins/${^plugins}/{functions,completions}(/FN)}
+  ${OMZ}/{functions,completions}(/FN)
   $fpath
 )
 
@@ -28,16 +31,16 @@ fpath=(
 autoload -Uz compinit && compinit -i
 
 # Source files (the order matters).
-source "${0:h}/helper.zsh"
-source "${0:h}/environment.zsh"
-source "${0:h}/terminal.zsh"
-source "${0:h}/keyboard.zsh"
-source "${0:h}/completion.zsh"
-source "${0:h}/history.zsh"
-source "${0:h}/directory.zsh"
-source "${0:h}/alias.zsh"
-source "${0:h}/spectrum.zsh"
-source "${0:h}/utility.zsh"
+source "${OMZ}/helper.zsh"
+source "${OMZ}/environment.zsh"
+source "${OMZ}/terminal.zsh"
+source "${OMZ}/keyboard.zsh"
+source "${OMZ}/completion.zsh"
+source "${OMZ}/history.zsh"
+source "${OMZ}/directory.zsh"
+source "${OMZ}/alias.zsh"
+source "${OMZ}/spectrum.zsh"
+source "${OMZ}/utility.zsh"
 
 # Autoload Zsh functions.
 autoload -Uz age
@@ -49,19 +52,19 @@ autoload -Uz zmv
 for plugin in "$plugins[@]"; do
   zstyle ":omz:plugin:$plugin" enable 'yes'
 
-  if [[ ! -d "${0:h}/plugins/$plugin" ]]; then
+  if [[ ! -d "${OMZ}/plugins/$plugin" ]]; then
     print "omz: no such plugin: $plugin" >&2
   fi
 
-  if [[ -f "${0:h}/plugins/$plugin/init.zsh" ]]; then
-    source "${0:h}/plugins/$plugin/init.zsh"
+  if [[ -f "${OMZ}/plugins/$plugin/init.zsh" ]]; then
+    source "${OMZ}/plugins/$plugin/init.zsh"
   fi
 done
 unset plugin plugins
 
 # Autoload Oh My Zsh functions.
 for fdir in "$fpath[@]"; do
-  if [[ "$fdir" == ${0:h}/(|*/)functions ]]; then
+  if [[ "$fdir" == ${OMZ}/(|*/)functions ]]; then
     for func in $fdir/[^_.]*(N.:t); do
       autoload -Uz $func
     done
