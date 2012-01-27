@@ -14,7 +14,6 @@ zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
 if git pull $nocommit --strategy=recursive -X ours origin master; then
   zstyle -t ':omz:function:update-omz' color && printf "$FG[blue]"
   printf 'Hooray! oh-my-zsh is up-to-date :)'
-  touch ~/.omz-update
 else
   zstyle -t ':omz:function:update-omz' color && printf "$FG[red]"
   printf 'Oh no! There was an error updating oh-my-zsh :('
