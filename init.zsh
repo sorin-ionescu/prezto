@@ -27,6 +27,9 @@ fpath=(
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
+# Export OMZ_HOME as the current directory.
+export OMZ_HOME=~+
+
 # Source files (the order matters).
 source "${0:h}/helper.zsh"
 source "${0:h}/environment.zsh"
