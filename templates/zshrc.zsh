@@ -28,6 +28,18 @@ zstyle ':omz:load' plugin 'archive' 'git'
 # Auto set to 'off' on dumb terminals.
 zstyle ':omz:prompt' theme 'sorin'
 
+# Auto update to the latest version.
+zstyle ':omz:updater:auto' update 'no'
+
+# Auto commit updated files without review.
+zstyle ':omz:updater:auto' commit 'no'
+
+# Set the name of the update remote.
+zstyle ':omz:updater:remote' name 'origin'
+
+# Set the branch of the update remote.
+zstyle ':omz:updater:remote' branch 'master'
+
 # This will make you shout: OH MY ZSHELL!
 source "$HOME/.oh-my-zsh/init.zsh"
 
