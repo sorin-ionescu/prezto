@@ -11,8 +11,9 @@ current_path=$PWD
 cd $OMZ_HOME
 
 zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
+zstyle -t ':omz:function:update-omz' upstream '_upstream'
 
-if git pull $nocommit --strategy=recursive -X ours origin master; then
+if git pull $nocommit --strategy=recursive -X ours ${_upstream:-origin} master; then
   zstyle -t ':omz:function:update-omz' color && printf "$FG[blue]"
   printf 'Hooray! oh-my-zsh is up-to-date :)'
 else
