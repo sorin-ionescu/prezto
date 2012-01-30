@@ -15,11 +15,11 @@
 #
 #   ( [ ! -f ~/.omz-update ] || [ ~/.omz-update(Nmh+6) ] ) && update-omz && touch ~/.omz-update
 
-local current_path=$PWD
-cd $OMZ_HOME
-
 zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
 zstyle -t ':omz:function:update-omz' upstream '_upstream'
+
+local current_path=$PWD
+cd $OMZ_HOME || return 1
 
 if git pull --rebase $nocommit --strategy=recursive -X ours ${_upstream:-origin} master && git submodule update --recursive; then
   zstyle -t ':omz:function:update-omz' color && printf "$FG[blue]"
@@ -29,4 +29,4 @@ else
   printf 'Oh no! There was an error updating oh-my-zsh :(\n'
 fi
 
-cd "$current_path"
+cd "$current_path" || return 1
