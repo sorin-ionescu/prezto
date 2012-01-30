@@ -17,16 +17,18 @@
 
 zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
 zstyle -t ':omz:function:update-omz' upstream '_upstream'
+zstyle -t ':omz:function:update-omz' color '_color'
 
 local current_path=$PWD
 cd $OMZ_HOME || return 1
 
 if git pull --rebase $nocommit --strategy=recursive -X ours ${_upstream:-origin} master && git submodule update --recursive; then
-  zstyle -t ':omz:function:update-omz' color && printf "$FG[blue]"
+  is-true _color && printf "$FG[blue]"
   printf 'Hooray! oh-my-zsh is up-to-date :)\n'
 else
-  zstyle -t ':omz:function:update-omz' color && printf "$FG[red]"
+  is-true _color && printf "$FG[red]"
   printf 'Oh no! There was an error updating oh-my-zsh :(\n'
 fi
 
+unset _color
 cd "$current_path" || return 1
