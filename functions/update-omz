@@ -31,4 +31,5 @@ else
 fi
 
 unset _color
+unset _upstream
 cd "$current_path" || return 1
