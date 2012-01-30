@@ -1,0 +1,35 @@
+# Update OMZ
+# Jonathan Dahan <jonathan@jedahan.com>
+
+# There are two options that can be added to your zshrc
+#
+# If upstream is a branch other than origin, add
+#
+#   zstyle ':omz:function:update-omz' upstream 'my-upstream-branch'
+#
+# To automatically commit from upstream, add
+#
+#   zstyle ':omz:function:update-omz' auto-commit 'yes'
+#
+# If you really need auto-updating and do not care about losing data, try
+#
+#   ( [ ! -f ~/.omz-update ] || [ ~/.omz-update(Nmh+6) ] ) && update-omz && touch ~/.omz-update
+
+zstyle -t ':omz:function:update-omz' auto-commit || local nocommit='--no-commit'
+zstyle -t ':omz:function:update-omz' upstream '_upstream'
+zstyle -t ':omz:function:update-omz' color '_color'
+
+local current_path=$PWD
+cd $OMZ_HOME || return 1
+
+if git pull --rebase $nocommit --strategy=recursive -X ours ${_upstream:-origin} master && git submodule update --recursive; then
+  is-true _color && printf "$FG[blue]"
+  printf 'Hooray! oh-my-zsh is up-to-date :)\n'
+else
+  is-true _color && printf "$FG[red]"
+  printf 'Oh no! There was an error updating oh-my-zsh :(\n'
+fi
+
+unset _color
+unset _upstream
+cd "$current_path" || return 1
