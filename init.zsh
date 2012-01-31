@@ -104,7 +104,7 @@ if zstyle -t ':omz:updater:auto' update; then
 
   # Check for update every 7 days.
   if [ "$omz_update"(Nm+7)  ]; then
-    update-omz && touch "$omz_update"
+    omz-update && touch "$omz_update"
   fi
 fi
 unset omz_update
