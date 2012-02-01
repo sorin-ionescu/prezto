@@ -14,7 +14,7 @@ if ! git \
       --git-dir="${OMZ}/.git" \
       --work-tree="$OMZ" \
       pull \
-      "${auto_commit:---no-commit}" \
+      $(is-true auto_commit || echo --no-commit) \
       --strategy=recursive \
       -X ours \
       "${remote_name:-origin}" \
