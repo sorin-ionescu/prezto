@@ -1,0 +1,50 @@
+#
+# A verbose theme
+#
+# Authors:
+#   Samuel Clements <samuel@borntyping.co.uk>
+#
+
+# Get the current directory and collapse $HOME to ~
+function collapse_pwd {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
+# Get the current battery charge
+function battery_charge {
+    echo `~/bin/charge.py` 2>/dev/null
+}
+
+# Echo a diffrent character if the current dir is a git repository
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    echo '○'
+}
+
+function prompt_twain_setup() {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+    prompt_opts=(cr percent subst)
+
+    autoload -Uz add-zsh-hook
+    autoload -Uz vcs_info
+    
+    add-zsh-hook precmd vcs_info
+
+    zstyle ':omz:completion' indicator '%B%F{red}...%f%b'
+    
+    zstyle ':vcs_info:*' enable git svn hg bzr
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:*' stagedstr '%B%F{green}+%f%b'
+    zstyle ':vcs_info:*' unstagedstr '%B%F{red}+%f%b'
+    zstyle ':vcs_info:*' formats 'on branch %F{blue}%r:%b%f%c%u '
+    zstyle ':vcs_info:*' actionformats 'on branch %F{blue}%r:%b%f%c%u %F{cyan}%a%f '
+
+    # %F{red}%n%f at %F{yellow}%m%f in 
+    PROMPT='%B%F{blue}${PWD/#$HOME/~}%f%b ${vcs_info_msg_0_}❯  '
+    RPROMPT='%(?..[ %F{red}%?%f ] )$(battery_charge)'
+    SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f? '
+}
+
+prompt_twain_setup "$@"
+
