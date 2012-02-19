@@ -63,7 +63,7 @@ for path_file in /etc/paths.d/*(.N); do
 done
 
 # Language
-export LANG="en_AU.UTF-8"
+export LANG="en_US.UTF-8"
 export LC_ALL="$LANG"
 export LC_COLLATE="$LANG"
 export LC_CTYPE="$LANG"
