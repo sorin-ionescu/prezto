@@ -11,14 +11,12 @@ function collapse_pwd {
 }
 
 # Get the current battery charge
+# Requires a script that returns a battery meter
 function battery_charge {
-    echo `~/bin/charge.py` 2>/dev/null
-}
-
-# Echo a diffrent character if the current dir is a git repository
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    echo '○'
+    CHARGE_SCRIPT="~/bin/charge.py"
+    if [[ -a $CHARGE_SCRIPT ]]; then
+        echo `$(CHARGE_SCRIPT)` 2>/dev/null
+    fi
 }
 
 function prompt_twain_setup() {
