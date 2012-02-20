@@ -1,22 +1,16 @@
 #
-# A verbose theme
+# A light theme showing only the needed information.
 #
 # Authors:
 #   Samuel Clements <samuel@borntyping.co.uk>
 #
+# Screenshot:
+#   
+#
 
-# Get the current directory and collapse $HOME to ~
-function collapse_pwd {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
-
-# Get the current battery charge
-# Requires a script that returns a battery meter
 function battery_charge {
-    CHARGE_SCRIPT="~/bin/charge.py"
-    if [[ -a $CHARGE_SCRIPT ]]; then
-        echo `$(CHARGE_SCRIPT)` 2>/dev/null
-    fi
+    # Get the current battery charge
+    echo `python ~/.oh-my-zsh/themes/twain/charge.py` 2>/dev/null
 }
 
 function prompt_twain_setup() {
@@ -38,8 +32,9 @@ function prompt_twain_setup() {
     zstyle ':vcs_info:*' formats 'on branch %F{blue}%r:%b%f%c%u '
     zstyle ':vcs_info:*' actionformats 'on branch %F{blue}%r:%b%f%c%u %F{cyan}%a%f '
 
-    # %F{red}%n%f at %F{yellow}%m%f in 
-    PROMPT='%B%F{blue}${PWD/#$HOME/~}%f%b ${vcs_info_msg_0_}❯  '
+    PROMPT='%B%F{blue}%~%f%b ${vcs_info_msg_0_}❯  '
+    # Uncomment to add 'user at host ' to the prompt
+    #PROMPT='%F{red}%n%f at %F{yellow}%m%f in $(PROMPT)'
     RPROMPT='%(?..[ %F{red}%?%f ] )$(battery_charge)'
     SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f? '
 }
