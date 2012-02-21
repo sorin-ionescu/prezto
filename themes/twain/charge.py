@@ -2,11 +2,12 @@
 # coding=UTF-8
 """	Prints a battery meter for use in a zsh theme """
 
-import math, sys
+import sys
 
 """ Config """
 
 output_length = 10
+hide_when_charge_is_above = 95
 blank_when_battery_full = True
 filled_char, empty_char = u'▪', u'▫'
 
@@ -24,8 +25,8 @@ def read_battery_percent ():
 
 charge = read_battery_percent()
 
-if not(blank_when_battery_full == True and charge == 100):
-	filled	= int(math.ceil(charge / output_length))
+if charge < hide_when_charge_is_above:
+	filled	= int(charge / output_length)
 	empty	= output_length - filled
 	meter	= (filled * filled_char + empty * empty_char).encode('utf-8')
 
