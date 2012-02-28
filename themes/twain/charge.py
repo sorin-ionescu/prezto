@@ -13,17 +13,20 @@ filled_char, empty_char = u'▪', u'▫'
 
 """ Read battery charge """
 
-def read_battery_percent ():
-	"""	Reads the battery charge as an integer between 0 and 100,
-		using 'acpi -b'	"""
+def read_battery_percent (sp, regex):
 	import subprocess, re
-	process = subprocess.Popen(["acpi", "-b"], stdout=subprocess.PIPE)
+	process = subprocess.Popen(sp, stdout=subprocess.PIPE)
 	output = process.communicate()[0].strip()
-	return int(re.search("^Battery 0: .+, ([\d]+)\%",output).group(1))
+	return int(re.search(regex,output).group(1))
+
+if sys.platform.startswith('darwin'):
+	"""	Reads the battery charge as an integer between 0 and 100, using 'pmset -g batt' """
+	charge = read_battery_percent(["pmset", "-g", "batt"], "^.+([\d]+)\%")
+else:
+	"""	Reads the battery charge as an integer between 0 and 100, using 'acpi -b' """
+	charge = read_battery_percent(["acpi", "-b"], "^Battery 0: .+, ([\d]+)\%")
 
 """ Output """
-
-charge = read_battery_percent()
 
 if charge < hide_when_charge_is_above:
 	filled	= int(charge / output_length)
