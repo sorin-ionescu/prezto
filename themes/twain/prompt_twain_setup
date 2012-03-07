@@ -1,11 +1,22 @@
 #
-# A light theme showing only the needed information.
+# A light theme showing only minimal information in colour:
+# - Current directory, optionally prefixed with the user and host
+# - Git repo and branch, with markers for staged and unstaged changes.
+# - Battery change meter on the right, with colour based on charge,
+#   and only appearing when battery is below 90% charge.
 #
 # Authors:
 #   Samuel Clements <samuel@borntyping.co.uk>
 #
-# Screenshot:
-#   http://i.imgur.com/JSFRj.png   
+# Screenshots:
+#   http://misc.borntyping.co.uk/twain-screenshots/Twain.png
+#
+#   http://misc.borntyping.co.uk/twain-screenshots/Repo.png
+#   http://misc.borntyping.co.uk/twain-screenshots/Repo%20%28with%20markers%29.png
+#
+#   http://misc.borntyping.co.uk/twain-screenshots/Charge25.png
+#   http://misc.borntyping.co.uk/twain-screenshots/Charge50.png
+#   http://misc.borntyping.co.uk/twain-screenshots/Charge75.png
 #
 
 function battery_charge {
