@@ -38,7 +38,7 @@ function _ssh-agent-start() {
   if [[ ! -n "${identities}" ]]; then
     ssh-add
   else
-    ssh-add "${HOME}/.ssh/${^identities}"
+    ssh-add "${HOME}/.ssh/${^identities[@]}"
   fi
 }
 
