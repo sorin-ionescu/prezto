@@ -278,12 +278,12 @@ function git-info() {
         branch="$match[1]"
       fi
     else
-      # Count added, deleted, modified, renamed, unmerged, untracked, dirty.
-      [[ "$line" == (((A|M|D|T) )|(AD|AM|AT|MM))\ * ]] && (( added++ ))
-      [[ "$line" == ( D|AD)\ * ]] && (( deleted++ ))
-      [[ "$line" == (( (M|T))|(AM|AT|MM))\ * ]] && (( modified++ ))
-      [[ "$line" == R\ \ * ]] && (( renamed++ ))
-      [[ "$line" == UU\ * ]] && (( unmerged++ ))
+      # Count: added/deleted/modified/renamed/unmerged/untracked
+      [[ "$line" == (A|M|D|C)[MD\ ]\ * ]] && (( added++ ))
+      [[ "$line" == [\ MARC]D\ * ]] && (( deleted++ ))
+      [[ "$line" == ?M\ * ]] && (( modified++ ))
+      [[ "$line" == R?\ * ]] && (( renamed++ ))
+      [[ "$line" == (?U|U?|AA|DD)\ * ]] && (( unmerged++ ))
       [[ "$line" == \?\?\ * ]] && (( untracked++ ))
       (( dirty++ ))
     fi
