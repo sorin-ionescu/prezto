@@ -88,6 +88,7 @@ autoload -Uz promptinit && promptinit
 
 # Load the prompt theme.
 zstyle -a ':omz:prompt' theme 'prompt_argv'
+[[ ${#prompt_argv} == 0 ]] && prompt_argv=("off")
 prompt "$prompt_argv[@]"
 unset prompt_argv
 
