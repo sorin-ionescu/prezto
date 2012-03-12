@@ -80,7 +80,7 @@ if (( $+commands[xdg-open] )); then
   export BROWSER='xdg-open'
 fi
 
-if (( $+commands[open] )); then
+if [[ $OSTYPE == darwin && 1 == $+commands[open] ]]; then
   export BROWSER='open'
 fi
 
