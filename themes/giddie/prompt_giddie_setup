@@ -20,7 +20,7 @@ function prompt_giddie_precmd {
   vcs_info
 
   # Replace "/home/<user>" with "~"
-  prompt_custom_wd=${PWD/$HOME\//\~/}
+  prompt_custom_wd=${PWD/$HOME/\~}
 
   # Choose prompt symbol based on whether on not we're in a repository.
   { git branch 2>&1 } >/dev/null
