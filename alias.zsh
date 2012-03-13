@@ -15,7 +15,12 @@ if zstyle -t ':omz:alias:ls' color; then
   else
     export CLICOLOR=1
     export LSCOLORS="exfxcxdxbxegedabagacad"
-    alias ls='ls -G -F'
+    ls --color -d . &>/dev/null 2>&1
+    if [[ $? == 0 ]]; then
+      alias ls='ls --color=auto -F'
+    else
+      alias ls='ls -GF'
+    fi
   fi
 fi
 
