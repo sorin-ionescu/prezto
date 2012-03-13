@@ -1,5 +1,13 @@
 #
-# A theme based on "sorin" theme.
+# Simple, colourful and one-line theme.
+# Based on "sorin" theme.
+#
+# Authors:
+#   Paul Miller <paul@paulmillr.com>
+#
+# Screenshots:
+#   
+#   http://cl.ly/0Y3N0O2C3u1A1K3D3A00/screen.png
 #
 
 function prompt_steeef_precmd() {
