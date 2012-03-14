@@ -172,6 +172,7 @@ function git-info() {
   local git_info_var
   local -A git_info_vars
   local status_cmd
+  local remote_cmd
   local ignore_submodule
   local ignore_submodule_when
 
@@ -205,6 +206,8 @@ function git-info() {
 
   # Use short status for easy parsing.
   status_cmd='git status --short --branch'
+  # Get remote's name.
+  remote_cmd='git rev-parse --verify HEAD@{upstream} --symbolic-full-name'
 
   # Ignore submodule status.
   zstyle -b \
@@ -290,26 +293,23 @@ function git-info() {
     zformat -f branch_formatted "$branch_format" "b:$branch"
 
     # Format remote.
-    if [[ -z "$remote" ]]; then
-      remote="${$( \
-        git rev-parse \
-          --verify ${branch}@{upstream} \
-          --symbolic-full-name 2>/dev/null)#refs/remotes/}"
+    remote=${$(${(z)remote_cmd} 2>/dev/null)##refs/remotes/}
+    if [[ -n "$remote" ]]; then
+      zstyle -s ':omz:plugin:git:prompt' remote 'remote_format'
+      zformat -f remote_formatted "$remote_format" "R:$remote"
     fi
-    zstyle -s ':omz:plugin:git:prompt' remote 'remote_format'
-    zformat -f remote_formatted "$remote_format" "R:$remote"
-  fi
 
-  # Format ahead.
-  if [[ -n "$ahead" ]]; then
-    zstyle -s ':omz:plugin:git:prompt' ahead 'ahead_format'
-    zformat -f ahead_formatted "$ahead_format" "A:$ahead"
-  fi
+    # Format ahead.
+    if [[ -n "$ahead" ]]; then
+      zstyle -s ':omz:plugin:git:prompt' ahead 'ahead_format'
+      zformat -f ahead_formatted "$ahead_format" "A:$ahead"
+    fi
 
-  # Format behind.
-  if [[ -n "$behind" ]]; then
-    zstyle -s ':omz:plugin:git:prompt' behind 'behind_format'
-    zformat -f behind_formatted "$behind_format" "B:$behind"
+    # Format behind.
+    if [[ -n "$behind" ]]; then
+      zstyle -s ':omz:plugin:git:prompt' behind 'behind_format'
+      zformat -f behind_formatted "$behind_format" "B:$behind"
+    fi
   fi
 
   # Format added.
