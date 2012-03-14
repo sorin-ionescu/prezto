@@ -273,19 +273,22 @@ function git-info() {
       elif [[ "$branch_info[2]" == (#b)(?##) ]]; then
         branch="$match[1]"
       fi
-    else
-      # Count added, deleted, modified, renamed, unmerged, untracked, dirty.
-      # T (type change) is undocumented, see http://git.io/FnpMGw.
-      # For a table of scenarii, see http://i.imgur.com/2YLu1.png.
-      [[ "$line" == ([ACDMT][\ MT]|[ACMT]D)\ * ]] && (( added++ ))
-      [[ "$line" == [\ ACMRT]D\ * ]] && (( deleted++ ))
-      [[ "$line" == ?[MT]\ * ]] && (( modified++ ))
-      [[ "$line" == R?\ * ]] && (( renamed++ ))
-      [[ "$line" == (AA|DD|U?|?U)\ * ]] && (( unmerged++ ))
-      [[ "$line" == \?\?\ * ]] && (( untracked++ ))
-      (( dirty++ ))
     fi
   done < <("${(z)status_cmd}" 2>/dev/null)
+
+  # Get current status.
+  while IFS=$'\n' read line; do
+    # Count added, deleted, modified, renamed, unmerged, untracked, dirty.
+    # T (type change) is undocumented, see http://git.io/FnpMGw.
+    # For a table of scenarii, see http://i.imgur.com/2YLu1.png.
+    [[ "$line" == ([ACDMT][\ MT]|[ACMT]D)\ * ]] && (( added++ ))
+    [[ "$line" == [\ ACMRT]D\ * ]] && (( deleted++ ))
+    [[ "$line" == ?[MT]\ * ]] && (( modified++ ))
+    [[ "$line" == R?\ * ]] && (( renamed++ ))
+    [[ "$line" == (AA|DD|U?|?U)\ * ]] && (( unmerged++ ))
+    [[ "$line" == \?\?\ * ]] && (( untracked++ ))
+    (( dirty++ ))
+  done < <(${(z)status_cmd} 2>/dev/null)
 
   # Format branch.
   if [[ -n "$branch" ]]; then
