@@ -142,6 +142,9 @@ function git-info {
   local modified=0
   local modified_format
   local modified_formatted
+  local position
+  local position_format
+  local position_formatted
   local prompt_format
   local remote
   local remote_cmd
@@ -274,6 +277,13 @@ function git-info {
         zformat -f behind_formatted "$behind_format" "B:$behind"
       fi
     fi
+  else
+    # Format position.
+    position="$(git describe --contains --all HEAD 2> /dev/null)"
+    if [[ -n "$position" ]]; then
+      zstyle -s ':omz:plugin:git:prompt' position 'position_format'
+      zformat -f position_formatted "$position_format" "p:$position"
+    fi
   fi
 
   # Format added.
@@ -329,19 +339,20 @@ function git-info {
 
   for git_info_var in ${(k)git_info_vars}; do
     zformat -f "$git_info_var" "$git_info_vars[$git_info_var]" \
-      "s:$action_formatted" \
-      "a:$added_formatted" \
       "A:$ahead_formatted" \
       "B:$behind_formatted" \
+      "D:$dirty_formatted" \
+      "R:$remote_formatted" \
+      "S:$stashed_formatted" \
+      "U:$unmerged_formatted" \
+      "a:$added_formatted" \
       "b:$branch_formatted" \
       "c:$commit_formatted" \
       "d:$deleted_formatted" \
-      "D:$dirty_formatted" \
       "m:$modified_formatted" \
-      "R:$remote_formatted" \
+      "p:$position_formatted" \
       "r:$renamed_formatted" \
-      "S:$stashed_formatted" \
-      "U:$unmerged_formatted" \
+      "s:$action_formatted" \
       "u:$untracked_formatted"
   done
 

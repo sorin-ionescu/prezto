@@ -32,6 +32,9 @@ zstyle ':omz:plugin:git:prompt' dirty 'dirty:%D'
 # %m - Indicator to notify of modified files.
 zstyle ':omz:plugin:git:prompt' modified 'modified:%m'
 
+# %p - HEAD position in relation to the nearest branch, remote, tag.
+zstyle ':omz:plugin:git:prompt' position '%p'
+
 # %R - Remote name.
 zstyle ':omz:plugin:git:prompt' remote '%R'
 
