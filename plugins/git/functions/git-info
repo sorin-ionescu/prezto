@@ -279,9 +279,10 @@ function git-info() {
       fi
     else
       # Count: added/deleted/modified/renamed/unmerged/untracked
-      [[ "$line" == (A|M|D|C)[MD\ ]\ * ]] && (( added++ ))
+      # T (type change) is undocumented, see https://raw.github.com/gitster/git/master/Documentation/RelNotes/1.7.8.2.txt
+      [[ "$line" == (A|M|D|C|T)[MD\ ]\ * ]] && (( added++ ))
       [[ "$line" == [\ MARC]D\ * ]] && (( deleted++ ))
-      [[ "$line" == ?M\ * ]] && (( modified++ ))
+      [[ "$line" == ?[M|T]\ * ]] && (( modified++ ))
       [[ "$line" == R?\ * ]] && (( renamed++ ))
       [[ "$line" == (?U|U?|AA|DD)\ * ]] && (( unmerged++ ))
       [[ "$line" == \?\?\ * ]] && (( untracked++ ))
