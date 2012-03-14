@@ -244,16 +244,13 @@ function git-info() {
         zformat -f action_formatted "$action_format" "s:$action"
       fi
     elif (( line_number == 1 )) \
-      && [[ "$line" == (#b)'## Initial commit on '(?##) ]];
-    then
-      branch="$match[1]"
+      && [[ "$line" == (#b)'## Initial commit on '(?##) ]]; then
     elif (( line_number == 1 )); then
       # Split the line into an array for parsing.
       branch_info=(${(s: :)line})
 
       # Match: master...origin/master
       if [[ "$branch_info[2]" == (#b)(?##)...(?##/?##) ]]; then
-        branch="$match[1]"
         remote="$match[2]"
 
         # Match: [ahead or [behind
@@ -269,9 +266,6 @@ function git-info() {
             behind="${branch_info[6]%\]}"
           fi
         fi
-      # Match: master
-      elif [[ "$branch_info[2]" == (#b)(?##) ]]; then
-        branch="$match[1]"
       fi
     fi
   done < <("${(z)status_cmd}" 2>/dev/null)
@@ -291,6 +285,7 @@ function git-info() {
   done < <(${(z)status_cmd} 2>/dev/null)
 
   # Format branch.
+  branch=${$(git symbolic-ref -q HEAD)##refs/heads/}
   if [[ -n "$branch" ]]; then
     zstyle -s ':omz:plugin:git:prompt' branch 'branch_format'
     zformat -f branch_formatted "$branch_format" "b:$branch"
