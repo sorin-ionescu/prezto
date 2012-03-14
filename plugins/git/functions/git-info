@@ -206,7 +206,7 @@ function git-info() {
   _git_info_executing=true
 
   # Use short status for easy parsing.
-  status_cmd='git status --short --branch'
+  status_cmd='git status --porcelain'
   # Get remote's name.
   remote_cmd='git rev-parse --verify HEAD@{upstream} --symbolic-full-name'
   # Get commits count between the local and the remote branch
