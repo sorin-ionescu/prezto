@@ -67,7 +67,7 @@ alias rm='nocorrect rm -i'
 alias scp='nocorrect scp'
 alias type='type -a'
 
-# Mac OS X
+# Desktop Environment integration
 if [[ "$OSTYPE" == darwin* ]]; then
   alias o='open'
   alias get='curl --continue-at - --location --progress-bar --remote-name'
@@ -76,18 +76,18 @@ else
   alias get='wget --continue --progress=bar'
 
   if (( $+commands[xclip] )); then
-    alias pbcopy='xclip -selection clipboard -in'
-    alias pbpaste='xclip -selection clipboard -out'
+    alias clipcopy='xclip -selection clipboard -in'
+    alias clippaste='xclip -selection clipboard -out'
   fi
 
   if (( $+commands[xsel] )); then
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
+    alias clipcopy='xsel --clipboard --input'
+    alias clippaste='xsel --clipboard --output'
   fi
 fi
 
-alias pbc='pbcopy'
-alias pbp='pbpaste'
+alias cbc='clipcopy'
+alias cbp='clippaste'
 
 # Top
 if (( $+commands[htop] )); then
