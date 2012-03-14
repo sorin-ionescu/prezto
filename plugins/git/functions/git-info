@@ -173,6 +173,7 @@ function git-info() {
   local -A git_info_vars
   local status_cmd
   local remote_cmd
+  local upstream_diff_cmd
   local ignore_submodule
   local ignore_submodule_when
 
@@ -208,6 +209,8 @@ function git-info() {
   status_cmd='git status --short --branch'
   # Get remote's name.
   remote_cmd='git rev-parse --verify HEAD@{upstream} --symbolic-full-name'
+  # Get commits count between the local and the remote branch
+  upstream_diff_cmd='git rev-list --count --left-right @{upstream}...HEAD'
 
   # Ignore submodule status.
   zstyle -b \
@@ -233,37 +236,6 @@ function git-info() {
     zstyle -s ':omz:plugin:git:prompt' stashed 'stashed_format'
     zformat -f stashed_formatted "$stashed_format" "S:$stashed"
   fi
-
-  while IFS=$'\n' read line; do
-    (( line_number++ ))
-
-    if (( line_number == 1 )) && [[ "$line" == *'(no branch)'* ]]; then
-    elif (( line_number == 1 )) \
-      && [[ "$line" == (#b)'## Initial commit on '(?##) ]]; then
-    elif (( line_number == 1 )); then
-      # Split the line into an array for parsing.
-      branch_info=(${(s: :)line})
-
-      # Match: master...origin/master
-      if [[ "$branch_info[2]" == (#b)(?##)...(?##/?##) ]]; then
-        remote="$match[2]"
-
-        # Match: [ahead or [behind
-        if [[ "$branch_info[3]" == (#b)\[(ahead|behind) ]]; then
-          ahead_or_behind="$match[1]"
-          if [[ "$ahead_or_behind" == 'behind' ]]; then
-            # Extract digits: 10]
-            behind="${branch_info[4]%\]}"
-          else
-            # Extract digits: 10] or 10,
-            ahead="${branch_info[4]%[,\]]}"
-            # Extract digits: 10]
-            behind="${branch_info[6]%\]}"
-          fi
-        fi
-      fi
-    fi
-  done < <("${(z)status_cmd}" 2>/dev/null)
 
   # Format action.
   action="$(_git-action)"
@@ -297,18 +269,23 @@ function git-info() {
     if [[ -n "$remote" ]]; then
       zstyle -s ':omz:plugin:git:prompt' remote 'remote_format'
       zformat -f remote_formatted "$remote_format" "R:$remote"
-    fi
 
-    # Format ahead.
-    if [[ -n "$ahead" ]]; then
-      zstyle -s ':omz:plugin:git:prompt' ahead 'ahead_format'
-      zformat -f ahead_formatted "$ahead_format" "A:$ahead"
-    fi
+      # Get difference with remote.
+      upstream_diff=$(${(z)upstream_diff_cmd} 2>/dev/null)
 
-    # Format behind.
-    if [[ -n "$behind" ]]; then
-      zstyle -s ':omz:plugin:git:prompt' behind 'behind_format'
-      zformat -f behind_formatted "$behind_format" "B:$behind"
+      # Format ahead.
+      ahead=$upstream_diff[(w)2]
+      if [[ $ahead > 0 ]]; then
+        zstyle -s ':omz:plugin:git:prompt' ahead 'ahead_format'
+        zformat -f ahead_formatted "$ahead_format" "A:$ahead"
+      fi
+
+      # Format behind.
+      behind=$upstream_diff[(w)1]
+      if [[ $behind > 0 ]]; then
+        zstyle -s ':omz:plugin:git:prompt' behind 'behind_format'
+        zformat -f behind_formatted "$behind_format" "B:$behind"
+      fi
     fi
   fi
 
