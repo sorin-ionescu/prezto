@@ -53,7 +53,7 @@ function prompt_giddie_setup {
 )%F{magenta}%n%f@%F{yellow}%m%f|%F{green}${prompt_custom_wd}%f${vcs_info_msg_0_}
 %F{blue}${prompt_symbol}%f '
   RPROMPT=
-  SPROMPT='%F{blue}zsh: %F{yellow}correct %F{magenta}%R%f to %F{green}%r%f [nyae]? '
+  SPROMPT='zsh: correct %F{magenta}%R%f to %F{green}%r%f [nyae]? '
 }
 
 prompt_giddie_setup "$@"
