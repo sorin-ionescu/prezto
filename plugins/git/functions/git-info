@@ -145,6 +145,10 @@ function git-info {
   local deleted=0
   local deleted_format
   local deleted_formatted
+  local describe
+  local describe_cmd
+  local describe_format
+  local describe_formatted
   local dirty=0
   local dirty_format
   local dirty_formatted
@@ -212,6 +216,9 @@ function git-info {
 
   # Gets the commit difference counts between local and remote.
   ahead_and_behind_cmd='git rev-list --count --left-right HEAD...@{upstream}'
+
+  # Use describe for approximative branch naming
+  describe_cmd='git describe --contains --all HEAD'
 
   # Ignore submodule status.
   zstyle -b \
@@ -286,6 +293,13 @@ function git-info {
         zformat -f behind_formatted "$behind_format" "B:$behind"
       fi
     fi
+  else
+    # Format describe.
+    describe=$(${(z)describe_cmd} 2>/dev/null)
+    if [[ -n "$describe" ]]; then
+      zstyle -s ':omz:plugin:git:prompt' describe 'describe_format'
+      zformat -f describe_formatted "$describe_format" "i:$describe"
+    fi
   fi
 
   # Format added.
@@ -349,6 +363,7 @@ function git-info {
       "c:$commit_formatted" \
       "d:$deleted_formatted" \
       "D:$dirty_formatted" \
+      "i:$describe_formatted" \
       "m:$modified_formatted" \
       "R:$remote_formatted" \
       "r:$renamed_formatted" \

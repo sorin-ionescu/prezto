@@ -29,6 +29,9 @@ zstyle ':omz:plugin:git:prompt' deleted 'deleted:%d'
 # %D - Indicator to notify of dirty files.
 zstyle ':omz:plugin:git:prompt' dirty 'dirty:%D'
 
+# %i - Closest branch/tag to the commit
+zstyle ':omz:plugin:git:prompt' describe '(%i)'
+
 # %m - Indicator to notify of modified files.
 zstyle ':omz:plugin:git:prompt' modified 'modified:%m'
 
