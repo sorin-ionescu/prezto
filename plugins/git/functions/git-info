@@ -235,14 +235,6 @@ function git-info() {
     (( line_number++ ))
 
     if (( line_number == 1 )) && [[ "$line" == *'(no branch)'* ]]; then
-      # Get action.
-      action="$(_git-action)"
-
-      # Format action.
-      if [[ -n "$action" ]]; then
-        zstyle -s ':omz:plugin:git:prompt' action 'action_format'
-        zformat -f action_formatted "$action_format" "s:$action"
-      fi
     elif (( line_number == 1 )) \
       && [[ "$line" == (#b)'## Initial commit on '(?##) ]]; then
     elif (( line_number == 1 )); then
@@ -269,6 +261,13 @@ function git-info() {
       fi
     fi
   done < <("${(z)status_cmd}" 2>/dev/null)
+
+  # Format action.
+  action="$(_git-action)"
+  if [[ -n "$action" ]]; then
+    zstyle -s ':omz:plugin:git:prompt' action 'action_format'
+    zformat -f action_formatted "$action_format" "s:$action"
+  fi
 
   # Get current status.
   while IFS=$'\n' read line; do
