@@ -41,6 +41,7 @@ function prompt_giddie_setup {
 
   prompt_opts=(cr percent subst)
 
+  zstyle ':omz:completion' indicator '%F{green}...%f'
   zstyle ':omz:prompt' vicmd '%F{yellow}--- VI-COMMAND ---%f'
   zstyle ':vcs_info:*' enable git
   zstyle ':vcs_info:*' check-for-changes true
