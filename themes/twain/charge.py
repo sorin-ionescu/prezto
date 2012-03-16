@@ -8,7 +8,6 @@ import sys
 
 output_length = 10
 hide_when_charge_is_above = 90
-blank_when_battery_full = True
 filled_char, empty_char = u'▪', u'▫'
 
 """ Read battery charge """
