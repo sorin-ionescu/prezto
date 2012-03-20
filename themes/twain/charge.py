@@ -37,4 +37,4 @@ if charge < hide_when_charge_is_above:
 	meter	= (filled * filled_char + empty * empty_char).encode('utf-8')
 
 	color = 'green'if filled > 6 else 'yellow' if filled > 4 else 'red'
-	sys.stdout.write("%F{{{}}}{}%f".format(color, meter))
+	sys.stdout.write("%F{{{0}}}{1}%f".format(color, meter))
