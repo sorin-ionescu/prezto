@@ -144,9 +144,6 @@ bindkey -M emacs "$keyinfo[Control]X$keyinfo[Control]E" edit-command-line
 if (( $+plugins[(er)history-substring-search] )); then
   bindkey -M emacs "$keyinfo[Control]P" history-substring-search-up
   bindkey -M emacs "$keyinfo[Control]N" history-substring-search-down
-else
-  bindkey -M emacs "$keyinfo[Control]P" up-line-or-history
-  bindkey -M emacs "$keyinfo[Control]N" down-line-or-history
 fi
 
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
@@ -154,11 +151,6 @@ if (( $+widgets[history-incremental-pattern-search-backward] )); then
     history-incremental-pattern-search-backward
   bindkey -M emacs "$keyinfo[Control]S" \
     history-incremental-pattern-search-forward
-else
-  bindkey -M emacs "$keyinfo[Control]R" \
-    history-incremental-search-backward
-  bindkey -M emacs "$keyinfo[Control]S" \
-    history-incremental-search-forward
 fi
 
 # Vi key bindings.
@@ -186,9 +178,6 @@ bindkey -M vicmd "G" end-of-history
 if (( $+plugins[(er)history-substring-search] )); then
   bindkey -M vicmd "k" history-substring-search-up
   bindkey -M vicmd "j" history-substring-search-down
-else
-  bindkey -M vicmd "k" up-line-or-history
-  bindkey -M vicmd "j" down-line-or-history
 fi
 
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
@@ -217,9 +206,6 @@ for keymap in 'emacs' 'viins'; do
   if (( $+plugins[(er)history-substring-search] )); then
     bindkey -M "$keymap" "$keyinfo[Up]" history-substring-search-up
     bindkey -M "$keymap" "$keyinfo[Down]" history-substring-search-down
-  else
-    bindkey -M "$keymap" "$keyinfo[Up]" up-line-or-history
-    bindkey -M "$keymap" "$keyinfo[Down]" down-line-or-history
   fi
 
   # Clear screen.
