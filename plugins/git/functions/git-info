@@ -280,7 +280,7 @@ function git-info() {
     else
       # Count: added/deleted/modified/renamed/unmerged/untracked
       # T (type change) is undocumented, see https://raw.github.com/gitster/git/master/Documentation/RelNotes/1.7.8.2.txt
-      [[ "$line" == [AMDCT][MD\ ]\ * ]] && (( added++ ))
+      [[ "$line" == ([AMDCT][M\ ]|[AMCT]D)\ * ]] && (( added++ ))
       [[ "$line" == [\ MARC]D\ * ]] && (( deleted++ ))
       [[ "$line" == ?[MT]\ * ]] && (( modified++ ))
       [[ "$line" == R?\ * ]] && (( renamed++ ))
