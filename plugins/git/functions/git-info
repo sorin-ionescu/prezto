@@ -278,8 +278,9 @@ function git-info() {
         branch="$match[1]"
       fi
     else
-      # Count: added/deleted/modified/renamed/unmerged/untracked
-      # T (type change) is undocumented, see https://raw.github.com/gitster/git/master/Documentation/RelNotes/1.7.8.2.txt
+      # Count added, deleted, modified, renamed, unmerged, untracked, dirty.
+      # T (type change) is undocumented, see http://git.io/FnpMGw.
+      # For a table of scenarii, see http://i.imgur.com/2YLu1.png.
       [[ "$line" == ([ACDMT][\ MT]|[ACMT]D)\ * ]] && (( added++ ))
       [[ "$line" == [\ ACMRT]D\ * ]] && (( deleted++ ))
       [[ "$line" == ?[MT]\ * ]] && (( modified++ ))
