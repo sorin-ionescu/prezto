@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Colin Hebert <hebert.colin@gmail.com>
 #
 # Usage:
 #   To auto start it, add the following to zshrc:
@@ -16,18 +17,16 @@ alias ta="tmux attach-session"
 alias tl="tmux list-sessions"
 
 # Auto Start
-if (( $SHLVL == 1 )) && zstyle -t ':omz:plugin:tmux:auto' start; then
-  (( SHLVL += 1 )) && export SHLVL
+if [[ -z "$TMUX" ]] && zstyle -t ':omz:plugin:tmux:auto' start; then
+  tmux_session='#OMZ'
 
-  session="$(
-    tmux list-sessions 2> /dev/null \
-      | cut -d':' -f1 \
-      | head -1)"
-
-  if [[ -n "$session" ]]; then
-    exec tmux attach-session -t "$session"
-  else
-    exec tmux new-session
+  if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
+    # Override potential tmux configuration
+    tmux set-option -g destroy-unattached off &> /dev/null
+    tmux new-session -d -s "$tmux_session"
+    tmux set-option -t "$tmux_session" destroy-unattached off &> /dev/null
+    # Mandatory, or we'll end up with a lot of open session detached
+    tmux set-option -g destroy-unattached on &> /dev/null
   fi
+  exec tmux new-session -t "$tmux_session"
 fi
-
