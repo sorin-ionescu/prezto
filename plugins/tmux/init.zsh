@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Colin Hebert <hebert.colin@gmail.com>
 #
 # Usage:
 #   To auto start it, add the following to zshrc:
@@ -16,8 +17,7 @@ alias ta="tmux attach-session"
 alias tl="tmux list-sessions"
 
 # Auto Start
-if (( $SHLVL == 1 )) && zstyle -t ':omz:plugin:tmux:auto' start; then
-  (( SHLVL += 1 )) && export SHLVL
+if [[ -z "$TMUX" ]] && zstyle -t ':omz:plugin:tmux:auto' start; then
 
   session="$(
     tmux list-sessions 2> /dev/null \
