@@ -16,7 +16,7 @@ url=$(
 branches=($(
   git branch -r | sed -e "/${remote}\/HEAD -> ${remote}/d" -e "s/^[[:space:]]*${remote}\///g"
 ))
-current_branch="$(git-branch)"
+current_branch="$(git-current-branch)"
 branch="${2:-master}"
 file="$3"
 

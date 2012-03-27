@@ -154,9 +154,9 @@ alias gpA='git push --all && git push --tags'
 compdef _git gpA=git-push
 alias gpt='git push --tags'
 compdef _git gpt=git-push
-alias gpc='git push --set-upstream origin "$(git-branch)"'
+alias gpc='git push --set-upstream origin "$(git-current-branch)"'
 compdef _git gpc=git-push
-alias gpp='git pull origin "$(git-branch)" && git push origin "$(git-branch)"'
+alias gpp='git pull origin "$(git-current-branch)" && git push origin "$(git-branch)"'
 
 # Rebase (r)
 alias gr='git rebase'
