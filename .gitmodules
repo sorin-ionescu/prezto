@@ -1,5 +1,5 @@
-[submodule "completions"]
-	path = completions
+[submodule "modules/completion/completions"]
+	path = modules/completion/completions
 	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "modules/history-substring-search/external"]
 	path = modules/history-substring-search/external

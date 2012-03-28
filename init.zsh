@@ -26,7 +26,6 @@ zstyle -a ':omz:load' module 'omodules'
 fpath=(
   ${0:h}/themes/*(/FN)
   ${omodules:+${0:h}/modules/${^omodules}/{functions,completions}(/FN)}
-  ${0:h}/{functions,completions}(/FN)
   $fpath
 )
 
@@ -38,7 +37,6 @@ source "${0:h}/helper.zsh"
 source "${0:h}/environment.zsh"
 source "${0:h}/terminal.zsh"
 source "${0:h}/keyboard.zsh"
-source "${0:h}/completion.zsh"
 
 # Autoload Zsh functions.
 autoload -Uz age
