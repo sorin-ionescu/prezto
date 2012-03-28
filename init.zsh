@@ -39,7 +39,6 @@ source "${0:h}/environment.zsh"
 source "${0:h}/terminal.zsh"
 source "${0:h}/keyboard.zsh"
 source "${0:h}/completion.zsh"
-source "${0:h}/history.zsh"
 
 # Autoload Zsh functions.
 autoload -Uz age
