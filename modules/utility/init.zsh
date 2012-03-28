@@ -7,9 +7,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Lists the ten most used commands.
-alias history-stat="history . | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
-
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
