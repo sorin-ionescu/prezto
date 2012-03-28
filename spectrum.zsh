@@ -6,7 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-typeset -Ag FX FG BG
+typeset -gA FX FG BG
 
 FX=(
                                         none                         "\e[00m"

@@ -30,7 +30,7 @@ zle -N edit-command-line
 
 # Use human-friendly identifiers.
 zmodload zsh/terminfo
-typeset -g -A keyinfo
+typeset -gA keyinfo
 keyinfo=(
   'Control'   '\C-'
   'Escape'    '\e'
