@@ -78,7 +78,7 @@ autoload -Uz add-zsh-hook
 
 # Sets the tab and window titles before the prompt is displayed.
 function set-title-precmd {
-  if zstyle -t ':omz:terminal' auto-title; then
+  if zstyle -t ':omz:module:terminal' auto-title; then
     if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
       # Set the current working directory in Apple Terminal.
       printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
@@ -95,7 +95,7 @@ add-zsh-hook precmd set-title-precmd
 
 # Sets the tab and window titles before command execution.
 function set-title-preexec {
-  if zstyle -t ':omz:terminal' auto-title; then
+  if zstyle -t ':omz:module:terminal' auto-title; then
     set-title-by-command "$2"
   fi
 }

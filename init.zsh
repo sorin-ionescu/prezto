@@ -49,7 +49,6 @@ autoload -Uz compinit && compinit -i
 # Source files (the order matters).
 source "${0:h}/helper.zsh"
 source "${0:h}/environment.zsh"
-source "${0:h}/terminal.zsh"
 
 # Source modules defined in ~/.zshrc.
 for omodule in "$omodules[@]"; do
