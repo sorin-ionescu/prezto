@@ -19,13 +19,13 @@ if [[ "$TERM" == 'dumb' ]]; then
   zstyle ':omz:prompt' theme 'off'
 fi
 
-# Get enabled plugins.
-zstyle -a ':omz:load' plugin 'plugins'
+# Get enabled modules.
+zstyle -a ':omz:load' module 'omodules'
 
 # Add functions to fpath.
 fpath=(
   ${0:h}/themes/*(/FN)
-  ${plugins:+${0:h}/plugins/${^plugins}/{functions,completions}(/FN)}
+  ${omodules:+${0:h}/modules/${^omodules}/{functions,completions}(/FN)}
   ${0:h}/{functions,completions}(/FN)
   $fpath
 )
@@ -51,21 +51,21 @@ autoload -Uz zargs
 autoload -Uz zcalc
 autoload -Uz zmv
 
-# Source plugins defined in ~/.zshrc.
-for plugin in "$plugins[@]"; do
-  if [[ ! -d "${0:h}/plugins/$plugin" ]]; then
-    print "omz: no such plugin: $plugin" >&2
+# Source modules defined in ~/.zshrc.
+for omodule in "$omodules[@]"; do
+  if [[ ! -d "${0:h}/modules/$omodule" ]]; then
+    print "omz: no such module: $omodule" >&2
   fi
 
-  if [[ -f "${0:h}/plugins/$plugin/init.zsh" ]]; then
-    source "${0:h}/plugins/$plugin/init.zsh"
+  if [[ -f "${0:h}/modules/$omodule/init.zsh" ]]; then
+    source "${0:h}/modules/$omodule/init.zsh"
   fi
 
   if (( $? == 0 )); then
-    zstyle ":omz:plugin:$plugin" enable 'yes'
+    zstyle ":omz:module:$omodule" enable 'yes'
   fi
 done
-unset plugin plugins
+unset omodule omodules
 
 # Autoload Oh My Zsh functions.
 for fdir in "$fpath[@]"; do

@@ -44,10 +44,10 @@ window or tab.
 Oh My Zsh has many features disabled by default. Read the source code and
 accompanying README files to learn of what is available.
 
-### Plugins
+### Modules
 
-1. Browse `plugins/` to see what is available.
-2. Load the plugins you need in `~/.zshrc` then open a new Zsh terminal window
+1. Browse `modules/` to see what is available.
+2. Load the modules you need in `~/.zshrc` then open a new Zsh terminal window
    or tab.
 
 ### Themes

@@ -20,8 +20,8 @@ zstyle ':omz:*:*' color 'yes'
 # Auto set the tab and window titles.
 zstyle ':omz:terminal:auto' title 'yes'
 
-# Set the plugins to load (see $OMZ/plugins/).
-zstyle ':omz:load' plugin 'archive' 'git'
+# Set the modules to load (see $OMZ/modules/).
+zstyle ':omz:load' module 'archive' 'git'
 
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
