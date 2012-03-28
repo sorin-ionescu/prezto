@@ -41,7 +41,6 @@ source "${0:h}/keyboard.zsh"
 source "${0:h}/completion.zsh"
 source "${0:h}/history.zsh"
 source "${0:h}/directory.zsh"
-source "${0:h}/alias.zsh"
 
 # Autoload Zsh functions.
 autoload -Uz age
