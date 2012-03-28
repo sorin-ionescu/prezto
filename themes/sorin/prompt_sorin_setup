@@ -25,7 +25,7 @@ function prompt_sorin_setup {
   autoload -Uz add-zsh-hook
   add-zsh-hook precmd prompt_sorin_precmd
 
-  zstyle ':omz:editor' completing '%B%F{red}...%f%b'
+  zstyle ':omz:module:editor' completing '%B%F{red}...%f%b'
   zstyle ':omz:prompt:vi' insert ''
   zstyle ':omz:prompt:vi' command ' %F{yellow}❮%f%B%F{red}❮%f%b%F{red}❮%f'
   zstyle ':omz:module:git:prompt' action ':%%B%F{yellow}%s%f%%b'

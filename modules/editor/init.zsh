@@ -19,7 +19,7 @@ zstyle ':omz:prompt:vi' insert '>>>'
 zstyle ':omz:prompt:vi' command '<<<'
 
 # Indicator to notify of generating completion.
-zstyle ':omz:editor' completing '...'
+zstyle ':omz:module:editor' completing '...'
 
 # Beep on error in line editor.
 setopt BEEP
@@ -96,7 +96,7 @@ zle -N expand-dot-to-parent-directory-path
 # Displays an indicator when completing.
 function expand-or-complete-with-indicator {
   local indicator
-  zstyle -s ':omz:editor' completing 'indicator'
+  zstyle -s ':omz:module:editor' completing 'indicator'
   print -Pn "$indicator"
   zle expand-or-complete-prefix
   zle redisplay
@@ -204,7 +204,7 @@ for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$keyinfo[Control]I" expand-or-complete-prefix
 
   # Expand .... to ../..
-  if zstyle -t ':omz:editor' dot-expansion; then
+  if zstyle -t ':omz:module:editor' dot-expansion; then
     bindkey -M "$keymap" "." expand-dot-to-parent-directory-path
   fi
 
@@ -217,12 +217,12 @@ for keymap in 'emacs' 'viins'; do
 done
 
 # Do not expand .... to ../.. during incremental search.
-if zstyle -t ':omz:editor' dot-expansion; then
+if zstyle -t ':omz:module:editor' dot-expansion; then
   bindkey -M isearch . self-insert 2> /dev/null
 fi
 
 # Set the key layout.
-zstyle -s ':omz:editor' keymap 'keymap'
+zstyle -s ':omz:module:editor' keymap 'keymap'
 if [[ "$keymap" == (emacs|) ]]; then
   bindkey -e
 elif [[ "$keymap" == vi ]]; then

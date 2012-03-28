@@ -6,10 +6,10 @@
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':omz:editor' keymap 'emacs'
+zstyle ':omz:module:editor' keymap 'emacs'
 
 # Auto convert .... to ../..
-zstyle ':omz:editor' dot-expansion 'no'
+zstyle ':omz:module:editor' dot-expansion 'no'
 
 # Set case-sensitivity for completion, history lookup, etc.
 zstyle ':omz:*:*' case-sensitive 'no'

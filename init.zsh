@@ -50,7 +50,6 @@ autoload -Uz compinit && compinit -i
 source "${0:h}/helper.zsh"
 source "${0:h}/environment.zsh"
 source "${0:h}/terminal.zsh"
-source "${0:h}/editor.zsh"
 
 # Source modules defined in ~/.zshrc.
 for omodule in "$omodules[@]"; do
