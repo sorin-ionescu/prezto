@@ -48,7 +48,7 @@ zstyle ':omz:plugin:git:prompt' unmerged 'unmerged:%U'
 zstyle ':omz:plugin:git:prompt' untracked 'untracked:%u'
 
 # Left prompt.
-zstyle ':omz:plugin:git:prompt' prompt ' git:(%b %D%C)'
+zstyle ':omz:plugin:git:prompt' prompt ' git:(%b %D)'
 
 # Right prompt.
 zstyle ':omz:plugin:git:prompt' rprompt ''
