@@ -21,13 +21,13 @@ zstyle ':omz:*:*' color 'yes'
 zstyle ':omz:terminal' auto-title 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
-# zstyle ':omz:load' module 'attr' 'stat'
+# zstyle ':omz:load' zmodule 'attr' 'stat'
 
 # Set the Zsh functions to load (man zshcontrib).
-# zstyle ':omz:load' function 'zargs' 'zmv'
+# zstyle ':omz:load' zfunction 'zargs' 'zmv'
 
-# Set the plugins to load (browse plugins).
-zstyle ':omz:load' plugin 'archive' 'git'
+# Set the Oh My Zsh modules to load (browse modules).
+zstyle ':omz:load' omodule 'archive' 'git'
 
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.

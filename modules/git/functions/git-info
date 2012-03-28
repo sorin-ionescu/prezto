@@ -206,9 +206,9 @@ function git-info {
 
   # Ignore submodule status.
   zstyle -b \
-    ':omz:plugin:git:prompt:ignore' submodule 'ignore_submodule'
+    ':omz:module:git:prompt:ignore' submodule 'ignore_submodule'
   zstyle -s \
-    ':omz:plugin:git:prompt:ignore:submodule' when 'ignore_submodule_when'
+    ':omz:module:git:prompt:ignore:submodule' when 'ignore_submodule_when'
   if is-true "$ignore_submodule"; then
     status_cmd+=" --ignore-submodules=${ignore_submodule_when:-all}"
   fi
@@ -216,21 +216,21 @@ function git-info {
   # Format commit.
   commit="$(git rev-parse HEAD 2> /dev/null)"
   if [[ -n "$commit" ]]; then
-    zstyle -s ':omz:plugin:git:prompt' commit 'commit_format'
+    zstyle -s ':omz:module:git:prompt' commit 'commit_format'
     zformat -f commit_formatted "$commit_format" "c:$commit"
   fi
 
   # Format stashed.
   if [[ -f "$(_git-dir)/refs/stash" ]]; then
     stashed="$(git stash list 2> /dev/null | wc -l)"
-    zstyle -s ':omz:plugin:git:prompt' stashed 'stashed_format'
+    zstyle -s ':omz:module:git:prompt' stashed 'stashed_format'
     zformat -f stashed_formatted "$stashed_format" "S:$stashed"
   fi
 
   # Format action.
   action="$(_git-action)"
   if [[ -n "$action" ]]; then
-    zstyle -s ':omz:plugin:git:prompt' action 'action_format'
+    zstyle -s ':omz:module:git:prompt' action 'action_format'
     zformat -f action_formatted "$action_format" "s:$action"
   fi
 
@@ -251,13 +251,13 @@ function git-info {
   # Format branch.
   branch="${$(git symbolic-ref -q HEAD)##refs/heads/}"
   if [[ -n "$branch" ]]; then
-    zstyle -s ':omz:plugin:git:prompt' branch 'branch_format'
+    zstyle -s ':omz:module:git:prompt' branch 'branch_format'
     zformat -f branch_formatted "$branch_format" "b:$branch"
 
     # Format remote.
     remote="${$(${(z)remote_cmd} 2> /dev/null)##refs/remotes/}"
     if [[ -n "$remote" ]]; then
-      zstyle -s ':omz:plugin:git:prompt' remote 'remote_format'
+      zstyle -s ':omz:module:git:prompt' remote 'remote_format'
       zformat -f remote_formatted "$remote_format" "R:$remote"
 
       # Get ahead and behind counts.
@@ -266,14 +266,14 @@ function git-info {
       # Format ahead.
       ahead="$ahead_and_behind[(w)1]"
       if (( $ahead > 0 )); then
-        zstyle -s ':omz:plugin:git:prompt' ahead 'ahead_format'
+        zstyle -s ':omz:module:git:prompt' ahead 'ahead_format'
         zformat -f ahead_formatted "$ahead_format" "A:$ahead"
       fi
 
       # Format behind.
       behind="$ahead_and_behind[(w)2]"
       if (( $behind > 0 )); then
-        zstyle -s ':omz:plugin:git:prompt' behind 'behind_format'
+        zstyle -s ':omz:module:git:prompt' behind 'behind_format'
         zformat -f behind_formatted "$behind_format" "B:$behind"
       fi
     fi
@@ -288,49 +288,49 @@ function git-info {
 
   # Format added.
   if (( $added > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' added 'added_format'
+    zstyle -s ':omz:module:git:prompt' added 'added_format'
     zformat -f added_formatted "$added_format" "a:$added_format"
   fi
 
   # Format deleted.
   if (( $deleted > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' deleted 'deleted_format'
+    zstyle -s ':omz:module:git:prompt' deleted 'deleted_format'
     zformat -f deleted_formatted "$deleted_format" "d:$deleted_format"
   fi
 
   # Format modified.
   if (( $modified > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' modified 'modified_format'
+    zstyle -s ':omz:module:git:prompt' modified 'modified_format'
     zformat -f modified_formatted "$modified_format" "m:$modified"
   fi
 
   # Format renamed.
   if (( $renamed > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' renamed 'renamed_format'
+    zstyle -s ':omz:module:git:prompt' renamed 'renamed_format'
     zformat -f renamed_formatted "$renamed_format" "r:$renamed"
   fi
 
   # Format unmerged.
   if (( $unmerged > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' unmerged 'unmerged_format'
+    zstyle -s ':omz:module:git:prompt' unmerged 'unmerged_format'
     zformat -f unmerged_formatted "$unmerged_format" "U:$unmerged"
   fi
 
   # Format untracked.
   if (( $untracked > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' untracked 'untracked_format'
+    zstyle -s ':omz:module:git:prompt' untracked 'untracked_format'
     zformat -f untracked_formatted "$untracked_format" "u:$untracked"
   fi
 
   # Format dirty.
   if (( $dirty > 0 )); then
-    zstyle -s ':omz:plugin:git:prompt' dirty 'dirty_format'
+    zstyle -s ':omz:module:git:prompt' dirty 'dirty_format'
     zformat -f dirty_formatted "$dirty_format" "D:$dirty"
   fi
 
   # Format prompts.
-  zstyle -s ':omz:plugin:git:prompt' prompt 'prompt_format'
-  zstyle -s ':omz:plugin:git:prompt' rprompt 'rprompt_format'
+  zstyle -s ':omz:module:git:prompt' prompt 'prompt_format'
+  zstyle -s ':omz:module:git:prompt' rprompt 'rprompt_format'
 
   git_info_vars=(
     git_prompt_info "$prompt_format"

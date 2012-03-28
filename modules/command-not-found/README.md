@@ -6,7 +6,7 @@ Loads the [command-not-found][1] tool on Debian-based distributions.
 Authors
 -------
 
-*The authors of this plugin should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the GitHub issue tracker.*
 
  - [Joseph Booker](/sargas)
 

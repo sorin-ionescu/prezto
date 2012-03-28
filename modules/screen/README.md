@@ -19,12 +19,12 @@ Start a Screen session automatically when Zsh is launched.
 
 To enable this feature, add the following line to *zshrc*:
 
-    zstyle ':omz:plugin:screen' auto-start 'yes'
+    zstyle ':omz:module:screen' auto-start 'yes'
 
 Authors
 -------
 
-*The authors of this plugin should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the GitHub issue tracker.*
 
  - [Sorin Ionescu](/sorin-ionescu)
 

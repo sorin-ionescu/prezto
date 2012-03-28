@@ -19,30 +19,30 @@ if [[ "$TERM" == 'dumb' ]]; then
   zstyle ':omz:prompt' theme 'off'
 fi
 
-# Get enabled plugins.
-zstyle -a ':omz:load' plugin 'plugins'
+# Get enabled OMZ modules.
+zstyle -a ':omz:load' omodule 'omodules'
 
 # Add functions to fpath.
 fpath=(
   ${0:h}/themes/*(/FN)
-  ${plugins:+${0:h}/plugins/${^plugins}/{functions,completions}(/FN)}
+  ${omodules:+${0:h}/modules/${^omodules}/{functions,completions}(/FN)}
   ${0:h}/{functions,completions}(/FN)
   $fpath
 )
 
-# Autoload Zsh modules.
-zstyle -a ':omz:load' module 'zsh_modules'
-for zsh_module in "$zsh_modules[@]"; do
-  zmodload "${(z)zsh_module}"
+# Load Zsh modules.
+zstyle -a ':omz:load' module 'zmodules'
+for zmodule in "$zmodules[@]"; do
+  zmodload "${(z)zmodule}"
 done
-unset zsh_modules zsh_module
+unset zmodules zmodule
 
 # Autoload Zsh functions.
-zstyle -a ':omz:load' function 'zsh_functions'
-for zsh_function in "$zsh_functions[@]"; do
-  autoload -Uz "$zsh_function"
+zstyle -a ':omz:load' function 'zfunctions'
+for zfunction in "$zfunctions[@]"; do
+  autoload -Uz "$zfunction"
 done
-unset zsh_functions zsh_function
+unset zfunctions zfunction
 
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
@@ -59,31 +59,31 @@ source "${0:h}/spectrum.zsh"
 source "${0:h}/alias.zsh"
 source "${0:h}/utility.zsh"
 
-# Source plugins defined in ~/.zshrc.
-for plugin in "$plugins[@]"; do
-  if [[ ! -d "${0:h}/plugins/$plugin" ]]; then
-    print "omz: no such plugin: $plugin" >&2
+# Source modules defined in ~/.zshrc.
+for omodule in "$omodules[@]"; do
+  if [[ ! -d "${0:h}/modules/$omodule" ]]; then
+    print "omz: no such module: $omodule" >&2
   fi
 
-  if [[ -f "${0:h}/plugins/$plugin/init.zsh" ]]; then
-    source "${0:h}/plugins/$plugin/init.zsh"
+  if [[ -f "${0:h}/modules/$omodule/init.zsh" ]]; then
+    source "${0:h}/modules/$omodule/init.zsh"
   fi
 
   if (( $? == 0 )); then
-    zstyle ":omz:plugin:$plugin" loaded 'yes'
+    zstyle ":omz:module:$omodule" loaded 'yes'
   fi
 done
-unset plugin plugins
+unset omodule omodules
 
 # Autoload Oh My Zsh functions.
 for fdir in "$fpath[@]"; do
   if [[ "$fdir" == ${0:h}/(|*/)functions ]]; then
-    for omz_function in $fdir/[^_.]*(N.:t); do
-      autoload -Uz "$omz_function"
+    for ofunction in $fdir/[^_.]*(N.:t); do
+      autoload -Uz "$ofunction"
     done
   fi
 done
-unset fdir omz_function
+unset fdir ofunction
 
 # Set environment variables for launchd processes.
 if [[ "$OSTYPE" == darwin* ]]; then

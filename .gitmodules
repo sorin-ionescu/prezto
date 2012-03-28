@@ -1,9 +1,9 @@
 [submodule "completions"]
 	path = completions
 	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "plugins/history-substring-search/external"]
-	path = plugins/history-substring-search/external
+[submodule "modules/history-substring-search/external"]
+	path = modules/history-substring-search/external
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "plugins/syntax-highlighting/external"]
-	path = plugins/syntax-highlighting/external
+[submodule "modules/syntax-highlighting/external"]
+	path = modules/syntax-highlighting/external
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

@@ -11,7 +11,7 @@ alias ta="tmux attach-session"
 alias tl="tmux list-sessions"
 
 # Auto Start
-if [[ -z "$TMUX" ]] && zstyle -t ':omz:plugin:tmux' auto-start; then
+if [[ -z "$TMUX" ]] && zstyle -t ':omz:module:tmux' auto-start; then
   tmux_session='#OMZ'
 
   if ! tmux has-session -t "$tmux_session" 2> /dev/null; then

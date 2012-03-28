@@ -18,12 +18,12 @@ Settings
 To use a different prefix, add the following to *zshrc*, and replace 'g' with
 the desired prefix:
 
-    zstyle ':omz:plugin:gnu-utils' prefix 'g'
+    zstyle ':omz:module:gnu-utils' prefix 'g'
 
 Authors
 -------
 
-*The authors of this plugin should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the GitHub issue tracker.*
 
  - [Sorin Ionescu](/sorin-ionescu)
 

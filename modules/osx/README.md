@@ -22,7 +22,7 @@ Functions
 
 Authors
 -------
-*The authors of this plugin should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the GitHub issue tracker.*
 
  - [Sorin Ionescu](/sorin-ionescu)
 

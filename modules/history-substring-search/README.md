@@ -10,24 +10,24 @@ Settings
 
 ### Case Sensitivity
 
-To enable case-sensitivity for this plugin only, add the following line to
+To enable case-sensitivity for this module only, add the following line to
 *zshrc*:
 
-    zstyle ':omz:plugin:history-substring-search' case-sensitive 'yes'
+    zstyle ':omz:module:history-substring-search' case-sensitive 'yes'
 
 ### Highlighting
 
 If colors are enabled, _history-substring-search_ will automatically highlight
 positive results.
 
-To enable highlighting for this plugin only, and the following line to *zshrc*:
+To enable highlighting for this module only, and the following line to *zshrc*:
 
-    zstyle -t ':omz:plugin:history-substring-search' color 'yes'
+    zstyle -t ':omz:module:history-substring-search' color 'yes'
 
 Authors
 -------
 
-*The authors of this plugin should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the GitHub issue tracker.*
 
  - [Sorin Ionescu](/sorin-ionescu)
  - [Suraj N. Kurapati](/sunaku)

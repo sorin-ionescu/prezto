@@ -6,7 +6,7 @@
 #
 
 # Get the prefix or use the default.
-zstyle -s ':omz:plugin:gnu-utils' prefix '_gnu_utils_prefix' ||
+zstyle -s ':omz:module:gnu-utils' prefix '_gnu_utils_prefix' ||
   _gnu_utils_prefix='g'
 
 # Check for the presence of GNU Core Utilities.

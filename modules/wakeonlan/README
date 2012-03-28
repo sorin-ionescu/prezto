@@ -1,4 +1,4 @@
-This plugin provides a wrapper around the "wakeonlan" tool available from most
+This module provides a wrapper around the "wakeonlan" tool available from most
 distributions' package repositories, or from the following website:
 
 http://gsd.di.uminho.pt/jpo/software/wakeonlan/
