@@ -53,7 +53,6 @@ source "${0:h}/environment.zsh"
 source "${0:h}/terminal.zsh"
 source "${0:h}/editor.zsh"
 source "${0:h}/completion.zsh"
-source "${0:h}/history.zsh"
 
 # Source modules defined in ~/.zshrc.
 for omodule in "$omodules[@]"; do
