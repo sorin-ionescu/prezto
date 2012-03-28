@@ -6,7 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-source "${0:h}/history-substring-search.zsh"
+source "${0:h}/external/zsh-history-substring-search.zsh"
 
 if zstyle -t ':omz:plugin:history-substring-search' case-sensitive; then
   unset HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS
