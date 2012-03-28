@@ -56,7 +56,6 @@ source "${0:h}/completion.zsh"
 source "${0:h}/history.zsh"
 source "${0:h}/directory.zsh"
 source "${0:h}/spectrum.zsh"
-source "${0:h}/alias.zsh"
 
 # Source modules defined in ~/.zshrc.
 for omodule in "$omodules[@]"; do
