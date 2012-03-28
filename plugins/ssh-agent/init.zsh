@@ -21,7 +21,7 @@
 #
 
 if (( ! $+commands[ssh-agent] )); then
-  return
+  return 1
 fi
 
 _ssh_agent_env="${HOME}/.ssh/environment-${HOST}"

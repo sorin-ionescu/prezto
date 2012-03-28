@@ -7,7 +7,7 @@
 #
 
 if (( ! $+commands[gpg-agent] )); then
-  return
+  return 1
 fi
 
 _gpg_env="$HOME/.gnupg/gpg-agent.env"

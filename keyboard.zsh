@@ -7,7 +7,7 @@
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
-  return
+  return 1
 fi
 
 # The default styles.
@@ -65,7 +65,7 @@ keyinfo=(
 for key in "$keyinfo[@]"; do
   if [[ -z "$key" ]]; then
     print "omz: one or more keys are non-bindable" >&2
-    return
+    return 1
   fi
 done
 

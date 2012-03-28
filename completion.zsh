@@ -8,7 +8,7 @@
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
-  return
+  return 1
 fi
 
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.

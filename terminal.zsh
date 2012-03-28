@@ -8,7 +8,7 @@
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
-  return
+  return 1
 fi
 
 # Set the GNU Screen window number.
