@@ -19,61 +19,23 @@ if [[ "$TERM" == 'dumb' ]]; then
   zstyle ':omz:prompt' theme 'off'
 fi
 
-# Get enabled modules.
-zstyle -a ':omz:load' module 'omodules'
-
-# Add functions to fpath.
-fpath=(
-  ${0:h}/themes/*(/FN)
-  ${omodules:+${0:h}/modules/${^omodules}/{functions,completions}(/FN)}
-  $fpath
-)
-
-# Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
-
-# Source files (the order matters).
-source "${0:h}/helper.zsh"
-
 # Autoload Zsh functions.
 autoload -Uz age
 autoload -Uz zargs
 autoload -Uz zcalc
 autoload -Uz zmv
 
+# Source files (the order matters).
+source "${0:h}/helper.zsh"
+
+# Get enabled modules.
+zstyle -a ':omz:module' enable 'omodules'
+
 # Source modules defined in ~/.zshrc.
-for omodule in "$omodules[@]"; do
-  if [[ ! -d "${0:h}/modules/$omodule" ]]; then
-    print "omz: no such module: $omodule" >&2
-  fi
+omodload "$omodules[@]"
 
-  if [[ -f "${0:h}/modules/$omodule/init.zsh" ]]; then
-    source "${0:h}/modules/$omodule/init.zsh"
-  fi
-
-  if (( $? == 0 )); then
-    zstyle ":omz:module:$omodule" enable 'yes'
-  fi
-done
-unset omodule omodules
-
-# Autoload Oh My Zsh functions.
-for fdir in "$fpath[@]"; do
-  if [[ "$fdir" == ${0:h}/(|*/)functions ]]; then
-    for func in $fdir/[^_.]*(N.:t); do
-      autoload -Uz $func
-    done
-  fi
-done
-unset fdir func
-
-# Set environment variables for launchd processes.
-if [[ "$OSTYPE" == darwin* ]]; then
-  for env_var in PATH MANPATH; do
-    launchctl setenv "$env_var" "${(P)env_var}" &!
-  done
-  unset env_var
-fi
+# Add themes to fpath.
+fpath=(${0:h}/themes/*(/FN) $fpath)
 
 # Load and run the prompt theming system.
 autoload -Uz promptinit && promptinit
@@ -86,6 +48,14 @@ else
   prompt 'off'
 fi
 unset prompt_argv
+
+# Set environment variables for launchd processes.
+if [[ "$OSTYPE" == darwin* ]]; then
+  for env_var in PATH MANPATH; do
+    launchctl setenv "$env_var" "${(P)env_var}" &!
+  done
+  unset env_var
+fi
 
 # Compile the completion dump, to increase startup speed.
 dump_file="$HOME/.zcompdump"

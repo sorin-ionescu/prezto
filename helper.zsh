@@ -10,6 +10,35 @@ function autoloadable {
   ( unfunction $1 ; autoload -U +X $1 ) &> /dev/null
 }
 
+# Loads Oh My Zsh modules.
+function omodload {
+  local omodule
+  local OMZ="${funcsourcetrace[1]:h}"
+
+  for omodule in "$argv[@]"; do
+    if [[ ! -d "$OMZ/modules/$omodule" ]]; then
+      print "omz: no such module: $omodule" >&2
+      continue
+    fi
+
+    # Add functions and completetions to fpath.
+    fpath=($OMZ/modules/$omodule/{functions,completions}(/FN) $fpath)
+
+    # Autoload module functions.
+    for func in $OMZ/modules/$omodule/functions/[^_.]*(N.:t); do
+      autoload -Uz $func
+    done
+
+    if [[ -f "$OMZ/modules/$omodule/init.zsh" ]]; then
+      source "$OMZ/modules/$omodule/init.zsh"
+    fi
+
+    if (( $? == 0 )); then
+      zstyle ":omz:module:$omodule" enable 'yes'
+    fi
+  done
+}
+
 # Checks boolean variable for "true" (case insensitive "1", "y", "yes", "t", "true", "o", and "on").
 function is-true {
   [[ -n "$1" && "$1" == (1|[Yy]([Ee][Ss]|)|[Tt]([Rr][Uu][Ee]|)|[Oo]([Nn]|)) ]]
