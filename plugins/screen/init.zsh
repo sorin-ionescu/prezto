@@ -8,7 +8,7 @@
 #   To auto start it, add the following to zshrc:
 #
 #     # Auto launch GNU Screen at start-up.
-#     zstyle -t ':omz:plugin:screen:auto' start 'yes'
+#     zstyle -t ':omz:plugin:screen' auto-start 'yes'
 #
 
 # Aliases
@@ -17,7 +17,7 @@ alias sn="screen -U -S"
 alias sr="screen -a -A -U -D -R"
 
 # Auto Start
-if [[ -z "$STY" ]] && zstyle -t ':omz:plugin:screen:auto' start; then
+if [[ -z "$STY" ]] && zstyle -t ':omz:plugin:screen' auto-start; then
   session="$(
     screen -list 2> /dev/null \
       | sed '1d;$d' \

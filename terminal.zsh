@@ -78,7 +78,7 @@ autoload -Uz add-zsh-hook
 
 # Sets the tab and window titles before the prompt is displayed.
 function set-title-precmd {
-  if [[ "$TERM_PROGRAM" != "Apple_Terminal" ]] && zstyle -t ':omz:terminal:auto' title; then
+  if [[ "$TERM_PROGRAM" != "Apple_Terminal" ]] && zstyle -t ':omz:terminal' auto-title; then
     set-window-title "${(%):-%~}"
     for kind in tab screen; do
       # Left-truncate the current working directory to 15 characters.
@@ -93,7 +93,7 @@ add-zsh-hook precmd set-title-precmd
 
 # Sets the tab and window titles before command execution.
 function set-title-preexec {
-  if zstyle -t ':omz:terminal:auto' title; then
+  if zstyle -t ':omz:terminal' auto-title; then
     set-title-by-command "$2"
   fi
 }
