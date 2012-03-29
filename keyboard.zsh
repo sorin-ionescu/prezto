@@ -19,7 +19,7 @@ zstyle ':omz:prompt:vi' insert '>>>'
 zstyle ':omz:prompt:vi' command '<<<'
 
 # Indicator to notify of generating completion.
-zstyle ':omz:completion' indicator '...'
+zstyle ':omz:editor' completing '...'
 
 # Beep on error in line editor.
 setopt BEEP
@@ -96,7 +96,7 @@ zle -N expand-dot-to-parent-directory-path
 # Displays an indicator when completing.
 function expand-or-complete-with-indicator {
   local indicator
-  zstyle -s ':omz:completion' indicator 'indicator'
+  zstyle -s ':omz:editor' completing 'indicator'
   print -Pn "$indicator"
   zle expand-or-complete-prefix
   zle redisplay
