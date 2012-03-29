@@ -4,3 +4,6 @@
 [submodule "plugins/history-substring-search/external"]
 	path = plugins/history-substring-search/external
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "plugins/syntax-highlighting/external"]
+	path = plugins/syntax-highlighting/external
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
