@@ -1,0 +1,12 @@
+#compdef git-hub-short-url
+#autoload
+
+#
+# Completes git-hub-short-url.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+_arguments '1:url:' && return 0
+
