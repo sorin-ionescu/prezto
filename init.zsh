@@ -30,6 +30,20 @@ fpath=(
   $fpath
 )
 
+# Autoload Zsh modules.
+zstyle -a ':omz:load' module 'zsh_modules'
+for zsh_module in "$zsh_modules[@]"; do
+  zmodload "${(z)zsh_module}"
+done
+unset zsh_modules zsh_module
+
+# Autoload Zsh functions.
+zstyle -a ':omz:load' function 'zsh_functions'
+for zsh_function in "$zsh_functions[@]"; do
+  autoload -Uz "$zsh_function"
+done
+unset zsh_functions zsh_function
+
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
@@ -44,12 +58,6 @@ source "${0:h}/directory.zsh"
 source "${0:h}/spectrum.zsh"
 source "${0:h}/alias.zsh"
 source "${0:h}/utility.zsh"
-
-# Autoload Zsh functions.
-autoload -Uz age
-autoload -Uz zargs
-autoload -Uz zcalc
-autoload -Uz zmv
 
 # Source plugins defined in ~/.zshrc.
 for plugin in "$plugins[@]"; do
@@ -70,12 +78,12 @@ unset plugin plugins
 # Autoload Oh My Zsh functions.
 for fdir in "$fpath[@]"; do
   if [[ "$fdir" == ${0:h}/(|*/)functions ]]; then
-    for func in $fdir/[^_.]*(N.:t); do
-      autoload -Uz $func
+    for omz_function in $fdir/[^_.]*(N.:t); do
+      autoload -Uz "$omz_function"
     done
   fi
 done
-unset fdir func
+unset fdir omz_function
 
 # Set environment variables for launchd processes.
 if [[ "$OSTYPE" == darwin* ]]; then
