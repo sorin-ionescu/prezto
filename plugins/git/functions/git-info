@@ -143,6 +143,7 @@ function git-info {
   local modified_format
   local modified_formatted
   local position
+  local position_cmd
   local position_format
   local position_formatted
   local prompt_format
@@ -203,6 +204,20 @@ function git-info {
 
   # Gets the commit difference counts between local and remote.
   ahead_and_behind_cmd='git rev-list --count --left-right HEAD...@{upstream}'
+
+  # Use describe to get the current position
+  zstyle -s 'omz:plugin:git:prompt:position' style 'position_style'
+  case "$position_style" in
+    (contains)
+      position_cmd='git describe --contains --tags HEAD'
+    ;;
+    (references)
+      position_cmd='git describe --contains --all HEAD'
+    ;;
+    (tags)
+      position_cmd='git describe --tags HEAD'
+    ;;
+  esac
 
   # Ignore submodule status.
   zstyle -b \
@@ -279,7 +294,7 @@ function git-info {
     fi
   else
     # Format position.
-    position="$(git describe --contains --all HEAD 2> /dev/null)"
+    position="$(${(z)position_cmd} 2> /dev/null)"
     if [[ -n "$position" ]]; then
       zstyle -s ':omz:plugin:git:prompt' position 'position_format'
       zformat -f position_formatted "$position_format" "p:$position"

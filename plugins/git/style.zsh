@@ -56,6 +56,9 @@ zstyle ':omz:plugin:git:prompt' prompt ' git:(%b %D)'
 # Right prompt.
 zstyle ':omz:plugin:git:prompt' rprompt ''
 
+# Position style "contains", "references", "tags"
+zstyle ':omz:plugin:git:prompt:position' style 'references'
+
 # Ignore submodule.
 zstyle ':omz:plugin:git:prompt:ignore' submodule 'no'
 
