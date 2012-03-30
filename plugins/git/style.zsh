@@ -18,7 +18,7 @@ zstyle ':omz:plugin:git:prompt' ahead 'ahead:%A'
 zstyle ':omz:plugin:git:prompt' behind 'behind:%B'
 
 # %b - Branch name.
-zstyle ':omz:plugin:git:prompt' branch '%b'
+zstyle ':omz:plugin:git:prompt' branch 'branch:%b'
 
 # %c - SHA-1 hash.
 zstyle ':omz:plugin:git:prompt' commit 'commit:%c'
@@ -33,10 +33,10 @@ zstyle ':omz:plugin:git:prompt' dirty 'dirty:%D'
 zstyle ':omz:plugin:git:prompt' modified 'modified:%m'
 
 # %p - HEAD position in relation to the nearest branch, remote, tag.
-zstyle ':omz:plugin:git:prompt' position '%p'
+zstyle ':omz:plugin:git:prompt' position 'position:%p'
 
 # %R - Remote name.
-zstyle ':omz:plugin:git:prompt' remote '%R'
+zstyle ':omz:plugin:git:prompt' remote 'remote:%R'
 
 # %r - Indicator to notify of renamed files.
 zstyle ':omz:plugin:git:prompt' renamed 'renamed:%r'
