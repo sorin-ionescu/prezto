@@ -8,7 +8,7 @@
 #   To auto start it, add the following to zshrc:
 #
 #     # Auto launch GNU Screen at start-up.
-#     zstyle -t ':omz:plugin:screen' auto-start 'yes'
+#     zstyle ':omz:plugin:screen' auto-start 'yes'
 #
 
 # Aliases
