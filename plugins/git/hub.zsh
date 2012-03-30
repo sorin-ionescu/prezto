@@ -1,5 +1,6 @@
 #
 # Adds GitHub knowledge to the Git command.
+# https://github.com/defunkt/hub
 #
 # Authors:
 #   Chris Wanstrath <chris@wanstrath.com>
