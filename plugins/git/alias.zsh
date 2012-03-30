@@ -86,11 +86,11 @@ alias giu='git add --update'
 compdef _git giu=git-add
 alias gid='git diff --no-ext-diff --cached'
 compdef _git gid=git-diff
-function giD { git diff --no-ext-diff --cached --ignore-all-space "$@" | view - }
+alias giD='git diff --no-ext-diff --cached --ignore-all-space'
 compdef _git giD=git-diff
-alias gir='git reset'
+alias gir='git reset --mixed'
 compdef _git gir=git-reset
-alias giR='git reset --mixed'
+alias giR='git reset --keep'
 compdef _git giR=git-reset
 alias gix='git rm -r --cached'
 compdef _git gix=git-rm
@@ -235,7 +235,7 @@ alias gwS='git status'
 compdef _git gwS=git-status
 alias gwd='git diff --no-ext-diff'
 compdef _git gwd=git-diff
-function gwD { git diff --no-ext-diff --ignore-all-space "$@" | view - }
+alias gwD='git diff --no-ext-diff --ignore-all-space'
 compdef _git gwD=git-diff
 alias gwr='git reset --soft'
 compdef _git gwr=git-reset
