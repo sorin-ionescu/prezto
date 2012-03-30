@@ -18,7 +18,7 @@ Start a tmux session automatically when a Zsh session is opened.
 
 To enable this feature, one line has to be added to the configuration file:
 
-    zstyle -t ':omz:plugin:tmux' auto-start 'yes'
+    zstyle ':omz:plugin:tmux' auto-start 'yes'
 
 This will automatically create a background session named "#OMZ" and attach every new shell to it.
 
