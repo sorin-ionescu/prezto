@@ -85,8 +85,8 @@ fi
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 else
-  if (( $+commands[xdg-open] )); then
-    export BROWSER='xdg-open'
+  if (( $+commands[xdg-settings] )); then
+    export BROWSER=$(xdg-settings get default-web-browser 2>/dev/null)
   fi
 fi
 
@@ -113,4 +113,3 @@ if zstyle -t ':omz:environment:termcap' color; then
   export LESS_TERMCAP_ue=$'\E[0m'          # end underline
   export LESS_TERMCAP_us=$'\E[01;32m'      # begin underline
 fi
-
