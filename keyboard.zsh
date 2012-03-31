@@ -159,10 +159,6 @@ bindkey -M vicmd "$keyinfo[Control]R" redo
 bindkey -M viins "jk" vi-cmd-mode
 bindkey -M viins "kj" vi-cmd-mode
 
-# History
-bindkey -M vicmd "gg" beginning-of-history
-bindkey -M vicmd "G" end-of-history
-
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
   bindkey -M vicmd "?" history-incremental-pattern-search-backward
   bindkey -M vicmd "/" history-incremental-pattern-search-forward
