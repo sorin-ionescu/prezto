@@ -151,9 +151,6 @@ fi
 # Edit command in an external editor.
 bindkey -M vicmd "v" edit-command-line
 
-# Show cursor position.
-bindkey -M vicmd "ga" what-cursor-position
-
 # Undo/Redo
 bindkey -M vicmd "u" undo
 bindkey -M vicmd "$keyinfo[Control]R" redo
