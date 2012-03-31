@@ -84,10 +84,6 @@ fi
 # Browser (Default)
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
-else
-  if (( $+commands[xdg-open] )); then
-    export BROWSER='xdg-open'
-  fi
 fi
 
 # Less
