@@ -14,7 +14,9 @@ if (( $+commands[dircolors] )); then
 
   if zstyle -t ':omz:alias:ls' color; then
     if [[ -f "$HOME/.dir_colors" ]]; then
-      eval $(dircolors "$HOME/.dir_colors")
+      eval "$(dircolors "$HOME/.dir_colors")"
+    else
+      eval "$(dircolors)"
     fi
     alias ls="$aliases[ls] --color=auto"
   else

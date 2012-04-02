@@ -82,7 +82,9 @@ alias ls='ls --group-directories-first'
 
 if zstyle -t ':omz:alias:ls' color; then
   if [[ -f "$HOME/.dir_colors" ]]; then
-    eval $(gdircolors "$HOME/.dir_colors")
+    eval "$(gdircolors "$HOME/.dir_colors")"
+  else
+    eval "$(gdircolors)"
   fi
   alias ls="$aliases[ls] --color=auto"
 else
