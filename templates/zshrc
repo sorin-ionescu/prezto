@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Set the path to Oh My Zsh.
+export OMZ="$HOME/.oh-my-zsh"
+
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':omz:module:editor' keymap 'emacs'
 
@@ -27,7 +30,8 @@ zstyle ':omz:module:terminal' auto-title 'yes'
 # zstyle ':omz:load' zfunction 'zargs' 'zmv'
 
 # Set the Oh My Zsh modules to load (browse modules).
-zstyle ':omz:load' omodule 'archive' 'git'
+zstyle ':omz:load' omodule 'environment' 'terminal' 'editor' \
+  'completion' 'history' 'directory' 'spectrum' 'alias' 'utility'
 
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
@@ -35,7 +39,7 @@ zstyle ':omz:load' omodule 'archive' 'git'
 zstyle ':omz:prompt' theme 'sorin'
 
 # This will make you shout: OH MY ZSHELL!
-source "$HOME/.oh-my-zsh/init.zsh"
+source "$OMZ/init.zsh"
 
 # Customize to your needs...
 
