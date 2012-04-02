@@ -4,58 +4,71 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
+# Usage:
+#
+#   To use a different prefix, add the following to zshrc,
+#   and replace 'g' with the desired prefix:
+#
+#     zstyle ':omz:plugin:gnu-utils' prefix 'g'
+#
+
+# Get the prefix or use the default.
+zstyle -s ':omz:plugin:gnu-utils' prefix '_gnu_utils_prefix' ||
+  _gnu_utils_prefix='g'
 
 # Check for the presence of GNU Core Utilities.
-if (( ! $+commands[gdircolors] )); then
+if (( ! $+commands[${_gnu_utils_prefix}dircolors] )); then
   return 1
 fi
 
 function _gnu-utils-hash-commands {
   emulate -L zsh
-  local gcmds
-  local gcmd
-  local cmd
 
-  gcmds=(
+  local cmds
+  local cmd
+  local pcmd
+
+  cmds=(
     # Coreutils
-    'g[' 'gbase64' 'gbasename' 'gcat' 'gchcon' 'gchgrp' 'gchmod' 'gchown'
-    'gchroot' 'gcksum' 'gcomm' 'gcp' 'gcsplit' 'gcut' 'gdate' 'gdd' 'gdf'
-    'gdir' 'gdircolors' 'gdirname' 'gdu' 'gecho' 'genv' 'gexpand' 'gexpr'
-    'gfactor' 'gfalse' 'gfmt' 'gfold' 'ggroups' 'ghead' 'ghostid' 'gid'
-    'ginstall' 'gjoin' 'gkill' 'glink' 'gln' 'glogname' 'gls' 'gmd5sum'
-    'gmkdir' 'gmkfifo' 'gmknod' 'gmktemp' 'gmv' 'gnice' 'gnl' 'gnohup' 'gnproc'
-    'god' 'gpaste' 'gpathchk' 'gpinee' 'gpr' 'gprintenv' 'gprintf' 'gptx'
-    'gpwd' 'greadlink' 'grealpath' 'grm' 'grmdir' 'gruncon' 'gseq' 'gsha1sum'
-    'gsha224sum' 'gsha256sum' 'gsha384sum' 'gsha512sum' 'gshred' 'gshuf'
-    'gsleep' 'gsort' 'gsplit' 'gstat' 'gstty' 'gsum' 'gsync' 'gtac' 'gtail'
-    'gtee' 'gtest' 'gtimeout' 'gtouch' 'gtr' 'gtrue' 'gtruncate' 'gtsort'
-    'gtty' 'guname' 'gunexpand' 'guniq' 'gunlink' 'guptime' 'gusers' 'gvdir'
-    'gwc' 'gwho' 'gwhoami' 'gyes'
+    '[' 'base64' 'basename' 'cat' 'chcon' 'chgrp' 'chmod' 'chown'
+    'chroot' 'cksum' 'comm' 'cp' 'csplit' 'cut' 'date' 'dd' 'df'
+    'dir' 'dircolors' 'dirname' 'du' 'echo' 'env' 'expand' 'expr'
+    'factor' 'false' 'fmt' 'fold' 'groups' 'head' 'hostid' 'id'
+    'install' 'join' 'kill' 'link' 'ln' 'logname' 'ls' 'md5sum'
+    'mkdir' 'mkfifo' 'mknod' 'mktemp' 'mv' 'nice' 'nl' 'nohup' 'nproc'
+    'od' 'paste' 'pathchk' 'pinee' 'pr' 'printenv' 'printf' 'ptx'
+    'pwd' 'readlink' 'realpath' 'rm' 'rmdir' 'runcon' 'seq' 'sha1sum'
+    'sha224sum' 'sha256sum' 'sha384sum' 'sha512sum' 'shred' 'shuf'
+    'sleep' 'sort' 'split' 'stat' 'stty' 'sum' 'sync' 'tac' 'tail'
+    'tee' 'test' 'timeout' 'touch' 'tr' 'true' 'truncate' 'tsort'
+    'tty' 'uname' 'unexpand' 'uniq' 'unlink' 'uptime' 'users' 'vdir'
+    'wc' 'who' 'whoami' 'yes'
 
     # The following are not part of Coreutils but installed separately.
 
     # Binutils
-    'gaddr2line' 'gar' 'gc++filt' 'gelfedit' 'gnm' 'gobjcopy' 'gobjdump'
-    'granlib' 'greadelf' 'gsize' 'gstrings' 'gstrip'
+    'addr2line' 'ar' 'c++filt' 'elfedit' 'nm' 'objcopy' 'objdump'
+    'ranlib' 'readelf' 'size' 'strings' 'strip'
 
     # Findutils
-    'gfind' 'glocate' 'goldfind' 'gupdatedb' 'gxargs'
+    'find' 'locate' 'oldfind' 'updatedb' 'xargs'
 
     # Libtool
-    'glibtool' 'glibtoolize'
+    'libtool' 'libtoolize'
 
     # Miscellaneous
-    'ggetopt' 'ggrep' 'gindent' 'gsed' 'gtar' 'gtime' 'gunits' 'gwhich'
+    'getopt' 'grep' 'indent' 'sed' 'tar' 'time' 'units' 'which'
   )
 
-  for gcmd in "$gcmds[@]"; do
+  for cmd in "$cmds[@]"; do
     #
     # This method allows for builtin commands to be primary but it's
     # lost if hash -r or rehash -f is executed. Thus, those two
     # functions have to be wrapped.
     #
-    if (( $+commands[$gcmd] )); then
-      builtin hash "$gcmd[2,-1]"="$commands[$gcmd]"
+    pcmd="${_gnu_utils_prefix}${cmd}"
+    if (( $+commands[$pcmd] )); then
+      builtin hash "$cmd"="$commands[$pcmd]"
     fi
   done
 
@@ -81,9 +94,9 @@ alias ls='ls --group-directories-first'
 
 if zstyle -t ':omz:alias:ls' color; then
   if [[ -f "$HOME/.dir_colors" ]]; then
-    eval "$(gdircolors "$HOME/.dir_colors")"
+    eval "$(dircolors "$HOME/.dir_colors")"
   else
-    eval "$(gdircolors)"
+    eval "$(dircolors)"
   fi
   alias ls="$aliases[ls] --color=auto"
 else
