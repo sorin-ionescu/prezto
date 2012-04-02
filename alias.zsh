@@ -20,6 +20,18 @@ if (( $+commands[dircolors] )); then
   else
     alias ls="$aliases[ls] -F"
   fi
+elif (( $+commands[gdircolors] )); then
+  # GNU core utilities on OS X.
+  alias ls='/usr/local/bin/gls --group-directories-first'
+
+  if zstyle -t ':omz:alias:ls' color; then
+    if [[ -f "$HOME/.dir_colors" ]]; then
+      eval $(gdircolors "$HOME/.dir_colors")
+    fi
+    alias ls="$aliases[ls] --color=auto"
+  else
+    alias ls="$aliases[ls] -F"
+  fi
 else
   # BSD core utilities.
   if zstyle -t ':omz:alias:ls' color; then
