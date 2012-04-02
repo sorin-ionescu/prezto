@@ -17,23 +17,37 @@ function __gnu_utils {
   local cmd
   local prefix
 
-  # GNU Coreutils.
-  gcmds=('g[' 'gbase64' 'gbasename' 'gcat' 'gchcon' 'gchgrp' 'gchmod'
-  'gchown' 'gchroot' 'gcksum' 'gcomm' 'gcp' 'gcsplit' 'gcut' 'gdate'
-  'gdd' 'gdf' 'gdir' 'gdircolors' 'gdirname' 'gdu' 'gecho' 'genv' 'gexpand'
-  'gexpr' 'gfactor' 'gfalse' 'gfmt' 'gfold' 'ggroups' 'ghead' 'ghostid'
-  'gid' 'ginstall' 'gjoin' 'gkill' 'glink' 'gln' 'glogname' 'gls' 'gmd5sum'
-  'gmkdir' 'gmkfifo' 'gmknod' 'gmktemp' 'gmv' 'gnice' 'gnl' 'gnohup' 'gnproc'
-  'god' 'gpaste' 'gpathchk' 'gpinky' 'gpr' 'gprintenv' 'gprintf' 'gptx' 'gpwd'
-  'greadlink' 'grm' 'grmdir' 'gruncon' 'gseq' 'gsha1sum' 'gsha224sum'
-  'gsha256sum' 'gsha384sum' 'gsha512sum' 'gshred' 'gshuf' 'gsleep' 'gsort'
-  'gsplit' 'gstat' 'gstty' 'gsum' 'gsync' 'gtac' 'gtail' 'gtee' 'gtest'
-  'gtimeout' 'gtouch' 'gtr' 'gtrue' 'gtruncate' 'gtsort' 'gtty' 'guname'
-  'gunexpand' 'guniq' 'gunlink' 'guptime' 'gusers' 'gvdir' 'gwc' 'gwho'
-  'gwhoami' 'gyes')
+  gcmds=(
+    # Coreutils
+    'g[' 'gbase64' 'gbasename' 'gcat' 'gchcon' 'gchgrp' 'gchmod' 'gchown'
+    'gchroot' 'gcksum' 'gcomm' 'gcp' 'gcsplit' 'gcut' 'gdate' 'gdd' 'gdf'
+    'gdir' 'gdircolors' 'gdirname' 'gdu' 'gecho' 'genv' 'gexpand' 'gexpr'
+    'gfactor' 'gfalse' 'gfmt' 'gfold' 'ggroups' 'ghead' 'ghostid' 'gid'
+    'ginstall' 'gjoin' 'gkill' 'glink' 'gln' 'glogname' 'gls' 'gmd5sum'
+    'gmkdir' 'gmkfifo' 'gmknod' 'gmktemp' 'gmv' 'gnice' 'gnl' 'gnohup' 'gnproc'
+    'god' 'gpaste' 'gpathchk' 'gpinee' 'gpr' 'gprintenv' 'gprintf' 'gptx'
+    'gpwd' 'greadlink' 'grealpath' 'grm' 'grmdir' 'gruncon' 'gseq' 'gsha1sum'
+    'gsha224sum' 'gsha256sum' 'gsha384sum' 'gsha512sum' 'gshred' 'gshuf'
+    'gsleep' 'gsort' 'gsplit' 'gstat' 'gstty' 'gsum' 'gsync' 'gtac' 'gtail'
+    'gtee' 'gtest' 'gtimeout' 'gtouch' 'gtr' 'gtrue' 'gtruncate' 'gtsort'
+    'gtty' 'guname' 'gunexpand' 'guniq' 'gunlink' 'guptime' 'gusers' 'gvdir'
+    'gwc' 'gwho' 'gwhoami' 'gyes'
 
-  # Not part of coreutils, installed separately.
-  gcmds+=('ggrep' 'gsed' 'gtar' 'gtime')
+    # The following are not part of Coreutils but installed separately.
+
+    # Binutils
+    'gaddr2line' 'gar' 'gc++filt' 'gelfedit' 'gnm' 'gobjcopy' 'gobjdump'
+    'granlib' 'greadelf' 'gsize' 'gstrings' 'gstrip'
+
+    # Findutils
+    'gfind' 'glocate' 'goldfind' 'gupdatedb' 'gxargs'
+
+    # Libtool
+    'glibtool' 'glibtoolize'
+
+    # Miscellaneous
+    'ggetopt' 'ggrep' 'gindent' 'gsed' 'gtar' 'gtime' 'gunits' 'gwhich'
+  )
 
   for gcmd in "$gcmds[@]"; do
     #
