@@ -56,7 +56,7 @@ function __gnu_utils {
     # functions have to be wrapped.
     #
     if (( $+commands[$gcmd] )); then
-      hash "$gcmd[2,-1]"="$commands[$gcmd]"
+      builtin hash "$gcmd[2,-1]"="$commands[$gcmd]"
     fi
   done
 
