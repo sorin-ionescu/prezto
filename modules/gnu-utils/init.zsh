@@ -62,16 +62,3 @@ function hash {
 function rehash {
   hash -r "$@"
 }
-
-# A sensible default for ls.
-alias ls='ls --group-directories-first'
-
-if zstyle -t ':omz:alias:ls' color; then
-  if [[ -f "$HOME/.dir_colors" ]]; then
-    eval $(gdircolors "$HOME/.dir_colors")
-  fi
-  alias ls="$aliases[ls] --color=auto"
-else
-  alias ls="$aliases[ls] -F"
-fi
-
