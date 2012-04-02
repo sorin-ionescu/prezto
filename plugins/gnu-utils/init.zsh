@@ -15,7 +15,6 @@ function _gnu-utils-hash-commands {
   local gcmds
   local gcmd
   local cmd
-  local prefix
 
   gcmds=(
     # Coreutils
