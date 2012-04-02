@@ -135,9 +135,9 @@ if zstyle -t ':omz:alias:diff' color; then
 fi
 
 # Miscellaneous
-(( $+commands[ack] )) && alias afind='nocorrect ack'
-(( $+commands[ebuild] )) && alias ebuild='nocorrect ebuild'
-(( $+commands[gist] )) && alias gist='nocorrect gist'
-(( $+commands[heroku] )) && alias heroku='nocorrect heroku'
-(( $+commands[mysql] )) && alias mysql='nocorrect mysql'
+if (( $+commands[ack] )) alias afind='nocorrect ack'
+if (( $+commands[ebuild] )) alias ebuild='nocorrect ebuild'
+if (( $+commands[gist] )) alias gist='nocorrect gist'
+if (( $+commands[heroku] )) alias heroku='nocorrect heroku'
+if (( $+commands[mysql] )) alias mysql='nocorrect mysql'
 
