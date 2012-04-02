@@ -70,7 +70,7 @@ for plugin in "$plugins[@]"; do
   fi
 
   if (( $? == 0 )); then
-    zstyle ":omz:plugin:$plugin" enable 'yes'
+    zstyle ":omz:plugin:$plugin" loaded 'yes'
   fi
 done
 unset plugin plugins
