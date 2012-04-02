@@ -41,21 +41,6 @@ zstyle -a ':omz:load' omodule 'omodules'
 omodload "$omodules[@]"
 unset omodules
 
-# Add themes to fpath.
-fpath=(${0:h}/themes/*(/FN) $fpath)
-
-# Load and run the prompt theming system.
-autoload -Uz promptinit && promptinit
-
-# Load the prompt theme.
-zstyle -a ':omz:prompt' theme 'prompt_argv'
-if (( $#prompt_argv > 0 )); then
-  prompt "$prompt_argv[@]"
-else
-  prompt 'off'
-fi
-unset prompt_argv
-
 # Set environment variables for launchd processes.
 if [[ "$OSTYPE" == darwin* ]]; then
   for env_var in PATH MANPATH; do
