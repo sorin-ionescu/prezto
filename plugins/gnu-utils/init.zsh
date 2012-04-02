@@ -10,7 +10,7 @@ if (( ! $+commands[gdircolors] )); then
   return 1
 fi
 
-function __gnu_utils {
+function _gnu-utils-hash-commands {
   emulate -L zsh
   local gcmds
   local gcmd
@@ -62,12 +62,12 @@ function __gnu_utils {
 
   return 0
 }
-__gnu_utils;
+_gnu-utils-hash-commands
 
 function hash {
   if (( $+argv[(er)-r] )) || (( $+argv[(er)-f] )); then
     builtin hash "$@"
-    __gnu_utils
+    _gnu-utils-hash-commands
   else
     builtin hash "$@"
   fi
