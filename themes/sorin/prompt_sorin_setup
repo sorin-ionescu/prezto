@@ -41,11 +41,12 @@ function prompt_sorin_setup {
   zstyle ':omz:plugin:git:prompt' stashed ' %%B%F{cyan}✭%f%%b'
   zstyle ':omz:plugin:git:prompt' unmerged ' %%B%F{yellow}═%f%%b'
   zstyle ':omz:plugin:git:prompt' untracked ' %%B%F{white}◼%f%%b'
-  zstyle ':omz:plugin:git:prompt' prompt ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s'
-  zstyle ':omz:plugin:git:prompt' rprompt '%A%B%S%a%d%m%r%U%u'
+  zstyle ':omz:plugin:git:prompt' prompts \
+    'prompt'  ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
+    'rprompt' '%A%B%S%a%d%m%r%U%u'
 
-  PROMPT='%F{cyan}%1~%f${(e)git_prompt_info} %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
-  RPROMPT='${vi_prompt_info}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_rprompt_info}'
+  PROMPT='%F{cyan}%1~%f${(e)git_prompt_info[prompt]} %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
+  RPROMPT='${vi_prompt_info}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_prompt_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
