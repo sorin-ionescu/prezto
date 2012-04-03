@@ -32,8 +32,8 @@ function omodload {
   # Extended globbing is needed for autoloading of module functions.
   setopt EXTENDED_GLOB
 
-  # Add functions and completions to fpath.
-  fpath=(${argv:+${OMZ}/modules/${^argv}/{functions,completions}(/FN)} $fpath)
+  # Add functions to fpath.
+  fpath=(${argv:+${OMZ}/modules/${^argv}/functions(/FN)} $fpath)
 
   # Load Oh My Zsh functions.
   for ofunction in $OMZ/modules/**/functions/^([_.]*|prompt_*_setup)(.N:t); do
