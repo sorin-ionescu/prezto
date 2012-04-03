@@ -13,10 +13,10 @@ fi
 # The default styles.
 
 # Indicator to notify of vi insert mode.
-zstyle ':omz:prompt:vi' insert '>>>'
+zstyle ':omz:module:editor:keymap' primary '>>>'
 
 # Indicator to notify of vi command mode.
-zstyle ':omz:prompt:vi' command '<<<'
+zstyle ':omz:module:editor:keymap' alternate '<<<'
 
 # Indicator to notify of generating completion.
 zstyle ':omz:module:editor' completing '...'
@@ -72,9 +72,9 @@ done
 # Displays the current vi mode.
 function zle-line-init zle-line-finish zle-keymap-select {
   if [[ "$KEYMAP" == 'vicmd' ]]; then
-    zstyle -s ':omz:prompt:vi' command 'vi_prompt_info'
+    zstyle -s ':omz:module:editor:keymap' alternate 'editor_keymap_info'
   else
-    zstyle -s ':omz:prompt:vi' insert 'vi_prompt_info'
+    zstyle -s ':omz:module:editor:keymap' primary 'editor_keymap_info'
   fi
   zle reset-prompt
   zle -R
