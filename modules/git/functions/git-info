@@ -46,20 +46,19 @@
 #     # %S - Indicator to notify of stashed files.
 #     zstyle ':omz:module:git' stashed 'stashed:%S'
 #
-#     # %U - Indicator tnotify of unmerged files.
+#     # %U - Indicator to notify of unmerged files.
 #     zstyle ':omz:module:git' unmerged 'unmerged:%U'
 #
 #     # %u - Indicator to notify of untracked files.
 #     zstyle ':omz:module:git' untracked 'untracked:%u'
 #
-#     # Left prompt.
-#     zstyle ':omz:module:git' prompt ' git:(%b %D)'
-#
-#     # Right prompt.
-#     zstyle ':omz:module:git' rprompt ''
-#
 #     # Ignore submodule when it is 'dirty', 'untracked', 'all', or 'none'.
 #     zstyle ':omz:module:git:ignore' submodule ''
+#
+#     # Prompts.
+#     zstyle ':omz:module:git' info \
+#       'prompt'  ' git:(%b%D)' \
+#       'rprompt' ''
 #
 
 # Load dependencies.
@@ -197,6 +196,8 @@ function git-info {
   local dirty_format
   local dirty_formatted
   local ignore_submodule
+  local -A info_formats
+  local info_format
   local line_number=0
   local modified=0
   local modified_format
@@ -204,7 +205,6 @@ function git-info {
   local position
   local position_format
   local position_formatted
-  local prompt_format
   local remote
   local remote_cmd
   local remote_format
@@ -212,7 +212,6 @@ function git-info {
   local renamed=0
   local renamed_format
   local renamed_formatted
-  local rprompt_format
   local stashed=0
   local stashed_format
   local stashed_formatted
@@ -223,12 +222,10 @@ function git-info {
   local untracked=0
   local untracked_format
   local untracked_formatted
-  local -A git_info_vars
-  local git_info_var
 
-  # Clean up previous git-info.
-  unset git_prompt_info
-  unset git_rprompt_info
+  # Clean up previous $git_info.
+  unset git_info
+  typeset -gA git_info
 
   # Return if not inside a Git repository work tree.
   if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
@@ -384,17 +381,10 @@ function git-info {
     zformat -f dirty_formatted "$dirty_format" "D:$dirty"
   fi
 
-  # Format prompts.
-  zstyle -s ':omz:module:git' prompt 'prompt_format'
-  zstyle -s ':omz:module:git' rprompt 'rprompt_format'
-
-  git_info_vars=(
-    git_prompt_info "$prompt_format"
-    git_rprompt_info "$rprompt_format"
-  )
-
-  for git_info_var in ${(k)git_info_vars}; do
-    zformat -f "$git_info_var" "$git_info_vars[$git_info_var]" \
+  # Format info.
+  zstyle -a ':omz:module:git' info 'info_formats'
+  for info_format in ${(k)info_formats}; do
+    zformat -f REPLY "$info_formats[$info_format]" \
       "A:$ahead_formatted" \
       "B:$behind_formatted" \
       "D:$dirty_formatted" \
@@ -410,9 +400,12 @@ function git-info {
       "r:$renamed_formatted" \
       "s:$action_formatted" \
       "u:$untracked_formatted"
+    git_info[$info_format]="$REPLY"
   done
 
+  unset REPLY
   unset _git_info_executing
+
   return 0
 }
 
