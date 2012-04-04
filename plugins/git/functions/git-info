@@ -146,6 +146,7 @@ function git-info {
   local position_format
   local position_formatted
   local prompt_format
+  local prompt_formats
   local remote
   local remote_cmd
   local remote_format
@@ -153,7 +154,6 @@ function git-info {
   local renamed=0
   local renamed_format
   local renamed_formatted
-  local rprompt_format
   local stashed=0
   local stashed_format
   local stashed_formatted
@@ -164,12 +164,11 @@ function git-info {
   local untracked=0
   local untracked_format
   local untracked_formatted
-  local -A git_info_vars
-  local git_info_var
+  typeset -A prompt_formats
 
   # Clean up previous git-info.
   unset git_prompt_info
-  unset git_rprompt_info
+  typeset -Ag git_prompt_info
 
   # Return if not inside a Git repository work tree.
   if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
@@ -329,16 +328,10 @@ function git-info {
   fi
 
   # Format prompts.
-  zstyle -s ':omz:plugin:git:prompt' prompt 'prompt_format'
-  zstyle -s ':omz:plugin:git:prompt' rprompt 'rprompt_format'
+  zstyle -a ':omz:plugin:git:prompt' prompts 'prompt_formats'
 
-  git_info_vars=(
-    git_prompt_info "$prompt_format"
-    git_rprompt_info "$rprompt_format"
-  )
-
-  for git_info_var in ${(k)git_info_vars}; do
-    zformat -f "$git_info_var" "$git_info_vars[$git_info_var]" \
+  for prompt_format in ${(k)prompt_formats}; do
+    zformat -f REPLY "$prompt_formats[$prompt_format]" \
       "A:$ahead_formatted" \
       "B:$behind_formatted" \
       "D:$dirty_formatted" \
@@ -354,6 +347,7 @@ function git-info {
       "r:$renamed_formatted" \
       "s:$action_formatted" \
       "u:$untracked_formatted"
+    git_prompt_info[$prompt_format]="$REPLY"
   done
 
   unset _git_info_executing
