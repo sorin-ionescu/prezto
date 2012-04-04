@@ -4,13 +4,6 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#
-#   To use a different prefix, add the following to zshrc,
-#   and replace 'g' with the desired prefix:
-#
-#     zstyle ':omz:plugin:gnu-utils' prefix 'g'
-#
 
 # Get the prefix or use the default.
 zstyle -s ':omz:plugin:gnu-utils' prefix '_gnu_utils_prefix' ||
