@@ -1,7 +1,7 @@
-tmux Plugin
-===========
+tmux
+====
 
-Plugin enhancing the [tmux](http://tmux.sourceforge.net/) multiplexer.
+Defines [tmux][1] aliases and provides for auto launching it at start-up.
 
 Aliases
 -------
@@ -20,15 +20,18 @@ To enable this feature, one line has to be added to the configuration file:
 
     zstyle ':omz:plugin:tmux' auto-start 'yes'
 
-This will automatically create a background session named "#OMZ" and attach every new shell to it.
+This will automatically create a background session named _#OMZ_ and attach
+every new shell to it.
 
-To avoid keeping open sessions, this plugin sets ``destroy-unattached off`` on the background session and ``destroy-unattached on`` on every other session (global setting).
+To avoid keeping open sessions, this plugin sets ``destroy-unattached off`` on
+the background session and ``destroy-unattached on`` on every other session
+(global setting).
 
 Caveats
 -------
 
 For some reasons, tmux seems to cause kernel panics on Mac OS X.  
-A discussion about this and OMZ has already been opened [here](http://git.io/jkPqHg).
+A discussion about this and OMZ has already been opened [here][2].
 
 Authors
 -------
@@ -37,3 +40,6 @@ Authors
 
  - [Sorin Ionescu](/sorin-ionescu)
  - [Colin Hebert](/ColinHebert)
+
+[1]: http://tmux.sourceforge.net/
+[2]: http://git.io/jkPqHg
