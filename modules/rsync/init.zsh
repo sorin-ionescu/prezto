@@ -15,13 +15,13 @@ if [[ "$OSTYPE" == darwin* ]] && grep -q 'file-flags' <(rsync --help 2>&1); then
 fi
 
 alias rsync-copy="${rsync_cmd}"
-compdef _rsync rsync-copy=rsync
+compdef _rsync rsync-copy=rsync 2> /dev/null
 alias rsync-move="${rsync_cmd} --remove-source-files"
-compdef _rsync rsync-move=rsync
+compdef _rsync rsync-move=rsync 2> /dev/null
 alias rsync-update="${rsync_cmd} --update"
-compdef _rsync rsync-upate=rsync
+compdef _rsync rsync-upate=rsync 2> /dev/null
 alias rsync-synchronize="${rsync_cmd} --update --delete"
-compdef _rsync rsync-synchronize=rsync
+compdef _rsync rsync-synchronize=rsync 2> /dev/null
 
 unset rsync_cmd
 
