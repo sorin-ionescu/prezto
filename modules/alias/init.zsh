@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+omodload 'spectrum'
+
 setopt CORRECT # Correct commands.
 
 # The 'ls' Family

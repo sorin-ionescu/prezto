@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+omodload 'completion'
+
 if (( ${+commands[compleat]} )); then
   compleat_setup="${commands[compleat]:h:h}/share/compleat-1.0/compleat_setup"
 
