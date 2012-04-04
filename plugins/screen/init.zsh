@@ -4,12 +4,6 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#   To auto start it, add the following to zshrc:
-#
-#     # Auto launch GNU Screen at start-up.
-#     zstyle ':omz:plugin:screen' auto-start 'yes'
-#
 
 # Aliases
 alias sl="screen -list"
