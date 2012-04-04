@@ -62,6 +62,9 @@
 #     zstyle ':omz:module:git:ignore' submodule ''
 #
 
+# Load dependencies.
+omodload 'trap'
+
 # Gets the path to the Git directory.
 function _git-dir {
   local git_dir="${$(git rev-parse --git-dir):A}"
