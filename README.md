@@ -15,11 +15,11 @@ version is 4.3.10.
 
 2. Initialize the submodules:
 
-    `git submodule update --init --recursive`
+    `cd ~/.oh-my-zsh && git submodule update --init --recursive`
 
 3. Create a new Zsh configuration by copying the Zsh template provided:
 
-    `cp ~/.oh-my-zsh/templates/zshrc.zsh ~/.zshrc`
+    `cp ~/.oh-my-zsh/templates/zshrc ~/.zshrc`
 
 4. Set Zsh as your default shell:
 
