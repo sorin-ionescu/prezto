@@ -8,5 +8,4 @@
 # Source module files.
 source "${0:h}/alias.zsh"
 source "${0:h}/hub.zsh"
-source "${0:h}/style.zsh"
 
