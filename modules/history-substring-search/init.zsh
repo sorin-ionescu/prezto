@@ -13,8 +13,7 @@ if zstyle -t ':omz:module:history-substring-search' case-sensitive; then
 fi
 
 if ! zstyle -t ':omz:module:history-substring-search' color; then
-  unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND
-  unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND
+  unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_{FOUND,NOT_FOUND}
 fi
 
 bindkey -M emacs "$keyinfo[Control]P" history-substring-search-up

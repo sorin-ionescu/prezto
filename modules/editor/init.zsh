@@ -231,6 +231,5 @@ else
   print "omz: invalid keymap: $keymap" >&2
 fi
 
-unset keymap
-unset key
+unset key{map,}
 

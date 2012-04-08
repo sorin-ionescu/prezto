@@ -61,5 +61,5 @@ for color in {0..255}; do
   FG[$color]="\e[38;5;${color}m"
   BG[$color]="\e[48;5;${color}m"
 done
-unset colors color index
+unset color{s,} index
 
