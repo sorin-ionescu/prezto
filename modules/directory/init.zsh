@@ -19,8 +19,5 @@ unsetopt CLOBBER            # Don't overwrite existing files with > and >>.
                             # Use >! and >>! to bypass.
 
 # Aliases
-for index in {1..9}; do
-  alias "$index"="cd +${index}"
-done
-unset index
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
 

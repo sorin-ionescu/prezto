@@ -116,15 +116,13 @@ zle -N prepend-sudo
 bindkey -d
 
 # Emacs key bindings.
-for key in "$keyinfo[Escape]"{B,b}; \
-  bindkey -M emacs "$key" emacs-backward-word
-for key in "$keyinfo[Escape]"{F,f}; \
-  bindkey -M emacs "$key" emacs-forward-word
+for key ("$keyinfo[Escape]"{B,b}) bindkey -M emacs "$key" emacs-backward-word
+for key ("$keyinfo[Escape]"{F,f}) bindkey -M emacs "$key" emacs-forward-word
 bindkey -M emacs "$keyinfo[Escape]$keyinfo[Left]" emacs-backward-word
 bindkey -M emacs "$keyinfo[Escape]$keyinfo[Right]" emacs-forward-word
 
 # Kill to the beginning of the line.
-for key in "$keyinfo[Escape]"{K,k}; \
+for key in "$keyinfo[Escape]"{K,k}
   bindkey -M emacs "$key" backward-kill-line
 
 # Redo.
@@ -186,15 +184,15 @@ for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$keyinfo[Control]L" clear-screen
 
   # Expand command name to full path.
-  for key in "$keyinfo[Escape]"{E,e}; \
+  for key in "$keyinfo[Escape]"{E,e}
     bindkey -M "$keymap" "$key" expand-cmd-path
 
   # Duplicate the previous word.
-  for key in "$keyinfo[Escape]"{M,m}; \
+  for key in "$keyinfo[Escape]"{M,m}
     bindkey -M "$keymap" "$key" copy-prev-shell-word
 
   # Use a more flexible push-line.
-  for key in "$keyinfo[Control]Q" "$keyinfo[Escape]"{q,Q}; \
+  for key in "$keyinfo[Control]Q" "$keyinfo[Escape]"{q,Q}
     bindkey -M "$keymap" "$key" push-line-or-edit
 
   # Bind Shift + Tab to go to the previous menu item.

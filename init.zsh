@@ -21,16 +21,12 @@ fi
 
 # Load Zsh modules.
 zstyle -a ':omz:load' zmodule 'zmodules'
-for zmodule in "$zmodules[@]"; do
-  zmodload "zsh/${(z)zmodule}"
-done
+for zmodule ("$zmodules[@]") zmodload "zsh/${(z)zmodule}"
 unset zmodule{s,}
 
 # Autoload Zsh functions.
 zstyle -a ':omz:load' zfunction 'zfunctions'
-for zfunction in "$zfunctions[@]"; do
-  autoload -Uz "$zfunction"
-done
+for zfunction ("$zfunctions[@]") autoload -Uz "$zfunction"
 unset zfunction{s,}
 
 # Source files (the order matters).
