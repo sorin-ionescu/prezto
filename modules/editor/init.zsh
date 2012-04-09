@@ -1,25 +1,39 @@
 #
-# Sets keyboard bindings.
+# Sets key bindings.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+# Usage:
+#   To enable key bindings, add the following to zshrc, and replace 'map' with
+#   'emacs' or 'vi.
+#
+#     zstyle ':omz:module:editor' keymap 'map'
+#
+#   To enable the auto conversion of .... to ../.., add the following to zshrc.
+#
+#     zstyle ':omz:module:editor' dot-expansion 'yes'
+#
+#   To indicate when the editor is in the primary keymap (emacs or viins), add
+#   the following to your theme prompt setup function.
+#
+#     zstyle ':omz:module:editor:keymap' primary '>>>'
+#
+#   To indicate when the editor is in the alternate keymap (vicmd), add the
+#   following to your theme prompt setup function.
+#
+#     zstyle ':omz:module:editor:keymap' alternate '<<<'
+#
+#   To indicate when the editor is completing, add the following to your theme
+#   prompt setup function.
+#
+#     zstyle ':omz:module:editor' completing '...'
 #
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
-
-# The default styles.
-
-# Indicator to notify of vi insert mode.
-zstyle ':omz:module:editor:keymap' primary '>>>'
-
-# Indicator to notify of vi command mode.
-zstyle ':omz:module:editor:keymap' alternate '<<<'
-
-# Indicator to notify of generating completion.
-zstyle ':omz:module:editor' completing '...'
 
 # Beep on error in line editor.
 setopt BEEP
