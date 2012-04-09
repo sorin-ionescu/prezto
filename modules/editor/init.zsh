@@ -44,7 +44,7 @@ zle -N edit-command-line
 
 # Use human-friendly identifiers.
 zmodload zsh/terminfo
-typeset -gA key_info
+typeset -gA key_info editor_info
 key_info=(
   'Control'   '\C-'
   'Escape'    '\e'
@@ -86,10 +86,15 @@ done
 # Displays the current vi mode.
 function zle-line-init zle-line-finish zle-keymap-select {
   if [[ "$KEYMAP" == 'vicmd' ]]; then
-    zstyle -s ':omz:module:editor:keymap' alternate 'editor_keymap_info'
+    zstyle -s ':omz:module:editor:keymap' alternate 'REPLY'
   else
-    zstyle -s ':omz:module:editor:keymap' primary 'editor_keymap_info'
+    zstyle -s ':omz:module:editor:keymap' primary 'REPLY'
   fi
+
+  editor_info[keymap]="$REPLY"
+
+  unset REPLY
+
   zle reset-prompt
   zle -R
 }
