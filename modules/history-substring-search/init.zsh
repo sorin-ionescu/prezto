@@ -16,8 +16,8 @@ if ! zstyle -t ':omz:module:history-substring-search' color; then
   unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_{FOUND,NOT_FOUND}
 fi
 
-bindkey -M emacs "$keyinfo[Control]P" history-substring-search-up
-bindkey -M emacs "$keyinfo[Control]N" history-substring-search-down
+bindkey -M emacs "$key_info[Control]P" history-substring-search-up
+bindkey -M emacs "$key_info[Control]N" history-substring-search-down
 bindkey -M vicmd "k" history-substring-search-up
 bindkey -M vicmd "j" history-substring-search-down
 

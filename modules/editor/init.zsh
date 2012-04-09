@@ -44,8 +44,8 @@ zle -N edit-command-line
 
 # Use human-friendly identifiers.
 zmodload zsh/terminfo
-typeset -gA keyinfo
-keyinfo=(
+typeset -gA key_info
+key_info=(
   'Control'   '\C-'
   'Escape'    '\e'
   'Meta'      '\M-'
@@ -75,8 +75,8 @@ keyinfo=(
   'BackTab'   "$terminfo[kcbt]"
 )
 
-# Do not bind any keys if there are empty values in $keyinfo.
-for key in "$keyinfo[@]"; do
+# Do not bind any keys if there are empty values in $key_info.
+for key in "$key_info[@]"; do
   if [[ -z "$key" ]]; then
     print "omz: one or more keys are non-bindable" >&2
     return 1
@@ -130,31 +130,31 @@ zle -N prepend-sudo
 bindkey -d
 
 # Emacs key bindings.
-for key ("$keyinfo[Escape]"{B,b}) bindkey -M emacs "$key" emacs-backward-word
-for key ("$keyinfo[Escape]"{F,f}) bindkey -M emacs "$key" emacs-forward-word
-bindkey -M emacs "$keyinfo[Escape]$keyinfo[Left]" emacs-backward-word
-bindkey -M emacs "$keyinfo[Escape]$keyinfo[Right]" emacs-forward-word
+for key ("$key_info[Escape]"{B,b}) bindkey -M emacs "$key" emacs-backward-word
+for key ("$key_info[Escape]"{F,f}) bindkey -M emacs "$key" emacs-forward-word
+bindkey -M emacs "$key_info[Escape]$key_info[Left]" emacs-backward-word
+bindkey -M emacs "$key_info[Escape]$key_info[Right]" emacs-forward-word
 
 # Kill to the beginning of the line.
-for key in "$keyinfo[Escape]"{K,k}
+for key in "$key_info[Escape]"{K,k}
   bindkey -M emacs "$key" backward-kill-line
 
 # Redo.
-bindkey -M emacs "$keyinfo[Escape]_" redo
+bindkey -M emacs "$key_info[Escape]_" redo
 
 # Search previous character.
-bindkey -M emacs "$keyinfo[Control]X$keyinfo[Control]B" vi-find-prev-char
+bindkey -M emacs "$key_info[Control]X$key_info[Control]B" vi-find-prev-char
 
 # Match bracket.
-bindkey -M emacs "$keyinfo[Control]X$keyinfo[Control]]" vi-match-bracket
+bindkey -M emacs "$key_info[Control]X$key_info[Control]]" vi-match-bracket
 
 # Edit command in an external editor.
-bindkey -M emacs "$keyinfo[Control]X$keyinfo[Control]E" edit-command-line
+bindkey -M emacs "$key_info[Control]X$key_info[Control]E" edit-command-line
 
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
-  bindkey -M emacs "$keyinfo[Control]R" \
+  bindkey -M emacs "$key_info[Control]R" \
     history-incremental-pattern-search-backward
-  bindkey -M emacs "$keyinfo[Control]S" \
+  bindkey -M emacs "$key_info[Control]S" \
     history-incremental-pattern-search-forward
 fi
 
@@ -165,7 +165,7 @@ bindkey -M vicmd "v" edit-command-line
 
 # Undo/Redo
 bindkey -M vicmd "u" undo
-bindkey -M vicmd "$keyinfo[Control]R" redo
+bindkey -M vicmd "$key_info[Control]R" redo
 
 # Switch to command mode.
 bindkey -M viins "jk" vi-cmd-mode
@@ -181,39 +181,39 @@ fi
 
 # Emacs and Vi key bindings.
 for keymap in 'emacs' 'viins'; do
-  bindkey -M "$keymap" "$keyinfo[Home]" beginning-of-line
-  bindkey -M "$keymap" "$keyinfo[End]" end-of-line
+  bindkey -M "$keymap" "$key_info[Home]" beginning-of-line
+  bindkey -M "$keymap" "$key_info[End]" end-of-line
 
-  bindkey -M "$keymap" "$keyinfo[Insert]" overwrite-mode
-  bindkey -M "$keymap" "$keyinfo[Delete]" delete-char
-  bindkey -M "$keymap" "$keyinfo[Backspace]" backward-delete-char
+  bindkey -M "$keymap" "$key_info[Insert]" overwrite-mode
+  bindkey -M "$keymap" "$key_info[Delete]" delete-char
+  bindkey -M "$keymap" "$key_info[Backspace]" backward-delete-char
 
-  bindkey -M "$keymap" "$keyinfo[Left]" backward-char
-  bindkey -M "$keymap" "$keyinfo[Right]" forward-char
+  bindkey -M "$keymap" "$key_info[Left]" backward-char
+  bindkey -M "$keymap" "$key_info[Right]" forward-char
 
   # Expand history on space.
   bindkey -M "$keymap" ' ' magic-space
 
   # Clear screen.
-  bindkey -M "$keymap" "$keyinfo[Control]L" clear-screen
+  bindkey -M "$keymap" "$key_info[Control]L" clear-screen
 
   # Expand command name to full path.
-  for key in "$keyinfo[Escape]"{E,e}
+  for key in "$key_info[Escape]"{E,e}
     bindkey -M "$keymap" "$key" expand-cmd-path
 
   # Duplicate the previous word.
-  for key in "$keyinfo[Escape]"{M,m}
+  for key in "$key_info[Escape]"{M,m}
     bindkey -M "$keymap" "$key" copy-prev-shell-word
 
   # Use a more flexible push-line.
-  for key in "$keyinfo[Control]Q" "$keyinfo[Escape]"{q,Q}
+  for key in "$key_info[Control]Q" "$key_info[Escape]"{q,Q}
     bindkey -M "$keymap" "$key" push-line-or-edit
 
   # Bind Shift + Tab to go to the previous menu item.
-  bindkey -M "$keymap" "$keyinfo[BackTab]" reverse-menu-complete
+  bindkey -M "$keymap" "$key_info[BackTab]" reverse-menu-complete
 
   # Complete in the middle of word.
-  bindkey -M "$keymap" "$keyinfo[Control]I" expand-or-complete-prefix
+  bindkey -M "$keymap" "$key_info[Control]I" expand-or-complete-prefix
 
   # Expand .... to ../..
   if zstyle -t ':omz:module:editor' dot-expansion; then
@@ -221,11 +221,11 @@ for keymap in 'emacs' 'viins'; do
   fi
 
   # Display an indicator when completing.
-  bindkey -M "$keymap" "$keyinfo[Control]I" \
+  bindkey -M "$keymap" "$key_info[Control]I" \
     expand-or-complete-with-indicator
 
   # Insert 'sudo ' at the beginning of the line.
-  bindkey -M "$keymap" "$keyinfo[Control]X$keyinfo[Control]S" prepend-sudo
+  bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
 done
 
 # Do not expand .... to ../.. during incremental search.
