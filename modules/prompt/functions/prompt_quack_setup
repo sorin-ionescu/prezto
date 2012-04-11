@@ -1,0 +1,40 @@
+function prompt_quack_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  function directory_list() {
+    if [[ $PWD = $HOME ]]
+    then
+      echo "%{$fg[green]%}~%{$reset_color%} ${return_code} "
+    else
+      echo "%{$fg_bold[green]%}${PWD%/*}/%{$reset_color%}%{$fg[green]%}${PWD##*/}%{$reset_color%} ${return_code} "
+    fi
+  }
+
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
+}
+
+function prompt_quack_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd prompt_quack_precmd
+
+  zstyle ':omz:module:editor' completing '%B%F{red}...%f%b'
+  zstyle ':omz:module:editor:keymap' primary '%B%F{yellow}$%f%b'
+  zstyle ':omz:module:editor:keymap' alternate '%F{yellow}#%f'
+  zstyle ':omz:module:git' branch '%%B%F{yellow}%b%f%%b'
+  zstyle ':omz:module:git' dirty ' %B%F{magenta}∆%f%b'
+  zstyle ':omz:module:git' clean ' %B%F{magenta}•%f%b'
+  zstyle ':omz:module:git' info \
+    'prompt' '%b%D%C '
+  PROMPT='${(e)git_info[prompt]}${editor_info[keymap]} '
+  PROMPT2='%F{red}%f\ %{$reset_color%}'
+  RPS1='$(directory_list)'
+}
+
+prompt_quack_setup "$@"

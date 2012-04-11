@@ -57,7 +57,7 @@ accompanying README files to learn of what is available.
 3. Load the theme you like in `~/.zshrc` then open a new Zsh terminal window or
    tab.
    ![sorin theme](http://i.imgur.com/aipDQ.png "sorin theme")
-   ![quack theme](http://imgur.com/vevSn "quack theme")
+   ![quack theme](http://i.imgur.com/vevSn.png "quack theme")
 
 ## Customization
 
