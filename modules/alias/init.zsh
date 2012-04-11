@@ -11,7 +11,7 @@ omodload 'spectrum'
 setopt CORRECT # Correct commands.
 
 # The 'ls' Family
-if (( $+commands[dircolors] )); then
+if is-callable 'dircolors'; then
   # GNU core utilities.
   alias ls='ls --group-directories-first'
 
