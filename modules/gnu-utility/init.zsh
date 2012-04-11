@@ -1,5 +1,5 @@
 #
-# Provides for the interactive usage of GNU Coreutils on BSD systems.
+# Provides for the interactive use of GNU utilities on BSD systems.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

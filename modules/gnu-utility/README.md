@@ -1,13 +1,13 @@
 gnu-utility
 ===========
 
-Provides for the interactive use of [GNU Core Utilities][1] on non-GNU systems.
+Provides for the interactive use of GNU utilities on non-GNU systems.
 
-Installing the GNU Core Utilities on non-GNU systems in `$PATH` without
-a prefix, i.e. `ls` instead of `gls`, is not recommended since scripts that
-target other core utilities will be broken.
+Installing GNU utilities on non-GNU systems in `$PATH` without a prefix, i.e.
+`ls` instead of `gls`, is not recommended since scripts that target other
+utilities will be broken.
 
-However, for interactive use, prefixed commands can be hashed to their
+However, for interactive use, prefixed commands can be wrapped in their
 non-prefixed counterparts.
 
 Settings
@@ -26,6 +26,4 @@ Authors
 *The authors of this module should be contacted via the GitHub issue tracker.*
 
  - [Sorin Ionescu](/sorin-ionescu)
-
-[1]: http://www.gnu.org/software/coreutils/
 
