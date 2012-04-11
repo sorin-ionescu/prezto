@@ -10,6 +10,9 @@
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
+# Displays user owned processes status.
+alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
+
 # Makes a directory and changes to it.
 function mkdcd {
   [[ -n "$1" ]] && mkdir -p "$1" && cd "$1"
@@ -38,12 +41,6 @@ compdef _cd popdll 2> /dev/null
 function slit {
   awk "{ print $(for n; do print -n "\$$n,"; done | sed 's/,$//') }"
 }
-
-# Displays user owned process status.
-function pmine {
-  ps "$@" -U "$USER" -o pid,%cpu,%mem,command
-}
-compdef _ps pmine 2> /dev/null
 
 # Finds files and executes a command on them.
 function find-exec {
