@@ -6,14 +6,14 @@
 #
 
 # Get the prefix or use the default.
-zstyle -s ':omz:module:gnu-utils' prefix '_gnu_utils_p' || _gnu_utils_p='g'
+zstyle -s ':omz:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'
 
 # Check for the presence of GNU Core Utilities.
-if (( ! ${+commands[${_gnu_utils_p}dircolors]} )); then
+if (( ! ${+commands[${_gnu_utility_p}dircolors]} )); then
   return 1
 fi
 
-_gnu_utils_cmds=(
+_gnu_utility_cmds=(
   # Coreutils
   '[' 'base64' 'basename' 'cat' 'chcon' 'chgrp' 'chmod' 'chown'
   'chroot' 'cksum' 'comm' 'cp' 'csplit' 'cut' 'date' 'dd' 'df'
@@ -46,16 +46,16 @@ _gnu_utils_cmds=(
 )
 
 # Wrap GNU utilities in functions.
-for _gnu_utils_cmd in "${_gnu_utils_cmds[@]}"; do
-  _gnu_utils_pcmd="${_gnu_utils_p}${_gnu_utils_cmd}"
-  if (( ${+commands[${_gnu_utils_pcmd}]} )); then
+for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
+  _gnu_utility_pcmd="${_gnu_utility_p}${_gnu_utility_cmd}"
+  if (( ${+commands[${_gnu_utility_pcmd}]} )); then
     eval "
-      function ${_gnu_utils_cmd} {
-        '${commands[${_gnu_utils_pcmd}]}' \"\$@\"
+      function ${_gnu_utility_cmd} {
+        '${commands[${_gnu_utility_pcmd}]}' \"\$@\"
       }
     "
   fi
 done
 
-unset _gnu_utils_{p,cmds,cmd,pcmd}
+unset _gnu_utility_{p,cmds,cmd,pcmd}
 

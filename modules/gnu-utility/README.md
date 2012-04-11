@@ -1,5 +1,5 @@
-gnu-utils
-=========
+gnu-utility
+===========
 
 Provides for the interactive use of [GNU Core Utilities][1] on non-GNU systems.
 
@@ -18,7 +18,7 @@ Settings
 To use a different prefix, add the following to *zshrc*, and replace 'g' with
 the desired prefix:
 
-    zstyle ':omz:module:gnu-utils' prefix 'g'
+    zstyle ':omz:module:gnu-utility' prefix 'g'
 
 Authors
 -------
