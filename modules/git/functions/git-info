@@ -376,10 +376,8 @@ function git-info {
   fi
 
   # Format dirty.
-  if (( $dirty > 0 )); then
-    zstyle -s ':omz:module:git' dirty 'dirty_format'
-    zformat -f dirty_formatted "$dirty_format" "D:$dirty"
-  fi
+  zstyle -s ':omz:module:git' dirty 'dirty_format'
+  zformat -f dirty_formatted "$dirty_format" "D:$dirty"
 
   # Format info.
   zstyle -a ':omz:module:git' info 'info_formats'
