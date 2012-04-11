@@ -40,10 +40,7 @@ function slit {
 }
 
 # Displays user owned process status.
-function pmine {
-  ps "$@" -U "$USER" -o pid,%cpu,%mem,command
-}
-compdef _ps pmine 2> /dev/null
+alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
 
 # Finds files and executes a command on them.
 function find-exec {
