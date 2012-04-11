@@ -29,7 +29,7 @@
 #     zstyle ':omz:module:git' deleted 'deleted:%d'
 #
 #     # %D - Indicator to notify of dirty files.
-#     zstyle ':omz:module:git' dirty 'dirty:%D'
+#     zstyle ':omz:module:git' dirty '%(D.clean.dirty:%D)'
 #
 #     # %m - Indicator to notify of modified files.
 #     zstyle ':omz:module:git' modified 'modified:%m'
@@ -376,10 +376,8 @@ function git-info {
   fi
 
   # Format dirty.
-  if (( $dirty > 0 )); then
-    zstyle -s ':omz:module:git' dirty 'dirty_format'
-    zformat -f dirty_formatted "$dirty_format" "D:$dirty"
-  fi
+  zstyle -s ':omz:module:git' dirty 'dirty_format'
+  zformat -f dirty_formatted "$dirty_format" "D:$dirty"
 
   # Format info.
   zstyle -a ':omz:module:git' info 'info_formats'
