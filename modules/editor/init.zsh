@@ -19,8 +19,18 @@
 #
 #     zstyle ':omz:module:editor:keymap' primary '>>>'
 #
-#   To indicate when the editor is in the alternate keymap (vicmd), add the
-#   following to your theme prompt setup function.
+#   To indicate when the editor is in the primary keymap (emacs or viins) insert
+#   mode, add the following to your theme prompt setup function.
+#
+#     zstyle ':omz:module:editor:keymap:primary' insert 'I'
+#
+#   To indicate when the editor is in the primary keymap (emacs or viins) overwrite
+#   mode, add the following to your theme prompt setup function.
+#
+#     zstyle ':omz:module:editor:keymap:primary' overwrite 'O'
+#
+#   To indicate when the editor is in the alternate keymap (vicmd), add the following
+#   to your theme prompt setup function.
 #
 #     zstyle ':omz:module:editor:keymap' alternate '<<<'
 #
@@ -44,7 +54,7 @@ zle -N edit-command-line
 
 # Use human-friendly identifiers.
 zmodload zsh/terminfo
-typeset -gA key_info editor_info
+typeset -gA key_info
 key_info=(
   'Control'   '\C-'
   'Escape'    '\e'
@@ -83,24 +93,71 @@ for key in "$key_info[@]"; do
   fi
 done
 
-# Displays the current vi mode.
-function zle-line-init zle-line-finish zle-keymap-select {
+# Displays editor information.
+function editor-info {
+  # Clean up previous $editor_info.
+  unset editor_info
+  typeset -gA editor_info
+
   if [[ "$KEYMAP" == 'vicmd' ]]; then
     zstyle -s ':omz:module:editor:keymap' alternate 'REPLY'
+    editor_info[keymap]="$REPLY"
   else
     zstyle -s ':omz:module:editor:keymap' primary 'REPLY'
-  fi
+    editor_info[keymap]="$REPLY"
 
-  editor_info[keymap]="$REPLY"
+    if [[ "$ZLE_STATE" == *overwrite* ]]; then
+      zstyle -s ':omz:module:editor:keymap:primary' overwrite 'REPLY'
+      editor_info[overwrite]="$REPLY"
+    else
+      zstyle -s ':omz:module:editor:keymap:primary' insert 'REPLY'
+      editor_info[overwrite]="$REPLY"
+    fi
+  fi
 
   unset REPLY
 
   zle reset-prompt
   zle -R
 }
-zle -N zle-line-init
-zle -N zle-line-finish
+zle -N editor-info
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select zle-line-init zle-line-finish {
+  zle editor-info
+}
 zle -N zle-keymap-select
+zle -N zle-line-finish
+zle -N zle-line-init
+
+# Toggles emacs overwrite mode and updates editor information.
+function overwrite-mode {
+  zle .overwrite-mode
+  zle editor-info
+}
+zle -N overwrite-mode
+
+# Enters vi insert mode and updates editor information.
+function vi-insert {
+  zle .vi-insert
+  zle editor-info
+}
+zle -N vi-insert
+
+# Moves to the first non-blank character then enters vi insert mode and updates
+# editor information.
+function vi-insert-bol {
+  zle .vi-insert-bol
+  zle editor-info
+}
+zle -N vi-insert-bol
+
+# Enters vi replace mode and updates editor information.
+function vi-replace  {
+  zle .vi-replace
+  zle editor-info
+}
+zle -N vi-replace
 
 # Expands .... to ../..
 function expand-dot-to-parent-directory-path {
