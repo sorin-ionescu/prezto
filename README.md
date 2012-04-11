@@ -29,8 +29,8 @@ version is 4.3.10.
 
 ### Mac OS X
 
-If you have administrator privileges, you must fix an Apple miss configuration
-in Mac OS X 10.7 Lion by renaming `/etc/zshenv` to `/etc/zprofile`, or Zsh will
+If you have administrator privileges, you must fix an Apple mis-configuration
+in Mac OS X 10.7 Lion by symlinking `/etc/zshenv` to `/etc/zprofile`, or Zsh will
 have the wrong `PATH` when executed non-interactively by scripts.
 
 ### Troubleshooting
@@ -57,6 +57,7 @@ accompanying README files to learn of what is available.
 3. Load the theme you like in `~/.zshrc` then open a new Zsh terminal window or
    tab.
    ![sorin theme](http://i.imgur.com/aipDQ.png "sorin theme")
+   ![quack theme](http://i.imgur.com/vevSn.png "quack theme")
 
 ## Customization
 

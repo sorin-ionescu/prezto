@@ -28,6 +28,9 @@
 #     # %d - Indicator to notify of deleted files.
 #     zstyle ':omz:module:git' deleted 'deleted:%d'
 #
+#     # %C - Indicator to notify of no dirty files.
+#     zstyle ':omz:module:git' clean 'clean:%C'
+#
 #     # %D - Indicator to notify of dirty files.
 #     zstyle ':omz:module:git' dirty 'dirty:%D'
 #
@@ -195,6 +198,8 @@ function git-info {
   local dirty=0
   local dirty_format
   local dirty_formatted
+  local clean_format
+  local clean_formatted
   local ignore_submodule
   local -A info_formats
   local info_format
@@ -381,12 +386,19 @@ function git-info {
     zformat -f dirty_formatted "$dirty_format" "D:$dirty"
   fi
 
+  # Format clean.
+  if (( $dirty == 0 )); then
+    zstyle -s ':omz:module:git' clean 'clean_format'
+    zformat -f clean_formatted "$clean_format" "C:$dirty"
+  fi
+
   # Format info.
   zstyle -a ':omz:module:git' info 'info_formats'
   for info_format in ${(k)info_formats}; do
     zformat -f REPLY "$info_formats[$info_format]" \
       "A:$ahead_formatted" \
       "B:$behind_formatted" \
+      "C:$clean_formatted" \
       "D:$dirty_formatted" \
       "R:$remote_formatted" \
       "S:$stashed_formatted" \
