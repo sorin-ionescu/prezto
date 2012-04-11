@@ -36,7 +36,7 @@ function omodload {
   fpath=(${argv:+${OMZ}/modules/${^argv}/functions(/FN)} $fpath)
 
   # Load Oh My Zsh functions.
-  for ofunction in $OMZ/modules/${^argv}/functions/^([_.]*|prompt_*_setup)(.N:t); do
+  for ofunction in $OMZ/modules/${^argv}/functions/^([_.]*|prompt_*_setup|README*)(.N:t); do
     autoload -Uz "$ofunction"
   done
   unset ofunction
