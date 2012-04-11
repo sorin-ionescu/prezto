@@ -29,7 +29,7 @@ version is 4.3.10.
 
 ### Mac OS X
 
-If you have administrator privileges, you must fix an Apple miss configuration
+If you have administrator privileges, you must fix an Apple misconfiguration
 in Mac OS X 10.7 Lion by renaming `/etc/zshenv` to `/etc/zprofile`, or Zsh will
 have the wrong `PATH` when executed non-interactively by scripts.
 
