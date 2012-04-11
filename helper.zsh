@@ -11,6 +11,11 @@ function is-true {
   [[ -n "$1" && "$1" == (1|[Yy]([Ee][Ss]|)|[Tt]([Rr][Uu][Ee]|)|[Oo]([Nn]|)) ]]
 }
 
+# Checks a name if it is a command, function, or alias.
+function is-callable {
+  (( $+commands[$1] )) || (( $+functions[$1] )) || (( $+aliases[$1] ))
+}
+
 # Prints the first non-empty string in the arguments array.
 function coalesce {
   for arg in $argv; do
