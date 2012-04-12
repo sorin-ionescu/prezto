@@ -22,6 +22,9 @@
 #     # %b - Branch name.
 #     zstyle ':omz:module:git' branch 'branch:%b'
 #
+#     # %C - Indicator to notify of a clean working directory.
+#     zstyle ':omz:module:git' clean 'clean'
+#
 #     # %c - SHA-1 hash.
 #     zstyle ':omz:module:git' commit 'commit:%c'
 #
@@ -29,7 +32,7 @@
 #     zstyle ':omz:module:git' deleted 'deleted:%d'
 #
 #     # %D - Indicator to notify of dirty files.
-#     zstyle ':omz:module:git' dirty '%(D.clean.dirty:%D)'
+#     zstyle ':omz:module:git' dirty 'dirty:%D'
 #
 #     # %m - Indicator to notify of modified files.
 #     zstyle ':omz:module:git' modified 'modified:%m'
@@ -57,7 +60,7 @@
 #
 #     # Prompts.
 #     zstyle ':omz:module:git' info \
-#       'prompt'  ' git:(%b%D)' \
+#       'prompt'  ' git:(%b%C%D)' \
 #       'rprompt' ''
 #
 
@@ -186,6 +189,8 @@ function git-info {
   local branch_format
   local branch_formatted
   local branch_info
+  local clean
+  local clean_formatted
   local commit
   local commit_format
   local commit_formatted
@@ -375,9 +380,13 @@ function git-info {
     zformat -f untracked_formatted "$untracked_format" "u:$untracked"
   fi
 
-  # Format dirty.
-  zstyle -s ':omz:module:git' dirty 'dirty_format'
-  zformat -f dirty_formatted "$dirty_format" "D:$dirty"
+  # Format dirty and clean.
+  if (( $dirty > 0 )); then
+    zstyle -s ':omz:module:git' dirty 'dirty_format'
+    zformat -f dirty_formatted "$dirty_format" "D:$dirty"
+  else
+    zstyle -s ':omz:module:git' clean 'clean_formatted'
+  fi
 
   # Format info.
   zstyle -a ':omz:module:git' info 'info_formats'
@@ -391,6 +400,7 @@ function git-info {
       "U:$unmerged_formatted" \
       "a:$added_formatted" \
       "b:$branch_formatted" \
+      "C:$clean_formatted" \
       "c:$commit_formatted" \
       "d:$deleted_formatted" \
       "m:$modified_formatted" \
