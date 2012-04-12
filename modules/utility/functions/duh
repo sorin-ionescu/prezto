@@ -8,7 +8,7 @@
 
 function duh {
   (( $# == 0 )) && set -- *
-  if [[ "$OSTYPE" == linux* ]]; then
+  if grep -q -i 'GNU' < <(du --version 2>&1); then
     du -khsc "$@" | sort -h -r
   else
     du -kcs "$@" | awk '{ printf "%9.1fM    %s\n", $1 / 1024, $2 } ' | sort -n -r
