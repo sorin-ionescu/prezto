@@ -6,7 +6,29 @@ if (( ! $+commands[fasd] )); then
   return 1
 fi
 
-eval "$(fasd --init-zsh)"
+cache_file="${0:h}/cache.zsh"
+if [[ ! -s "$cache_file" ]]; then
+  # fasd is slow; cache its output.
+  # fasd --init-zsh >! "$cache_file" 2> /dev/null
+  # fasd --init \
+  #   posix-alias \
+  #   zsh-hook \
+  #   zsh-ccomp \
+  #   zsh-ccomp-install \
+  #   zsh-wcomp \
+  #   zsh-wcomp-install >! "$cache_file" 2> /dev/null
+
+  init_args='posix-alias zsh-hook'
+  if -t zstyle ':omz:module:completion' loaded; then
+    init_args+='zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install'
+  fi
+
+  fasd --init "${(z)init_args[@]}" >! "$cache_file" 2> /dev/null
+fi
+
+source "$cache_file"
+
+unset cache_file init_args
 
 alias a='fasd -a' # any
 alias s='fasd -s' # show / search / select
