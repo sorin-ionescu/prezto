@@ -24,12 +24,14 @@ done
 unset _z_prefix{es,} _z_sh
 
 if (( $+functions[_z] )); then
-  alias z='nocorrect _z 2>&1'
-  alias j='z'
-  function z-precmd {
-    z --add "$(pwd -P)"
+  function _z-precmd {
+    _z --add "${PWD:A}"
   }
+
   autoload -Uz add-zsh-hook
-  add-zsh-hook precmd z-precmd
+  add-zsh-hook precmd _z-precmd
+
+  alias z='nocorrect _z'
+  alias j='nocorrect _z'
 fi
 
