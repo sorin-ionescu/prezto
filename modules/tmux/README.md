@@ -30,8 +30,15 @@ the background session and `destroy-unattached on` on every other session
 Caveats
 -------
 
-tmux is known to cause kernel panics on Mac OS X. A discussion about this and
-OMZ has already been opened [here][2].
+On Mac OS X, launching tmux can cause the error **launch_msg(...): Socket is not
+connected** to be displayed, which can be fixed by installing
+[reattach-to-user-namespace][3], available in [Homebrew][4], and adding the
+following to *tmux.conf*:
+
+    set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
+
+Furthermore, tmux is known to cause **kernel panics** on Mac OS X. A discussion
+about this and OMZ has already been opened [here][2].
 
 Authors
 -------
@@ -43,4 +50,6 @@ Authors
 
 [1]: http://tmux.sourceforge.net
 [2]: http://git.io/jkPqHg
+[3]: ChrisJohnsen/tmux-MacOSX-pasteboard
+[4]: mxcl/homebrew
 
