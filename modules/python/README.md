@@ -4,14 +4,31 @@ Python
 Enables local Python package installation (see [PEP 370][1]) and
 [_virtualenvwrapper_][2], if installed.
 
-This module will prepend the per user site packages directory as defined in [PEP
-370][1] to `$path` and `$manpath` so that you can run Python scripts and read
-man pages installed into the per user site.
+Local package installation
+--------------------------
 
-It also sources the [_virtualenvwrapper_][2] initialization script, if
-[_virtualenvwrapper_][2] is installed and `$WORKON_HOME` is set.
-[_virtualenvwrapper_][2] is a frontend to [_virtualenv_][3] which provides
-convenient shell functions to create, switch and manage virtualenvs.
+Since version 2.6 Python supports per user package installation into a per user
+site as defined in [PEP 370][1].
+
+This module prepends the scripts directory of the per user site
+to `$path` so that you can run Python scripts from per user packages.  It also
+prepends the man directories from the per user site to `$manpath` to make
+documentation of per user packages available.
+
+You can install packages into the per user site with `easy_install --user` or
+`pip install --user`.
+
+[_virtualenvwrapper_][2] support
+--------------------------------
+
+[_virtualenvwrapper_][2] is a frontend to the popular [_virtualenv_][3] utility.
+_virtualenv_ creates isolated Python environments and _virtualenvwrapper_
+provides convenient shell functions to create, switch and manage such
+environments.
+
+If _virtualenvwrapper_ is installed and the `$WORKON_HOME` environment variable
+is set, this module sources the _virtualenvwrapper_ initialization script to
+enable _virtualenvwrapper_.
 
 Authors
 -------
