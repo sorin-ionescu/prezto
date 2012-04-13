@@ -33,6 +33,14 @@ Caveats
 tmux is known to cause kernel panics on Mac OS X. A discussion about this and
 OMZ has already been opened [here][2].
 
+For Mac users, launching tmux can cause an error
+(`launch_msg(...): Socket is not connected`). this can be easily fixed by
+installing [reattach-to-user-namespace][3] (available on [homebrew][4]).
+
+You then have to change your `~/.tmux.conf` to add :
+
+    set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
+
 Authors
 -------
 
@@ -43,4 +51,5 @@ Authors
 
 [1]: http://tmux.sourceforge.net
 [2]: http://git.io/jkPqHg
-
+[3]: ChrisJohnsen/tmux-MacOSX-pasteboard
+[4]: mxcl/homebrew
