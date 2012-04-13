@@ -21,7 +21,7 @@ else
 fi
 
 # source virtualenvwrapper if available
-if (( $+WORKON_HOME )); then
+if [[ -n "$WORKON_HOME" ]]; then
     if (( $+commands[virtualenvwrapper.sh] )); then
         source virtualenvwrapper.sh
     fi
