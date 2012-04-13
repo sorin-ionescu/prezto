@@ -9,9 +9,9 @@ This module will prepend the per user site packages directory as defined in [PEP
 man pages installed into the per user site.
 
 It also sources the [_virtualenvwrapper_][2] initialization script, if
-[_virtualenvwrapper_][2] is installed.  [_virtualenvwrapper_][2] is a frontend
-to [_virtualenv_][3] which provides convenient shell functions to create, switch
-and manage virtualenvs.
+[_virtualenvwrapper_][2] is installed and `$WORKON_HOME` is set.
+[_virtualenvwrapper_][2] is a frontend to [_virtualenv_][3] which provides
+convenient shell functions to create, switch and manage virtualenvs.
 
 Authors
 -------
