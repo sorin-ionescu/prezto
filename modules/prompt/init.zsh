@@ -4,13 +4,6 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#   To select a prompt theme, add the following to zshrc, and replace 'name'
-#   with the name of the theme you wish to load. Setting it to random will load
-#   a random theme.
-#
-#     zstyle ':omz:module:prompt' theme 'name'
-#
 
 # Load and run the prompt theming system.
 autoload -Uz promptinit && promptinit
