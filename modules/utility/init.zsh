@@ -20,7 +20,7 @@ alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
 function mkdcd {
   [[ -n "$1" ]] && builtin mkdir -p "$1" && builtin cd "$1"
 }
-compdef _mkdir mkdcd 2> /dev/null
+compdef '_path_files -/' mkdcd 2> /dev/null
 
 # Changes to a directory and lists its contents.
 function cdll {
