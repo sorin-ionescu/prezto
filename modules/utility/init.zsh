@@ -7,6 +7,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+omodload 'alias'
+
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
