@@ -42,7 +42,7 @@ compdef _cd popdll 2> /dev/null
 
 # Prints columns 1 2 3 ... n.
 function slit {
-  awk "{ print $(for n; do print -n "\$$n,"; done | sed 's/,$//') }"
+  awk "{ print ${(j:,:):-\$${^@}} }"
 }
 
 # Finds files and executes a command on them.
