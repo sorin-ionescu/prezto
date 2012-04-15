@@ -7,9 +7,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Load dependencies.
-omodload 'alias'
-
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
@@ -23,22 +20,22 @@ function mkdcd {
 compdef '_path_files -/' mkdcd 2> /dev/null
 
 # Changes to a directory and lists its contents.
-function cdll {
-  builtin cd "$1" && ll
+function cdls {
+  builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd cdll 2> /dev/null
+compdef _cd cdls 2> /dev/null
 
 # Pushes an entry onto the directory stack and lists its contents.
-function pushdll {
-  builtin pushd "$1" && ll
+function pushdls {
+  builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd pushdll 2> /dev/null
+compdef _cd pushdls 2> /dev/null
 
 # Pops an entry off the directory stack and lists its contents.
-function popdll {
-  builtin popd "$1" && ll
+function popdls {
+  builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd popdll 2> /dev/null
+compdef _cd popdls 2> /dev/null
 
 # Prints columns 1 2 3 ... n.
 function slit {
