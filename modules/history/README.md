@@ -3,8 +3,8 @@ History
 
 Sets [history][1] options and defines history aliases.
 
-VARIBLES
---------
+VARIABLES
+---------
 
  - `HISTFILE` the file to save the history in when an interactive shell exits.
  - `HISTSIZE` the maximum size of the history list.
@@ -25,12 +25,12 @@ Options
  - `HIST_SAVE_NO_DUPS` do not write duplicate entries in the history file.
  - `HIST_REDUCE_BLANKS` remove superfluous blanks before recording entry.
  - `HIST_VERIFY` do not execute immediately upon history expansion.
- - `HIST_BEEP` beep when accessing nonexistent history.
+ - `HIST_BEEP` beep when accessing non-existent history.
 
 Aliases
 -------
 
- - `history-stat` lists the ten most used commands
+ - `history-stat` list the ten most used commands
 
 Authors
 -------
