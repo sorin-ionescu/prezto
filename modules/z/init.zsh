@@ -15,7 +15,7 @@ _z_prefixes=(
 for _z_prefix in "$_z_prefixes[@]"; do
   _z_sh="${_z_prefix}/etc/profile.d/z.sh"
 
-  if [[ -f "$_z_sh" ]]; then
+  if [[ -s "$_z_sh" ]]; then
     source "$_z_sh"
     break
   fi

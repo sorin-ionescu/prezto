@@ -28,7 +28,7 @@ if [[ "$1" == "-r" || "$1" == "--remove" ]]; then
 fi
 
 while (( $# > 0 )); do
-  if [[ ! -f "$1" ]]; then
+  if [[ ! -s "$1" ]]; then
     print "$0: file not valid: $1" >&2
     shift
     continue

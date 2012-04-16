@@ -19,7 +19,7 @@ function _gpg-agent-start {
 }
 
 # Source GPG agent settings, if applicable.
-if [[ -f "${_gpg_env}" ]]; then
+if [[ -s "${_gpg_env}" ]]; then
   source "${_gpg_env}" > /dev/null
   ps -ef | grep "${SSH_AGENT_PID}" | grep -q 'gpg-agent' || {
     _gpg-agent-start

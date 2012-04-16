@@ -7,8 +7,8 @@
 #
 
 local config_file="$HOME/.wakeonlan/$1"
-if [[ ! -f "$config_file" ]]; then
-  print "$0: no such device file: $1" >&2
+if [[ ! -s "$config_file" ]]; then
+  print "$0: invalid device file: $1" >&2
   return 1
 fi
 

@@ -16,7 +16,7 @@ if is-callable 'dircolors'; then
   alias ls='ls --group-directories-first'
 
   if zstyle -t ':omz:alias:ls' color; then
-    if [[ -f "$HOME/.dir_colors" ]]; then
+    if [[ -s "$HOME/.dir_colors" ]]; then
       eval "$(dircolors "$HOME/.dir_colors")"
     else
       eval "$(dircolors)"

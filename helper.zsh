@@ -58,7 +58,7 @@ function omodload {
       print "$0: no such module: $omodule" >&2
       continue
     else
-      if [[ -f "$OMZ/modules/$omodule/init.zsh" ]]; then
+      if [[ -s "$OMZ/modules/$omodule/init.zsh" ]]; then
         source "$OMZ/modules/$omodule/init.zsh"
       fi
 

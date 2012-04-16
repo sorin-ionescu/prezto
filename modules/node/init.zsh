@@ -6,7 +6,7 @@
 #
 
 cache_file="${0:h}/cache.zsh"
-if [[ ! -f "$cache_file" ]]; then
+if [[ ! -s "$cache_file" ]]; then
   if (( $+commands[npm] )); then
     # npm is slow; cache its output.
     npm completion >! "$cache_file" 2> /dev/null
