@@ -174,7 +174,7 @@ function expand-or-complete-with-indicator {
   local indicator
   zstyle -s ':omz:module:editor' completing 'indicator'
   print -Pn "$indicator"
-  zle expand-or-complete-prefix
+  zle expand-or-complete
   zle redisplay
 }
 zle -N expand-or-complete-with-indicator
@@ -275,7 +275,7 @@ for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$key_info[BackTab]" reverse-menu-complete
 
   # Complete in the middle of word.
-  bindkey -M "$keymap" "$key_info[Control]I" expand-or-complete-prefix
+  bindkey -M "$keymap" "$key_info[Control]I" expand-or-complete
 
   # Expand .... to ../..
   if zstyle -t ':omz:module:editor' dot-expansion; then
