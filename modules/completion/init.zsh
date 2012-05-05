@@ -104,7 +104,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 zstyle '*' single-ignored show
 
 # Ignore multiple entries.
-zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes
+zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
 zstyle ':completion:*:rm:*' file-patterns '*:all-files'
 
 # Kill
