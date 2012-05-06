@@ -268,7 +268,7 @@ function git-info {
 
   # Format stashed.
   if [[ -f "$(git-dir)/refs/stash" ]]; then
-    stashed="$(git stash list 2> /dev/null | wc -l)"
+    stashed="$(git stash list 2> /dev/null | wc -l | awk '{print $1}')"
     zstyle -s ':omz:module:git' stashed 'stashed_format'
     zformat -f stashed_formatted "$stashed_format" "S:$stashed"
   fi
