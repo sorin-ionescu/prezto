@@ -120,7 +120,7 @@ alias gRb='git-hub'
 # Stash (s)
 alias gs='git stash'
 alias gsa='git stash apply'
-alias gsc='git stash clear'
+alias gsc='git-stash-clear-interactive'
 alias gsx='git stash drop'
 alias gsl='git stash list'
 alias gsL='git stash show --patch --stat'

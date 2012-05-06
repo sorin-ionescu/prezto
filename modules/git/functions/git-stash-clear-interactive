@@ -1,0 +1,18 @@
+#
+# Asks for confirmation before clearing the Git stash.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+local stashed
+
+if [[ -f "$(git-dir)/refs/stash" ]]; then
+  stashed="$(git stash list 2> /dev/null | wc -l | awk '{print $1}')"
+  if (( $stashed > 0 )); then
+    if read -q "?Clear $stashed stashed state(s) [Y/n]? "; then
+      git stash clear
+    fi
+  fi
+fi
+
