@@ -33,23 +33,23 @@ function autoloadable {
 # Loads Oh My Zsh modules.
 function omodload {
   local omodule
-  local ofunction
 
-  # Extended globbing is needed for autoloading of module functions.
-  setopt EXTENDED_GLOB
+  function {
+    local ofunction
 
-  # Add functions to fpath.
-  fpath=(${argv:+${OMZ}/modules/${^argv}/functions(/FN)} $fpath)
+    # Extended globbing is needed for listing autoloadable function directories.
+    setopt LOCAL_OPTIONS EXTENDED_GLOB
 
-  # Load Oh My Zsh functions.
-  for ofunction in \
-    $OMZ/modules/${^argv}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
-  do
-    autoload -Uz "$ofunction"
-  done
+    # Add functions to fpath.
+    fpath=(${argv:+${OMZ}/modules/${^argv}/functions(/FN)} $fpath)
 
-  # Extended globbing is no longer needed.
-  unsetopt EXTENDED_GLOB
+    # Load Oh My Zsh functions.
+    for ofunction in \
+      $OMZ/modules/${^argv}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
+    do
+      autoload -Uz "$ofunction"
+    done
+  } "$argv[@]"
 
   for omodule in "$argv[@]"; do
     if zstyle -t ":omz:module:$omodule" loaded; then
