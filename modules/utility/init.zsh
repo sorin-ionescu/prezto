@@ -15,7 +15,7 @@ alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
 
 # Makes a directory and changes to it.
 function mkdcd {
-  [[ -n "$1" ]] && builtin mkdir -p "$1" && builtin cd "$1"
+  [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
 }
 compdef '_path_files -/' mkdcd 2> /dev/null
 
