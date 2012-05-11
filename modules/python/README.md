@@ -1,7 +1,7 @@
 Python
 ======
 
-Enables local Python package installation.
+Enables local Python package installation and virtualenvwrapper.
 
 Local Package Installation
 --------------------------
