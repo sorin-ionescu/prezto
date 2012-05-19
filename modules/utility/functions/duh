@@ -11,7 +11,14 @@ function duh {
   if grep -q -i 'GNU' < <(du --version 2>&1); then
     du -khsc "$@" | sort -h -r
   else
-    du -kcs "$@" | awk '{ printf "%9.1fM    %s\n", $1 / 1024, $2 } ' | sort -n -r
+    local line size name
+    local -a record
+    while IFS=$'\n' read line; do
+      record=(${(z)line})
+      size="$(($record[1] / 1024.0))"
+      name="$record[2,-1]"
+      printf "%9.1LfM    %s\n" "$size" "$name"
+    done < <(du -kcs "$@") | sort -n -r
   fi
 }
 compdef _du duh
