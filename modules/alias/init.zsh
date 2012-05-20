@@ -15,7 +15,7 @@ if is-callable 'dircolors'; then
   # GNU core utilities.
   alias ls='ls --group-directories-first'
 
-  if zstyle -t ':omz:alias:ls' color; then
+  if zstyle -t ':omz:module:alias:ls' color; then
     if [[ -s "$HOME/.dir_colors" ]]; then
       eval "$(dircolors "$HOME/.dir_colors")"
     else
@@ -27,7 +27,7 @@ if is-callable 'dircolors'; then
   fi
 else
   # BSD core utilities.
-  if zstyle -t ':omz:alias:ls' color; then
+  if zstyle -t ':omz:module:alias:ls' color; then
     export LSCOLORS="exfxcxdxbxegedabagacad"
     alias ls="ls -G"
   else
@@ -102,8 +102,8 @@ else
   alias topc='top -o cpu'
 fi
 
-# Diff/Make
-if zstyle -t ':omz:alias:diff' color; then
+# Diff
+if zstyle -t ':omz:module:alias:diff' color; then
   function diff {
     if (( $+commands[colordiff] )); then
       "$commands[diff]" --unified "$@" | colordiff --difftype diffu
@@ -130,6 +130,7 @@ if zstyle -t ':omz:alias:diff' color; then
       print "zsh: command not found: $0" >&2
     fi
   }
+fi
 
   if (( $+commands[colormake] )); then
     alias make='colormake'
