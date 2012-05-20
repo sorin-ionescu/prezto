@@ -5,7 +5,7 @@
 #   Joseph Jon Booker <joe@neoturbine.net>
 #
 
-if [[ -s /etc/zsh_command_not_found ]]; then
-  source /etc/zsh_command_not_found
+if [[ -s '/etc/zsh_command_not_found' ]]; then
+  source '/etc/zsh_command_not_found'
 fi
 
