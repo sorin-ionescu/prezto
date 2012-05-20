@@ -10,6 +10,8 @@ utilities will be broken.
 However, for interactive use, prefixed commands can be wrapped in their
 non-prefixed counterparts.
 
+This module must be loaded **before** the *alias* module.
+
 Settings
 --------
 
