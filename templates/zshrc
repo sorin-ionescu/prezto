@@ -35,11 +35,11 @@ zstyle ':omz:load' omodule \
   'environment' \
   'terminal' \
   'editor' \
-  'completion' \
   'history' \
   'directory' \
   'spectrum' \
   'alias' \
+  'completion' \
   'utility' \
   'prompt'
 
