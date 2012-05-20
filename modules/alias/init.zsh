@@ -132,10 +132,15 @@ if zstyle -t ':omz:module:alias:diff' color; then
   }
 fi
 
-  if (( $+commands[colormake] )); then
-    alias make='colormake'
-    compdef colormake=make 2> /dev/null
-  fi
+# Make
+if zstyle -t ':omz:module:alias:make' color; then
+  function make {
+    if (( $+commands[colormake] )); then
+      colormake "$@"
+    else
+      "$comamnds[make]" "$@"
+    fi
+  }
 fi
 
 # Miscellaneous
