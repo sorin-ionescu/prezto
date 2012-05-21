@@ -38,7 +38,7 @@
 #     zstyle ':omz:module:git' modified 'modified:%m'
 #
 #     # %p - HEAD position in relation to the nearest branch, remote, tag.
-#     zstyle ':omz:module:git:prompt' position 'position:%p'
+#     zstyle ':omz:module:git' position 'position:%p'
 #
 #     # %R - Remote name.
 #     zstyle ':omz:moduleit' remote 'remote:%R'
@@ -327,7 +327,7 @@ function git-info {
     # Format position.
     position="$(git describe --contains --all HEAD 2> /dev/null)"
     if [[ -n "$position" ]]; then
-      zstyle -s ':omz:module:git:prompt' position 'position_format'
+      zstyle -s ':omz:module:git' position 'position_format'
       zformat -f position_formatted "$position_format" "p:$position"
     fi
   fi
