@@ -8,11 +8,13 @@
 
 function duh {
   (( $# == 0 )) && set -- *
+
   if grep -q -i 'GNU' < <(du --version 2>&1); then
     du -khsc "$@" | sort -h -r
   else
     local line size name
     local -a record
+
     while IFS=$'\n' read line; do
       record=(${(z)line})
       size="$(($record[1] / 1024.0))"
