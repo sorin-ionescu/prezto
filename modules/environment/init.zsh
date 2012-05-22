@@ -22,76 +22,10 @@ unsetopt BG_NICE          # Don't run all background jobs at a lower priority.
 unsetopt HUP              # Don't kill jobs on shell exit.
 unsetopt CHECK_JOBS       # Don't report on jobs when shell exit.
 
-# Paths
-typeset -gU cdpath fpath mailpath manpath path
-typeset -gUT INFOPATH infopath
-
-cdpath=(
-  $HOME
-  $cdpath
-)
-
-infopath=(
-  /usr/local/share/info
-  /usr/share/info
-  $infopath
-)
-
-manpath=(
-  /usr/local/share/man
-  /usr/share/man
-  $manpath
-)
-
-for path_file in /etc/manpaths.d/*(.N); do
-  manpath+=($(<$path_file))
-done
-unset path_file
-
-path=(
-  /usr/local/{bin,sbin}
-  /usr/{bin,sbin}
-  /{bin,sbin}
-  $path
-)
-
-for path_file in /etc/paths.d/*(.N); do
-  path+=($(<$path_file))
-done
-unset path_file
-
-# Language
-if [[ -z "$LANG" ]]; then
-  eval "$(locale)"
-fi
-
-# Editors
-export EDITOR="vim"
-export VISUAL="vim"
-export PAGER='less'
-
 # Grep
 if zstyle -t ':omz:environment:grep' color; then
   export GREP_COLOR='37;45'
   export GREP_OPTIONS='--color=auto'
-fi
-
-# Browser (Default)
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
-
-# Less
-export LESSCHARSET="UTF-8"
-export LESSHISTFILE='-'
-export LESSEDIT='vim ?lm+%lm. %f'
-
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
 fi
 
 # Termcap
