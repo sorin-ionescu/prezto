@@ -16,9 +16,10 @@ This module must be loaded **after** the *alias* module but **before** the
 Authors
 -------
 
-*The authors of this module should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
- - [Sorin Ionescu](/sorin-ionescu)
+  - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: /zsh-users/zsh-completions
+[1]: https://github.com/zsh-users/zsh-completions
+[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 

@@ -6,18 +6,19 @@ Loads prompt [themes][1].
 Settings
 --------
 
-To select a prompt theme, add the following to *zshrc*, and replace **name** with the
-name of the theme you wish to load. Setting it to **random** will load a random
-theme.
+To select a prompt theme, add the following to *zshrc*, and replace **name**
+with the name of the theme you wish to load. Setting it to **random** will load
+a random theme.
 
     zstyle ':omz:module:prompt' theme 'name'
 
 Authors
 -------
 
-*The authors of this module should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
- - [Sorin Ionescu](/sorin-ionescu)
+  - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
+[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 

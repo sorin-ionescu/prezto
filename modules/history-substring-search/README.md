@@ -27,10 +27,11 @@ To enable highlighting for this module only, and the following line to *zshrc*:
 Authors
 -------
 
-*The authors of this module should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
- - [Sorin Ionescu](/sorin-ionescu)
- - [Suraj N. Kurapati](/sunaku)
+  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+  - [Suraj N. Kurapati](https://github.com/sunaku)
 
 [1]: http://fishshell.com
+[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 

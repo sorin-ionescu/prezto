@@ -1,5 +1,5 @@
-wakeonlan
-=========
+Wake-on-LAN
+===========
 
 This module provides a wrapper around the [wakeonlan][1] tool.
 
@@ -26,11 +26,12 @@ For more information on the configuration file format, read the
 Authors
 -------
 
-*The authors of this module should be contacted via Github issue tracker.*
+*The authors of this module should be contacted via [issue tracker][3].*
 
- - [Paul Dann](/giddie)
- - [Sorin Ionescu](/sorin-ionescu)
+  - [Paul Dann](https://github.com/giddie)
+  - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://gsd.di.uminho.pt/jpo/software/wakeonlan/
 [2]: http://man.cx/wakeonlan
+[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 

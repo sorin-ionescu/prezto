@@ -20,9 +20,10 @@ Install packages into per user directories with `cabal install --user`.
 Authors
 -------
 
-*The authors of this module should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
- - [Sebastian Wiesner](/lunaryorn)
+  - [Sebastian Wiesner](https://github.com/lunaryorn)
 
 [1]: http://www.haskell.org/cabal/
+[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 

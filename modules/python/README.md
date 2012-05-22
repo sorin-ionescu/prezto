@@ -33,13 +33,14 @@ environments will be stored.
 Authors
 -------
 
-*The authors of this module should be contacted via the GitHub issue tracker.*
+*The authors of this module should be contacted via the [issue tracker][5].*
 
- - [Sorin Ionescu](/sorin-ionescu)
- - [Sebastian Wiesner](/lunaryorn)
+  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+  - [Sebastian Wiesner](https://github.com/lunaryorn)
 
 [1]: http://www.python.org/dev/peps/pep-0370/
 [2]: http://www.doughellmann.com/projects/virtualenvwrapper/
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: http://www.doughellmann.com/docs/virtualenvwrapper/#introduction
+[5]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 
