@@ -31,14 +31,27 @@ version is 4.3.10.
 
 ### Mac OS X
 
-If you have administrator privileges, you must fix an Apple misconfiguration in
-Mac OS X 10.7 Lion by renaming `/etc/zshenv` to `/etc/zprofile`, or Zsh will
-have the wrong `PATH` when executed non-interactively by scripts.
+If you have administrator privileges, you must fix an Apple-introduced problem
+in Mac OS X 10.5 Leopard by executing the following command, or BASH and Zsh
+will have the wrong `PATH` when executed non-interactively.
+
+    sudo chmod ugo-x /usr/libexec/path_helper
+
+`path_helper` is intended to make it easier for installers to add new paths to
+the environment without having to edit shell configuration files by adding
+a file with a path to the */etc/paths.d* directory.
+
+Unfortunately, `path_helper` always reads paths from */etc/paths* set by Apple
+then paths from */etc/paths.d* set by third party installers, and lastly paths
+from the `PATH` environment variable set by the parent process, which
+ultimately is set by the user with `export PATH=...` Thus, it reorders path
+priorities, and user */bin* directories meant to override system */bin*
+directories end up at the tail of the array.
 
 ### Troubleshooting
 
 If you are not able to find certain commands after switching to *Oh My Zsh*,
-modify the `PATH` variable in `environment.zsh` then open a new Zsh terminal
+modify the `PATH` variable in *environment.zsh* then open a new Zsh terminal
 window or tab.
 
 ## Usage
@@ -48,15 +61,15 @@ accompanying README files to learn of what is available.
 
 ### Modules
 
-   1. Browse `modules/` to see what is available.
-   2. Load the modules you need in `~/.zshrc` then open a new Zsh terminal
+   1. Browse */modules* to see what is available.
+   2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal
       window or tab.
 
 ### Themes
 
    1. For a list of themes, type `prompt -l`.
    2. To preview a theme, type `prompt -p name`.
-   3. Load the theme you like in `~/.zshrc` then open a new Zsh terminal window
+   3. Load the theme you like in *~/.zshrc* then open a new Zsh terminal window
       or tab.
       ![sorin theme][2]
 
