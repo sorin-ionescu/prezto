@@ -138,7 +138,7 @@ if zstyle -t ':omz:module:alias:make' color; then
     if (( $+commands[colormake] )); then
       colormake "$@"
     else
-      "$comamnds[make]" "$@"
+      "$commands[make]" "$@"
     fi
   }
 fi
