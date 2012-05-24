@@ -1,8 +1,8 @@
 Pacman
 ======
 
-Provides aliases and utility functions for package management on Arch Linux with
-`pacman` and `yaourt`.
+Provides aliases and utility functions for the package manager [`pacman`][1] and
+it's frontend [`yaourt`][2].
 
 Aliases
 -------
@@ -16,7 +16,7 @@ These aliases use `sudo` whenever a command needs privileges.
 ### Aliases for `yaourt`
 
 These aliases use the `yaourt` command, and are thus only available, if
-[`yaourt`][1] is installed.
+[`yaourt`][2] is installed.
 
 - `yaconf`: Fix all configuration files with `vimdiff`.
 - `yaupg`: Synchronize repositories and upgrade packages that are out of date.
@@ -76,5 +76,6 @@ Authors
 
 - [Sorin Ionescu](/sorin-ionescu)
 
-[1]: http://archlinux.fr/yaourt-en
+[1]: http://www.archlinux.org/pacman/
+[2]: http://archlinux.fr/yaourt-en
 
