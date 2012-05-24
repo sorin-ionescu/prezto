@@ -1,0 +1,28 @@
+#
+# Displays a README of OMZ or OMZ modules
+#
+# Authors:
+#   Sebastian Wiesner <lunaryorn@googlemail.com>
+#
+
+local -a readmes
+local readme
+
+if (( $# == 0 )); then
+  readmes=("$OMZ/README.md")
+else
+  for module in "$argv[@]"; do
+    readme="$OMZ/modules/$module/README.md"
+    if [[ -f $readme ]]; then
+      readmes+=("$readme")
+    elif [[ ! -d "$OMZ/modules/$module" ]]; then
+      print "unknown module $module" >&2
+    else
+      print "no README in module $module" >&2
+    fi
+  done
+fi
+
+if (( $#readmes )); then
+  $PAGER "$readmes[@]"
+fi

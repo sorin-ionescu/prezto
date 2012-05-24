@@ -12,6 +12,7 @@ Aliases
 Functions
 ---------
 
+  - `omz-readme` shows the README of OMZ or OMZ modules
   - `mkdcd` makes a directory and changes to it.
   - `cdls` changes to a directory and lists its contents.
   - `pushdls` pushes an entry onto the directory stack and lists its contents.
