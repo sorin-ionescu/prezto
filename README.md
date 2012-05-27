@@ -11,23 +11,26 @@ Installation
 Oh My Zsh will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
-   1. Clone the repository:
+  1. Clone the repository:
 
-      `git clone https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh`
+        git clone https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
 
-   2. Initialize the submodules:
+  2. Initialize the submodules:
 
-      `cd ~/.oh-my-zsh && git submodule update --init --recursive`
+        cd ~/.oh-my-zsh && git submodule update --init --recursive
 
-   3. Create a new Zsh configuration by copying the Zsh template provided:
+  3. Create a new Zsh configuration by copying the Zsh configuration file
+     templates provided:
 
-      `cp ~/.oh-my-zsh/templates/zshrc ~/.zshrc`
+        for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
+          cp -f "${rcfile}" "${HOME}/.${rcfile}"
+        done
 
-   4. Set Zsh as your default shell:
+  4. Set Zsh as your default shell:
 
-      `chsh -s /bin/zsh`
+        chsh -s /bin/zsh
 
-   5. Open a new Zsh terminal window or tab.
+  5. Open a new Zsh terminal window or tab.
 
 ### Mac OS X
 
@@ -51,29 +54,32 @@ directories end up at the tail of the array.
 ### Troubleshooting
 
 If you are not able to find certain commands after switching to *Oh My Zsh*,
-modify the `PATH` variable in *environment.zsh* then open a new Zsh terminal
+modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
 window or tab.
 
-## Usage
+Usage
+-----
 
 Oh My Zsh has many features disabled by default. Read the source code and
 accompanying README files to learn of what is available.
 
 ### Modules
 
-   1. Browse */modules* to see what is available.
-   2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal
-      window or tab.
+  1. Browse */modules* to see what is available.
+  2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal window
+     or tab.
 
 ### Themes
 
-   1. For a list of themes, type `prompt -l`.
-   2. To preview a theme, type `prompt -p name`.
-   3. Load the theme you like in *~/.zshrc* then open a new Zsh terminal window
-      or tab.
-      ![sorin theme][2]
+  1. For a list of themes, type `prompt -l`.
+  2. To preview a theme, type `prompt -p name`.
+  3. Load the theme you like in *~/.zshrc* then open a new Zsh terminal window
+     or tab.
 
-## Customization
+     ![sorin theme][2]
+
+Customization
+-------------
 
 The project is managed via [Git][3]. It is highly recommend that you commit
 your changes and push them to [GitHub][4] to not lose them. If you do not know
@@ -84,18 +90,21 @@ how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 Submit program completions to the [zsh-completions][7] project. The Oh My Zsh
 completions directory will be synched against it.
 
-## Resources
+Resources
+---------
 
 The [Zsh Reference Card][8] is indispensable.
 
-## Contribute
+Contribute
+----------
 
 This project would not exist without all of its users and [contributors][9].
 
 If you have ideas on how to make the configuration easier to maintain or
 improve its performance, do not hesitate to fork and send pull requests.
 
-## License
+License
+-------
 
 (The MIT License)
 
