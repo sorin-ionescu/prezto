@@ -5,6 +5,11 @@
 #   Matt Cable <wozz@wookie.net>
 #
 
+# This module is for Mac OS X only.
+if [[ "$OSTYPE" != darwin* ]]; then
+  return 1
+fi
+
 # Aliases
 alias pc="sudo port clean --all installed"
 alias pi="sudo port install $1"
