@@ -133,11 +133,11 @@ function prompt_solarized_setup {
 
   zstyle -b ':omz:module:prompt:solarized' dark '_prompt_dark'
   if is-true "${_prompt_dark}"; then
-    PROMPT="$prompt_green%n%f$prompt_base1 at $prompt_green%m%f$prompt_base1 in $prompt_base01%~%f"'${vcs_info_msg_0_}'"
-"'$(virtualenv_info)'"$prompt_base1 $ $prompt_base0"
+    PROMPT="%(!.$prompt_red.$prompt_green)%n%f$prompt_base1 on $prompt_green%m%f$prompt_base1 in $prompt_base01%~%f"'${vcs_info_msg_0_}'"
+"'$(virtualenv_info)'"$prompt_base1 %# $prompt_base0"
   else
-    PROMPT="$prompt_green%n%f$prompt_base01 at $prompt_green%m%f$prompt_base01 in $prompt_base1%~%f"'${vcs_info_msg_0_}'"
-"'$(virtualenv_info)'"$prompt_base01 $ $prompt_base00"
+    PROMPT="%(!.$prompt_red.$prompt_green)%n%f$prompt_base01 on $prompt_green%m%f$prompt_base01 in $prompt_base1%~%f"'${vcs_info_msg_0_}'"
+"'$(virtualenv_info)'"$prompt_base01 %# $prompt_base00"
   fi
 }
 
