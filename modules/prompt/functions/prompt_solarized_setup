@@ -18,6 +18,13 @@
 #
 #  zstyle ':omz:module:prompt:solarized' 256colors 'yes'
 #  zstyle ':omz:module:prompt:solarized' dark 'yes'
+#
+#  custom hostname colours
+#
+#  zstyle ':omz:module:prompt:solarized' hostname 'red'
+#  zstyle ':omz:module:prompt:solarized' hostname2 'blue'
+#
+#
 
 function virtualenv_info {
   if [[ -n "$VIRTUAL_ENV" ]]; then
