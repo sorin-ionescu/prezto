@@ -8,24 +8,24 @@
 #
 
 # Aliases
-alias as="aptitude -F \"* %p -> %d \n(%v/%V)\" --no-gui --disable-columns search" # Search package.
-alias ad="sudo apt-get update"                                                    # Update packages lists.
-alias au="sudo apt-get update && sudo apt-get dselect-upgrade"                    # Upgrade packages.
-alias ai="sudo apt-get install"                                                   # Install package.
-alias ar="sudo apt-get remove --purge && sudo apt-get autoremove --purge"         # Remove package.
-alias ap="apt-cache policy"                                                       # Apt policy.
-alias av="apt-cache show"                                                         # Show package info.
-alias acs="apt-cache search"                                                      # Search package.
-alias ac="sudo apt-get clean && sudo apt-get autoclean"                           # Clean apt cache.
-alias afs='apt-file search --regexp'                                              # Find file's packake.
+alias as="aptitude -F \"* %p -> %d \n(%v/%V)\" --no-gui --disable-columns search" # Searches for a package.
+alias ad="sudo apt-get update"                                                    # Updates packages lists.
+alias au="sudo apt-get update && sudo apt-get dselect-upgrade"                    # Upgrades packages.
+alias ai="sudo apt-get install"                                                   # Installs package.
+alias ar="sudo apt-get remove --purge && sudo apt-get autoremove --purge"         # Removes package.
+alias ap="apt-cache policy"                                                       # Prints pinning levels.
+alias av="apt-cache show"                                                         # Shows package info.
+alias acs="apt-cache search"                                                      # Searches for a package.
+alias ac="sudo apt-get clean && sudo apt-get autoclean"                           # Cleans cache.
+alias afs='apt-file search --regexp'                                              # Finds a file's packake.
 
-# Install all .deb files in the current directory.
-# WARNING: you will need to put the glob in single quotes if you use glob_subst.
+# Installs all .deb files in the current directory.
+# WARNING: You will need to put the glob in single quotes if you use GLOB_SUBST.
 alias debi='su -c "dpkg -i ./*.deb"'
 
-# Create a basic .deb package.
+# Creates a basic .deb package.
 alias debc='time dpkg-buildpackage -rfakeroot -us -uc'
 
-# Remove ALL kernel images and headers EXCEPT the one in use.
+# Removes ALL kernel images and headers EXCEPT the one in use.
 alias kclean='su -c '\''aptitude remove -P ?and(~i~nlinux-(ima|hea) ?not(~n`uname -r`))'\'' root'
 

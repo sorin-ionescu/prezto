@@ -9,8 +9,9 @@ Local Package Installation
 Since version 2.6, Python supports per user package installation, as defined in
 [PEP 370][1].
 
-This module prepends per user site directories to the relevant path variables to
-enable the execution of user installed scripts and the reading of documentation.
+This module prepends per user site directories to the relevant path variables
+to enable the execution of user installed scripts and the reading of
+documentation.
 
 ### Usage
 

@@ -1,7 +1,7 @@
 Utility
 =======
 
-Defines additional utilities functions.
+Defines additional utility functions.
 
 Aliases
 -------
@@ -16,7 +16,7 @@ Functions
   - `cdls` changes to a directory and lists its contents.
   - `pushdls` pushes an entry onto the directory stack and lists its contents.
   - `popdls` pops an entry off the directory stack and lists its contents.
-  - `slit` prints columns 1 2 3 ... n.
+  - `slit` prints columns 1, 2, 3 ... n.
   - `find-exec` finds files and executes a command on them.
 
 Authors

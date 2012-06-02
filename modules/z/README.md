@@ -7,8 +7,8 @@ information see [z][1].
 Aliases
 -------
 
-  - `z` cd to most frecent dir matching.
-  - `j` same as `z` for [autojump][2] converts.
+  - `z` changes the directory to most *frecent* match.
+  - `j` is the same as `z` for [autojump][2] converts.
 
 Authors
 -------

@@ -6,15 +6,15 @@ Defines [tmux][1] aliases and provides for auto launching it at start-up.
 Aliases
 -------
 
-  - `ta` attach or switch to a tmux session.
-  - `tl` list sessions managed by the tmux server.
+  - `ta` attaches or switches to a tmux session.
+  - `tl` lists sessions managed by the tmux server.
 
 Settings
 --------
 
 ### Auto-start
 
-Start a tmux session automatically when Zsh is launched.
+Starts a tmux session automatically when Zsh is launched.
 
 To enable this feature, add the following line to *zshrc*:
 

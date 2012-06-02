@@ -6,16 +6,16 @@ Defines [GNU Screen][1] aliases and provides for auto launching it at start-up.
 Aliases
 -------
 
-  - `sl` list sessions/socket directory.
-  - `sn` start a new session.
-  - `sr` attach to a session if one exists or start a new one.
+  - `sl` lists sessions/socket directory.
+  - `sn` starts a new session.
+  - `sr` attaches to a session if one exists or start a new one.
 
 Settings
 --------
 
 ### Auto-start
 
-Start a Screen session automatically when Zsh is launched.
+Starts a GNU Screen session automatically when Zsh is launched.
 
 To enable this feature, add the following line to *zshrc*:
 
