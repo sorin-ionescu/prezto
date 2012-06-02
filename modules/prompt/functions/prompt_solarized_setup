@@ -132,9 +132,9 @@ function prompt_solarized_setup {
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   zstyle -a ':omz:module:prompt:solarized' $HOST '_prompt_host'
-
-  prompt_host=$"prompt_$_prompt_host"
-
+  if [ ! -z $_prompt_host ]; then
+    prompt_host=$"prompt_$_prompt_host"
+  fi
   zstyle -b ':omz:module:prompt:solarized' dark '_prompt_dark'
   if is-true "${_prompt_dark}"; then
     PROMPT="%(!.$prompt_red.$prompt_green)%n%f$prompt_base1 at $prompt_host%m%f$prompt_base1 in $prompt_base01%~%f"'${vcs_info_msg_0_}'"
