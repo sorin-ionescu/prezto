@@ -5,6 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# This module is for Mac OS X only.
+if [[ "$OSTYPE" != darwin* ]]; then
+  return 1
+fi
+
 # Change directory to the current Finder directory.
 alias cdf='cd "$(pfd)"'
 
