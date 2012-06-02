@@ -138,6 +138,7 @@ function prompt_solarized_setup {
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
+  prompt_host=$prompt_green
   zstyle -a ':omz:module:prompt:solarized' $HOST '_prompt_host'
   if [ ! -z $_prompt_host ]; then
     prompt_host=$"prompt_$_prompt_host"
