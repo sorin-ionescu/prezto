@@ -5,19 +5,15 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-if zstyle -t ':omz:module:utility:diff' color; then
-  function diff {
+function diff {
+  if zstyle -t ':omz:module:utility:diff' color; then
     if (( $+commands[colordiff] )); then
-      "$commands[diff]" --unified "$@" | colordiff --difftype diffu
+      command diff --unified "$@" | colordiff --difftype diffu
     elif (( $+commands[git] )); then
       git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
-    else
-      "$commands[diff]" --unified "$@"
     fi
-  }
-else
-  unfunction diff
-fi
-
-diff --unified "$@"
+  else
+    command diff --unified "$@"
+  fi
+}
 

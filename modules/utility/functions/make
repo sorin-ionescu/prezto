@@ -5,17 +5,13 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-if zstyle -t ':omz:module:utility:make' color; then
-  function make {
+function make {
+  if zstyle -t ':omz:module:utility:make' color; then
     if (( $+commands[colormake] )); then
       colormake "$@"
-    else
-      "$commands[make]" "$@"
     fi
-  }
-else
-  unfunction make
-fi
-
-make "$@"
+  else
+    command make "$@"
+  fi
+}
 
