@@ -1,0 +1,30 @@
+#
+# Highlights wdiff output.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+if zstyle -t ':omz:module:utility:wdiff' color; then
+  function wdiff {
+    if (( $+commands[wdiff] )); then
+      "$commands[wdiff]" \
+        --avoid-wraps \
+        --start-delete="$(print -n $FG[red])" \
+        --end-delete="$(print -n $FG[none])" \
+        --start-insert="$(print -n $FG[green])" \
+        --end-insert="$(print -n $FG[none])" \
+        "$@" \
+      | sed 's/^\(@@\( [+-][[:digit:]]*,[[:digit:]]*\)\{2\} @@\)$/;5;6m\10m/g'
+    elif (( $+commands[git] )); then
+      git --no-pager diff --color=auto --no-ext-diff --no-index --color-words "$@"
+    else
+      print "zsh: command not found: $0" >&2
+    fi
+  }
+else
+  unfunction wdiff
+fi
+
+wdiff "$@"
+

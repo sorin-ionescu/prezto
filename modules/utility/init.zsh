@@ -107,47 +107,6 @@ else
   alias topc='top -o cpu'
 fi
 
-# Diff
-if zstyle -t ':omz:module:utility:diff' color; then
-  function diff {
-    if (( $+commands[colordiff] )); then
-      "$commands[diff]" --unified "$@" | colordiff --difftype diffu
-    elif (( $+commands[git] )); then
-      git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
-    else
-      "$commands[diff]" --unified "$@"
-    fi
-  }
-
-  function wdiff {
-    if (( $+commands[wdiff] )); then
-      "$commands[wdiff]" \
-        --avoid-wraps \
-        --start-delete="$(print -n $FG[red])" \
-        --end-delete="$(print -n $FG[none])" \
-        --start-insert="$(print -n $FG[green])" \
-        --end-insert="$(print -n $FG[none])" \
-        "$@" \
-      | sed 's/^\(@@\( [+-][[:digit:]]*,[[:digit:]]*\)\{2\} @@\)$/;5;6m\10m/g'
-    elif (( $+commands[git] )); then
-      git --no-pager diff --color=auto --no-ext-diff --no-index --color-words "$@"
-    else
-      print "zsh: command not found: $0" >&2
-    fi
-  }
-fi
-
-# Make
-if zstyle -t ':omz:module:utility:make' color; then
-  function make {
-    if (( $+commands[colormake] )); then
-      colormake "$@"
-    else
-      "$commands[make]" "$@"
-    fi
-  }
-fi
-
 # Miscellaneous
 if (( $+commands[ack] )) alias afind='nocorrect ack'
 if (( $+commands[ebuild] )) alias ebuild='nocorrect ebuild'

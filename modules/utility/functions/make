@@ -1,0 +1,21 @@
+#
+# Highlights make output.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+if zstyle -t ':omz:module:utility:make' color; then
+  function make {
+    if (( $+commands[colormake] )); then
+      colormake "$@"
+    else
+      "$commands[make]" "$@"
+    fi
+  }
+else
+  unfunction make
+fi
+
+make "$@"
+
