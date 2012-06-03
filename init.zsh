@@ -10,6 +10,7 @@
 min_zsh_version='4.3.10'
 if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
   print "omz: old shell detected, minimum required: $min_zsh_version" >&2
+  return 1
 fi
 unset min_zsh_version
 
