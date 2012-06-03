@@ -108,11 +108,11 @@ else
 fi
 
 # Miscellaneous
-if (( $+commands[ack] )) alias afind='nocorrect ack'
-if (( $+commands[ebuild] )) alias ebuild='nocorrect ebuild'
-if (( $+commands[gist] )) alias gist='nocorrect gist'
-if (( $+commands[heroku] )) alias heroku='nocorrect heroku'
-if (( $+commands[mysql] )) alias mysql='nocorrect mysql'
+alias afind='nocorrect ack'
+alias ebuild='nocorrect ebuild'
+alias gist='nocorrect gist'
+alias heroku='nocorrect heroku'
+alias mysql='nocorrect mysql'
 
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
