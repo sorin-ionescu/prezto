@@ -35,9 +35,8 @@ zstyle ':omz:load' omodule \
   'history' \
   'directory' \
   'spectrum' \
-  'alias' \
-  'completion' \
   'utility' \
+  'completion' \
   'prompt'
 
 # Set the prompt theme to load.
