@@ -126,25 +126,21 @@ alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
 function mkdcd {
   [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
 }
-compdef '_path_files -/' mkdcd 2> /dev/null
 
 # Changes to a directory and lists its contents.
 function cdls {
   builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd cdls 2> /dev/null
 
 # Pushes an entry onto the directory stack and lists its contents.
 function pushdls {
   builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd pushdls 2> /dev/null
 
 # Pops an entry off the directory stack and lists its contents.
 function popdls {
   builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd popdls 2> /dev/null
 
 # Prints columns 1 2 3 ... n.
 function slit {
