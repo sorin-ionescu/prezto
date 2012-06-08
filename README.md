@@ -23,7 +23,7 @@ version is 4.3.10.
      templates provided:
 
         for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
-          cp -f "${rcfile}" "${HOME}/.${rcfile}"
+          cp -f $rcfile ~/.$rcfile:t
         done
 
   4. Set Zsh as your default shell:
