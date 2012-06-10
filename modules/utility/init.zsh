@@ -15,9 +15,47 @@ setopt CORRECT
 
 # Aliases
 
-# The 'ls' Family
+# Disable correction.
+alias ack='nocorrect ack'
+alias cd='nocorrect cd'
+alias cp='nocorrect cp'
+alias ebuild='nocorrect ebuild'
+alias gcc='nocorrect gcc'
+alias gist='nocorrect gist'
+alias grep='nocorrect grep'
+alias heroku='nocorrect heroku'
+alias ln='nocorrect ln'
+alias man='nocorrect man'
+alias mkdir='nocorrect mkdir'
+alias mv='nocorrect mv'
+alias mysql='nocorrect mysql'
+alias rm='nocorrect rm'
+alias scp='nocorrect scp'
+
+# Disable globbing.
+alias fc='noglob fc'
+alias find='noglob find'
+alias history='noglob history'
+alias locate='noglob locate'
+alias rake='noglob rake'
+
+# Define general aliases.
+alias _='sudo'
+alias b='${(z)BROWSER}'
+alias cp="${aliases[cp]:-cp} -i"
+alias e='${(z)EDITOR}'
+alias ln="${aliases[ln]:-ln} -i"
+alias mkdir="${aliases[mkdir]:-mkdir} -p"
+alias mv="${aliases[mv]:-mv} -i"
+alias p='${(z)PAGER}'
+alias po='popd'
+alias pu='pushd'
+alias rm="${aliases[rm]:-rm} -i"
+alias type='type -a'
+
+# ls
 if is-callable 'dircolors'; then
-  # GNU core utilities.
+  # GNU Core Utilities
   alias ls='ls --group-directories-first'
 
   if zstyle -t ':omz:module:utility:ls' color; then
@@ -31,7 +69,7 @@ if is-callable 'dircolors'; then
     alias ls="$aliases[ls] -F"
   fi
 else
-  # BSD core utilities.
+  # BSD Core Utilities
   if zstyle -t ':omz:module:utility:ls' color; then
     export LSCOLORS="exfxcxdxbxegedabagacad"
     alias ls="ls -G"
@@ -40,44 +78,19 @@ else
   fi
 fi
 
-alias l='ls -1A'         # List in one column.
-alias ll='ls -lh'        # List human readable sizes.
-alias lr='ll -R'         # List recursively.
-alias la='ll -A'         # List hidden files.
-alias lp='la | "$PAGER"' # List through pager.
-alias lx='ll -XB'        # List sorted by extension.
-alias lk='ll -Sr'        # List sorted by size, largest last.
-alias lt='ll -tr'        # List sorted by date, most recent last.
-alias lc='lt -c'         # List sorted by date, most recent last, show change time.
-alias lu='lt -u'         # List sorted by date, most recent last, show access time.
+alias l='ls -1A'         # Lists in one column, hidden files.
+alias ll='ls -lh'        # Lists human readable sizes.
+alias lr='ll -R'         # Lists human readable sizes, recursively.
+alias la='ll -A'         # Lists human readable sizes, hidden files.
+alias lp='la | "$PAGER"' # Lists human readable sizes, hidden files through pager.
+alias lx='ll -XB'        # Lists sorted by extension (GNU only).
+alias lk='ll -Sr'        # Lists sorted by size, largest last.
+alias lt='ll -tr'        # Lists sorted by date, most recent last.
+alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
+alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls'            # I often screw this up.
 
-# General
-alias _='sudo'
-alias b='${(z)BROWSER}'
-alias cd='nocorrect cd'
-alias cp='nocorrect cp -i'
-alias df='df -kh'
-alias du='du -kh'
-alias e='${(z)EDITOR}'
-alias find='noglob find'
-alias fc='noglob fc'
-alias gcc='nocorrect gcc'
-alias history='noglob history'
-alias ln='nocorrect ln -i'
-alias locate='noglob locate'
-alias man='nocorrect man'
-alias mkdir='nocorrect mkdir -p'
-alias mv='nocorrect mv -i'
-alias p='${(z)PAGER}'
-alias po='popd'
-alias pu='pushd'
-alias rake='noglob rake'
-alias rm='nocorrect rm -i'
-alias scp='nocorrect scp'
-alias type='type -a'
-
-# Mac OS X
+# Mac OS X Everywhere
 if [[ "$OSTYPE" == darwin* ]]; then
   alias o='open'
   alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
@@ -99,26 +112,21 @@ fi
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 
-# Top
+# Resource Usage
+alias df='df -kh'
+alias du='du -kh'
+
 if (( $+commands[htop] )); then
   alias top=htop
 else
-  alias topm='top -o vsize'
   alias topc='top -o cpu'
+  alias topm='top -o vsize'
 fi
 
 # Miscellaneous
-alias afind='nocorrect ack'
-alias ebuild='nocorrect ebuild'
-alias gist='nocorrect gist'
-alias heroku='nocorrect heroku'
-alias mysql='nocorrect mysql'
 
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
-
-# Displays user owned processes status.
-alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
 
 # Functions
 
@@ -150,5 +158,10 @@ function slit {
 # Finds files and executes a command on them.
 function find-exec {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
+}
+
+# Displays user owned processes status.
+function psu {
+  ps -{U,u}" ${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
 

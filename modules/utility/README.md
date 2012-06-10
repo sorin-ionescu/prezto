@@ -11,8 +11,8 @@ Settings
 If you have enabled color globally in *zshrc*, you may disable it for certain
 commands.
 
-To disable `ls` color, add the following line to *zshrc*. If coloring is
-disabled, type indicators (*, /, =>, @, |) will be appended to entries.
+To disable `ls` color, add the following line to *zshrc*; when coloring is
+disabled, type indicators (\*, /, =>, @, =, |, %) will be appended to entries.
 
     zstyle ':omz:module:utility:ls' color 'no'
 
@@ -31,32 +31,7 @@ To disable `make` highlighting, add the following line to *zshrc*:
 Aliases
 -------
 
-### The ls Family
-
-  - `ls` lists with directories grouped first (GNU only).
-  - `l`  lists in one column, hidden files.
-  - `ll` lists human readable sizes.
-  - `lr` lists recursively.
-  - `la` lists hidden files.
-  - `lp` lists through pager.
-  - `lx` lists sorted by extension (GNU only).
-  - `lk` lists sorted by size, largest last.
-  - `lt` lists sorted by date, most recent last.
-  - `lc` lists sorted by date, most recent last, shows change time.
-  - `lu` lists sorted by date, most recent last, shows access time.
-  - `sl` is aliased to ls.
-
-### General
-
-  - `_` is aliased to sudo.
-  - `b` opens the default web browser.
-  - `e` opens the default editor.
-  - `p` opens the default pager.
-  - `po` removes a directory from the stack and changes to it.
-  - `pu` adds the current directory to the stack and changes to a directory.
-  - `type` displays all attribute values of a shell parameter.
-
-### Spelling Correction Disabled
+### Disabled Spelling Correction
 
   - `ack`
   - `cd`
@@ -64,6 +39,7 @@ Aliases
   - `ebuild`
   - `gcc`
   - `gist`
+  - `grep`
   - `heroku`
   - `ln`
   - `man`
@@ -73,7 +49,7 @@ Aliases
   - `rm`
   - `scp`
 
-### File Globbing Disabled
+### Disabled File Globbing
 
   - `fc`
   - `find`
@@ -81,14 +57,45 @@ Aliases
   - `locate`
   - `rake`
 
-### Mac OS X
+### General
 
-  - `o` is alised to `open` on Mac OS X and `xdg-open` on non Mac OS X.
-  - `get` downloads a file using `curl` or `wget`.
-  - `pbcopy` uses xclip or xsel on non Mac OS X.
-  - `pbpaste` uses xclip or xsel on non Mac OS X.
-  - `pbc` is alised to `pbcopy`.
-  - `pbp` is alised to `pbpaste`.
+  - `_` executes a command as another user (`sudo`).
+  - `b` opens the default web browser.
+  - `cp` copies files and directories interactively.
+  - `e` opens the default editor.
+  - `ln` links files and directories interactively.
+  - `mkdir` creates directories, including itermediery directories.
+  - `mv` moves files and directories interactively.
+  - `p` opens the default pager.
+  - `po` removes a directory from the stack and changes to it (`popd`).
+  - `pu` changes the directory and pushes the old directory onto the stack
+    (`pushd`).
+  - `rm` removes files and directories interactively.
+  - `type` displays all the attribute values of a shell parameter.
+
+### Files and Directories
+
+  - `ls` lists with directories grouped first (GNU only).
+  - `l`  lists in one column, hidden files.
+  - `ll` lists human readable sizes.
+  - `lr` lists human readable sizes, recursively.
+  - `la` lists human readable sizes, hidden files.
+  - `lp` lists human readable sizes, hidden files through pager.
+  - `lx` lists sorted by extension (GNU only).
+  - `lk` lists sorted by size, largest last.
+  - `lt` lists sorted by date, most recent last.
+  - `lc` lists sorted by date, most recent last, shows change time.
+  - `lu` lists sorted by date, most recent last, shows access time.
+  - `sl` lists directory contents (`ls`).
+
+### Mac OS X Everywhere
+
+  - `o` opens files and directories (`open` or `xdg-open`).
+  - `get` downloads files (`curl` or `wget`).
+  - `pbcopy` copies to the pasteboard (`pbcopy`, `xclip` or `xsel`).
+  - `pbpaste` pastes from the pasteboard (`pbcopy`, `xclip` or `xsel`).
+  - `pbc` copies to the pasteboard (`pbcopy`).
+  - `pbp` pastes from the pasteboard (`pbpaste`).
 
 ### Resource Usage
 
@@ -103,19 +110,18 @@ Aliases
 ### Misecellaneous
 
   - `http-serve` serves a directory via HTTP.
-  - `pmine` displays user owned processes status.
 
 Functions
 ---------
 
 ### General
 
-  - `slit` prints columns 1 2 3 ... n.
+  - `slit` prints columns *1, 2, 3 ... n*.
 
 ### Files and Directories
 
   - `cdls` changes to a directory and lists its contents.
-  - `duh` displays human readable disk usage.
+  - `dut` displays the grand total disk usage using human readable units.
   - `find-exec` finds files and executes a command on them.
   - `mkdcd` makes a directory and changes to it.
   - `popdls` pops an entry off the directory stack and lists its contents.
@@ -126,6 +132,10 @@ Functions
   - `diff` highlights diff output (requires `colordiff` or `Git`).
   - `make` highlights make output (requires `colormake`).
   - `wdiff` highlights wdiff output (requires `wdiff `or `Git`).
+
+### Resource usage
+
+  - `psu` displays user owned processes status.
 
 Authors
 -------
