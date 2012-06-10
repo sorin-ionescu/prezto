@@ -3,12 +3,6 @@ Tmux
 
 Defines [tmux][1] aliases and provides for auto launching it at start-up.
 
-Aliases
--------
-
-  - `ta` attaches or switches to a tmux session.
-  - `tl` lists sessions managed by the tmux server.
-
 Settings
 --------
 
@@ -26,6 +20,12 @@ it.
 To avoid keeping open sessions, this module sets `destroy-unattached off` on
 the background session and `destroy-unattached on` on every other session
 (global setting).
+
+Aliases
+-------
+
+  - `ta` attaches or switches to a tmux session.
+  - `tl` lists sessions managed by the tmux server.
 
 Caveats
 -------
