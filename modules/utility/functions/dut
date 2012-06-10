@@ -1,12 +1,12 @@
 #
-# Displays human readable disk usage.
+# Displays the grand total disk usage using human readable units.
 #
 # Authors:
 #   Suraj N. Kurapati <sunaku@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function duh {
+function dut {
   (( $# == 0 )) && set -- *
 
   if grep -q -i 'GNU' < <(du --version 2>&1); then
@@ -23,7 +23,7 @@ function duh {
     done < <(du -kcs "$@") | sort -n -r
   fi
 }
-compdef _du duh
+compdef _du dut
 
-duh "$@"
+dut "$@"
 
