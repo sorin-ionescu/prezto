@@ -23,7 +23,6 @@ Options
   - `HIST_FIND_NO_DUPS` does not display a previously found event.
   - `HIST_IGNORE_SPACE` does not record an event starting with a space.
   - `HIST_SAVE_NO_DUPS` does not write a duplicate event to the history file.
-  - `HIST_REDUCE_BLANKS` removes superfluous blanks before recording an event.
   - `HIST_VERIFY` does not execute immediately upon history expansion.
   - `HIST_BEEP` beeps when accessing non-existent history.
 
