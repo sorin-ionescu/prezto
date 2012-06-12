@@ -45,9 +45,13 @@ alias pd='perldoc'
 alias pe='perl -wlne'
 
 # Perlbrew
+alias pb='perlbrew'
+alias pba='perlbrew available'
 alias pbi='perlbrew install'
 alias pbl='perlbrew list'
 alias pbo='perlbrew off'
+alias pbO='perlbrew switch-off'
 alias pbs='perlbrew switch'
 alias pbu='perlbrew use'
+alias pbx='perlbrew uninstall'
 
