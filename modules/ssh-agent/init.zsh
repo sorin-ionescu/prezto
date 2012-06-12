@@ -10,15 +10,6 @@
 #   gwjo <gowen72@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#   To enable agent forwarding, add the following to your .zshrc:
-#
-#     zstyle ':omz:module:ssh-agent' forwarding 'yes'
-#
-#   To load multiple identities, add the following to your .zshrc:
-#
-#     zstyle ':omz:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
-#
 
 if (( ! $+commands[ssh-agent] )); then
   return 1
