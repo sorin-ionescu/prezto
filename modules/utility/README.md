@@ -64,7 +64,7 @@ Aliases
   - `cp` copies files and directories interactively.
   - `e` opens the default editor.
   - `ln` links files and directories interactively.
-  - `mkdir` creates directories, including itermediery directories.
+  - `mkdir` creates directories, including intermediary directories.
   - `mv` moves files and directories interactively.
   - `p` opens the default pager.
   - `po` removes a directory from the stack and changes to it (`popd`).
@@ -101,13 +101,13 @@ Aliases
 
   - `df` displays free disk space using human readable units.
   - `du` displays disk usage using human readable units.
-  - `top` displays information about processes (alised to `htop`, if installed).
+  - `top` displays information about processes (aliased to `htop`, if installed).
   - `topc` displays information about processes sorted by CPU usage (`htop` not
     installed).
-  - `topm` dispalys information about processes sorted by RAM usage (`htop` not
+  - `topm` displays information about processes sorted by RAM usage (`htop` not
     installed).
 
-### Misecellaneous
+### Miscellaneous
 
   - `http-serve` serves a directory via HTTP.
 

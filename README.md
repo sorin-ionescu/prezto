@@ -88,7 +88,7 @@ how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 ### Completions
 
 Submit program completions to the [zsh-completions][7] project. The Oh My Zsh
-completions directory will be synched against it.
+completions directory will be synchronized against it.
 
 Resources
 ---------
@@ -107,7 +107,7 @@ improve its performance, do not hesitate to fork and send pull requests.
 
    - Check that the issue has not already been reported.
    - Check that the issue has not already been fixed in the latest code.
-   - Open an issue with a clear title and description in gramatically correct,
+   - Open an issue with a clear title and description in grammatically correct,
      complete sentences.
 
 ### Pull Request

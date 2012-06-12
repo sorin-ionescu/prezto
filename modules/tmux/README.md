@@ -38,7 +38,7 @@ following to *tmux.conf*:
    set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
 
 Furthermore, tmux is known to cause **kernel panics** on Mac OS X. A discussion
-about this and OMZ has already been opened [here][2].
+about this and OMZ has already been [opened][2].
 
 Authors
 -------

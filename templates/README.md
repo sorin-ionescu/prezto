@@ -30,7 +30,7 @@ The configuration files are read in the following order:
 ### zshenv
 
 This file is sourced by all instances of Zsh, and thus, it should be kept as
-small as possible. It should only define environment variables.
+small as possible and should only define environment variables.
 
 ### zprofile
 

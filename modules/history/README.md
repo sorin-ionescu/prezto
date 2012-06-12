@@ -3,7 +3,7 @@ History
 
 Sets [history][1] options and defines history aliases.
 
-VARIABLES
+Variables
 ---------
 
   - `HISTFILE` stores the path to the history file.
