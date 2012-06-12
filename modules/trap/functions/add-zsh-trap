@@ -1,6 +1,6 @@
 #
-# Provides for the trapping of UNIX signals and the calling of multiple
-# registered functions when a trap is triggered.
+# Provides for trapping UNIX signals and calling callback functions when a trap
+# is triggered.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
