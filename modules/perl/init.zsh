@@ -39,11 +39,15 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # Aliases
+
+# General
+alias pd='perldoc'
+alias pe='perl -wlne'
+
+# Perlbrew
 alias pbi='perlbrew install'
 alias pbl='perlbrew list'
 alias pbo='perlbrew off'
 alias pbs='perlbrew switch'
 alias pbu='perlbrew use'
-alias ple='perl -wlne'
-alias pd='perldoc'
 
