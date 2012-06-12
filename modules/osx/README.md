@@ -15,12 +15,12 @@ Aliases
 Functions
 ---------
 
-- `manb` opens _man_ pages in [_Bwana.app_][2].
-- `manp` opens _man_ pages in _Preview.app_.
-- `pfd` prints the current _Finder_ directory.
-- `pfs` prints the current _Finder_ selection.
-- `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
-- `trash` moves files and folders to _Trash_.
+  - `manb` opens _man_ pages in [_Bwana.app_][2].
+  - `manp` opens _man_ pages in _Preview.app_.
+  - `pfd` prints the current _Finder_ directory.
+  - `pfs` prints the current _Finder_ selection.
+  - `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
+  - `trash` moves files and folders to _Trash_.
 
 Authors
 -------
