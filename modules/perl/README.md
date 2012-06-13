@@ -8,7 +8,7 @@ Local Module Installation
 
 Perl versions older than 5.14 do not support the local installation of Perl
 modules natively. This module allows for local installation of Perl modules on
-Mac OS X Lion in *~/Library/Perl/5.12* by altering the environment.
+Mac OS X in *~/Library/Perl/5.12* by altering the environment.
 
 ### Usage
 
