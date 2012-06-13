@@ -24,3 +24,5 @@ function wdiff {
   fi
 }
 
+wdiff "$@"
+

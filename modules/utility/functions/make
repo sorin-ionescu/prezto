@@ -15,3 +15,5 @@ function make {
   fi
 }
 
+make "$@"
+

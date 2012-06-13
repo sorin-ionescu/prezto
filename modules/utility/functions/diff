@@ -17,3 +17,5 @@ function diff {
   fi
 }
 
+diff "$@"
+
