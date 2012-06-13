@@ -9,6 +9,8 @@ function make {
   if zstyle -t ':omz:module:utility:make' color; then
     if (( $+commands[colormake] )); then
       colormake "$@"
+    else
+      command make "$@"
     fi
   else
     command make "$@"

@@ -18,6 +18,8 @@ function wdiff {
       | sed 's/^\(@@\( [+-][[:digit:]]*,[[:digit:]]*\)\{2\} @@\)$/;5;6m\10m/g'
     elif (( $+commands[git] )); then
       git --no-pager diff --color=auto --no-ext-diff --no-index --color-words "$@"
+    else
+      command wdiff "$@"
     fi
   else
     command wdiff "$@"
