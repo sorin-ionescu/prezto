@@ -1,0 +1,12 @@
+#compdef manb manp
+#autoload
+
+#
+# Completes manb and manp.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+_man
+

@@ -23,7 +23,6 @@ function dut {
     done < <(du -kcs "$@") | sort -n -r
   fi
 }
-compdef _du dut
 
 dut "$@"
 

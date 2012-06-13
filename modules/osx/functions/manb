@@ -19,6 +19,6 @@ function manb {
     print 'What manual page do you want?' >&2
   fi
 }
-compdef _man manb
+
 manb "$@"
 
