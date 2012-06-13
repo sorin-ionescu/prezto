@@ -1,8 +1,8 @@
 #
-# Configures Ruby gem installation and loads rvm/rbenv.
+# Configures Ruby local gem installation, loads version managers, and defines
+# aliases.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# Authors: Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
 # Load RVM into the shell session.
@@ -32,6 +32,8 @@ else
 fi
 
 # Aliases
+
+# Bundler
 alias b='bundle'
 alias be='b exec'
 alias bi='b install --path vendor/bundle'
