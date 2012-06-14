@@ -7,17 +7,20 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Aliases (compatible with Rails 2)
+# Aliases (Compatible with Rails 2)
 alias rc='_rails-command console'
-alias rd='_rails-command destroy'
-alias rdb='_rails-command dbconsole'
-alias rdbm='rake db:migrate db:test:clone'
+alias rdc='_rails-command dbconsole'
+alias rdm='rake db:migrate'
+alias rdM='rake db:migrate db:test:clone'
+alias rdr='rake db:rollback'
 alias rg='_rails-command generate'
+alias rl='tail -f log/development.log'
+alias rlc='rake log:clear'
 alias rp='_rails-command plugin'
 alias rr='_rails-command runner'
 alias rs='_rails-command server'
 alias rsd='_rails-command server --debugger'
-alias devlog='tail -f log/development.log'
+alias rx='_rails-command destroy'
 
 # Functions
 function _rails-command {
