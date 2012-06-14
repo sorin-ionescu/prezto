@@ -5,12 +5,6 @@
 #   James Cox <james@imaj.es>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#   To auto set the terminal window and tab titles with the current command or
-#   directory, add the following to zshrc:
-#
-#     zstyle ':omz:module:terminal' auto-title 'yes'
-#
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
