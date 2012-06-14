@@ -7,13 +7,15 @@
 #
 
 # Aliases
-alias ys="yum search"                          # Search package.
-alias yp="yum info"                            # Show package info.
-alias yl="yum list"                            # List packages.
-alias yli="yum list installed"                 # Print all installed packages.
-alias yu="sudo yum update"                     # Upgrate packages.
-alias yi="sudo yum install"                    # Install package.
-alias yr="sudo yum remove"                     # Remove package.
-alias yrl="sudo yum remove --remove-leaves"    # Remove package and leaves.
-alias yc="sudo yum clean all"                  # Clean cache.
+alias yumc='sudo yum clean all'    # Cleans the cache.
+alias yumh='yum history'           # Displays history.
+alias yumi='sudo yum install'      # Installs package(s).
+alias yuml='yum list'              # Lists packages.
+alias yumL='yum list installed'    # Lists installed packages.
+alias yumq='yum info'              # Displays package information.
+alias yumr='sudo yum remove'       # Removes package(s).
+alias yums='yum search'            # Searches for a package.
+alias yumu='sudo yum update'       # Updates packages.
+alias yumU='sudo yum upgrade'      # Upgrades packages.
+
 
