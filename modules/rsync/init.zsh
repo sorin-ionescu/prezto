@@ -1,5 +1,5 @@
 #
-# Defines rsync aliases.
+# Defines Rsync aliases.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
