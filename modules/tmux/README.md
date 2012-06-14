@@ -6,7 +6,7 @@ Defines [tmux][1] aliases and provides for auto launching it at start-up.
 Settings
 --------
 
-### Auto-start
+### Auto-Start
 
 Starts a tmux session automatically when Zsh is launched.
 
