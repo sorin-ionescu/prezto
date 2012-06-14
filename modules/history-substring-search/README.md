@@ -1,9 +1,20 @@
-history-substring-search
+History Substring Search
 ========================
 
-It implements the [Fish shell][1]'s history search feature, where the user can
-type in any part of a previously entered command and press the `UP` and `DOWN`
-arrow keys to cycle through matching commands.
+Integrates [zsh-syntax-highlighting][1] into Oh My Zsh, which implements the
+[Fish shell][2]'s history search feature, where the user can type in any part
+of a previously entered command and press the `UP` and `DOWN` arrow keys to
+cycle through matching commands.
+
+If this module is used in conjuncture with the *syntax-highlighting* module, it
+must be loaded **after** it.
+
+Contributors
+------------
+
+New features and bug fixes should be submitted to the
+[zsh-history-substring-search][1] project according to its rules and
+regulations. This module will be synchronized against it.
 
 Settings
 --------
@@ -17,21 +28,22 @@ To enable case-sensitivity for this module only, add the following line to
 
 ### Highlighting
 
-If colors are enabled, _history-substring-search_ will automatically highlight
+If colors are enabled, *history-substring-search* will automatically highlight
 positive results.
 
 To enable highlighting for this module only, and the following line to *zshrc*:
 
-    zstyle -t ':omz:module:history-substring-search' color 'yes'
+    zstyle ':omz:module:history-substring-search' color 'yes'
 
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+*The authors of this module should be contacted via the [issue tracker][3].*
 
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Suraj N. Kurapati](https://github.com/sunaku)
+  - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: http://fishshell.com
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[1]: https://github.com/zsh-users/zsh-history-substring-search
+[2]: http://fishshell.com
+[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 
