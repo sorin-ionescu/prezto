@@ -40,6 +40,13 @@
 #     zstyle ':omz:module:editor' completing '...'
 #
 
+# Check for the minimum supported version.
+min_zsh_version='4.3.10'
+if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
+  return 1
+fi
+unset min_zsh_version
+
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
   return 1

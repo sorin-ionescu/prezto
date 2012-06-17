@@ -56,7 +56,9 @@ alias type='type -a'
 # ls
 if is-callable 'dircolors'; then
   # GNU Core Utilities
-  alias ls='ls --group-directories-first'
+  if [[ `dircolors --version |head -1 |awk '{print $NF}'` > 6 ]]; then
+    alias ls='ls --group-directories-first'
+  fi
 
   if zstyle -t ':omz:module:utility:ls' color; then
     if [[ -s "$HOME/.dir_colors" ]]; then

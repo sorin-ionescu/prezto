@@ -5,6 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+if (( ! $+commands[screen] )); then
+  return 1
+fi
+
 # Aliases
 alias sl="screen -list"
 alias sn="screen -U -S"
