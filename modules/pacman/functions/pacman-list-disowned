@@ -1,19 +1,19 @@
 #
-# Lists pacman disowned files.
+# Lists Pacman disowned files.
 #
 # Authors:
 #   Benjamin Boudreau <dreurmail@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-tmp="${TMPDIR-/tmp}/pacman-disowned-$UID-$$"
-db="$tmp/db"
-fs="$tmp/fs"
+local tmp="${TMPDIR-/tmp}/pacman-disowned-$UID-$$"
+local db="$tmp/db"
+local fs="$tmp/fs"
 
 mkdir "$tmp"
 trap  'rm -rf "$tmp"' EXIT
 
-pacman -Qlq | sort -u > "$db"
+pacman --quiet --query --list | sort --unique > "$db"
 
 find /bin /etc /lib /sbin /usr \
   ! -name lost+found \
