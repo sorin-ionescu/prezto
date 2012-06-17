@@ -6,6 +6,10 @@
 #   Colin Hebert <hebert.colin@gmail.com>
 #
 
+if (( ! $+commands[tmux] )); then
+  return 1
+fi
+
 # Aliases
 alias ta="tmux attach-session"
 alias tl="tmux list-sessions"
