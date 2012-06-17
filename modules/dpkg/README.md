@@ -1,7 +1,7 @@
 Dpkg
 ====
 
-Defines Dpkg aliases and functions
+Defines [dpkg][1] aliases and functions
 
 Aliases
 -------
@@ -32,11 +32,12 @@ Functions
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Daniel Bolton](https://github.com/dbb)
   - [Benjamin Boudreau](https://github.com/dreur)
 
-[1]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[1]: http://alioth.debian.org/projects/dpkg
+[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 
