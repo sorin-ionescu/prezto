@@ -55,11 +55,11 @@ function omodload {
       if (( $? == 0 )); then
         zstyle ":omz:module:$omodule" loaded 'yes'
         # Add functions to fpath.
-        fpath=(${omodule:+${OMZ}/modules/${^omodule}/functions(/FN)} $fpath)
+        fpath=(${omodules:+${OMZ}/modules/${^omodules}/functions(/FN)} $fpath)
 
         # Load Oh My Zsh functions.
         for ofunction in \
-          $OMZ/modules/${^omodule}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
+          $OMZ/modules/${^omodules}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
         do
           autoload -Uz "$ofunction"
         done
