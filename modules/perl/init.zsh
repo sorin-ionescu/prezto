@@ -5,6 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+if (( ! $+commands[perl] )); then
+  return 1
+fi
+
 if [[ "$OSTYPE" == darwin* ]]; then
   # Perl is slow; cache its output.
   cache_file="${0:h}/cache.zsh"
