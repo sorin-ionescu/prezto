@@ -38,6 +38,9 @@ function omodload {
   # $argv is overridden in the anonymous function.
   omodules=("$argv[@]")
 
+  # Add functions to fpath.
+  fpath=(${OMZ}/modules/${^omodules}/functions(/FN) $fpath)
+
   for omodule in "$omodules[@]"; do
     if zstyle -t ":omz:module:$omodule" loaded; then
       continue
@@ -46,8 +49,6 @@ function omodload {
       continue
     else
       if [[ -s "$OMZ/modules/$omodule/init.zsh" ]]; then
-        # Add functions to fpath.
-        fpath=(${OMZ}/modules/${^omodule}/functions(/FN) $fpath)
         source "$OMZ/modules/$omodule/init.zsh"
       fi
       if (( $? == 0 )); then
