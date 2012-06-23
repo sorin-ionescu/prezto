@@ -137,8 +137,8 @@ alias gSf='git submodule foreach'
 alias gSi='git submodule init'
 alias gSl='git submodule status'
 alias gSs='git submodule sync'
-alias gSu='git submodule update'
-alias gSU='git submodule update --init --recursive'
+alias gSu='git submodule update --init --recursive'
+alias gSU='git submodule foreach git pull origin master'
 
 # Working Copy (w)
 alias gws='git status --short'
