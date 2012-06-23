@@ -80,7 +80,7 @@ Aliases
   - `ll` lists human readable sizes.
   - `lr` lists human readable sizes, recursively.
   - `la` lists human readable sizes, hidden files.
-  - `lp` lists human readable sizes, hidden files through pager.
+  - `lm` lists human readable sizes, hidden files through pager.
   - `lx` lists sorted by extension (GNU only).
   - `lk` lists sorted by size, largest last.
   - `lt` lists sorted by date, most recent last.
