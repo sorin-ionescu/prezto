@@ -7,6 +7,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+if (( ! $+commands[dpkg] )); then
+  return 1
+fi
+
 # Aliases
 alias as="aptitude -F \"* %p -> %d \n(%v/%V)\" --no-gui --disable-columns search" # Searches for a package.
 alias ad="sudo apt-get update"                                                    # Updates packages lists.
