@@ -1,28 +1,26 @@
-# https://github.com/clvv/fasd
-
-omodload 'completion'
+#
+# Command-line productivity booster, offers quick access to files and directories.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Wei Dai <x@wei23.net>
+#
 
 if (( ! $+commands[fasd] )); then
   return 1
 fi
 
 cache_file="${0:h}/cache.zsh"
-if [[ ! -s "$cache_file" ]]; then
-  # fasd is slow; cache its output.
-  # fasd --init-zsh >! "$cache_file" 2> /dev/null
-  # fasd --init \
-  #   posix-alias \
-  #   zsh-hook \
-  #   zsh-ccomp \
-  #   zsh-ccomp-install \
-  #   zsh-wcomp \
-  #   zsh-wcomp-install >! "$cache_file" 2> /dev/null
-
+if [[ "$(which fasd)" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
+  # Base init arguments
   init_args='posix-alias zsh-hook'
-  if -t zstyle ':omz:module:completion' loaded; then
-    init_args+='zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install'
+
+  # Load zsh-{ccomp,wcomp} when completion is loaded
+  if zstyle -t ':omz:module:completion' loaded; then
+    init_args+=' zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install'
   fi
 
+  # Cache init code
   fasd --init "${(z)init_args[@]}" >! "$cache_file" 2> /dev/null
 fi
 
@@ -30,16 +28,9 @@ source "$cache_file"
 
 unset cache_file init_args
 
-alias a='fasd -a' # any
-alias s='fasd -s' # show / search / select
-alias d='fasd -d' # directory
-alias f='fasd -f' # file
-alias z='fasd_cd -d' # cd, same functionality as j in autojump
-
-alias j='z'             # Quickly cd into directories.
-alias m='f -e mplayer'        # Quickly open files with mplayer.
-alias o="a -e $aliases[o]"    # Quickly open files with open.
-alias v='f -e vim -b viminfo' # Quickly open files with vim.
+alias j='z'                      # For autojump converts
+alias o="a -e $aliases[o]"       # Quickly open paths with open.
+alias v='f -t -e vim -b viminfo' # Quickly open files with vim.
 
 for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]A" fasd-complete    # C-x C-a (files and directories)
