@@ -1,5 +1,5 @@
 #
-# Defines pacman aliases.
+# Defines Pacman aliases.
 #
 # Authors:
 #   Benjamin Boudreau <dreurmail@gmail.com>
@@ -9,102 +9,58 @@
 #   https://wiki.archlinux.org/index.php/Pacman_Tips
 #
 
-# Yaourt Aliases
-if (( $+commands[yaourt] )); then
-  # Upgrade Arch Linux.
-  alias arch-upgrade='yaourt -Syu'
+# Get the Pacman frontend.
+zstyle -s ':omz:module:pacman' frontend '_pacman_frontend'
 
-  # Fix all configuration files with vimdiff.
-  alias yaconf='yaourt -C'
+if (( $+commands[$_pacman_frontend] )); then
+  alias pacman="$_pacman_frontend"
 
-  # Synchronize with repositories before upgrading packages that are out of date on the local system.
-  alias yaupg='yaourt -Syu'
-
-  # Install specific package(s) from the repositories.
-  alias yain='yaourt -S'
-
-  # Install specific package(s) not from the repositories but from a file .
-  alias yains='yaourt -U'
-
-  # Remove the specified package(s), retaining its configuration(s) and required dependencies.
-  alias yare='yaourt -R'
-
-  # Remove the specified package(s), its configuration(s) and unneeded dependencies.
-  alias yarem='yaourt -Rns'
-
-  # Display information about a given package in the repositories.
-  alias yarep='yaourt -Si'
-
-  # Search for package(s) in the repositories.
-  alias yareps='yaourt -Ss'
-
-  # Display information about a given package in the local database.
-  alias yaloc='yaourt -Qi'
-
-  # Search for package(s) in the local database.
-  alias yalocs='yaourt -Qs'
-
-  # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
-  alias yamir='yaourt -Syy'
-
-  # Install given package(s) as dependencies of another package
-  alias yainsd='yaourt -S --asdeps'
-
-  # Update and refresh the local package and ABS databases against repositories.
-  if (( $+commands[abs] )); then
-    alias yaupd='yaourt -Sy && sudo abs'
-  else
-    alias yaupd='yaourt -Sy'
+  if [[ -s "${0:h}/${_pacman_frontend}.zsh" ]]; then
+    source "${0:h}/${_pacman_frontend}.zsh"
   fi
-else
-  # Upgrade Arch Linux.
-  alias arch-upgrade='sudo pacman -Syu'
 fi
 
-# Pacman Aliases
-# Synchronize with repositories before upgrading packages that are out of date on the local system.
-alias pacupg='sudo pacman -Syu'
+# Installs packages from repositories.
+alias paci='sudo pacman --sync'
 
-# Install specific package(s) from the repositories.
-alias pacin='sudo pacman -S'
+# Installs packages from files.
+alias pacI='sudo pacman --upgrade'
 
-# Install specific package not from the repositories but from a file.
-alias pacins='sudo pacman -U'
+# Removes packages and unneeded dependencies.
+alias pacx='sudo pacman --remove'
 
-# Remove the specified package(s), retaining its configuration(s) and required dependencies.
-alias pacre='sudo pacman -R'
+# Removes packages, their configuration, and unneeded dependencies.
+alias pacX='sudo pacman --remove --nosave --recursive'
 
-# Remove the specified package(s), its configuration(s) and unneeded dependencies.
-alias pacrem='sudo pacman -Rns'
+# Displays information about a given package in the repositories.
+alias pacq='pacman --sync --info'
 
-# Display information about a given package in the repositories.
-alias pacrep='pacman -Si'
+# Displays information about a given package in the local database.
+alias pacQ='pacman --query --info'
 
-# Search for package(s) in the repositories.
-alias pacreps='pacman -Ss'
+# Searches for packages in the repositories.
+alias pacs='pacman --sync --recursive'
 
-# Display information about a given package in the local database.
-alias pacloc='pacman -Qi'
+# Searches for packages in the local database.
+alias pacS='pacman --query --recursive'
 
-# Search for package(s) in the local database.
-alias paclocs='pacman -Qs'
+# Lists orphan packages.
+alias pacman-list-orphans='sudo pacman --query --deps --unrequired'
 
-# Install given package(s) as dependencies of another package.
-alias pacinsd='sudo pacman -S --asdeps'
+# Removes orphan packages.
+alias pacman-remove-orphans='sudo pacman --remove --recursive $(pacman --quiet --query --deps --unrequired)'
 
-# Force refresh of all package lists after updating /etc/pacman.d/mirrorlist.
-alias pacmir='sudo pacman -Syy'
-
-# List orphan packages(s).
-alias paclsorphans='sudo pacman -Qdt'
-
-# Remove orphan package(s).
-alias pacrmorphans='sudo pacman -Rs $(pacman -Qtdq)'
-
-# Update and refresh the local package and ABS databases against repositories.
+# Synchronizes the local package and Arch Build System databases against the
+# repositories.
 if (( $+commands[abs] )); then
-  alias pacupd='sudo pacman -Sy && sudo abs'
+  alias pacu='sudo pacman --sync --refresh && sudo abs'
 else
-  alias pacupd='sudo pacman -Sy'
+  alias pacu='sudo pacman --sync --refresh'
 fi
+
+# Synchronizes the local package database against the repositories then
+# upgrades outdated packages.
+alias pacU='sudo pacman --sync --refresh --sysupgrade'
+
+unset _pacman_frontend
 
