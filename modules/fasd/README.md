@@ -9,6 +9,9 @@ you can quickly reference them in the command line.
 You should define your own aliases to utilize the full power of fasd. For more
 information please see `man fasd` or visit [fasd][1].
 
+For completion to work, this module should be loaded **after** the *completion*
+module.
+
 Aliases
 -------
 
@@ -19,8 +22,29 @@ Aliases
   - `sd` interactive directory selection
   - `sf` interactive file selection
   - `z`  changes the directory to most *frecent* match.
-  - `j`  the same as `z` for [autojump][2] converts.
   - `zz` interactive z
+  - `j`  the same as `z` for [autojump][2] converts.
+  - `v`  open recently vim-edited files
+
+Note: loading `fasd` module will override alias `d` defined in `directory`
+module.
+
+Completion
+----------
+
+You can do tab completion on any fasd command (d, f, z, v, etc.).
+
+You can type a comma-separated query on *any command* and use the following key
+combination:
+
+  - Ctrl-x Ctrl-a to complete files and directories
+  - Ctrl-x Ctrl-d to complete directories
+  - Ctrl-x Ctrl-f to complete files
+
+Alternatively, you can type extra `f,`, `d,` `,` in front of your
+comma-separated query, or type extra `,,f`, `,,d`, `,,` at the end of your
+comma-separated query. Such formated command-line arguments will be tab
+completed via fasd.
 
 Authors
 -------

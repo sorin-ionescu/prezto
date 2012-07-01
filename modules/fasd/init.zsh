@@ -11,7 +11,7 @@ if (( ! $+commands[fasd] )); then
 fi
 
 cache_file="${0:h}/cache.zsh"
-if [[ "$(which fasd)" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
+if [[ "${commands[fasd]}" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
   # Base init arguments
   init_args='posix-alias zsh-hook'
 
@@ -29,7 +29,6 @@ source "$cache_file"
 unset cache_file init_args
 
 alias j='z'                      # For autojump converts
-alias o="a -e $aliases[o]"       # Quickly open paths with open.
 alias v='f -t -e vim -b viminfo' # Quickly open files with vim.
 
 for keymap in 'emacs' 'viins'; do
