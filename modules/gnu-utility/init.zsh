@@ -9,7 +9,7 @@
 zstyle -s ':omz:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'
 
 # Check for the presence of GNU Core Utilities.
-if (( ! ${+commands[${_gnu_utility_p}dircolors]} )); then
+if (( ! ${+commands[${_gnu_utility_p}dircolors]} && ! ${+commands[dircolors]} )); then
   return 1
 fi
 
