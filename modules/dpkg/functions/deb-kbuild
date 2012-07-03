@@ -6,12 +6,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-MAKEFLAGS=''                  # Temporarily unset MAKEFLAGS ('-j3' will fail).
-appendage='-custom'           # Displayed in $(uname -r).
-revision=$(date +"%Y%m%d")    # Displayed in the dpkg package file name.
-
 make-kpkg clean
-
-time fakeroot make-kpkg --append-to-version "$appendage" --revision \
-  "$revision" kernel_image kernel_headers
+MAKEFLAGS='' time fakeroot make-kpkg \
+  --append-to-version '-custom' \
+  --revision "$(date +"%Y%m%d")" \
+  kernel_image \
+  kernel_headers
 
