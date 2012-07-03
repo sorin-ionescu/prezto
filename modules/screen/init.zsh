@@ -5,11 +5,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Aliases
-alias sl="screen -list"
-alias sn="screen -U -S"
-alias sr="screen -a -A -U -D -R"
-
 # Auto Start
 if [[ -z "$STY" ]] && zstyle -t ':omz:module:screen' auto-start; then
   session="$(
@@ -25,3 +20,7 @@ if [[ -z "$STY" ]] && zstyle -t ':omz:module:screen' auto-start; then
   fi
 fi
 
+# Aliases
+alias sl="screen -list"
+alias sn="screen -U -S"
+alias sr="screen -a -A -U -D -R"
