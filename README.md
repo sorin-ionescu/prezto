@@ -13,24 +13,20 @@ version is 4.3.10.
 
   1. Clone the repository:
 
-        git clone https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
 
-  2. Initialize the submodules:
-
-        cd ~/.oh-my-zsh && git submodule update --init --recursive
-
-  3. Create a new Zsh configuration by copying the Zsh configuration file
+  2. Create a new Zsh configuration by copying the Zsh configuration file
      templates provided:
 
         for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
           cp -f $rcfile ~/.$rcfile:t
         done
 
-  4. Set Zsh as your default shell:
+  3. Set Zsh as your default shell:
 
         chsh -s /bin/zsh
 
-  5. Open a new Zsh terminal window or tab.
+  4. Open a new Zsh terminal window or tab.
 
 ### Mac OS X
 
