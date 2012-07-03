@@ -20,6 +20,8 @@ if (( $+commands[$_pacman_frontend] )); then
   fi
 fi
 
+# Aliases
+
 # Installs packages from repositories.
 alias paci='sudo pacman --sync'
 
@@ -32,10 +34,10 @@ alias pacx='sudo pacman --remove'
 # Removes packages, their configuration, and unneeded dependencies.
 alias pacX='sudo pacman --remove --nosave --recursive'
 
-# Displays information about a given package in the repositories.
+# Displays information about a package from the repositories.
 alias pacq='pacman --sync --info'
 
-# Displays information about a given package in the local database.
+# Displays information about a package from the local database.
 alias pacQ='pacman --query --info'
 
 # Searches for packages in the repositories.

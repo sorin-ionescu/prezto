@@ -28,8 +28,8 @@ Aliases
   - `pacI` installs packages from files.
   - `pacx` removes packages and unneeded dependencies.
   - `pacX` removes packages, their configuration, and unneeded dependencies.
-  - `pacq` displays information about a given package in the repositories.
-  - `pacQ` displays information about a given package in the local database.
+  - `pacq` displays information about a package from the repositories.
+  - `pacQ` displays information about a package from the local database.
   - `pacs` searches for packages in the repositories.
   - `pacS` searches for packages in the local database.
   - `pacu` synchronizes the local package and Arch Build System (requires `abs`)
