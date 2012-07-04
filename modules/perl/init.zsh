@@ -9,15 +9,17 @@ if [[ "$OSTYPE" == darwin* ]]; then
   # Perl is slow; cache its output.
   cache_file="${0:h}/cache.zsh"
   perl_path="$HOME/Library/Perl/5.12"
+
   if [[ -f "$perl_path/lib/perl5/local/lib.pm" ]]; then
     manpath=("$perl_path/man" $manpath)
+
     if [[ ! -s "$cache_file" ]]; then
       perl -I$perl_path/lib/perl5 -Mlocal::lib=$perl_path >! "$cache_file"
-      source "$cache_file"
-    else
-      source "$cache_file"
     fi
+
+    source "$cache_file"
   fi
+
   unset perl_path
   unset cache_file
 
