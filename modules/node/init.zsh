@@ -5,15 +5,18 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-cache_file="${0:h}/cache.zsh"
-if [[ ! -s "$cache_file" ]]; then
-  if (( $+commands[npm] )); then
-    # npm is slow; cache its output.
-    npm completion >! "$cache_file" 2> /dev/null
-    source "$cache_file"
-  fi
-else
-  source "$cache_file"
+if (( ! $+commands[npm] )); then
+  return 1
 fi
+
+cache_file="${0:h}/cache.zsh"
+
+if [[ "$commands[npm]" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+  # npm is slow; cache its output.
+  npm completion >! "$cache_file" 2> /dev/null
+fi
+
+source "$cache_file"
+
 unset cache_file
 
