@@ -31,3 +31,15 @@ fi
 # Aliases
 alias ta="tmux attach-session"
 alias tl="tmux list-sessions"
+
+if (( $+commands[tmuxinator] )); then
+  alias ts="tmuxinator start "
+  alias to="tmuxinator open "
+  alias tc="tmuxinator copy "
+  alias tD="tmuxinator delete "
+  alias tI="tmuxinator implode"
+  alias tls="tmuxinator list"
+  alias tlsv="tmuxinator list -v"
+  alias tdoc="tmuxinator doctor"
+fi
+
