@@ -82,6 +82,7 @@ function set-title-precmd {
     if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
       # Set the current working directory in Apple Terminal.
       printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
+      set-tab-title "${(%):-%15<...<%~%<<}"
     else
       set-window-title "${(%):-%~}"
       for kind in tab screen; do
