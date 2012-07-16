@@ -27,6 +27,17 @@ Aliases
   - `ta` attaches or switches to a tmux session.
   - `tl` lists sessions managed by the tmux server.
 
+If [tmuxinator][6] is installed, these aliases will also be setup
+
+  - `ts [project_name]` start a tmux session using project's tmuxinator config
+  - `to [project_name]` create a new project file and open it in your editor
+  - `tc [source_project] [new_project]` copy source_project project file to a new project called new_project
+  - `tD [project_name]` deletes the project called project_name
+  - `tI` deletes all existing projects!
+  - `tls` list all existing projects
+  - `tlsv` verbosly list all existing projects
+  - `tdoc` look for problems in your configuration
+
 Caveats
 -------
 
@@ -53,4 +64,5 @@ Authors
 [3]: ChrisJohnsen/tmux-MacOSX-pasteboard
 [4]: mxcl/homebrew
 [5]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[6]: https://github.com/aziz/tmuxinator
 
