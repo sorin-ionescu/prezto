@@ -5,6 +5,11 @@
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[ghc] )); then
+  return 1
+fi
+
 # Prepend Cabal per user directories to PATH/MANPATH.
 if [[ "$OSTYPE" == darwin* ]]; then
   path=($HOME/Library/Haskell/bin(/N) $path)

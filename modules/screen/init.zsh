@@ -5,6 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[screen] )); then
+  return 1
+fi
+
 # Auto Start
 if [[ -z "$STY" ]] && zstyle -t ':omz:module:screen' auto-start; then
   session="$(

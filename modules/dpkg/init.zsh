@@ -7,6 +7,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[dpkg] && ! $+commands[apt-get] )); then
+  return 1
+fi
+
 # Aliases
 
 # Cleans the cache.

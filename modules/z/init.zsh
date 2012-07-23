@@ -23,15 +23,18 @@ done
 
 unset _z_prefix{es,} _z_sh
 
-if (( $+functions[_z] )); then
-  function _z-precmd {
-    _z --add "${PWD:A}"
-  }
-
-  autoload -Uz add-zsh-hook
-  add-zsh-hook precmd _z-precmd
-
-  alias z='nocorrect _z'
-  alias j='nocorrect _z'
+# Return if requirements are not found.
+if (( ! $+functions[_z] )); then
+  return 1
 fi
+
+function _z-precmd {
+  _z --add "${PWD:A}"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _z-precmd
+
+alias z='nocorrect _z'
+alias j='nocorrect _z'
 

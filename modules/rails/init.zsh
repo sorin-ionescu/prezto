@@ -7,6 +7,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[rails] )); then
+  return 1
+fi
+
 # Aliases (Compatible with Rails 2)
 alias rc='_rails-command console'
 alias rdc='_rails-command dbconsole'

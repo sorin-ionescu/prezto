@@ -11,6 +11,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
 if (( ! $+commands[ssh-agent] )); then
   return 1
 fi

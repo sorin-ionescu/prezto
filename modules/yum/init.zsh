@@ -6,6 +6,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[yum] )); then
+  return 1
+fi
+
 # Aliases
 alias yumc='sudo yum clean all'    # Cleans the cache.
 alias yumh='yum history'           # Displays history.

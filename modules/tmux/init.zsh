@@ -6,6 +6,11 @@
 #   Colin Hebert <hebert.colin@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[tmux] )); then
+  return 1
+fi
+
 # Auto Start
 if [[ -z "$TMUX" ]] && zstyle -t ':omz:module:tmux' auto-start; then
   tmux_session='#OMZ'

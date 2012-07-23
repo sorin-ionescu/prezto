@@ -5,6 +5,11 @@
 # Authors: Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[ruby] )); then
+  return 1
+fi
+
 # Load RVM into the shell session.
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   # Unset AUTO_NAME_DIRS since auto adding variable-stored paths to ~ list
@@ -34,16 +39,18 @@ fi
 # Aliases
 
 # Bundler
-alias b='bundle'
-alias be='b exec'
-alias bi='b install --path vendor/bundle'
-alias bl='b list'
-alias bo='b open'
-alias bp='b package'
-alias bu='b update'
-alias bI='bi \
-  && b package \
-  && print .bundle       >>! .gitignore \
-  && print vendor/bundle >>! .gitignore \
-  && print vendor/cache  >>! .gitignore'
+if (( $+commands[bundle] )); then
+  alias b='bundle'
+  alias be='b exec'
+  alias bi='b install --path vendor/bundle'
+  alias bl='b list'
+  alias bo='b open'
+  alias bp='b package'
+  alias bu='b update'
+  alias bI='bi \
+    && b package \
+    && print .bundle       >>! .gitignore \
+    && print vendor/bundle >>! .gitignore \
+    && print vendor/cache  >>! .gitignore'
+fi
 

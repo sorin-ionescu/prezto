@@ -8,7 +8,7 @@
 # Get the prefix or use the default.
 zstyle -s ':omz:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'
 
-# Check for the presence of GNU Core Utilities.
+# Return if requirements are not found.
 if (( ! ${+commands[${_gnu_utility_p}whoami]} )); then
   return 1
 fi

@@ -34,9 +34,13 @@ function autoloadable {
 function omodload {
   local -a omodules
   local omodule
+  local ofunction_glob='^([_.]*|prompt_*_setup|README*)(.N:t)'
 
   # $argv is overridden in the anonymous function.
   omodules=("$argv[@]")
+
+  # Add functions to $fpath.
+  fpath=(${omodules:+${OMZ}/modules/${^omodules}/functions(/FN)} $fpath)
 
   function {
     local ofunction
@@ -44,17 +48,13 @@ function omodload {
     # Extended globbing is needed for listing autoloadable function directories.
     setopt LOCAL_OPTIONS EXTENDED_GLOB
 
-    # Add functions to fpath.
-    fpath=(${omodules:+${OMZ}/modules/${^omodules}/functions(/FN)} $fpath)
-
     # Load Oh My Zsh functions.
-    for ofunction in \
-      $OMZ/modules/${^omodules}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
-    do
+    for ofunction in $OMZ/modules/${^omodules}/functions/$~ofunction_glob; do
       autoload -Uz "$ofunction"
     done
   }
 
+  # Load Oh My Zsh modules.
   for omodule in "$omodules[@]"; do
     if zstyle -t ":omz:module:$omodule" loaded; then
       continue
@@ -69,6 +69,22 @@ function omodload {
       if (( $? == 0 )); then
         zstyle ":omz:module:$omodule" loaded 'yes'
       else
+        # Remove the $fpath entry.
+        fpath[(r)$OMZ/modules/${omodule}/functions]=()
+
+        function {
+          local ofunction
+
+          # Extended globbing is needed for listing autoloadable function
+          # directories.
+          setopt LOCAL_OPTIONS EXTENDED_GLOB
+
+          # Unload Oh My Zsh functions.
+          for ofunction in $OMZ/modules/$omodule/functions/$~ofunction_glob; do
+            unfunction "$ofunction"
+          done
+        }
+
         zstyle ":omz:module:$omodule" loaded 'no'
       fi
     fi

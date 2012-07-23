@@ -9,6 +9,11 @@
 #   https://wiki.archlinux.org/index.php/Pacman_Tips
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[pacman] )); then
+  return 1
+fi
+
 # Get the Pacman frontend.
 zstyle -s ':omz:module:pacman' frontend '_pacman_frontend'
 

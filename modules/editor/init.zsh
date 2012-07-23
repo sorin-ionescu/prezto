@@ -40,7 +40,7 @@
 #     zstyle ':omz:module:editor' completing '...'
 #
 
-# Dumb terminals lack support.
+# Return if requirements are not found.
 if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
