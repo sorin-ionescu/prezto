@@ -45,7 +45,7 @@ zstyle ':omz:load' omodule \
 zstyle ':omz:module:prompt' theme 'sorin'
 
 # Hey Prezto!
-source "$PREZTO/init.zsh"
+source "$prezto/init.zsh"
 
 # Customize to your needs...
 

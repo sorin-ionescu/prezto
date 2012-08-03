@@ -45,11 +45,11 @@ function omodload {
     setopt LOCAL_OPTIONS EXTENDED_GLOB
 
     # Add functions to fpath.
-    fpath=(${omodules:+${PREZTO}/modules/${^omodules}/functions(/FN)} $fpath)
+    fpath=(${omodules:+${prezto}/modules/${^omodules}/functions(/FN)} $fpath)
 
     # Load Prezto functions.
     for ofunction in \
-      $PREZTO/modules/${^omodules}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
+      $prezto/modules/${^omodules}/functions/^([_.]*|prompt_*_setup|README*)(.N:t)
     do
       autoload -Uz "$ofunction"
     done
@@ -58,12 +58,12 @@ function omodload {
   for omodule in "$omodules[@]"; do
     if zstyle -t ":omz:module:$omodule" loaded; then
       continue
-    elif [[ ! -d "$PREZTO/modules/$omodule" ]]; then
+    elif [[ ! -d "$prezto/modules/$omodule" ]]; then
       print "$0: no such module: $omodule" >&2
       continue
     else
-      if [[ -s "$PREZTO/modules/$omodule/init.zsh" ]]; then
-        source "$PREZTO/modules/$omodule/init.zsh"
+      if [[ -s "$prezto/modules/$omodule/init.zsh" ]]; then
+        source "$prezto/modules/$omodule/init.zsh"
       fi
 
       if (( $? == 0 )); then

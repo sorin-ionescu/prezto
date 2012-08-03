@@ -7,7 +7,7 @@
 
 # Set the path to Prezto.
 # TODO: use $HOME/.prezto
-export PREZTO="$HOME/.oh-my-zsh"
+export prezto="$HOME/.oh-my-zsh"
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
