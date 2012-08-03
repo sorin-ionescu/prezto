@@ -45,7 +45,7 @@ zprofile and zlogin are not meant to be used concurrently but can be done so.
 This file is sourced by interactive shells. It should define aliases,
 functions, shell options, and key bindings.
 
-This is the main Oh My Zsh configuration file.
+This is the main Prezto configuration file.
 
 ### zlogin
 

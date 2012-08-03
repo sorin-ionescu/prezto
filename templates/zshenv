@@ -5,8 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Set the path to Oh My Zsh.
-export OMZ="$HOME/.oh-my-zsh"
+# Set the path to Prezto.
+# TODO: use $HOME/.prezto
+export prezto="$HOME/.oh-my-zsh"
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
