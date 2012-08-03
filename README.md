@@ -1,24 +1,24 @@
-Oh My Zsh
-=========
+Prezto
+======
 
-OMZ is a configuration framework for [Zsh][1] that enriches the command line
+Prezto is a configuration framework for [Zsh][1] that enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
 
 Installation
 ------------
 
-Oh My Zsh will work with any recent release of Zsh, but the minimum recommended
+Prezto will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
   1. Clone the repository:
 
-        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.prezto
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
      templates provided:
 
-        for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
+        for rcfile in ~/.prezto/templates/z{shenv,shrc,login,logout}; do
           cp -f $rcfile ~/.$rcfile:t
         done
 
@@ -49,14 +49,14 @@ directories end up at the tail of the array.
 
 ### Troubleshooting
 
-If you are not able to find certain commands after switching to *Oh My Zsh*,
+If you are not able to find certain commands after switching to Prezto,
 modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
 window or tab.
 
 Usage
 -----
 
-Oh My Zsh has many features disabled by default. Read the source code and
+Prezto has many features disabled by default. Read the source code and
 accompanying README files to learn of what is available.
 
 ### Modules
@@ -83,7 +83,7 @@ how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 
 ### Completions
 
-Submit program completions to the [zsh-completions][7] project. The Oh My Zsh
+Submit program completions to the [zsh-completions][7] project. The Prezto
 completions directory will be synchronized against it.
 
 Resources

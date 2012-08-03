@@ -1,7 +1,7 @@
 Syntax Highlighting
 ===================
 
-Integrates [zsh-syntax-highlighting][1] into Oh My Zsh.
+Integrates [zsh-syntax-highlighting][1] into Prezto.
 
 This module should be loaded *second to last*, where last is the *prompt*
 module, unless used in conjuncture with the *history-substring-search* module

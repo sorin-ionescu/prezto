@@ -1,5 +1,5 @@
 #
-# Sets Oh My Zsh options.
+# Sets Prezto options.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -26,7 +26,7 @@ zstyle ':omz:module:terminal' auto-title 'yes'
 # Set the Zsh functions to load (man zshcontrib).
 # zstyle ':omz:load' zfunction 'zargs' 'zmv'
 
-# Set the Oh My Zsh modules to load (browse modules).
+# Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':omz:load' omodule \
   'environment' \
@@ -44,8 +44,8 @@ zstyle ':omz:load' omodule \
 # Auto set to 'off' on dumb terminals.
 zstyle ':omz:module:prompt' theme 'sorin'
 
-# This will make you shout: OH MY ZSHELL!
-source "$OMZ/init.zsh"
+# Hey Prezto!
+source "$PREZTO/init.zsh"
 
 # Customize to your needs...
 
