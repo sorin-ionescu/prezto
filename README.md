@@ -13,12 +13,12 @@ version is 4.3.10.
 
   1. Clone the repository:
 
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.prezto
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.oh-my-zsh
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
      templates provided:
 
-        for rcfile in ~/.prezto/templates/z{shenv,shrc,login,logout}; do
+        for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
           cp -f $rcfile ~/.$rcfile:t
         done
 
