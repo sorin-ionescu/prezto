@@ -10,6 +10,10 @@ if (( ! $+commands[perl] )); then
   return 1
 fi
 
+#
+# Local Module Installation
+#
+
 if [[ "$OSTYPE" == darwin* ]]; then
   # Perl is slow; cache its output.
   cache_file="${0:h}/cache.zsh"
@@ -35,7 +39,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   unset env_var
 fi
 
+#
 # Aliases
+#
 
 # General
 alias pd='perldoc'

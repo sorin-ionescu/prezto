@@ -10,7 +10,10 @@ if (( ! $+commands[screen] )); then
   return 1
 fi
 
+#
 # Auto Start
+#
+
 if [[ -z "$STY" ]] && zstyle -t ':omz:module:screen' auto-start; then
   session="$(
     screen -list 2> /dev/null \
@@ -25,7 +28,11 @@ if [[ -z "$STY" ]] && zstyle -t ':omz:module:screen' auto-start; then
   fi
 fi
 
+#
 # Aliases
+#
+
 alias sl="screen -list"
 alias sn="screen -U -S"
 alias sr="screen -a -A -U -D -R"
+

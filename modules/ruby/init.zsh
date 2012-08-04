@@ -36,7 +36,9 @@ else
   fi
 fi
 
+#
 # Aliases
+#
 
 # Bundler
 if (( $+commands[bundle] )); then

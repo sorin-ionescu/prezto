@@ -5,6 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+#
+# Aliases
+#
+
 # Disable color.
 if ! zstyle -t ':omz:module:pacman:yaourt' color; then
   alias pacman='pacman --nocolor'

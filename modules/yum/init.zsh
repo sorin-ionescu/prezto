@@ -11,7 +11,10 @@ if (( ! $+commands[yum] )); then
   return 1
 fi
 
+#
 # Aliases
+#
+
 alias yumc='sudo yum clean all'    # Cleans the cache.
 alias yumh='yum history'           # Displays history.
 alias yumi='sudo yum install'      # Installs package(s).
@@ -22,5 +25,4 @@ alias yumr='sudo yum remove'       # Removes package(s).
 alias yums='yum search'            # Searches for a package.
 alias yumu='sudo yum update'       # Updates packages.
 alias yumU='sudo yum upgrade'      # Upgrades packages.
-
 

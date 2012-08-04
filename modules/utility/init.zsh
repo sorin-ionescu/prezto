@@ -13,7 +13,9 @@ omodload 'spectrum'
 # Correct commands.
 setopt CORRECT
 
+#
 # Aliases
+#
 
 # Disable correction.
 alias ack='nocorrect ack'
@@ -128,7 +130,9 @@ fi
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
+#
 # Functions
+#
 
 # Makes a directory and changes to it.
 function mkdcd {

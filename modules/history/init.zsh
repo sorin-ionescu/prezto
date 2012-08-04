@@ -6,9 +6,17 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+#
+# Variables
+#
+
 HISTFILE="$HOME/.zhistory"       # The path to the history file.
 HISTSIZE=10000                   # The maximum number of events to save in the internal history.
 SAVEHIST=10000                   # The maximum number of events to save in the history file.
+
+#
+# Options
+#
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
@@ -23,7 +31,9 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing non-existent history.
 
+#
 # Aliases
+#
 
 # Lists the ten most used commands.
 alias history-stat="history . | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"

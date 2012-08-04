@@ -11,7 +11,9 @@ if [[ "$OSTYPE" != darwin* ]]; then
   return 1
 fi
 
+#
 # Paths
+#
 
 # Set the list of directories that info searches for manuals.
 infopath=(
@@ -31,7 +33,10 @@ path=(
   $path
 )
 
+#
 # Aliases
+#
+
 alias portc='sudo port clean --all installed'
 alias porti='sudo port install'
 alias ports='port search'

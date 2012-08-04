@@ -8,6 +8,10 @@
 
 source "${0:h}/external/zsh-history-substring-search.zsh"
 
+#
+# Styles
+#
+
 if zstyle -t ':omz:module:history-substring-search' case-sensitive; then
   unset HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS
 fi
@@ -15,6 +19,10 @@ fi
 if ! zstyle -t ':omz:module:history-substring-search' color; then
   unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_{FOUND,NOT_FOUND}
 fi
+
+#
+# Key Bindings
+#
 
 bindkey -M emacs "$key_info[Control]P" history-substring-search-up
 bindkey -M emacs "$key_info[Control]N" history-substring-search-down

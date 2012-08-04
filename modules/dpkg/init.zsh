@@ -12,7 +12,9 @@ if (( ! $+commands[dpkg] && ! $+commands[apt-get] )); then
   return 1
 fi
 
+#
 # Aliases
+#
 
 # Cleans the cache.
 alias debc='sudo apt-get clean && sudo apt-get autoclean'

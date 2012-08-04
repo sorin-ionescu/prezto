@@ -14,6 +14,10 @@ fi
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
+#
+# Options
+#
+
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
 setopt PATH_DIRS           # Perform path search even on command names with slashes.
@@ -25,6 +29,10 @@ unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 
 # Treat these characters as part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+#
+# Styles
+#
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on

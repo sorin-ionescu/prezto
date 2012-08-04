@@ -11,7 +11,10 @@ if (( ! $+commands[tmux] )); then
   return 1
 fi
 
+#
 # Auto Start
+#
+
 if [[ -z "$TMUX" ]] && zstyle -t ':omz:module:tmux' auto-start; then
   tmux_session='#OMZ'
 
@@ -33,6 +36,9 @@ if [[ -z "$TMUX" ]] && zstyle -t ':omz:module:tmux' auto-start; then
   exec tmux new-session -t "$tmux_session"
 fi
 
+#
 # Aliases
+#
+
 alias ta="tmux attach-session"
 alias tl="tmux list-sessions"
