@@ -16,9 +16,9 @@ version is 4.3.10.
         git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
-     templates provided:
+     runcoms provided:
 
-        for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
+        for rcfile in ~/.oh-my-zsh/runcoms/z{shenv,shrc,login,logout}; do
           cp -f $rcfile ~/.$rcfile:t
         done
 
