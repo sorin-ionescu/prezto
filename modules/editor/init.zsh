@@ -24,13 +24,13 @@
 #
 #     zstyle ':omz:module:editor:keymap:primary' insert 'I'
 #
-#   To indicate when the editor is in the primary keymap (emacs or viins) overwrite
-#   mode, add the following to your theme prompt setup function.
+#   To indicate when the editor is in the primary keymap (emacs or viins)
+#   overwrite mode, add the following to your theme prompt setup function.
 #
 #     zstyle ':omz:module:editor:keymap:primary' overwrite 'O'
 #
-#   To indicate when the editor is in the alternate keymap (vicmd), add the following
-#   to your theme prompt setup function.
+#   To indicate when the editor is in the alternate keymap (vicmd), add the
+#   following to your theme prompt setup function.
 #
 #     zstyle ':omz:module:editor:keymap' alternate '<<<'
 #
