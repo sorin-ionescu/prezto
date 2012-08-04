@@ -29,7 +29,7 @@ _gnu_utility_cmds=(
   'tty' 'uname' 'unexpand' 'uniq' 'unlink' 'uptime' 'users' 'vdir'
   'wc' 'who' 'whoami' 'yes'
 
-  # The following are not part of Coreutils but installed separately.
+  # The following utilities are not part of Coreutils but installed separately.
 
   # Binutils
   'addr2line' 'ar' 'c++filt' 'elfedit' 'nm' 'objcopy' 'objdump'
