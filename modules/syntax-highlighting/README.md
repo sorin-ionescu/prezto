@@ -1,7 +1,7 @@
 Syntax Highlighting
 ===================
 
-Integrates [zsh-syntax-highlighting][1] into Oh My Zsh.
+Integrates [zsh-syntax-highlighting][1] into Prezto.
 
 This module should be loaded *second to last*, where last is the *prompt*
 module, unless used in conjuncture with the *history-substring-search* module
@@ -21,7 +21,7 @@ Settings
 
 To enable highlighting for this module only, and the following line to *zshrc*:
 
-    zstyle ':omz:module:syntax-highlighting' color 'yes'
+    zstyle ':prezto:module:syntax-highlighting' color 'yes'
 
 ### Highlighters
 
@@ -30,7 +30,7 @@ enables the *main*, *brackets*, and *cursor* highlighters by default.
 
 To enable all highlighters, add the following to *zshrc*:
 
-    zstyle ':omz:module:syntax-highlighting' highlighters \
+    zstyle ':prezto:module:syntax-highlighting' highlighters \
       'main' \
       'brackets' \
       'pattern' \
@@ -46,5 +46,5 @@ Authors
 
 [1]: https://github.com/zsh-users/zsh-syntax-highlighting
 [2]: https://github.com/zsh-users/zsh-syntax-highlighting/tree/master/highlighters
-[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[3]: https://github.com/sorin-ionescu/prezto/issues
 

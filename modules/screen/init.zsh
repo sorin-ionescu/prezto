@@ -14,7 +14,7 @@ fi
 # Auto Start
 #
 
-if [[ -z "$STY" ]] && zstyle -t ':omz:module:screen' auto-start; then
+if [[ -z "$STY" ]] && zstyle -t ':prezto:module:screen' auto-start; then
   session="$(
     screen -list 2> /dev/null \
       | sed '1d;$d' \

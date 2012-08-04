@@ -1,5 +1,5 @@
 #
-# Integrates history-substring-search into Oh My Zsh.
+# Integrates history-substring-search into Prezto.
 #
 # Authors:
 #   Suraj N. Kurapati <sunaku@gmail.com>
@@ -12,11 +12,11 @@ source "${0:h}/external/zsh-history-substring-search.zsh"
 # Styles
 #
 
-if zstyle -t ':omz:module:history-substring-search' case-sensitive; then
+if zstyle -t ':prezto:module:history-substring-search' case-sensitive; then
   unset HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS
 fi
 
-if ! zstyle -t ':omz:module:history-substring-search' color; then
+if ! zstyle -t ':prezto:module:history-substring-search' color; then
   unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_{FOUND,NOT_FOUND}
 fi
 
