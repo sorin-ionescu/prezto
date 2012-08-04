@@ -134,8 +134,23 @@ function editor-info {
 }
 zle -N editor-info
 
-# Updates editor information when the keymap changes.
+# Ensures that $terminfo values are valid and updates editor information when
+# the keymap changes.
 function zle-keymap-select zle-line-init zle-line-finish {
+  # The terminal must be in application mode when ZLE is active for $terminfo
+  # values to be valid.
+  case "$0" in
+    (zle-line-init)
+      # Enable terminal application mode.
+      echoti smkx
+    ;;
+    (zle-line-finish)
+      # Disable terminal application mode.
+      echoti rmkx
+    ;;
+  esac
+
+  # Update editor information.
   zle editor-info
 }
 zle -N zle-keymap-select
