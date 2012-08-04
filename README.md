@@ -1,32 +1,41 @@
-Oh My Zsh
-=========
+Prezto — Instantly Awesome Zsh
+==============================
 
-OMZ is a configuration framework for [Zsh][1] that enriches the command line
-interface environment with sane defaults, aliases, functions, auto completion,
-and prompt themes.
+Prezto is the configuration framework for [Zsh][1] that enriches the command
+line interface environment with sane defaults, aliases, functions, auto
+completion, and prompt themes.
 
 Installation
 ------------
 
-Oh My Zsh will work with any recent release of Zsh, but the minimum recommended
+Prezto will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
-  1. Clone the repository:
+  1. Launch Zsh:
 
-        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+        zsh
 
-  2. Create a new Zsh configuration by copying the Zsh configuration file
-     runcoms provided:
+  2. Define the installation location:
 
-        for rcfile in ~/.oh-my-zsh/runcoms/z{shenv,shrc,login,logout}; do
-          cp -f $rcfile ~/.$rcfile:t
+        export ZDOTDIR="${ZDOTDIR:-$HOME}"
+        export PDIR="$ZDOTDIR/.zsh.d"
+
+  3. Clone the repository:
+
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git "$PDIR"
+
+  4. Create a new Zsh configuration by copying the Zsh configuration files
+     provided:
+
+        for rcfile in "$PDIR/runcoms/z"{shenv,shrc,login,logout}; do
+          cp -f "$rcfile" "$ZDOTDIR/.$rcfile:t"
         done
 
-  3. Set Zsh as your default shell:
+  5. Set Zsh as your default shell:
 
         chsh -s /bin/zsh
 
-  4. Open a new Zsh terminal window or tab.
+  6. Open a new Zsh terminal window or tab.
 
 ### Mac OS X
 
@@ -49,14 +58,14 @@ directories end up at the tail of the array.
 
 ### Troubleshooting
 
-If you are not able to find certain commands after switching to *Oh My Zsh*,
+If you are not able to find certain commands after switching to *Prezto*,
 modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
 window or tab.
 
 Usage
 -----
 
-Oh My Zsh has many features disabled by default. Read the source code and
+Prezto has many features disabled by default. Read the source code and
 accompanying README files to learn of what is available.
 
 ### Modules
@@ -83,7 +92,7 @@ how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 
 ### Completions
 
-Submit program completions to the [zsh-completions][7] project. The Oh My Zsh
+Submit program completions to the [zsh-completions][7] project. The Prezto
 completions directory will be synchronized against it.
 
 Resources
@@ -161,7 +170,7 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: https://github.com/zsh-users/zsh-completions
 [8]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
-[9]: https://github.com/sorin-ionescu/oh-my-zsh/contributors
+[9]: https://github.com/sorin-ionescu/prezto/contributors
 [10]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 [11]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [12]: https://help.github.com/articles/using-pull-requests

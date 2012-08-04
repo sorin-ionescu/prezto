@@ -39,7 +39,7 @@ zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$HOME/.zcache"
 
 # Case-insensitive (all), partial-word, and then substring completion.
-if zstyle -t ':omz:module:completion:*' case-sensitive; then
+if zstyle -t ':prezto:module:completion:*' case-sensitive; then
   zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
   setopt CASE_GLOB
 else

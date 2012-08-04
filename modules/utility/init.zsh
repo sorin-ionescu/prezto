@@ -8,7 +8,7 @@
 #
 
 # Load dependencies.
-omodload 'spectrum'
+pmodload 'spectrum'
 
 # Correct commands.
 setopt CORRECT
@@ -60,7 +60,7 @@ if is-callable 'dircolors'; then
   # GNU Core Utilities
   alias ls='ls --group-directories-first'
 
-  if zstyle -t ':omz:module:utility:ls' color; then
+  if zstyle -t ':prezto:module:utility:ls' color; then
     if [[ -s "$HOME/.dir_colors" ]]; then
       eval "$(dircolors "$HOME/.dir_colors")"
     else
@@ -72,7 +72,7 @@ if is-callable 'dircolors'; then
   fi
 else
   # BSD Core Utilities
-  if zstyle -t ':omz:module:utility:ls' color; then
+  if zstyle -t ':prezto:module:utility:ls' color; then
     export LSCOLORS="exfxcxdxbxegedabagacad"
     alias ls="ls -G"
   else

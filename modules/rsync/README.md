@@ -24,5 +24,5 @@ Authors
 
 [1]: http://rsync.samba.org
 [2]: http://www.bombich.com/rsync.html
-[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[3]: https://github.com/sorin-ionescu/prezto/issues
 

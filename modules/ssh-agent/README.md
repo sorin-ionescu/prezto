@@ -10,13 +10,13 @@ Settings
 
 To enable ssh-agent forwarding, add the following line to *zshrc*:
 
-    zstyle ':omz:module:ssh-agent' forwarding 'yes'
+    zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 
 ### Identities
 
 To load multiple identities, add the following line to *zshrc*:
 
-    zstyle ':omz:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
+    zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
 
 Authors
 -------
@@ -32,5 +32,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-agent&sektion=1
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
 
