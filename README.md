@@ -13,12 +13,12 @@ version is 4.3.10.
 
   1. Clone the repository:
 
-        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.prezto
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
      runcoms provided:
 
-        for rcfile in ~/.oh-my-zsh/runcoms/z{shenv,shrc,login,logout}; do
+        for rcfile in ~/.prezto/runcoms/z{shenv,shrc,login,logout}; do
           cp -f $rcfile ~/.$rcfile:t
         done
 
