@@ -1,5 +1,5 @@
 #
-# A theme based on Steve Losh's prompt with VCS_INFO integration.
+# A theme based on Steve Losh's Extravagant Prompt with vcs_info integration.
 #
 # Authors:
 #   Steve Losh <steve@stevelosh.com>
@@ -16,14 +16,14 @@ function virtualenv_info {
 }
 
 function prompt_steeef_precmd {
-  # Check for untracked files or updated submodules since vcs_info doesn't.
+  # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    fmt_branch="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
+    branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
   else
-    fmt_branch="(${_prompt_steeef_colors[1]}%b%f%u%c)"
+    branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
   fi
 
-  zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
 
   vcs_info 'prompt'
 }
@@ -43,11 +43,11 @@ function prompt_steeef_setup {
   # Use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     _prompt_steeef_colors=(
-      "%F{81}"  # turquoise
-      "%F{166}" # orange
-      "%F{135}" # purple
-      "%F{161}" # hotpink
-      "%F{118}" # limegreen
+      "%F{81}"  # Turquoise
+      "%F{166}" # Orange
+      "%F{135}" # Purple
+      "%F{161}" # Hotpink
+      "%F{118}" # Limegreen
     )
   else
     _prompt_steeef_colors=(
@@ -59,31 +59,28 @@ function prompt_steeef_setup {
     )
   fi
 
-  # Enable VCS systems you use.
-  zstyle ':vcs_info:*' enable bzr git hg svn
-
-  # check-for-changes can be really slow.
-  # You should disable it if you work with large repositories.
-  zstyle ':vcs_info:*:prompt:*' check-for-changes true
-
   # Formats:
-  # %b - branchname
-  # %u - unstagedstr (see below)
-  # %c - stagedstr (see below)
-  # %a - action (e.g. rebase-i)
-  # %R - repository path
-  # %S - path in the repository
-  local fmt_branch="(${_prompt_steeef_colors[1]}%b%f%u%c)"
-  local fmt_action="(${_prompt_steeef_colors[5]}%a%f)"
-  local fmt_unstaged="${_prompt_steeef_colors[2]}●%f"
-  local fmt_staged="${_prompt_steeef_colors[5]}●%f"
+  #   %b - branchname
+  #   %u - unstagedstr (see below)
+  #   %c - stagedstr (see below)
+  #   %a - action (e.g. rebase-i)
+  #   %R - repository path
+  #   %S - path in the repository
+  local branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
+  local action_format="(${_prompt_steeef_colors[5]}%a%f)"
+  local unstaged_format="${_prompt_steeef_colors[2]}●%f"
+  local staged_format="${_prompt_steeef_colors[5]}●%f"
 
-  zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
-  zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
-  zstyle ':vcs_info:*:prompt:*' actionformats "${fmt_branch}${fmt_action}"
-  zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*:prompt:*' check-for-changes true
+  zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
+  zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
+  # Define prompts.
   PROMPT="
 ${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
 "'$(virtualenv_info)'"$ "
