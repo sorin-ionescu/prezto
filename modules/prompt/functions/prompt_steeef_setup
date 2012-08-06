@@ -8,6 +8,9 @@
 #   steeef <steeef@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
+# Screenshots:
+#   http://i.imgur.com/HyRvv.png
+#
 
 function virtualenv_info {
   if [[ -n "$VIRTUAL_ENV" ]]; then

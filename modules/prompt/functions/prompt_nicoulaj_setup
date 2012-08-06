@@ -15,6 +15,9 @@
 #   - Shows user@hostname if connected through SSH.
 #   - Shows if logged in as root or not.
 #
+# Screenshots:
+#   http://i.imgur.com/Xe1bu.png
+#
 
 function prompt_nicoulaj_precmd {
   vcs_info

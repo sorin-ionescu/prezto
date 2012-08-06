@@ -5,6 +5,9 @@
 #   Brian Tse <briankftse@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
+# Screenshots:
+#   http://i.imgur.com/zLZNK.png
+#
 
 function +vi-git-status() {
   # Check for untracked files or updated submodules since vcs_info does not.
