@@ -16,29 +16,16 @@ function virtualenv_info {
 }
 
 function prompt_steeef_precmd {
-  if [[ -n "$__PROMPT_STEEEF_VCS_UPDATE" ]] ; then
-    # Check for untracked files or updated submodules since vcs_info doesn't.
-    if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-      __PROMPT_STEEEF_VCS_UPDATE=1
-      fmt_branch="(${__PROMPT_STEEEF_COLORS[1]}%b%f%u%c${__PROMPT_STEEEF_COLORS[4]}●%f)"
-    else
-      fmt_branch="(${__PROMPT_STEEEF_COLORS[1]}%b%f%u%c)"
-    fi
-    zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
-
-    vcs_info 'prompt'
-    __PROMPT_STEEEF_VCS_UPDATE=''
+  # Check for untracked files or updated submodules since vcs_info doesn't.
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    fmt_branch="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
+  else
+    fmt_branch="(${_prompt_steeef_colors[1]}%b%f%u%c)"
   fi
-}
 
-function prompt_steeef_preexec {
-  if [[ "${2[(w)1]}" == (git|svn) ]]; then
-    __PROMPT_STEEEF_VCS_UPDATE=1
-  fi
-}
+  zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
 
-function prompt_steeef_chpwd {
-  __PROMPT_STEEEF_VCS_UPDATE=1
+  vcs_info 'prompt'
 }
 
 function prompt_steeef_setup {
@@ -46,18 +33,16 @@ function prompt_steeef_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
+  # Load required functions.
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
 
+  # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_steeef_precmd
-  add-zsh-hook preexec prompt_steeef_preexec
-  add-zsh-hook chpwd prompt_steeef_chpwd
-
-  __PROMPT_STEEEF_VCS_UPDATE=1
 
   # Use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
-    __PROMPT_STEEEF_COLORS=(
+    _prompt_steeef_colors=(
       "%F{81}"  # turquoise
       "%F{166}" # orange
       "%F{135}" # purple
@@ -65,7 +50,7 @@ function prompt_steeef_setup {
       "%F{118}" # limegreen
     )
   else
-    __PROMPT_STEEEF_COLORS=(
+    _prompt_steeef_colors=(
       "%F{cyan}"
       "%F{yellow}"
       "%F{magenta}"
@@ -88,10 +73,10 @@ function prompt_steeef_setup {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  local fmt_branch="(${__PROMPT_STEEEF_COLORS[1]}%b%f%u%c)"
-  local fmt_action="(${__PROMPT_STEEEF_COLORS[5]}%a%f)"
-  local fmt_unstaged="${__PROMPT_STEEEF_COLORS[2]}●%f"
-  local fmt_staged="${__PROMPT_STEEEF_COLORS[5]}●%f"
+  local fmt_branch="(${_prompt_steeef_colors[1]}%b%f%u%c)"
+  local fmt_action="(${_prompt_steeef_colors[5]}%a%f)"
+  local fmt_unstaged="${_prompt_steeef_colors[2]}●%f"
+  local fmt_staged="${_prompt_steeef_colors[5]}●%f"
 
   zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
   zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
@@ -100,7 +85,7 @@ function prompt_steeef_setup {
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   PROMPT="
-${__PROMPT_STEEEF_COLORS[3]}%n%f at ${__PROMPT_STEEEF_COLORS[2]}%m%f in ${__PROMPT_STEEEF_COLORS[5]}%~%f "'${vcs_info_msg_0_}'"
+${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
 "'$(virtualenv_info)'"$ "
 }
 
