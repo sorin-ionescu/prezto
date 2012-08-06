@@ -47,15 +47,18 @@ Aliases
   - `mv`
   - `mysql`
   - `rm`
-  - `scp`
 
 ### Disabled File Globbing
 
   - `fc`
   - `find`
+  - `ftp`
   - `history`
   - `locate`
   - `rake`
+  - `rsync`
+  - `scp`
+  - `sftp`
 
 ### General
 
