@@ -32,14 +32,9 @@ function prompt_steeef_precmd {
 }
 
 function prompt_steeef_preexec {
-  case "$(history $HISTCMD)" in
-    (*git*)
-      __PROMPT_STEEEF_VCS_UPDATE=1
-    ;;
-    (*svn*)
-      __PROMPT_STEEEF_VCS_UPDATE=1
-    ;;
-  esac
+  if [[ "${2[(w)1]}" == (git|svn) ]]; then
+    __PROMPT_STEEEF_VCS_UPDATE=1
+  fi
 }
 
 function prompt_steeef_chpwd {
