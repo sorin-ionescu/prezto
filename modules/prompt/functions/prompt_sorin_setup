@@ -1,5 +1,5 @@
 #
-# A simple theme that only shows relevant information.
+# A simple theme that displays relevant, contextual information.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -22,7 +22,10 @@ function prompt_sorin_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
+  # Load required functions.
   autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_sorin_precmd
 
   zstyle ':omz:module:editor' completing '%B%F{red}...%f%b'
@@ -45,6 +48,7 @@ function prompt_sorin_setup {
     'prompt'  ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
+  # Define prompts.
   PROMPT='%F{cyan}%1~%f${git_info:+${(e)git_info[prompt]}} %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
   RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '

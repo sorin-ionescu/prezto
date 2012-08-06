@@ -25,7 +25,7 @@ function prompt_nicoulaj_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
-  # Load required modules.
+  # Load required functions.
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
 
@@ -42,7 +42,7 @@ function prompt_nicoulaj_setup {
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
-  zstyle ':vcs_info:*:*' check-for-changes true # Can be slow on big repos.
+  zstyle ':vcs_info:*:*' check-for-changes true
   zstyle ':vcs_info:*:*' unstagedstr '!'
   zstyle ':vcs_info:*:*' stagedstr '+'
   zstyle ':vcs_info:*:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
