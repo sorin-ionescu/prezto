@@ -49,7 +49,7 @@ function pmodload {
     setopt LOCAL_OPTIONS EXTENDED_GLOB
 
     # Load Prezto functions.
-    for pfunction in $PDIR/modules/${^pmodules}/functions/$~README.md_glob; do
+    for pfunction in $PDIR/modules/${^pmodules}/functions/$~pfunction_glob; do
       autoload -Uz "$pfunction"
     done
   }
@@ -80,7 +80,7 @@ function pmodload {
           setopt LOCAL_OPTIONS EXTENDED_GLOB
 
           # Unload Prezto functions.
-          for pfunction in $PDIR/modules/$pmodule/functions/$~README.md_glob; do
+          for pfunction in $PDIR/modules/$pmodule/functions/$~pfunction_glob; do
             unfunction "$pfunction"
           done
         }
