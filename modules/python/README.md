@@ -1,7 +1,23 @@
 Python
 ======
 
-Enables local Python package installation.
+Enables local Python builds and package installation.
+
+Local Python builds
+-------------------
+
+[pythonz][6] builds and installs multiple Python versions locally in the home
+directory. It supports CPython, Stackless Python, Jython and PyPy.
+
+This module prepends the pythonz directory to the path variable to make
+`pythonz` available.
+
+### Usage
+
+Install Python versions with `pythonz install` into into `~/.pythonz/pythons`.
+To make these Python versions generally available, add symbolic links to
+`~/.pythonz/bin`.
+
 
 Local Package Installation
 --------------------------
@@ -44,4 +60,4 @@ Authors
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: http://www.doughellmann.com/docs/virtualenvwrapper/#introduction
 [5]: https://github.com/sorin-ionescu/oh-my-zsh/issues
-
+[6]: http://saghul.github.com/pythonz/
