@@ -50,12 +50,6 @@ Aliases
   - `pbu` uninstalls a Perl version.
   - `pbx` temporarily sets the Perl version to use.
 
-Functions
----------
-
-  - `prep` provides a grep-like pattern search.
-  - `psub` provides a sed-like pattern substitution.
-
 Authors
 -------
 

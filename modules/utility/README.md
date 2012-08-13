@@ -140,6 +140,11 @@ Functions
 
   - `psu` displays user owned processes status.
 
+### Search and Replace
+
+  - `prep` provides a grep-like pattern search.
+  - `psub` provides a sed-like pattern substitution.
+
 Authors
 -------
 
