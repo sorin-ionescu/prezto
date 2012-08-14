@@ -44,17 +44,18 @@ fi
 #
 
 # General
-alias pd='perldoc'
-alias pe='perl -wlne'
+alias pl='perl'
+alias pld='perldoc'
+alias ple='perl -wlne'
 
 # Perlbrew
-alias pb='perlbrew'
-alias pba='perlbrew available'
-alias pbi='perlbrew install'
-alias pbl='perlbrew list'
-alias pbo='perlbrew off'
-alias pbO='perlbrew switch-off'
-alias pbs='perlbrew switch'
-alias pbu='perlbrew use'
-alias pbx='perlbrew uninstall'
+alias plb='perlbrew'
+alias plba='perlbrew available'
+alias plbi='perlbrew install'
+alias plbl='perlbrew list'
+alias plbo='perlbrew off'
+alias plbO='perlbrew switch-off'
+alias plbs='perlbrew switch'
+alias plbu='perlbrew use'
+alias plbx='perlbrew uninstall'
 

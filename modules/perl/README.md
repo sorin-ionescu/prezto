@@ -35,20 +35,21 @@ Aliases
 
 ### General
 
-  - `pe` executes a one line program in a loop (`perl -wlne`).
-  - `pd` looks up Perl documentation (`perldoc`).
+  - `pl` is short for `perl`.
+  - `pld` looks up Perl documentation (`perldoc`).
+  - `ple` executes a one line program in a loop (`perl -wlne`).
 
 ### Perlbrew
 
-  - `pb` manages Perl environments.
-  - `pba` lists available Perl versions.
-  - `pbi` installs a Perl version.
-  - `pbl` lists installed Perl versions.
-  - `pbo` temporarily turns off Perlbrew.
-  - `pbO` turns off Perlbrew.
-  - `pbs` switches to a Perl version.
-  - `pbu` uninstalls a Perl version.
-  - `pbx` temporarily sets the Perl version to use.
+  - `plb` manages Perl environments.
+  - `plba` lists available Perl versions.
+  - `plbi` installs a Perl version.
+  - `plbl` lists installed Perl versions.
+  - `plbo` temporarily turns off Perlbrew.
+  - `plbO` turns off Perlbrew.
+  - `plbs` switches to a Perl version.
+  - `plbu` uninstalls a Perl version.
+  - `plbx` temporarily sets the Perl version to use.
 
 Authors
 -------
