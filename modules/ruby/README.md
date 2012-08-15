@@ -38,19 +38,23 @@ dependencies, with [Bundler][4].
 Aliases
 -------
 
+### General
+
+  - `rb` is short for `ruby`.
+
 ### Bundler
 
-  - `b` manages ruby dependencies (`bundle`).
-  - `be` executes a script in the context of the current bundle.
-  - `bi` installs the gems specified in the *Gemfile* in *vendor/bundle*.
-  - `bI` installs the following:
+  - `rbb` manages ruby dependencies (`bundle`).
+  - `rbbe` executes a script in the context of the current bundle.
+  - `rbbi` installs the gems specified in the *Gemfile* in *vendor/bundle*.
+  - `rbbI` installs the following:
     - gems specified in the *Gemfile* in *vendor/bundle*.
     - packages the gems into *vendor/cache*.
     - appends bundler directories to  *.gitignore*.
-  - `bl` lists all gems in the current bundle.
-  - `bo` opens an installed gem in the editor.
-  - `bp` packages gem files into *vendor/cache*.
-  - `bu` updates gems to their latest version.
+  - `rbbl` lists all gems in the current bundle.
+  - `rbbo` opens an installed gem in the editor.
+  - `rbbp` packages gem files into *vendor/cache*.
+  - `rbbu` updates gems to their latest version.
 
 Authors
 -------

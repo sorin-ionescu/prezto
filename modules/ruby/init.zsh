@@ -40,17 +40,20 @@ fi
 # Aliases
 #
 
+# General
+alias rb='ruby'
+
 # Bundler
 if (( $+commands[bundle] )); then
-  alias b='bundle'
-  alias be='b exec'
-  alias bi='b install --path vendor/bundle'
-  alias bl='b list'
-  alias bo='b open'
-  alias bp='b package'
-  alias bu='b update'
-  alias bI='bi \
-    && b package \
+  alias rbb='bundle'
+  alias rbbe='rbb exec'
+  alias rbbi='rbb install --path vendor/bundle'
+  alias rbbl='rbb list'
+  alias rbbo='rbb open'
+  alias rbbp='rbb package'
+  alias rbbu='rbb update'
+  alias rbbI='rbbi \
+    && rbb package \
     && print .bundle       >>! .gitignore \
     && print vendor/bundle >>! .gitignore \
     && print vendor/cache  >>! .gitignore'
