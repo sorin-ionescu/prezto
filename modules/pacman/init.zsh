@@ -33,6 +33,9 @@ fi
 # Aliases
 #
 
+# Pacman.
+alias pac='pacman'
+
 # Installs packages from repositories.
 alias paci='sudo pacman --sync'
 

@@ -24,6 +24,7 @@ Aliases
 
 ### Pacman
 
+  - `pac` is short for `pacman`.
   - `paci` installs packages from repositories.
   - `pacI` installs packages from files.
   - `pacx` removes packages and unneeded dependencies.
