@@ -31,6 +31,11 @@ convenient shell functions to create, switch, and manage them.
 Install virtualenvwrapper and set [`$WORKON_HOME`][4] to the path where virtual
 environments will be stored.
 
+Aliases
+-------
+
+  - `py` is short for `python`.
+
 Authors
 -------
 
