@@ -32,7 +32,8 @@ fi
 # Aliases
 #
 
-alias sl="screen -list"
-alias sn="screen -U -S"
-alias sr="screen -a -A -U -D -R"
+alias scr='screen'
+alias scrl='screen -list'
+alias scrn='screen -U -S'
+alias scrr='screen -a -A -U -D -R'
 

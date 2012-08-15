@@ -17,9 +17,10 @@ To enable this feature, add the following line to *zshrc*:
 Aliases
 -------
 
-  - `sl` lists sessions/socket directory.
-  - `sn` starts a new session.
-  - `sr` attaches to a session if one exists or start a new one.
+  - `scr` is short for `screen`.
+  - `scrl` lists sessions/socket directory.
+  - `scrn` starts a new session.
+  - `scrr` attaches to a session if one exists or start a new one.
 
 Authors
 -------
