@@ -24,8 +24,8 @@ the background session and `destroy-unattached on` on every other session
 Aliases
 -------
 
-  - `ta` attaches or switches to a tmux session.
-  - `tl` lists sessions managed by the tmux server.
+  - `tmuxa` attaches or switches to a tmux session.
+  - `tmuxl` lists sessions managed by the tmux server.
 
 Caveats
 -------
