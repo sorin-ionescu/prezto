@@ -6,20 +6,21 @@ Defines [Ruby on Rails][1] aliases.
 Aliases
 -------
 
-  - `rc` starts the Rails console.
-  - `rdc` starts the Rails console connected to the database.
-  - `rdm` migrates the database.
-  - `rdM` migrates the database and recreates the test database.
-  - `rdr` rolls the database schema back to the previous version.
-  - `rg` generates new code.
-  - `rl` displays the log.
-  - `rlc` truncates logs to zero bytes.
-  - `rp` installs a plugin.
-  - `rr` runs code in the application environment.
-  - `rs` starts the Rails server.
-  - `rsd` starts the Rails server with the debugger.
-  - `rx` destroys newly generated code.
-  
+  - `ror` is short for `rails`.
+  - `rorc` starts the Rails console.
+  - `rordc` starts the Rails console connected to the database.
+  - `rordm` migrates the database.
+  - `rordM` migrates the database and recreates the test database.
+  - `rordr` rolls the database schema back to the previous version.
+  - `rorg` generates new code.
+  - `rorl` displays the log.
+  - `rorlc` truncates logs to zero bytes.
+  - `rorp` installs a plugin.
+  - `rorr` runs code in the application environment.
+  - `rors` starts the Rails server.
+  - `rorsd` starts the Rails server with the debugger.
+  - `rorx` destroys newly generated code.
+
 Authors
 -------
 

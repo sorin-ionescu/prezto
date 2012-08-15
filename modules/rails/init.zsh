@@ -16,19 +16,20 @@ fi
 # Aliases (Compatible with Rails 2)
 #
 
-alias rc='_rails-command console'
-alias rdc='_rails-command dbconsole'
-alias rdm='rake db:migrate'
-alias rdM='rake db:migrate db:test:clone'
-alias rdr='rake db:rollback'
-alias rg='_rails-command generate'
-alias rl='tail -f log/development.log'
-alias rlc='rake log:clear'
-alias rp='_rails-command plugin'
-alias rr='_rails-command runner'
-alias rs='_rails-command server'
-alias rsd='_rails-command server --debugger'
-alias rx='_rails-command destroy'
+alias ror='rails'
+alias rorc='_rails-command console'
+alias rordc='_rails-command dbconsole'
+alias rordm='rake db:migrate'
+alias rordM='rake db:migrate db:test:clone'
+alias rordr='rake db:rollback'
+alias rorg='_rails-command generate'
+alias rorl='tail -f log/development.log'
+alias rorlc='rake log:clear'
+alias rorp='_rails-command plugin'
+alias rorr='_rails-command runner'
+alias rors='_rails-command server'
+alias rorsd='_rails-command server --debugger'
+alias rorx='_rails-command destroy'
 
 #
 # Functions
