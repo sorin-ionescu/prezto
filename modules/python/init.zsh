@@ -25,5 +25,7 @@ fi
 # Load virtualenvwrapper into the shell session.
 if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
   source "$commands[virtualenvwrapper.sh]"
+elif [[ -e "/etc/bash_completion.d/virtualenvwrapper" ]]; then 
+  source "/etc/bash_completion.d/virtualenvwrapper"
 fi
 
