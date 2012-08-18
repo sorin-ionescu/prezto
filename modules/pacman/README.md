@@ -61,5 +61,5 @@ Authors
 
 [1]: http://www.archlinux.org/pacman/
 [2]: http://archlinux.fr/yaourt-en
-[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[3]: https://github.com/sorin-ionescu/prezto/issues
 

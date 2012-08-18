@@ -52,5 +52,5 @@ Authors
 [2]: http://git.io/jkPqHg
 [3]: ChrisJohnsen/tmux-MacOSX-pasteboard
 [4]: mxcl/homebrew
-[5]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[5]: https://github.com/sorin-ionescu/prezto/issues
 

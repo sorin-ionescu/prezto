@@ -1,5 +1,5 @@
 #
-# Integrates zsh-syntax-highlighting into Oh My Zsh.
+# Integrates zsh-syntax-highlighting into Prezto.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

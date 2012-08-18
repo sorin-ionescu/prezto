@@ -1,5 +1,5 @@
 #
-# Integrates history-substring-search into Oh My Zsh.
+# Integrates history-substring-search into Prezto.
 #
 # Authors:
 #   Suraj N. Kurapati <sunaku@gmail.com>
