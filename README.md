@@ -12,9 +12,9 @@ Oh My Zsh will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
 Install using the following one liner:
-
-``curl https://raw.github.com/sorin-ionescu/prezto/master/install | bash``
-
+``` bash
+curl https://raw.github.com/sorin-ionescu/prezto/master/install | bash
+```
 ### Mac OS X
 
 If you have administrator privileges, you must fix an Apple-introduced problem
