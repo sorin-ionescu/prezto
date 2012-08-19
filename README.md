@@ -13,7 +13,7 @@ version is 4.3.10.
 
 Install using the following one liner:
 
-``curl https://raw.github.com/sorin-ionescu/prezto/master/install | sh``
+``curl https://raw.github.com/sorin-ionescu/prezto/master/install | bash``
 
 ### Mac OS X
 

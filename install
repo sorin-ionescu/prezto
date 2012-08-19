@@ -5,7 +5,6 @@ git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zs
 cd $HOME/.oh-my-zsh/runcoms/
 for rcfile in z{shenv,shrc,login,logout}; do
   cp -f $rcfile ~/.$rcfile
-  cat ~/.$rcfile
 done
 
 chsh -s /bin/zsh
