@@ -11,22 +11,9 @@ Installation
 Oh My Zsh will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
-  1. Clone the repository:
+Install using the following one liner:
 
-        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
-
-  2. Create a new Zsh configuration by copying the Zsh configuration file
-     runcoms provided:
-
-        for rcfile in ~/.oh-my-zsh/runcoms/z{shenv,shrc,login,logout}; do
-          cp -f $rcfile ~/.$rcfile:t
-        done
-
-  3. Set Zsh as your default shell:
-
-        chsh -s /bin/zsh
-
-  4. Open a new Zsh terminal window or tab.
+``curl https://raw.github.com/sorin-ionescu/prezto/master/install | sh``
 
 ### Mac OS X
 

@@ -1,0 +1,12 @@
+#!/bin/sh
+echo "We will now install prezto."
+
+git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+
+for rcfile in ~/.oh-my-zsh/runcoms/z{shenv,shrc,login,logout}; do
+  cp -f $rcfile ~/.$rcfile:t
+done
+
+chsh -s /bin/zsh
+
+echo "Congrats! prezto is successfully installed. To test it open a new Zsh terminal window or tab."
