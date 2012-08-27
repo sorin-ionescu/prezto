@@ -81,11 +81,6 @@ The project is managed via [Git][3]. It is highly recommend that you commit
 your changes and push them to [GitHub][4] to not lose them. If you do not know
 how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 
-### Completions
-
-Submit program completions to the [zsh-completions][7] project. The Oh My Zsh
-completions directory will be synchronized against it.
-
 Resources
 ---------
 
