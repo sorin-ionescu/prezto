@@ -29,5 +29,5 @@ Authors
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[1]: https://github.com/sorin-ionescu/prezto/issues
 

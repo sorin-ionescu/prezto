@@ -25,5 +25,5 @@ Authors
   - [Sebastian Wiesner](https://github.com/lunaryorn)
 
 [1]: http://www.haskell.org/cabal/
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
 

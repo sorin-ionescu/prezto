@@ -65,5 +65,5 @@ Authors
 
 [1]: http://www.perl.org
 [2]: http://perlbrew.pl
-[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[3]: https://github.com/sorin-ionescu/prezto/issues
 

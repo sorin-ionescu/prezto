@@ -30,7 +30,7 @@ function autoloadable {
   ( unfunction $1 ; autoload -U +X $1 ) &> /dev/null
 }
 
-# Loads Oh My Zsh modules.
+# Loads Prezto modules.
 function omodload {
   local -a omodules
   local omodule
@@ -48,13 +48,13 @@ function omodload {
     # Extended globbing is needed for listing autoloadable function directories.
     setopt LOCAL_OPTIONS EXTENDED_GLOB
 
-    # Load Oh My Zsh functions.
+    # Load Prezto functions.
     for ofunction in $OMZ/modules/${^omodules}/functions/$~ofunction_glob; do
       autoload -Uz "$ofunction"
     done
   }
 
-  # Load Oh My Zsh modules.
+  # Load Prezto modules.
   for omodule in "$omodules[@]"; do
     if zstyle -t ":omz:module:$omodule" loaded; then
       continue
@@ -79,7 +79,7 @@ function omodload {
           # directories.
           setopt LOCAL_OPTIONS EXTENDED_GLOB
 
-          # Unload Oh My Zsh functions.
+          # Unload Prezto functions.
           for ofunction in $OMZ/modules/$omodule/functions/$~ofunction_glob; do
             unfunction "$ofunction"
           done

@@ -1,5 +1,5 @@
 #
-# Initializes Oh My Zsh.
+# Initializes Prezto.
 #
 # Authors:
 #   Robby Russell <robby@planetargon.com>

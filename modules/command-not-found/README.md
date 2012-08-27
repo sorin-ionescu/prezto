@@ -11,5 +11,5 @@ Authors
   - [Joseph Booker](https://github.com/sargas)
 
 [1]: https://code.launchpad.net/command-not-found
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
 
