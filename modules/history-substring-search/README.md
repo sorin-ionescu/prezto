@@ -31,7 +31,7 @@ To enable case-sensitivity for this module only, add the following line to
 If colors are enabled, *history-substring-search* will automatically highlight
 positive results.
 
-To enable highlighting for this module only, and the following line to *zshrc*:
+To enable highlighting for this module only, add the following line to *zshrc*:
 
     zstyle ':omz:module:history-substring-search' color 'yes'
 

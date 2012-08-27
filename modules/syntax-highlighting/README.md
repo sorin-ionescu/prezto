@@ -19,7 +19,7 @@ Settings
 
 ### Highlighting
 
-To enable highlighting for this module only, and the following line to *zshrc*:
+To enable highlighting for this module only, add the following line to *zshrc*:
 
     zstyle ':omz:module:syntax-highlighting' color 'yes'
 
