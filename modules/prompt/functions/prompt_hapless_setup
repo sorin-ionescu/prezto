@@ -14,7 +14,7 @@
 #  <http://hintsforums.macworld.com/showthread.php?t=17068>
 #
 # Screenshots:
-#   TBA
+#   <http://www.flickr.com/photos/79770035@N03/7867663652/>
 #
 
 function prompt_char {
@@ -23,26 +23,22 @@ function prompt_char {
   echo '$'
 }
 
-function hg_prompt_info {
-  hg prompt "(${_prompt_steeef_colors[1]}{branch}%f${_prompt_steeef_colors[2]}{status|modified|unknown}%f{update})" 2>/dev/null
-}
-
 function rvm_info {
   if which rvm-prompt &> /dev/null; then
-    echo "${_prompt_steeef_colors[5]}‹$(rvm-prompt i v g)›"
+    echo "‹${_prompt_hapless_colors[5]}$(rvm-prompt i v g)%f›"
   else
     if which rbenv &> /dev/null; then
-      echo "${_prompt_steeef_colors[5]}‹$(rbenv version | sed -e "s/ (set.*$//")›"
+      echo "‹${_prompt_hapless_colors[5]}$(rbenv version | sed -e "s/ (set.*$//")%f›"
     fi
   fi
 }
 
-function prompt_steeef_precmd {
+function prompt_hapless_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
+  if [[ (-n $(git ls-files --others --exclude-standard 2> /dev/null)) || (-n $(hg status -u 2> /dev/null)) ]]; then
+    branch_format="(${_prompt_hapless_colors[1]}%b%f%u%c${_prompt_hapless_colors[4]}●%f)"
   else
-    branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
+    branch_format="(${_prompt_hapless_colors[1]}%b%f%u%c)"
   fi
 
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
@@ -50,7 +46,7 @@ function prompt_steeef_precmd {
   vcs_info 'prompt'
 }
 
-function prompt_steeef_setup {
+function prompt_hapless_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -60,9 +56,9 @@ function prompt_steeef_setup {
   autoload -Uz vcs_info
 
   # Add hook for calling vcs_info before each command.
-  add-zsh-hook precmd prompt_steeef_precmd
+  add-zsh-hook precmd prompt_hapless_precmd
 
-  _prompt_steeef_colors=(
+  _prompt_hapless_colors=(
     "%F{cyan}"
     "%F{yellow}"
     "%F{magenta}"
@@ -77,15 +73,17 @@ function prompt_steeef_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
-  local action_format="(${_prompt_steeef_colors[5]}%a%f)"
-  local unstaged_format="${_prompt_steeef_colors[2]}●%f"
-  local staged_format="${_prompt_steeef_colors[5]}●%f"
-  local return_code='%(?..${_prompt_steeef_colors[4]}%? ↵%f)'
+  local branch_format="(${_prompt_hapless_colors[1]}%b%f%u%c)"
+  local action_format="(${_prompt_hapless_colors[5]}%a%f)"
+  local unstaged_format="${_prompt_hapless_colors[2]}●%f"
+  local staged_format="${_prompt_hapless_colors[5]}●%f"
+  local return_code='%(?..${_prompt_hapless_colors[4]}%? ↵%f)'
 
   # Set vcs_info parameters.
-  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' enable git hg
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
+  zstyle ':vcs_info:hg*:prompt:*' get-revision true
+  zstyle ':vcs_info:hg*:prompt:*' hgrevformat ""
   zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
   zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
   zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
@@ -93,9 +91,9 @@ function prompt_steeef_setup {
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   # Define prompts.
-  PROMPT="${_prompt_steeef_colors[3]}%n%f@${_prompt_steeef_colors[2]}%m%f:${_prompt_steeef_colors[1]}%~%f"'$(prompt_char) '
-  RPROMPT="${return_code} "'${vcs_info_msg_0_}$(hg_prompt_info)$(rvm_info)'
+  PROMPT="${_prompt_hapless_colors[3]}%n%f@${_prompt_hapless_colors[2]}%m%f:${_prompt_hapless_colors[1]}%~%f"'$(prompt_char) '
+  RPROMPT="${return_code} "'${vcs_info_msg_0_}$(rvm_info)'
 }
 
-prompt_steeef_setup "$@"
+prompt_hapless_setup "$@"
 
