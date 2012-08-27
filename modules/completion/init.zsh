@@ -11,6 +11,9 @@ if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
 
+# Add zsh-completions to $fpath.
+fpath=("${0:h}/external/src" $fpath)
+
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
