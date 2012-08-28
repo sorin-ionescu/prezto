@@ -13,7 +13,7 @@ version is 4.3.10.
 
   1. Clone the repository:
 
-        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.oh-my-zsh
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
      runcoms provided:
