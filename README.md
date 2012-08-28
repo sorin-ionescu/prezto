@@ -84,7 +84,7 @@ how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 Resources
 ---------
 
-The [Zsh Reference Card][8] is indispensable.
+The [Zsh Reference Card][7] and the [zsh-lovers][8] man page are indispensable.
 
 Contribute
 ----------
@@ -154,8 +154,8 @@ SOFTWARE.
 [4]: https://github.com
 [5]: http://gitimmersion.com
 [6]: http://gitref.org
-[7]: https://github.com/zsh-users/zsh-completions
-[8]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
+[7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
+[8]: http://grml.org/zsh/zsh-lovers.html
 [9]: https://github.com/sorin-ionescu/oh-my-zsh/contributors
 [10]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 [11]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
