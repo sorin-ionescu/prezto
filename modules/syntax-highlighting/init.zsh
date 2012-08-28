@@ -10,6 +10,7 @@ if ! zstyle -t ':omz:module:syntax-highlighting' color; then
   return 1
 fi
 
+# Source module files.
 source "${0:h}/external/zsh-syntax-highlighting.zsh"
 
 # Set the highlighters.
