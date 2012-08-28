@@ -102,7 +102,7 @@ function _git-action {
   done
 
   for action_dir in \
-    "${git_dir}/rebase-merge"
+    "${git_dir}/rebase-merge" \
     "${git_dir}/.dotest-merge"
   do
     if [[ -d "$action_dir" ]]; then
