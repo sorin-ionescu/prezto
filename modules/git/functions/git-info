@@ -76,7 +76,8 @@ function _git-action {
   for action_dir in \
     "${git_dir}/rebase-apply" \
     "${git_dir}/rebase" \
-    "${git_dir}/../.dotest"; do
+    "${git_dir}/../.dotest"
+  do
     if [[ -d "$action_dir" ]] ; then
       if [[ -f "${action_dir}/rebasing" ]] ; then
         print 'rebase'
@@ -85,13 +86,15 @@ function _git-action {
       else
         print 'am/rebase'
       fi
+
       return 0
     fi
   done
 
   for action_dir in \
     "${git_dir}/rebase-merge/interactive" \
-    "${git_dir}/.dotest-merge/interactive"; do
+    "${git_dir}/.dotest-merge/interactive"
+  do
     if [[ -f "$action_dir" ]]; then
       print 'rebase-i'
       return 0
@@ -99,8 +102,9 @@ function _git-action {
   done
 
   for action_dir in \
-    "${git_dir}/rebase-merge" \
-    "${git_dir}/.dotest-merge"; do
+    "${git_dir}/rebase-merge"
+    "${git_dir}/.dotest-merge"
+  do
     if [[ -d "$action_dir" ]]; then
       print 'rebase-m'
       return 0
