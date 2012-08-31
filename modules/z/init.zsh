@@ -5,36 +5,15 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-_z_prefixes=(
-  ''
-  '/usr/local'
-  '/opt/local'
-  "$(brew --prefix 2> /dev/null)"
-)
+# Set the directory changing command.
+_Z_CMD='j'
 
-for _z_prefix in "$_z_prefixes[@]"; do
-  _z_sh="${_z_prefix}/etc/profile.d/z.sh"
+# Prevent symbolic link resolution.
+_Z_NO_RESOLVE_SYMLINKS=1
 
-  if [[ -s "$_z_sh" ]]; then
-    source "$_z_sh"
-    break
-  fi
-done
+# Source module files.
+source "${0:h}/external/z.sh"
 
-unset _z_prefix{es,} _z_sh
-
-# Return if requirements are not found.
-if (( ! $+functions[_z] )); then
-  return 1
-fi
-
-function _z-precmd {
-  _z --add "${PWD:A}"
-}
-
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _z-precmd
-
-alias z='nocorrect _z'
-alias j='nocorrect _z'
+# Cleanup.
+unset _Z_{CMD,NO_RESOLVE_SYMLINKS}
 

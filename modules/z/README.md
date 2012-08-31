@@ -1,23 +1,21 @@
 Z
 =
 
-Maintains a frequently used directory list for fast directory changes. For more
-information see [z][1].
+Integrates [z][1] into Oh My Zsh, which maintains a frequently used directory
+list for fast directory changes.
 
 Aliases
 -------
 
-  - `z` changes the directory to most *frecent* match.
-  - `j` is the same as `z` for [autojump][2] converts.
+  - `j` changes the current working directory to the most *frecent* match.
 
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/rupa/z
-[2]: https://github.com/joelthelion/autojump
-[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
 
