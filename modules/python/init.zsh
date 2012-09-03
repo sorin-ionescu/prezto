@@ -23,10 +23,10 @@ else
 fi
 
 # Load virtualenvwrapper into the shell session.
-if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
+if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper_lazy.sh] )); then
   # Disable the virtualenv prompt.
   VIRTUAL_ENV_DISABLE_PROMPT=1
-  source "$commands[virtualenvwrapper.sh]"
+  source "$commands[virtualenvwrapper_lazy.sh]"
 fi
 
 # Load pythonz into the shell session.
