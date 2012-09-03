@@ -10,7 +10,7 @@ Settings
 
 Starts a tmux session automatically when Zsh is launched.
 
-To enable this feature, add the following line to *zshrc*:
+To enable this feature, add the following line to *zpreztorc*:
 
     zstyle ':prezto:module:tmux' auto-start 'yes'
 

@@ -22,8 +22,9 @@ version is 4.3.10.
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:
 
-        for rcfile in "${ZDOTDIR:-$HOME}/.zprezto/runcoms/z"{shenv,shrc,login,logout}; do
-          ln -s "$rcfile" "$ZDOTDIR/.$rcfile:t"
+        setopt EXTENDED_GLOB
+        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+          ln -s "$rcfile" "$ZDOTDIR/.${rcfile:t}"
         done
 
   4. Set Zsh as your default shell:
@@ -66,15 +67,15 @@ accompanying README files to learn of what is available.
 ### Modules
 
   1. Browse */modules* to see what is available.
-  2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal window
-     or tab.
+  2. Load the modules you need in *~/.zpreztorc* then open a new Zsh terminal
+     window or tab.
 
 ### Themes
 
   1. For a list of themes, type `prompt -l`.
   2. To preview a theme, type `prompt -p name`.
-  3. Load the theme you like in *~/.zshrc* then open a new Zsh terminal window
-     or tab.
+  3. Load the theme you like in *~/.zpreztorc* then open a new Zsh terminal
+     window or tab.
 
      ![sorin theme][2]
 

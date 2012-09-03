@@ -17,7 +17,7 @@ Settings
 
 ### Prefix
 
-To use a different prefix, add the following to *zshrc*, and replace 'g' with
+To use a different prefix, add the following to *zpreztorc*, and replace 'g' with
 the desired prefix:
 
     zstyle ':prezto:module:gnu-utility' prefix 'g'

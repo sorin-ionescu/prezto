@@ -6,7 +6,7 @@ Loads prompt [themes][1].
 Settings
 --------
 
-To select a prompt theme, add the following to *zshrc*, and replace **name**
+To select a prompt theme, add the following to *zpreztorc*, and replace **name**
 with the name of the theme you wish to load. Setting it to **random** will load
 a random theme.
 

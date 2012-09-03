@@ -8,13 +8,13 @@ Settings
 
 ### Agent Forwarding
 
-To enable ssh-agent forwarding, add the following line to *zshrc*:
+To enable ssh-agent forwarding, add the following line to *zpreztorc*:
 
     zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 
 ### Identities
 
-To load multiple identities, add the following line to *zshrc*:
+To load multiple identities, add the following line to *zpreztorc*:
 
     zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
 

@@ -19,7 +19,8 @@ Settings
 
 ### Highlighting
 
-To enable highlighting for this module only, add the following line to *zshrc*:
+To enable highlighting for this module only, add the following line to
+*zpreztorc*:
 
     zstyle ':prezto:module:syntax-highlighting' color 'yes'
 
@@ -28,7 +29,7 @@ To enable highlighting for this module only, add the following line to *zshrc*:
 Syntax highlighting is accomplished by pluggable [highlighters][2]. This module
 enables the *main*, *brackets*, and *cursor* highlighters by default.
 
-To enable all highlighters, add the following to *zshrc*:
+To enable all highlighters, add the following to *zpreztorc*:
 
     zstyle ':prezto:module:syntax-highlighting' highlighters \
       'main' \

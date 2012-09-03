@@ -1,7 +1,9 @@
-Zsh Configuration Files
-=======================
+Configuration Files
+===================
 
 Zsh has several system-wide and user-local configuration files.
+
+Prezto has one user-local configuration file.
 
 System-wide configuration files are installation-dependent but are installed
 in */etc* by default.
@@ -22,10 +24,11 @@ The configuration files are read in the following order:
   04. ~/.zprofile
   05. /etc/zshrc
   06. ~/.zshrc
-  07. /etc/zlogin
-  08. ~/.zlogin
-  09. ~/.zlogout
-  10. /etc/zlogout
+  07. ~/.zpreztorc
+  08. /etc/zlogin
+  09. ~/.zlogin
+  10. ~/.zlogout
+  11. /etc/zlogout
 
 ### zshenv
 
@@ -45,7 +48,9 @@ zprofile and zlogin are not meant to be used concurrently but can be done so.
 This file is sourced by interactive shells. It should define aliases,
 functions, shell options, and key bindings.
 
-This is the main Prezto configuration file.
+## zpreztorc
+
+This file configures Prezto.
 
 ### zlogin
 

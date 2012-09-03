@@ -22,7 +22,7 @@ Settings
 ### Case Sensitivity
 
 To enable case-sensitivity for this module only, add the following line to
-*zshrc*:
+*zpreztorc*:
 
     zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
 
@@ -31,7 +31,8 @@ To enable case-sensitivity for this module only, add the following line to
 If colors are enabled, *history-substring-search* will automatically highlight
 positive results.
 
-To enable highlighting for this module only, add the following line to *zshrc*:
+To enable highlighting for this module only, add the following line to
+*zpreztorc*:
 
     zstyle ':prezto:module:history-substring-search' color 'yes'
 
