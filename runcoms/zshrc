@@ -45,7 +45,9 @@ zstyle ':prezto:load' pmodule \
 zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Source Prezto.
-source "$PREZTO/init.zsh"
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 # Customize to your needs...
 

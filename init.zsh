@@ -13,6 +13,11 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 unset min_zsh_version
 
+# Source the Prezto configuration file.
+if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zpreztorc"
+fi
+
 # Disable color and theme in dumb terminals.
 if [[ "$TERM" == 'dumb' ]]; then
   zstyle ':prezto:*:*' color 'no'
