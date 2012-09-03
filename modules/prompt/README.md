@@ -10,7 +10,7 @@ To select a prompt theme, add the following to *zshrc*, and replace **name**
 with the name of the theme you wish to load. Setting it to **random** will load
 a random theme.
 
-    zstyle ':omz:module:prompt' theme 'name'
+    zstyle ':prezto:module:prompt' theme 'name'
 
 Authors
 -------
@@ -20,5 +20,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
 

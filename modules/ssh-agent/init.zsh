@@ -29,7 +29,7 @@ function _ssh-agent-start {
   source "${_ssh_agent_env}" > /dev/null
 
   # Load identities.
-  zstyle -a ':omz:module:ssh-agent' identities 'identities'
+  zstyle -a ':prezto:module:ssh-agent' identities 'identities'
 
   if (( ${#identities} > 0 )); then
     ssh-add "${HOME}/.ssh/${^identities[@]}"
@@ -39,7 +39,7 @@ function _ssh-agent-start {
 }
 
 # Test if agent-forwarding is enabled.
-zstyle -b ':omz:module:ssh-agent' forwarding '_ssh_agent_forwarding'
+zstyle -b ':prezto:module:ssh-agent' forwarding '_ssh_agent_forwarding'
 if is-true "${_ssh_agent_forwarding}" && [[ -n "$SSH_AUTH_SOCK" ]]; then
   # Add a nifty symlink for screen/tmux if agent forwarding.
   [[ -L "$SSH_AUTH_SOCK" ]] || ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER-screen

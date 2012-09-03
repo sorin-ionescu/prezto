@@ -67,7 +67,7 @@ To display the name of the current virtual enviroment in a prompt, define the
 following style in the `prompt_theme_setup` function.
 
     # %v - virtualenv name.
-    zstyle ':omz:module:python' virtualenv 'virtualenv:%v'
+    zstyle ':prezto:module:python' virtualenv 'virtualenv:%v'
 
 Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
 `python-info` in the `prompt_theme_preexec` hook function.
@@ -105,5 +105,5 @@ Authors
 [2]: http://www.doughellmann.com/projects/virtualenvwrapper/
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: http://saghul.github.com/pythonz/
-[5]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[5]: https://github.com/sorin-ionescu/prezto/issues
 

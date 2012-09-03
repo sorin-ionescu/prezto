@@ -12,7 +12,7 @@ Starts a GNU Screen session automatically when Zsh is launched.
 
 To enable this feature, add the following line to *zshrc*:
 
-    zstyle ':omz:module:screen' auto-start 'yes'
+    zstyle ':prezto:module:screen' auto-start 'yes'
 
 Aliases
 -------
@@ -30,5 +30,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://www.gnu.org/software/screen/
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
 

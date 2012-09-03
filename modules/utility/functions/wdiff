@@ -6,7 +6,7 @@
 #
 
 function wdiff {
-  if zstyle -t ':omz:module:utility:wdiff' color; then
+  if zstyle -t ':prezto:module:utility:wdiff' color; then
     if (( $+commands[wdiff] )); then
       command wdiff \
         --avoid-wraps \

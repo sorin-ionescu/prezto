@@ -32,5 +32,5 @@ Authors
 [1]: http://www.apple.com/macosx/
 [2]: http://bruji.com/bwana/
 [3]: http://www.iterm2.com/
-[4]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[4]: https://github.com/sorin-ionescu/prezto/issues
 

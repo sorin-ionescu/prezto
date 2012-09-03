@@ -1,7 +1,7 @@
 Z
 =
 
-Integrates [z][1] into Oh My Zsh, which maintains a frequently used directory
+Integrates [z][1] into Prezto, which maintains a frequently used directory
 list for fast directory changes.
 
 Aliases
@@ -17,5 +17,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/rupa/z
-[2]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
 

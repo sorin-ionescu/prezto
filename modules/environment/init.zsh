@@ -35,7 +35,7 @@ unsetopt CHECK_JOBS       # Don't report on jobs when shell exit.
 # Grep
 #
 
-if zstyle -t ':omz:environment:grep' color; then
+if zstyle -t ':prezto:environment:grep' color; then
   export GREP_COLOR='37;45'
   export GREP_OPTIONS='--color=auto'
 fi
@@ -44,7 +44,7 @@ fi
 # Termcap
 #
 
-if zstyle -t ':omz:environment:termcap' color; then
+if zstyle -t ':prezto:environment:termcap' color; then
   export LESS_TERMCAP_mb=$'\E[01;31m'      # Begins blinking.
   export LESS_TERMCAP_md=$'\E[01;31m'      # Begins bold.
   export LESS_TERMCAP_me=$'\E[0m'          # Ends mode.

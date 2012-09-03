@@ -19,5 +19,5 @@ Authors
 [1]: http://nodejs.org
 [2]: http://npmjs.org
 [3]: http://nodejs.org/api
-[4]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[4]: https://github.com/sorin-ionescu/prezto/issues
 

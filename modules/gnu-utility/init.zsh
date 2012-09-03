@@ -6,7 +6,7 @@
 #
 
 # Get the prefix or use the default.
-zstyle -s ':omz:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'
+zstyle -s ':prezto:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'
 
 # Return if requirements are not found.
 if (( ! ${+commands[${_gnu_utility_p}whoami]} )); then

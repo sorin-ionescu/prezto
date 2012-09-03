@@ -6,7 +6,7 @@
 #
 
 function diff {
-  if zstyle -t ':omz:module:utility:diff' color; then
+  if zstyle -t ':prezto:module:utility:diff' color; then
     if (( $+commands[colordiff] )); then
       command diff --unified "$@" | colordiff --difftype diffu
     elif (( $+commands[git] )); then

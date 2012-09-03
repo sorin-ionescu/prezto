@@ -1,32 +1,36 @@
-Oh My Zsh
-=========
+Prezto — Instantly Awesome Zsh
+==============================
 
-OMZ is a configuration framework for [Zsh][1] that enriches the command line
+Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
 
 Installation
 ------------
 
-Oh My Zsh will work with any recent release of Zsh, but the minimum recommended
+Prezto will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
-  1. Clone the repository:
+  1. Launch Zsh:
 
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.oh-my-zsh
+        zsh
 
-  2. Create a new Zsh configuration by copying the Zsh configuration file
-     runcoms provided:
+  2. Clone the repository:
 
-        for rcfile in ~/.oh-my-zsh/runcoms/z{shenv,shrc,login,logout}; do
-          cp -f $rcfile ~/.$rcfile:t
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+  3. Create a new Zsh configuration by copying the Zsh configuration files
+     provided:
+
+        for rcfile in "${ZDOTDIR:-$HOME}/.zprezto/runcoms/z"{shenv,shrc,login,logout}; do
+          cp -f "$rcfile" "$ZDOTDIR/.$rcfile:t"
         done
 
-  3. Set Zsh as your default shell:
+  4. Set Zsh as your default shell:
 
         chsh -s /bin/zsh
 
-  4. Open a new Zsh terminal window or tab.
+  5. Open a new Zsh terminal window or tab.
 
 ### Mac OS X
 
@@ -49,14 +53,14 @@ directories end up at the tail of the array.
 
 ### Troubleshooting
 
-If you are not able to find certain commands after switching to *Oh My Zsh*,
+If you are not able to find certain commands after switching to *Prezto*,
 modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
 window or tab.
 
 Usage
 -----
 
-Oh My Zsh has many features disabled by default. Read the source code and
+Prezto has many features disabled by default. Read the source code and
 accompanying README files to learn of what is available.
 
 ### Modules
@@ -149,14 +153,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [1]: http://www.zsh.org
-[2]: http://i.imgur.com/aipDQ.png "sorin theme"
+[2]: http://i.imgur.com/4CeOj.png "sorin theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
 [6]: http://gitref.org
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: http://grml.org/zsh/zsh-lovers.html
-[9]: https://github.com/sorin-ionescu/oh-my-zsh/contributors
+[9]: https://github.com/sorin-ionescu/prezto/contributors
 [10]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 [11]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [12]: https://help.github.com/articles/using-pull-requests

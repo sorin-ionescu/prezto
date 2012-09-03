@@ -5,8 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Set the path to Oh My Zsh.
-export OMZ="$HOME/.oh-my-zsh"
+# Set the path to Prezto.
+export ZDOTDIR="${ZDOTDIR:-$HOME}"
+export PREZTO="$ZDOTDIR/.zprezto"
 
 #
 # Browser
