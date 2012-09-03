@@ -6,7 +6,7 @@ Enables local Python and local Python package installation.
 Local Python Installation
 -------------------------
 
-[pythonz][6] builds and installs multiple Python versions locally in the home
+[pythonz][4] builds and installs multiple Python versions locally in the home
 directory.
 
 This module prepends the pythonz directory to the path variable to enable the
@@ -41,8 +41,9 @@ convenient shell functions to create, switch, and manage them.
 
 ### Usage
 
-Install virtualenvwrapper and set [`$WORKON_HOME`][4] to the path where virtual
-environments will be stored.
+Install virtualenvwrapper.
+
+Virtual environments are stored in *~/.virtualenvs*.
 
 ### Theming
 
@@ -87,7 +88,6 @@ Authors
 [1]: http://www.python.org/dev/peps/pep-0370/
 [2]: http://www.doughellmann.com/projects/virtualenvwrapper/
 [3]: http://pypi.python.org/pypi/virtualenv
-[4]: http://www.doughellmann.com/docs/virtualenvwrapper/#introduction
+[4]: http://saghul.github.com/pythonz/
 [5]: https://github.com/sorin-ionescu/oh-my-zsh/issues
-[6]: http://saghul.github.com/pythonz/
 
