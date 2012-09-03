@@ -27,8 +27,25 @@ if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
   source "$commands[virtualenvwrapper.sh]"
 fi
 
+# Load pythonz into the shell session.
+if [[ -s $HOME/.pythonz/bin/pythonz ]]; then
+  path=($HOME/.pythonz/bin $path)
+fi
+
 #
 # Aliases
 #
 
 alias py='python'
+
+# pythonz
+if (( $+commands[pythonz] )); then
+  alias pyz='pythonz'
+  alias pyzc='pythonz cleanup'
+  alias pyzi='pythonz install'
+  alias pyzl='pythonz list'
+  alias pyzL='pythonz list -a'
+  alias pyzu='pythonz update'
+  alias pyzx='pythonz uninstall'
+fi
+
