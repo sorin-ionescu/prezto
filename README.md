@@ -23,7 +23,7 @@ version is 4.3.10.
      provided:
 
         for rcfile in "${ZDOTDIR:-$HOME}/.zprezto/runcoms/z"{shenv,shrc,login,logout}; do
-          cp -f "$rcfile" "$ZDOTDIR/.$rcfile:t"
+          ln -s "$rcfile" "$ZDOTDIR/.$rcfile:t"
         done
 
   4. Set Zsh as your default shell:
