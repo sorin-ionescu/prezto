@@ -45,6 +45,22 @@ Install virtualenvwrapper.
 
 Virtual environments are stored in *~/.virtualenvs*.
 
+There are configuration variables that have to be set to enable certain features.
+If you wish to use these features, export the variables in *~/.zshenv*
+
+The variable `$PROJECT_HOME` tells virtualenvwrapper where to place project
+working directories. It must be set and the directory created before `mkproject`
+is used. Replace *Developer* with your projects directory.
+
+    export PROJECT_HOME="$HOME/Developer"
+
+The variable `$VIRTUALENVWRAPPER_VIRTUALENV_ARGS` tells virtualenvwrapper what
+arguments to pass to `virtualenv`. For example, set the value to
+*--no-site-packages* to ensure that all new environments are isolated from the
+system site-packages directory.
+
+    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+
 ### Theming
 
 To display the name of the current virtual enviroment in a prompt, define the
