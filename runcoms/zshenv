@@ -94,8 +94,10 @@ unset path_file
 # Temporary Files
 #
 
-export TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
+if [[ -d "$TMPDIR" ]]; then
+  export TMPPREFIX="${TMPDIR%/}/zsh"
+  if [[ ! -d "$TMPPREFIX" ]]; then
+    mkdir -p "$TMPPREFIX"
+  fi
 fi
 
