@@ -96,6 +96,6 @@ unset path_file
 
 export TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -v "$TMPPREFIX"
+  mkdir -p "$TMPPREFIX"
 fi
 
