@@ -44,6 +44,17 @@ convenient shell functions to create, switch, and manage them.
 Install virtualenvwrapper and set [`$WORKON_HOME`][4] to the path where virtual
 environments will be stored.
 
+### Theming
+
+To display the name of the current virtual enviroment in a prompt, define the
+following style in the `prompt_theme_setup` function.
+
+    # %v - virtualenv name.
+    zstyle ':omz:module:python' virtualenv 'virtualenv:%v'
+
+Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
+`python-info` in the `prompt_theme_preexec` hook function.
+
 Aliases
 -------
 
@@ -58,6 +69,12 @@ Aliases
   - `pyzL` lists available Python versions.
   - `pyzu` updates itself to the latest version.
   - `pyzx` uninstalls Python versions.
+
+Functions
+---------
+
+  - `python-info` exposes information about the Python environment via the
+    `$python_info` associative array.
 
 Authors
 -------

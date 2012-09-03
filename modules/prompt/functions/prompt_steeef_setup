@@ -12,12 +12,6 @@
 #   http://i.imgur.com/HyRvv.png
 #
 
-function virtualenv_info {
-  if [[ -n "$VIRTUAL_ENV" ]]; then
-    print "(${VIRTUAL_ENV:t}) "
-  fi
-}
-
 function prompt_steeef_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -29,6 +23,10 @@ function prompt_steeef_precmd {
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
 
   vcs_info 'prompt'
+
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
 }
 
 function prompt_steeef_setup {
@@ -83,10 +81,13 @@ function prompt_steeef_setup {
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
+  # Set python-info parameters.
+  zstyle ':omz:module:python' virtualenv '(%v)'
+
   # Define prompts.
   PROMPT="
 ${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
-"'$(virtualenv_info)'"$ "
+"'$python_info[virtualenv]'"$ "
 }
 
 prompt_steeef_setup "$@"
