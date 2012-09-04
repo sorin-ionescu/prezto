@@ -6,8 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-sudo pacman --query --explicit --info \
-  $(pacman --query --upgrades | cut -d' ' -f 1) \
+pacman --query --explicit --info \
   | awk '
       BEGIN {
         FS=":"
