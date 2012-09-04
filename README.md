@@ -24,7 +24,7 @@ version is 4.3.10.
 
         setopt EXTENDED_GLOB
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-          ln -s "$rcfile" "$ZDOTDIR/.${rcfile:t}"
+          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         done
 
   4. Set Zsh as your default shell:
@@ -114,7 +114,7 @@ improve its performance, do not hesitate to fork and send pull requests.
    - Squash commits on the topic branch before opening a pull request.
    - Use the same coding style and spacing.
    - Open a [pull request][12] that relates to but one subject with a clear
-     title and description in gramatically correct, complete sentences.
+     title and description in grammatically correct, complete sentences.
 
 #### Modules
 
@@ -125,7 +125,7 @@ improve its performance, do not hesitate to fork and send pull requests.
 #### Themes
 
    - A screenshots section must be present in the file header.
-   - The pull request description must have must have [embedded
+   - The pull request description must have [embedded
      screenshots][13].
 
 License
