@@ -1,0 +1,58 @@
+#
+# A simple theme that displays relevant, contextual information.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+# Screenshots:
+#   http://i.imgur.com/aipDQ.png
+#
+
+function prompt_sorinplus_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
+}
+
+function prompt_sorinplus_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_sorinplus_precmd
+
+  zstyle ':prezto:module:editor' completing '%B%F{red}...%f%b'
+  zstyle ':prezto:module:editor:keymap:primary' overwrite ' %F{red}♺%f'
+  zstyle ':prezto:module:editor:keymap' alternate ' %F{yellow}❮%f%B%F{red}❮%f%b%F{red}❮%f'
+  zstyle ':prezto:module:git' action ':%%B%F{yellow}%s%f%%b'
+  zstyle ':prezto:module:git' added ' %%B%F{green}✚%f%%b'
+  zstyle ':prezto:module:git' ahead ' %%B%F{yellow}⬆%f%%b'
+  zstyle ':prezto:module:git' behind ' %%B%F{yellow}⬇%f%%b'
+  zstyle ':prezto:module:git' branch ':%F{red}%b%f'
+  zstyle ':prezto:module:git' commit ':%F{green}%.7c%f'
+  zstyle ':prezto:module:git' deleted ' %%B%F{red}✖%f%%b'
+  zstyle ':prezto:module:git' modified ' %%B%F{blue}✱%f%%b'
+  zstyle ':prezto:module:git' position ':%F{green}%p%f'
+  zstyle ':prezto:module:git' renamed ' %%B%F{magenta}➜%f%%b'
+  zstyle ':prezto:module:git' stashed ' %%B%F{cyan}✭%f%%b'
+  zstyle ':prezto:module:git' unmerged ' %%B%F{yellow}═%f%%b'
+  zstyle ':prezto:module:git' untracked ' %%B%F{white}◼%f%%b'
+  zstyle ':prezto:module:git' info \
+    'prompt'  ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
+    'rprompt' '%A%B%S%a%d%m%r%U%u'
+
+  # Define prompts.
+  PROMPT='%F{cyan}%m%f:%F{cyan}%~%f${git_info:+${(e)git_info[prompt]}} %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
+  RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
+  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+}
+
+prompt_sorinplus_setup "$@"
+
