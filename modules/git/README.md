@@ -185,20 +185,20 @@ Theming
 To display git repository information on the prompt, define the
 following style in the `prompt_theme_setup` function.
 
-  zstyle ':prezto:module:git' action ':%%B%F{yellow}%s%f%%b'
-  zstyle ':prezto:module:git' added ' %%B%F{green}✚%f%%b'
-  zstyle ':prezto:module:git' ahead ' %%B%F{yellow}⬆%f%%b'
-  zstyle ':prezto:module:git' behind ' %%B%F{yellow}⬇%f%%b'
-  zstyle ':prezto:module:git' branch ':%F{red}%b%f'
-  zstyle ':prezto:module:git' commit ':%F{green}%.7c%f'
-  zstyle ':prezto:module:git' deleted ' %%B%F{red}✖%f%%b'
-  zstyle ':prezto:module:git' modified ' %%B%F{blue}✱%f%%b'
-  zstyle ':prezto:module:git' position ':%F{green}%p%f'
-  zstyle ':prezto:module:git' renamed ' %%B%F{magenta}➜%f%%b'
-  zstyle ':prezto:module:git' stashed ' %%B%F{cyan}✭%f%%b'
-  zstyle ':prezto:module:git' unmerged ' %%B%F{yellow}═%f%%b'
-  zstyle ':prezto:module:git' untracked ' %%B%F{white}◼%f%%b'
-  zstyle ':prezto:module:git' info \
+  - zstyle ':prezto:module:git' action ':%%B%F{yellow}%s%f%%b'
+  - zstyle ':prezto:module:git' added ' %%B%F{green}✚%f%%b'
+  - zstyle ':prezto:module:git' ahead ' %%B%F{yellow}⬆%f%%b'
+  - zstyle ':prezto:module:git' behind ' %%B%F{yellow}⬇%f%%b'
+  - zstyle ':prezto:module:git' branch ':%F{red}%b%f'
+  - zstyle ':prezto:module:git' commit ':%F{green}%.7c%f'
+  - zstyle ':prezto:module:git' deleted ' %%B%F{red}✖%f%%b'
+  - zstyle ':prezto:module:git' modified ' %%B%F{blue}✱%f%%b'
+  - zstyle ':prezto:module:git' position ':%F{green}%p%f'
+  - zstyle ':prezto:module:git' renamed ' %%B%F{magenta}➜%f%%b'
+  - zstyle ':prezto:module:git' stashed ' %%B%F{cyan}✭%f%%b'
+  - zstyle ':prezto:module:git' unmerged ' %%B%F{yellow}═%f%%b'
+  - zstyle ':prezto:module:git' untracked ' %%B%F{white}◼%f%%b'
+  - zstyle ':prezto:module:git' info \
     'prompt'  ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
