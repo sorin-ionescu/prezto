@@ -205,7 +205,7 @@ following style in the `prompt_theme_setup` function.
 Authors
 -------
 
-\*The authors of this module should be contacted via the [issue tracker][2].\*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 [1]: http://git-scm.com/
