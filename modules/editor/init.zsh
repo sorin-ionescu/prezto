@@ -106,7 +106,8 @@ done
 # Functions
 #
 
-# Displays editor information.
+# Exposes information about the Zsh Line Editor via the $editor_info associative
+# array.
 function editor-info {
   # Clean up previous $editor_info.
   unset editor_info

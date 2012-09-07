@@ -1,5 +1,6 @@
 #
-# Displays Ruby information.
+# Exposes information about the Ruby environment via the $ruby_info associative
+# array.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

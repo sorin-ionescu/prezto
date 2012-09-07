@@ -1,5 +1,6 @@
 #
-# Displays Python information.
+# Exposes information about the Python environment via the $python_info
+# associative array.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

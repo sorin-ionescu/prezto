@@ -1,5 +1,5 @@
 #
-# Displays Git repository information.
+# Exposes Git repository information via the $git_info associative array.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
