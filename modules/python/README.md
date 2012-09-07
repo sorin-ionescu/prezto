@@ -61,17 +61,6 @@ system site-packages directory.
 
     export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 
-### Theming
-
-To display the name of the current virtual enviroment in a prompt, define the
-following style in the `prompt_theme_setup` function.
-
-    # %v - virtualenv name.
-    zstyle ':prezto:module:python' virtualenv 'virtualenv:%v'
-
-Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
-`python-info` in the `prompt_theme_preexec` hook function.
-
 Aliases
 -------
 
@@ -92,6 +81,18 @@ Functions
 
   - `python-info` exposes information about the Python environment via the
     `$python_info` associative array.
+
+Theming
+-------
+
+To display the name of the current virtual enviroment in a prompt, define the
+following style in the `prompt_theme_setup` function.
+
+    # %v - virtualenv name.
+    zstyle ':prezto:module:python' virtualenv 'virtualenv:%v'
+
+Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
+`python-info` in the `prompt_theme_preexec` hook function.
 
 Authors
 -------
