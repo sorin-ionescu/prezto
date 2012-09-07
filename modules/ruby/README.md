@@ -56,6 +56,24 @@ Aliases
   - `rbbp` packages gem files into *vendor/cache*.
   - `rbbu` updates gems to their latest version.
 
+Functions
+---------
+
+  - `ruby-info` exposes information about the Ruby environment via the
+    `$ruby_info` associative array.
+
+Theming
+-------
+
+To display the name of the current Ruby version in a prompt, define the
+following style in the `prompt_theme_setup` function.
+
+    # %v - ruby version.
+    zstyle ':prezto:module:ruby' version 'version:%v'
+
+Then add `$ruby_info[version]` to `$PROMPT` or `$RPROMPT` and call
+`ruby-info` in the `prompt_theme_preexec` hook function.
+
 Authors
 -------
 
