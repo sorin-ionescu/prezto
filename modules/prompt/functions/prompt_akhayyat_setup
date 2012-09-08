@@ -1,0 +1,105 @@
+#
+# A theme based on the steeef theme with hg-prompt and more
+# information in the prompt.
+#
+# Authors:
+#   Ahmad Khayyat <akhayyat@gmail.com>
+#
+# Screenshots:
+#   http://i.imgur.com/jmOES.png
+#
+# Dependencies:
+#   git
+#   mercurial
+#   hg-prompt (https://bitbucket.org/sjl/hg-prompt)
+#
+
+function prompt_akhayyat_precmd {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+
+    if (( $+functions[vcs_info] )); then
+        vcs_info 'prompt'
+    fi
+
+    if (( $+functions[python-info] )); then
+        python-info
+    fi
+}
+
+function prompt_akhayyat_setup {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+    prompt_opts=(cr percent subst)
+
+    # Load required functions.
+    autoload -Uz add-zsh-hook
+    autoload -Uz vcs_info
+
+    # Use extended color pallete if available.
+    if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+        orange="166"
+    else
+        orange="yellow"
+    fi
+
+    # Add hook for calling *-info before each command.
+    add-zsh-hook precmd prompt_akhayyat_precmd
+
+    # Set vcs_info parameters.
+    zstyle ':vcs_info:*' enable git
+    zstyle ':vcs_info:*:prompt:*' check-for-changes true
+    zstyle ':vcs_info:*:prompt:*' stagedstr "%F{green}●%f"
+    zstyle ':vcs_info:*:prompt:*' unstagedstr "%F{$orange}●%f"
+    zstyle ':vcs_info:*:prompt:*' formats " on ±%F{cyan}%r%f/%F{yellow}%b%f %c%u %m"
+    zstyle ':vcs_info:*:prompt:*' actionformats " on ±%F{cyan}%r%f/%F{yellow}%b%f in %a %c%u %m"
+    zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+    zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st
+
+    # Set python-info format
+    zstyle ':prezto:module:python' virtualenv '(%v)'
+
+    # Define prompts.
+    PROMPT="
+%F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'$(hg_prompt_info)${vcs_info_msg_0_}
+${python_info[virtualenv]}» '
+
+    RPROMPT="%B%F{black}%D{%Y.%m.%d %a  %I:%M %P}%f%b"
+}
+
+function hg_prompt_info {
+    hg prompt --angle-brackets "\
+ <on ☿<%F{cyan}<root|basename>%f/>%F{yellow}<branch>%f>\
+<:%F{$orange}<bookmark>%f>\
+ at %F{green}<rev>%f\
+<:%F{green}<tags>%f>\
+<%F{$orange}<status|modified>%f>\
+<%F{red}<status|unknown>%f>\
+<update>\
+< %F{yellow}↑%f<outgoing>>\
+< %F{$orange}↓$f<incoming>><
+patches: <patches|join( → )|pre_applied(%F{yellow})|post_applied(%f)|pre_unapplied(%B%F{black})|post_unapplied(%f%b)>>" 2>/dev/null
+}
+
+function +vi-git-untracked {
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        hook_com[unstaged]+="%F{red}●%f"
+    fi
+}
+
+function +vi-git-st() {
+    local ahead behind
+    local -a gitstatus
+
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "%F{yellow}↑%f" )
+
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && gitstatus+=( "%F{$orange}↓%f" )
+
+    hook_com[misc]+=${(j:/:)gitstatus}
+}
+
+
+prompt_akhayyat_setup "$@"
