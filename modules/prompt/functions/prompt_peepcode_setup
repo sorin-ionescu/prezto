@@ -25,6 +25,17 @@ function prompt_peepcode_precmd {
   fi
 }
 
+function prompt_peepcode_help {
+  cat <<'EOH'
+This theme's last command status symbol can be customized as follows:
+
+  prompt peepcode <symbol>
+
+If this option isn't provided the theme defaults to ☻ .
+
+EOH
+}
+
 function prompt_peepcode_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -36,6 +47,12 @@ function prompt_peepcode_setup {
 
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_peepcode_precmd
+
+  # Customizable parameters.
+  local command_exit_status='☻ '
+  if [[ -n "$1" ]]; then
+    command_exit_status="$1"
+  fi
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git
@@ -51,11 +68,23 @@ function prompt_peepcode_setup {
   zstyle ':prezto:module:ruby' version ' %F{white}%v%f'
 
   # Define prompts.
-  PROMPT='
+  PROMPT="
 %~
-%(?.%F{green}☻%f.%F{red}☻%f)  '
+%(?.%F{green}${command_exit_status}%f.%F{red}${command_exit_status}%f) "
 RPROMPT='${ruby_info[version]}${vcs_info_msg_0_}'
 
+}
+
+function prompt_peepcode_preview {
+  if (( ! $#* )); then
+    prompt_preview_theme peepcode
+    print
+    prompt_preview_theme peepcode "❯"
+    print
+    prompt_preview_theme peepcode "$"
+  else
+    prompt_preview_theme peepcode "$@"
+  fi
 }
 
 prompt_peepcode_setup "$@"
