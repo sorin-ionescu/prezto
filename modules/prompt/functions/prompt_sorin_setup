@@ -8,6 +8,9 @@
 #   http://i.imgur.com/4CeOj.png
 #
 
+# Load dependencies.
+pmodload 'helper'
+
 function prompt_sorin_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
