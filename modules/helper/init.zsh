@@ -10,7 +10,7 @@ function is-autoloadable {
   ( unfunction $1 ; autoload -U +X $1 ) &> /dev/null
 }
 
-# Checks a name if it is a command, function, or alias.
+# Checks if a name is a command, function, or alias.
 function is-callable {
   (( $+commands[$1] )) || (( $+functions[$1] )) || (( $+aliases[$1] ))
 }
