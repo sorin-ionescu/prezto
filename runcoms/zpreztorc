@@ -141,3 +141,22 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # Auto start a session when Zsh is launched in a SSH connection.
 # zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
+#
+# Update
+#
+
+# Auto update to the latest version.
+zstyle ':prezto:module:update' auto-update 'no'
+
+# Auto commit updated files without review.
+zstyle ':prezto:module:update' auto-commit 'no'
+
+# Set the update frequency in days.
+zstyle ':prezto:module:update' check-frequency '7'
+
+# Set the name of the update remote.
+zstyle ':prezto:module:update:remote' name 'origin'
+
+# Set the branch of the update remote.
+zstyle ':prezto:module:update:remote' branch 'master'
+

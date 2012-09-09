@@ -1,0 +1,54 @@
+#
+# Updates Prezto to the latest version.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+local remote_name
+local remote_branch
+local auto_commit
+local use_color
+
+zstyle -s ':prezto:module:update:remote' name 'remote_name'
+zstyle -s ':prezto:module:update:remote' branch 'remote_branch'
+zstyle -t ':prezto:module:update' auto-commit && auto_commit='yes'
+zstyle -t ':prezto:module:update:*' color && use_color='yes'
+
+if ! git \
+      --git-dir="$(cd "${ZDOTDIR:-$HOME}/.zprezto" && git-root)" \
+      --work-tree="${ZDOTDIR:-$HOME}/.zprezto" \
+      pull \
+      $(! is-true "$auto_commit" && print '--no-commit') \
+      --strategy=recursive \
+      -X ours \
+      "${remote_name:-origin}" \
+      "${remote_branch:-master}" 2> /dev/null
+then
+  is-true "$use_color" && printf "$FG[red]"
+  print 'There was an error updating. Try again later?'
+  is-true "$use_color" && printf "$FG[none]"
+  return 1
+fi
+
+is-true "$use_color" && printf "$FG[green]"
+printf '%s' \
+'________                  _____
+___  __ \___________________  /______
+__  /_/ /_  ___/  _ \__  /_  __/  __ \
+_  ____/_  /   /  __/_  /_/ /_ / /_/ /
+/_/     /_/    \___/_____/\__/ \____/
+'
+is-true "$use_color" && printf "$FG[cyan]"
+print
+print 'Prezto has been updated to the latest version.'
+print 'Follow me on GitHub at https://github.com/sorin-ionescu/prezto.'
+if ! is-true "$auto_commit"; then
+  is-true "$use_color" && printf "$FG[yellow]"
+  print
+  print 'Updates must be manually commited.'
+fi
+print
+is-true "$use_color" && printf "$FG[none]"
+return 0
+
