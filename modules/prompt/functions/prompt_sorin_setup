@@ -33,6 +33,7 @@ function prompt_sorin_setup {
 
   zstyle ':prezto:module:editor' completing '%B%F{red}...%f%b'
   zstyle ':prezto:module:editor:keymap:primary' overwrite ' %F{red}♺%f'
+  zstyle ':prezto:module:editor:keymap' primary ' %F{red}❯%f%B%F{red}❯%f%b%F{yellow}❯%f'
   zstyle ':prezto:module:editor:keymap' alternate ' %F{yellow}❮%f%B%F{red}❮%f%b%F{red}❮%f'
   zstyle ':prezto:module:git' action ':%%B%F{yellow}%s%f%%b'
   zstyle ':prezto:module:git' added ' %%B%F{green}✚%f%%b'
@@ -52,8 +53,8 @@ function prompt_sorin_setup {
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='%F{cyan}%1~%f${git_info:+${(e)git_info[prompt]}} %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
-  RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
+  PROMPT='%F{cyan}%1~%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
