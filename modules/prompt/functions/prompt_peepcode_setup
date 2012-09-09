@@ -42,9 +42,9 @@ function prompt_peepcode_setup {
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' get-revision true
   zstyle ':vcs_info:*' use-simple true
-  zstyle ':vcs_info:*' unstagedstr '%F{8}✗%f'
-  zstyle ':vcs_info:*' formats ' %F{8}%b%f %F{white}%.7i%f %u'
-  zstyle ':vcs_info:*' actionformats ' %F{8}%b%f %F{white}%.7i%f +%a %u'
+  zstyle ':vcs_info:*' unstagedstr ' %F{8}✗%f'
+  zstyle ':vcs_info:*' formats ' %F{8}%b%f %F{white}%.7i%f%u'
+  zstyle ':vcs_info:*' actionformats ' %F{8}%b%f %F{white}%.7i%f +%a%u'
   zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   # Set ruby-info parameters.
