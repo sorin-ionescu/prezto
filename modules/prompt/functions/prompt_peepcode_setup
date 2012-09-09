@@ -51,11 +51,37 @@ function prompt_peepcode_setup {
   zstyle ':prezto:module:ruby' version ' %F{white}%v%f'
 
   # Define prompts.
-  PROMPT='
+  PROMPT="
 %~
-%(?.%F{green}☻%f.%F{red}☻%f)  '
+%(?.%F{green}${1:-☻ }%f.%F{red}${1:-☻ }%f) "
 RPROMPT='${ruby_info[version]}${vcs_info_msg_0_}'
 
+}
+
+function prompt_peepcode_help {
+  cat <<EOH
+This prompt's last command exit status symbol is customizable:
+
+  prompt peepcode [<symbol>]
+
+If this option is not provided, the symbol defaults to ☻.
+EOH
+}
+
+function prompt_peepcode_preview {
+  local +h PROMPT='%# '
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  if (( $# > 0 )); then
+    prompt_preview_theme 'peepcode' "$@"
+  else
+    prompt_preview_theme 'peepcode'
+    print
+    prompt_preview_theme 'peepcode' "❯"
+    print
+    prompt_preview_theme 'peepcode' "$"
+  fi
 }
 
 prompt_peepcode_setup "$@"
