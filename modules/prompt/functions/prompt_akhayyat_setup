@@ -89,13 +89,14 @@ function +vi-git-untracked {
 }
 
 function +vi-git-st() {
-    local ahead behind
+    local ahead behind ahead_and_behind
     local -a gitstatus
 
-    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-    (( $ahead )) && gitstatus+=( "%F{yellow}↑%f" )
+    ahead_and_behind=$(git rev-list --count --left-right HEAD...@{upstream} 2>/dev/null)
+    ahead=$ahead_and_behind[(w)1]
+    behind=$ahead_and_behind[(w)2]
 
-    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "%F{yellow}↑%f" )
     (( $behind )) && gitstatus+=( "%F{$orange}↓%f" )
 
     hook_com[misc]+=${(j:/:)gitstatus}
