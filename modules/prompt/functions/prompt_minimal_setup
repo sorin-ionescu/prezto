@@ -44,6 +44,7 @@ function prompt_minimal_setup {
 
   # Define prompts.
   PROMPT='%2~${vcs_info_msg_0_} » '
+  RPROMPT=''
 }
 
 prompt_minimal_setup "$@"
