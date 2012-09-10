@@ -45,12 +45,12 @@ function prompt_nicoulaj_setup {
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
-  zstyle ':vcs_info:*:*' check-for-changes true
-  zstyle ':vcs_info:*:*' unstagedstr '!'
-  zstyle ':vcs_info:*:*' stagedstr '+'
-  zstyle ':vcs_info:*:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
-  zstyle ':vcs_info:*:*' formats "%S" "%r/%s/%b %u%c"
-  zstyle ':vcs_info:*:*' nvcsformats "%~" ""
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' unstagedstr '!'
+  zstyle ':vcs_info:*' stagedstr '+'
+  zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
+  zstyle ':vcs_info:*' formats "%S" "%r/%s/%b %u%c"
+  zstyle ':vcs_info:*' nvcsformats "%~" ""
 
   # Define prompts.
   PROMPT="%(?.${success_color}.${failure_color})${SSH_TTY:+[%n@%m]}%B%${max_path_chars}<...<"'${vcs_info_msg_0_%%.}'"%<<%(!.${root_char}.${user_char})%b%f "
