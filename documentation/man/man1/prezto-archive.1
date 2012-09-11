@@ -1,0 +1,55 @@
+.TH Archive
+.PP
+Provides functions to extract and list popular archive formats.
+.SH Functions
+.RS
+.IP \(bu 2
+\fB\fCextract\fR extracts the contents of one or more archives.
+.IP \(bu 2
+\fB\fCls-archive\fR lists the contents of one or more archives.
+.RE
+.SH Supported Formats
+.PP
+The following archive formats are supported when the required utilities are
+installed:
+.RS
+.IP \(bu 2
+\fI.tar.gz\fP, \fI.tgz\fP require \fB\fCtar\fR.
+.IP \(bu 2
+\fI.tar.bz2\fP, \fI.tbz\fP require \fB\fCtar\fR.
+.IP \(bu 2
+\fI.tar.xz\fP, \fI.txz\fP require \fB\fCtar\fR with \fIxz\fP support.
+.IP \(bu 2
+\fI.tar.zma\fP, \fI.tlz\fP require \fB\fCtar\fR with \fIlzma\fP support.
+.IP \(bu 2
+\fI.tar\fP requires \fB\fCtar\fR.
+.IP \(bu 2
+\fI.gz\fP requires \fB\fCgunzip\fR.
+.IP \(bu 2
+\fI.bz2\fP requires \fB\fCbunzip2\fR.
+.IP \(bu 2
+\fI.xz\fP requires \fB\fCunxz\fR.
+.IP \(bu 2
+\fI.lzma\fP requires \fB\fCunlzma\fR.
+.IP \(bu 2
+\fI.Z\fP requires \fB\fCuncompress\fR.
+.IP \(bu 2
+\fI.zip\fP requires \fB\fCunzip\fR.
+.IP \(bu 2
+\fI.rar\fP requires \fB\fCunrar\fR.
+.IP \(bu 2
+\fI.7z\fP requires \fB\fC7za\fR.
+.IP \(bu 2
+\fI.deb\fP requires \fB\fCar\fR, \fB\fCtar\fR.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

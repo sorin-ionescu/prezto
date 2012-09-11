@@ -1,0 +1,63 @@
+.TH Dpkg
+.PP
+Defines dpkg
+.UR http://wiki.debian.org/Teams/Dpkg
+.UE
+aliases and functions.
+.SH Aliases
+.RS
+.IP \(bu 2
+\fB\fCdebc\fR cleans the cache.
+.IP \(bu 2
+\fB\fCdebf\fR displays a file's packake.
+.IP \(bu 2
+\fB\fCdebi\fR installs packages from repositories.
+.IP \(bu 2
+\fB\fCdebI\fR installs packages from files.
+.IP \(bu 2
+\fB\fCdebq\fR displays package information.
+.IP \(bu 2
+\fB\fCdebu\fR updates the packages lists.
+.IP \(bu 2
+\fB\fCdebU\fR upgrades outdated packages.
+.IP \(bu 2
+\fB\fCdebx\fR removes packages.
+.IP \(bu 2
+\fB\fCdebX\fR removes packages, their configuration, and unneeded dependencies.
+.IP \(bu 2
+\fB\fCdebs\fR searches for packages.
+.IP \(bu 2
+\fB\fCdeb-build\fR creates a basic .deb package.
+.IP \(bu 2
+\fB\fCdeb-kclean\fR removes all kernel images and headers, except for the ones in
+use.
+.RE
+.SH Functions
+.RS
+.IP \(bu 2
+\fB\fCdeb-clone\fR generates a script that can be used to duplicate a dpkg\-based
+system.
+.IP \(bu 2
+\fB\fCdeb-history\fR displays dpkg history.
+.IP \(bu 2
+\fB\fCdeb-kbuild\fR makes a dpkg Linux kernel package.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Daniel Bolton
+.UR https://github.com/dbb
+.UE
+.IP \(bu 2
+Benjamin Boudreau
+.UR https://github.com/dreur
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

@@ -1,0 +1,53 @@
+.TH SSH\-Agent
+.PP
+Provides for an easier use of ssh\-agent
+.UR http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-agent&sektion=1
+.UE .
+.SH Settings
+.SS Agent Forwarding
+.PP
+To enable ssh\-agent forwarding, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:ssh-agent' forwarding 'yes'
+.fi
+.SS Identities
+.PP
+To load multiple identities, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
+.fi
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Robby Russell
+.UR https://github.com/robbyrussell
+.UE
+.IP \(bu 2
+Theodore Robert Campbell Jr
+.UR https://github.com/trcjr
+.UE
+.IP \(bu 2
+Joseph M. Reagle Jr.
+.UR https://github.com/reagle
+.UE
+.IP \(bu 2
+Florent Thoumie
+.UR https://github.com/flz
+.UE
+.IP \(bu 2
+Jonas Pfenniger
+.UR https://github.com/zimbatm
+.UE
+.IP \(bu 2
+Gareth Owen
+.UR https://github.com/gwjo
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

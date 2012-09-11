@@ -1,0 +1,62 @@
+.TH History
+.PP
+Sets history
+.UR http://zsh.sourceforge.net/Guide/zshguide02.html#l16
+.UE
+options and defines history aliases.
+.SH Variables
+.RS
+.IP \(bu 2
+\fB\fCHISTFILE\fR stores the path to the history file.
+.IP \(bu 2
+\fB\fCHISTSIZE\fR stores the maximum number of events to save in the internal history.
+.IP \(bu 2
+\fB\fCSAVEHIST\fR stores the maximum number of events to save in the history file.
+.RE
+.SH Options
+.RS
+.IP \(bu 2
+\fB\fCBANG_HIST\fR treats the \fB!\fP character specially during expansion.
+.IP \(bu 2
+\fB\fCEXTENDED_HISTORY\fR writes the history file in the \fI:start:elapsed;command\fP format.
+.IP \(bu 2
+\fB\fCINC_APPEND_HISTORY\fR writes to the history file immediately, not when the shell exits.
+.IP \(bu 2
+\fB\fCSHARE_HISTORY\fR shares history between all sessions.
+.IP \(bu 2
+\fB\fCHIST_EXPIRE_DUPS_FIRST\fR expires a duplicate event first when trimming history.
+.IP \(bu 2
+\fB\fCHIST_IGNORE_DUPS\fR does not record an event that was just recorded again.
+.IP \(bu 2
+\fB\fCHIST_IGNORE_ALL_DUPS\fR deletes an old recorded event if a new event is a duplicate.
+.IP \(bu 2
+\fB\fCHIST_FIND_NO_DUPS\fR does not display a previously found event.
+.IP \(bu 2
+\fB\fCHIST_IGNORE_SPACE\fR does not record an event starting with a space.
+.IP \(bu 2
+\fB\fCHIST_SAVE_NO_DUPS\fR does not write a duplicate event to the history file.
+.IP \(bu 2
+\fB\fCHIST_VERIFY\fR does not execute immediately upon history expansion.
+.IP \(bu 2
+\fB\fCHIST_BEEP\fR beeps when accessing non\-existent history.
+.RE
+.SH Aliases
+.RS
+.IP \(bu 2
+\fB\fChistory-stat\fR lists the ten most used commands
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Robby Russell
+.UR https://github.com/robbyrussell
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

@@ -1,0 +1,84 @@
+.TH Pacman
+.PP
+Provides aliases and functions for the Pacman
+.UR http://www.archlinux.org/pacman/
+.UE
+package manager and
+frontends.
+.SH Settings
+.PP
+To enable a Pacman frontend, for example, Yaourt
+.UR http://archlinux.fr/yaourt-en
+.UE , add the following line to
+\fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:pacman' frontend 'yaourt'
+.fi
+.PP
+If you have enabled color globally in \fIzpreztorc\fP, you may disable it for certain
+commands.
+.PP
+To disable \fB\fCyaourt\fR highlighting, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:pacman:yaourt' color 'no'
+.fi
+.SH Aliases
+.SS Pacman
+.RS
+.IP \(bu 2
+\fB\fCpac\fR is short for \fB\fCpacman\fR.
+.IP \(bu 2
+\fB\fCpaci\fR installs packages from repositories.
+.IP \(bu 2
+\fB\fCpacI\fR installs packages from files.
+.IP \(bu 2
+\fB\fCpacx\fR removes packages and unneeded dependencies.
+.IP \(bu 2
+\fB\fCpacX\fR removes packages, their configuration, and unneeded dependencies.
+.IP \(bu 2
+\fB\fCpacq\fR displays information about a package from the repositories.
+.IP \(bu 2
+\fB\fCpacQ\fR displays information about a package from the local database.
+.IP \(bu 2
+\fB\fCpacs\fR searches for packages in the repositories.
+.IP \(bu 2
+\fB\fCpacS\fR searches for packages in the local database.
+.IP \(bu 2
+\fB\fCpacu\fR synchronizes the local package and Arch Build System (requires \fB\fCabs\fR)
+databases against the repositories.
+.IP \(bu 2
+\fB\fCpacU\fR synchronizes the local package database against the repositories then
+upgrades outdated packages.
+.IP \(bu 2
+\fB\fCpacman-list-orphans\fR lists orphan packages.
+.IP \(bu 2
+\fB\fCpacman-remove-orphans\fR removes orphan packages.
+.RE
+.SS Frontends
+.SS Yaourt
+.RS
+.IP \(bu 2
+\fB\fCpacc\fR manages \fI.pac\\fP* files.
+.RE
+.SH Functions
+.RS
+.IP \(bu 2
+\fB\fCpacman-list-explicit\fR lists explicitly installed pacman packages.
+.IP \(bu 2
+\fB\fCpacman-list-disowned\fR lists pacman disowned files.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Benjamin Boudreau
+.UR https://github.com/dreur
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

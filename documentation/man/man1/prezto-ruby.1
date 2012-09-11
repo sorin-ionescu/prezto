@@ -1,0 +1,97 @@
+.TH Ruby
+.PP
+Configures Ruby
+.UR http://www.ruby-lang.org
+.UE
+local gem installation, loads version managers, and defines
+aliases.
+.SH Local Gem Installation
+.PP
+When a Ruby version manager is not detected, local gems are installed in
+\fI~/Library/Ruby/Gems/1.8\fP on Mac OS X.
+.SH RVM
+.PP
+An alternative to the above is to use The Ruby Version Manager (RVM)
+.UR https://rvm.io
+.UE , which
+allows for managing multiple, isolated Ruby installations and gem sets in the
+home directory.
+.PP
+Since RVM is loaded into the shell and is known to override shell commands, it
+may conflict with shell scripts.
+.SH rbenv
+.PP
+An alternative RVM is to use rbenv
+.UR https://github.com/sstephenson/rbenv
+.UE , which allows for switching between multiple,
+isolated Ruby installations in the home directory.
+.PP
+While it is not as feature rich as RVM, it is not loaded into the shell and is
+not known to cause conflicts with shell scripts.
+.SH Bundler
+.PP
+Manage gems that are not meant to be used as commands, such as application
+dependencies, with Bundler
+.UR http://gembundler.com
+.UE .
+.SH Aliases
+.SS General
+.RS
+.IP \(bu 2
+\fB\fCrb\fR is short for \fB\fCruby\fR.
+.RE
+.SS Bundler
+.RS
+.IP \(bu 2
+\fB\fCrbb\fR manages ruby dependencies (\fB\fCbundle\fR).
+.IP \(bu 2
+\fB\fCrbbe\fR executes a script in the context of the current bundle.
+.IP \(bu 2
+\fB\fCrbbi\fR installs the gems specified in the \fIGemfile\fP in \fIvendor/bundle\fP.
+.IP \(bu 2
+\fB\fCrbbI\fR installs the following:
+.RS
+.IP \(bu 2
+gems specified in the \fIGemfile\fP in \fIvendor/bundle\fP.
+.IP \(bu 2
+packages the gems into \fIvendor/cache\fP.
+.IP \(bu 2
+appends bundler directories to  \fI.gitignore\fP.
+.RE
+.IP \(bu 2
+\fB\fCrbbl\fR lists all gems in the current bundle.
+.IP \(bu 2
+\fB\fCrbbo\fR opens an installed gem in the editor.
+.IP \(bu 2
+\fB\fCrbbp\fR packages gem files into \fIvendor/cache\fP.
+.IP \(bu 2
+\fB\fCrbbu\fR updates gems to their latest version.
+.RE
+.SH Functions
+.RS
+.IP \(bu 2
+\fB\fCruby-info\fR exposes information about the Ruby environment via the
+\fB\fC$ruby_info\fR associative array.
+.RE
+.SH Theming
+.PP
+To display the name of the current Ruby version in a prompt, define the
+following style in the \fB\fCprompt_theme_setup\fR function.
+.nf
+# %v - ruby version.
+zstyle ':prezto:module:ruby' version 'version:%v'
+.fi
+.PP
+Then add \fB\fC$ruby_info[version]\fR to \fB\fC$PROMPT\fR or \fB\fC$RPROMPT\fR and call
+\fB\fCruby-info\fR in the \fB\fCprompt_theme_preexec\fR hook function.
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

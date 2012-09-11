@@ -1,0 +1,74 @@
+.TH Perl
+.PP
+Enables local Perl
+.UR http://www.perl.org
+.UE
+module installation on Mac OS X and defines alises.
+.SH Local Module Installation
+.PP
+Perl versions older than 5.14 do not support the local installation of Perl
+modules natively. This module allows for local installation of Perl modules on
+Mac OS X in \fI~/Library/Perl/5.12\fP by altering the environment.
+.SS Usage
+.PP
+For Perl versions older than 5.14, install \fIlocal::lib\fP.
+.nf
+curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
+tar xvf local-lib-1.008004.tar.gz
+cd local-lib-1.008004
+perl Makefile.PL --bootstrap=$HOME/Library/Perl/5.12
+make && make test && make install
+.fi
+.PP
+Install \fIcpanminus\fP:
+.nf
+curl -L http://cpanmin.us | perl - --self-upgrade
+.fi
+.SH Perlbrew
+.PP
+An alternative to the above is to use Perlbrew
+.UR http://perlbrew.pl
+.UE , which allows for the
+management of multiple, isolated Perl installations in the home directory.
+.SH Aliases
+.SS General
+.RS
+.IP \(bu 2
+\fB\fCpl\fR is short for \fB\fCperl\fR.
+.IP \(bu 2
+\fB\fCpld\fR looks up Perl documentation (\fB\fCperldoc\fR).
+.IP \(bu 2
+\fB\fCple\fR executes a one line program in a loop (\fB\fCperl -wlne\fR).
+.RE
+.SS Perlbrew
+.RS
+.IP \(bu 2
+\fB\fCplb\fR manages Perl environments.
+.IP \(bu 2
+\fB\fCplba\fR lists available Perl versions.
+.IP \(bu 2
+\fB\fCplbi\fR installs a Perl version.
+.IP \(bu 2
+\fB\fCplbl\fR lists installed Perl versions.
+.IP \(bu 2
+\fB\fCplbo\fR temporarily turns off Perlbrew.
+.IP \(bu 2
+\fB\fCplbO\fR turns off Perlbrew.
+.IP \(bu 2
+\fB\fCplbs\fR switches to a Perl version.
+.IP \(bu 2
+\fB\fCplbu\fR uninstalls a Perl version.
+.IP \(bu 2
+\fB\fCplbx\fR temporarily sets the Perl version to use.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

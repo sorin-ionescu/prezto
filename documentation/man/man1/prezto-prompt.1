@@ -1,0 +1,108 @@
+.TH Prompt
+.PP
+Loads prompt themes
+.UR http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
+.UE .
+.SH Settings
+.PP
+To select a prompt theme, add the following to \fIzpreztorc\fP, and replace \fBname\fP
+with the name of the theme you wish to load. Setting it to \fBrandom\fP will load
+a random theme.
+.nf
+zstyle ':prezto:module:prompt' theme 'name'
+.fi
+.SH Theming
+.PP
+A prompt theme is an autoloadable function file with a special name,
+\fB\fCprompt_name_setup\fR, placed anywhere in \fB\fC$fpath\fR, but for the purpose of this
+project, themes \fBshould\fP be placed in the \fImodules/prompt/functions\fP
+directory.
+.SS Theme Functions
+.PP
+There are three theme functions, a setup function, a help function, and
+a preview function. The setup function \fBmust\fP always be defined. The help
+function and the preview functions are optional.
+.SS prompt_name_setup
+.PP
+This function is called by the \fB\fCprompt\fR function to install the theme. This
+function may define other functions as necessary to maintain the prompt,
+including a function that displays help or a function used to preview it.
+.PP
+\fBDo not call this function directly.\fP
+.PP
+The most basic example of this function can be seen bellow.
+.nf
+function prompt_name_setup {
+  PROMPT='%m%# '
+  RPROMPT=''
+}
+.fi
+.SS prompt_name_help
+.PP
+If the \fB\fCprompt_name_setup\fR function is customizable via parameters, a help
+function \fBshould\fP be defined. The user will access it via \fB\fCprompt -h name\fR.
+.PP
+The most basic example of this function can be seen bellow.
+.nf
+function prompt_name_help {
+  cat <<EOH
+This prompt is color-scheme-able. You can invoke it thus:
+  prompt theme [<color1>] [<color2>]
+where the color is for the left-hand prompt.
+EOH
+}
+.fi
+.SS prompt_name_preview
+.PP
+If the \fB\fCprompt_name_setup\fR function is customizable via parameters, a preview
+function \fBshould\fP be defined. The user will access it via \fB\fCprompt -p name\fR.
+.PP
+The most basic example of this function can be seen bellow.
+.nf
+function prompt_name_preview {
+  if (( $# > 0 )); then
+    prompt_preview_theme theme "$@"
+  else
+    prompt_preview_theme theme red green blue
+    print
+    prompt_preview_theme theme yellow magenta black
+  fi
+}
+.fi
+.SS Hook Functions
+.PP
+There are many Zsh hook
+.UR http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions
+.UE
+functions, but mostly the \fIprecmd\fP hook will be
+used.
+.SS prompt_name_precmd
+.PP
+This hook is called before the prompt is displayed and is useful for getting
+information to display in a prompt.
+.PP
+When calling functions to get information to display in a prompt, do not assume
+that all the dependencies have been loaded. Always check for the availability of
+a function before you calling it.
+.PP
+\fBDo not register hook functions. They will be registered by the \fB\fCprompt\fR function.\fP
+.PP
+The most basic example of this function can be seen bellow.
+.nf
+function prompt_name_precmd {
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
+}
+.fi
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

@@ -1,0 +1,145 @@
+.TH Spectrum
+.PP
+Provides for easier use of 256 colors and effects.
+.PP
+To learn more about text formatting, read That 256 Color Thing
+.UR http://lucentbeing.com/blog/that-256-color-thing/
+.UE .
+.SH Variables
+.RS
+.IP \(bu 2
+\fB\fCBG\fR provides background colors.
+.IP \(bu 2
+\fB\fCFG\fR provides foreground colors.
+.IP \(bu 2
+\fB\fCFX\fR provides effects.
+.RE
+.SS Background and Foreground
+.PP
+Terminals support 8, 16, 88, and 256 colors. Check if a terminal supports 256
+colors with \fB\fCtput colors\fR before use.
+.PP
+The following colors are supported.
+.RS
+.IP \(bu 2
+0 to 255
+.IP \(bu 2
+black
+.IP \(bu 2
+red
+.IP \(bu 2
+green
+.IP \(bu 2
+yellow
+.IP \(bu 2
+blue
+.IP \(bu 2
+magenta
+.IP \(bu 2
+cyan
+.IP \(bu 2
+white
+.RE
+.SS Effects
+.PP
+Though there are many effects, most terminals support at least bold formatting.
+.PP
+\fBNot all effects work on all terminals; use them sparingly.\fP
+.TS
+allbox;
+cb cb
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+l l
+.
+Enable	Disable
+	none
+	normal
+bold	no\-bold
+faint	no\-faint
+standout	no\-standout
+underline	no\-underline
+blink	no\-blink
+fast\-blink	no\-fast\-blink
+reverse	no\-reverse
+conceal	no\-conceal
+strikethrough	no\-strikethrough
+gothic	no\-gothic
+double\-underline	no\-double\-underline
+proportional	no\-proportional
+overline	no\-overline
+	
+	no\-border
+border\-rectangle	no\-border\-rectangle
+border\-circle	no\-border\-circle
+	
+	no\-ideogram\-marking
+underline\-or\-right	no\-underline\-or\-right
+double\-underline\-or\-right	no\-double\-underline\-or\-right
+overline\-or\-left	no\-overline\-or\-left
+double\-overline\-or\-left	no\-double\-overline\-or\-left
+stress	no\-stress
+	
+	font\-default
+font\-first	no\-font\-first
+font\-second	no\-font\-second
+font\-third	no\-font\-third
+font\-fourth	no\-font\-fourth
+font\-fifth	no\-font\-fifth
+font\-sixth	no\-font\-sixth
+font\-seventh	no\-font\-seventh
+font\-eigth	no\-font\-eigth
+font\-ninth	no\-font\-ninth
+.TE
+.SS Plain Text
+.PP
+Use \fB\fC$BG[none]\fR, \fB\fC$FG[none]\fR, or \fB\fC$FX[none]\fR to turn off formatting.
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+P.C. Shyamshankar
+.UR https://github.com/sykora
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

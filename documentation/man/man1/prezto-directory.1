@@ -1,0 +1,49 @@
+.TH Directory
+.PP
+Sets directory options and defines directory aliases.
+.SH Options
+.RS
+.IP \(bu 2
+\fB\fCAUTO_CD\fR auto changes to a directory without typing \fB\fCcd\fR.
+.IP \(bu 2
+\fB\fCAUTO_PUSHD\fR pushes the old directory onto the stack on \fB\fCcd\fR.
+.IP \(bu 2
+\fB\fCPUSHD_IGNORE_DUPS\fR does not store duplicates in the stack.
+.IP \(bu 2
+\fB\fCPUSHD_SILENT\fR does not print the directory stack after \fB\fCpushd\fR or \fB\fCpopd\fR.
+.IP \(bu 2
+\fB\fCPUSHD_TO_HOME\fR pushes to the home directory when no argument is given.
+.IP \(bu 2
+\fB\fCCDABLE_VARS\fR changes directory to a path stored in a variable.
+.IP \(bu 2
+\fB\fCAUTO_NAME_DIRS\fR auto adds variable\-stored paths to \fB\fC~\fR list.
+.IP \(bu 2
+\fB\fCMULTIOS\fR writes to multiple descriptors.
+.IP \(bu 2
+\fB\fCEXTENDED_GLOB\fR uses extended globbing syntax.
+.IP \(bu 2
+\fB\fCCLOBBER\fR does not overwrite existing files with \fB\fC>\fR and \fB\fC>>\fR. Use \fB\fC>!\fR and
+\fB\fC>>!\fR to bypass.
+.RE
+.SH Aliases
+.RS
+.IP \(bu 2
+\fB\fCd\fR prints the contents of the directory stack.
+.IP \(bu 2
+\fB\fC1 ... 9\fR changes the directory to the \fBn\fP previous one.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+James Cox
+.UR https://github.com/imajes
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

@@ -1,0 +1,53 @@
+.TH Syntax Highlighting
+.PP
+Integrates zsh\-syntax\-highlighting
+.UR https://github.com/zsh-users/zsh-syntax-highlighting
+.UE
+into Prezto.
+.PP
+This module should be loaded \fIsecond to last\fP, where last is the \fIprompt\fP
+module, unless used in conjuncture with the \fIhistory\-substring\-search\fP module
+where it must be loaded \fBbefore\fP it.
+.SH Contributors
+.PP
+New features and bug fixes should be submitted to the
+zsh\-syntax\-highlighting
+.UR https://github.com/zsh-users/zsh-syntax-highlighting
+.UE
+project according to its rules and regulations.
+This module will be synchronized against it.
+.SH Settings
+.SS Highlighting
+.PP
+To enable highlighting for this module only, add the following line to
+\fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:syntax-highlighting' color 'yes'
+.fi
+.SS Highlighters
+.PP
+Syntax highlighting is accomplished by pluggable highlighters
+.UR https://github.com/zsh-users/zsh-syntax-highlighting/tree/master/highlighters
+.UE . This module
+enables the \fImain\fP, \fIbrackets\fP, and \fIcursor\fP highlighters by default.
+.PP
+To enable all highlighters, add the following to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'cursor' \
+  'root'
+.fi
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

@@ -1,0 +1,233 @@
+.TH Utility
+.PP
+Defines general aliases and functions.
+.SH Settings
+.SS Highlighting
+.PP
+If you have enabled color globally in \fIzpreztorc\fP, you may disable it for certain
+commands.
+.PP
+To disable \fB\fCls\fR color, add the following line to \fIzpreztorc\fP; when coloring is
+disabled, type indicators (*, /, =>, @, =, |, %) will be appended to entries.
+.nf
+zstyle ':prezto:module:utility:ls' color 'no'
+.fi
+.PP
+To disable \fB\fCdiff\fR highlighting, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:utility:diff' color 'no'
+.fi
+.PP
+To disable \fB\fCwdiff\fR highlighting, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:utility:wdiff' color 'no'
+.fi
+.PP
+To disable \fB\fCmake\fR highlighting, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:utility:make' color 'no'
+.fi
+.SH Aliases
+.SS Disabled Spelling Correction
+.RS
+.IP \(bu 2
+\fB\fCack\fR
+.IP \(bu 2
+\fB\fCcd\fR
+.IP \(bu 2
+\fB\fCcp\fR
+.IP \(bu 2
+\fB\fCebuild\fR
+.IP \(bu 2
+\fB\fCgcc\fR
+.IP \(bu 2
+\fB\fCgist\fR
+.IP \(bu 2
+\fB\fCgrep\fR
+.IP \(bu 2
+\fB\fCheroku\fR
+.IP \(bu 2
+\fB\fCln\fR
+.IP \(bu 2
+\fB\fCman\fR
+.IP \(bu 2
+\fB\fCmkdir\fR
+.IP \(bu 2
+\fB\fCmv\fR
+.IP \(bu 2
+\fB\fCmysql\fR
+.IP \(bu 2
+\fB\fCrm\fR
+.RE
+.SS Disabled File Globbing
+.RS
+.IP \(bu 2
+\fB\fCfc\fR
+.IP \(bu 2
+\fB\fCfind\fR
+.IP \(bu 2
+\fB\fCftp\fR
+.IP \(bu 2
+\fB\fChistory\fR
+.IP \(bu 2
+\fB\fClocate\fR
+.IP \(bu 2
+\fB\fCrake\fR
+.IP \(bu 2
+\fB\fCrsync\fR
+.IP \(bu 2
+\fB\fCscp\fR
+.IP \(bu 2
+\fB\fCsftp\fR
+.RE
+.SS General
+.RS
+.IP \(bu 2
+\fB\fC_\fR executes a command as another user (\fB\fCsudo\fR).
+.IP \(bu 2
+\fB\fCb\fR opens the default web browser.
+.IP \(bu 2
+\fB\fCcp\fR copies files and directories interactively.
+.IP \(bu 2
+\fB\fCe\fR opens the default editor.
+.IP \(bu 2
+\fB\fCln\fR links files and directories interactively.
+.IP \(bu 2
+\fB\fCmkdir\fR creates directories, including intermediary directories.
+.IP \(bu 2
+\fB\fCmv\fR moves files and directories interactively.
+.IP \(bu 2
+\fB\fCp\fR opens the default pager.
+.IP \(bu 2
+\fB\fCpo\fR removes a directory from the stack and changes to it (\fB\fCpopd\fR).
+.IP \(bu 2
+\fB\fCpu\fR changes the directory and pushes the old directory onto the stack
+(\fB\fCpushd\fR).
+.IP \(bu 2
+\fB\fCrm\fR removes files and directories interactively.
+.IP \(bu 2
+\fB\fCtype\fR displays all the attribute values of a shell parameter.
+.RE
+.SS Files and Directories
+.RS
+.IP \(bu 2
+\fB\fCls\fR lists with directories grouped first (GNU only).
+.IP \(bu 2
+\fB\fCl\fR  lists in one column, hidden files.
+.IP \(bu 2
+\fB\fCll\fR lists human readable sizes.
+.IP \(bu 2
+\fB\fClr\fR lists human readable sizes, recursively.
+.IP \(bu 2
+\fB\fCla\fR lists human readable sizes, hidden files.
+.IP \(bu 2
+\fB\fClm\fR lists human readable sizes, hidden files through pager.
+.IP \(bu 2
+\fB\fClx\fR lists sorted by extension (GNU only).
+.IP \(bu 2
+\fB\fClk\fR lists sorted by size, largest last.
+.IP \(bu 2
+\fB\fClt\fR lists sorted by date, most recent last.
+.IP \(bu 2
+\fB\fClc\fR lists sorted by date, most recent last, shows change time.
+.IP \(bu 2
+\fB\fClu\fR lists sorted by date, most recent last, shows access time.
+.IP \(bu 2
+\fB\fCsl\fR lists directory contents (\fB\fCls\fR).
+.RE
+.SS Mac OS X Everywhere
+.RS
+.IP \(bu 2
+\fB\fCo\fR opens files and directories (\fB\fCopen\fR or \fB\fCxdg-open\fR).
+.IP \(bu 2
+\fB\fCget\fR downloads files (\fB\fCcurl\fR or \fB\fCwget\fR).
+.IP \(bu 2
+\fB\fCpbcopy\fR copies to the pasteboard (\fB\fCpbcopy\fR, \fB\fCxclip\fR or \fB\fCxsel\fR).
+.IP \(bu 2
+\fB\fCpbpaste\fR pastes from the pasteboard (\fB\fCpbcopy\fR, \fB\fCxclip\fR or \fB\fCxsel\fR).
+.IP \(bu 2
+\fB\fCpbc\fR copies to the pasteboard (\fB\fCpbcopy\fR).
+.IP \(bu 2
+\fB\fCpbp\fR pastes from the pasteboard (\fB\fCpbpaste\fR).
+.RE
+.SS Resource Usage
+.RS
+.IP \(bu 2
+\fB\fCdf\fR displays free disk space using human readable units.
+.IP \(bu 2
+\fB\fCdu\fR displays disk usage using human readable units.
+.IP \(bu 2
+\fB\fCtop\fR displays information about processes (aliased to \fB\fChtop\fR, if installed).
+.IP \(bu 2
+\fB\fCtopc\fR displays information about processes sorted by CPU usage (\fB\fChtop\fR not
+installed).
+.IP \(bu 2
+\fB\fCtopm\fR displays information about processes sorted by RAM usage (\fB\fChtop\fR not
+installed).
+.RE
+.SS Miscellaneous
+.RS
+.IP \(bu 2
+\fB\fChttp-serve\fR serves a directory via HTTP.
+.RE
+.SH Functions
+.SS General
+.RS
+.IP \(bu 2
+\fB\fCslit\fR prints columns \fI1, 2, 3 ... n\fP.
+.RE
+.SS Files and Directories
+.RS
+.IP \(bu 2
+\fB\fCcdls\fR changes to a directory and lists its contents.
+.IP \(bu 2
+\fB\fCdut\fR displays the grand total disk usage using human readable units.
+.IP \(bu 2
+\fB\fCfind-exec\fR finds files and executes a command on them.
+.IP \(bu 2
+\fB\fCmkdcd\fR makes a directory and changes to it.
+.IP \(bu 2
+\fB\fCpopdls\fR pops an entry off the directory stack and lists its contents.
+.IP \(bu 2
+\fB\fCpushdls\fR pushes an entry onto the directory stack and lists its contents.
+.RE
+.SS Developer
+.RS
+.IP \(bu 2
+\fB\fCdiff\fR highlights diff output (requires \fB\fCcolordiff\fR or \fB\fCGit\fR).
+.IP \(bu 2
+\fB\fCmake\fR highlights make output (requires \fB\fCcolormake\fR).
+.IP \(bu 2
+\fB\fCwdiff\fR highlights wdiff output (requires \fB\fCwdiff\fRor \fB\fCGit\fR).
+.RE
+.SS Resource usage
+.RS
+.IP \(bu 2
+\fB\fCpsu\fR displays user owned processes status.
+.RE
+.SS Search and Replace
+.RS
+.IP \(bu 2
+\fB\fCprep\fR provides a grep\-like pattern search.
+.IP \(bu 2
+\fB\fCpsub\fR provides a sed\-like pattern substitution.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Robby Russell
+.UR https://github.com/robbyrussell
+.UE
+.IP \(bu 2
+Suraj N. Kurapati
+.UR https://github.com/sunaku
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

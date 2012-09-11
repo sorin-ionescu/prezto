@@ -1,0 +1,27 @@
+.TH Haskell
+.PP
+Enables local Haskell package installation.
+.SH Per\-user Package Installation
+.PP
+Cabal
+.UR http://www.haskell.org/cabal/
+.UE , the Haskell package manager, can install packages into per user
+directories.
+.PP
+This module prepends per user directories to the relevant path variables to
+enable the execution of user installed executables and the reading of
+documentation.
+.SS Usage
+.PP
+Install packages into per user directories with \fB\fCcabal install --user\fR.
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sebastian Wiesner
+.UR https://github.com/lunaryorn
+.UE
+.RE

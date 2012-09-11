@@ -1,0 +1,119 @@
+.TH Python
+.PP
+Enables local Python and local Python package installation.
+.SH Local Python Installation
+.PP
+pythonz
+.UR http://saghul.github.com/pythonz/
+.UE
+builds and installs multiple Python versions locally in the home
+directory.
+.PP
+This module prepends the pythonz directory to the path variable to enable the
+execution of \fB\fCpythonz\fR.
+.SS Usage
+.PP
+Install Python versions with \fB\fCpythonz install\fR into \fI~/.pythonz/pythons\fP.
+.SH Local Package Installation
+.PP
+Since version 2.6, Python supports per user package installation, as defined in
+PEP 370
+.UR http://www.python.org/dev/peps/pep-0370/
+.UE .
+.PP
+This module prepends per user site directories to the relevant path variables
+to enable the execution of user installed scripts and the reading of
+documentation.
+.SS Usage
+.PP
+Install packages into the per user site directory with \fB\fCeasy_install --user\fR or
+\fB\fCpip install --user\fR.
+.SH virtualenvwrapper
+.PP
+virtualenvwrapper
+.UR http://www.doughellmann.com/projects/virtualenvwrapper/
+.UE
+is a frontend to the popular virtualenv
+.UR http://pypi.python.org/pypi/virtualenv
+.UE
+utility.
+.PP
+virtualenv creates isolated Python environments and virtualenvwrapper provides
+convenient shell functions to create, switch, and manage them.
+.SS Usage
+.PP
+Install virtualenvwrapper.
+.PP
+Virtual environments are stored in \fI~/.virtualenvs\fP.
+.PP
+There are configuration variables that have to be set to enable certain features.
+If you wish to use these features, export the variables in \fI~/.zshenv\fP
+.PP
+The variable \fB\fC$PROJECT_HOME\fR tells virtualenvwrapper where to place project
+working directories. It must be set and the directory created before \fB\fCmkproject\fR
+is used. Replace \fIDeveloper\fP with your projects directory.
+.nf
+export PROJECT_HOME="$HOME/Developer"
+.fi
+.PP
+The variable \fB\fC$VIRTUALENVWRAPPER_VIRTUALENV_ARGS\fR tells virtualenvwrapper what
+arguments to pass to \fB\fCvirtualenv\fR. For example, set the value to
+\fI\-\-no\-site\-packages\fP to ensure that all new environments are isolated from the
+system site\-packages directory.
+.nf
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+.fi
+.SH Aliases
+.RS
+.IP \(bu 2
+\fB\fCpy\fR is short for \fB\fCpython\fR.
+.RE
+.SS Pythonz
+.RS
+.IP \(bu 2
+\fB\fCpyz\fR is short for \fB\fCpythonz\fR.
+.IP \(bu 2
+\fB\fCpyzc\fR removes stale source folders and archives.
+.IP \(bu 2
+\fB\fCpyzi\fR installs Python versions.
+.IP \(bu 2
+\fB\fCpyzl\fR lists installed Python versions.
+.IP \(bu 2
+\fB\fCpyzL\fR lists available Python versions.
+.IP \(bu 2
+\fB\fCpyzu\fR updates itself to the latest version.
+.IP \(bu 2
+\fB\fCpyzx\fR uninstalls Python versions.
+.RE
+.SH Functions
+.RS
+.IP \(bu 2
+\fB\fCpython-info\fR exposes information about the Python environment via the
+\fB\fC$python_info\fR associative array.
+.RE
+.SH Theming
+.PP
+To display the name of the current virtual enviroment in a prompt, define the
+following style in the \fB\fCprompt_theme_setup\fR function.
+.nf
+# %v - virtualenv name.
+zstyle ':prezto:module:python' virtualenv 'virtualenv:%v'
+.fi
+.PP
+Then add \fB\fC$python_info[virtualenv]\fR to \fB\fC$PROMPT\fR or \fB\fC$RPROMPT\fR and call
+\fB\fCpython-info\fR in the \fB\fCprompt_theme_preexec\fR hook function.
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.IP \(bu 2
+Sebastian Wiesner
+.UR https://github.com/lunaryorn
+.UE
+.RE

@@ -1,0 +1,55 @@
+.TH History Substring Search
+.PP
+Integrates zsh\-history\-substring\-search
+.UR https://github.com/zsh-users/zsh-history-substring-search
+.UE
+into Prezto, which implements
+the Fish shell
+.UR http://fishshell.com
+.UE 's history search feature, where the user can type in any
+part of a previously entered command and press up and down to cycle through
+matching commands.
+.PP
+If this module is used in conjuncture with the \fIsyntax\-highlighting\fP module, it
+must be loaded \fBafter\fP it.
+.SH Contributors
+.PP
+New features and bug fixes should be submitted to the
+zsh\-history\-substring\-search
+.UR https://github.com/zsh-users/zsh-history-substring-search
+.UE
+project according to its rules and
+regulations. This module will be synchronized against it.
+.SH Settings
+.SS Case Sensitivity
+.PP
+To enable case\-sensitivity for this module only, add the following line to
+\fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
+.fi
+.SS Highlighting
+.PP
+If colors are enabled, \fIhistory\-substring\-search\fP will automatically highlight
+positive results.
+.PP
+To enable highlighting for this module only, add the following line to
+\fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:history-substring-search' color 'yes'
+.fi
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Suraj N. Kurapati
+.UR https://github.com/sunaku
+.UE
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

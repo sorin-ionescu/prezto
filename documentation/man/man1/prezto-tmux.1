@@ -1,0 +1,61 @@
+.TH Tmux
+.PP
+Defines tmux
+.UR http://tmux.sourceforge.net
+.UE
+aliases and provides for auto launching it at start\-up.
+.SH Settings
+.SS Auto\-Start
+.PP
+Starts a tmux session automatically when Zsh is launched.
+.PP
+To enable this feature, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:tmux' auto-start 'yes'
+.fi
+.PP
+It will create a background session named \fI#Prezto\fP and attach every new shell
+to it.
+.PP
+To avoid keeping open sessions, this module sets \fB\fCdestroy-unattached off\fR on
+the background session and \fB\fCdestroy-unattached on\fR on every other session
+(global setting).
+.SH Aliases
+.RS
+.IP \(bu 2
+\fB\fCtmuxa\fR attaches or switches to a tmux session.
+.IP \(bu 2
+\fB\fCtmuxl\fR lists sessions managed by the tmux server.
+.RE
+.SH Caveats
+.PP
+On Mac OS X, launching tmux can cause the error \fBlaunch_msg(...): Socket is not
+connected\fP to be displayed, which can be fixed by installing
+reattach\-to\-user\-namespace
+.UR ChrisJohnsen/tmux-MacOSX-pasteboard
+.UE , available in Homebrew
+.UR mxcl/homebrew
+.UE , and adding the
+following to \fItmux.conf\fP:
+.PP
+   set\-option \-g default\-command "reattach\-to\-user\-namespace \-l $SHELL \-l"
+.PP
+Furthermore, tmux is known to cause \fBkernel panics\fP on Mac OS X. A discussion
+about this and Prezto has already been opened
+.UR http://git.io/jkPqHg
+.UE .
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.IP \(bu 2
+Colin Hebert
+.UR https://github.com/ColinHebert
+.UE
+.RE

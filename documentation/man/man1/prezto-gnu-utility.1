@@ -1,0 +1,31 @@
+.TH GNU Utility
+.PP
+Provides for the interactive use of GNU utilities on non\-GNU systems.
+.PP
+Installing GNU utilities on non\-GNU systems in \fB\fC$PATH\fR without a prefix, i.e.
+\fB\fCls\fR instead of \fB\fCgls\fR, is not recommended since scripts that target other
+utilities will be broken.
+.PP
+However, for interactive use, prefixed commands can be wrapped in their
+non\-prefixed counterparts.
+.PP
+This module must be loaded \fBbefore\fP the \fIutility\fP module.
+.SH Settings
+.SS Prefix
+.PP
+To use a different prefix, add the following to \fIzpreztorc\fP, and replace 'g' with
+the desired prefix:
+.nf
+zstyle ':prezto:module:gnu-utility' prefix 'g'
+.fi
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

@@ -1,0 +1,37 @@
+.TH GNU Screen
+.PP
+Defines GNU Screen
+.UR http://www.gnu.org/software/screen/
+.UE
+aliases and provides for auto launching it at start\-up.
+.SH Settings
+.SS Auto\-Start
+.PP
+Starts a GNU Screen session automatically when Zsh is launched.
+.PP
+To enable this feature, add the following line to \fIzpreztorc\fP:
+.nf
+zstyle ':prezto:module:screen' auto-start 'yes'
+.fi
+.SH Aliases
+.RS
+.IP \(bu 2
+\fB\fCscr\fR is short for \fB\fCscreen\fR.
+.IP \(bu 2
+\fB\fCscrl\fR lists sessions/socket directory.
+.IP \(bu 2
+\fB\fCscrn\fR starts a new session.
+.IP \(bu 2
+\fB\fCscrr\fR attaches to a session if one exists or start a new one.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

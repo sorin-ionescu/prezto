@@ -1,0 +1,29 @@
+.TH Helper
+.PP
+Provides helper functions for developing modules.
+.SH Functions
+.RS
+.IP \(bu 2
+\fB\fCadd-zsh-trap\fR adds a function name to a list to be called when a trap is
+triggered.
+.IP \(bu 2
+\fB\fCis-autoloadable\fR checks if a file can be autoloaded by trying to load it
+in a subshell.
+.IP \(bu 2
+\fB\fCis-callable\fR checks if a name is a command, function, or alias.
+.IP \(bu 2
+\fB\fCis-true\fR checks a boolean variable for "true".
+.IP \(bu 2
+\fB\fCcoalesce\fR prints the first non\-empty string in the arguments array.
+.RE
+.SH Authors
+.PP
+\fIThe authors of this module should be contacted via the issue tracker
+.UR https://github.com/sorin-ionescu/prezto/issues
+.UE .\fP
+.RS
+.IP \(bu 2
+Sorin Ionescu
+.UR https://github.com/sorin-ionescu
+.UE
+.RE

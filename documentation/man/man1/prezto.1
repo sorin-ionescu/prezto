@@ -1,0 +1,199 @@
+.TH Prezto — Instantly Awesome Zsh
+.PP
+Prezto is the configuration framework for Zsh
+.UR http://www.zsh.org
+.UE ; it enriches the command line
+interface environment with sane defaults, aliases, functions, auto completion,
+and prompt themes.
+.SH Installation
+.PP
+Prezto will work with any recent release of Zsh, but the minimum recommended
+version is 4.3.10.
+.nr step0 0 1
+.RS
+.IP \n+[step0]
+Launch Zsh:
+.nf
+zsh
+.fi
+.IP \n+[step0]
+Clone the repository:
+.nf
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+.fi
+.IP \n+[step0]
+Create a new Zsh configuration by copying the Zsh configuration files
+ provided:
+.nf
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+.fi
+.IP \n+[step0]
+Set Zsh as your default shell:
+.nf
+chsh -s /bin/zsh
+.fi
+.IP \n+[step0]
+Open a new Zsh terminal window or tab.
+.RE
+.SS Mac OS X
+.PP
+If you have administrator privileges, you must fix an Apple\-introduced problem
+in Mac OS X 10.5 Leopard by executing the following command, or BASH and Zsh
+will have the wrong \fB\fCPATH\fR when executed non\-interactively.
+.nf
+sudo chmod ugo-x /usr/libexec/path_helper
+.fi
+.PP
+\fB\fCpath_helper\fR is intended to make it easier for installers to add new paths to
+the environment without having to edit shell configuration files by adding
+a file with a path to the \fI/etc/paths.d\fP directory.
+.PP
+Unfortunately, \fB\fCpath_helper\fR always reads paths from \fI/etc/paths\fP set by Apple
+then paths from \fI/etc/paths.d\fP set by third party installers, and lastly paths
+from the \fB\fCPATH\fR environment variable set by the parent process, which
+ultimately is set by the user with \fB\fCexport PATH=...\fR Thus, it reorders path
+priorities, and user \fI/bin\fP directories meant to override system \fI/bin\fP
+directories end up at the tail of the array.
+.SS Troubleshooting
+.PP
+If you are not able to find certain commands after switching to \fIPrezto\fP,
+modify the \fB\fCPATH\fR variable in \fI~/.zshenv\fP then open a new Zsh terminal
+window or tab.
+.SH Usage
+.PP
+Prezto has many features disabled by default. Read the source code and
+accompanying README files to learn of what is available.
+.SS Modules
+.nr step1 0 1
+.RS
+.IP \n+[step1]
+Browse \fI/modules\fP to see what is available.
+.IP \n+[step1]
+Load the modules you need in \fI~/.zpreztorc\fP then open a new Zsh terminal
+ window or tab.
+.RE
+.SS Themes
+.nr step2 0 1
+.RS
+.IP \n+[step2]
+For a list of themes, type \fB\fCprompt -l\fR.
+.IP \n+[step2]
+To preview a theme, type \fB\fCprompt -p name\fR.
+.IP \n+[step2]
+Load the theme you like in \fI~/.zpreztorc\fP then open a new Zsh terminal
+ window or tab.
+.PP
+ [sorin theme]2
+.UR http://i.imgur.com/ij8Lv.png
+.UE
+.RE
+.SH Customization
+.PP
+The project is managed via Git
+.UR http://git-scm.com
+.UE . It is highly recommend that you commit
+your changes and push them to GitHub
+.UR https://github.com
+.UE
+to not lose them. If you do not know
+how to use Git, follow this tutorial
+.UR http://gitimmersion.com
+.UE
+and bookmark this reference
+.UR http://gitref.org
+.UE .
+.SH Resources
+.PP
+The Zsh Reference Card
+.UR http://www.bash2zsh.com/zsh_refcard/refcard.pdf
+.UE
+and the zsh\-lovers
+.UR http://grml.org/zsh/zsh-lovers.html
+.UE
+man page are indispensable.
+.SH Contribute
+.PP
+This project would not exist without all of its users and contributors
+.UR https://github.com/sorin-ionescu/prezto/contributors
+.UE .
+.PP
+If you have ideas on how to make the configuration easier to maintain or
+improve its performance, do not hesitate to fork and send pull requests.
+.SS Issue Reporting
+.RS
+.IP \(bu 2
+Check that the issue has not already been reported.
+.IP \(bu 2
+Check that the issue has not already been fixed in the latest code.
+.IP \(bu 2
+Open an issue with a clear title and description in grammatically correct,
+ complete sentences.
+.RE
+.SS Pull Request
+.RS
+.IP \(bu 2
+Read how to properly contribute to open source projects on GitHub
+.UR http://gun.io/blog/how-to-github-fork-branch-and-pull-request
+.UE .
+.IP \(bu 2
+Use a topic branch to easily amend a pull request later, if necessary.
+.IP \(bu 2
+Write good commit messages
+.UR http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+.UE .
+.IP \(bu 2
+Squash commits on the topic branch before opening a pull request.
+.IP \(bu 2
+Use the same coding style and spacing.
+.IP \(bu 2
+Open a pull request
+.UR https://help.github.com/articles/using-pull-requests
+.UE
+that relates to but one subject with a clear
+ title and description in grammatically correct, complete sentences.
+.RE
+.SS Modules
+.RS
+.IP \(bu 2
+A \fIREADME.md\fP must be present.
+.IP \(bu 2
+Large functions must be placed in a \fIfunctions\fP directory.
+.IP \(bu 2
+Functions that take arguments must have completion.
+.RE
+.SS Themes
+.RS
+.IP \(bu 2
+A screenshots section must be present in the file header.
+.IP \(bu 2
+The pull request description must have embedded
+ screenshots
+.UR http://daringfireball.net/projects/markdown/syntax#img
+.UE .
+.RE
+.SH License
+.PP
+(The MIT License)
+.PP
+Copyright (c) 2009\-2012 Robby Russell, Sorin Ionescu, and contributors.
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+.PP
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
