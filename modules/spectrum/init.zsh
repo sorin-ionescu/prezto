@@ -1,5 +1,5 @@
 #
-# Provides for easier formatting and use of 256 colors.
+# Provides for easier use of 256 colors and effects.
 #
 # Authors:
 #   P.C. Shyamshankar <sykora@lucentbeing.com>
