@@ -49,8 +49,7 @@ Authors
   - [Colin Hebert](https://github.com/ColinHebert)
 
 [1]: http://tmux.sourceforge.net
-[2]: http://git.io/jkPqHg
-[3]: ChrisJohnsen/tmux-MacOSX-pasteboard
-[4]: mxcl/homebrew
+[2]: https://github.com/sorin-ionescu/prezto/issues/62
+[3]: https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
+[4]: https://github.com/mxcl/homebrew
 [5]: https://github.com/sorin-ionescu/prezto/issues
-
