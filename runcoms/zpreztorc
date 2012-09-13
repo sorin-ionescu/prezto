@@ -5,20 +5,15 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' keymap 'emacs'
-
-# Auto convert .... to ../..
-zstyle ':prezto:module:editor' dot-expansion 'no'
+#
+# General
+#
 
 # Set case-sensitivity for completion, history lookup, etc.
 zstyle ':prezto:*:*' case-sensitive 'no'
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
-
-# Auto set the tab and window titles.
-zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
@@ -39,8 +34,87 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'prompt'
 
+#
+# Editor
+#
+
+# Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' keymap 'emacs'
+
+# Auto convert .... to ../..
+# zstyle ':prezto:module:editor' dot-expansion 'yes'
+
+#
+# Git
+#
+
+# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
+# zstyle ':prezto:module:git:ignore' submodule 'all'
+
+#
+# GNU Utility
+#
+
+# Set the command prefix on non-GNU systems.
+# zstyle ':prezto:module:gnu-utility' prefix 'g'
+
+#
+# Pacman
+#
+
+# Set the Pacman frontend.
+# zstyle ':prezto:module:pacman' frontend 'yaourt'
+
+#
+# Prompt
+#
+
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'sorin'
+
+#
+# Screen
+#
+
+# Auto start a session when Zsh is launched.
+# zstyle ':prezto:module:screen' auto-start 'yes'
+
+#
+# SSH-Agent
+#
+
+# Enable ssh-agent forwarding.
+# zstyle ':prezto:module:ssh-agent' forwarding 'yes'
+
+# Set ssh-agent identities to load.
+# zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
+
+#
+# Syntax Highlighting
+#
+
+# Set syntax highlighters.
+# By default main, brackets, and cursor are enabled.
+# zstyle ':prezto:module:syntax-highlighting' highlighters
+#   'main' \
+#   'brackets' \
+#   'pattern' \
+#   'cursor' \
+#   'root'
+
+#
+# Terminal
+#
+
+# Auto set the tab and window titles.
+zstyle ':prezto:module:terminal' auto-title 'yes'
+
+#
+# Tmux
+#
+
+# Auto start a session when Zsh is launched.
+# zstyle ':prezto:module:tmux' auto-start 'yes'
 
