@@ -14,6 +14,15 @@ To enable this feature, add the following line to *zpreztorc*:
 
     zstyle ':prezto:module:screen' auto-start 'yes'
 
+#### SSH and auto-start
+
+To avoid having screen sessions inside screen sessions, auto-start is disabled for
+SSH access.
+
+It is possible to re-enable auto-start for SSH sessions with
+
+    zstyle ':prezto:module:screen' remote 'yes'
+
 Aliases
 -------
 

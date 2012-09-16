@@ -15,7 +15,8 @@ fi
 # Auto Start
 #
 
-if [[ -z "$TMUX" ]] && zstyle -t ':prezto:module:tmux' auto-start; then
+if ( [[ -z "$SSH_CLIENT" ]] || zstyle -t ':prezto:module:tmux' remote ) &&
+    ( [[ -z "$TMUX" ]] && zstyle -t ':prezto:module:tmux' auto-start ); then
   tmux_session='#Prezto'
 
   if ! tmux has-session -t "$tmux_session" 2> /dev/null; then

@@ -21,6 +21,15 @@ To avoid keeping open sessions, this module sets `destroy-unattached off` on
 the background session and `destroy-unattached on` on every other session
 (global setting).
 
+#### SSH and auto-start
+
+To avoid having tmux sessions inside tmux sessions, auto-start is disabled for
+SSH access.
+
+It is possible to re-enable auto-start for SSH sessions with
+
+    zstyle ':prezto:module:tmux' remote 'yes'
+
 Aliases
 -------
 

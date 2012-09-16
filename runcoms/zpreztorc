@@ -81,6 +81,9 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # Auto start a session when Zsh is launched.
 # zstyle ':prezto:module:screen' auto-start 'yes'
 
+# Allow auto-start with an SSH connection
+# zstyle ':prezto:module:screen' remote 'yes'
+
 #
 # SSH-Agent
 #
@@ -118,3 +121,5 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # Auto start a session when Zsh is launched.
 # zstyle ':prezto:module:tmux' auto-start 'yes'
 
+# Allow auto-start with an SSH connection
+# zstyle ':prezto:module:tmux' remote 'yes'
