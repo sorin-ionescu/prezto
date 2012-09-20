@@ -16,6 +16,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
   manpath=($HOME/Library/Haskell/man(/N) $manpath)
 else
   path=($HOME/.cabal/bin(/N) $path)
-  manpath=($HOME/.cabal/man(/N) $path)
+  manpath=($HOME/.cabal/man(/N) $manpath)
 fi
 
