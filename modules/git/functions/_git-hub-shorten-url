@@ -1,8 +1,8 @@
-#compdef git-hub-short-url
+#compdef git-hub-shorten-url
 #autoload
 
 #
-# Completes git-hub-short-url.
+# Completes git-hub-shorten-url.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
