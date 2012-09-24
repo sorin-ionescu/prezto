@@ -9,12 +9,12 @@ local remote branches branch current_branch file url
 
 remote="${1:-origin}"
 url=$(
-  git config -l \
-    | grep "remote.${remote}.url" \
-    | sed -En "s/remote.${remote}.url=(git|https?)(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\4\/\5/p"
+  git config --local --get "remote.${remote}.url" \
+    | sed -En "s/(git|https?)(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\4\/\5/p"
 )
 branches=($(
-  git branch -r | sed -e "/${remote}\/HEAD -> ${remote}/d" -e "s/^[[:space:]]*${remote}\///g"
+  git ls-remote --heads "$remote" \
+    | awk '{gsub(/refs\/heads\//, "", $2)} ; {print $2}'
 ))
 current_branch="$(git-branch-current)"
 branch="${2:-master}"

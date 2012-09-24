@@ -18,19 +18,16 @@ _arguments -C -s -S \
 case "$state" in
   (remote)
     remotes=($(
-      git config -l \
-        | grep 'remote\.[^.]*\.url' \
-        | cut -d'.' -f2))
+      git config --local --get-regexp 'remote.*.url' \
+        | awk 'BEGIN {FS="."} ; {print $2}'
+    ))
     _describe -t branch 'remotes' remotes && ret=0
   ;;
   (branch)
     remote="$words[(($CURRENT - 1))]"
     branches=($(
-      git branch -r \
-        | grep "${remote}/" \
-        | sed \
-          -e "/${remote}\/HEAD -> ${remote}/d" \
-          -e "s/^[[:space:]]*${remote}\///g"
+      git ls-remote --heads "$remote" \
+        | awk '{gsub(/refs\/heads\//, "", $2)} ; {print $2}'
     ))
     _describe -t branch 'branches' branches && ret=0
   ;;
