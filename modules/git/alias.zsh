@@ -115,7 +115,7 @@ alias gRm='git remote rename'
 alias gRu='git remote update'
 alias gRc='git remote prune'
 alias gRs='git remote show'
-alias gRb='git-hub'
+alias gRb='git-hub-browse'
 
 # Stash (s)
 alias gs='git stash'
