@@ -1,0 +1,30 @@
+#
+# Moves a Git submodule.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+local src="$1"
+local dst="$2"
+local url
+
+if [[ "$PWD" != "$(git-root)" ]]; then
+  print "$0: must be run from the root of the working tree" >&2
+  return 1
+fi
+
+url="$(git config --file "$(git-root)/.gitmodules" --get "submodule.${src}.url")"
+
+if [[ -z "$url" ]]; then
+  print "$0: submodule not found: $src" >&2
+  return 1
+fi
+
+mkdir -p "${dst:h}"
+
+git-submodule-remove "$src"
+git submodule add "$url" "$dst"
+
+return 0
+

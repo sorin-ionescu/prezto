@@ -1,0 +1,27 @@
+#
+# Removes a Git submodule.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+if [[ "$PWD" != "$(git-root)" ]]; then
+  print "$0: must be run from the root of the working tree" >&2
+  return 1
+fi
+
+if ! git config --file .gitmodules --get "submodule.${1}.path" &>/dev/null; then
+  print "$0: submodule not found: $1" >&2
+  return 1
+fi
+
+git config --file "$(git-dir)/config" --remove-section "submodule.${1}" &>/dev/null
+git config --file "$(git-root)/.gitmodules" --remove-section "submodule.${1}" &>/dev/null
+git add .gitmodules
+
+git rm --cached -rf "${1}"
+rm -rf "${1}"
+rm -rf "$(git-dir)/modules/${1}"
+
+return 0
+
