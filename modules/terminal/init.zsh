@@ -48,7 +48,7 @@ function set-titles-with-command {
   fi
 
   emulate -L zsh
-  setopt LOCAL_OPTIONS EXTENDED_GLOB
+  setopt EXTENDED_GLOB
 
   # Get the command name that is under job control.
   if [[ "${1[(w)1]}" == (fg|%*)(\;|) ]]; then
