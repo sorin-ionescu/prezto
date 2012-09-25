@@ -12,9 +12,15 @@ if (( ! $+commands[gpg-agent] )); then
 fi
 
 _gpg_env="$HOME/.gnupg/gpg-agent.env"
+_gpg_ssh_enabled=
+zstyle -b ':prezto:module:gpg-agent' ssh-support '_gpg_ssh_enabled'
 
 function _gpg-agent-start {
-  gpg-agent --daemon --enable-ssh-support --write-env-file "${_gpg_env}" > /dev/null
+  _gpg_ssh_support=
+  if is-true "${_gpg_ssh_enabled}"; then
+    _gpg_ssh_support="--enable-ssh-support"
+  fi
+  gpg-agent --daemon ${_gpg_ssh_support} --write-env-file "${_gpg_env}" > /dev/null
   chmod 600 "${_gpg_env}"
   source "${_gpg_env}" > /dev/null
 }
