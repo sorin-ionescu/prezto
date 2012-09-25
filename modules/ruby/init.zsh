@@ -5,11 +5,6 @@
 # Authors: Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Return if requirements are not found.
-if (( ! $+commands[ruby] )); then
-  return 1
-fi
-
 # Load RVM into the shell session.
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   # Unset AUTO_NAME_DIRS since auto adding variable-stored paths to ~ list
@@ -34,6 +29,11 @@ else
     export GEM_HOME="$HOME/Library/Ruby/Gems/1.8"
     path=("$GEM_HOME/bin" $path)
   fi
+fi
+
+# Return if requirements are not found.
+if (( ! $+commands[ruby] && ! ( $+commands[rvm] || $+commands[rbenv] ) )); then
+  return 1
 fi
 
 #
