@@ -6,8 +6,13 @@
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
 #
 
+# Load pythonz into the shell session.
+if [[ -s $HOME/.pythonz/bin/pythonz ]]; then
+  path=($HOME/.pythonz/bin $path)
+fi
+
 # Return if requirements are not found.
-if (( ! $+commands[python] )); then
+if (( ! $+commands[python] && ! $+commands[pythonz] )); then
   return 1
 fi
 
@@ -31,11 +36,6 @@ if (( $+commands[virtualenvwrapper_lazy.sh] )); then
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
   source "$commands[virtualenvwrapper_lazy.sh]"
-fi
-
-# Load pythonz into the shell session.
-if [[ -s $HOME/.pythonz/bin/pythonz ]]; then
-  path=($HOME/.pythonz/bin $path)
 fi
 
 #
