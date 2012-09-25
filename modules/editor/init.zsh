@@ -95,9 +95,10 @@ key_info=(
 )
 
 # Do not bind any keys if there are empty values in $key_info.
-for key in "$key_info[@]"; do
-  if [[ -z "$key" ]]; then
+for key in "${(k)key_info[@]}"; do
+  if [[ -z "$key_info[$key]" ]]; then
     print "prezto: one or more keys are non-bindable" >&2
+    unset key{,_info}
     return 1
   fi
 done
