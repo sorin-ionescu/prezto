@@ -49,6 +49,14 @@ alias gfc='git clone'
 alias gfm='git pull'
 alias gfr='git pull --rebase'
 
+# Grep (g)
+alias gg='git grep'
+alias ggi='git grep --ignore-case'
+alias ggl='git grep --files-with-matches'
+alias ggL='git grep --files-without-matches'
+alias ggv='git grep --invert-match'
+alias ggw='git grep --word-regexp'
+
 # Index (i)
 alias gia='git add'
 alias giA='git add --patch'
@@ -154,5 +162,4 @@ alias gwc='git clean -n'
 alias gwC='git clean -f'
 alias gwx='git rm -r'
 alias gwX='git rm -rf'
-alias gwg='git grep'
 
