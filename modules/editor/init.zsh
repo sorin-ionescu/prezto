@@ -53,10 +53,6 @@ fi
 # Beep on error in line editor.
 setopt BEEP
 
-# Allow command line editing in an external editor.
-autoload -Uz edit-command-line
-zle -N edit-command-line
-
 #
 # Variables
 #
@@ -102,6 +98,14 @@ for key in "${(k)key_info[@]}"; do
     return 1
   fi
 done
+
+#
+# External Editor
+#
+
+# Allow command line editing in an external editor.
+autoload -Uz edit-command-line
+zle -N edit-command-line
 
 #
 # Functions
