@@ -129,6 +129,7 @@ alias gsp='git stash pop'
 alias gsr='git-stash-recover'
 alias gss='git stash save --include-untracked'
 alias gsS='git stash save --patch --no-keep-index'
+alias gsw='git stash save --include-untracked --keep-index'
 
 # Submodule (S)
 alias gS='git submodule'
