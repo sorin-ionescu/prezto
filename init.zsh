@@ -47,7 +47,7 @@ function pmodload {
 
   # Load Prezto modules.
   for pmodule in "$pmodules[@]"; do
-    if zstyle -t ":prezto:module:$pmodule" loaded; then
+    if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
       continue
     elif [[ ! -d "${ZDOTDIR:-$HOME}/.zprezto/modules/$pmodule" ]]; then
       print "$0: no such module: $pmodule" >&2
