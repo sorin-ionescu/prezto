@@ -16,6 +16,7 @@ function prompt_sorin_pwd {
 
   if [[ "$pwd" == (#m)[/~] ]]; then
     _prompt_sorin_pwd="$MATCH"
+    unset MATCH
   else
     _prompt_sorin_pwd="${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}/${pwd:t}"
   fi
