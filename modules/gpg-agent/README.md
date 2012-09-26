@@ -3,6 +3,15 @@ GPG-Agent
 
 Provides for an easier use of [gpg-agent][1].
 
+Settings
+--------
+
+### SSH Agent Forwarding
+
+To enable ssh-agent forwarding support, add the following line to *zpreztorc*:
+
+    zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
+
 Authors
 -------
 
