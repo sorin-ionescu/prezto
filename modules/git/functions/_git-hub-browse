@@ -8,7 +8,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-local state remotes remote branches_or_tags branches tags files ret=1
+local state expl remotes remote branches_or_tags branches tags files ret=1
 
 _arguments -C -s -S \
   '1::args:->remote' \
