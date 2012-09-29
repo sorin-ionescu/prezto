@@ -5,11 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-git fsck --unreachable 2> /dev/null
+git fsck --unreachable 2> /dev/null \
   | grep 'commit' \
   | awk '{print $3}' \
   | git log \
-      ${git_log_format_oneline}
+      ${git_log_format_oneline} \
       --extended-regexp \
       --grep="${1:-(WIP )?[Oo]n [^:]+:}" \
       --merges \
