@@ -3,6 +3,15 @@ GPG-Agent
 
 Provides for an easier use of [gpg-agent][1].
 
+Settings
+--------
+
+### SSH-Agent Protocol Emulation
+
+To enable SSH-Agent protocol emulation, add the following line to *zpreztorc*:
+
+    zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
+
 Authors
 -------
 
