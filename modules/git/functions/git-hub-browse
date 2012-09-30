@@ -8,10 +8,7 @@
 local remotes remote references reference file url
 
 remote="${1:-origin}"
-remotes=($(
-  git config --local --get-regexp 'remote.*.url' \
-    | awk 'BEGIN {FS="."} ; {print $2}'
-))
+remotes=($(git config --get-regexp 'remote.*.url' | cut -d. -f2))
 
 if (( $remotes[(i)$remote] == $#remotes + 1 )); then
   print "$0: remote not found: $remote" >&2
@@ -19,7 +16,7 @@ if (( $remotes[(i)$remote] == $#remotes + 1 )); then
 fi
 
 url=$(
-  git config --local --get "remote.${remote}.url" \
+  git config --get "remote.${remote}.url" \
     | sed -En "s/(git|https?)(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\4\/\5/p"
 )
 

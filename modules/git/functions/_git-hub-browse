@@ -17,17 +17,15 @@ _arguments -C -s -S \
 
 case "$state" in
   (remote)
-    remotes=($(
-      git config --local --get-regexp 'remote.*.url' \
-        | awk 'BEGIN {FS="."} ; {print $2}'
-    ))
+    remotes=($(git config --get-regexp 'remote.*.url' | cut -d. -f2))
+
     _describe -t branch 'remotes' remotes && ret=0
   ;;
   (branch-or-tag)
     remote="$words[(($CURRENT - 1))]"
 
     branches_or_tags=($(
-      git ls-remote --heads --tags "$remote" | awk '{print $2}'
+      git ls-remote --heads --tags "$remote" 2>/dev/null | cut -f2
     ))
 
     branches=(HEAD ${${(M)branches_or_tags[@]##refs/heads/?##}##refs/heads/})
