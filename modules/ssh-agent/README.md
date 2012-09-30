@@ -8,7 +8,7 @@ Settings
 
 ### Agent Forwarding
 
-To enable ssh-agent forwarding, add the following line to *zpreztorc*:
+To enable SSH-Agent forwarding, add the following line to *zpreztorc*:
 
     zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 
