@@ -5,6 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+  print "$0: not a repository work tree: $PWD" >&2
+  return 1
+fi
+
 local commit
 
 for commit in "$@"; do

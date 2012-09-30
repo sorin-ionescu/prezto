@@ -8,6 +8,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+  return 1
+fi
+
 local state expl remotes remote branches_or_tags branches tags files ret=1
 
 _arguments -C -s -S \
