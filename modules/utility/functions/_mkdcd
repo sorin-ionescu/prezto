@@ -8,7 +8,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-_wanted directories expl \
-  'parent directory (alternatively specify name of directory)' \
-  _path_files -/ || _message 'name of directory'
+local expl
+
+_wanted directories expl 'directory' _path_files -/ || _message 'directory'
 
