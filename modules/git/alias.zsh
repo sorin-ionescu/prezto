@@ -143,11 +143,11 @@ alias gS='git submodule'
 alias gSa='git submodule add'
 alias gSf='git submodule foreach'
 alias gSi='git submodule init'
+alias gSI='git submodule update --init --recursive'
 alias gSl='git submodule status'
 alias gSm='git-submodule-move'
 alias gSs='git submodule sync'
-alias gSu='git submodule update --init --recursive'
-alias gSU='git submodule foreach git pull origin master'
+alias gSu='git submodule foreach git pull origin master'
 alias gSx='git-submodule-remove'
 
 # Working Copy (w)
