@@ -1,0 +1,196 @@
+# vim:syn=zsh
+# A two line pluggable and themable theme (blue/white default).
+#
+# Author:
+# shura <shura1991@gmail.com>
+#
+# Features:
+#   - Two lines.
+#   - All the VCS informations (default).
+#   - Pluggable.
+#   - Themable.
+#
+# Settings (:prezto:module:prompt:theme:borra):
+#   - plugins:    list of plugins (array)
+#   - prefix:     right-side of plugin wrapper (string)
+#   - separator:  plugin separator (string)
+#   - suffix:     left-side of plugin wrapper (string)
+#   - top:        beginning of first line (string)
+#   - bottom:     beginning of second line (string)
+#   - prompt:     right-side of second line (string)
+#   - rprompt:    right prompt enable or disable (bool)
+#
+# Plugins settings (:prezto:module:prompt:theme:borra:plugin:$plugin):
+#   vcs:
+#     - enable: vcs enable backends (array)
+#     - format: vcs backends format (string):
+#                   - %b: backend name (to write a bold-end, escape it using %%b)
+#                   - %i: formatted text according to zstyle ':vcs_info:*' formats (or actionformats)
+#   userhost
+#     - format: username and hostname format (string):
+#                   - %u: username
+#                   - %h: hostname
+# Example:
+#   zstyle ':prezto:module:prompt:theme:borra' separator ' '
+#
+# Screenshots:
+#   http://i.imgur.com/rEgWv.png
+# ascii.io presentation:
+#   http://ascii.io/a/1310
+# borra prompt theme
+
+function prompt_borra_set_zstyle_if_not_set {
+  zstyle -T "$1" "$2" && zstyle "$@"
+}
+
+function prompt_borra_setup {
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+  prompt_opts=(cr percent subst)
+
+  add-zsh-hook precmd prompt_borra_precmd
+  vcs_info # need VCS_INFO_backends
+
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' plugins 'userhost' 'pts' 'rvm-info' 'vcs-info'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' prefix '%F{blue}(%f'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' separator '%F{blue}-%f'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' suffix '%F{blue}%)%f'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' top '%F{blue}╭-%f'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' bottom '%F{blue}╰─%f'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' prompt '%F{blue}(%f%B%$((COLUMNS / 2))<...<%~%<<%b%F{blue})%F{yellow}>%f '
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra' rprompt 'yes'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra:plugin:vcs' enable ${VCS_INFO_backends[@]}
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra:plugin:vcs' format '%b: %i'
+  prompt_borra_set_zstyle_if_not_set ':prezto:module:prompt:theme:borra:plugin:userhost' format '%u%F{blue}@%f%h'
+
+  zstyle ':vcs_info:*' check-for-changes 'true'
+  zstyle ':vcs_info:*' unstagedstr ' %F{yellow}⚑%f'
+  zstyle ':vcs_info:*' stagedstr ' %F{green}⚑%f'
+  zstyle ':vcs_info:*' actionformats '%b%u%c [%a]'
+  zstyle ':vcs_info:*' formats '%b%u%c'
+  zstyle ':vcs_info:*+set-message:*' hooks 'git-st'
+
+  prompt_borra_precmd
+}
+
+function prompt_borra_precmd {
+  local rprompt
+  PROMPT="$(prompt_borra_create_prompt)"
+  zstyle -b ':prezto:module:prompt:theme:borra' rprompt 'rprompt'
+  if [ "$rprompt" = yes ]; then
+    RPROMPT='%(?..%F{red}%? ↵%f)'
+  else
+    RPROMPT=''
+  fi
+}
+
+function prompt_borra_wrap_plugin {
+  local prefix
+  local suffix
+
+  zstyle -s ':prezto:module:prompt:theme:borra' prefix 'prefix'
+  zstyle -s ':prezto:module:prompt:theme:borra' suffix 'suffix'
+
+  print -n -- "$2$prefix$1$suffix"
+}
+
+function prompt_borra_render_item {
+  local res
+
+  res="$($1 "$2" 2>/dev/null)"
+  case "$?" in
+    0) prompt_borra_wrap_plugin "$res" "$2" ;;
+    23) print -n "$res" ;;
+    *) return 1 ;;
+  esac
+}
+
+function prompt_borra_render_plugins {
+  local res=""
+  local plugin
+  local plugins
+  local sep
+
+  zstyle -a ':prezto:module:prompt:theme:borra' plugins 'plugins'
+
+  for plugin in ${plugins[*]}
+  do
+    res+="$(prompt_borra_render_item "+borra-$plugin" "$sep")"
+    [ -z "$sep" -a ! -z "$res" ] && zstyle -s ':prezto:module:prompt:theme:borra' separator 'sep'
+  done
+
+  print -n "${res}"
+}
+
+function prompt_borra_create_prompt {
+  local plugins="$(prompt_borra_render_plugins)"
+  local res=""
+  local top
+  local bottom
+  local prompt
+
+  if [ ! -z "$plugins" ]
+  then
+    zstyle -s ':prezto:module:prompt:theme:borra' top 'top'
+    zstyle -s ':prezto:module:prompt:theme:borra' bottom 'bottom'
+    res="${top}${plugins}
+${bottom}"
+  fi
+  zstyle -s ':prezto:module:prompt:theme:borra' prompt 'prompt'
+  print -n "${res}${prompt}"
+}
+
+function +borra-userhost {
+  local fmt
+  local res
+  zstyle -s ':prezto:module:prompt:theme:borra:plugin:userhost' format 'fmt'
+  zformat -f res "$fmt" u:'%(!.%SROOT%s.%n)' h:'%m'
+  print -n "$res"
+}
+
+function +borra-pts {
+  print -n '/dev/%y'
+}
+
+function +borra-rvm-info {
+  (( $+functions[rvm] )) || return 1
+  local rb="$(rvm-prompt s)"
+  [ -z "${rb}" ] && echo "$(rvm-prompt i v p r)" || echo "${rb}"
+}
+
+function +vi-git-st {
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    hook_com[unstaged]=' %F{red}⚑%f'
+  fi
+}
+
+function +borra-vcs-info {
+  local res=""
+  local sep="$1"
+  local backend
+  local enabled
+  local fmt
+  local s
+
+  vcs_info # need VCS_INFO_backends
+  zstyle -a ':prezto:module:prompt:theme:borra:plugin:vcs' enable 'enabled'
+  zstyle -s ':prezto:module:prompt:theme:borra:plugin:vcs' format 'fmt'
+
+  for backend in ${VCS_INFO_backends[@]}; do
+    [ "${enabled[(I)$backend]}" = 0 ] && continue
+    zstyle ':vcs_info:*' enable "$backend"
+    vcs_info || continue
+    [ -z "${vcs_info_msg_0_}" ] && continue
+
+    zformat -f s "$fmt" b:"$backend" i:"$vcs_info_msg_0_"
+
+    res+="$(prompt_borra_wrap_plugin "$s" "$sep")"
+
+    [ -z "$sep" -a ! -z "$res" ] && zstyle -s ':prezto:module:prompt:theme:borra' separator 'sep'
+  done
+
+  print -n -- "$res"
+  return 23
+}
+
+prompt_borra_setup "$@"
