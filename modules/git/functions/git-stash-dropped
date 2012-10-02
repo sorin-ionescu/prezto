@@ -14,7 +14,7 @@ git fsck --unreachable 2> /dev/null \
   | grep 'commit' \
   | awk '{print $3}' \
   | git log \
-      ${git_log_format_oneline} \
+      --pretty=format:${_git_log_oneline_format} \
       --extended-regexp \
       --grep="${1:-(WIP )?[Oo]n [^:]+:}" \
       --merges \

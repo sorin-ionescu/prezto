@@ -17,5 +17,5 @@ git fsck 2> /dev/null \
       --date-order \
       --no-walk \
       --stdin \
-      ${git_log_format_oneline}
+      --pretty=format:${_git_log_oneline_format}
 
