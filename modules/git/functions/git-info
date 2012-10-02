@@ -192,7 +192,7 @@ function git-info {
   local dirty=0
   local dirty_format
   local dirty_formatted
-  local ignore_submodule
+  local ignore_submodules
   local -A info_formats
   local info_format
   local line_number=0
@@ -258,9 +258,9 @@ function git-info {
   ahead_and_behind_cmd='git rev-list --count --left-right HEAD...@{upstream}'
 
   # Ignore submodule status.
-  zstyle -s ':prezto:module:git:ignore' submodule 'ignore_submodule'
-  if [[ -n "$ignore_submodule" ]]; then
-    status_cmd+=" --ignore-submodules=${ignore_submodule}"
+  zstyle -s ':prezto:module:git:status:ignore' submodules 'ignore_submodules'
+  if [[ -n "$ignore_submodules" ]]; then
+    status_cmd+=" --ignore-submodules=${ignore_submodules}"
   fi
 
   # Format commit.
