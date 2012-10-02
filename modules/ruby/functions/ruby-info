@@ -22,7 +22,7 @@ fi
 
 # Format version.
 if [[ -n "$version" ]]; then
-  zstyle -s ':prezto:module:ruby' version 'version_format'
+  zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
   zformat -f version_formatted "$version_format" "v:$version"
   ruby_info[version]="$version_formatted"
 fi

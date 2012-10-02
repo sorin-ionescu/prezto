@@ -48,7 +48,7 @@ function prompt_peepcode_setup {
   zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   # Set ruby-info parameters.
-  zstyle ':prezto:module:ruby' version ' %F{white}%v%f'
+  zstyle ':prezto:module:ruby:info:version' format ' %F{white}%v%f'
 
   # Define prompts.
   PROMPT="
