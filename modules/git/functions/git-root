@@ -1,5 +1,5 @@
 #
-# Displays the Git repository root.
+# Displays the path to the working tree root.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

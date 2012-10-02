@@ -1,5 +1,5 @@
 #
-# Gets the path to the Git directory.
+# Displays the path to the Git directory.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
