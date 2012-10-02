@@ -18,27 +18,27 @@
 #   To indicate when the editor is in the primary keymap (emacs or viins), add
 #   the following to your theme prompt setup function.
 #
-#     zstyle ':prezto:module:editor:keymap' primary '>>>'
+#     zstyle ':prezto:module:editor:info:keymap:primary' format '>>>'
 #
 #   To indicate when the editor is in the primary keymap (emacs or viins) insert
 #   mode, add the following to your theme prompt setup function.
 #
-#     zstyle ':prezto:module:editor:keymap:primary' insert 'I'
+#     zstyle ':prezto:module:editor:info:keymap:primary:insert' format 'I'
 #
 #   To indicate when the editor is in the primary keymap (emacs or viins)
 #   overwrite mode, add the following to your theme prompt setup function.
 #
-#     zstyle ':prezto:module:editor:keymap:primary' overwrite 'O'
+#     zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format 'O'
 #
 #   To indicate when the editor is in the alternate keymap (vicmd), add the
 #   following to your theme prompt setup function.
 #
-#     zstyle ':prezto:module:editor:keymap' alternate '<<<'
+#     zstyle ':prezto:module:editor:info:keymap:alternate' format '<<<'
 #
 #   To indicate when the editor is completing, add the following to your theme
 #   prompt setup function.
 #
-#     zstyle ':prezto:module:editor' completing '...'
+#     zstyle ':prezto:module:editor:info:completing' format '...'
 #
 
 # Return if requirements are not found.
@@ -119,17 +119,17 @@ function editor-info {
   typeset -gA editor_info
 
   if [[ "$KEYMAP" == 'vicmd' ]]; then
-    zstyle -s ':prezto:module:editor:keymap' alternate 'REPLY'
+    zstyle -s ':prezto:module:editor:info:keymap:alternate' format 'REPLY'
     editor_info[keymap]="$REPLY"
   else
-    zstyle -s ':prezto:module:editor:keymap' primary 'REPLY'
+    zstyle -s ':prezto:module:editor:info:keymap:primary' format 'REPLY'
     editor_info[keymap]="$REPLY"
 
     if [[ "$ZLE_STATE" == *overwrite* ]]; then
-      zstyle -s ':prezto:module:editor:keymap:primary' overwrite 'REPLY'
+      zstyle -s ':prezto:module:editor:info:keymap:primary:overwrite' format 'REPLY'
       editor_info[overwrite]="$REPLY"
     else
-      zstyle -s ':prezto:module:editor:keymap:primary' insert 'REPLY'
+      zstyle -s ':prezto:module:editor:info:keymap:primary:insert' format 'REPLY'
       editor_info[overwrite]="$REPLY"
     fi
   fi
@@ -191,7 +191,7 @@ zle -N expand-dot-to-parent-directory-path
 # Displays an indicator when completing.
 function expand-or-complete-with-indicator {
   local indicator
-  zstyle -s ':prezto:module:editor' completing 'indicator'
+  zstyle -s ':prezto:module:editor:info:completing' format 'indicator'
   print -Pn "$indicator"
   zle expand-or-complete
   zle redisplay
