@@ -10,6 +10,14 @@
 function _git-action {
   local action_dir
   local git_dir="$(git-dir)"
+  local apply_formatted
+  local bisect_formatted
+  local cherry_pick_formatted
+  local cherry_pick_sequence_formatted
+  local merge_formatted
+  local rebase_formatted
+  local rebase_interactive_formatted
+  local rebase_merge_formatted
 
   for action_dir in \
     "${git_dir}/rebase-apply" \
@@ -17,12 +25,15 @@ function _git-action {
     "${git_dir}/../.dotest"
   do
     if [[ -d "$action_dir" ]] ; then
+      zstyle -s ':prezto:module:git:info:action:apply' format 'apply_formatted' || apply_formatted='apply'
+      zstyle -s ':prezto:module:git:info:action:rebase' format 'rebase_formatted' || rebase_formatted='rebase'
+
       if [[ -f "${action_dir}/rebasing" ]] ; then
-        print 'rebase'
+        print "$rebase_formatted"
       elif [[ -f "${action_dir}/applying" ]] ; then
-        print 'am'
+        print "$apply_formatted"
       else
-        print 'am/rebase'
+        print "${rebase_formatted}/${apply_formatted}"
       fi
 
       return 0
@@ -34,7 +45,8 @@ function _git-action {
     "${git_dir}/.dotest-merge/interactive"
   do
     if [[ -f "$action_dir" ]]; then
-      print 'rebase-i'
+      zstyle -s ':prezto:module:git:info:action:rebase-interactive' format 'rebase_interactive_formatted' || rebase_interactive_formatted='rebase-interactive'
+      print "$rebase_interactive_formatted"
       return 0
     fi
   done
@@ -44,28 +56,33 @@ function _git-action {
     "${git_dir}/.dotest-merge"
   do
     if [[ -d "$action_dir" ]]; then
-      print 'rebase-m'
+      zstyle -s ':prezto:module:git:info:action:rebase-merge' format 'rebase_merge_formatted' || rebase_merge_formatted='rebase-merge'
+      print "$rebase_merge_formatted"
       return 0
     fi
   done
 
   if [[ -f "${git_dir}/MERGE_HEAD" ]]; then
-    print 'merge'
+    zstyle -s ':prezto:module:git:info:action:merge' format 'merge_formatted' || merge_formatted='merge'
+    print "$merge_formatted"
     return 0
   fi
 
   if [[ -f "${git_dir}/CHERRY_PICK_HEAD" ]]; then
     if [[ -d "${git_dir}/sequencer" ]] ; then
-      print 'cherry-seq'
+      zstyle -s ':prezto:module:git:info:action:cherry-pick-sequence' format 'cherry_pick_sequence_formatted' || cherry_pick_sequence_formatted='cherry-pick-sequence'
+      print "$cherry_pick_sequence_formatted"
     else
-      print 'cherry'
+      zstyle -s ':prezto:module:git:info:action:cherry-pick' format 'cherry_pick_formatted' || cherry_pick_formatted='cherry-pick'
+      print "$cherry_pick_formatted"
     fi
 
     return 0
   fi
 
   if [[ -f "${git_dir}/BISECT_LOG" ]]; then
-    print 'bisect'
+    zstyle -s ':prezto:module:git:info:action:bisect' format 'bisect_formatted' || bisect_formatted='bisect'
+    print "$bisect_formatted"
     return 0
   fi
 

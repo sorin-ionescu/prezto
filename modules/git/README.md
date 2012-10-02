@@ -241,9 +241,12 @@ Theming
 -------
 
 To display information about the current repository in a prompt, define the
-following styles in the `prompt_name_setup` function.
+following styles in the `prompt_name_setup` function, where the syntax for
+setting a style is as follows.
 
-| Name      | Format Code | Content
+    zstyle ':prezto:module:git:info:context:subcontext' format 'string'
+
+| Name      | Format Code | Description
 | --------- | :---------: | ---------------------------------------------------
 | action    |     %s      | Special action name
 | added     |     %a      | Added files count
@@ -261,6 +264,19 @@ following styles in the `prompt_name_setup` function.
 | stashed   |     %S      | Stashed states count
 | unmerged  |     %U      | Unmerged files count
 | untracked |     %u      | Untracked files count
+[**Main Contexts**]
+
+| Name                 |   Format    | Description
+| -------------------- | :---------: | -----------------------------------------
+| apply                |    value    | Applying patches
+| bisect               |    value    | Binary searching for changes
+| cherry-pick          |    value    | Cherry picking
+| cherry-pick-sequence |    value    | Cherry picking sequence
+| merge                |    value    | Merging
+| rebase               |    value    | Rebasing
+| rebase-interactive   |    value    | Rebasing interactively
+| rebase-merge         |    value    | Rebasing merge
+[**Special Action Contexts**]
 
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.
