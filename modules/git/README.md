@@ -10,12 +10,11 @@ Settings
 
 ### Log
 
-The format of the [git-log][8] output is configurable via the following styles,
-which will be passed to the `--prety=format:` switch.
+The format of the [git-log][8] output is configurable via the following style,
+where context is *brief*, *oneline*, and *medium*, which will be passed to the
+`--prety=format:` switch.
 
-    zstyle ':prezto:module:git:log:brief' format ''
-    zstyle ':prezto:module:git:log:oneline' format ''
-    zstyle ':prezto:module:git:log:medium' format ''
+    zstyle ':prezto:module:git:log:context' format ''
 
 ### Status
 
