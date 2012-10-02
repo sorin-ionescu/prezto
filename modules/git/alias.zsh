@@ -81,14 +81,14 @@ alias giR='git reset --keep'
 alias gix='git rm -r --cached'
 alias giX='git rm -rf --cached'
 
-# Konflict (k)
-alias gkl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
-alias gka='git add $(gkl)'
-alias gke='git mergetool $(gkl)'
-alias gko='git checkout --ours --'
-alias gkO='gko $(gkl)'
-alias gkt='git checkout --theirs --'
-alias gkT='gkt $(gkl)'
+# Conflict (C)
+alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gCa='git add $(gCl)'
+alias gCe='git mergetool $(gCl)'
+alias gCo='git checkout --ours --'
+alias gCO='gCo $(gCl)'
+alias gCt='git checkout --theirs --'
+alias gCT='gCt $(gCl)'
 
 # Log (l)
 git_log_format_medium='--pretty=format:%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
