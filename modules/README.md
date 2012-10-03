@@ -36,6 +36,11 @@ Environment
 
 Sets general shell options and defines environment variables.
 
+Fasd
+----
+
+Maintains a frequently used file and directory list for fast access.
+
 GNU Utility
 -----------
 
@@ -161,10 +166,4 @@ Yum
 ---
 
 Defines yum aliases.
-
-Z
--
-
-Integrates z into Prezto, which maintains a frequently used directory list for
-fast directory changes.
 
