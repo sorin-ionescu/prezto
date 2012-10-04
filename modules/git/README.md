@@ -246,6 +246,8 @@ setting a style is as follows.
 
     zstyle ':prezto:module:git:info:context:subcontext' format 'string'
 
+### Main Contexts
+
 | Name      | Format Code | Description
 | --------- | :---------: | ---------------------------------------------------
 | action    |     %s      | Special action name
@@ -264,7 +266,8 @@ setting a style is as follows.
 | stashed   |     %S      | Stashed states count
 | unmerged  |     %U      | Unmerged files count
 | untracked |     %u      | Untracked files count
-[**Main Contexts**]
+
+### Special Action Contexts
 
 | Name                 |   Format    | Description
 | -------------------- | :---------: | -----------------------------------------
@@ -276,7 +279,6 @@ setting a style is as follows.
 | rebase               |    value    | Rebasing
 | rebase-interactive   |    value    | Rebasing interactively
 | rebase-merge         |    value    | Rebasing merge
-[**Special Action Contexts**]
 
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.
