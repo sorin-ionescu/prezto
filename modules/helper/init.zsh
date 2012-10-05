@@ -30,3 +30,7 @@ function coalesce {
   return 1
 }
 
+# Defines a style if it is already not defined.
+function zstyle- {
+  zstyle -T "$1" "$2" && zstyle "$@"
+}
