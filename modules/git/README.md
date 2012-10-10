@@ -28,6 +28,11 @@ This setting affects all aliases and functions that call `git-status`.
 Aliases
 -------
 
+By default several short aliases are set up for quick access to often needed commands.
+If you do not want this use:
+
+    zstyle ':prezto:module:git' aliases 'no'
+
 ### Git
 
   - `g` is short for `git`.

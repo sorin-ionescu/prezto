@@ -14,5 +14,7 @@ fi
 pmodload 'helper'
 
 # Source module files.
-source "${0:h}/alias.zsh"
+if zstyle -T ':prezto:module:git' aliases; then
+  source "${0:h}/alias.zsh"
+fi
 
