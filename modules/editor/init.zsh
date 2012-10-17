@@ -146,16 +146,18 @@ zle -N editor-info
 function zle-keymap-select zle-line-init zle-line-finish {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
-  case "$0" in
-    (zle-line-init)
-      # Enable terminal application mode.
-      echoti smkx
-    ;;
-    (zle-line-finish)
-      # Disable terminal application mode.
-      echoti rmkx
-    ;;
-  esac
+  if (( $+terminfo[smkx] && $+terminfo[rmkx] )); then
+    case "$0" in
+      (zle-line-init)
+        # Enable terminal application mode.
+        echoti smkx
+      ;;
+      (zle-line-finish)
+        # Disable terminal application mode.
+        echoti rmkx
+      ;;
+    esac
+  fi
 
   # Update editor information.
   zle editor-info
