@@ -41,12 +41,6 @@ function set-terminal-tab-title {
 
 # Sets the tab and window titles with a given command.
 function set-titles-with-command {
-  # Do not set the window and tab titles in Terminal.app because they are not
-  # reset upon command termination.
-  if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
-    return 1
-  fi
-
   emulate -L zsh
   setopt EXTENDED_GLOB
 
