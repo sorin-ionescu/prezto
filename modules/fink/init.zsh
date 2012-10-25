@@ -1,5 +1,5 @@
 #
-# Defines Fnik aliases and adds Fink directories to path variables.
+# Defines Fink aliases and adds Fink directories to path variables.
 #
 # Authors:
 # 	Jeff Cox  
