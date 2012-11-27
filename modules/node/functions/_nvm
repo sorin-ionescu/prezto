@@ -1,0 +1,85 @@
+#compdef nvm
+# ------------------------------------------------------------------------------
+# Description
+# -----------
+#
+#  Completion script for nvm (https://github.com/creationix/nvm).
+#
+# ------------------------------------------------------------------------------
+# Authors
+# -------
+#
+#  * Changwoo Park (https://github.com/pismute)
+#
+# ------------------------------------------------------------------------------
+
+local curcontext="$curcontext" state line  ret=1
+
+local -a _1st_arguments
+_1st_arguments=(
+  'help:Show this message'
+  'install:Download and install a <version>'
+  'uninstall:Uninstall a <version>'
+  'use:Modify PATH to use <version>'
+  'run:Run <version> with <args> as arguments'
+  'ls:List installed [versions]'
+  'ls-remote:List remote versions available for install'
+  'deactivate:Undo effects of NVM on current shell'
+  'alias:Set an alias named <name> pointing to <version>. Show all aliases beginning with [<pattern>].'
+  'unalias:Deletes the alias named <name>'
+  'copy-packages:Install global NPM packages contained in <version> to current version'
+  'clear-cache:Clear cache'
+  'version:Show current node version'
+)
+
+_arguments -C \
+  '1: :->cmds' \
+  '*: :->args' && ret=0
+
+__nvm_aliases(){
+  local aliases
+  aliases=""
+  if [ -d $NVM_DIR/alias ]; then
+    aliases="`cd $NVM_DIR/alias && ls`"
+  fi
+  echo "${aliases}"
+}
+
+__nvm_versions(){
+  echo "$(nvm_ls) $(__nvm_aliases)"
+}
+
+case $state in
+  cmds)
+    _describe -t commands 'nvm command' _1st_arguments && ret=0
+    ;;
+
+  args)
+    case $words[2] in
+      (use|run|ls|list|install|uninstall|copy-packages)
+
+        _values 'version' $(__nvm_versions) && ret=0
+        ;;
+
+      (alias|unalias)
+
+        _values 'aliases' $(__nvm_aliases) && ret=0
+        ;;
+
+      *)
+        (( ret )) && _message 'no more arguments'
+        ;;
+
+    esac
+    ;;
+esac
+
+return ret
+
+# Local Variables:
+# mode: Shell-Script
+# sh-indentation: 2
+# indent-tabs-mode: nil
+# sh-basic-offset: 2
+# End:
+# vim: ft=zsh sw=2 ts=2 et
