@@ -5,6 +5,19 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# make defualt NVM_DIR to ~/.nvm
+if [[ $NVM_DIR = "" ]]; then
+  export NVM_DIR=~/.nvm
+fi
+
+# load nvm
+source "${0:h}/nvm/nvm.sh"
+
+# nvm use default if nvm has default 
+if [ "$(nvm alias default)" != "" ]; then
+  nvm use default
+fi
+
 # Return if requirements are not found.
 if (( ! $+commands[node] )); then
   return 1
