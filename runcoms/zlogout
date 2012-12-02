@@ -3,12 +3,13 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+#   John McDonnell <john.v.mcdonnell@gmail.com>
 
-# Print the message.
-cat <<-EOF
-
-Thank you. Come again!
-  -- Dr. Apu Nahasapeemapetilon
-EOF
+if [ -f ~/.signoffs ];
+then
+    SIGNOFF=`shuf -n 1 ~/.signoffs`
+else
+    SIGNOFF='Till next time!'
+fi
+cowsay -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) $SIGNOFF || echo $SIGNOFF
 
