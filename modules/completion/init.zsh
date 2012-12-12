@@ -15,7 +15,9 @@ fi
 fpath=("${0:h}/external/src" $fpath)
 
 # Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
+# huy: allow the sharing of prezto files
+#autoload -Uz compinit && compinit -i
+autoload -Uz compinit && compinit -i -d "${_ZDOTDIR:-$HOME}/.zcompdump"
 
 #
 # Options
@@ -39,7 +41,9 @@ WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
+# huy: use the user's home directory
+#zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
+zstyle ':completion::complete:*' cache-path "${_ZDOTDIR:-$HOME}/.zcompcache"
 
 # Case-insensitive (all), partial-word, and then substring completion.
 if zstyle -t ':prezto:module:completion:*' case-sensitive; then

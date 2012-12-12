@@ -36,7 +36,9 @@ fi
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
 # Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
+export LESS='-F -i -M -R -w -X -z-4'
+# huy: improve less options
+export LESS="${${LESS/-g /}/-S /} -j4"
 
 # Set the Less input preprocessor.
 if (( $+commands[lesspipe.sh] )); then
@@ -98,3 +100,31 @@ if [[ -d "$TMPDIR" ]]; then
   fi
 fi
 
+#
+# huy: more paths
+#
+
+typeset -T NODE_PATH node_path
+typeset -U path manpath fpath classpath pythonpath perl5lib node_path
+
+# Add some other paths
+for path_dir in \
+  /opt/local/bin \
+  /opt/local/sbin \
+  /brew/bin \
+  /brew/sbin \
+  /brew/share/npm/bin \
+  ~/bin \
+; do
+  [[ -d $path_dir ]] && path=($path_dir $path)
+done
+
+# Add some other paths
+for path_dir in \
+  /opt/local/man \
+  /brew/share/man \
+  ~/man \
+; do
+  [[ -d $path_dir ]] && manpath=($path_dir $manpath)
+done
+unset path_dir

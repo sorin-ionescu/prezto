@@ -12,3 +12,6 @@ fi
 
 # Customize to your needs...
 
+# huy: display non-success exit value for every command
+# This cannot be put in a module as it's always scoped to the enclosing function
+setopt printexitvalue

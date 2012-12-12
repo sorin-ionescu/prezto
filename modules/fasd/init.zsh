@@ -18,7 +18,9 @@ fi
 # Initialization
 #
 
-cache_file="${0:h}/cache.zsh"
+# huy: use the user's home directory
+#cache_file="${0:h}/cache.zsh"
+cache_file="${_ZDOTDIR:-$HOME}/.zprezto.fasd.cache.zsh"
 if [[ "${commands[fasd]}" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
   # Set the base init arguments.
   init_args=(zsh-hook)

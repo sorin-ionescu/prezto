@@ -12,7 +12,9 @@ fi
 
 # Load NPM completion.
 if (( $+commands[npm] )); then
-  cache_file="${0:h}/cache.zsh"
+  # huy: use the user's home directory
+  #cache_file="${0:h}/cache.zsh"
+  cache_file="${_ZDOTDIR:-$HOME}/.zprezto.node.cache.zsh"
 
   if [[ "$commands[npm]" -nt "$cache_file" || ! -s "$cache_file" ]]; then
     # npm is slow; cache its output.
