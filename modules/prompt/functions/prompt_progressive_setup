@@ -32,7 +32,7 @@ function prompt_progressive_precmd {
       #git_info[remote]="$(git remote -v | fgrep fetch | sed 's/.*[\/:]\([^:\/][^:\/]*\)\.git.*/\1/')"
       git_info[repo]=$(basename $(git rev-parse --show-toplevel))
     fi
-  else
+  elif (( $+functions[vcs_info] )); then
     vcs_info
   fi
 }
@@ -173,10 +173,10 @@ function prompt_progressive_setup {
 
   # Print up to 5 elements of the current directory
   #P+="%5~%f"
-  if (( $+functions[git-info] )); then
+  if (( $+functions[git-info] || $+functions[vcs_info] )); then
     P+='%~'
   else
-  # Print current directory or, if inside repo, path relative to that
+    # Print current directory or, if inside repo, path relative to that
     P+='${vcs_info_msg_0_}'
   fi
   # Stop coloring path
@@ -210,7 +210,7 @@ function prompt_progressive_setup {
   local R
   if (( $+functions[git-info] )); then
     R+='${git_info:+[${(e)git_info[prompt]}${git_info[rprompt]}]}'
-  else
+  elif (( $+functions[vcs_info] )); then
     R+="${vcs_info_color}"'${vcs_info_msg_1_}'"%f"
   fi
   if [[ $style == 'verbose' ]]; then
