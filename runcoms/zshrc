@@ -15,3 +15,11 @@ fi
 # huy: display non-success exit value for every command
 # This cannot be put in a module as it's always scoped to the enclosing function
 setopt printexitvalue
+
+# Speed up git if requested by user
+if !  zstyle -b ':huy:system' git-smart-file-complete 'dummy'; then
+  # http://talkings.org/post/5236392664/zsh-and-slow-git-completion
+  __git_files () {
+    _wanted files expl 'local files' _files
+  }
+fi
