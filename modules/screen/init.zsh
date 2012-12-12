@@ -34,7 +34,7 @@ fi
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all screen; then
-  return 1
+  return 0
 fi
 
 alias scr='screen'

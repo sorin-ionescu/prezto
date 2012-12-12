@@ -16,7 +16,7 @@ fi
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all rsync; then
-  return 1
+  return 0
 fi
 
 _rsync_cmd='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'

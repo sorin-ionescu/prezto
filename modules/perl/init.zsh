@@ -45,7 +45,7 @@ fi
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all perl; then
-  return 1
+  return 0
 fi
 
 # General

@@ -20,7 +20,7 @@ fi
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all pacman; then
-  return 1
+  return 0
 fi
 
 # Get the Pacman frontend.

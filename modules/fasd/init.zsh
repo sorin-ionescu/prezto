@@ -51,7 +51,7 @@ function fasd_cd {
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all fasd; then
-  return 1
+  return 0
 fi
 
 # Changes the current working directory interactively.

@@ -17,7 +17,7 @@ fi
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all yum; then
-  return 1
+  return 0
 fi
 
 alias yumc='sudo yum clean all'    # Cleans the cache.

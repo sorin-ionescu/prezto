@@ -33,7 +33,7 @@ function rm-osx-cruft {
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all osx; then
-  return 1
+  return 0
 fi
 
 # Change directory to the current Finder directory.

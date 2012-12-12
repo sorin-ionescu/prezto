@@ -37,7 +37,7 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all history; then
-  return 1
+  return 0
 fi
 
 # Lists the ten most used commands.

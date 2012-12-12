@@ -58,7 +58,7 @@ function psu {
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all utility; then
-  return 1
+  return 0
 fi
 
 # Disable correction.

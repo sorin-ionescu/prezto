@@ -28,7 +28,7 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all directory; then
-  return 1
+  return 0
 fi
 
 alias d='dirs -v'

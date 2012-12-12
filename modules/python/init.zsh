@@ -44,7 +44,7 @@ fi
 
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all python; then
-  return 1
+  return 0
 fi
 
 alias py='python'
