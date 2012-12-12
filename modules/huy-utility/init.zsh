@@ -53,7 +53,7 @@ else
 fi
 eval "
   function ls {
-    $_gnu_utility_ls -ACF \"\$@\" $_ls_color_flag | \$PAGER -e
+    LC_COLLATE=posix $_gnu_utility_ls -ACF \"\$@\" $_ls_color_flag | \$PAGER -e
   }
 "
 alias ll="$aliases[ll] -a"
