@@ -18,6 +18,11 @@ fi
 # Frontend
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all pacman; then
+  return 1
+fi
+
 # Get the Pacman frontend.
 zstyle -s ':prezto:module:pacman' frontend '_pacman_frontend'
 

@@ -14,6 +14,11 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all rsync; then
+  return 1
+fi
+
 _rsync_cmd='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
 
 # Mac OS X and HFS+ Enhancements

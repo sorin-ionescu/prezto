@@ -35,5 +35,10 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all history; then
+  return 1
+fi
+
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"

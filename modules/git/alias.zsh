@@ -22,14 +22,14 @@ zstyle -s ':prezto:module:git:log:brief' format '_git_log_brief_format' \
 zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_submodules' \
   || _git_status_ignore_submodules='none'
 
+#
+# Aliases
+#
+
 # Return if conditions are unsatistied
 if ! zstyle -t ':prezto:alias' pmodule all git; then
   return 1
 fi
-
-#
-# Aliases
-#
 
 # Git
 alias g='git'

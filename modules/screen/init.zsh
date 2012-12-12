@@ -32,6 +32,11 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all screen; then
+  return 1
+fi
+
 alias scr='screen'
 alias scrl='screen -list'
 alias scrn='screen -U -S'

@@ -16,6 +16,11 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all dpkg; then
+  return 1
+fi
+
 # Cleans the cache.
 alias debc='sudo apt-get clean && sudo apt-get autoclean'
 
