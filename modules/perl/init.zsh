@@ -43,6 +43,11 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all perl; then
+  return 0
+fi
+
 # General
 alias pl='perl'
 alias pld='perldoc'

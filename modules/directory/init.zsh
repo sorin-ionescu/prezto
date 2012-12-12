@@ -26,6 +26,11 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all directory; then
+  return 0
+fi
+
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 

@@ -49,6 +49,11 @@ function fasd_cd {
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all fasd; then
+  return 0
+fi
+
 # Changes the current working directory interactively.
 alias j='fasd_cd -i'
 

@@ -16,6 +16,11 @@ fi
 # Aliases (Compatible with Rails 2)
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all rails; then
+  return 0
+fi
+
 alias ror='rails'
 alias rorc='_rails-command console'
 alias rordc='_rails-command dbconsole'

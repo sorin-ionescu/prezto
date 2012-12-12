@@ -37,6 +37,11 @@ path=(
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all macports; then
+  return 0
+fi
+
 alias portc='sudo port clean --all installed'
 alias porti='sudo port install'
 alias ports='port search'

@@ -40,6 +40,11 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all ruby; then
+  return 0
+fi
+
 # General
 alias rb='ruby'
 

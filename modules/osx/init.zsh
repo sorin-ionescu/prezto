@@ -11,16 +11,6 @@ if [[ "$OSTYPE" != darwin* ]]; then
 fi
 
 #
-# Aliases
-#
-
-# Change directory to the current Finder directory.
-alias cdf='cd "$(pfd)"'
-
-# Push directory to the current Finder directory.
-alias pushdf='pushd "$(pfd)"'
-
-#
 # Functions
 #
 
@@ -36,4 +26,19 @@ function rm-osx-cruft {
     -type d -name '__MACOSX' \
   \) -print0 | xargs -0 rm -rf
 }
+
+#
+# Aliases
+#
+
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all osx; then
+  return 0
+fi
+
+# Change directory to the current Finder directory.
+alias cdf='cd "$(pfd)"'
+
+# Push directory to the current Finder directory.
+alias pushdf='pushd "$(pfd)"'
 

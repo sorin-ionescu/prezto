@@ -15,6 +15,11 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all yum; then
+  return 0
+fi
+
 alias yumc='sudo yum clean all'    # Cleans the cache.
 alias yumh='yum history'           # Displays history.
 alias yumi='sudo yum install'      # Installs package(s).

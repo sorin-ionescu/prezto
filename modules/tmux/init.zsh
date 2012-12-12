@@ -40,5 +40,10 @@ fi
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all tmux; then
+  return 0
+fi
+
 alias tmuxa='tmux attach-session'
 alias tmuxl='tmux list-sessions'

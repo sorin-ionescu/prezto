@@ -26,6 +26,11 @@ zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_subm
 # Aliases
 #
 
+# Return if conditions are unsatistied
+if ! zstyle -t ':prezto:alias' pmodule all git; then
+  return 0
+fi
+
 # Git
 alias g='git'
 

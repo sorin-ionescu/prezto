@@ -35,6 +35,16 @@ zstyle ':prezto:load' pmodule \
   'prompt'
 
 #
+# Alias
+#
+
+# Allow aliases defined in all loaded modules with 'all'
+# Commenting out will disable aliases
+# Specific modules can be loaded with:
+# zstyle ':prezto:alias' pmodule 'git' 'ruby' 'osx'
+zstyle ':prezto:alias' pmodule 'all'
+
+#
 # Editor
 #
 
