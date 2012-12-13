@@ -114,6 +114,8 @@ for path_dir in \
   /brew/bin \
   /brew/sbin \
   /brew/share/npm/bin \
+  /usr/local/bin \
+  /usr/local/sbin \
   ~/bin \
 ; do
   [[ -d $path_dir ]] && path=($path_dir $path)
@@ -123,6 +125,7 @@ done
 for path_dir in \
   /opt/local/man \
   /brew/share/man \
+  /usr/local/man \
   ~/man \
 ; do
   [[ -d $path_dir ]] && manpath=($path_dir $manpath)
