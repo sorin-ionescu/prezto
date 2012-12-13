@@ -152,6 +152,7 @@ function prompt_progressive_setup {
     4) style=unabbreviated ;;
     5) style=multiline ;;
     6) style=verbose ;;
+    [a-z]*) style="$1" ;;
     *)
       print -P "Unrecognized style '%F{blue}$style%f'." >&2
       style=concise
