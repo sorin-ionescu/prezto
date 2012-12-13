@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Speed up git TAB completion of files
+zstyle -b ':huy:system' git-smart-file-complete 'no'
+
 #
 # General
 #
