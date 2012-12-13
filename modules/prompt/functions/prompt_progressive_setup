@@ -4,10 +4,13 @@
 # Features:
 #   - Multiple verbosity styles:
 #     - One or multiple lines
-#     - In minimal style, shows user@hostname if connected through SSH.
+#     - In minimal style, only shows user@hostname if connected through SSH.
 #     - toggle with aliases "P 0" ... "P 5"
 #   - VCS information in the right prompt.
-#     - Supports prezto's git-info if 'git' module is loaded, or zsh's default vcs_info otherwise
+#     - Supports both prezto's git-info and zsh's default vcs_info
+#     - A callback function can decide whether to use the featureful git-info or faster
+#       vcs_info on a case-by-case basis:
+#       define prompt_is_git_info_ok and return false when you want to force the faster vcs_info
 #   - If using the default vcs_info module:
 #     - Only shows the path on the left prompt by default.
 #     - Crops the path to a defined length and only shows the path relative to
@@ -15,8 +18,11 @@
 #   - Shows if logged in as root or not.
 #   - Shows number of jobs
 #   - Shows shell level if greater than 1
-#   - Colors work with Solarized 8-bit ANSI colors
-#   - Supports callbacks for customizing style and value of user and hostname
+#   - Colors work with Solarized theme implemented by remapping 8-bit ANSI colors
+#   - Supports callbacks for customizing style and value of user and hostname:
+#     prompt_map_user and prompt_map_host are passed in the original values and are expected
+#     to return: $prompt_info_user and $prompt_info_user_unformatted
+#                $prompt_info_host and $prompt_info_host_unformatted
 
 # Load dependencies.
 pmodload 'helper'
@@ -25,14 +31,26 @@ function prompt_progressive_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
+  local repo
+
+  # Clear out any remnants of info from the previous time
+  unset git_info vcs_info vcs_info_msg_0_ vcs_info_msg_1_
+
   # Get Git repository information.
   if (( $+functions[git-info] )); then
-    if git-info; then
-      # Some functionality not provided by git-info
-      #git_info[remote]="$(git remote -v | fgrep fetch | sed 's/.*[\/:]\([^:\/][^:\/]*\)\.git.*/\1/')"
-      git_info[repo]=$(basename $(git rev-parse --show-toplevel))
+    repo=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -n $repo ]]; then
+      repo=$(basename $repo)
+
+      if ! (( $+functions[prompt_is_git_info_ok] )) || prompt_is_git_info_ok $USERNAME $HOST $repo; then
+        git-info
+        git_info[repo]="$repo"
+        return
+      fi
     fi
-  elif (( $+functions[vcs_info] )); then
+  fi
+
+  if (( $+functions[vcs_info] )); then
     vcs_info
   fi
 }
@@ -47,9 +65,15 @@ function prompt_progressive_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
+  # Customizable parameters.
+  local max_path_chars=50
+
   # Load required functions.
   autoload -Uz add-zsh-hook
-  # If git module is loaded, use that, otherwise get standard zsh vcs_info
+
+  ### git-info setup
+
+  # If git module is loaded, we'll try to use that
   if (( $+functions[git-info] )); then
     # Set git-info parameters (from sorin prompt)
     zstyle ':prezto:module:editor:info:completing' format '%F{magenta}...%f'
@@ -75,35 +99,38 @@ function prompt_progressive_setup {
 
     # Our extensions
     zstyle ':prezto:module:git:info:repo' format ':%%B%F{yellow}%R%f%%b'
-  else
-    autoload -Uz vcs_info
-
-    local vcs_info_color='%F{242}'
-
-    # Set vcs_info parameters.
-    zstyle ':vcs_info:*' enable git hg svn
-    zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' stagedstr '%F{green}✚%{[m%}'
-    zstyle ':vcs_info:*' unstagedstr '%F{red}?%{[m%}'
-
-    # On OS X, see /usr/share/zsh/4.3.11/functions/VCS_INFO_formats for docs:
-    # %r: repo
-    # %s: VCS, e.g. 'git'
-    # %b: branch
-    # %u: unstaged
-    # %c: staged
-    #zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
-    #zstyle ':vcs_info:*' formats "%S" "%r/%s/%b %u%c"
-    zstyle ':vcs_info:*' actionformats "√%%S" "[%r:%B%F{magenta}%b%f %u%c (%a)"
-    zstyle ':vcs_info:*' formats "√%S" "[%r:%B%F{magenta}%b%{[m%} %u%c]"
-    zstyle ':vcs_info:*' nvcsformats "%~" ""
   fi
 
-  # Add hook for calling vcs_info before each command.
+  ### vcs_info setup
+
+  # Load up zsh standard VCS functions if git-info is not there, or just for performance reasons
+  # because it's so much faster than git-info
+  autoload -Uz vcs_info
+
+  local vcs_info_color='%F{242}'
+
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable git hg svn
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' stagedstr '%F{green}✚%{[m%}'
+  zstyle ':vcs_info:*' unstagedstr '%F{red}?%{[m%}'
+
+  # On OS X, see /usr/share/zsh/4.3.11/functions/VCS_INFO_formats for docs:
+  # %r: repo
+  # %s: VCS, e.g. 'git'
+  # %b: branch
+  # %u: unstaged
+  # %c: staged
+  #zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
+  #zstyle ':vcs_info:*' formats "%S" "%r/%s/%b %u%c"
+  zstyle ':vcs_info:*' actionformats "√%%S" "[%F{green}%r%f:%B%F{magenta}%b%f %u%c (%a)"
+  zstyle ':vcs_info:*' formats       "√%S"  "[%F{green}%r%f:%B%F{magenta}%b%{[m%} %u%c]"
+  zstyle ':vcs_info:*' nvcsformats "%~" ""
+
+  # Add hook for calling git-info vcs_info before each command.
   add-zsh-hook precmd prompt_progressive_precmd
 
-  # Customizable parameters.
-  local max_path_chars=50
+  ### Arguments
 
   # Style
   if [[ "$1" == --init ]]; then
@@ -118,7 +145,10 @@ function prompt_progressive_setup {
     4) style=multiline ;;
     5) style=verbose ;;
     2|) style=concise ;;
-    *) style="$1" ;;
+    *)
+      print -P "Unrecognized style '%F{blue}$style%f'." >&2
+      style=concise
+      ;;
   esac
   [[ -z "$init" ]] && print -P "Switching to '%F{blue}$style%f' style of '%F{green}progressive%f' prompt."
 
@@ -206,13 +236,9 @@ function prompt_progressive_setup {
 
   PS1="$P"
 
-  # Right prompt contains VCS info and maybe load
-  local R
-  if (( $+functions[git-info] )); then
-    R+='${git_info:+[${(e)git_info[prompt]}${git_info[rprompt]}]}'
-  elif (( $+functions[vcs_info] )); then
-    R+="${vcs_info_color}"'${vcs_info_msg_1_}'"%f"
-  fi
+  # Right prompt contains git-info or vcs_info (one or the other) and maybe load
+  R+='${git_info:+[${(e)git_info[prompt]}${git_info[rprompt]}]}'
+  R+='${vcs_info_color}${vcs_info_msg_1_}%f'
   if [[ $style == 'verbose' ]]; then
     R+=" ($(prompt_progressive_load))"
   fi
