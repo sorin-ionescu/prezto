@@ -1,9 +1,15 @@
 #
-# Completes npm.
+# Loads the Node Version Manager and enables npm completion.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Zeh Rizzatti <zehrizzatti@gmail.com>
 #
+
+# Load NVM into the shell session.
+if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
+  source "$HOME/.nvm/nvm.sh"
+fi
 
 # Return if requirements are not found.
 if (( ! $+commands[node] )); then
