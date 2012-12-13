@@ -147,10 +147,11 @@ function prompt_progressive_setup {
   case "$1" in
     0) style=bare ;;
     1) style=minimal ;;
-    3) style=unabbreviated ;;
-    4) style=multiline ;;
-    5) style=verbose ;;
-    2|) style=concise ;;
+    2) style=fast ;; # Default
+    3|) style=concise ;; # Default
+    4) style=unabbreviated ;;
+    5) style=multiline ;;
+    6) style=verbose ;;
     *)
       print -P "Unrecognized style '%F{blue}$style%f'." >&2
       style=concise
@@ -180,6 +181,11 @@ function prompt_progressive_setup {
   fi
 
   ### Define prompt
+
+  # Remove the git hooks for some levels of hooks
+  if [[ $style == (bare|minimal|fast) ]]; then
+    add-zsh-hook -d precmd prompt_progressive_precmd
+  fi
 
   if [[ $style == bare ]]; then
     PS1='%# '
@@ -219,7 +225,9 @@ function prompt_progressive_setup {
   # Number of background jobs
   P+="%1(j. %jJ.)"
   # Shell level if greater than 1
-  P+="%(2L/ L1/)"
+  # Hmm, which one is correct?
+  #P+="%(2L/ L1/)"
+  P+="%(2L/ L%L/)"
 
   if [[ $style == (multiline|verbose) ]]; then
     P+="
