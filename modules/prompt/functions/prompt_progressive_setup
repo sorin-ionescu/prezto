@@ -68,18 +68,24 @@ function prompt_progressive_setup {
   # Customizable parameters.
   local max_path_chars=50
 
+  # Clear out any remnants of info from the previous time
+  unset git_info vcs_info vcs_info_msg_0_ vcs_info_msg_1_
+
   # Load required functions.
   autoload -Uz add-zsh-hook
+
+  ### editor_info setup
+
+  zstyle ':prezto:module:editor:info:completing' format '%F{magenta}...%f'
+  zstyle ':prezto:module:editor:info:keymap:primary' format '%#'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{yellow}⎋%f'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{red}➨%f'
 
   ### git-info setup
 
   # If git module is loaded, we'll try to use that
   if (( $+functions[git-info] )); then
     # Set git-info parameters (from sorin prompt)
-    zstyle ':prezto:module:editor:info:completing' format '%F{magenta}...%f'
-    zstyle ':prezto:module:editor:info:keymap:primary' format '%#'
-    zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{yellow}⎋%f'
-    zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{red}➨%f'
     zstyle ':prezto:module:git:info:action' format '%F{yellow}%s%f%%b'
     zstyle ':prezto:module:git:info:added' format ' %F{green}✚%f%%b'
     zstyle ':prezto:module:git:info:ahead' format ' %F{yellow}⬆%f%%b'
@@ -203,12 +209,11 @@ function prompt_progressive_setup {
 
   # Print up to 5 elements of the current directory
   #P+="%5~%f"
-  if (( $+functions[git-info] || $+functions[vcs_info] )); then
-    P+='%~'
-  else
-    # Print current directory or, if inside repo, path relative to that
-    P+='${vcs_info_msg_0_}'
-  fi
+  # Print current directory or, if inside repo, path relative to that
+  #P+='${vcs_info_msg_0_}'
+  # Print direcotry
+  P+='%~'
+
   # Stop coloring path
   P+="%f"
   # Number of background jobs
@@ -228,15 +233,12 @@ function prompt_progressive_setup {
   # (not needed because that's handled by 'terminal' module)
   #P+="%{]2;${user_unformatted}@${host_unformatted}: %~]1;%1~%}"
   # Terminate the line with character that depends on mode
-  if (( $+functions[git-info] )); then
-    P+='${editor_info[overwrite]:-${editor_info[keymap]}} '
-  else
-    P+='%# '
-  fi
+  P+='${editor_info[overwrite]:-${editor_info[keymap]}} '
 
   PS1="$P"
 
   # Right prompt contains git-info or vcs_info (one or the other) and maybe load
+  local R
   R+='${git_info:+[${(e)git_info[prompt]}${git_info[rprompt]}]}'
   R+='${vcs_info_color}${vcs_info_msg_1_}%f'
   if [[ $style == 'verbose' ]]; then
