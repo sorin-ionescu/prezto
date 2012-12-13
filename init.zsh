@@ -90,6 +90,10 @@ function pmodload {
 if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
   source "${ZDOTDIR:-$HOME}/.zpreztorc"
 fi
+# huy: Let a shared zpreztorc file count first (where ZDOTDIR is the location of the shared files)
+if [[ "${_ZDOTDIR:-$HOME}" != "${ZDOTDIR:-$HOME}" && -s "${_ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
+  source "${_ZDOTDIR:-$HOME}/.zpreztorc"
+fi
 
 # Disable color and theme in dumb terminals.
 if [[ "$TERM" == 'dumb' ]]; then

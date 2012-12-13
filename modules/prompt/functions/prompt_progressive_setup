@@ -1,0 +1,266 @@
+# Progressive theme that displays only relevant information as needed.
+# Builds on both sorin and nicoulaj theme.
+#
+# Features:
+#   - Multiple verbosity styles:
+#     - One or multiple lines
+#     - In minimal style, only shows user@hostname if connected through SSH.
+#     - toggle with aliases "P 0" ... "P 5"
+#   - VCS information in the right prompt.
+#     - Supports both prezto's git-info and zsh's default vcs_info
+#     - A callback function can decide whether to use the featureful git-info or faster
+#       vcs_info on a case-by-case basis:
+#       define prompt_is_git_info_ok and return false when you want to force the faster vcs_info
+#   - If using the default vcs_info module:
+#     - Only shows the path on the left prompt by default.
+#     - Crops the path to a defined length and only shows the path relative to
+#       the current VCS repository root.
+#   - Shows if logged in as root or not.
+#   - Shows number of jobs
+#   - Shows shell level if greater than 1
+#   - Colors work with Solarized theme implemented by remapping 8-bit ANSI colors
+#   - Supports callbacks for customizing style and value of user and hostname:
+#     prompt_map_user and prompt_map_host are passed in the original values and are expected
+#     to return: $prompt_info_user and $prompt_info_user_unformatted
+#                $prompt_info_host and $prompt_info_host_unformatted
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_progressive_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  local repo
+
+  # Clear out any remnants of info from the previous time
+  unset git_info vcs_info vcs_info_msg_0_ vcs_info_msg_1_
+
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    repo=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -n $repo ]]; then
+      repo=$(basename $repo)
+
+      if ! (( $+functions[prompt_is_git_info_ok] )) || prompt_is_git_info_ok $USERNAME $HOST $repo; then
+        git-info
+        git_info[repo]="$repo"
+        return
+      fi
+    fi
+  fi
+
+  if (( $+functions[vcs_info] )); then
+    vcs_info
+  fi
+}
+
+function prompt_progressive_load() {
+  uptime | sed 's/.*: *//;s/,//g'
+}
+
+# @param verbosity From 0 to 5 with 2 as default
+function prompt_progressive_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Customizable parameters.
+  local max_path_chars=50
+
+  # Clear out any remnants of info from the previous time
+  unset git_info vcs_info vcs_info_msg_0_ vcs_info_msg_1_
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  ### editor_info setup
+
+  zstyle ':prezto:module:editor:info:completing' format '%F{magenta}...%f'
+  zstyle ':prezto:module:editor:info:keymap:primary' format '%#'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{yellow}⎋%f'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{red}➨%f'
+
+  ### git-info setup
+
+  # If git module is loaded, we'll try to use that
+  if (( $+functions[git-info] )); then
+    # Set git-info parameters (from sorin prompt)
+    zstyle ':prezto:module:git:info:action' format '%F{yellow}%s%f%%b'
+    zstyle ':prezto:module:git:info:added' format ' %F{green}✚%f%%b'
+    zstyle ':prezto:module:git:info:ahead' format ' %F{yellow}⬆%f%%b'
+    zstyle ':prezto:module:git:info:behind' format ' %F{yellow}⬇%f%%b'
+    zstyle ':prezto:module:git:info:branch' format '%F{blue}%b%f'
+    zstyle ':prezto:module:git:info:commit' format '%F{blue}%.7c%f'
+    zstyle ':prezto:module:git:info:deleted' format ' %F{red}✖%f%%b'
+    zstyle ':prezto:module:git:info:modified' format ' %%B%F{magenta}✱%f%%b'
+    zstyle ':prezto:module:git:info:position' format '%F{blue}%p%f'
+    zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
+    zstyle ':prezto:module:git:info:stashed' format ' %F{cyan}✭%f%%b'
+    zstyle ':prezto:module:git:info:unmerged' format ' %F{yellow}═%f%%b'
+    zstyle ':prezto:module:git:info:untracked' format ' %F{magenta}?%f%%b'
+    zstyle ':prezto:module:git:info:keys' format \
+      'prompt' '%F{green}${git_info[repo]:+$git_info[repo]:}%f$(coalesce "%b" "%p" "%c")%s' \
+      'rprompt' '%A%B%a%d%m%r%U%u%S'
+
+    # Our extensions
+    zstyle ':prezto:module:git:info:repo' format ':%%B%F{yellow}%R%f%%b'
+  fi
+
+  ### vcs_info setup
+
+  # Load up zsh standard VCS functions if git-info is not there, or just for performance reasons
+  # because it's so much faster than git-info
+  autoload -Uz vcs_info
+
+  local vcs_info_color='%F{242}'
+
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable git hg svn
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' stagedstr '%F{green}✚%{[m%}'
+  zstyle ':vcs_info:*' unstagedstr '%F{red}?%{[m%}'
+
+  # On OS X, see /usr/share/zsh/4.3.11/functions/VCS_INFO_formats for docs:
+  # %r: repo
+  # %s: VCS, e.g. 'git'
+  # %b: branch
+  # %u: unstaged
+  # %c: staged
+  #zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
+  #zstyle ':vcs_info:*' formats "%S" "%r/%s/%b %u%c"
+  zstyle ':vcs_info:*' actionformats "√%%S" "[%F{green}%r%f:%B%F{magenta}%b%f %u%c (%a)"
+  zstyle ':vcs_info:*' formats       "√%S"  "[%F{green}%r%f:%B%F{magenta}%b%{[m%} %u%c]"
+  zstyle ':vcs_info:*' nvcsformats "%~" ""
+
+  # Add hook for calling git-info vcs_info before each command.
+  add-zsh-hook precmd prompt_progressive_precmd
+
+  ### Arguments
+
+  # Style
+  if [[ "$1" == --init ]]; then
+    local init=1
+    shift
+  fi
+  local style=''
+  case "$1" in
+    0) style=bare ;;
+    1) style=minimal ;;
+    2) style=fast ;; # Default
+    3|) style=concise ;; # Default
+    4) style=unabbreviated ;;
+    5) style=multiline ;;
+    6) style=verbose ;;
+    [a-z]*) style="$1" ;;
+    *)
+      print -P "Unrecognized style '%F{blue}$style%f'." >&2
+      style=concise
+      ;;
+  esac
+  [[ -z "$init" ]] && print -P "Switching to '%F{blue}$style%f' style of '%F{green}progressive%f' prompt."
+
+
+  ### Process username and hostname
+
+  local user host
+
+  user="%F{green}%n%f"
+  user_unformatted="%n"
+  if (( $+functions[prompt_map_user] )); then
+    prompt_map_user $USERNAME
+    user="$prompt_info_user"
+    user_unformatted="$prompt_info_user_unformatted"
+  fi
+
+  host="%m"
+  host_unformatted="%m"
+  if (( $+functions[prompt_map_host] )); then
+    prompt_map_host $HOST
+    host="$prompt_info_host"
+    host_unformatted="$prompt_info_host_unformatted"
+  fi
+
+  ### Define prompt
+
+  # Remove the git hooks for some levels of hooks
+  if [[ $style == (bare|minimal|fast) ]]; then
+    add-zsh-hook -d precmd prompt_progressive_precmd
+  fi
+
+  if [[ $style == bare ]]; then
+    PS1='%# '
+    RPS1=''
+    return
+  fi
+
+  local P
+
+  if [[ $style == 'verbose' ]]; then
+    # Insert the time
+    P+='%F{blue}%*%f '
+  fi
+
+  if [[ $style != 'minimal' || -n "$SSH_TTY" ]]; then
+    # Username and host
+    P+="${user}@${host} "
+  fi
+
+  # Start coloring path
+  P+="%F{cyan}"
+
+  if [[ $style != (unabbreviated|multiline|verbose) ]]; then
+    # Limit the amount of space taken by the rest of the line
+    P+="%${max_path_chars}<…<"
+  fi
+
+  # Print up to 5 elements of the current directory
+  #P+="%5~%f"
+  # Print current directory or, if inside repo, path relative to that
+  #P+='${vcs_info_msg_0_}'
+  # Print direcotry
+  P+='%~'
+
+  # Stop coloring path
+  P+="%f"
+  # Number of background jobs
+  P+="%1(j. %jJ.)"
+  # Shell level if greater than 1
+  # Hmm, which one is correct?
+  #P+="%(2L/ L1/)"
+  P+="%(2L/ L%L/)"
+
+  if [[ $style == (multiline|verbose) ]]; then
+    P+="
+"
+  else
+    # Separator
+    ##P+=" "
+  fi
+
+  # Add names and titles to window and tab titles
+  # (not needed because that's handled by 'terminal' module)
+  #P+="%{]2;${user_unformatted}@${host_unformatted}: %~]1;%1~%}"
+  # Terminate the line with character that depends on mode
+  P+='${editor_info[overwrite]:-${editor_info[keymap]}} '
+
+  PS1="$P"
+
+  # Right prompt contains git-info or vcs_info (one or the other) and maybe load
+  local R
+  R+='${git_info:+[${(e)git_info[prompt]}${git_info[rprompt]}]}'
+  R+='${vcs_info_color}${vcs_info_msg_1_}%f'
+  if [[ $style == 'verbose' ]]; then
+    R+=" ($(prompt_progressive_load))"
+  fi
+  RPROMPT="$R"
+}
+
+# Allows quick switching of prompts at command line; e.g.
+#   P 0
+#   P 5
+#   P verbose
+alias P='prompt_progressive_setup'
+
+prompt_progressive_setup --init "$@"
+
