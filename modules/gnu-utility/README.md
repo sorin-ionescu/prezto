@@ -3,12 +3,12 @@ GNU Utility
 
 Provides for the interactive use of GNU utilities on non-GNU systems.
 
+This module wraps the GNU utility commands in their non-prefixed counterparts,
+for interactive use, rather than appending to `$PATH`.
+
 Installing GNU utilities on non-GNU systems in `$PATH` without a prefix, i.e.
 `ls` instead of `gls`, is not recommended since scripts that target other
 utilities will be broken.
-
-However, for interactive use, prefixed commands can be wrapped in their
-non-prefixed counterparts.
 
 This module must be loaded **before** the *utility* module.
 
