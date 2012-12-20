@@ -5,6 +5,14 @@
 # Authors: Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+local _rbenv_rehash
+zstyle -s ':prezto:module:ruby:rbenv' rehash '_rbenv_rehash' || _rbenv_rehash='yes'
+if [[ "$_rbenv_rehash" == (N|n)(O|o) ]]; then
+  $_rbenv_rehash='--no-rehash'
+else
+  $_rbenv_rehash=''
+fi
+
 # Load RVM into the shell session.
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   # Unset AUTO_NAME_DIRS since auto adding variable-stored paths to ~ list
@@ -17,11 +25,11 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
 # Load manually installed rbenv into the shell session.
 elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
   path=("$HOME/.rbenv/bin" $path)
-  eval "$(rbenv init - --no-rehash zsh)"
+  eval "$(rbenv init - $_rbenv_rehash zsh)"
 
 # Load package manager installed rbenv into the shell session.
 elif (( $+commands[rbenv] )); then
-  eval "$(rbenv init - --no-rehash zsh)"
+  eval "$(rbenv init - $_rbenv_rehash zsh)"
 
 # Install local gems according to operating system conventions.
 else
