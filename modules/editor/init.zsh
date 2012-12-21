@@ -270,10 +270,6 @@ bindkey -M vicmd "v" edit-command-line
 bindkey -M vicmd "u" undo
 bindkey -M vicmd "$key_info[Control]R" redo
 
-# Switch to command mode.
-bindkey -M viins "jk" vi-cmd-mode
-bindkey -M viins "kj" vi-cmd-mode
-
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
   bindkey -M vicmd "?" history-incremental-pattern-search-backward
   bindkey -M vicmd "/" history-incremental-pattern-search-forward
