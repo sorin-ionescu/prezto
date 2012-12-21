@@ -56,6 +56,7 @@ Aliases
   - `gcO` checks out paths to work tree using the *HEAD* commit.
   - `gcf` amends the tip of the current branch using the same log message as
     *HEAD*.
+  - `gcF` amends the tip of the current branch.
   - `gcp` applies changes introduced by existing commits.
   - `gcP` applies changes introduced by existing commits without committing.
   - `gcr` reverts existing commits by reverting patches and recording new
