@@ -253,19 +253,38 @@ setting a style is as follows.
 | Name      | Format Code | Description
 | --------- | :---------: | ---------------------------------------------------
 | action    |     %s      | Special action name
-| added     |     %a      | Added files count
 | ahead     |     %A      | Commits ahead of remote count
 | behind    |     %B      | Commits behind of remote count
 | branch    |     %b      | Branch name
 | commit    |     %c      | Commit hash
+| position  |     %p      | Commits from the nearest tag count
+| remote    |     %R      | Remote name
+| stashed   |     %S      | Stashed states count
+
+### Concise Contexts
+
+| Name      | Format Code | Description
+| --------- | :---------: | ---------------------------------------------------
+| clean     |     %C      | Clean state
+| dirty     |     %D      | Dirty files count
+| indexed   |     %i      | Indexed files count
+| unindexed |     %I      | Unindexed files count
+| untracked |     %u      | Untracked files count
+
+The following contexts must be enabled with the following zstyle:
+
+    zstyle ':prezto:module:git:info' verbose 'yes'
+
+### Verbose Contexts
+
+| Name      | Format Code | Description
+| --------- | :---------: | ---------------------------------------------------
+| added     |     %a      | Added files count
 | clean     |     %C      | Clean state
 | deleted   |     %d      | Deleted files count
 | dirty     |     %D      | Dirty files count
 | modified  |     %m      | Modified files count
-| position  |     %p      | Commits from the nearest tag count
-| remote    |     %R      | Remote name
 | renamed   |     %r      | Renamed files count
-| stashed   |     %S      | Stashed states count
 | unmerged  |     %U      | Unmerged files count
 | untracked |     %u      | Untracked files count
 
