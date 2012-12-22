@@ -126,13 +126,13 @@ function git-info {
   local added=0
   local added_format
   local added_formatted
-  local ahead
+  local ahead=0
   local ahead_and_behind
   local ahead_and_behind_cmd
   local ahead_format
   local ahead_formatted
   local ahead_or_behind
-  local behind
+  local behind=0
   local behind_format
   local behind_formatted
   local branch
