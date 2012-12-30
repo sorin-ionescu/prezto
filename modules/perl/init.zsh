@@ -31,12 +31,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   unset perl_path
   unset cache_file
-
-  # Set environment variables for launchd processes.
-  for env_var in PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT PERL5LIB; do
-    launchctl setenv "$env_var" "${(P)env_var}" &!
-  done
-  unset env_var
 fi
 
 #
