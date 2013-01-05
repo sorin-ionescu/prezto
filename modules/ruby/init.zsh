@@ -14,6 +14,11 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   # Source RVM.
   source "$HOME/.rvm/scripts/rvm"
 
+# Load chruby into the shell session
+elif [[ -s "/usr/local/share/chruby/chruby.sh" ]]; then
+  source "/usr/local/share/chruby/chruby.sh"
+  source "/usr/local/share/chruby/auto.sh"
+
 # Load manually installed rbenv into the shell session.
 elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
   path=("$HOME/.rbenv/bin" $path)
@@ -32,7 +37,7 @@ else
 fi
 
 # Return if requirements are not found.
-if (( ! $+commands[ruby] && ! ( $+commands[rvm] || $+commands[rbenv] ) )); then
+if (( ! $+commands[ruby] && ! ( $+commands[rvm] || $+commands[rbenv] || $+commands[chruby] ) )); then
   return 1
 fi
 
