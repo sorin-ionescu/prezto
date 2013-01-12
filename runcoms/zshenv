@@ -47,8 +47,9 @@ fi
 # Paths
 #
 
-typeset -gU cdpath fpath mailpath manpath path
-typeset -gUT INFOPATH infopath
+typeset -gU cdpath fpath mailpath path
+typeset -gxU MANPATH
+typeset -gxUT INFOPATH infopath
 
 # Set the the list of directories that cd searches.
 # cdpath=(
