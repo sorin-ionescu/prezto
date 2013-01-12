@@ -98,8 +98,8 @@ Aliases
   - `giu` adds file contents to the index (updates only known files).
   - `gid` displays changes between the index and a named commit (diff).
   - `giD` displays changes between the index and a named commit (word diff).
-  - `gir` resets current HEAD to the specified state.
-  - `giR` resets current index to the specified state.
+  - `gir` resets the current HEAD to the specified state.
+  - `giR` resets the current index interactively.
   - `gix` removes files/directories from the index (recursively).
   - `giX` removes files/directories from the index (recursively and forced).
 
