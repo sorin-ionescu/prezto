@@ -170,6 +170,7 @@ Aliases
   - `gsx` drops a stashed state.
   - `gsX` drops all the stashed states.
   - `gsd` lists dropped stashed states.
+  - `gsD` shows the diff for all stashes
   - `gsl` lists stashed states.
   - `gsL` displays the changes recorded in the stash as a diff between the
     stashed state and its original parent.
