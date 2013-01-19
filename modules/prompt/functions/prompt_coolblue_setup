@@ -1,0 +1,134 @@
+# Coolblue prompt
+# https://github.com/skarfacegc
+#
+# This likely degrades poorly on a non 256 color terminal
+#
+# The VCS bits are lifted from
+#   https://github.com/whiteinge/dotfiles/blob/master/.zsh_shouse_prompt
+#
+# Modified version of peepcode original authors
+#   Geoffrey Grosenbach <boss@topfunky.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+function prompt_coolblue_precmd {
+  vcs_info
+}
+
+function prompt_coolblue_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add hook for calling vcs_info before each command.
+  add-zsh-hook precmd prompt_coolblue_precmd
+
+
+
+  # Set vcs_info options
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' get-revision true
+  zstyle ':vcs_info:*' check-for-changes true
+  
+  zstyle ':vcs_info:*' formats "%b%c%u%m" # hash changes branch misc
+  zstyle ':vcs_info:*' actionformats "%F{196}(%a)%f %b%c%u%m"
+  zstyle ':vcs_info:*' branchformat "%b" # only show branch
+  
+  zstyle ':vcs_info:*' stagedstr "%F{106}⦿%f"
+  zstyle ':vcs_info:*' unstagedstr "%F{124}●%f"
+  
+  zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
+
+
+
+
+  local uname="%(!.%F{red}[root %m]%f.[%n %m])"
+  local dir="%5d"
+  
+
+  # Define prompts.
+  PS1="
+%B$uname%b "'${vcs_info_msg_0_}'" $dir      
+%F{033}>>%f%F{074}>>%f%F{123}>%f%F{015}%B>%b%f "
+  RPROMPT=
+}
+
+
+
+# Show remote ref name and number of commits ahead-of or behind
+function +vi-git-st() {
+    local ahead behind remote
+    local -a gitstatus
+
+    # Are we on a remote-tracking branch?
+    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+        --symbolic-full-name --abbrev-ref 2>/dev/null)}
+
+    if [[ -n ${remote} ]] ; then
+        ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+        (( $ahead )) && gitstatus+=( "%F{106}∆${ahead//[[:space:]]/}%f" )
+
+        behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+        (( $behind )) && gitstatus+=( "%F{124}∇${behind//[[:space:]]/}%f" )
+
+        user_data[gitstatus]=${gitstatus}
+        hook_com[branch]="%F{242}${hook_com[branch]}%f${(j::)gitstatus}"
+    else
+        hook_com[branch]="%F{242}${hook_com[branch]}%f"
+    fi
+}
+
+# Show the above/behind upstream counts more tersely for the compact display
+function +vi-git-st-compact() {
+    [[ -n ${user_data[gitstatus]} ]] \
+        && hook_com[misc]="@{u}${(j:/:)user_data[gitstatus]}"
+}
+
+# Show count of stashed changes
+function +vi-git-stash() {
+    local -a stashes
+
+    if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+        stashes=$(git stash list 2>/dev/null | wc -l)
+        hook_com[misc]+=" %F{242}(${stashes//[[:space:]]/} stashed)%f"
+    fi
+}
+
+# Indicate if there are any untracked files present
+function +vi-git-untracked() {
+    local untracked
+
+    #check if there's at least 1 untracked file
+    untracked=${$(git ls-files --exclude-standard --others | head -n 1)}
+
+    if [[ -n ${untracked} ]] ; then
+        hook_com[unstaged]="${hook_com[unstaged]}%F{143}?%f"
+    fi
+}
+
+
+
+
+
+
+
+
+function prompt_coolblue_help {
+  cat <<EOH
+EOH
+}
+
+function prompt_coolblue_preview {
+  local +h PROMPT='%# '
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  prompt_preview_theme 'coolblue'
+}
+
+prompt_coolblue_setup "$@"
+
