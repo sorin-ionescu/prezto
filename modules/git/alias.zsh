@@ -155,6 +155,7 @@ alias gsr='git-stash-recover'
 alias gss='git stash save --include-untracked'
 alias gsS='git stash save --patch --no-keep-index'
 alias gsw='git stash save --include-untracked --keep-index'
+alias gsD='git show $(git stash list | cut -d":" -f 1)'
 
 # Submodule (S)
 alias gS='git submodule'
