@@ -17,10 +17,6 @@ To enable this feature, add the following line to *zpreztorc*:
 It will create a background session named _#Prezto_ and attach every new shell
 to it.
 
-To avoid keeping open sessions, this module sets `destroy-unattached off` on
-the background session and `destroy-unattached on` on every other session
-(global setting).
-
 Aliases
 -------
 
@@ -47,6 +43,7 @@ Authors
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Colin Hebert](https://github.com/ColinHebert)
+  - [neersighted](https://github.com/neersighted)
 
 [1]: http://tmux.sourceforge.net
 [2]: https://github.com/sorin-ionescu/prezto/issues/62
