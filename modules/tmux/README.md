@@ -10,12 +10,18 @@ Settings
 
 Starts a tmux session automatically when Zsh is launched.
 
-To enable this feature, add the following line to *zpreztorc*:
+To enable this feature when launching Zsh in a local terminal, add the
+following line to *zpreztorc*:
 
-    zstyle ':prezto:module:tmux' auto-start 'yes'
+    zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
-It will create a background session named _#Prezto_ and attach every new shell
-to it.
+To enable this feature when launching Zsh in a SSH connection, add the
+following line to *zpreztorc*:
+
+    zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+
+In both cases, it will create a background session named _#Prezto_ and attach
+every new shell to it.
 
 To avoid keeping open sessions, this module sets `destroy-unattached off` on
 the background session and `destroy-unattached on` on every other session
@@ -47,6 +53,7 @@ Authors
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Colin Hebert](https://github.com/ColinHebert)
+  - [Georges Discry](https://github.com/gdiscry)
 
 [1]: http://tmux.sourceforge.net
 [2]: https://github.com/sorin-ionescu/prezto/issues/62
