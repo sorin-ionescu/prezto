@@ -34,19 +34,11 @@ fi
 #
 
 typeset -gU cdpath fpath mailpath path
-typeset -gxUT INFOPATH infopath
 
 # Set the the list of directories that cd searches.
 # cdpath=(
 #   $cdpath
 # )
-
-# Set the list of directories that info searches for manuals.
-infopath=(
-  /usr/local/share/info
-  /usr/share/info
-  $infopath
-)
 
 # Set the list of directories that Zsh searches for programs.
 path=(

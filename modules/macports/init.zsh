@@ -15,12 +15,6 @@ fi
 # Paths
 #
 
-# Set the list of directories that info searches for manuals.
-infopath=(
-  /opt/local/share/info
-  $infopath
-)
-
 # Set the list of directories that Zsh searches for programs.
 path=(
   /opt/local/{bin,sbin}
