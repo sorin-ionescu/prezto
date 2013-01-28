@@ -34,7 +34,6 @@ fi
 #
 
 typeset -gU cdpath fpath mailpath path
-typeset -gxU MANPATH
 typeset -gxUT INFOPATH infopath
 
 # Set the the list of directories that cd searches.
@@ -48,18 +47,6 @@ infopath=(
   /usr/share/info
   $infopath
 )
-
-# Set the list of directories that man searches for manuals.
-manpath=(
-  /usr/local/share/man
-  /usr/share/man
-  $manpath
-)
-
-for path_file in /etc/manpaths.d/*(.N); do
-  manpath+=($(<$path_file))
-done
-unset path_file
 
 # Set the list of directories that Zsh searches for programs.
 path=(
