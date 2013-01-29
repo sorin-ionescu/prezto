@@ -90,12 +90,11 @@ key_info=(
   'BackTab'   "$terminfo[kcbt]"
 )
 
-# Do not bind any keys if there are empty values in $key_info.
+# Set empty $key_info values to an invalid UTF-8 sequence to induce silent
+# bindkey failure.
 for key in "${(k)key_info[@]}"; do
   if [[ -z "$key_info[$key]" ]]; then
-    print "prezto: one or more keys are non-bindable" >&2
-    unset key{,_info}
-    return 1
+    key_info["$key"]='�'
   fi
 done
 
