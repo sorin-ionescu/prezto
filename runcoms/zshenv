@@ -99,3 +99,8 @@ if [[ -d "$TMPDIR" ]]; then
   fi
 fi
 
+#
+# Alias
+#
+
+alias sourcetree="open -a SourceTree"
