@@ -103,4 +103,4 @@ fi
 # Alias
 #
 
-alias sourcetree="open -a SourceTree"
+[[ -s "$HOME/.aliases" ]] && source "$HOME/.aliases"
