@@ -9,10 +9,20 @@
 # Load pythonz into the shell session.
 if [[ -s $HOME/.pythonz/bin/pythonz ]]; then
   path=($HOME/.pythonz/bin $path)
+
+# Load manually installed pyenv into the shell session.
+elif [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
+  path=("$HOME/.pyenv/bin" $path)
+  eval "$(pyenv init -)"
+
+# Load package manager installed pyenv into the shell session.
+elif (( $+commands[pyenv] )); then
+  eval "$(pyenv init -)"
+
 fi
 
 # Return if requirements are not found.
-if (( ! $+commands[python] && ! $+commands[pythonz] )); then
+if (( ! $+commands[python] && ! ( $+commands[pythonz] || $+commands[pyenv] ) )); then
   return 1
 fi
 

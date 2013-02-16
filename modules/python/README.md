@@ -16,6 +16,16 @@ execution of `pythonz`.
 
 Install Python versions with `pythonz install` into *~/.pythonz/pythons*.
 
+pyenv
+-----
+
+An alternative pythonz is to use [pyenv][6], which allows for switching between
+multiple, isolated Python installations in the home directory.
+
+### Usage
+
+Install Python versions with `pyenv install` into *~/.pyenv/versions*.
+
 Local Package Installation
 --------------------------
 
@@ -107,4 +117,4 @@ Authors
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: http://saghul.github.com/pythonz/
 [5]: https://github.com/sorin-ionescu/prezto/issues
-
+[6]: https://github.com/yyuu/pyenv
