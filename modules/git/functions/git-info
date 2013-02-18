@@ -104,6 +104,9 @@ This process may be time-intensive for certain repositories.
 To disable zsh git prompt for this repository, execute:
   git-info off
 
+To disable zsh git prompt for all repositories, add to zpreztorc:
+  zstyle ':prezto:module:git:info' disable-prompt 'yes'
+
 EOF
 
   unset _git_info_executing
@@ -147,6 +150,7 @@ function git-info {
   local dirty=0
   local dirty_format
   local dirty_formatted
+  local disable_prompt
   local ignore_submodules
   local -A info_formats
   local info_format
@@ -197,6 +201,12 @@ function git-info {
 
   # Return if git-info is disabled.
   if ! is-true "${$(git config --bool prompt.showinfo):-true}"; then
+    return 1
+  fi
+
+  # Return if git-info is disabled
+  zstyle -b ':prezto:module:git:info' disable-prompt 'disable_prompt'
+  if [[ "$disable_prompt" == "yes" ]]; then
     return 1
   fi
 
