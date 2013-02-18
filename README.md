@@ -11,27 +11,9 @@ Installation
 Prezto will work with any recent release of Zsh, but the minimum recommended
 version is 4.3.10.
 
-  1. Launch Zsh:
+  1. curl -L https://github.com/sorin-ionescu/prezto/raw/install_script/install.sh | zsh
 
-        zsh
-
-  2. Clone the repository:
-
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-
-  3. Create a new Zsh configuration by copying the Zsh configuration files
-     provided:
-
-        setopt EXTENDED_GLOB
-        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-        done
-
-  4. Set Zsh as your default shell:
-
-        chsh -s /bin/zsh
-
-  5. Open a new Zsh terminal window or tab.
+  2. Open a new Zsh terminal window or tab.
 
 ### Troubleshooting
 
