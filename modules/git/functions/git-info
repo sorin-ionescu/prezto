@@ -98,18 +98,15 @@ function _git-info-abort {
   cat >&2 <<EOF
 
 
-Gathering status for certain repositories is time intensive.
-By pressing CTRL + C, you have turned off prompt Git status
-for this repository.
+Caught CTRL + C while gathering info for zsh git prompt.
 
-To revert, execute:
-  git-info on
+This process may be time-intensive for certain repositories.
+To disable zsh git prompt for this repository, execute:
+  git-info off
 
 EOF
 
   unset _git_info_executing
-  git config --bool prompt.showinfo false
-  git-info
   return 0
 }
 add-zsh-trap INT _git-info-abort
