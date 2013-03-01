@@ -39,14 +39,13 @@ function set-terminal-tab-title {
   fi
 }
 
+# Sets the Terminal.app current working directory.
+function set-terminal-app-cwd {
+  printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
+}
+
 # Sets the tab and window titles with a given command.
 function set-titles-with-command {
-  # Do not set the window and tab titles in Terminal.app because they are not
-  # reset upon command termination.
-  if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
-    return 1
-  fi
-
   emulate -L zsh
   setopt EXTENDED_GLOB
 
@@ -85,25 +84,34 @@ function set-titles-with-path {
   setopt EXTENDED_GLOB
 
   local absolute_path="${${1:a}:-$PWD}"
+  local abbreviated_path="${absolute_path/#$HOME/~}"
+  local truncated_path="${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}"
+  unset MATCH
 
-  if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
-    printf '\e]7;%s\a' "file://$HOST${absolute_path// /%20}"
+  if [[ "$TERM" == screen* ]]; then
+    set-screen-window-title "$truncated_path"
   else
-    local abbreviated_path="${absolute_path/#$HOME/~}"
-    local truncated_path="${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}"
-    unset MATCH
-
-    if [[ "$TERM" == screen* ]]; then
-      set-screen-window-title "$truncated_path"
-    else
-      set-terminal-window-title "$abbreviated_path"
-      set-terminal-tab-title "$truncated_path"
-    fi
+    set-terminal-window-title "$abbreviated_path"
+    set-terminal-tab-title "$truncated_path"
   fi
 }
 
 # Don't override precmd/preexec; append to hook array.
 autoload -Uz add-zsh-hook
+
+if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
+  # Sets the Terminal.app current working directory.
+  add-zsh-hook precmd set-terminal-app-cwd
+
+  # Do not set the tab and window titles in Terminal.app since it sets the tab
+  # title to the currently running process by default and the current working
+  # directory is set separately.
+
+  # Do set the tab and window titles inside terminal multiplexers.
+  if [[ "$TERM" != screen* ]]; then
+    return
+  fi
+fi
 
 # Sets the tab and window titles before the prompt is displayed.
 function set-titles-precmd {
