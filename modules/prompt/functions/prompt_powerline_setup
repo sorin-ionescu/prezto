@@ -1,3 +1,13 @@
+#
+# A [powerline](https://github.com/Lokaltog/vim-powerline) theme for prezto,
+# based on the [oh-my-zsh-powerline-theme](https://github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme)
+#
+# Author:
+#   lepht <pete.clark@gmail.com>
+#
+# Screenshots:
+#   http://i.imgur.com/Z6XIuT9.png
+
 git_prompt_info () {
   ref=$(git symbolic-ref HEAD 2> /dev/null)  || ref=$(git rev-parse --short HEAD 2> /dev/null)  || return
   echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
@@ -87,3 +97,5 @@ function prompt_powerline_setup {
 
   RPROMPT=$POWERLINE_GIT_INFO_RIGHT$POWERLINE_COLOR_FG_WHITE$'\u2b82'"%f$POWERLINE_COLOR_BG_WHITE $POWERLINE_COLOR_FG_GRAY$POWERLINE_RIGHT_B "$'\u2b82'"%f%k$POWERLINE_COLOR_BG_GRAY$POWERLINE_COLOR_FG_WHITE $POWERLINE_RIGHT_A %f%k"
 }
+
+# vim:ft=zsh
