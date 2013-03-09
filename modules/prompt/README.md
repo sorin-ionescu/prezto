@@ -34,7 +34,7 @@ including a function that displays help or a function used to preview it.
 
 **Do not call this function directly.**
 
-The most basic example of this function can be seen bellow.
+The most basic example of this function can be seen below.
 
     function prompt_name_setup {
       PROMPT='%m%# '
