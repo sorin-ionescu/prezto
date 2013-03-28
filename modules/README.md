@@ -26,6 +26,11 @@ Directory
 
 Sets directory options and defines directory aliases.
 
+DNF
+---
+
+Defines dnf aliases.
+
 Dpkg
 ----
 
