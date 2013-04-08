@@ -24,7 +24,6 @@ fi
 
 # Download two ".pem" files, one starting with `pk-`, and one starting with `cert-`.
 # You need to put both into a folder in your home directory, `~/.ec2`.
-export JAVA_HOME="$(/usr/libexec/java_home)"
 export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
 export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
 export EC2_HOME="/usr/local/Library/LinkedKegs/ec2-api-tools/jars"
@@ -33,4 +32,4 @@ export EC2_HOME="/usr/local/Library/LinkedKegs/ec2-api-tools/jars"
 # Aliases
 #
 
-alias ii='curl -q http://169.254.169.254/latest/meta-data/instance-id'
+alias ec2ii='curl -q http://169.254.169.254/latest/meta-data/instance-id'
