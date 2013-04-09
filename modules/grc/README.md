@@ -1,7 +1,8 @@
-grc
-===
+Generic Colouriser Module
+=========================
 
-Defines grc aliases.
+[grc](https://github.com/pengwynn/grc) takes standard input and colourises the output.
+Using regular expressions, you can create your own pattern matching colour schemes.
 
 Aliases
 -------
