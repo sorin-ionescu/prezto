@@ -1,7 +1,8 @@
 Git
 ===
 
-Enhances the [Git][1] distributed version control system by providing aliases, functions and by exposing repository status information to prompts.
+Enhances the [Git][1] distributed version control system by providing aliases,
+functions and by exposing repository status information to prompts.
 
 Git **1.7.2** is the [minimum required version][7].
 
