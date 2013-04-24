@@ -1,0 +1,59 @@
+#
+# A colourful, friendly, multiline theme with some handy features:
+#
+# Authors:
+#   Paul Gideon Dann <pdgiddie@gmail.com>
+#
+# Features:
+#   - Simple VCS branch, staged, and unstaged indication.
+#   - Prompt character is different in a VCS repository.
+#   - Last command exit status is displayed when non-zero.
+#
+# Screenshots:
+#   http://i.imgur.com/rCo3S.png
+#
+
+function prompt_giddie_precmd {
+  # Replace "/home/<user>" with "~"
+  _prompt_giddie_pwd="${PWD/#$HOME/~}"
+
+  # Choose prompt symbol based on whether or not we are in a repository.
+  if (( $+commands[git] )) && git rev-parse 2> /dev/null; then
+    _prompt_giddie_symbol='±'
+    vcs_info
+  else
+    _prompt_giddie_symbol=')'
+  fi
+}
+
+function prompt_giddie_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz vcs_info
+  autoload -Uz add-zsh-hook
+
+  # Add hook to call our function before each command
+  add-zsh-hook precmd prompt_giddie_precmd
+
+  zstyle ':prezto:module:editor:info:completing' format '%F{green}...%f'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{yellow}--- VI-COMMAND ---%f'
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' formats ' on %F{magenta}%b%f%c%u'
+  zstyle ':vcs_info:*' actionformats ' on %F{magenta}%b%f%c%u %F{yellow}(%a)%f'
+  zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
+  zstyle ':vcs_info:*' unstagedstr '%F{green}!%f'
+
+  # Define prompts.
+  PROMPT='%(?..%F{red}%B-> [%?]%b%f
+)%F{magenta}%n%f@%F{yellow}%m%f|%F{green}${_prompt_giddie_pwd}%f${vcs_info_msg_0_}
+%F{blue}${_prompt_giddie_symbol}%f '
+  RPROMPT=
+  SPROMPT='zsh: correct %F{magenta}%R%f to %F{green}%r%f [nyae]? '
+}
+
+prompt_giddie_setup "$@"
+
