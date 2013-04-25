@@ -1,7 +1,8 @@
 Git
 ===
 
-Enhances the [Git][1] distributed version control system by providing aliases, functions and by exposing repository status information to prompts.
+Enhances the [Git][1] distributed version control system by providing aliases,
+functions and by exposing repository status information to prompts.
 
 Git **1.7.2** is the [minimum required version][7].
 
@@ -12,7 +13,7 @@ Settings
 
 The format of the [git-log][8] output is configurable via the following style,
 where context is *brief*, *oneline*, and *medium*, which will be passed to the
-`--prety=format:` switch.
+`--pretty=format:` switch.
 
     zstyle ':prezto:module:git:log:context' format ''
 
@@ -38,8 +39,8 @@ Aliases
   - `gbc` creates a new branch.
   - `gbl` lists branches and their commits.
   - `gbL` lists local and remote branches and their commits.
-  - `gbs` lists branches and their commits with ancestery graphs.
-  - `gbS` lists local and remote branches and their commits with ancestery
+  - `gbs` lists branches and their commits with ancestry graphs.
+  - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
   - `gbx` deletes a branch.
   - `gbX` deletes a branch irrespective of its merged status.
