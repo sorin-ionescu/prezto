@@ -57,6 +57,9 @@ setopt BEEP
 # Variables
 #
 
+# Treat these characters as part of a word.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
 # Use human-friendly identifiers.
 zmodload zsh/terminfo
 typeset -gA key_info
