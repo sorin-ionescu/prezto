@@ -56,6 +56,15 @@ alias gcR='git reset "HEAD^"'
 alias gcs='git show'
 alias gcl='git-commit-lost'
 
+# Conflict (C)
+alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gCa='git add $(gCl)'
+alias gCe='git mergetool $(gCl)'
+alias gCo='git checkout --ours --'
+alias gCO='gCo $(gCl)'
+alias gCt='git checkout --theirs --'
+alias gCT='gCt $(gCl)'
+
 # Data (d)
 alias gd='git ls-files'
 alias gdc='git ls-files --cached'
@@ -89,15 +98,6 @@ alias gir='git reset'
 alias giR='git reset --patch'
 alias gix='git rm -r --cached'
 alias giX='git rm -rf --cached'
-
-# Conflict (C)
-alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
-alias gCa='git add $(gCl)'
-alias gCe='git mergetool $(gCl)'
-alias gCo='git checkout --ours --'
-alias gCO='gCo $(gCl)'
-alias gCt='git checkout --theirs --'
-alias gCT='gCt $(gCl)'
 
 # Log (l)
 alias gl='git log --topo-order --pretty=format:${_git_log_medium_format}'
