@@ -33,7 +33,7 @@ function _gpg-agent-start {
 # Source GPG agent settings, if applicable.
 if [[ -s "${_gpg_env}" ]]; then
   source "${_gpg_env}" > /dev/null
-  ps --no-headers -C 'gpg-agent' || {
+  ps -e | grep $(grep GPG_AGENT_INFO $_gpg_env | cut -d: -f 2) ||
     _gpg-agent-start
   }
 else
