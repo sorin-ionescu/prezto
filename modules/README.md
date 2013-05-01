@@ -46,10 +46,10 @@ GNU Utility
 
 Provides for the interactive use of GNU utilities on non-GNU systems.
 
-GPG-Agent
+GPG
 ---------
 
-Provides for an easier use of gpg-agent.
+Provides for an easier use of GPG by setting up gpg-agent.
 
 Haskell
 -------

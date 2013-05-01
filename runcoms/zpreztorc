@@ -95,13 +95,6 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # zstyle ':prezto:module:screen' auto-start 'yes'
 
 #
-# GPG-Agent
-#
-
-# Enable SSH-Agent protocol emulation.
-# zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
-
-#
 # SSH-Agent
 #
 
