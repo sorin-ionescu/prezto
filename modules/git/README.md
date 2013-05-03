@@ -64,7 +64,7 @@ Aliases
      commits.
   - `gcR` removes the *HEAD* commit.
   - `gcs` displays various types of objects.
-  - `gcl` displays lost commits.
+  - `gcl` lists lost commits.
 
 ### Conflict
 
@@ -97,8 +97,8 @@ Aliases
 
   - `gg` displays lines matching a pattern.
   - `ggi` displays lines matching a pattern ignoring case.
-  - `ggl` displays files matching a pattern.
-  - `ggL` displays files are not matching a pattern.
+  - `ggl` lists files matching a pattern.
+  - `ggL` lists files that are not matching a pattern.
   - `ggv` displays lines not matching a pattern.
   - `ggw` displays lines matching a pattern at word boundary.
 
@@ -155,7 +155,7 @@ Aliases
 ### Remote
 
   - `gR` manages tracked repositories.
-  - `gRl` displays remote names and URLs.
+  - `gRl` lists remote names and their URLs.
   - `gRa` adds a new remote.
   - `gRx` removes a remote.
   - `gRm` renames a remote.
