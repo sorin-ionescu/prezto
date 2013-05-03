@@ -170,10 +170,9 @@ Aliases
   - `gsa` applies the changes recorded in a stash to the working directory.
   - `gsx` drops a stashed state.
   - `gsX` drops all the stashed states.
-  - `gsd` lists dropped stashed states.
   - `gsl` lists stashed states.
-  - `gsL` displays the changes recorded in the stash as a diff between the
-    stashed state and its original parent.
+  - `gsL` lists dropped stashed states.
+  - `gsd` displays changes between the stash and its original parent.
   - `gsp` removes and applies a single stashed state from the stash list.
   - `gsr` recovers a given stashed state.
   - `gss` stashes the changes of the dirty working directory, including untracked.
