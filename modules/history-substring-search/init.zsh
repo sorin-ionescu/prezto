@@ -29,8 +29,7 @@ zstyle -s ':prezto:module:history-substring-search' globbing-flags \
     || HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 
 if zstyle -t ':prezto:module:history-substring-search' case-sensitive; then
-  HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS=\
-    "${HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS//i}"
+  HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="${HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS//i}"
 fi
 
 if ! zstyle -t ':prezto:module:history-substring-search' color; then
