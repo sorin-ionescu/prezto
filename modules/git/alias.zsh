@@ -138,7 +138,7 @@ alias gRa='git remote add'
 alias gRx='git remote rm'
 alias gRm='git remote rename'
 alias gRu='git remote update'
-alias gRc='git remote prune'
+alias gRp='git remote prune'
 alias gRs='git remote show'
 alias gRb='git-hub-browse'
 

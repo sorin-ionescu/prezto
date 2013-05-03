@@ -160,7 +160,7 @@ Aliases
   - `gRx` removes a remote.
   - `gRm` renames a remote.
   - `gRu` fetches remotes updates.
-  - `gRc` deletes all stale remote tracking branches.
+  - `gRp` prunes all stale remote tracking branches.
   - `gRs` displays information about a given remote.
   - `gRb` opens a remote on [GitHub][3] in the default browser.
 
