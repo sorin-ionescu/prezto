@@ -4,6 +4,10 @@
 # Authors:
 #   Santiago Suarez Ordoñez <santiycr@gmail.com>
 #
+# Screenshots:
+#   http://i.imgur.com/4ArSAKB.png
+#   http://i.imgur.com/5Fxg2z8.png
+#
 
 # Load dependencies.
 pmodload 'helper'
@@ -48,7 +52,7 @@ function prompt_santiycr_setup {
   else
     HOS=""
   fi
-  PROMPT='%F{cyan}%n%f %2~$HOS ${git_info:+${(e)git_info[prompt]}} ${editor_info[keymap]} '
+  PROMPT='%F{cyan}%n%f %2~$HOS${git_info:+ ${(e)git_info[prompt]}} ${editor_info[keymap]} '
   RPROMPT='${git_info[rprompt]}%f ${VIM:+" %F{green}V%f"} %F{blue}[%*]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
