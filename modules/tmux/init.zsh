@@ -19,6 +19,9 @@ if [[ -z "$TMUX" ]] && zstyle -t ':prezto:module:tmux' auto-start; then
   tmux_session='#Prezto'
 
   if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
+    # Ensure that tmux server is started.
+    tmux start-server
+
     # Disable the destruction of unattached sessions globally.
     tmux set-option -g destroy-unattached off &> /dev/null
 
