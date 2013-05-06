@@ -156,7 +156,6 @@ function git-info {
   local indexed_formatted
   local -A info_formats
   local info_format
-  local line_number=0
   local modified=0
   local modified_format
   local modified_formatted
