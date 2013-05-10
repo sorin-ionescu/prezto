@@ -23,8 +23,7 @@ fi
 typeset -A syntax_highlighting_styles
 zstyle -a ':prezto:module:syntax-highlighting' styles 'syntax_highlighting_styles'
 for syntax_highlighting_style in "${(k)syntax_highlighting_styles[@]}"; do
-  ZSH_HIGHLIGHT_STYLES[$syntax_highlighting_style]=\
-    "$syntax_highlighting_styles[$syntax_highlighting_style]"
+  ZSH_HIGHLIGHT_STYLES[$syntax_highlighting_style]="$syntax_highlighting_styles[$syntax_highlighting_style]"
 done
 unset syntax_highlighting_style{s,}
 
