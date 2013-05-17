@@ -12,4 +12,9 @@ if [[ -d "$HOME/.carton" ]]; then
     alias cau='carton update'
     alias caI='carton init'
     alias cae='carton exec'
+
+    local completion="$HOME/.carton/etc/carton_completion.zsh"
+    if [[ -e "${completion}" ]]; then
+      source "${completion}"
+    fi
 fi
