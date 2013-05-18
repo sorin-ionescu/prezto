@@ -8,10 +8,10 @@ Settings
 
 ### Key bindings
 
-To enable key bindings, add the following to *zpreztorc*, and replace 'map' with
-'emacs' or 'vi'.
+To enable key bindings, add the following to *zpreztorc*, and replace 'bindings'
+with 'emacs' or 'vi'.
 
-    zstyle ':prezto:module:editor' keymap 'map'
+    zstyle ':prezto:module:editor' key-bindings 'bindings'
 
 ### Dot Expansion
 

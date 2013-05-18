@@ -306,14 +306,14 @@ fi
 #
 
 # Set the key layout.
-zstyle -s ':prezto:module:editor' keymap 'keymap'
-if [[ "$keymap" == (emacs|) ]]; then
+zstyle -s ':prezto:module:editor' key-bindings 'key_bindings'
+if [[ "$key_bindings" == (emacs|) ]]; then
   bindkey -e
-elif [[ "$keymap" == vi ]]; then
+elif [[ "$key_bindings" == vi ]]; then
   bindkey -v
 else
-  print "prezto: invalid keymap: $keymap" >&2
+  print "prezto: editor: invalid key bindings: $key_bindings" >&2
 fi
 
-unset key{map,}
+unset key{,map,bindings}
 
