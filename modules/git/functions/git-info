@@ -89,32 +89,6 @@ function _git-action {
   return 1
 }
 
-# Instructs the user on how to turn off git-info for the current repository.
-function _git-info-abort {
-  if ! is-true "$_git_info_executing"; then
-    return 1
-  fi
-
-  cat >&2 <<EOF
-
-
-Gathering status for certain repositories is time intensive.
-
-To turn off in-prompt Git status for this repository, execute:
-
-  git info off
-
-To revert, execute:
-
-  git-info on
-
-EOF
-
-  unset _git_info_executing
-  return 0
-}
-add-zsh-trap INT _git-info-abort
-
 # Gets the Git status information.
 function git-info {
   # Extended globbing is needed to parse repository status.
@@ -209,9 +183,6 @@ function git-info {
   if ! is-true "${$(git config --bool prompt.showinfo):-true}"; then
     return 1
   fi
-
-  # Used to abort git-info on SIGINT.
-  _git_info_executing=true
 
   # Ignore submodule status.
   zstyle -s ':prezto:module:git:status:ignore' submodules 'ignore_submodules'
@@ -445,7 +416,6 @@ function git-info {
   done
 
   unset REPLY
-  unset _git_info_executing
 
   return 0
 }
