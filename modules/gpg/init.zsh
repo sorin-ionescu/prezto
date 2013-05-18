@@ -10,19 +10,32 @@ if (( ! $+commands[gpg-agent] )); then
   return 1
 fi
 
-# Set the default path to the gpg-agent-info file.
-_gpg_agent_info="$HOME/.gpg-agent-info"
+# Set the default paths to gpg-agent files.
+_gpg_agent_conf="$HOME/.gnupg/gpg-agent.conf"
+_gpg_agent_env="$TMPDIR/gpg-agent.env"
 
 # Start gpg-agent if not started.
-ps -U "$USER" -o ucomm | grep -q gpg-agent \
-  || gpg-agent --daemon >! "$_gpg_agent_info"
+if ! ps -U "$USER" -o ucomm | grep -q gpg-agent; then
+  eval "$(gpg-agent --daemon | tee "$_gpg_agent_env")"
+else
+  # Export environment variables.
+  source "$_gpg_agent_env" 2> /dev/null
+fi
 
-# Export environment variables.
+# Inform gpg-agent of the current TTY for user prompts.
 export GPG_TTY="$(tty)"
-source "$_gpg_agent_info"
+
+# Integrate with the SSH module.
+if grep 'enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
+  # Override the ssh-agent environment file default path.
+  _ssh_agent_env="$_gpg_agent_env"
+
+  # Load the SSH module for additional processing.
+  pmodload 'ssh'
+fi
 
 # Clean up.
-unset _gpg_agent_info
+unset _gpg_agent_{conf,env}
 
 # Disable GUI prompts inside SSH.
 if [[ -n "$SSH_CONNECTION" ]]; then
