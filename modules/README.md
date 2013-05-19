@@ -71,6 +71,11 @@ History
 
 Sets history options and defines history aliases.
 
+Homebrew
+--------
+
+Defines Homebrew aliases.
+
 Macports
 --------
 
