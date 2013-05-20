@@ -74,3 +74,10 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
+#
+# Zsh
+#
+
+ZDOTDIR="${ZDOTDIR:-$HOME}"
+PREZTO="$ZDOTDIR/.zprezto"
+
