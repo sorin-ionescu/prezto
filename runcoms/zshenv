@@ -10,3 +10,10 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+#
+# Zsh
+#
+
+ZDOTDIR="${ZDOTDIR:-$HOME}"
+PREZTO="$ZDOTDIR/.zprezto"
+
