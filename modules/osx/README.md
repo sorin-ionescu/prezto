@@ -15,7 +15,6 @@ Aliases
 Functions
 ---------
 
-  - `manb` opens _man_ pages in [_Bwana.app_][2].
   - `manp` opens _man_ pages in _Preview.app_.
   - `pfd` prints the current _Finder_ directory.
   - `pfs` prints the current _Finder_ selection.
@@ -29,7 +28,6 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://www.apple.com/macosx/
-[2]: http://bruji.com/bwana/
 [3]: http://www.iterm2.com/
 [4]: https://github.com/sorin-ionescu/prezto/issues
 
