@@ -1,8 +1,8 @@
-#compdef manp
+#compdef mand manp
 #autoload
 
 #
-# Completes manp.
+# Completes mand and manp.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
