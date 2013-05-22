@@ -64,7 +64,7 @@ Aliases
      commits.
   - `gcR` removes the *HEAD* commit.
   - `gcs` displays various types of objects.
-  - `gcl` displays lost commits.
+  - `gcl` lists lost commits.
 
 ### Conflict
 
@@ -97,8 +97,8 @@ Aliases
 
   - `gg` displays lines matching a pattern.
   - `ggi` displays lines matching a pattern ignoring case.
-  - `ggl` displays files matching a pattern.
-  - `ggL` displays files are not matching a pattern.
+  - `ggl` lists files matching a pattern.
+  - `ggL` lists files that are not matching a pattern.
   - `ggv` displays lines not matching a pattern.
   - `ggw` displays lines matching a pattern at word boundary.
 
@@ -155,12 +155,12 @@ Aliases
 ### Remote
 
   - `gR` manages tracked repositories.
-  - `gRl` displays remote names and URLs.
+  - `gRl` lists remote names and their URLs.
   - `gRa` adds a new remote.
   - `gRx` removes a remote.
   - `gRm` renames a remote.
   - `gRu` fetches remotes updates.
-  - `gRc` deletes all stale remote tracking branches.
+  - `gRp` prunes all stale remote tracking branches.
   - `gRs` displays information about a given remote.
   - `gRb` opens a remote on [GitHub][3] in the default browser.
 
@@ -170,10 +170,9 @@ Aliases
   - `gsa` applies the changes recorded in a stash to the working directory.
   - `gsx` drops a stashed state.
   - `gsX` drops all the stashed states.
-  - `gsd` lists dropped stashed states.
   - `gsl` lists stashed states.
-  - `gsL` displays the changes recorded in the stash as a diff between the
-    stashed state and its original parent.
+  - `gsL` lists dropped stashed states.
+  - `gsd` displays changes between the stash and its original parent.
   - `gsp` removes and applies a single stashed state from the stash list.
   - `gsr` recovers a given stashed state.
   - `gss` stashes the changes of the dirty working directory, including untracked.
@@ -253,19 +252,38 @@ setting a style is as follows.
 | Name      | Format Code | Description
 | --------- | :---------: | ---------------------------------------------------
 | action    |     %s      | Special action name
-| added     |     %a      | Added files count
 | ahead     |     %A      | Commits ahead of remote count
 | behind    |     %B      | Commits behind of remote count
 | branch    |     %b      | Branch name
 | commit    |     %c      | Commit hash
+| position  |     %p      | Commits from the nearest tag count
+| remote    |     %R      | Remote name
+| stashed   |     %S      | Stashed states count
+
+### Concise Contexts
+
+| Name      | Format Code | Description
+| --------- | :---------: | ---------------------------------------------------
+| clean     |     %C      | Clean state
+| dirty     |     %D      | Dirty files count
+| indexed   |     %i      | Indexed files count
+| unindexed |     %I      | Unindexed files count
+| untracked |     %u      | Untracked files count
+
+The following contexts must be enabled with the following zstyle:
+
+    zstyle ':prezto:module:git:info' verbose 'yes'
+
+### Verbose Contexts
+
+| Name      | Format Code | Description
+| --------- | :---------: | ---------------------------------------------------
+| added     |     %a      | Added files count
 | clean     |     %C      | Clean state
 | deleted   |     %d      | Deleted files count
 | dirty     |     %D      | Dirty files count
 | modified  |     %m      | Modified files count
-| position  |     %p      | Commits from the nearest tag count
-| remote    |     %R      | Remote name
 | renamed   |     %r      | Renamed files count
-| stashed   |     %S      | Stashed states count
 | unmerged  |     %U      | Unmerged files count
 | untracked |     %u      | Untracked files count
 

@@ -4,42 +4,6 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#   To enable key bindings, add the following to zpreztorc, and replace 'map'
-#   with 'emacs' or 'vi.
-#
-#     zstyle ':prezto:module:editor' keymap 'map'
-#
-#   To enable the auto conversion of .... to ../.., add the following to
-#   zpreztorc.
-#
-#     zstyle ':prezto:module:editor' dot-expansion 'yes'
-#
-#   To indicate when the editor is in the primary keymap (emacs or viins), add
-#   the following to your theme prompt setup function.
-#
-#     zstyle ':prezto:module:editor:info:keymap:primary' format '>>>'
-#
-#   To indicate when the editor is in the primary keymap (emacs or viins) insert
-#   mode, add the following to your theme prompt setup function.
-#
-#     zstyle ':prezto:module:editor:info:keymap:primary:insert' format 'I'
-#
-#   To indicate when the editor is in the primary keymap (emacs or viins)
-#   overwrite mode, add the following to your theme prompt setup function.
-#
-#     zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format 'O'
-#
-#   To indicate when the editor is in the alternate keymap (vicmd), add the
-#   following to your theme prompt setup function.
-#
-#     zstyle ':prezto:module:editor:info:keymap:alternate' format '<<<'
-#
-#   To indicate when the editor is completing, add the following to your theme
-#   prompt setup function.
-#
-#     zstyle ':prezto:module:editor:info:completing' format '...'
-#
 
 # Return if requirements are not found.
 if [[ "$TERM" == 'dumb' ]]; then
