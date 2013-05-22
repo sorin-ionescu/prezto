@@ -1,0 +1,351 @@
+# —————————————————————————————————————————————————————————————————————
+#                                                      Chauncey Garrett
+#                                                        @vrtcl1dvoshun
+#                                                           21 May 2013
+# 
+# Garrett Zsh Theme for Prezto
+# Created with modified code by Chauncey Garrett
+# (ver.2013.05.21.15.17.46)
+# 
+# A prompt full of information when you need it and absent when you don't.
+# 
+# This prompt has the following features:                                                     
+#	- change prompt color when UID is root
+#	- change host color when on SSH
+#	- display full or truncated hostname on SSH
+#	- determine the number of background jobs
+#	- report the present working directory
+#	- report return codes
+#	- report local time
+#	- report the terminal line number
+#	- report git status, git remote status, git prompt info and git SHA information
+#	- indicate vi-mode
+#
+# Features may be disabled and rearranged as desired by using the corresponding tokens. 
+# —————————————————————————————————————————————————————————————————————
+
+# —————————————————————————————————————————————————————————————————————
+# Load dependencies
+# —————————————————————————————————————————————————————————————————————
+pmodload 'helper'
+
+
+# —————————————————————————————————————————————————————————————————————
+# Help function
+# TODO not even remotely finished...
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_help() {
+  cat <<'EOF'
+This prompt is configurable via styles:
+
+  Context: :prompt:garrett
+
+  Colors (in zsh/terminfo value):
+    user-color - the color for user@host. defaults to 'green'
+    root-color - the color for the hostname for root. defaults to 'red'
+    prompt-color - the color for everything else. defaults to 'blue'
+
+  Path type:
+    path - possible values:
+      ratio - use COLUMNS/ratio to clip the path. Default.
+      fixed - use a fixed maximum lenght.
+      subdir - clip by number of subdirectories.
+      full - show the full path
+
+  Path length styles:
+    ratio - the ratio for the 'ratio' path style, funnily enough.
+            default to 6.
+    length - the maximin lenght for the 'fixed' path style.
+             defaults to 20
+    subdir - the number of subdirs to show for the 'subdir' path style.
+             defaults to 3.
+
+  You can set styles in the current terminal to test things out, values
+  will be updated.
+
+EOF
+}
+
+# —————————————————————————————————————————————————————————————————————
+# Preview 
+# TODO not sure if I need to do this or really how...
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_preview {
+	prompt_preview_theme 'garrett'
+}
+
+# —————————————————————————————————————————————————————————————————————
+# PWD truncation precmd
+# TODO doesn't work like the rest of my "easy variables"
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_pwd {
+	eval pwd='${PWD/#$HOME/~}'
+	
+	if [[ "$pwd" == (#m)[/~] ]]; then
+		eval _prompt_garrett_pwd="$MATCH"
+		unset MATCH
+	else
+		eval _prompt_garrett_pwd='${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}'
+	fi
+}
+
+# —————————————————————————————————————————————————————————————————————
+# PROMPT chpwd
+# 	- a function which is executed whenever the directory is changed
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_chpwd {
+	emulate -L zsh  # TODO can't remember why this is necessary...
+	ls -AG         # list the contents of the new directory
+}
+
+# —————————————————————————————————————————————————————————————————————
+# PROMPT precmd
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_precmd {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+    
+	# Format PWD.
+    eval prompt_garrett_pwd
+    
+	# Get git repository information.
+    if (( $+functions[git-info] )); then
+    	git-info
+    fi
+}
+
+# —————————————————————————————————————————————————————————————————————
+# PROMPT preexec
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_preexec {
+	# Get ruby info
+    if (( $+functions[ruby-info] )); then
+      ruby-info
+    fi
+}
+
+# —————————————————————————————————————————————————————————————————————
+# Setup prompt
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_setup {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+    prompt_opts=(cr percent subst)
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Load necessary modules
+	# —————————————————————————————————————————————————————————————————————
+	setopt prompt_subst
+	
+	# —————————————————————————————————————————————————————————————————————
+    # Add hook for calling precommand & chpwd
+	# —————————————————————————————————————————————————————————————————————
+	autoload -Uz add-zsh-hook
+    add-zsh-hook precmd prompt_garrett_precmd
+	add-zsh-hook chpwd prompt_garrett_chpwd
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Alias the colors
+	# —————————————————————————————————————————————————————————————————————
+	[[ -z $(functions colors) ]] && autoload -U colors && colors      # Used in the color alias below
+	#[[ -z $(functions zsh/terminfo) ]] && autoload -Uz zsh/terminfo   # TODO not sure if zsh/terminfo is necessary...
+	for color in red green yellow blue magenta cyan white grey; do
+		eval $color='%{$fg_no_bold[${(L)color}]%}'
+		eval BOLD_$color='%{$fg_bold[${(L)color}]%}'
+	done
+	eval no_color='%{$reset_color%}'
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Check the UID to set prompt color
+	# TODO better Zsh way to determine UID?
+	# —————————————————————————————————————————————————————————————————————
+	if [[ $UID -eq 0 ]]; then # root
+	    eval user_color='${red}'                      # set root user color
+	    eval prompt_color='${red}'                    # set root prompt color
+		eval BOLD_prompt_color='${BOLD_red}'          # set root prompt BOLD color
+	    eval user='%S${user_color}%n%s'
+	else # normal user
+	    eval user_color='${green}'                    # set normal user color
+	    eval prompt_color='${white}'                  # set normal prompt color
+		eval BOLD_prompt_color='${BOLD_white}'        # set normal prompt BOLD color
+	    eval user='${user_color}%n'
+	fi
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Check if we are on SSH or not to set host_color
+	# TODO better Zsh way to determine SSH2_CLIENT?
+	# —————————————————————————————————————————————————————————————————————
+	if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then # SSH
+	    eval host_color='${yellow}'
+	else # no SSH
+	    eval host_color='${green}'
+	fi
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Set hostname display
+	# —————————————————————————————————————————————————————————————————————
+	eval host='${host_color}%m'      # hostname up to first . (dot)
+	#eval host='${host_color}%M'      # full hostname
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Determine number of background jobs
+	# TODO doesn't work like the rest of my "easy variables"
+	# 	- must instead insert code directly into PROMPT
+	# —————————————————————————————————————————————————————————————————————
+#	eval number_jobs=' ${prompt_color}%(1j.J:${cyan}%j${no_color}.)'
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Report hostname
+	# —————————————————————————————————————————————————————————————————————
+	eval location='${user}${cyan}@${host}'      # hostname with user
+	#eval location='${cyan}@${host}'            # hostname without user
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Report present working directory
+	# TODO truncated dir doesn't work like the rest of my "easy variables"
+	# 	- must instead insert code directly into PROMPT
+	# —————————————————————————————————————————————————————————————————————
+#	eval current_dir='${blue}%~'                     # Full directory
+#	eval current_dir='${blue}${_prompt_garrett_pwd}'  # Truncated directory
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Report return code
+	# —————————————————————————————————————————————————————————————————————
+	eval return_code='%(?..${red}%? ↵ )'
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Report local time
+	# —————————————————————————————————————————————————————————————————————
+	eval current_time='${green}%T'           # 24 hour time format
+#	eval current_time='${green}%t'           # AM/PM time format
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Report terminal line number
+	# —————————————————————————————————————————————————————————————————————
+	eval line_number='${magenta}%!'
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Report git prompt info (in order in which it will appear in the prompt)
+	# —————————————————————————————————————————————————————————————————————
+    zstyle ':prezto:module:git:info:branch'    format "${cyan}λ ${green}%b"
+    zstyle ':prezto:module:git:info:remote'    format "%R"
+
+    zstyle ':prezto:module:git:info:action'    format "${yellow}%s"
+    zstyle ':prezto:module:git:info:position'  format "${red}%p"
+	
+	# Git commit SHA (in order in which it will appear in the prompt)
+	# —————————————————————————————————————————————————————————————————————
+    zstyle ':prezto:module:git:info:commit'    format "${prompt_color}➤ ${yellow}%.7c"
+	
+	# Git remote status (in order in which it will appear in the prompt)
+	# —————————————————————————————————————————————————————————————————————
+    zstyle ':prezto:module:git:info:behind'    format "${BOLD_magenta}%A⤥"
+	#zstyle ':prezto:module:git:info:behind'    format "${BOLD_magenta}⬇"
+    zstyle ':prezto:module:git:info:ahead'     format "${BOLD_magenta}%B⤤"
+	#zstyle ':prezto:module:git:info:ahead'     format "${BOLD_magenta}⬆"
+	zstyle ':prezto:module:git:info:diverged'     format "${BOLD_magenta}⥮"
+    zstyle ':prezto:module:git:info:stashed'   format "${cyan} %S✭"
+	
+	
+	# Git local status (in order in which it will appear in the prompt)
+	# —————————————————————————————————————————————————————————————————————
+    zstyle ':prezto:module:git:info:clean'     format ""
+    zstyle ':prezto:module:git:info:dirty'     format "${yellow}⚡${prompt_color} |"
+    zstyle ':prezto:module:git:info:added'     format "${green} ✚"
+    zstyle ':prezto:module:git:info:deleted'   format "${red} ✗"
+    zstyle ':prezto:module:git:info:modified'  format "${blue} ✱"
+    zstyle ':prezto:module:git:info:renamed'   format "${magenta} ➜"
+    zstyle ':prezto:module:git:info:unmerged'  format "${yellow} ═"
+    zstyle ':prezto:module:git:info:untracked' format "${white} ◼"
+	
+	# Git prompt styles
+	# —————————————————————————————————————————————————————————————————————
+	zstyle ':prezto:module:git:info:keys' format \
+		'prompt_info'  "%b" \
+		'rprompt' "[%R]" \
+		'local_status'  "%C%D%a%d%m%r%U%u" \
+		'remote_status'  "%B%A%S" \
+		'sha' " %c" \
+
+	# —————————————————————————————————————————————————————————————————————
+	# Report ruby version
+	# —————————————————————————————————————————————————————————————————————
+    #zstyle ':prezto:module:ruby:info:version' format "${white}%v"  # %v - ruby version
+    zstyle ':prezto:module:ruby:info:version' format "version:%v "
+	
+
+	# —————————————————————————————————————————————————————————————————————
+	# Vim mode indicator
+	# TODO not sure how to just use alternate...
+	# —————————————————————————————————————————————————————————————————————
+	local vi_mode_prompt_info="${${KEYMAP/vicmd/${BOLD_red}❮${red}❮❮}/(main|viins)/} "
+	eval MODE_INDICATOR='${BOLD_red}❮${red}❮❮'
+	
+    zstyle ':prezto:module:editor:info:keymap:primary'           format "${no_color}❯${grey}❯${BOLD_red}❯ "
+	#zstyle ':prezto:module:editor:info:keymap:primary:insert'    format "I"
+    zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format "${red}♺ "
+    zstyle ':prezto:module:editor:info:keymap:alternate'         format "${BOLD_red}❮${grey}❮${no_color}❮ "
+    zstyle ':prezto:module:editor:info:completing'               format "${BOLD_red}..."
+	
+	# —————————————————————————————————————————————————————————————————————
+	# Scary Root Prompt (for default root prompt, i.e., usually bash)
+	# 	- different from zsh root prompt
+	# —————————————————————————————————————————————————————————————————————
+	export SUDO_PS1="\[\e[31;1;46m\][\u] \w \$\[\e[0m\] "
+	
+# —————————————————————————————————————————————————————————————————————
+# Finally! the PROMPT...
+# 	- add %E to beginning of PROMPT to clear screen after every command
+# TODO prompt works but code is not ideal (clean)
+# —————————————————————————————————————————————————————————————————————
+	
+# PROMPT on left
+# —————————————————————————————————————————————————————————————————————
+#PROMPT='
+# TODO: how I'd like it to look...
+#${prompt_color}╭─( ${current_dir} ${prompt_color}) ${git_info[remote_status]} ${git_info[prompt_info]} ${git_info[local_status]}
+#${prompt_color}⎪ ${line_number}${number_jobs}${git_info[sha]}
+#${prompt_color}╰─❮ ${current_time}${prompt_color} ❯${editor_info[keymap]}${no_color}'
+# TODO: for testing the problems I have...
+#PROMPT='
+#current dir:
+#test ${current_dir}
+#code ${blue}${_prompt_garrett_pwd} ${prompt_color}
+#
+#number jobs:
+#test ${number_jobs}
+#code ${prompt_color}%(1j.J:${cyan}%j${no_color}.)
+#
+#vi mode:
+#test ${vi_mode_prompt_info}
+#test ${editor_info[alternate]}
+#test ${editor_info[overwrite]}
+#code ${editor_info[keymap]}
+#code ${${KEYMAP/vicmd/${BOLD_red}❮${red}❮❮}/(main|viins)/}
+#
+#ruby version:
+#test ${ruby_info[version]}
+#code %v
+#'
+# TODO: how it must look to work...
+PROMPT='
+${prompt_color}╭─( ${blue}${_prompt_garrett_pwd} ${prompt_color}) ${git_info[remote_status]} ${git_info[prompt_info]} ${git_info[local_status]}
+${prompt_color}⎪ ${line_number} ${prompt_color}%(1j.J:${cyan}%j${no_color}.)${git_info[sha]}
+${prompt_color}╰─❮ ${current_time}${prompt_color} ❯${editor_info[keymap]}${no_color}'
+
+
+# PROMPT on right
+# —————————————————————————————————————————————————————————————————————
+# TODO: how I'd like it to look...
+#RPROMPT="${editor_info[alternate]}${ruby_info[version]}${editor_info[overwrite]}${return_code}${location} ${no_color}"
+# TODO: how it must look to work...
+RPROMPT='${${KEYMAP/vicmd/${BOLD_red}❮${red}❮❮}/(main|viins)/} ${ruby_info[version]}${editor_info[overwrite]}${return_code}${location} ${no_color}'
+
+# Autocorrection PROMPT
+# —————————————————————————————————————————————————————————————————————
+SPROMPT="
+Correct ${red}%R${no_color} to ${green}%r${no_color}? [nyae] "
+}
+
+prompt_garrett_setup "$@"
+
