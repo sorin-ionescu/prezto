@@ -7,3 +7,6 @@
 [submodule "modules/completion/external"]
 	path = modules/completion/external
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "modules/marked"]
+	path = modules/marked
+	url = https://github.com/vrtcl1dvoshun/marked.git
