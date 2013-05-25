@@ -1,8 +1,8 @@
-#compdef ls-archive
+#compdef lsarchive
 #autoload
 
 #
-# Completes ls-archive.
+# Completes lsarchive.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
