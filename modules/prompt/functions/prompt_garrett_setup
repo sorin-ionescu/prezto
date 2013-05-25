@@ -159,7 +159,7 @@ function prompt_garrett_setup {
 	# Check the UID to set prompt color
 	# TODO better Zsh way to determine UID?
 	# —————————————————————————————————————————————————————————————————————
-	if [[ $UID -eq 0 ]]; then # root
+	if [[ "$EUID" = "0" ]] || [[ "$USER" = 'root' ]]; then # root
 	    eval user_color='${red}'                      # set root user color
 	    eval prompt_color='${red}'                    # set root prompt color
 		eval BOLD_prompt_color='${BOLD_red}'          # set root prompt BOLD color
