@@ -28,6 +28,8 @@ else
   if [[ "$OSTYPE" == darwin* ]]; then
     export GEM_HOME="$HOME/Library/Ruby/Gems/1.8"
     path=("$GEM_HOME/bin" $path)
+  else
+    path=($HOME/.gem/ruby/*/bin(N) $path)
   fi
 fi
 
@@ -58,4 +60,3 @@ if (( $+commands[bundle] )); then
     && print vendor/bundle >>! .gitignore \
     && print vendor/cache  >>! .gitignore'
 fi
-

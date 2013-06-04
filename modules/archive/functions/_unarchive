@@ -1,8 +1,8 @@
-#compdef extract
+#compdef unarchive
 #autoload
 
 #
-# Completes extract.
+# Completes unarchive.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
