@@ -10,3 +10,6 @@
 [submodule "modules/marked"]
 	path = modules/marked
 	url = https://github.com/vrtcl1dvoshun/marked.git
+[submodule "modules/mime-setup"]
+	path = modules/mime-setup
+	url = git@github.com:chauncey-garrett/zsh-mime-setup.git
