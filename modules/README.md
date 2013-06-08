@@ -76,6 +76,16 @@ Macports
 
 Defines MacPorts aliases and adds MacPorts directories to path variables.
 
+Marked
+------
+
+Defines Marked.app aliases.
+
+MIME Setup
+----------
+
+Uses system default handlers to determine suffix aliases.
+
 Node.js
 -------
 
@@ -84,7 +94,7 @@ Provides utility functions for Node.js and loads npm completion.
 OSX
 ---
 
-Defines Mac OS X aliases and functions.
+Defines OS X aliases and functions.
 
 Pacman
 ------
