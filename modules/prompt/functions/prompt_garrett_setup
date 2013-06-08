@@ -20,6 +20,7 @@
 #	- report the terminal line number
 #	- report git status, git remote status, git prompt info and git SHA information
 #	- indicate vi-mode
+#	- growl notifications for commands taking longer than x time
 #
 # Features may be disabled and rearranged as desired by using the corresponding tokens. 
 # —————————————————————————————————————————————————————————————————————
@@ -76,9 +77,10 @@ function prompt_garrett_preview {
 
 # —————————————————————————————————————————————————————————————————————
 # PWD truncation precmd
-# TODO doesn't work like the rest of my "easy variables"
+# TODO PWD doesn't work like the rest of my "easy variables"
 # —————————————————————————————————————————————————————————————————————
 function prompt_garrett_pwd {
+
 	eval pwd='${PWD/#$HOME/~}'
 	
 	if [[ "$pwd" == (#m)[/~] ]]; then
@@ -99,7 +101,32 @@ function prompt_garrett_chpwd {
 }
 
 # —————————————————————————————————————————————————————————————————————
-# PROMPT precmd
+# Growl Notifications after x amount of time has passed
+# —————————————————————————————————————————————————————————————————————
+function prompt_garrett_growl_preexec {
+	# Define timer and cmd for growl notification
+	export PREEXEC_TIME=$(date +'%s')
+	export PREEXEC_CMD="The command: $1"
+}
+
+function prompt_garrett_growl_precmd {
+	# Trigger a growl notification after x time has elapsed
+	DELAY_AFTER_NOTIFICATION=1
+    
+	# Determine x time elapsed
+	start=${PREEXEC_TIME:-`date +'%s'`}
+	stop=$(date +'%s')
+	let elapsed=$stop-$start
+    
+	# growlnotify!
+	if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then # x time has passed so growlnotify!
+		tput bel
+		growlnotify -n "Terminal" -m "Took $elapsed s" ${PREEXEC_CMD:-Some command}
+	fi
+}
+
+# —————————————————————————————————————————————————————————————————————
+# PROMPT precmd (After a command execution)
 # —————————————————————————————————————————————————————————————————————
 function prompt_garrett_precmd {
     setopt LOCAL_OPTIONS
@@ -107,6 +134,11 @@ function prompt_garrett_precmd {
     
 	# Format PWD.
     eval prompt_garrett_pwd
+	
+	# Trigger a growl notification after x time has elapsed
+	if (( $+commands[growlnotify] )); then
+		eval prompt_garrett_growl_precmd
+	fi
     
 	# Get git repository information.
     if (( $+functions[git-info] )); then
@@ -117,11 +149,17 @@ function prompt_garrett_precmd {
 # —————————————————————————————————————————————————————————————————————
 # PROMPT preexec
 # —————————————————————————————————————————————————————————————————————
-function prompt_garrett_preexec {
+function preexec {
 	# Get ruby info
     if (( $+functions[ruby-info] )); then
-      ruby-info
+    	ruby-info
     fi
+	
+	# Define timer and cmd for growl notification
+	if (( $+commands[growlnotify] )); then
+		export PREEXEC_TIME=$(date +'%s')
+		export PREEXEC_CMD="The command: $1"
+	fi
 }
 
 # —————————————————————————————————————————————————————————————————————
