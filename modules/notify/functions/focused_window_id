@@ -1,0 +1,26 @@
+# Gets the id of the current focused window.
+#
+# Authors:
+#   Alex Reece <awreece@gmail.com>
+#
+
+function focused_window_id {
+  case "$OSTYPE" in
+    (darwin*)
+      osascript -e 'tell application "System Events" to ¬' \
+                -e '  set focus_app_name to ¬' \
+                -e '    name of first application process ¬' \
+                -e '    whose frontmost is true' \
+                -e 'tell application focus_app_name to ¬' \
+                -e '  get id of front window'
+      ;;
+    (linux-gnu*)
+      # http://stackoverflow.com/a/8688624/447288 
+      xprop -root -f _NET_ACTIVE_WINDOW 0x ' $0' _NET_ACTIVE_WINDOW  \
+        | awk '{print $2}'
+      ;;
+    (*)
+      return 1
+      ;;
+  esac
+}

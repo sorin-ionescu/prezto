@@ -7,28 +7,18 @@
 
 pmodload 'last_command'
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  terminal_window_id=$(osascript -e 'tell application "Terminal" to ¬' \
-                                 -e '  get id of front window')
+if ! should_load_notify_module; then
+  return 1
 fi
 
+# Initialize $terminal_window_id to the current active window.
+terminal_window_id=$(focused_window_id)
+
 # Returns true if the current window has focus.
-# Warning: Currently only implementd on mac.
-# Assume $terminal_window_id is the osascript id of the current window.
 #
 # TODO(awreece) Add support for tabs.
 function window_is_focused {
-  if [[ "$OSTYPE" == darwin* ]]; then
-    focus_window_id=$(osascript -e 'tell application "System Events" to ¬' \
-                                -e '  set focus_app_name to ¬' \
-                                -e '    name of first application process ¬' \
-                                -e '    whose frontmost is true' \
-                                -e 'tell application focus_app_name to ¬' \
-                                -e '  get id of front window')
-  fi
-  # On a not mac, this will always return true since focus_id and
-  # terminal_window_id are both undefined so empty strings.
-  [[ $focus_window_id == $terminal_window_id ]]
+  [[ $(focused_window_id) == $terminal_window_id ]]
 }
 
 # Sends a notification that the last command terminated.
@@ -40,13 +30,21 @@ function last_command_notify {
                    $(time_to_human $last_command_time))
 
   # TODO(awreece) Add support for user defined callback.
-  if [[ "$OSTYPE" == darwin* ]]; then
-    callback="osascript -e 'tell application \"Terminal\"' \
-                        -e 'activate' \
-                        -e 'set index of window id $terminal_window_id to 1' \
-                        -e 'end tell'"
-    terminal-notifier -message $message -execute $callback >/dev/null
-  fi
+  case "$OSTYPE" in
+    (darwin*)
+      callback="osascript -e 'tell application \"Terminal\"' \
+                          -e 'activate' \
+                          -e 'set index of window id $terminal_window_id to 1' \
+                          -e 'end tell'"
+      terminal-notifier -message $message -execute $callback >/dev/null
+      ;;
+    (linux-gnu*)
+      notify-send "Command finished" $message
+      ;;
+    (*)
+      return 1
+      ;;
+  esac
 }
 
 function notify_precmd {
