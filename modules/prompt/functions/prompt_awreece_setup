@@ -37,6 +37,8 @@ EOH
 }
 
 function prompt_awreece_setup {
+  prompt_opts=(cr percent subst)
+
   # Load required functions.
   autoload -Uz add-zsh-hook
   zmodload zsh/datetime  # For EPOCHREALTIME.
