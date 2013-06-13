@@ -26,6 +26,19 @@ Submodules may be ignored when they are *dirty*, *untracked*, *all*, or *none*.
 
 This setting affects all aliases and functions that call `git-status`.
 
+### No Aliases
+
+The loading of the git aliases can be disabled:
+
+    zstyle ':prezto:module:git' no-aliases 'yes'
+
+### Magic escaping
+
+Automatic escaping of special characters in git refspecs (i.e, `HEAD^`) can be
+enabled via adding the following to your *zpreztorc*:
+
+    zstyle ':prezto:module:git' escape-magic 'yes'
+
 Aliases
 -------
 
