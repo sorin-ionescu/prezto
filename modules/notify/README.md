@@ -1,7 +1,12 @@
-Last Command
-============
+Notify
+======
 
-Notifies if the command completes and terminal isn't the foreground window.
+Cross platform notification support.
+
+Functions
+---------
+
+-    `notify` opens a notification with the given args. Usage: `notify hello world`.
 
 Settings
 --------
