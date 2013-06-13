@@ -16,6 +16,8 @@ if (( ! $+commands[node] )); then
   return 1
 fi
 
+pmodload 'helper'
+
 # Load NPM completion.
 if (( $+commands[npm] )); then
   cache_file="${0:h}/cache.zsh"

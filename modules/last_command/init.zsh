@@ -1,19 +1,20 @@
 #
-# Exports information about the last command.
+# Provides information about the last command.
 #
 # Authors:
 #   Alex Reece <awreece@gmail.com>
 #
 
-# Exported values.
+# Provided values.
 last_command=''
 last_command_status=0
 last_command_time=0.0
 
-# Not exported.
-last_command_start_time=invalid
-
 zmodload zsh/datetime  # For EPOCHREALTIME.
+
+# This value is used internally by this module and is not intended to be used
+# elsewhere.
+last_command_start_time='invalid'
 
 function last_command_precmd {
   exit_status=$?  # TODO(awreece) What happens if another precmd runs first?
