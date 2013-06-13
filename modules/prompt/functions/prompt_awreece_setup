@@ -39,22 +39,8 @@ EOH
 function prompt_awreece_setup {
   prompt_opts=(cr percent subst)
 
-  # Load required functions.
-  autoload -Uz add-zsh-hook
-  zmodload zsh/datetime  # For EPOCHREALTIME.
-
-  # Add hooks used for timing each command and displaying notifications.
-  add-zsh-hook precmd prompt_awreece_precmd
-  add-zsh-hook preexec prompt_awreece_preexec
-
-  last_run_time=0
-  last_start_time='invalid'
-  last_command=''
-  last_status=0
-  if [[ "$OSTYPE" == darwin* ]]; then
-    terminal_window_id=$(osascript -e 'tell application "Terminal" to ¬' \
-                                   -e '  get id of front window')
-  fi
+  # Load prerequisites.
+  pmodload 'last_command'
 
   # Variables used for prompts.
   local background_job_status='%(1j.%F{yellow}%j&%f .)'
@@ -70,83 +56,8 @@ function prompt_awreece_setup {
   RPROMPT="${background_job_status}${full_directory}${ssh_host}${command_time}"
 }
 
-# Converts a floating point time in seconds to a human readable string.
-function prompt_awreece_time_to_human {
-  seconds=$1
-  if (( seconds < 10 )); then
-    printf "%6.3fs" $seconds
-  elif (( seconds < 60 )); then
-    printf "%6.3fs" $seconds
-  elif (( seconds < (60*60) )); then
-    printf "%6.3fm" $(( seconds / 60 ))
-  elif (( seconds < (60*60*24) )); then
-    printf "%6.3fh" $(( seconds / (60*60) ))
-  else
-    printf "%6.3fd" $(( seconds / (60*60*24) ))
-  fi
-}
-
 function prompt_awreece_command_time {
-  prompt_awreece_time_to_human $last_run_time
-}
-
-function prompt_awreece_preexec {
-  last_start_time=$EPOCHREALTIME
-  last_command=$1
-}
-
-function prompt_awreece_precmd {
-  exit_status=$?  # TODO(awreece) What happens if another precmd runs first?
-
-  # We do these 'invalid' shenanigans because zsh executes precmd but not
-  # preexec if an empty line is entered.
-  if [[ $last_start_time != 'invalid' ]]; then
-    last_status=$exit_status
-    last_run_time=$((EPOCHREALTIME - last_start_time))
-
-    if ! prompt_awreece_is_focused; then
-      prompt_awreece_notify
-    fi
-
-    last_start_time='invalid'
-    last_comamnd=''
-  fi
-}
-
-# Returns true if the current window has focus.
-# Warning: Currently only implementd on mac.
-# Assume $terminal_window_id is the osascript id of the current window.
-#
-# TODO(awreece) Add support for tabs.
-function prompt_awreece_is_focused {
-  if [[ "$OSTYPE" == darwin* ]]; then
-    focus_window_id=$(osascript -e 'tell application "System Events" to ¬' \
-                                -e '  set focus_app_name to ¬' \
-                                -e '    name of first application process ¬' \
-                                -e '    whose frontmost is true' \
-                                -e 'tell application focus_app_name to ¬' \
-                                -e '  get id of front window')
-  fi
-  # On a not mac, this will always return true since focus_id and
-  # terminal_window_id are both undefined so empty strings.
-  [[ $focus_window_id == $terminal_window_id ]]
-}
-
-# Sends a notification that the last command terminated.
-# Warning: currently only implemented for mac.
-function prompt_awreece_notify {
-  message=$(printf "Command \"%s\" finished (%d) after %s." \
-                   $last_command \
-                   $last_status \
-                   $(prompt_awreece_time_to_human $last_run_time))
-
-  if [[ "$OSTYPE" == darwin* ]]; then
-    callback="osascript -e 'tell application \"Terminal\"' \
-                        -e 'activate' \
-                        -e 'set index of window id $terminal_window_id to 1' \
-                        -e 'end tell'"
-    terminal-notifier -message $message -execute $callback >/dev/null
-  fi
+  time_to_human $last_command_time
 }
 
 # Return a zero exit status (true) iff the current shell is controlled via ssh.
@@ -161,8 +72,8 @@ function prompt_awreece_is_ssh {
 function prompt_awreece_preview {
   local +h PROMPT='%# '
   local +h RPROMPT=''
-  # Set a last_run_time to make it interesting.
-  local +h last_run_time=3.14159
+  # Set a last_command_time to make it interesting.
+  local +h last_commmand_time=3.14159
 
   prompt_preview_theme 'awreece' "$@"
 }

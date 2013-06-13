@@ -1,0 +1,26 @@
+#
+# Pretty prints a time in human readable format.
+#
+# Authors:
+#   Alex Reece <awreece@gmail.com>
+#
+
+# Converts a floating point time duration in seconds to a human readable string.
+function time_to_human {
+  seconds=$1
+  if (( seconds < 10 )); then
+    printf "%6.3fs" $seconds
+  elif (( seconds < 60 )); then
+    printf "%6.3fs" $seconds
+  elif (( seconds < (60*60) )); then
+    printf "%6.3fm" $(( seconds / 60 ))
+  elif (( seconds < (60*60*24) )); then
+    printf "%6.3fh" $(( seconds / (60*60) ))
+  elif (( seconds < (60*60*24*30) )); then
+    printf "%6.3fd" $(( seconds / (60*60*24) ))
+  elif (( seconds < (60*60*24*30*12) )); then
+    printf "%6.3fm" $(( seconds / (60*60*24*30) ))
+  else
+    printf "%6.3fy" $(( seconds / (60*60*24*30*12) ))
+  fi
+}
