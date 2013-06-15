@@ -7,7 +7,7 @@
 case "$OSTYPE" in
   (darwin*)
     osascript -e 'tell application (path to frontmost application as text) ¬' \
-              -e '  to get id of front window'
+              -e '  to get id of front window' 2>/dev/null
     ;;
   (linux-gnu*)
     # http://stackoverflow.com/a/8688624/447288
