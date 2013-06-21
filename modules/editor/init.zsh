@@ -222,10 +222,8 @@ bindkey -M emacs "$key_info[Control]X$key_info[Control]]" vi-match-bracket
 bindkey -M emacs "$key_info[Control]X$key_info[Control]E" edit-command-line
 
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
-  bindkey -M emacs "$key_info[Control]R" \
-    history-incremental-pattern-search-backward
-  bindkey -M emacs "$key_info[Control]S" \
-    history-incremental-pattern-search-forward
+  bindkey -M emacs "$key_info[Control]R" history-incremental-pattern-search-backward
+  bindkey -M emacs "$key_info[Control]S" history-incremental-pattern-search-forward
 fi
 
 #
@@ -292,8 +290,7 @@ for keymap in 'emacs' 'viins'; do
   fi
 
   # Display an indicator when completing.
-  bindkey -M "$keymap" "$key_info[Control]I" \
-    expand-or-complete-with-indicator
+  bindkey -M "$keymap" "$key_info[Control]I" expand-or-complete-with-indicator
 
   # Insert 'sudo ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo

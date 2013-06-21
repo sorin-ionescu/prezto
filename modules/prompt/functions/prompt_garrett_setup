@@ -93,7 +93,7 @@ function prompt_garrett_pwd {
 # Determine number of background jobs precmd function
 # —————————————————————————————————————————————————————————————————————
 function prompt_garrett_number_jobs {
-	number_jobs="%(1j.${color_prompt}J:${cyan}%j.)"
+	number_jobs="%(1j.${color_prompt}J:${cyan}%j.) "
 }
 	
 # —————————————————————————————————————————————————————————————————————
@@ -194,7 +194,7 @@ function prompt_garrett_precmd {
 
 	# Determine the length needed for prompt_space
 	# NOTE: Be sure not to include the ${(e)prompt_space} portion or it won't work
-	local prompt_line1="╭─( ${current_dir} )${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} ( ${current_time} )─┐"
+	local prompt_line1="╭─( ${current_dir}${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} )( ${ruby_info[version]}${location} )─┐"
 	local zero='%([BSUbfksu]|([FB]|){*})'
 	local prompt_width_line1=${#${(S%%)prompt_line1//$~zero/}} 
 
@@ -208,7 +208,7 @@ function prompt_garrett_precmd {
 	# Prompt line 1
 	# —————————————————————————————————————————————————————————————————————
 	print
-	print -P '${color_prompt}╭─( ${current_dir} ${color_prompt})${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} ${(e)prompt_space}( ${current_time}${color_prompt} )─┐'
+	print -P '${color_prompt}╭─( ${current_dir}${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} ${color_prompt})${(e)prompt_space}( ${ruby_info[version]}${location}${color_prompt} )─┐'
 }
 
 # —————————————————————————————————————————————————————————————————————
@@ -307,14 +307,32 @@ function prompt_garrett_setup {
 	# —————————————————————————————————————————————————————————————————————
 	# Report return code
 	# —————————————————————————————————————————————————————————————————————
-	eval return_code='%(?..${red}%? ↵ )'
+	eval return_code='%(?..${red}%? ↵ ) '
 	
 	# —————————————————————————————————————————————————————————————————————
 	# Report local time
 	# —————————————————————————————————————————————————————————————————————
 	eval current_time='${green}%T'           # 24 hour time format
+	# eval current_time='${green}%*'           # 24 hour time format, precise
 	# eval current_time='${green}%t'           # AM/PM time format
-	
+
+	# Keep the time updated
+	# schedprompt() {
+		# emulate -L zsh
+		# zmodload -i zsh/sched
+
+		# # Remove existing event, so that multiple calls to "schedprompt" work OK (you could put one in precmd to push the timer 30 seconds into the future, for example.)
+		# integer i=${"${(@)zsh_scheduled_events#*:*:}"[(i)schedprompt]}
+		# (( i )) && sched -$i
+
+		# # Test that zle is running before calling the widget (recommended to avoid error messages). Otherwise it updates on entry to zle, so there's no loss.
+		# zle && zle reset-prompt
+
+		# # This ensures we're not too far off the start of the minute
+		# sched +1 schedprompt
+	# }
+	# schedprompt
+
 	# —————————————————————————————————————————————————————————————————————
 	# Report terminal line number
 	# —————————————————————————————————————————————————————————————————————
@@ -363,27 +381,31 @@ function prompt_garrett_setup {
 	# Report ruby version
 	#	%v - ruby version
 	# —————————————————————————————————————————————————————————————————————
-    zstyle ':prezto:module:ruby:info:version' format "${white}ruby-%v "
+    zstyle ':prezto:module:ruby:info:version' format "${yellow}ruby%v "
 	
 	# —————————————————————————————————————————————————————————————————————
 	# Vim mode indicator
 	# —————————————————————————————————————————————————————————————————————
-	zstyle ':prezto:module:editor:info:keymap:primary'           format "${red}❯${color_prompt}❯❯ "
-	zstyle ':prezto:module:editor:info:keymap:alternate'         format "${red}❮${color_prompt}❮❮ "
+	zstyle ':prezto:module:editor:info:keymap:primary'           format "${red}❱${color_prompt}❱❱ "
+	zstyle ':prezto:module:editor:info:keymap:alternate'         format "${red}❰${color_prompt}❰❰ "
 	# zstyle ':prezto:module:editor:info:keymap:primary:insert'    format "${red}I "
     zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format "${red}♺ "
     zstyle ':prezto:module:editor:info:completing'               format "${red}..."
-	
+
 # —————————————————————————————————————————————————————————————————————
 # Finally! the PROMPT...
 # 	- add %E to beginning of PROMPT to clear screen after every command
 # —————————————————————————————————————————————————————————————————————
 
 # Left PROMPT
-export PROMPT='${color_prompt}╰─${editor_info[keymap]}' 
+if (( $SHLVL == 1 )); then
+	export PROMPT='${color_prompt}╰─${editor_info[keymap]}' 
+else
+	export PROMPT='${color_prompt}╰─( ${cyan}$SHLVL ${color_prompt}) ${editor_info[keymap]}' 
+fi
 
 # Right PROMPT
-export RPROMPT='${editor_info[alternate]}${editor_info[overwrite]}${return_code}${number_jobs} ${ruby_info[version]}${location} ${line_number}${color_prompt} ─┘'
+export RPROMPT='${editor_info[alternate]}${editor_info[overwrite]}${return_code}${number_jobs}${line_number} ${current_time} ${color_prompt}❰─┘'
 
 # Continuation PROMPT
 export PROMPT2='${color_prompt}%_ ${editor_info[keymap]}'
@@ -392,7 +414,7 @@ export PROMPT2='${color_prompt}%_ ${editor_info[keymap]}'
 export PROMPT3='${yellow}#? '
 
 # Execution trace PROMPT
-export PROMPT4='${blue}$0${color_prompt}@${yellow}$LINENO+ '
+export PROMPT4='${blue}$0${color_prompt}@${yellow}%i+ '
 
 # Backup scary root prompt (for default root prompt, i.e., usually bash)
 # NOTE: different from zsh root prompt
