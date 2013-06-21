@@ -20,8 +20,9 @@ version is 4.3.10.
         git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
-     provided:
+     provided (copy these lines in a script and run it):
 
+        #!/bin/zsh
         setopt EXTENDED_GLOB
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
