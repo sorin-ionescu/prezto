@@ -28,10 +28,10 @@ else
 	for _ssh_id in $_ssh_identities
 	do
 		# Check identities and add ones that aren't already added
-		envoy -l | grep "$HOME/.ssh/$_ssh_id" > /dev/null
+		/usr/bin/envoy -l | grep "$HOME/.ssh/$_ssh_id" > /dev/null
 		if [[ $? != 0 ]]; then
 			echo "New identity: $_ssh_id"
-			envoy -a $_ssh_id
+			/usr/bin/envoy -a $_ssh_id
 		fi
 	done
 fi
