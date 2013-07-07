@@ -23,6 +23,15 @@ if [[ `systemctl show envoy --property=ActiveState` != "ActiveState=active" ]]; 
 	else
 		/usr/bin/envoy -t ssh-agent 
 	fi
+	
+	# Check envoyd status again
+	if [[ `systemctl show envoy --property=ActiveState` != "ActiveState=active" ]]; then
+		source <(/usr/bin/envoy -p) # get ssh env vars
+	else
+		# envoyd isn't running, print an error message and return
+		echo "We had trouble starting envoy. Check 'systemctl status envoy' as root."
+		return 1 
+	fi
 
 else
 	for _ssh_id in $_ssh_identities
@@ -35,3 +44,4 @@ else
 		fi
 	done
 fi
+
