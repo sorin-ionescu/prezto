@@ -194,21 +194,21 @@ function prompt_garrett_precmd {
 
 	# Determine the length needed for prompt_space
 	# NOTE: Be sure not to include the ${(e)prompt_space} portion or it won't work
-	local prompt_line1="╭─( ${current_dir}${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} )( ${ruby_info[version]}${location} )─┐"
+	local prompt_line1="${altchar_upper_left_corner}( ${current_dir}${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} )( ${ruby_info[version]}${location} )${altchar_upper_right_corner}"
 	local zero='%([BSUbfksu]|([FB]|){*})'
 	local prompt_width_line1=${#${(S%%)prompt_line1//$~zero/}} 
 
 	local prompt_space_padding
 	(( prompt_space_padding= ${prompt_width_term} - ${prompt_width_line1} ))
 
-	local prompt_space_character="—"
+	local prompt_space_character="${altchar_padding}"
 	eval prompt_space="${color_prompt}\${(l.${prompt_space_padding}..${prompt_space_character}.)}"
 
 	# —————————————————————————————————————————————————————————————————————
 	# Prompt line 1
 	# —————————————————————————————————————————————————————————————————————
 	print
-	print -P '${color_prompt}╭─( ${current_dir}${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} ${color_prompt})${(e)prompt_space}( ${ruby_info[version]}${location}${color_prompt} )─┐'
+	print -P '${altchar_enable}${color_prompt}${altchar_upper_left_corner}( ${current_dir}${git_info[remote_status]}${git_info[prompt_info]}${git_info[local_status]}${git_info[sha]} ${color_prompt})${altchar_enter}${(e)prompt_space}${altchar_leave}( ${ruby_info[version]}${location}${color_prompt} )${altchar_upper_right_corner}'
 }
 
 # —————————————————————————————————————————————————————————————————————
@@ -289,7 +289,7 @@ function prompt_garrett_setup {
 	else # normal user
 		eval color_user=${1:-'${green}'}
 	    eval color_host=${1:-'${green}'}
-	    eval color_prompt=${1:-'${white}'}
+	    eval color_prompt=${1:-'${grey}'}
 		# eval color_prompt_BOLD=${1:-'${white}'}
 		eval user=''
 		# eval user='${color_user}%n'
@@ -301,7 +301,6 @@ function prompt_garrett_setup {
 	eval host='${color_host}%m'      # hostname up to first . (dot)
 	# eval host='${color_host}%M'      # full hostname
 	
-	# Report hostname
 	eval location='${user}${cyan}@${host}'      # hostname with user
 	
 	# —————————————————————————————————————————————————————————————————————
@@ -392,6 +391,25 @@ function prompt_garrett_setup {
     zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format "${red}♺ "
     zstyle ':prezto:module:editor:info:completing'               format "${red}..."
 
+	# —————————————————————————————————————————————————————————————————————
+    # See if we can use extended characters to look nicer
+	# —————————————————————————————————————————————————————————————————————
+    typeset -A altchar
+    set -A altchar ${(s..)terminfo[acsc]}
+    altchar_enable="%{$terminfo[enacs]%}"
+    altchar_enter="%{$terminfo[smacs]%}"
+    altchar_leave="%{$terminfo[rmacs]%}"
+    altchar_padding=${altchar[q]:--}
+    altchar_upper_left_corner=%{$terminfo[smacs]%}${altchar[l]:--}${altchar[q]:--}%{$terminfo[rmacs]%}
+    altchar_lower_left_corner=%{$terminfo[smacs]%}${altchar[m]:--}${altchar[q]:--}%{$terminfo[rmacs]%}
+    altchar_upper_right_corner=%{$terminfo[smacs]%}${altchar[q]:--}${altchar[k]:--}%{$terminfo[rmacs]%}
+    altchar_lower_right_corner=%{$terminfo[smacs]%}${altchar[q]:--}${altchar[j]:--}%{$terminfo[rmacs]%}
+    # altchar_padding=${altchar[q]:-─}
+    # altchar_upper_left_corner=%{$terminfo[smacs]%}${altchar[l]:-╭}${altchar[q]:-─}%{$terminfo[rmacs]%}
+    # altchar_lower_left_corner=%{$terminfo[smacs]%}${altchar[m]:-╰}${altchar[q]:-─}%{$terminfo[rmacs]%}
+    # altchar_upper_right_corner=%{$terminfo[smacs]%}${altchar[q]:-─}${altchar[k]:-┐}%{$terminfo[rmacs]%}
+    # altchar_lower_right_corner=%{$terminfo[smacs]%}${altchar[q]:-─}${altchar[j]:-┘}%{$terminfo[rmacs]%}
+
 # —————————————————————————————————————————————————————————————————————
 # Finally! the PROMPT...
 # 	- add %E to beginning of PROMPT to clear screen after every command
@@ -399,13 +417,14 @@ function prompt_garrett_setup {
 
 # Left PROMPT
 if (( $SHLVL == 1 )); then
-	export PROMPT='${color_prompt}╰─${editor_info[keymap]}' 
+	export PROMPT='${altchar_enable}${color_prompt}${altchar_lower_left_corner}${editor_info[keymap]}' 
+	# export PROMPT='${altchar_enable}${color_prompt}${altchar_lower_left_corner}╰─${editor_info[keymap]}' 
 else
-	export PROMPT='${color_prompt}╰─( ${cyan}$SHLVL ${color_prompt}) ${editor_info[keymap]}' 
+	export PROMPT='${color_prompt}${altchar_lower_left_corner}( ${cyan}$SHLVL ${color_prompt}) ${editor_info[keymap]}' 
 fi
 
 # Right PROMPT
-export RPROMPT='${editor_info[alternate]}${editor_info[overwrite]}${return_code}${number_jobs}${line_number} ${current_time} ${color_prompt}❰─┘'
+export RPROMPT='${editor_info[alternate]}${editor_info[overwrite]}${return_code}${number_jobs}${line_number} ${current_time} ${color_prompt}❰${altchar_lower_right_corner}'
 
 # Continuation PROMPT
 export PROMPT2='${color_prompt}%_ ${editor_info[keymap]}'
