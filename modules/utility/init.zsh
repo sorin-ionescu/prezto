@@ -18,31 +18,21 @@ setopt CORRECT
 #
 
 # Disable correction.
-alias ack='nocorrect ack'
-alias cd='nocorrect cd'
-alias cp='nocorrect cp'
-alias ebuild='nocorrect ebuild'
-alias gcc='nocorrect gcc'
-alias gist='nocorrect gist'
-alias grep='nocorrect grep'
-alias heroku='nocorrect heroku'
-alias ln='nocorrect ln'
-alias man='nocorrect man'
-alias mkdir='nocorrect mkdir'
-alias mv='nocorrect mv'
-alias mysql='nocorrect mysql'
-alias rm='nocorrect rm'
+for command (ack cd cp ebuild gcc gist grep heroku ln man mkdir mv mysql rm); do
+  if is-callable $command; then
+    alias $command="nocorrect $command"
+  fi
+done
 
 # Disable globbing.
-alias fc='noglob fc'
-alias find='noglob find'
-alias ftp='noglob ftp'
-alias history='noglob history'
-alias locate='noglob locate'
-alias rake='noglob rake'
-alias rsync='noglob rsync'
-alias scp='noglob scp'
-alias sftp='noglob sftp'
+for command (fc find ftp history locate rake rsync scp sftp); do
+  if is-callable $command; then
+    alias $command="noglob $command"
+  fi
+done
+
+unset command
+
 
 # Define general aliases.
 alias _='sudo'
