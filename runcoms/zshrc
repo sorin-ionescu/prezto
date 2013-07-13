@@ -5,10 +5,17 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Prezto customizations...
+for before_prezto in "${ZDOTDIR:-$HOME}"/.zprezto.before/*.zsh; do
+  source "$before_prezto"
+done
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
-
+# Your zsh customizations outside of Prezto...
+for after_prezto in "${ZDOTDIR:-$HOME}"/.zprezto.after/*.zsh; do
+  source "$after_prezto"
+done
