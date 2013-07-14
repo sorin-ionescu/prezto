@@ -19,7 +19,7 @@ fi
 # Cleans the cache.
 alias debc='sudo apt-get clean && sudo apt-get autoclean'
 
-# Displays a file's packake.
+# Displays a file's package.
 alias debf='apt-file search --regexp'
 
 # Installs packages from repositories.
@@ -31,7 +31,7 @@ alias debI='sudo dpkg -i'
 # Displays package information.
 alias debq='apt-cache show'
 
-# Updates the packages lists.
+# Updates the package lists.
 alias debu='sudo apt-get update'
 
 # Upgrades outdated packages.
