@@ -7,16 +7,16 @@ Aliases
 -------
 
 - `debc` cleans the cache.
-- `debf` displays a file's packake.
+- `debf` displays a file's package.
 - `debi` installs packages from repositories.
 - `debI` installs packages from files.
 - `debq` displays package information.
-- `debu` updates the packages lists.
+- `debu` updates the package lists.
 - `debU` upgrades outdated packages.
 - `debx` removes packages.
 - `debX` removes packages, their configuration, and unneeded dependencies.
 - `debs` searches for packages.
-- `deb-build` creates a basic .deb package.
+- `deb-build` creates a basic deb package.
 - `deb-kclean` removes all kernel images and headers, except for the ones in
   use.
 
