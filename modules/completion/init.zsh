@@ -61,6 +61,44 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 
+
+# Don't autoexpand until nothing else has changed on line
+zstyle ':completion:*' keep-prefix true
+zstyle ':completion:*' expand prefix suffix
+# zstyle ':completion:*' suffix true
+
+# Complete ..
+zstyle ':completion:*' special-dirs ..
+
+# Do not select the current directory when executing cd ../<tab>.
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
+# Do not perform completion on pastes containing tabs.
+zstyle ':completion:*' insert-tab pending
+
+# Some completion settings
+# zstyle ':completion:*:match:*' match-original only
+zstyle ':completion:*' insert-unambiguous true
+
+# Expand partial paths.
+# zstyle ':completion:*' squeeze-slashes true
+
+# Rehash when failing to find the executable.
+zstyle ':completion:*' rehash true
+
+# Add a recent director listing completion using the cdr command
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':completion:*:*:cdr:*:*' menu selection
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':completion:*' recent-dirs-insert both
+zstyle ':chpwd:*' recent-dirs-prune parent
+
+
+
+
+
+
 # Fuzzy match mistyped completions.
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
