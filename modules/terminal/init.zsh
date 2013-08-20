@@ -11,13 +11,6 @@ if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
 
-# Set the GNU Screen window number.
-if [[ -n "$WINDOW" ]]; then
-  export SCREEN_NO="%B${WINDOW}%b "
-else
-  export SCREEN_NO=""
-fi
-
 # Sets the GNU Screen title.
 function set-screen-window-title {
   if [[ "$TERM" == screen* ]]; then
