@@ -23,14 +23,9 @@ elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
 elif (( $+commands[rbenv] )); then
   eval "$(rbenv init - --no-rehash zsh)"
 
-# Install local gems according to operating system conventions.
+# Prepend local gems bin directories to PATH.
 else
-  if [[ "$OSTYPE" == darwin* ]]; then
-    export GEM_HOME="$HOME/Library/Ruby/Gems/1.8"
-    path=("$GEM_HOME/bin" $path)
-  else
-    path=($HOME/.gem/ruby/*/bin(N) $path)
-  fi
+  path=($HOME/.gem/ruby/*/bin(N) $path)
 fi
 
 # Return if requirements are not found.
