@@ -26,8 +26,7 @@ elif (( $+commands[rbenv] )); then
 # Install local gems according to operating system conventions.
 else
   if [[ "$OSTYPE" == darwin* ]]; then
-    export GEM_HOME="$HOME/Library/Ruby/Gems/1.8"
-    path=("$GEM_HOME/bin" $path)
+    path=("$HOME/Library/Ruby/Gems/1.8/bin" $path)
   else
     path=($HOME/.gem/ruby/*/bin(N) $path)
   fi
