@@ -165,7 +165,7 @@ alias gSI='git submodule update --init --recursive'
 alias gSl='git submodule status'
 alias gSm='git-submodule-move'
 alias gSs='git submodule sync'
-alias gSu='git submodule foreach git pull origin master'
+alias gSu='git submodule update'
 alias gSx='git-submodule-remove'
 
 # Working Copy (w)
