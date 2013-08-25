@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Joel Kuzmarski <leoj3n@gmail.com>
 #
 
 #
@@ -137,6 +138,7 @@ alias gRl='git remote --verbose'
 alias gRa='git remote add'
 alias gRx='git remote rm'
 alias gRm='git remote rename'
+alias gRe='git remote set-url'
 alias gRu='git remote update'
 alias gRp='git remote prune'
 alias gRs='git remote show'
