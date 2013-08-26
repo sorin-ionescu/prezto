@@ -8,10 +8,15 @@ Settings
 
 ### Auto-Title
 
-To auto set the terminal window and tab titles with the current command or
+To auto set the terminal emulator window and tab titles with the current command
+or directory, add the following to *zpreztorc*:
+
+    zstyle ':prezto:module:terminal:auto-title' emulator 'yes'
+
+To auto set the terminal multiplexer window title with the current command or
 directory, add the following to *zpreztorc*:
 
-    zstyle ':prezto:module:terminal' auto-title 'yes'
+    zstyle ':prezto:module:terminal:auto-title' multiplexer 'yes'
 
 Functions
 ---------

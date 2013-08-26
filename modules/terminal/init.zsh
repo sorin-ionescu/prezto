@@ -6,6 +6,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+pmodload 'helper'
+
 # Return if requirements are not found.
 if [[ "$TERM" == 'dumb' ]]; then
   return 1
@@ -20,21 +23,23 @@ function set-screen-window-title {
 
 # Sets the terminal window title.
 function set-terminal-window-title {
-  if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
+  if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*|dvtm*) ]]; then
     printf "\e]2;%s\a" ${(V)argv}
   fi
 }
 
 # Sets the terminal tab title.
 function set-terminal-tab-title {
-  if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
+  if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*|dvtm*) ]]; then
     printf "\e]1;%s\a" ${(V)argv}
   fi
 }
 
 # Sets the Terminal.app current working directory.
 function set-terminal-app-cwd {
-  printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
+  if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
+    printf '\e]7;%s\a' "file://$HOST${${1:-$PWD}// /%20}"
+  fi
 }
 
 # Sets the tab and window titles with a given command.
@@ -89,36 +94,49 @@ function set-titles-with-path {
   fi
 }
 
-# Don't override precmd/preexec; append to hook array.
+# Do not override precmd/preexec; append to the hook array.
 autoload -Uz add-zsh-hook
 
-if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
-  # Sets the Terminal.app current working directory.
+# Set up the Apple Terminal.
+if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]] \
+  && (( ${${OSTYPE#darwin}[1,2]} >= 11 )) \
+	&& ! is-terminal-inside-multiplexer
+then
+  # Sets the Terminal.app current working directory before the prompt is
+	# displayed.
   add-zsh-hook precmd set-terminal-app-cwd
+
+	# Unsets the Terminal.app current working directory when a terminal
+	# multiplexer or remote connection is started since it can no longer be
+  # updated, and it becomes confusing when the directory displayed in the title
+  # bar is no longer synchronized with real current working directory.
+	function unset-terminal-app-cwd {
+    if [[ "${2[(w)1]:t}" == (screen|tmux|dvtm|ssh|mosh) ]]; then
+      set-terminal-app-cwd ' '
+    fi
+	}
+	add-zsh-hook preexec unset-terminal-app-cwd
 
   # Do not set the tab and window titles in Terminal.app since it sets the tab
   # title to the currently running process by default and the current working
-  # directory is set separately.
-
-  # Do set the tab and window titles inside terminal multiplexers.
-  if [[ "$TERM" != screen* ]]; then
-    return
-  fi
+  # directory is set separately, but do set the tab and window titles inside
+	# terminal multiplexers inside Terminal.app.
+	return
 fi
 
-# Sets the tab and window titles before the prompt is displayed.
-function set-titles-precmd {
-  if zstyle -t ':prezto:module:terminal' auto-title; then
-    set-titles-with-path
-  fi
-}
-add-zsh-hook precmd set-titles-precmd
+# Set up non-Apple terminals.
+if ( ( ! is-terminal-inside-multiplexer || [[ -n "$DVTM" ]] ) \
+    && zstyle -t ':prezto:module:terminal:auto-title' emulator ) \
+  || ( is-terminal-inside-multiplexer \
+    && zstyle -t ':prezto:module:terminal:auto-title' multiplexer )
+then
+	# Sets the tab and window titles before the prompt is displayed.
+	add-zsh-hook precmd set-titles-with-path
 
-# Sets the tab and window titles before command execution.
-function set-titles-preexec {
-  if zstyle -t ':prezto:module:terminal' auto-title; then
-    set-titles-with-command "$2"
-  fi
-}
-add-zsh-hook preexec set-titles-preexec
+	# Sets the tab and window titles before command execution.
+	function set-titles-with-command-preexec {
+		set-titles-with-command "$2"
+	}
+	add-zsh-hook preexec set-titles-with-command-preexec
+fi
 
