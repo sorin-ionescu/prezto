@@ -27,20 +27,20 @@ else
   source "$_ssh_agent_env" 2> /dev/null
 fi
 
-# Load identities.
-if ssh-add -l 2>&1 | grep 'The agent has no identities'; then
-  zstyle -a ':prezto:module:ssh:load' identities '_ssh_identities'
-  if (( ${#identities} > 0 )); then
-    ssh-add "$_ssh_dir/${^_ssh_identities[@]}"
-  else
-    ssh-add
-  fi
-fi
-
 # Create a persistent SSH authentication socket.
 if [[ -S "$SSH_AUTH_SOCK" && "$SSH_AUTH_SOCK" != "$_ssh_agent_sock" ]]; then
   ln -sf "$SSH_AUTH_SOCK" "$_ssh_agent_sock"
   export SSH_AUTH_SOCK="$_ssh_agent_sock"
+fi
+
+# Load identities.
+if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
+  zstyle -a ':prezto:module:ssh:load' identities '_ssh_identities'
+  if (( ${#_ssh_identities} > 0 )); then
+    ssh-add "$_ssh_dir/${^_ssh_identities[@]}" 2> /dev/null
+  else
+    ssh-add 2> /dev/null
+  fi
 fi
 
 # Clean up.

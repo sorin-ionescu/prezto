@@ -63,9 +63,10 @@ accompanying README files to learn of what is available.
 Customization
 -------------
 
-The project is managed via [Git][3]. It is highly recommend that you commit
-your changes and push them to [GitHub][4] to not lose them. If you do not know
-how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
+The project is managed via [Git][3]. It is highly recommended that you fork this
+project; so, that you can commit your changes and push them to [GitHub][4] to
+not lose them. If you do not know how to use Git, follow this [tutorial][5] and
+bookmark this [reference][6].
 
 Resources
 ---------

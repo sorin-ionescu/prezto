@@ -5,21 +5,21 @@
 #
 
 # Return if requirements are not found.
-if [[ ! -d "$HOME/.carton" ]]; then
+if [[ ! -d "$HOME/.cask" ]]; then
   return 1
 fi
 
-# Prepend Carton bin directory.
-path=($HOME/.carton/bin $path)
+# Prepend Cask bin directory.
+path=($HOME/.cask/bin $path)
 
 # Load Carton completion
-source "$HOME/.carton/etc/carton_completion.zsh" 2> /dev/null
+source "$HOME/.cask/etc/cask_completion.zsh" 2> /dev/null
 
 #
 # Aliases
 #
 
-alias cai='carton install'
-alias cau='carton update'
-alias caI='carton init'
-alias cae='carton exec'
+alias cai='cask install'
+alias cau='cask update'
+alias caI='cask init'
+alias cae='cask exec'
