@@ -21,11 +21,6 @@ function is-true {
   [[ -n "$1" && "$1" == (1|[Yy]([Ee][Ss]|)|[Tt]([Rr][Uu][Ee]|)|[Oo]([Nn]|)) ]]
 }
 
-# Checks if the currently running terminal is inside a terminal multiplexer.
-function is-terminal-inside-multiplexer {
-  [[ -n "$STY" || -n "$TMUX" || -n "$DVTM" ]]
-}
-
 # Prints the first non-empty string in the arguments array.
 function coalesce {
   for arg in $argv; do

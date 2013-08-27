@@ -127,11 +127,8 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # Terminal
 #
 
-# Auto set the terminal emulator tab and window titles.
-zstyle ':prezto:module:terminal:auto-title' emulator 'yes'
-
-# Auto set the terminal multiplexer window title.
-zstyle ':prezto:module:terminal:auto-title' multiplexer 'no'
+# Auto set the tab and window titles.
+# zstyle ':prezto:module:terminal' auto-title 'yes'
 
 #
 # Tmux

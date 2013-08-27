@@ -11,8 +11,6 @@ Functions
   - `is-autoloadable` checks if a file can be autoloaded by trying to load it
     in a subshell.
   - `is-callable` checks if a name is a command, function, or alias.
-  - `is-terminal-inside-multiplexer` checks if the currently running terminal is
-     inside a terminal multiplexer.
   - `is-true` checks a boolean variable for "true".
   - `coalesce` prints the first non-empty string in the arguments array.
 

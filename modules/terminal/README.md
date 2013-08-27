@@ -8,32 +8,26 @@ Settings
 
 ### Auto-Title
 
-To auto set the terminal emulator window and tab titles with the current command
-or directory, add the following to *zpreztorc*:
-
-    zstyle ':prezto:module:terminal:auto-title' emulator 'yes'
-
-To auto set the terminal multiplexer window title with the current command or
+To auto set the terminal window and tab titles with the current command or
 directory, add the following to *zpreztorc*:
 
-    zstyle ':prezto:module:terminal:auto-title' multiplexer 'yes'
+    zstyle ':prezto:module:terminal' auto-title 'yes'
+
+Auto titling is disabled inside terminal multiplexers, except inside dvtm, since
+it interferes with window names defined in configuration files and profile
+managers.
 
 Functions
 ---------
 
-- `set-screen-window-title` sets the screen title.
-- `set-terminal-tab-title` sets the terminal tab title.
-- `set-terminal-window-title` sets the terminal window title.
-- `set-titles-with-command` sets the screen and terminal titles with
-  a given command.
-- `set-titles-with-path` sets the screen and terminal titles with a given path.
+- `set-tab-title` sets the terminal tab title.
+- `set-window-title` sets the terminal or terminal multiplexer window title.
 
 Authors
 -------
 
 *The authors of this module should be contacted via the [issue tracker][1].*
 
-  - [James Cox](https://github.com/imajes)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/sorin-ionescu/prezto/issues
