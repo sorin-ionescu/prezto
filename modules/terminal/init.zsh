@@ -25,7 +25,7 @@ function set-tab-title {
 }
 
 # Sets the tab and window titles with a given command.
-function set-titles-with-command-preexec {
+function _terminal-set-titles-with-command-preexec {
   emulate -L zsh
   setopt EXTENDED_GLOB
 
@@ -55,7 +55,7 @@ function set-titles-with-command-preexec {
 }
 
 # Sets the tab and window titles with a given path.
-function set-titles-with-path-precmd {
+function _terminal-set-titles-with-path-precmd {
   emulate -L zsh
   setopt EXTENDED_GLOB
 
@@ -69,7 +69,7 @@ function set-titles-with-path-precmd {
 }
 
 # Sets the Terminal.app proxy icon.
-function set-terminal-app-proxy-icon-precmd {
+function _terminal-set-terminal-app-proxy-icon-precmd {
   printf '\e]7;%s\a' "file://$HOST${${1:-$PWD}// /%20}"
 }
 
@@ -82,18 +82,18 @@ if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]] \
 then
   # Sets the Terminal.app current working directory before the prompt is
 	# displayed.
-  add-zsh-hook precmd set-terminal-app-proxy-icon-precmd
+  add-zsh-hook precmd _terminal-set-terminal-app-proxy-icon-precmd
 
 	# Unsets the Terminal.app current working directory when a terminal
 	# multiplexer or remote connection is started since it can no longer be
   # updated, and it becomes confusing when the directory displayed in the title
   # bar is no longer synchronized with real current working directory.
-	function unset-terminal-app-proxy-icon-preexec {
+	function _terminal-unset-terminal-app-proxy-icon-preexec {
     if [[ "${2[(w)1]:t}" == (screen|tmux|dvtm|ssh|mosh) ]]; then
-      set-terminal-app-proxy-icon-precmd ' '
+      _terminal-set-terminal-app-proxy-icon-precmd ' '
     fi
 	}
-	add-zsh-hook preexec unset-terminal-app-cwd-preexec
+	add-zsh-hook preexec _terminal-unset-terminal-app-proxy-icon-preexec
 
   # Do not set the tab and window titles in Terminal.app since it sets the tab
   # title to the currently running process by default and the current working
@@ -106,9 +106,9 @@ if zstyle -t ':prezto:module:terminal' auto-title \
   && ( ! [[ -n "$STY" || -n "$TMUX" ]] )
 then
 	# Sets the tab and window titles before the prompt is displayed.
-	add-zsh-hook precmd set-titles-with-path-precmd
+	add-zsh-hook precmd _terminal-set-titles-with-path-precmd
 
 	# Sets the tab and window titles before command execution.
-	add-zsh-hook preexec set-titles-with-command-preexec
+	add-zsh-hook preexec _terminal-set-titles-with-command-preexec
 fi
 
