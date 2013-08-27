@@ -55,10 +55,10 @@ alias pacq='pacman --sync --info'
 alias pacQ='pacman --query --info'
 
 # Searches for packages in the repositories.
-alias pacs='pacman --sync --recursive'
+alias pacs='pacman --sync --search'
 
 # Searches for packages in the local database.
-alias pacS='pacman --query --recursive'
+alias pacS='pacman --query --search'
 
 # Lists orphan packages.
 alias pacman-list-orphans='sudo pacman --query --deps --unrequired'
