@@ -12,16 +12,26 @@ fi
 
 # Sets the terminal or terminal multiplexer window title.
 function set-window-title {
+  local title_format{,ted}
+  zstyle -s ':prezto:module:terminal:window-title' format 'title_format' || title_format="%s"
+  zformat -f title_formatted "$title_format" "s:$argv"
+
   if [[ "$TERM" == screen* ]]; then
-    printf "\ek%s\e\\" ${(V)argv}
+    title_format="\ek%s\e\\"
   else
-    printf "\e]2;%s\a" ${(V)argv}
+    title_format="\e]2;%s\a"
   fi
+
+  printf "$title_format" "${(V%)title_formatted}"
 }
 
 # Sets the terminal tab title.
 function set-tab-title {
-  printf "\e]1;%s\a" ${(V)argv}
+  local title_format{,ted}
+  zstyle -s ':prezto:module:terminal:tab-title' format 'title_format' || title_format="%s"
+  zformat -f title_formatted "$title_format" "s:$argv"
+
+  printf "\e]1;%s\a" ${(V%)title_formatted}
 }
 
 # Sets the tab and window titles with a given command.
