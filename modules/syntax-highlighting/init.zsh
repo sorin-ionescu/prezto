@@ -11,7 +11,7 @@ if ! zstyle -t ':prezto:module:syntax-highlighting' color; then
 fi
 
 # Source module files.
-source "${0:h}/external/zsh-syntax-highlighting.zsh"
+source "${0:h}/external/zsh-syntax-highlighting.zsh" || return 1
 
 # Set highlighters.
 zstyle -a ':prezto:module:syntax-highlighting' highlighters 'ZSH_HIGHLIGHT_HIGHLIGHTERS'
