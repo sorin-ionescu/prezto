@@ -39,6 +39,13 @@ If you are not able to find certain commands after switching to *Prezto*,
 modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
 window or tab.
 
+Updating
+--------
+
+Pull the latest changes and update submodules.
+
+    git pull && git submodule update --init --recursive
+
 Usage
 -----
 
