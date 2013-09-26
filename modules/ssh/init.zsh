@@ -21,10 +21,14 @@ _ssh_agent_sock="$TMPDIR/ssh-agent.sock"
 
 # Start ssh-agent if not started.
 if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
-  eval "$(ssh-agent | sed '/^echo /d' | tee "$_ssh_agent_env")"
-else
   # Export environment variables.
   source "$_ssh_agent_env" 2> /dev/null
+  # Check if process is still running.
+  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ &> /dev/null || {
+    eval "$(ssh-agent | sed '/^echo /d' | tee "$_ssh_agent_env")"
+    # Source new environment variables.
+    source "$_ssh_agent_env" 2> /dev/null
+  }
 fi
 
 # Create a persistent SSH authentication socket.
