@@ -1,4 +1,5 @@
-Prezto — Instantly Awesome Zsh
+
+     Prezto — Instantly Awesome Zsh
 ==============================
 
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
@@ -33,18 +34,18 @@ version is 4.3.10.
 
   5. Open a new Zsh terminal window or tab.
 
+
+Updating
+------------
+
+        git pull && git submodule update --init --recursive
+        
+
 ### Troubleshooting
 
 If you are not able to find certain commands after switching to *Prezto*,
 modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
 window or tab.
-
-Updating
---------
-
-Pull the latest changes and update submodules.
-
-    git pull && git submodule update --init --recursive
 
 Usage
 -----
