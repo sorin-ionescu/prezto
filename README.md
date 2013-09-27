@@ -9,7 +9,8 @@ Installation
 ------------
 
 Prezto will work with any recent release of Zsh, but the minimum recommended
-version is 4.3.11.
+version is 4.3.11. Unfortunately, [Cygwin][9] is not supported due to
+non-standard core utilities.
 
   1. Launch Zsh:
 
@@ -113,4 +114,5 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: http://grml.org/zsh/zsh-lovers.html
+[9]: http://www.cygwin.com
 
