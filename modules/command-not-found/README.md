@@ -1,7 +1,7 @@
 Command-Not-Found
 =================
 
-Loads the [command-not-found][1] tool on Debian-based distributions.
+Loads the [command-not-found][1] tool on Debian-based distributions or Arch Linux.
 
 Authors
 -------
