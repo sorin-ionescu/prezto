@@ -124,6 +124,7 @@ Functions
 ### Files and Directories
 
   - `cdls` changes to a directory and lists its contents.
+  - `cdx` locates directory of an executable in your path and changes to it.
   - `dut` displays the grand total disk usage using human readable units.
   - `find-exec` finds files and executes a command on them.
   - `mkdcd` makes a directory and changes to it.
@@ -153,6 +154,7 @@ Authors
   - [Robby Russell](https://github.com/robbyrussell)
   - [Suraj N. Kurapati](https://github.com/sunaku)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
+  - [Wil Moore III](https://github.com/wilmoore)
 
 [1]: https://github.com/sorin-ionescu/prezto/issues
 
