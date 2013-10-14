@@ -86,6 +86,11 @@ Node.js
 
 Provides utility functions for Node.js and loads npm completion.
 
+Ocaml
+-----
+
+Initializes Ocaml package management.
+
 OSX
 ---
 
