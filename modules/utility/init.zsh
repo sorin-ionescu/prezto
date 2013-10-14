@@ -185,3 +185,24 @@ function psu {
   ps -U "${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
 
+# locates directory of an executable in your path and changes to it.
+function cdx {
+  local exe="$1"
+  local fqe="$(command -v $exe 2>/dev/null)"
+  local dir="${commands[$exe]:h}"
+
+  if [[ ! -x "$fqe" ]]; then
+    echo "cdx: '$exe' not found."
+    return 1
+  fi
+
+  if [[ ! -d "$dir" ]]; then
+    echo "cdx: '$dir' is not a directory"
+    return 1
+  fi
+
+  cd $dir
+
+  return  $?
+}
+
