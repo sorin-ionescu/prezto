@@ -189,7 +189,7 @@ function psu {
 function cdx {
   local exe="$1"
   local fqe="$(command -v $exe 2>/dev/null)"
-  local dir="$(dirname $fqe 2>/dev/null)"
+  local dir="${commands[$exe]:h}"
 
   if [[ ! -x "$fqe" ]]; then
     echo "cdx: '$exe' not found."
