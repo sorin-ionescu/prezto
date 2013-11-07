@@ -41,11 +41,6 @@ function set-terminal-tab-title {
 
 # Sets the tab and window titles with a given command.
 function set-titles-with-command {
-  # Do not set the window and tab titles in Terminal.app because they are not
-  # reset upon command termination.
-  if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
-    return 1
-  fi
 
   emulate -L zsh
   setopt EXTENDED_GLOB
@@ -86,12 +81,14 @@ function set-titles-with-path {
 
   local absolute_path="${${1:a}:-$PWD}"
 
+  local abbreviated_path="${absolute_path/#$HOME/~}"
+  local truncated_path="${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}"
+  unset MATCH
   if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
     printf '\e]7;%s\a' "file://$HOST${absolute_path// /%20}"
+    set-terminal-window-title "$abbreviated_path"
+    set-terminal-tab-title "$truncated_path"
   else
-    local abbreviated_path="${absolute_path/#$HOME/~}"
-    local truncated_path="${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}"
-    unset MATCH
 
     if [[ "$TERM" == screen* ]]; then
       set-screen-window-title "$truncated_path"
