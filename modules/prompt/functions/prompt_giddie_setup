@@ -14,8 +14,14 @@
 #   http://i.imgur.com/rCo3S.png
 #
 
-# Hook for vcs_info set-message (see zshcontrib man page)
-function +vi-git-status() {
+# Hooks for vcs_info
+function +vi-set_vcs_prompt_symbol() {
+  _prompt_giddie_symbol='±'
+}
+function +vi-set_novcs_prompt_symbol() {
+  _prompt_giddie_symbol=')'
+}
+function +vi-set_extra_prompt_data() {
   # Check for untracked files, since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
     hook_com[unstaged]+='%F{green}?%f'
@@ -25,13 +31,6 @@ function +vi-git-status() {
 function prompt_giddie_precmd {
   # Replace '/home/<user>' with '~'.
   _prompt_giddie_pwd="${PWD/#$HOME/~}"
-
-  # Choose prompt symbol based on whether or not we are in a repository.
-  if (( $+commands[git] )) && git rev-parse 2> /dev/null; then
-    _prompt_giddie_symbol='±'
-  else
-    _prompt_giddie_symbol=')'
-  fi
   vcs_info
 }
 
@@ -58,7 +57,11 @@ function prompt_giddie_setup {
   zstyle ':vcs_info:*' actionformats ' on %F{magenta}%b%f%c%u %F{yellow}(%a)%f'
   zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
   zstyle ':vcs_info:*' unstagedstr '%F{green}!%f'
-  zstyle ':vcs_info:git*+set-message:*' hooks git-status
+
+  # Add vcs_info hooks
+  zstyle ':vcs_info:*+start-up:*' hooks set_vcs_prompt_symbol
+  zstyle ':vcs_info:*+no-vcs:*' hooks set_novcs_prompt_symbol
+  zstyle ':vcs_info:git*+set-message:*' hooks set_extra_prompt_data
 
   # Define prompts.
   PROMPT='%(?..%F{red}%B-> [%?]%b%f
