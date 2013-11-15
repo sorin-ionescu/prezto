@@ -44,6 +44,7 @@ alias gbS='git show-branch -a'
 # Commit (c)
 alias gc='git commit --verbose'
 alias gca='git commit --verbose --all'
+alias gci='git commit --interactive'
 alias gcm='git commit --message'
 alias gco='git checkout'
 alias gcO='git checkout --patch'
