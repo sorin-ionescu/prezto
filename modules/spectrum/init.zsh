@@ -7,7 +7,7 @@
 #
 
 # Return if requirements are not found.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ "$TERM" == 'dumb' && "$EMACS" != 't' ]]; then
   return 1
 fi
 
