@@ -15,13 +15,13 @@
 #
 
 # Hooks for vcs_info
-function +vi-set_vcs_prompt_symbol() {
-  _prompt_giddie_symbol='±'
-}
-function +vi-set_novcs_prompt_symbol() {
+function +vi-no_vcs_precmd() {
   _prompt_giddie_symbol=')'
 }
-function +vi-set_extra_git_prompt_data() {
+function +vi-vcs_precmd() {
+  _prompt_giddie_symbol='±'
+}
+function +vi-git_precmd() {
   # Check for untracked files, since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
     hook_com[unstaged]+='%F{green}?%f'
@@ -41,7 +41,6 @@ function prompt_giddie_setup {
 
   # Load required functions.
   autoload -Uz vcs_info
-  autoload -Uz vcs_info_hookadd
   autoload -Uz add-zsh-hook
 
   # Add hook to set up prompt parameters before each command.
@@ -52,7 +51,6 @@ function prompt_giddie_setup {
   zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{yellow}--- COMMAND ---%f'
 
   # Set vcs_info parameters.
-  zstyle ':vcs_info:*' enable git
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' formats ' on %F{magenta}%b%f%c%u'
   zstyle ':vcs_info:*' actionformats ' on %F{magenta}%b%f%c%u %F{yellow}(%a)%f'
@@ -60,9 +58,9 @@ function prompt_giddie_setup {
   zstyle ':vcs_info:*' unstagedstr '%F{green}!%f'
 
   # Add vcs_info hooks
-  vcs_info_hookadd 'no-vcs' set_novcs_prompt_symbol
-  vcs_info_hookadd 'set-message' set_vcs_prompt_symbol
-  zstyle ':vcs_info:git*+set-message:*' hooks set_extra_git_prompt_data
+  zstyle ':vcs_info:*+no-vcs:*' hooks no_vcs_precmd
+  zstyle ':vcs_info:git*+set-message:*' hooks vcs_precmd git_precmd
+  zstyle ':vcs_info:*+set-message:*' hooks vcs_precmd
 
   # Define prompts.
   PROMPT='%(?..%F{red}%B-> [%?]%b%f
