@@ -15,10 +15,10 @@
 #
 
 # Hooks for vcs_info
-function +vi-no_vcs_precmd() {
+function +vi-set_novcs_prompt_symbol() {
   _prompt_giddie_symbol=')'
 }
-function +vi-vcs_precmd() {
+function +vi-set_vcs_prompt_symbol() {
   _prompt_giddie_symbol='±'
 }
 function +vi-git_precmd() {
@@ -58,9 +58,11 @@ function prompt_giddie_setup {
   zstyle ':vcs_info:*' unstagedstr '%F{green}!%f'
 
   # Add vcs_info hooks
-  zstyle ':vcs_info:*+no-vcs:*' hooks no_vcs_precmd
-  zstyle ':vcs_info:git*+set-message:*' hooks vcs_precmd git_precmd
-  zstyle ':vcs_info:*+set-message:*' hooks vcs_precmd
+  # NOTE: Prior to ZSH 4.3.12, there are no static hooks, no vcs_info_hookadd
+  #       function, and no 'no-vcs' hook.
+  zstyle ':vcs_info:*+start-up:*' hooks set_novcs_prompt_symbol
+  zstyle ':vcs_info:git*+set-message:*' hooks set_vcs_prompt_symbol git_precmd
+  zstyle ':vcs_info:*+set-message:*' hooks set_vcs_prompt_symbol
 
   # Define prompts.
   PROMPT='%(?..%F{red}%B-> [%?]%b%f
