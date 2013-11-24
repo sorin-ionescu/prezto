@@ -38,6 +38,8 @@ alias rorx='_rails-command destroy'
 function _rails-command {
   if [[ -e "script/server" ]]; then
     ruby script/"$@"
+  elif [[ -e "bin/rails" ]]; then
+    ruby bin/rails "$@"
   else
     ruby script/rails "$@"
   fi
