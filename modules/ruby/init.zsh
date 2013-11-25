@@ -52,6 +52,8 @@ if (( $+commands[bundle] )); then
   alias rbbI='rbbi \
     && rbb package \
     && print .bundle       >>! .gitignore \
+    && print vendor/assets >>! .gitignore \
     && print vendor/bundle >>! .gitignore \
     && print vendor/cache  >>! .gitignore'
 fi
+
