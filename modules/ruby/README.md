@@ -59,6 +59,7 @@ Aliases
 Functions
 ---------
 
+  - `ruby-app-root` displays the path to the Ruby application root directory.
   - `ruby-info` exposes information about the Ruby environment via the
     `$ruby_info` associative array.
 

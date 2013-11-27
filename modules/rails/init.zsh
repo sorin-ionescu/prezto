@@ -7,56 +7,30 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+pmodload 'ruby'
+
 # Return if requirements are not found.
-if (( ! $+commands[rails] )); then
+if (( ! $+commands[bundle] )); then
   return 1
 fi
 
 #
-# Aliases (Compatible with Rails 2)
+# Aliases
 #
 
-alias ror='rails'
-alias rorc='_rails-command console'
-alias rordc='_rails-command dbconsole'
-alias rordm='rake db:migrate'
-alias rordM='rake db:migrate db:test:clone'
-alias rordr='rake db:rollback'
-alias rorg='_rails-command generate'
-alias rorl='tail -f log/development.log'
-alias rorlc='rake log:clear'
-alias rorp='_rails-command plugin'
-alias rorr='_rails-command runner'
-alias rors='_rails-command server'
-alias rorsd='_rails-command server --debugger'
-alias rorx='_rails-command destroy'
-
-#
-# Functions
-#
-
-function _rails-command {
-  local root_dir="$PWD"
-  local rails_cmd
-
-  while [[ "$root_dir" != '/' ]]; do
-    if [[ -d "$root_dir/.bundle" ]]; then
-      break
-    fi
-    root_dir="$root_dir:h"
-  done
-
-  if [[ -e "$root_dir/bin/rails" ]]; then
-    rails_cmd='bin/rails'
-  elif [[ -e "$root_dir/script/rails" ]]; then
-    rails_cmd='script/rails'
-  elif [[ -e "$root_dir/script/server" ]]; then
-    rails_cmd='script/'
-  else
-    print "$0: not inside of a Rails application: $PWD" >&2
-    return 1
-  fi
-
-  (cd "$root_dir" && ruby "$rails_cmd" "$@")
-}
+alias ror='bundle exec rails'
+alias rorc='bundle exec rails console'
+alias rordc='bundle exec rails dbconsole'
+alias rordm='bundle exec rake db:migrate'
+alias rordM='bundle exec rake db:migrate db:test:clone'
+alias rordr='bundle exec rake db:rollback'
+alias rorg='bundle exec rails generate'
+alias rorl='tail -f "$(ruby-app-root)/log/development.log"'
+alias rorlc='bundle exec rake log:clear'
+alias rorp='bundle exec rails plugin'
+alias rorr='bundle exec rails runner'
+alias rors='bundle exec rails server'
+alias rorsd='bundle exec rails server --debugger'
+alias rorx='bundle exec rails destroy'
 
