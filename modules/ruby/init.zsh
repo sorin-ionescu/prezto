@@ -13,6 +13,7 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
 
   # Source RVM.
   source "$HOME/.rvm/scripts/rvm"
+  path=($path "$HOME/.rvm/bin")
 
 # Load manually installed rbenv into the shell session.
 elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
