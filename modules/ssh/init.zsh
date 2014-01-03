@@ -14,10 +14,10 @@ fi
 _ssh_dir="$HOME/.ssh"
 
 # Set the path to the environment file if not set by another module.
-_ssh_agent_env="${_ssh_agent_env:-$TMPDIR/ssh-agent.env}"
+_ssh_agent_env="${_ssh_agent_env:-${TMPDIR:-/tmp}/ssh-agent.env}"
 
 # Set the path to the persistent authentication socket.
-_ssh_agent_sock="$TMPDIR/ssh-agent.sock"
+_ssh_agent_sock="${TMPDIR:-/tmp}/ssh-agent.sock"
 
 # Start ssh-agent if not started.
 if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
