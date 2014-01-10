@@ -22,7 +22,11 @@ Aliases
 -------
 
   - `d` prints the contents of the directory stack.
-  - `1 ... 9` changes the directory to the **n** previous one.
+
+Functions
+---------
+
+  - `command_not_found_handler` changes the directory to the **n** previous one.
 
 Authors
 -------

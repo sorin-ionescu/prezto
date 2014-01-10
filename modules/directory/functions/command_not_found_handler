@@ -1,0 +1,13 @@
+#
+# Changes the directory to the n previous one.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+if [[ "$1" == [[:digit:]]## ]]; then
+  builtin cd "+$1"
+else
+  return 127
+fi
+
