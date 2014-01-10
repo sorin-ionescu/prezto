@@ -107,30 +107,39 @@ function editor-info {
 }
 zle -N editor-info
 
-# Ensures that $terminfo values are valid and updates editor information when
-# the keymap changes.
-function zle-keymap-select zle-line-init zle-line-finish {
+# Updates editor information when the keymap changes.
+function zle-keymap-select {
+  zle editor-info
+}
+zle -N zle-keymap-select
+
+# Enables terminal application mode and updates editor information.
+function zle-line-init {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
-  if (( $+terminfo[smkx] && $+terminfo[rmkx] )); then
-    case "$0" in
-      (zle-line-init)
-        # Enable terminal application mode.
-        echoti smkx
-      ;;
-      (zle-line-finish)
-        # Disable terminal application mode.
-        echoti rmkx
-      ;;
-    esac
+  if (( $+terminfo[smkx] )); then
+    # Enable terminal application mode.
+    echoti smkx
   fi
 
   # Update editor information.
   zle editor-info
 }
-zle -N zle-keymap-select
-zle -N zle-line-finish
 zle -N zle-line-init
+
+# Disables terminal application mode and updates editor information.
+function zle-line-finish {
+  # The terminal must be in application mode when ZLE is active for $terminfo
+  # values to be valid.
+  if (( $+terminfo[rmkx] )); then
+    # Disable terminal application mode.
+    echoti rmkx
+  fi
+
+  # Update editor information.
+  zle editor-info
+}
+zle -N zle-line-finish
 
 # Toggles emacs overwrite mode and updates editor information.
 function overwrite-mode {
