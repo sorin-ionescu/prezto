@@ -36,7 +36,7 @@ fi
 #
 
 # Pacman.
-alias pac= "${_pacman_frontend}"
+alias pac="${_pacman_frontend}"
 
 # Installs packages from repositories.
 alias paci="${_pacman_sudo}${_pacman_frontend} --sync"
