@@ -9,10 +9,13 @@
 pacman --query --explicit --info \
   | awk '
       BEGIN {
-        FS=":"
+        FS=" : "
       }
       /^Name/ {
-        print $2
+        printf "\033[0;01m" $2 "\033[0m"
+      }
+      /^Version/ {
+        print " \033[1;32m" $2 "\033[0m"
       }
       /^Description/ {
         print $2
