@@ -64,7 +64,7 @@ alias pacs="${_pacman_frontend} --sync --search"
 alias pacS="${_pacman_frontend} --query --search"
 
 # Lists orphan packages.
-alias pacman-list-orphans="${_pacman_sudo}${_pacman_frontend} --query --deps --unrequired"
+alias pacman-list-orphans="${_pacman_frontend} --query --deps --unrequired"
 
 # Removes orphan packages.
 alias pacman-remove-orphans="${_pacman_sudo}${_pacman_frontend} --remove --recursive \$(${_pacman_frontend} --quiet --query --deps --unrequired)"
