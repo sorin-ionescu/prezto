@@ -43,6 +43,7 @@ alias rake='noglob rake'
 alias rsync='noglob rsync'
 alias scp='noglob scp'
 alias sftp='noglob sftp'
+alias bower='noglob bower'
 
 # Define general aliases.
 alias _='sudo'
