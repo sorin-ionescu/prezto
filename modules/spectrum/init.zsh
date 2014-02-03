@@ -57,7 +57,7 @@ FG[none]="$FX[none]"
 BG[none]="$FX[none]"
 colors=(black red green yellow blue magenta cyan white)
 for color in {0..255}; do
-  if (( $color >= 0 )) && (( $color < $#colors )); then
+  if (( $color >= 0 && $color < $#colors )); then
     index=$(( $color + 1 ))
     FG[$colors[$index]]="\e[38;5;${color}m"
     BG[$colors[$index]]="\e[48;5;${color}m"

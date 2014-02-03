@@ -22,4 +22,3 @@ alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewU='brew update && brew upgrade'
 alias brewx='brew remove'
-
