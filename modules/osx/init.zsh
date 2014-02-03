@@ -14,8 +14,8 @@ fi
 # Aliases
 #
 
-# Change directory to the current Finder directory.
+# Changes directory to the current Finder directory.
 alias cdf='cd "$(pfd)"'
 
-# Push directory to the current Finder directory.
+# Pushes directory to the current Finder directory.
 alias pushdf='pushd "$(pfd)"'
