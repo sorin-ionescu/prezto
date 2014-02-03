@@ -9,8 +9,7 @@ Aliases
   - `cdf` changes the current working director to the current _Finder_
     directory.
   - `pushdf` pushes the current working directory onto the directory queue and
-  - `ql` quick looks at files.
-  - `rm-osx-cruft` deletes .DS\_Store, \_\_MACOSX cruft.
+    changes the current working director to the current _Finder_ directory.
 
 Functions
 ---------
@@ -20,6 +19,8 @@ Functions
   - `pfd` prints the current _Finder_ directory.
   - `pfs` prints the current _Finder_ selection.
   - `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
+  - `ql` previews files in Quick Look.
+  - `rm-osx-cruft` deletes .DS\_Store, \_\_MACOSX cruft.
 
 Authors
 -------
