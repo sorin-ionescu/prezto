@@ -21,6 +21,8 @@ Functions
   - `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
   - `ql` previews files in Quick Look.
   - `rm-osx-cruft` deletes .DS\_Store, \_\_MACOSX cruft.
+  - `ls-osx-download-history` displays the Mac OS X download history.
+  - `rm-osx-download-history` deletes the Mac OS X download history.
 
 Authors
 -------
