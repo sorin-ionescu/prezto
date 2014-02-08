@@ -2,21 +2,29 @@
 # Shortens GitHub URLs.
 #
 # Authors:
+#   Joel Kuzmarski <leoj3n@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
 local url="$1"
 
-if [[ "$url" == '-' ]]; then
-  read url <&0
-fi
-
 if [[ -z "$url" ]]; then
-  print "usage: $0 [ url | - ]" >&2
+  print "usage: $0 [ url | - ] [slug]" >&2
+  return 1
+elif [[ "$url" == '-' ]]; then
+  read url <&0
+elif [[ "$url" != *github.com* ]]; then
+  url="https://github.com/$url"
 fi
 
 if (( $+commands[curl] )); then
-  curl -s -i 'http://git.io' -F "url=$url" | grep 'Location:' | sed 's/Location: //'
+  local result="$(curl -s -i 'http://git.io' -F "url=$url" -F "code=$2")"
+
+  if [[ $result == *Unprocessable* ]]; then
+    print "$0: the slug '$2' is already taken!" >&2
+  else
+    print $result | grep 'Location:' | sed 's/Location: //'
+  fi
 else
   print "$0: command not found: curl" >&2
 fi
