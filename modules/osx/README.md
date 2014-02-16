@@ -20,9 +20,9 @@ Functions
   - `pfs` prints the current _Finder_ selection.
   - `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
   - `ql` previews files in Quick Look.
-  - `rm-osx-cruft` deletes .DS\_Store, \_\_MACOSX cruft.
-  - `ls-osx-download-history` displays the Mac OS X download history.
-  - `rm-osx-download-history` deletes the Mac OS X download history.
+  - `osx-rm-dir-metadata` deletes .DS\_Store, \_\_MACOSX cruft.
+  - `osx-ls-download-history` displays the Mac OS X download history.
+  - `osx-rm-download-history` deletes the Mac OS X download history.
 
 Authors
 -------
