@@ -29,6 +29,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   unset perl_path
   unset cache_file
+
+  # Perlbrew
+  zstyle -s ':prezto:module:perl:perlbrew' location '_perlbrew_root' 
+  if [[ -s "${_perlbrew_root}/etc/bashrc" ]]; then
+    export PERLBREW_ROOT="${_perlbrew_root}"
+    source "${_perlbrew_root}/etc/bashrc"
+  fi
 fi
 
 #
