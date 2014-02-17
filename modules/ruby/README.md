@@ -18,7 +18,8 @@ allows for managing multiple, isolated Ruby installations and gem sets in the
 home directory.
 
 Since RVM is loaded into the shell and is known to override shell commands, it
-may conflict with shell scripts.
+may conflict with shell scripts.  It may be best to load ruby last in .zpreztorc
+as RVM will complain if it's not first in the load path.
 
 rbenv
 -----
