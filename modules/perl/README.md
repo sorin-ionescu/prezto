@@ -30,6 +30,10 @@ Perlbrew
 An alternative to the above is to use [Perlbrew][2], which allows for the
 management of multiple, isolated Perl installations in the home directory.
 
+You can specify the perlbrew location so the environment is automatically loaded.
+
+    zstyle ':prezto:module:perl:perlbrew' location '/path/to/perlbrew'
+
 Aliases
 -------
 
