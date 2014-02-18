@@ -20,6 +20,9 @@ home directory.
 Since RVM is loaded into the shell and is known to override shell commands, it
 may conflict with shell scripts.
 
+Load this module as late as possible when using RVM since RVM will complain if
+it is not first in `$PATH`.
+
 rbenv
 -----
 
