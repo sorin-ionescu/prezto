@@ -15,7 +15,7 @@ fi
 # Auto Start
 #
 
-if [[ -z "$STY" && ( -n "$INSIDE_EMACS" || -n "$EMACS" || -n "$VIM" ) ]] && ( \
+if [[ -z "$STY" && ( -z "$INSIDE_EMACS" || -z "$EMACS" || -z "$VIM" ) ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:screen:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:screen:auto-start' local ) \
 ); then

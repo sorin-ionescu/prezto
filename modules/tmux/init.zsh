@@ -16,7 +16,7 @@ fi
 # Auto Start
 #
 
-if [[ -z "$TMUX" && ( -n "$INSIDE_EMACS" || -n "$EMACS" || -n "$VIM" ) ]] && ( \
+if [[ -z "$TMUX" && ( -z "$INSIDE_EMACS" || -z "$EMACS" || -z "$VIM" ) ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
 ); then
