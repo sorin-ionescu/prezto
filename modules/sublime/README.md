@@ -17,7 +17,7 @@ Aliases
 ### General
 
   - `st`    Opens Sublime Text
-  - 'subl'  Opens Sublime Text
+  - `subl`  Opens Sublime Text
   - `stt`   Opens Sublime Text in project mode for the current directory
 
 Authors
