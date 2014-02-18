@@ -23,14 +23,17 @@ following line to *zpreztorc*:
 In both cases, it will create a background session named _#Prezto_ and attach
 every new shell to it.
 
-To control if the unattached sessions must be kept alive, set the
-`destroy-unattached` option in your `.tmux.conf`:
+__Note__: With `auto-start` enabled, you may want to control how multiple
+sessions are managed. The `destroy-unattached` option of tmux controls if the
+unattached sessions must be kept alive, making them available for later use.
 
-	```shell
-    set-option -g destroy-unattached 'on'
-    # or
-    set-option -g destroy-unattached 'off'
-    ```
+This is configured in your `.tmux.conf`:
+
+```shell
+set-option -g destroy-unattached 'on'
+# or
+set-option -g destroy-unattached 'off'
+```
 
 Aliases
 -------
