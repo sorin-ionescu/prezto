@@ -3,18 +3,27 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Patrick Baker <patricksbaker@gmail.com>
 #
 
-# Return if requirements are not found.
-if (( ! $+commands[perl] )); then
-  return 1
+#
+# Perlbrew
+#
+zstyle -s ':prezto:module:perl:perlbrew' location '_perlbrew_root'
+_perlbrew_root_expanded=${(j::)~_perlbrew_root}
+
+if [[ -s "${_perlbrew_root}/etc/bashrc" ]]; then
+  export PERLBREW_ROOT="${_perlbrew_root}"
+  source "${_perlbrew_root}/etc/bashrc"
+
+  unset _perlbrew_root
+  unset _perlbrew_root_expanded
 fi
 
 #
 # Local Module Installation
 #
-
-if [[ "$OSTYPE" == darwin* ]]; then
+if [[ "$OSTYPE" == darwin* ]] && (( $+commands[perl] )); then
   # Perl is slow; cache its output.
   cache_file="${0:h}/cache.zsh"
   perl_path="$HOME/Library/Perl/5.12"
@@ -29,13 +38,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   unset perl_path
   unset cache_file
-
-  # Perlbrew
-  zstyle -s ':prezto:module:perl:perlbrew' location '_perlbrew_root' 
-  if [[ -s "${_perlbrew_root}/etc/bashrc" ]]; then
-    export PERLBREW_ROOT="${_perlbrew_root}"
-    source "${_perlbrew_root}/etc/bashrc"
-  fi
 fi
 
 #
