@@ -23,18 +23,12 @@ if [[ -z "$TMUX" && ( -z "$INSIDE_EMACS" || -z "$EMACS" || -z "$VIM" ) ]] && ( \
 ); then
   tmux_session='prezto'
 
-  # Create the default '#Prezto' session if not available. 
-  if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
+  # Create a first 'prezto' session if tmux is starting. 
+  if ! tmux has-session 2> /dev/null; then
     tmux start-server \; new-session -d -s "$tmux_session" \; set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
-  #By default, prezto sets destroy-unattached to on
-  tmux_destroy_unattached=`tmux show-options -v -g destroy-unattached`
-  if [[ -z "$tmux_destroy_unattached" ]]; then
-    tmux set-option -g destroy-unattached on
-  fi
-
-  #Opens the session '#Prezto' or the latest session used
+  #Opens the session 'prezto' or the latest session used
   exec tmux attach-session
 fi
 

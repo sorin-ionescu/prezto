@@ -20,8 +20,8 @@ following line to *zpreztorc*:
 
     zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
-In both cases, it will create a background session named _#Prezto_ and attach
-every new shell to it.
+In both cases, it will create a background session named _prezto_ if the tmux
+server is not started.
 
 __Note__: With `auto-start` enabled, you may want to control how multiple
 sessions are managed. The `destroy-unattached` option of tmux controls if the
