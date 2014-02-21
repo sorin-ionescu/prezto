@@ -5,6 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Colin Hebert <hebert.colin@gmail.com>
 #   Georges Discry <georges@discry.be>
+#   Xavier Cambar <xcambar@gmail.com>
 #
 
 # Return if requirements are not found.
@@ -22,25 +23,16 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
 ); then
   tmux_session='prezto'
 
-  if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
-    # Ensure that tmux server is started.
-    tmux start-server
-
-    # Disable the destruction of unattached sessions globally.
-    tmux set-option -g destroy-unattached off &> /dev/null
-
-    # Create a new session.
-    tmux new-session -d -s "$tmux_session"
-
-    # Disable the destruction of the new, unattached session.
-    tmux set-option -t "$tmux_session" destroy-unattached off &> /dev/null
-
-    # Enable the destruction of unattached sessions globally to prevent
-    # an abundance of open, detached sessions.
-    tmux set-option -g destroy-unattached on &> /dev/null
+  # Create a first 'prezto' session if tmux is starting.
+  if ! tmux has-session 2> /dev/null; then
+    tmux \
+      start-server \; \
+      new-session -d -s "$tmux_session" \; \
+      set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
-  exec tmux new-session -t "$tmux_session"
+  # Attach to the 'prezto' session or to the last session used.
+  exec tmux attach-session
 fi
 
 #
