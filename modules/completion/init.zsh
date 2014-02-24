@@ -99,14 +99,13 @@ zstyle -e ':completion:*:hosts' hosts 'reply=(
 )'
 
 # Don't complete uninteresting users...
-zstyle ':completion:*:*:*:users' ignored-patterns \
-  adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-  dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-  hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-  mailman mailnull mldonkey mysql nagios \
-  named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-  operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-  rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
+zstyle ':completion:*:*:*:users' ignored-patterns nobody nobody4 noaccess '_*' \
+  $([[ $OSTYPE =~ solaris ]] && max_uid=100 || max_uid=500
+    IFS=:
+    while read user pass uid remainder; do
+      [[ ! $user =~ (^#|root) ]] && ((uid < max_uid)) && echo $user
+    done </etc/passwd
+  )
 
 # ... unless we really want to.
 zstyle '*' single-ignored show
