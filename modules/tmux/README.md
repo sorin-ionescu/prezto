@@ -20,12 +20,20 @@ following line to *zpreztorc*:
 
     zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
-In both cases, it will create a background session named _#Prezto_ and attach
-every new shell to it.
+In both cases, it will create a background session named _prezto_ if the tmux
+server is not started.
 
-To avoid keeping open sessions, this module sets `destroy-unattached off` on
-the background session and `destroy-unattached on` on every other session
-(global setting).
+__Note__: With `auto-start` enabled, you may want to control how multiple
+sessions are managed. The `destroy-unattached` option of tmux controls if the
+unattached sessions must be kept alive, making them available for later use.
+
+This is configured in your `.tmux.conf`:
+
+```shell
+set-option -g destroy-unattached 'on'
+# or
+set-option -g destroy-unattached 'off'
+```
 
 Aliases
 -------
@@ -54,6 +62,7 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Colin Hebert](https://github.com/ColinHebert)
   - [Georges Discry](https://github.com/gdiscry)
+  - [Xavier Cambar](https://github.com/xcambar)
 
 [1]: http://tmux.sourceforge.net
 [2]: https://github.com/sorin-ionescu/prezto/issues/62
