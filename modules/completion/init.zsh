@@ -100,10 +100,10 @@ zstyle -e ':completion:*:hosts' hosts 'reply=(
 
 # Don't complete uninteresting users...
 zstyle ':completion:*:*:*:users' ignored-patterns nobody nobody4 noaccess '_*' \
-  $([[ $OSTYPE =~ solaris ]] && max_uid=100 || max_uid=500
+  $([[ $OSTYPE = *(linux|darwin|cygwin)* ]] && min_uid=500 || min_uid=100
     IFS=:
-    while read user pass uid remainder; do
-      [[ ! $user =~ (^#|root) ]] && ((uid < max_uid)) && echo $user
+    while read -r user pass uid remainder; do
+      [[ "$user" != (\#*|root) ]] && ((uid < min_uid)) && echo $user
     done </etc/passwd
   )
 
