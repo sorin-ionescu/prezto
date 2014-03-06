@@ -12,6 +12,13 @@ if (( ! $+commands[tmux] )); then
   return 1
 fi
 
+# Set options globally
+tmux set -g mode-mouse on &> /dev/null
+tmux set -g history-limit 100000
+tmux set -g mouse-select-pane on
+tmux set -g mouse-resize-pane on
+tmux set -g mouse-select-window on
+
 #
 # Auto Start
 #
