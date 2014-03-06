@@ -27,7 +27,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     fi
   done
 
-  export JAVA_HOME=${JAVA_HOME_17:-$(/usr/libexec/java_home 2> /dev/null)}
+  export JAVA_HOME=${JAVA_HOME_18:-$(/usr/libexec/java_home 2> /dev/null)}
 fi
 
 #
