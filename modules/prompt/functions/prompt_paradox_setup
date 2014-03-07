@@ -1,4 +1,10 @@
 # Added from: https://raw.github.com/paradox460/prezto/paradox/modules/prompt/functions/prompt_paradox_setup
+# Requirements:
+# - set the presto module(pmodule) git to in zpreztorc
+# - install solarized
+# - install a Powerline-patched font (https://gist.github.com/qrush/1595572). I personally like Menlo
+
+# Documentation can be found at: http://www.paradox.io/posts/9-my-new-zsh-prompt and https://gist.github.com/agnoster/3712874
 
 # Load dependencies.
 pmodload 'helper'
