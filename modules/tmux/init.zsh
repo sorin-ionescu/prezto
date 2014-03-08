@@ -39,5 +39,8 @@ fi
 # Aliases
 #
 
-alias tmuxa='tmux attach-session'
+alias tmuxn='tmux new-session -s' # [name] create new named session; if don't need name just use 'tmux'
+alias tmuxa='tmux attach-session' # optionally [-t] [name] to attach to specific session
 alias tmuxl='tmux list-sessions'
+alias tmuxr='tmux rename-session -t' # [name] [new name]
+alias tmuxk='tmux kill-session -t'
