@@ -16,8 +16,9 @@ version is 4.3.11.
         zsh
 
   2. Clone the repository:
+
         cd /opt
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git
+        git clone --recursive https://github.com/matthiasha/prezto
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:
