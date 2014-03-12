@@ -23,7 +23,9 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
 ); then
   tmux_session='prezto'
 
-  # Create a first 'prezto' session if tmux is starting.
+  tmux start-server
+  # Create a first 'prezto' session if tmux is starting
+  # and no session has been created.
   if ! tmux has-session 2> /dev/null; then
     tmux \
       start-server \; \
