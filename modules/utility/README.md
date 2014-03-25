@@ -34,6 +34,7 @@ Aliases
 ### Disabled Spelling Correction
 
   - `ack`
+  - `ag`
   - `cd`
   - `cp`
   - `ebuild`

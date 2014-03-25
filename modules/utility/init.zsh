@@ -19,6 +19,7 @@ setopt CORRECT
 
 # Disable correction.
 alias ack='nocorrect ack'
+alias ag='nocorrect ag'
 alias cd='nocorrect cd'
 alias cp='nocorrect cp'
 alias ebuild='nocorrect ebuild'
@@ -46,6 +47,7 @@ alias sftp='noglob sftp'
 
 # Define general aliases.
 alias _='sudo'
+alias ag="${aliases[ag]:-ag} --color-match 35"
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
@@ -83,7 +85,7 @@ else
     # Define colors for the completion system.
     export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 
-    alias ls='ls -G'
+    alias ls='ls --color=auto'
   else
     alias ls='ls -F'
   fi
