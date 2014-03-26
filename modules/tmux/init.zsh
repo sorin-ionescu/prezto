@@ -28,7 +28,6 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   # and no session has been created.
   if ! tmux has-session 2> /dev/null; then
     tmux \
-      start-server \; \
       new-session -d -s "$tmux_session" \; \
       set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
