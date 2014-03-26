@@ -25,14 +25,21 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
 
   # Create a 'prezto' session if no session has been defined in tmux.conf.
   if ! tmux has-session 2> /dev/null; then
-    tmux_session='prezto'
     tmux \
-      new-session -d -s "$tmux_session" \; \
-      set-option -t "$tmux_session" destroy-unattached off &> /dev/null
+      new-session -d -s prezto \; \
+      set-option -t prezto destroy-unattached off &> /dev/null
+  else
+    tmux_session
   fi
 
-  # Attach to the 'prezto' session or to the last session used.
-  exec tmux attach-session
+  if zstyle -t ':prezto:module:tmux:auto-start' mode shared; then
+      # Attach to the 'prezto' session or to the last session used.
+      exec tmux attach
+  else
+      # Find a session to share windows with.
+      tmux_session=`tmux list-sessions -F '#S' | head -n 1`
+      exec tmux new-session -t "$tmux_session"\; set-option destroy-unattached on
+  fi
 fi
 
 #
