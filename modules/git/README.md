@@ -316,6 +316,21 @@ Last, add `$git_info[prompt]` to `$PROMPT` and `$git_info[rprompt]` to
 `$RPROMPT` respectively and call `git-info` in the `prompt_name_preexec` hook
 function.
 
+
+### Directory listings for zsh with git features.
+
+k is a zsh script to make directory listings more readable, adding a bit of color and some git information. ([Read more](https://github.com/supercrabtree/k/blob/master/README.md))
+
+Turns this:  
+![repos-ls](https://raw.githubusercontent.com/supercrabtree/k/gh-pages/repos-ls.jpg)
+
+Into this:  
+![repos-k](https://raw.githubusercontent.com/supercrabtree/k/gh-pages/repos-k.jpg)
+
+k is licensed under the MIT License:
+> Copyright © 2014 George Crabtree & Christopher Newton. MIT License
+
+
 Authors
 -------
 
