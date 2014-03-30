@@ -1,3 +1,4 @@
+
 #
 # A simple theme that displays relevant, contextual information.
 #
@@ -47,26 +48,26 @@ function prompt_sorin_setup {
   add-zsh-hook precmd prompt_sorin_precmd
 
   # Set editor-info parameters.
-  zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
-  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}❮%F{yellow}❮%F{red}❮%f%b'
+  zstyle ':prezto:module:editor:info:completing' format '%F{red}...%F{black}'
+  zstyle ':prezto:module:editor:info:keymap:primary' format ' %F{red}❯%F{yellow}❯%F{green}❯%F{default}'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%F{black}'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %F{green}❮%F{yellow}❮%F{red}❮%F{default}'
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
-  zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
-  zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
-  zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
-  zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
-  zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
-  zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
-  zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
-  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
-  zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
-  zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
+  zstyle ':prezto:module:git:info:action' format ':%F{yellow}%s%F{black}'
+  zstyle ':prezto:module:git:info:added' format ' %F{green}✚%F{black}'
+  zstyle ':prezto:module:git:info:ahead' format ' %F{yellow}⬆%F{black}'
+  zstyle ':prezto:module:git:info:behind' format ' %F{yellow}⬇%F{black}'
+  zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%F{black}'
+  zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%F{black}'
+  zstyle ':prezto:module:git:info:deleted' format ' %F{red}✖%F{black}'
+  zstyle ':prezto:module:git:info:modified' format ' %F{blue}✹%F{black}'
+  zstyle ':prezto:module:git:info:position' format ':%F{red}%p%F{black}'
+  zstyle ':prezto:module:git:info:renamed' format ' %F{magenta}➜%F{black}'
+  zstyle ':prezto:module:git:info:stashed' format ' %F{cyan}⚑%F{black}'
+  zstyle ':prezto:module:git:info:unmerged' format ' %F{yellow}═%F{black}'
+  zstyle ':prezto:module:git:info:untracked' format ' %F{white}✭%F{black}'
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
