@@ -5,4 +5,4 @@
 #   Jozef Izso <jozef.izso@gmail.com>
 #
 
-source "${0:h}/external/k.sh"
+source "${0:h}/external/k.sh" || return 1
