@@ -30,7 +30,7 @@ while (( $# > 0 )); do
     continue
   fi
 
-  case "$1" in
+  case "$1:l" in
     (*.tar.gz|*.tgz) tar t${verbose:+v}vzf "$1" ;;
     (*.tar.bz2|*.tbz|*.tbz2) tar t${verbose:+v}jf "$1" ;;
     (*.tar.xz|*.txz) tar --xz --help &> /dev/null \
