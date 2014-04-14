@@ -115,7 +115,7 @@ Initializes Ocaml package management.
 OSX
 ---
 
-Defines OS X aliases and functions.
+Defines Mac OS X aliases and functions.
 
 Pacman
 ------
