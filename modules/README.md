@@ -81,11 +81,6 @@ Macports
 
 Defines MacPorts aliases and adds MacPorts directories to path variables.
 
-Marked
-------
-
-Defines Marked.app aliases.
-
 MIME Setup
 ----------
 
