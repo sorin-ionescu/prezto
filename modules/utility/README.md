@@ -51,6 +51,7 @@ Aliases
 
 ### Disabled File Globbing
 
+  - `bower`
   - `fc`
   - `find`
   - `ftp`

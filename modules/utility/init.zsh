@@ -35,6 +35,7 @@ alias mysql='nocorrect mysql'
 alias rm='nocorrect rm'
 
 # Disable globbing.
+alias bower='noglob bower'
 alias fc='noglob fc'
 alias find='noglob find'
 alias ftp='noglob ftp'

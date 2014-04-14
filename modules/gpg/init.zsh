@@ -12,7 +12,7 @@ fi
 
 # Set the default paths to gpg-agent files.
 _gpg_agent_conf="$HOME/.gnupg/gpg-agent.conf"
-_gpg_agent_env="$TMPDIR/gpg-agent.env"
+_gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env"
 
 # Start gpg-agent if not started.
 if ! ps -U "$USER" -o ucomm | grep -q gpg-agent; then

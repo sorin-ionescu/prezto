@@ -48,7 +48,7 @@ zprofile and zlogin are not meant to be used concurrently but can be done so.
 This file is sourced by interactive shells. It should define aliases,
 functions, shell options, and key bindings.
 
-## zpreztorc
+### zpreztorc
 
 This file configures Prezto.
 

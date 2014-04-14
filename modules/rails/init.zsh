@@ -7,39 +7,30 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+pmodload 'ruby'
+
 # Return if requirements are not found.
-if (( ! $+commands[rails] )); then
+if (( ! $+commands[bundle] )); then
   return 1
 fi
 
 #
-# Aliases (Compatible with Rails 2)
+# Aliases
 #
 
-alias ror='rails'
-alias rorc='_rails-command console'
-alias rordc='_rails-command dbconsole'
-alias rordm='rake db:migrate'
-alias rordM='rake db:migrate db:test:clone'
-alias rordr='rake db:rollback'
-alias rorg='_rails-command generate'
-alias rorl='tail -f log/development.log'
-alias rorlc='rake log:clear'
-alias rorp='_rails-command plugin'
-alias rorr='_rails-command runner'
-alias rors='_rails-command server'
-alias rorsd='_rails-command server --debugger'
-alias rorx='_rails-command destroy'
-
-#
-# Functions
-#
-
-function _rails-command {
-  if [[ -e "script/server" ]]; then
-    ruby script/"$@"
-  else
-    ruby script/rails "$@"
-  fi
-}
+alias ror='bundle exec rails'
+alias rorc='bundle exec rails console'
+alias rordc='bundle exec rails dbconsole'
+alias rordm='bundle exec rake db:migrate'
+alias rordM='bundle exec rake db:migrate db:test:clone'
+alias rordr='bundle exec rake db:rollback'
+alias rorg='bundle exec rails generate'
+alias rorl='tail -f "$(ruby-app-root)/log/development.log"'
+alias rorlc='bundle exec rake log:clear'
+alias rorp='bundle exec rails plugin'
+alias rorr='bundle exec rails runner'
+alias rors='bundle exec rails server'
+alias rorsd='bundle exec rails server --debugger'
+alias rorx='bundle exec rails destroy'
 

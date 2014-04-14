@@ -348,13 +348,13 @@ function git-info {
     # Format added.
     if (( added > 0 )); then
       zstyle -s ':prezto:module:git:info:added' format 'added_format'
-      zformat -f added_formatted "$added_format" "a:$added_format"
+      zformat -f added_formatted "$added_format" "a:$added"
     fi
 
     # Format deleted.
     if (( deleted > 0 )); then
       zstyle -s ':prezto:module:git:info:deleted' format 'deleted_format'
-      zformat -f deleted_formatted "$deleted_format" "d:$deleted_format"
+      zformat -f deleted_formatted "$deleted_format" "d:$deleted"
     fi
 
     # Format modified.
