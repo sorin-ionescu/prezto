@@ -45,10 +45,6 @@ function fasd_cd {
   fi
 }
 
-#
-# Aliases
-#
+source ${0:h}/aliases.zsh
 
-alias j='fasd_cd -id'                   # Changes the current working directory interactively.
-alias v='fasd -f -t -e vim -b viminfo'  # Mimics rupa/v: opens the file with vim using viminfo backend.
 
