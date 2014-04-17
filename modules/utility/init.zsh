@@ -66,9 +66,9 @@ if is-callable 'dircolors'; then
 
   if zstyle -t ':prezto:module:utility:ls' color; then
     if [[ -s "$HOME/.dir_colors" ]]; then
-      eval "$(dircolors "$HOME/.dir_colors")"
+      eval "$(dircolors -b "$HOME/.dir_colors")"
     else
-      eval "$(dircolors)"
+      eval "$(dircolors -b)"
     fi
 
     alias ls="$aliases[ls] --color=auto"
