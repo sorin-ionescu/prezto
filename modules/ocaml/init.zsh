@@ -6,9 +6,9 @@
 #
 
 # Return if requirements are not found.
-if (( ! $+commands[opam] )); then
+if [[ ! -f "$HOME/.opam/opam-init/init.zsh" ]]; then
   return 1
 fi
 
 # Initialize OPAM.
-eval "$(opam config env)"
+source "$HOME/.opam/opam-init/init.zsh"
