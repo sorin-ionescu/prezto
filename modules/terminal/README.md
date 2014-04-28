@@ -15,7 +15,9 @@ directory, add the following to *zpreztorc*:
 
 Auto titling is disabled inside terminal multiplexers, except inside dvtm, since
 it interferes with window names defined in configuration files and profile
-managers.
+managers. This can be overridden by setting it to `always`.
+
+    zstyle ':prezto:module:terminal' auto-title 'always'
 
 ### Title formats
 

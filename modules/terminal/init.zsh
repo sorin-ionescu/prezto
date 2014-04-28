@@ -124,8 +124,9 @@ then
 fi
 
 # Set up non-Apple terminals.
-if zstyle -t ':prezto:module:terminal' auto-title \
-  && ( ! [[ -n "$STY" || -n "$TMUX" ]] )
+if zstyle -t ':prezto:module:terminal' auto-title 'always' \
+  || (zstyle -t ':prezto:module:terminal' auto-title \
+    && ( ! [[ -n "$STY" || -n "$TMUX" ]] ))
 then
   # Sets the tab and window titles before the prompt is displayed.
   add-zsh-hook precmd _terminal-set-titles-with-path
