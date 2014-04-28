@@ -143,6 +143,9 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # Set the tab title format.
 # zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
+# Choose tab-title as the multiplexer title
+# zstyle ':prezto:module:terminal' multiplexer-title 'tab-title'
+
 #
 # Tmux
 #

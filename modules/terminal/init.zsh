@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Olaf Conradi <olaf@conradi.org>
 #
 
 # Return if requirements are not found.
@@ -10,13 +11,18 @@ if [[ "$TERM" == (dumb|linux|*bsd*) ]]; then
   return 1
 fi
 
+# Set default title for terminal multiplexers to the window title.
+zstyle ':prezto:module:terminal' multiplexer-title 'window-title'
+
 # Sets the terminal or terminal multiplexer window title.
 function set-window-title {
   local title_format{,ted}
   zstyle -s ':prezto:module:terminal:window-title' format 'title_format' || title_format="%s"
   zformat -f title_formatted "$title_format" "s:$argv"
 
-  if [[ "$TERM" == screen* ]]; then
+  if zstyle -t ':prezto:module:terminal' multiplexer-title 'window-title' \
+    && [[ "$TERM" == screen* ]]
+  then
     title_format="\ek%s\e\\"
   else
     title_format="\e]2;%s\a"
@@ -25,13 +31,21 @@ function set-window-title {
   printf "$title_format" "${(V%)title_formatted}"
 }
 
-# Sets the terminal tab title.
+# Sets the terminal or terminal multiplexer tab title.
 function set-tab-title {
   local title_format{,ted}
   zstyle -s ':prezto:module:terminal:tab-title' format 'title_format' || title_format="%s"
   zformat -f title_formatted "$title_format" "s:$argv"
 
-  printf "\e]1;%s\a" ${(V%)title_formatted}
+  if zstyle -t ':prezto:module:terminal' multiplexer-title 'tab-title' \
+    && [[ "$TERM" == screen* ]]
+  then
+    title_format="\ek%s\e\\"
+  else
+    title_format="\e]1;%s\a"
+  fi
+
+  printf "$title_format" "${(V%)title_formatted}"
 }
 
 # Sets the tab and window titles with a given command.
