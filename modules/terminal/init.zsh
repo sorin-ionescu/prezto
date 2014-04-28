@@ -12,7 +12,9 @@ if [[ "$TERM" == (dumb|linux|*bsd*) ]]; then
 fi
 
 # Set default title for terminal multiplexers to the window title.
-zstyle ':prezto:module:terminal' multiplexer-title 'window-title'
+if zstyle -T ':prezto:module:terminal' multiplexer-title; then
+  zstyle ':prezto:module:terminal' multiplexer-title 'window-title'
+fi
 
 # Sets the terminal or terminal multiplexer window title.
 function set-window-title {
