@@ -1,5 +1,5 @@
 #
-# Initializes Ocaml package management.
+# Initializes OCaml package management.
 #
 # Authors:
 #   Sebastian Wiesner <lunaryorn@gmail.com>
