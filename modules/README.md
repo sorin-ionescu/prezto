@@ -102,10 +102,10 @@ Node.js
 
 Provides utility functions for Node.js and loads npm completion.
 
-Ocaml
+OCaml
 -----
 
-Initializes Ocaml package management.
+Initializes OCaml package management.
 
 OSX
 ---
