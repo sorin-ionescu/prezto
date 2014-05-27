@@ -1,0 +1,107 @@
+##################################################
+# vim: ft=zsh
+#
+# A simple theme that displays relevant, contextual information.
+#
+# Authors:
+#   Joseph Tannhuber <sepp.tannhuber@yahoo.com>
+#
+# Screenshots:
+#   http://i.imgur.com/nBEEZ.png
+##################################################
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_dangerous_pwd {
+local pwd="${PWD/#$HOME/~}"
+
+if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_dangerous_pwd="$MATCH"
+    unset MATCH
+else
+    _prompt_dangerous_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+fi
+}
+
+function prompt_dangerous_indicator {
+if [[ "$editor_info" =~ "red" ]]; then
+    print -n "%{\033]12;#dc322f\007$editor_info[overwrite]%}REPLACE"
+fi
+if [[ "$editor_info" =~ "blue" ]]; then
+    print -n "%{\033]12;#268bd2\007$editor_info[keymap]%}NORMAL"
+fi
+if [[ ! "$editor_info" =~ "blue" && ! "$editor_info" =~ "red" ]]; then
+    print -n "%{\033]12;#b58900\007$editor_info[keymap]%}INSERT"
+fi
+}
+
+function prompt_dangerous_symbols {
+_prompt_dangerous_symbols="${VIM:+" %B%F{green}V%f%b"}"
+_prompt_dangerous_symbols+="${jobstates:+" %F{cyan}⚙%f"}"
+_prompt_dangerous_symbols+="%(?::%B%F{red} ⏎%f%b)"
+_prompt_dangerous_symbols+="%f%(!. %B%F{166}⚡%f%b.)"
+}
+
+function prompt_dangerous_precmd {
+setopt LOCAL_OPTIONS
+unsetopt XTRACE KSH_ARRAYS
+
+# Format PWD.
+prompt_dangerous_pwd
+
+# Format Symbols.
+prompt_dangerous_symbols
+
+# Get Git repository information.
+if (( $+functions[git-info] )); then
+    git-info
+fi
+
+# Removes the whitespace character at the end of the right prompt.
+ZLE_RPROMPT_INDENT=0
+}
+
+function prompt_dangerous_setup {
+setopt LOCAL_OPTIONS
+unsetopt XTRACE KSH_ARRAYS
+prompt_opts=(cr percent subst)
+
+# Load required functions.
+autoload -Uz add-zsh-hook
+
+# Add hook for calling git-info before each command.
+add-zsh-hook precmd prompt_dangerous_precmd
+
+# Set editor-info parameters.
+zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
+zstyle ':prezto:module:editor:info:keymap:primary' format '%F{yellow}'
+zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{red}'
+zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{blue}'
+
+# Set git-info parameters.
+zstyle ':prezto:module:git:info' verbose 'yes'
+zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
+zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
+zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
+zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
+zstyle ':prezto:module:git:info:branch' format '%F{gray}%b%f'
+zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
+zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
+zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
+zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
+zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
+zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
+zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
+zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
+zstyle ':prezto:module:git:info:keys' format \
+    'prompt' ' %F{gray}%f $(coalesce "%b" "%p" "%c")%s' \
+    'rprompt' '%A%B%S%a%d%m%r%U%u'
+
+# Define prompts.
+PROMPT='$(prompt_dangerous_indicator) ▷%b${git_info:+${(e)git_info[prompt]} ▷}${_prompt_dangerous_symbols} '
+RPROMPT='${git_info[rprompt]} ${editor_info[keymap]}${editor_info[overwrite]}◁ ${_prompt_dangerous_pwd}'
+SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+}
+
+prompt_dangerous_setup "$@"
