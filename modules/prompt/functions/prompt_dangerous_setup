@@ -81,10 +81,10 @@ zstyle ':prezto:module:editor:info:keymap:alternate' format '%B%F{blue}'
 
 # Set git-info parameters.
 zstyle ':prezto:module:git:info' verbose 'yes'
-zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
+zstyle ':prezto:module:git:info:action' format ':%%B%F{violet}%s%f%%b'
 zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
-zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
-zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
+zstyle ':prezto:module:git:info:ahead' format ' %%B%F{violet}⬆%f%%b'
+zstyle ':prezto:module:git:info:behind' format ' %%B%F{violet}⬇%f%%b'
 zstyle ':prezto:module:git:info:branch' format '%F{gray}%b%f'
 zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
 zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
@@ -92,7 +92,7 @@ zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
 zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
 zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
 zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
-zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
+zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{violet}═%f%%b'
 zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
 zstyle ':prezto:module:git:info:keys' format \
     'prompt' ' %F{gray}%f $(coalesce "%b" "%p" "%c")%s' \
