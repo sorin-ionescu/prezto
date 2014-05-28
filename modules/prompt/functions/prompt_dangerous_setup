@@ -5,34 +5,41 @@
 #
 # Authors:
 #   Joseph Tannhuber <sepp.tannhuber@yahoo.com>
-#
-# Screenshots:
-#   http://i.imgur.com/nBEEZ.png
 ##################################################
 
 # Load dependencies.
 pmodload 'helper'
 
+function prompt_dangerous_user {
+unset _prompt_dangerous_user
+if [[ -n "$SSH_CLIENT" || $UID -eq 0 ]]; then
+    _prompt_dangerous_user="%(!.%{%F{166}%B%}.)%n"
+fi
+}
+
 function prompt_dangerous_pwd {
 local pwd="${PWD/#$HOME/~}"
-
+unset _prompt_dangerous_pwd
+if [[ -n "$SSH_CLIENT" || $UID -eq 0 ]]; then
+    _prompt_dangerous_pwd="@%M:"
+fi
 if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_dangerous_pwd="$MATCH"
+    _prompt_dangerous_pwd+="$MATCH"
     unset MATCH
 else
-    _prompt_dangerous_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+    _prompt_dangerous_pwd+="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
 fi
 }
 
 function prompt_dangerous_indicator {
-if [[ "$editor_info" =~ "red" ]]; then
-    print -n "\033]12;#dc322f\007$editor_info[overwrite]"
-fi
-if [[ "$editor_info" =~ "blue" ]]; then
-    print -n "\033]12;#268bd2\007$editor_info[keymap]"
-fi
-if [[ ! "$editor_info" =~ "blue" && ! "$editor_info" =~ "red" ]]; then
-    print -n "\033]12;#b58900\007$editor_info[keymap]"
+if [[ "$editor_info[vimode]" =~ "red" ]]; then
+    print -n "\033]12;#dc322f\007"
+else
+    if [[ "$editor_info[vimode]" =~ "blue" ]]; then
+        print -n "\033]12;#268bd2\007"
+    else
+        print -n "\033]12;#b58900\007"
+    fi
 fi
 }
 
@@ -46,6 +53,9 @@ _prompt_dangerous_symbols+="%f%(!. %B%F{166}⚡%f%b.)"
 function prompt_dangerous_precmd {
 setopt LOCAL_OPTIONS
 unsetopt XTRACE KSH_ARRAYS
+
+# Format Username.
+prompt_dangerous_user
 
 # Format PWD.
 prompt_dangerous_pwd
@@ -76,6 +86,7 @@ add-zsh-hook precmd prompt_dangerous_precmd
 # Set editor-info parameters.
 zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
 zstyle ':prezto:module:editor:info:keymap:primary' format '%B%F{yellow}'
+zstyle ':prezto:module:editor:info:keymap:primary:insert' format '%B%F{yellow}'
 zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%B%F{red}'
 zstyle ':prezto:module:editor:info:keymap:alternate' format '%B%F{blue}'
 
@@ -99,8 +110,8 @@ zstyle ':prezto:module:git:info:keys' format \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
 # Define prompts.
-PROMPT='%{$(prompt_dangerous_indicator)%}❯❯❯%b${git_info:+${(e)git_info[prompt]} %B❯❯❯%b}${_prompt_dangerous_symbols} '
-RPROMPT='${git_info[rprompt]} %B❮❮❮%b ${_prompt_dangerous_pwd} ${editor_info[keymap]}${editor_info[overwrite]}❮❮❮'
+PROMPT='${editor_info[vimode]}❯❯❯%b%f${git_info:+${(e)git_info[prompt]} %B❯❯❯%b}${_prompt_dangerous_symbols} '
+RPROMPT='${git_info[rprompt]} %B❮❮❮%b ${_prompt_dangerous_user}%b${_prompt_dangerous_pwd} ${editor_info[vimode]}❮❮❮%{$(prompt_dangerous_indicator)%}'
 SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 

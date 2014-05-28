@@ -10,58 +10,58 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_terencehill_user {
-unset _prompt_terencehill_user
+function prompt_budspencer_user {
+unset _prompt_budspencer_user
 if [[ -n "$SSH_CLIENT" || $UID -eq 0 ]]; then
-    _prompt_terencehill_user="%(!.%{%F{166}%B%}.)%n"
+    _prompt_budspencer_user="%(!.%{%K{166}%B%}.)%n"
 fi
 }
 
-function prompt_terencehill_pwd {
+function prompt_budspencer_pwd {
 local pwd="${PWD/#$HOME/~}"
-unset _prompt_terencehill_pwd
+unset _prompt_budspencer_pwd
 if [[ -n "$SSH_CLIENT" || $UID -eq 0 ]]; then
-    _prompt_terencehill_pwd="@%M:"
+    _prompt_budspencer_pwd="@%M:"
 fi
 if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_terencehill_pwd+="$MATCH"
+    _prompt_budspencer_pwd+="$MATCH"
     unset MATCH
 else
-    _prompt_terencehill_pwd+="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+    _prompt_budspencer_pwd+="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
 fi
 }
 
-function prompt_terencehill_indicator {
-if [[ "${editor_info[vimode]}" =~ "red" ]]; then
-    print -n "%{\033]12;#dc322f\007${editor_info[vimode]}%}REPLACE"
+function prompt_budspencer_indicator {
+if [[ "$editor_info[vimode]" =~ "red" ]]; then
+    print -n "%{\033]12;#dc322f\007%K{$editor_info[vimode]}%} REPLACE "
 else
-    if [[ "${editor_info[vimode]}" =~ "blue" ]]; then
-        print -n "%{\033]12;#268bd2\007${editor_info[vimode]}%}NORMAL"
+    if [[ "$editor_info[vimode]" =~ "blue" ]]; then
+        print -n "%{\033]12;#268bd2\007%K{$editor_info[vimode]}%} NORMAL "
     else
-        print -n "%{\033]12;#b58900\007${editor_info[vimode]}%}INSERT"
+        print -n "%{\033]12;#b58900\007%K{$editor_info[vimode]}%} INSERT "
     fi
 fi
 }
 
-function prompt_terencehill_symbols {
-_prompt_terencehill_symbols="${VIM:+" %B%F{green}V%f%b"}"
-_prompt_terencehill_symbols+="${jobstates:+" %F{cyan}⚙%f"}"
-_prompt_terencehill_symbols+="%(?::%B%F{red} ⏎%f%b)"
-_prompt_terencehill_symbols+="%f%(!. %B%F{166}⚡%f%b.)"
+function prompt_budspencer_symbols {
+_prompt_budspencer_symbols="${VIM:+" %B%F{green}V%f%b"}"
+_prompt_budspencer_symbols+="${jobstates:+" %F{cyan}⚙%f"}"
+_prompt_budspencer_symbols+="%(?::%B%F{red} ⏎%f%b)"
+_prompt_budspencer_symbols+="%f%(!. %B%F{166}⚡%f%b.)"
 }
 
-function prompt_terencehill_precmd {
+function prompt_budspencer_precmd {
 setopt LOCAL_OPTIONS
 unsetopt XTRACE KSH_ARRAYS
 
 # Format Username.
-prompt_terencehill_user
+prompt_budspencer_user
 
 # Format PWD.
-prompt_terencehill_pwd
+prompt_budspencer_pwd
 
 # Format Symbols.
-prompt_terencehill_symbols
+prompt_budspencer_symbols
 
 # Get Git repository information.
 if (( $+functions[git-info] )); then
@@ -72,7 +72,7 @@ fi
 ZLE_RPROMPT_INDENT=0
 }
 
-function prompt_terencehill_setup {
+function prompt_budspencer_setup {
 setopt LOCAL_OPTIONS
 unsetopt XTRACE KSH_ARRAYS
 prompt_opts=(cr percent subst)
@@ -81,14 +81,14 @@ prompt_opts=(cr percent subst)
 autoload -Uz add-zsh-hook
 
 # Add hook for calling git-info before each command.
-add-zsh-hook precmd prompt_terencehill_precmd
+add-zsh-hook precmd prompt_budspencer_precmd
 
 # Set editor-info parameters.
 zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
-zstyle ':prezto:module:editor:info:keymap:primary' format '%F{yellow}'
-zstyle ':prezto:module:editor:info:keymap:primary:insert' format '%F{yellow}'
-zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{red}'
-zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{blue}'
+zstyle ':prezto:module:editor:info:keymap:primary' format 'yellow'
+zstyle ':prezto:module:editor:info:keymap:primary:insert' format 'yellow'
+zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format 'red'
+zstyle ':prezto:module:editor:info:keymap:alternate' format 'blue'
 
 # Set git-info parameters.
 zstyle ':prezto:module:git:info' verbose 'yes'
@@ -96,7 +96,7 @@ zstyle ':prezto:module:git:info:action' format ':%%B%F{violet}%s%f%%b'
 zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
 zstyle ':prezto:module:git:info:ahead' format ' %%B%F{violet}⬆%f%%b'
 zstyle ':prezto:module:git:info:behind' format ' %%B%F{violet}⬇%f%%b'
-zstyle ':prezto:module:git:info:branch' format '%F{gray}%b%f'
+zstyle ':prezto:module:git:info:branch' format '%K{241}%F{black}%b'
 zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
 zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
 zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
@@ -106,13 +106,13 @@ zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
 zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{violet}═%f%%b'
 zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
 zstyle ':prezto:module:git:info:keys' format \
-    'prompt' ' %F{gray}%f $(coalesce "%b" "%p" "%c")%s' \
+    'prompt' '%F{$editor_info{vimode]}%K{241}%F{black} %f $(coalesce "%b" "%p" "%c")%s %F{241}' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
 # Define prompts.
-PROMPT='$(prompt_terencehill_indicator) ▷${git_info:+${(e)git_info[prompt]} ▷}${_prompt_terencehill_symbols} '
-RPROMPT='${git_info[rprompt]} ${editor_info[vimode]}◁ ${_prompt_terencehill_user}%b${editor_info[vimode]}${_prompt_terencehill_pwd}'
+PROMPT='%F{black}$(prompt_budspencer_indicator)%F{${editor_info[vimode]}}%k${git_info:+${(e)git_info[prompt]}}%k%f${_prompt_budspencer_symbols} '
+RPROMPT='${git_info[rprompt]} %K{black}%F{${editor_info[vimode]}}%F{black}%K{${editor_info[vimode]}} ${_prompt_budspencer_user}%K{${editor_info[vimode]}}${_prompt_budspencer_pwd} '
 SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
-prompt_terencehill_setup "$@"
+prompt_budspencer_setup "$@"
