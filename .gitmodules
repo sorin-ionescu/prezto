@@ -16,3 +16,6 @@
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule "modules/opp/external"]
+	path = modules/opp/external
+	url = https://github.com/hchbaw/opp.zsh.git
