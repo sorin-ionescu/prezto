@@ -59,6 +59,7 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
   zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
   zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
+  zstyle ':prezto:module:git:info:dirty-branch' format ':%%B%F{red}%b%f%%b'
   zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
   zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
   zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
