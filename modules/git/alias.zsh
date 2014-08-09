@@ -55,6 +55,8 @@ alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcs='git show'
 alias gcl='git-commit-lost'
+alias gcS='git commit -S'
+alias gpS='git show --pretty=short --show-signature'
 
 # Conflict (C)
 alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
@@ -107,6 +109,7 @@ alias glo='git log --topo-order --pretty=format:${_git_log_oneline_format}'
 alias glg='git log --topo-order --all --graph --pretty=format:${_git_log_oneline_format}'
 alias glb='git log --topo-order --pretty=format:${_git_log_brief_format}'
 alias glc='git shortlog --summary --numbered'
+alias glS='git log --show-signature'
 
 # Merge (m)
 alias gm='git merge'
@@ -167,6 +170,10 @@ alias gSm='git-submodule-move'
 alias gSs='git submodule sync'
 alias gSu='git submodule foreach git pull origin master'
 alias gSx='git-submodule-remove'
+
+# Tag (t)
+alias gts='git tag -s'
+alias gtv='git verify-tag'
 
 # Working Copy (w)
 alias gws='git status --ignore-submodules=${_git_status_ignore_submodules} --short'
