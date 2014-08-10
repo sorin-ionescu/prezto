@@ -23,12 +23,16 @@ elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
 elif (( $+commands[rbenv] )); then
   eval "$(rbenv init - --no-rehash zsh)"
 
-# Install local gems according to operating system conventions.
-else
-  if [[ "$OSTYPE" == darwin* ]]; then
-    export GEM_HOME="$HOME/Library/Ruby/Gems/1.8"
-    path=("$GEM_HOME/bin" $path)
+# Load package manager installed chruby into the shell session.
+elif (( $+commands[chruby-exec] )); then
+  source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
+  if zstyle -t ':prezto:module:ruby:chruby' auto-switch; then
+    source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
   fi
+
+# Prepend local gems bin directories to PATH.
+else
+  path=($HOME/.gem/ruby/*/bin(N) $path)
 fi
 
 # Return if requirements are not found.
@@ -46,15 +50,16 @@ alias rb='ruby'
 # Bundler
 if (( $+commands[bundle] )); then
   alias rbb='bundle'
-  alias rbbe='rbb exec'
-  alias rbbi='rbb install --path vendor/bundle'
-  alias rbbl='rbb list'
-  alias rbbo='rbb open'
-  alias rbbp='rbb package'
-  alias rbbu='rbb update'
+  alias rbbe='bundle exec'
+  alias rbbi='bundle install --path vendor/bundle'
+  alias rbbl='bundle list'
+  alias rbbo='bundle open'
+  alias rbbp='bundle package'
+  alias rbbu='bundle update'
   alias rbbI='rbbi \
-    && rbb package \
+    && bundle package \
     && print .bundle       >>! .gitignore \
+    && print vendor/assets >>! .gitignore \
     && print vendor/bundle >>! .gitignore \
     && print vendor/cache  >>! .gitignore'
 fi

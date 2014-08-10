@@ -1,13 +1,13 @@
 Archive
 =======
 
-Provides functions to extract and list popular archive formats.
+Provides functions to list and extract archives.
 
 Functions
 ---------
 
-  - `extract` extracts the contents of one or more archives.
-  - `ls-archive` lists the contents of one or more archives.
+  - `lsarchive` lists the contents of one or more archives.
+  - `unarchive` extracts the contents of one or more archives.
 
 Supported Formats
 -----------------
@@ -26,7 +26,7 @@ installed:
   - *.lzma* requires `unlzma`.
   - *.Z* requires `uncompress`.
   - *.zip* requires `unzip`.
-  - *.rar* requires `unrar`.
+  - *.rar* requires `unrar` or `rar`.
   - *.7z* requires `7za`.
   - *.deb* requires `ar`, `tar`.
 

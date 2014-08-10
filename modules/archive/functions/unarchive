@@ -1,5 +1,5 @@
 #
-# Extracts the contents of popular archive formats.
+# Extracts the contents of archives.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -53,7 +53,9 @@ while (( $# > 0 )); do
     (*.lzma) unlzma "$1" ;;
     (*.Z) uncompress "$1" ;;
     (*.zip) unzip "$1" -d $extract_dir ;;
-    (*.rar) unrar e -ad "$1" ;;
+    (*.rar) unrar &> /dev/null \
+      && unrar e -ad "$1" \
+      || rar e -ad "$1" ;;
     (*.7z) 7za x "$1" ;;
     (*.deb)
       mkdir -p "$extract_dir/control"

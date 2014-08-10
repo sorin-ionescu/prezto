@@ -9,7 +9,7 @@ Installation
 ------------
 
 Prezto will work with any recent release of Zsh, but the minimum recommended
-version is 4.3.10.
+version is 4.3.11.
 
   1. Launch Zsh:
 
@@ -17,7 +17,7 @@ version is 4.3.10.
 
   2. Clone the repository:
 
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+        git clone --recursive https://github.com/thegiantbeast/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:
@@ -33,30 +33,18 @@ version is 4.3.10.
 
   5. Open a new Zsh terminal window or tab.
 
-### Mac OS X
-
-If you have administrator privileges, you must fix an Apple-introduced problem
-in Mac OS X 10.5 Leopard by executing the following command, or BASH and Zsh
-will have the wrong `PATH` when executed non-interactively.
-
-    sudo chmod ugo-x /usr/libexec/path_helper
-
-`path_helper` is intended to make it easier for installers to add new paths to
-the environment without having to edit shell configuration files by adding
-a file with a path to the */etc/paths.d* directory.
-
-Unfortunately, `path_helper` always reads paths from */etc/paths* set by Apple
-then paths from */etc/paths.d* set by third party installers, and lastly paths
-from the `PATH` environment variable set by the parent process, which
-ultimately is set by the user with `export PATH=...` Thus, it reorders path
-priorities, and user */bin* directories meant to override system */bin*
-directories end up at the tail of the array.
-
 ### Troubleshooting
 
 If you are not able to find certain commands after switching to *Prezto*,
-modify the `PATH` variable in *~/.zshenv* then open a new Zsh terminal
+modify the `PATH` variable in *~/.zprofile* then open a new Zsh terminal
 window or tab.
+
+Updating
+--------
+
+Pull the latest changes and update submodules.
+
+    git pull && git submodule update --init --recursive
 
 Usage
 -----
@@ -82,9 +70,10 @@ accompanying README files to learn of what is available.
 Customization
 -------------
 
-The project is managed via [Git][3]. It is highly recommend that you commit
-your changes and push them to [GitHub][4] to not lose them. If you do not know
-how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
+The project is managed via [Git][3]. It is highly recommended that you fork this
+project; so, that you can commit your changes and push them to [GitHub][4] to
+not lose them. If you do not know how to use Git, follow this [tutorial][5] and
+bookmark this [reference][6].
 
 Resources
 ---------
@@ -96,7 +85,8 @@ License
 
 (The MIT License)
 
-Copyright (c) 2009-2012 Robby Russell, Sorin Ionescu, and contributors.
+Copyright (c) 2009-2011 Robby Russell and contributors.
+Copyright (c) 2011-2014 Sorin Ionescu and contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

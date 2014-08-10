@@ -1,5 +1,5 @@
 #
-# Lists the contents of popular archive formats.
+# Lists the contents of archives.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -41,7 +41,9 @@ while (( $# > 0 )); do
       || lzcat "$1" | tar x${verbose:+v}f - ;;
     (*.tar) tar t${verbose:+v}f "$1" ;;
     (*.zip) unzip -l${verbose:+v} "$1" ;;
-    (*.rar) unrar ${${verbose:+v}:-l} "$1" ;;
+    (*.rar) unrar &> /dev/null \
+      && unrar ${${verbose:+v}:-l} "$1" \
+      || rar ${${verbose:+v}:-l} "$1" ;;
     (*.7z) 7za l "$1" ;;
     (*)
 			print "$0: cannot list: $1" >&2

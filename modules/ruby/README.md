@@ -8,7 +8,7 @@ Local Gem Installation
 ----------------------
 
 When a Ruby version manager is not detected, local gems are installed in
-*~/Library/Ruby/Gems/1.8* on Mac OS X.
+*~/.gems*; otherwise, they are installed according to the manager.
 
 RVM
 ---
@@ -20,14 +20,32 @@ home directory.
 Since RVM is loaded into the shell and is known to override shell commands, it
 may conflict with shell scripts.
 
+Load this module as late as possible when using RVM since RVM will complain if
+it is not first in `$PATH`.
+
 rbenv
 -----
 
-An alternative RVM is to use [rbenv][3], which allows for switching between multiple,
-isolated Ruby installations in the home directory.
+An alternative RVM is to use [rbenv][3], which allows for switching between
+multiple, isolated Ruby installations in the home directory.
 
 While it is not as feature rich as RVM, it is not loaded into the shell and is
 not known to cause conflicts with shell scripts.
+
+chruby
+------
+
+Yet another alternative is [chruby][6], which is simpler than both RVM and
+rbenv.
+
+### Settings
+
+#### Auto-Switch
+
+To enable auto switching the Ruby version on directory change based on the
+.ruby-version file, add the following line to *zpreztorc*:
+
+    zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 
 Bundler
 -------
@@ -59,6 +77,7 @@ Aliases
 Functions
 ---------
 
+  - `ruby-app-root` displays the path to the Ruby application root directory.
   - `ruby-info` exposes information about the Ruby environment via the
     `$ruby_info` associative array.
 
@@ -86,4 +105,4 @@ Authors
 [3]: https://github.com/sstephenson/rbenv
 [4]: http://gembundler.com
 [5]: https://github.com/sorin-ionescu/prezto/issues
-
+[6]: https://github.com/postmodern/chruby
