@@ -67,6 +67,9 @@ accompanying README files to learn of what is available.
 
      ![sorin theme][2]
 
+### Restarting a shell session.
+Run `exec zsh`. (`source ~/.zshrc` will not work.)
+
 Customization
 -------------
 
