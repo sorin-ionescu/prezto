@@ -23,9 +23,11 @@ zstyle -s ':prezto:module:pacman' frontend '_pacman_frontend'
 
 if (( $+commands[$_pacman_frontend] )); then
   alias pacman="$_pacman_frontend"
+  _abs_sudo='sudo '
 
   if [[ -s "${0:h}/${_pacman_frontend}.zsh" ]]; then
     source "${0:h}/${_pacman_frontend}.zsh"
+    _abs_sudo='sudo '
   fi
 else
   _pacman_frontend='pacman'
@@ -72,7 +74,7 @@ alias pacman-remove-orphans="${_pacman_sudo}${_pacman_frontend} --remove --recur
 # Synchronizes the local package and Arch Build System databases against the
 # repositories.
 if (( $+commands[abs] )); then
-  alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh && ${_pacman_sudo}abs"
+  alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh && ${_abs_sudo}abs"
 else
   alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh"
 fi
