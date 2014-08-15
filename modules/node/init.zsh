@@ -9,6 +9,11 @@
 # Load NVM into the shell session.
 if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
   source "$HOME/.nvm/nvm.sh"
+elif [[ "$OSTYPE" == darwin* ]]; then
+  # Try alternative NVM location if installed via Homebrew (See: `brew info nvm`)
+  if (( $+commands[brew] )) && [[ -d "$(brew --prefix nvm 2> /dev/null)" ]]; then
+    source $(brew --prefix nvm)/nvm.sh
+  fi
 fi
 
 # Return if requirements are not found.
