@@ -3,7 +3,7 @@ Spectrum
 
 Provides for easier use of 256 colors and effects.
 
-To learn more about text formatting, read [That 256 Color Thing][1].
+To learn more about text formatting, read [A Guide to 256 Color Codes][1].
 
 Variables
 ---------
@@ -87,6 +87,6 @@ Authors
   - [P.C. Shyamshankar](https://github.com/sykora)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: http://lucentbeing.com/blog/that-256-color-thing/
+[1]: http://lucentbeing.com/writing/archives/a-guide-to-256-color-codes/
 [2]: https://github.com/sorin-ionescu/prezto/issues
 
