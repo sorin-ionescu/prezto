@@ -1,0 +1,73 @@
+#
+# The oh-my-zsh cloud theme ported to prezto
+#
+# Authors:
+# Kevin Laude <nerfyoda@gmail.com>
+#
+# Usage:
+#   In ~/.preztorc:
+#   zstyle ':prezto:module:prompt' theme 'cloud'
+#
+#   Optionally, add an option to the end of this line to define characters to
+#   display instead of a cloud character at the beginning of the prompt:
+#   zstyle ':prezto:module:prompt' theme 'cloud' '✯'
+#
+# Screenshots:
+#   http://i.imgur.com/mJCZ8rE.png
+#
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_cloud_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+      git-info
+  fi
+}
+
+function prompt_cloud_preview {
+  if (( $# > 0 )); then
+    prompt_preview_theme cloud "$@"
+  else
+    prompt_preview_theme cloud
+  fi
+}
+
+function prompt_cloud_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Set the theme prefix to a cloud or to the user's given characters.
+  if (( $# > 0 )); then
+    prefix=$1
+  else
+    prefix='☁'
+  fi
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_cloud_precmd
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:dirty' format '%%B%F{green}]%f%%b %F{yellow}⚡%f'
+  zstyle ':prezto:module:git:info:clean' format '%B%F{green}]%f%b'
+  zstyle ':prezto:module:git:info:branch' format '%%B%F{green}[%f%%b%%B%F{cyan}%b%f%%b'
+  zstyle ':prezto:module:git:info:keys' format \
+    'prompt' '%b%C%D' \
+    'rprompt' ''
+
+  # Define prompts.
+  PROMPT='%B%F{cyan}${prefix}%f%b  %B%F{green}%c%f%b $git_info[prompt] '
+  RPROMPT=''
+}
+
+prompt_cloud_setup "$@"
+
