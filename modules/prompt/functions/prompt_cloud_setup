@@ -5,12 +5,15 @@
 # Kevin Laude <nerfyoda@gmail.com>
 #
 # Usage:
-#   In ~/.preztorc:
-#   zstyle ':prezto:module:prompt' theme 'cloud'
+# This prompt's prefix symbol and colors are customizable:
 #
-#   Optionally, add an option to the end of this line to define characters to
-#   display instead of a cloud character at the beginning of the prompt:
-#   zstyle ':prezto:module:prompt' theme 'cloud' '✯'
+#   prompt cloud [<symbol>] [<color1>] [<color2>]
+#
+# In ~/.zpreztorc:
+#   zstyle ':prezto:module:prompt' theme 'cloud' ['<symbol>'] ['<color1>'] ['<color2>']
+#
+# If these options are not provided, the symbol defaults to ☁ with colors cyan
+# and green.
 #
 # Screenshots:
 #   http://i.imgur.com/mJCZ8rE.png
@@ -29,11 +32,29 @@ function prompt_cloud_precmd {
   fi
 }
 
+function prompt_cloud_help {
+  cat <<EOT
+This prompt's prefix symbol and colors are customizable:
+
+  prompt cloud [<symbol>] [<color1>] [<color2>]
+
+In ~/.zpreztorc:
+  zstyle ':prezto:module:prompt' theme 'cloud' ['<symbol>'] ['<color1>'] ['<color2>']
+
+If these options are not provided, the symbol defaults to ☁ with colors cyan
+and green.
+EOT
+}
+
 function prompt_cloud_preview {
   if (( $# > 0 )); then
-    prompt_preview_theme cloud "$@"
+    prompt_preview_theme 'cloud' "$@"
   else
-    prompt_preview_theme cloud
+    prompt_preview_theme 'cloud'
+    print
+    prompt_preview_theme 'cloud' "✯"
+    print
+    prompt_preview_theme 'cloud' ">" "yellow" "red"
   fi
 }
 
@@ -43,10 +64,23 @@ function prompt_cloud_setup {
   prompt_opts=(cr percent subst)
 
   # Set the theme prefix to a cloud or to the user's given characters.
-  if (( $# > 0 )); then
+  if [[ -n "$1" ]]; then
     prefix=$1
   else
     prefix='☁'
+  fi
+
+  # Assign colors.
+  if [[ -n "$2" ]]; then
+    primary_color=$2
+  else
+    primary_color='cyan'
+  fi
+
+  if [[ -n "$3" ]]; then
+    secondary_color=$3
+  else
+    secondary_color='green'
   fi
 
   # Load required functions.
@@ -57,15 +91,15 @@ function prompt_cloud_setup {
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:dirty' format '%%B%F{green}]%f%%b %F{yellow}⚡%f'
-  zstyle ':prezto:module:git:info:clean' format '%B%F{green}]%f%b'
-  zstyle ':prezto:module:git:info:branch' format '%%B%F{green}[%f%%b%%B%F{cyan}%b%f%%b'
+  zstyle ':prezto:module:git:info:dirty' format "%%B%F{$secondary_color}]%f%%b %F{yellow}⚡%f"
+  zstyle ':prezto:module:git:info:clean' format "%B%F{$secondary_color}]%f%b"
+  zstyle ':prezto:module:git:info:branch' format "%%B%F{$secondary_color}[%f%%b%%B%F{$primary_color}%b%f%%b"
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' '%b%C%D' \
     'rprompt' ''
 
   # Define prompts.
-  PROMPT='%B%F{cyan}${prefix}%f%b  %B%F{green}%c%f%b $git_info[prompt] '
+  PROMPT='%B%F{$primary_color}${prefix}%f%b  %B%F{$secondary_color}%c%f%b $git_info[prompt] '
   RPROMPT=''
 }
 
