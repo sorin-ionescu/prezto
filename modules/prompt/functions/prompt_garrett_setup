@@ -142,7 +142,7 @@ function prompt_garrett_notification_precmd
 function prompt_garrett_chpwd
 {
 	emulate -L zsh  # TODO can't remember why this is necessary...
-	ls --color=auto # list the contents of the new directory
+	ls # list the contents of the new directory
 }
 
 #
