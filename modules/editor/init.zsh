@@ -87,9 +87,11 @@ function editor-info {
   if [[ "$KEYMAP" == 'vicmd' ]]; then
     zstyle -s ':prezto:module:editor:info:keymap:alternate' format 'REPLY'
     editor_info[keymap]="$REPLY"
+	editor_info[alternate]="$REPLY"
   else
     zstyle -s ':prezto:module:editor:info:keymap:primary' format 'REPLY'
     editor_info[keymap]="$REPLY"
+	editor_info[primary]="$REPLY"
 
     if [[ "$ZLE_STATE" == *overwrite* ]]; then
       zstyle -s ':prezto:module:editor:info:keymap:primary:overwrite' format 'REPLY'
@@ -97,6 +99,7 @@ function editor-info {
     else
       zstyle -s ':prezto:module:editor:info:keymap:primary:insert' format 'REPLY'
       editor_info[overwrite]="$REPLY"
+      editor_info[insert]="$REPLY"
     fi
   fi
 

@@ -97,6 +97,11 @@ Macports
 
 Defines MacPorts aliases and adds MacPorts directories to path variables.
 
+MIME Setup
+----------
+
+Uses system default handlers to determine suffix aliases.
+
 Node.js
 -------
 

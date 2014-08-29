@@ -28,6 +28,9 @@ zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_subm
 
 # Git
 alias g='git'
+alias gh='git-hub-browse'
+alias ..g='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+alias git-url='git config --get remote.origin.url'
 
 # Branch (b)
 alias gb='git branch'

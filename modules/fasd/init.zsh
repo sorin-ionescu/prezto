@@ -45,10 +45,6 @@ function fasd_cd {
   fi
 }
 
-#
-# Aliases
-#
+source ${0:h}/aliases.zsh
 
-# Changes the current working directory interactively.
-alias j='fasd_cd -i'
 

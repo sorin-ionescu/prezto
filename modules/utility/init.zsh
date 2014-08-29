@@ -19,6 +19,7 @@ setopt CORRECT
 
 # Disable correction.
 alias ack='nocorrect ack'
+alias ag='nocorrect ag'
 alias cd='nocorrect cd'
 alias cp='nocorrect cp'
 alias ebuild='nocorrect ebuild'
@@ -47,6 +48,7 @@ alias sftp='noglob sftp'
 
 # Define general aliases.
 alias _='sudo'
+alias ag="${aliases[ag]:-ag} --color-match 35"
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
@@ -84,23 +86,26 @@ else
     # Define colors for the completion system.
     export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 
-    alias ls='ls -G'
+	# Enable colors for the command line interface.
+	export CLICOLOR=1
   else
     alias ls='ls -F'
   fi
 fi
 
-alias l='ls -1A'         # Lists in one column, hidden files.
-alias ll='ls -lh'        # Lists human readable sizes.
-alias lr='ll -R'         # Lists human readable sizes, recursively.
-alias la='ll -A'         # Lists human readable sizes, hidden files.
-alias lm='la | "$PAGER"' # Lists human readable sizes, hidden files through pager.
-alias lx='ll -XB'        # Lists sorted by extension (GNU only).
-alias lk='ll -Sr'        # Lists sorted by size, largest last.
-alias lt='ll -tr'        # Lists sorted by date, most recent last.
-alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
-alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls'            # I often screw this up.
+alias lsd='ls -A | egrep "^\."' # Lists hidden files only.
+alias l='ls -1A'                # Lists in one column, hidden files.
+alias ll='ls -lh'               # Lists human readable sizes.
+alias lr='ll -R'                # Lists human readable sizes, recursively.
+alias la='ll -A'                # Lists human readable sizes, hidden files.
+alias lld='la | egrep "^\."'    # Lists human readable sizes, hidden files only.
+alias lm='la | "$PAGER"'        # Lists human readable sizes, hidden files through pager.
+alias lx='ll -XB'               # Lists sorted by extension (GNU only).
+alias lk='ll -Sr'               # Lists sorted by size, largest last.
+alias lt='ll -tr'               # Lists sorted by date, most recent last.
+alias lc='lt -c'                # Lists sorted by date, most recent last, shows change time.
+alias lu='lt -u'                # Lists sorted by date, most recent last, shows access time.
+alias sl='ls'                   # I often screw this up.
 
 # Mac OS X Everywhere
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -152,7 +157,7 @@ alias http-serve='python -m SimpleHTTPServer'
 #
 
 # Makes a directory and changes to it.
-function mkdcd {
+function mcd {
   [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
 }
 

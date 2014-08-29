@@ -3,7 +3,7 @@ Fasd
 
 [Fasd][1] is a command-line productivity booster, inspired by tools like
 [autojump][2], [z][3] and [v][4], it offers quick access to files and
-directories by keeping track of files and directories  that were previously
+directories by keeping track of files and directories that were previously
 accessed.
 
 For completion to work, this module must be loaded **after** the *completion*
@@ -16,6 +16,7 @@ Aliases
 -------
 
   - `j` changes the current working directory interactively.
+  - `v` Mimics rupa/v: opens the file with vim using viminfo backend.
 
 Completion
 ----------
