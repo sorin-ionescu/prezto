@@ -27,7 +27,7 @@ To enable highlighting for this module only, add the following line to
 ### Highlighters
 
 Syntax highlighting is accomplished by pluggable [highlighters][2]. This module
-enables the *main*, *brackets*, and *cursor* highlighters by default.
+only enables the *main* highlighter by default.
 
 To enable all highlighters, add the following to *zpreztorc*:
 
