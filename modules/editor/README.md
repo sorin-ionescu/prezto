@@ -13,6 +13,19 @@ with 'emacs' or 'vi'.
 
     zstyle ':prezto:module:editor' key-bindings 'bindings'
 
+To enable additional key bindings, add some definitions like the following to
+*zpreztorc*.
+
+    zstyle ':prezto:module:editor:term' xterm \
+        'Home' '\\e\[H' 'End' '\\e\[F'
+    zstyle ':prezto:module:editor:term' linux \
+    'Home' '\\e\[1\~' 'End' '\\e\[4\~'
+    zstyle ':prezto:module:editor:term' rxvt \
+        'Home' '\\e\[7\~' 'End' '\\e\[8\~'
+
+Those lines will take care of *Home* and *End* key in rxvt/eterm virtual
+terminal emulator families and in *linux* console.
+
 ### Dot Expansion
 
 To enable the auto conversion of .... to ../.., add the following to
