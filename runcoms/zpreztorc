@@ -41,6 +41,19 @@ zstyle ':prezto:load' pmodule \
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'emacs'
 
+# Set additional key-bindings for terminal emulators, special characters
+# should be escaped accordingly with a backslash '\'.
+zstyle ':prezto:module:editor:term' default \
+	'Home' '\\eOH' 'End' '\\eOF'
+zstyle ':prezto:module:editor:term' xterm \
+	'Home' '\\e\[H' 'End' '\\e\[F'
+zstyle ':prezto:module:editor:term' linux \
+	'Home' '\\e\[1\~' 'End' '\\e\[4\~'
+zstyle ':prezto:module:editor:term' rxvt \
+	'Home' '\\e\[7\~' 'End' '\\e\[8\~'
+zstyle ':prezto:module:editor:term' eterm \
+	'Home' '\\e\[7\~' 'End' '\\e\[8\~'
+
 # Auto convert .... to ../..
 # zstyle ':prezto:module:editor' dot-expansion 'yes'
 
