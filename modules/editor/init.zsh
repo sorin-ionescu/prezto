@@ -57,6 +57,28 @@ key_info=(
   'BackTab'   "$terminfo[kcbt]"
 )
 
+# Set key_info values from user zstyle defined pairs: terminal/array
+zstyle -g terminal ':prezto:module:editor:term'
+
+for term ($terminal[@]); do
+  if [[ "${TERM/$term}" != "$TERM" ]]; then
+    zstyle -a ':prezto:module:editor:term' $term 'bindings'
+	for key (${(k)binding[@]}); do
+      key_info[$key]="$bindings[$key]"
+    done
+    break
+  fi
+done
+
+# Else, apply some default values if defined to empty term_info[key]
+zstyle -a ':prezto:module:editor:term' default 'bindings'
+for key (${(k)default[@]}); do
+  if [[ -z "$key_info[$key]" ]]; then
+    key_info[$key]="$default[$key]"
+  fi
+done
+unset terminal bindings
+
 # Set empty $key_info values to an invalid UTF-8 sequence to induce silent
 # bindkey failure.
 for key in "${(k)key_info[@]}"; do
