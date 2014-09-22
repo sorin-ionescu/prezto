@@ -5,7 +5,7 @@
 # $Authors: (c) 2011-2014 -tclover <tokiclover@gmail.com>        Exp $
 # $Licence: MIT or 2-clause/new/simplified BSD                   Exp $
 # $Version: 2.0 2014/09/09                                       Exp $
-# $Screenshots:                                                  Exp $
+# $Screenshots: https://imgur.com/10w3Tzu.png                    Exp $
 #
 
 function prompt_clover_help {
@@ -80,7 +80,7 @@ function prompt_clover_setup {
 	# Need this so the prompt will work
 	setopt PROMPT_SUBST
 	setopt EXTENDED_GLOB
-	unsetopt KSH_ARRAYS
+	unsetopt BRACE_CCL
 
 	# See if we can use colors.
 	autoload colors zsh/terminfo
