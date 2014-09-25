@@ -1,0 +1,86 @@
+#
+# Provide a cheap helper for temporary directory/file creation
+#
+# $Header: firefox-profile/functions/fhp                 Exp $
+# $Aythor: (c) 2011-2014 -tclover <tokiclover@gmail.com> Exp $
+# $License: MIT (or 2-clause/new/simplified BSD)         Exp $
+# $Version: 0.2 2014/09/09 21:09:26                      Exp $
+#
+
+function die {
+	local ret=$?
+	print -P " %F{red}*%f ${(%):-%1x}: $@" >&2
+	return $ret
+}
+
+function usage {
+	cat <<-EOH
+usage: mktmp [-d|-f] [-m <mode>] [-o <owner[:group]>] [-g <group>] TEMPLATE
+  -d, --dir           create a directory
+  -f, --file          create a file
+  -o, --owner <name>  owner naame
+  -g, --group <name>  group name
+  -m, --mode <1700>   octal mode
+  -h, --help          help/exit
+EOH
+return
+}
+
+test $# -ge 1 -a -n "$1" || return
+
+local type temp=-XXXXXX tmpdir=${TMPDIR:-/tmp}
+for (( ; $# > 1; ))
+	case $1 {
+		(-d|--dir)
+			type=dir
+			shift;;
+		(-f|--file)
+			type=file
+			shift;;
+		(-h|--help)
+			usage;;
+		(-m|--mode)
+			local mode=$2
+			shift 2;;
+		(-o|--owner)
+			local owner="$2"
+			shift 2;;
+		(-g|-group)
+			local group="$2"
+			shift 2;;
+	 	(*)
+			die "invalid argument $@"
+			return;;
+	}
+
+test -n "$1" -a "${1%$temp}" != "$1"
+if (( $? )) {
+	die "invalid/null TEMPLATE"
+	return
+}
+(( $+commands[uuidgen] )) && temp=$($commands[uuidgen] --random)
+local tmp="$tmpdir/${1%$temp}-$temp[1,6]"
+
+if [[ $type == "dir" ]] {
+	mkdir -p ${mode:+-m$mode} "$tmp"
+	if (( $? )) {
+		die "failed to make $tmp"
+		return
+	}
+} else {
+	mkdir -p "$tmp:h" && touch "$tmp"
+	if (( $? )) {
+		die "failed to make $tmp"
+		return
+	}
+	(( $+mode )) && chmod $mode "$tmp"
+}
+
+(( $+owner )) && chown $owner "$tmp"
+(( $+group )) && chgrp $group "$tmp"
+
+print "$tmp"
+
+#
+# vim:fenc=utf-8:ft=zsh:ci:pi:sts=2:sw=2:ts=2:
+#
