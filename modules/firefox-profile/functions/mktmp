@@ -9,7 +9,7 @@
 
 function die {
 	local ret=$?
-	print -P " %F{red}*%f ${(%):-%1x}: $@" >&2
+	print -P " %F{red}%1x: %F{yellow}%U%I%u:%f $argv" >&2
 	return $ret
 }
 

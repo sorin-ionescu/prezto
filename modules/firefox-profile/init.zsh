@@ -8,6 +8,12 @@
 # $Version: 2.0 2014/09/25 21:09:26                      Exp $
 #
 
+function die {
+	local ret=$?
+	print -P " %F{red}%1x: %F{yellow}%U%I%u:%f $argv" >&2
+	return $ret
+}
+
 setopt EXTENDED_GLOB
 setopt NULL_GLOB
 
