@@ -1,0 +1,52 @@
+#
+# firefox home profile (fhp) module to maintain the profile
+# in a tmpfs or zram backed filesystem
+#
+# $Header: firefox-profile/functions/fhp                 Exp $
+# $Aythor: (c) 2011-2014 -tclover <tokiclover@gmail.com> Exp $
+# $License: MIT (or 2-clause/new/simplified BSD)         Exp $
+# $Version: 3.0 2014/09/25 21:09:26                      Exp $
+#
+
+function die {
+	local ret=$?
+	print -P " %F{red}*%f ${(%):-%1x}: $@" >&2
+	return $ret
+}
+
+local compressor profile
+
+zstyle -s ':prezto:module:firefox-profile' profile 'profile'
+zstyle -s ':prezto:module:firefox-profile' compressor 'compressor'
+
+local ext=.tar.$compressor[(w)1]
+
+pushd -q "$HOME"/.mozilla/firefox || return
+
+if [[ -f $profile/.unpacked ]] {
+	mv -f $profile{,.old}$ext
+	if (( $? )) {
+		die "failed to override the old tarball"
+		return
+	}
+
+	tar -X $profile/.unpacked -Ocp $profile | $=compressor $profile$ext
+	(( $? )) && die "failed to repack a new tarball"
+	popd -q
+	return
+}
+
+if [[ -f $profile$ext ]] {
+	$compressor -cd $profile$ext | tar -xp && touch $profile/.unpacked
+	(( $? )) && die "failed to unpack the profile"
+} elif [[ -f $profile.old$ext ]] {
+	$compressor -cd $profile.old$ext | tar -xp && touch $profile/.unpacked
+	(( $? )) && die "failed to unpack the profile"
+} else {
+	die "no tarball found"
+}
+popd -q
+
+#
+# vim:fenc=utf-8:ft=zsh:ci:pi:sts=2:sw=2:ts=2:
+#
