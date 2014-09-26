@@ -36,6 +36,7 @@ if [[ -f $profile/.unpacked ]] {
 	return
 }
 
+compressor=$compressor[(w)1]
 if [[ -f $profile$ext ]] {
 	$compressor -cd $profile$ext | tar -xp && touch $profile/.unpacked
 	(( $? )) && die "failed to unpack the profile"
