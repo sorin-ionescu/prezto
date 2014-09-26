@@ -24,10 +24,13 @@ local ext=.tar.$compressor[(w)1]
 pushd -q "$HOME"/.mozilla/firefox || return
 
 if [[ -f $profile/.unpacked ]] {
-	mv -f $profile{,.old}$ext
-	if (( $? )) {
-		die "failed to override the old tarball"
-		return
+	if [[ -f $profile$ext ]] {
+		mv -f $profile{,.old}$ext
+		if (( $? )) {
+			die "failed to override the old tarball"
+			popd -q
+			return
+		}
 	}
 
 	tar -X $profile/.unpacked -Ocp $profile | $=compressor $profile$ext

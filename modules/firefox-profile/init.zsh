@@ -15,7 +15,6 @@ function die {
 }
 
 setopt EXTENDED_GLOB
-setopt NULL_GLOB
 
 zstyle -s ':prezto:module:firefox-profile' profile 'profile'
 zstyle -s ':prezto:module:firefox-profile' compressor 'compressor'
@@ -27,7 +26,7 @@ if [[ -z "$compressor" ]] {
 	zstyle ':prezto:module:firefox-profile' compressor "$compressor"
 }
 
-:	${profile:=${$(print $HOME/.mozilla/firefox/*.default(/)):t}}
+:	${profile:=${$(print $HOME/.mozilla/firefox/*.default(/N)):t}}
 if [[ -z $profile ]] {
 	unset compressor profile zramdir zsh_hook
 	die "null firefox home profile"
