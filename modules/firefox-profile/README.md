@@ -52,6 +52,22 @@ A profile can be auto-started by setting:
 
     zstyle ':prezto:module:firefox-profile' start-profile 'yes'
 
+Customizations
+-------
+
+This module may not be needed in specif use cases... no superuser, no tty or
+console devices... if sharing the same configuration files with different
+users. The following can be done in that case in *zpreztorc*.
+
+    zpmodules=(precompile environment editor prompt helper utility)
+    if [[ ${TTY/tty} == $TTY ]] && [[ $EUID != 0 ]] {
+      zpmodules=($zpmodules firefox-profile)
+    }
+    zstyle ':prezto:load' pmodule $zpmodules
+    unset zpmodules
+
+That snipet of code exlude console and *superuser* from having this module.
+
 Authors
 -------
 
