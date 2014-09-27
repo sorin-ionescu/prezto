@@ -28,7 +28,7 @@ return
 
 test $# -ge 1 -a -n "$1" || return
 
-local type temp=-XXXXXX tmpdir=${TMPDIR:-/tmp}
+local type temp=XXXXXX tmpdir=${TMPDIR:-/tmp}
 for (( ; $# > 1; ))
 	case $1 {
 		(-d|--dir)
@@ -53,13 +53,13 @@ for (( ; $# > 1; ))
 			return;;
 	}
 
-test -n "$1" -a "${1%$temp}" != "$1"
+test -n "$1" -a "${1%-$temp}" != "$1"
 if (( $? )) {
 	die "invalid/null TEMPLATE"
 	return
 }
 (( $+commands[uuidgen] )) && temp=$($commands[uuidgen] --random)
-local tmp="$tmpdir/${1%$temp}-$temp[1,6]"
+local tmp="$tmpdir/${1%$temp}$temp[1,6]"
 
 if [[ $type == "dir" ]] {
 	mkdir -p ${mode:+-m$mode} "$tmp"
