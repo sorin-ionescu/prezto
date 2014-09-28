@@ -22,7 +22,7 @@ by looking at the previous directory, however a user can set the following:
 
 The second setting select a compressor to be used instead of default is 'lz4 -1'.
 
-The last setting add fhp function to zsh-exit-hook, so the profile will be saved
+The last setting add fhp function to zshexit hook, so the profile will be saved
 or archived to be more precise before the shell exit.
 
 Optimizations
@@ -35,7 +35,7 @@ least to get any benefice of this script with something like:
 
 This will ensure very low latency when browsing the intertubes and removing the
 profile in the fly *really* remove any trace of your browsing history because
-everything is memory because firing up a 'fhp' command.
+everything is in memory, but firing up a 'fhp' command will nullify this effect.
 
 ### Zram baccked File System
 
@@ -59,7 +59,7 @@ This module may not be needed in specif use cases... no superuser, no tty or
 console devices... if sharing the same configuration files with different
 users. The following can be done in that case in *zpreztorc*.
 
-    zpmodules=(precompile environment editor prompt helper utility)
+    zpmodules=(environment editor prompt helper utility precompile)
     if [[ ${TTY/tty} == $TTY ]] && [[ $EUID != 0 ]] {
       zpmodules=($zpmodules firefox-profile)
     }
