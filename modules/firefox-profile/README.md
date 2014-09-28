@@ -63,7 +63,7 @@ users. The following can be done in that case in *zpreztorc*.
     if [[ ${TTY/tty} == $TTY ]] && [[ $EUID != 0 ]] {
       zpmodules=($zpmodules firefox-profile)
     }
-    zstyle ':prezto:load' pmodule ${(qq)zpmodules}
+    zstyle ':prezto:load' pmodule $zpmodules
     unset zpmodules
 
 That snipet of code exlude console and *superuser* from having this module.
