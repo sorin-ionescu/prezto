@@ -5,7 +5,7 @@
 # $Header: firefox-profile/functions/fhp                 Exp $
 # $Aythor: (c) 2011-2014 -tclover <tokiclover@gmail.com> Exp $
 # $License: MIT (or 2-clause/new/simplified BSD)         Exp $
-# $Version: 3.0 2014/09/25 21:09:26                      Exp $
+# $Version: 3.0 2014/09/30                               Exp $
 #
 
 function die {
@@ -35,20 +35,24 @@ if [[ -f $profile/.unpacked ]] {
 
 	tar -X $profile/.unpacked -Ocp $profile | $=compressor $profile$ext
 	(( $? )) && die "failed to repack a new tarball"
+
 	popd -q
 	return
 }
 
 compressor=$compressor[(w)1]
 if [[ -f $profile$ext ]] {
-	$compressor -cd $profile$ext | tar -xp && touch $profile/.unpacked
-	(( $? )) && die "failed to unpack the profile"
+	local tarball=$profile$ext
 } elif [[ -f $profile.old$ext ]] {
-	$compressor -cd $profile.old$ext | tar -xp && touch $profile/.unpacked
-	(( $? )) && die "failed to unpack the profile"
+	local tarball=$profile.old$ext
 } else {
 	die "no tarball found"
+	return
 }
+
+$compressor -cd $tarball | tar -xp && touch $profile/.unpacked
+(( $? )) && die "failed to unpack the profile"
+
 popd -q
 
 #
