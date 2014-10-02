@@ -206,8 +206,6 @@ bindkey -d
 # Emacs Key Bindings
 #
 
-for key ("$key_info[Escape]"{B,b}) bindkey -M emacs "$key" emacs-backward-word
-for key ("$key_info[Escape]"{F,f}) bindkey -M emacs "$key" emacs-forward-word
 bindkey -M emacs "$key_info[Escape]$key_info[Left]" emacs-backward-word
 bindkey -M emacs "$key_info[Escape]$key_info[Right]" emacs-forward-word
 
@@ -267,6 +265,9 @@ for keymap in 'emacs' 'viins'; do
 
   bindkey -M "$keymap" "$key_info[Left]" backward-char
   bindkey -M "$keymap" "$key_info[Right]" forward-char
+
+  for key ("$key_info[Escape]"{B,b}) bindkey -M "$keymap" "$key" backward-word
+  for key ("$key_info[Escape]"{F,f}) bindkey -M "$keymap" "$key" forward-word
 
   # Expand history on space.
   bindkey -M "$keymap" ' ' magic-space
