@@ -18,6 +18,7 @@ return
 }
 
 setopt LOCAL_OPTIONS EXTENDED_GLOB NULL_GLOB
+unsetopt KSH_ARRAYS
 
 for (( ; $# > 0; ))
 	case $1 {
