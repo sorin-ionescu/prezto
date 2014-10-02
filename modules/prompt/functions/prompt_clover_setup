@@ -78,7 +78,6 @@ function prompt_clover_setup {
 	esac
 
 	# Need this so the prompt will work
-	setopt LOCAL_OPTIONS
 	setopt PROMPT_SUBST
 	setopt EXTENDED_GLOB
 	unsetopt BRACE_CCL
