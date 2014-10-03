@@ -254,6 +254,7 @@ setting a style is as follows.
 | action    |     %s      | Special action name
 | ahead     |     %A      | Commits ahead of remote count
 | behind    |     %B      | Commits behind of remote count
+| diverged  |     %V      | Diverged from remote state
 | branch    |     %b      | Branch name
 | commit    |     %c      | Commit hash
 | position  |     %p      | Commits from the nearest tag count
