@@ -11,6 +11,7 @@
 function die {
 	local ret=$?
 	print -P " %F{red}%1x: %F{yellow}%U%I%u:%f $argv" >&2
+	popd -q
 	return $ret
 }
 
@@ -28,7 +29,6 @@ if [[ -f $profile/.unpacked ]] {
 		mv -f $profile{,.old}$ext
 		if (( $? )) {
 			die "failed to override the old tarball"
-			popd -q
 			return
 		}
 	}

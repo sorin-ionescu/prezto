@@ -61,6 +61,7 @@ function {
 		pushd -q "$fhpdir:h" || return
 		tar -Ocp $profile | $=compressor $profile$ext
 		if (( $? )) {
+			popd -q
 			die "failed to pack a new tarball"
 			return
 		}
