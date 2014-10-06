@@ -15,7 +15,7 @@ _gpg_agent_conf="$HOME/.gnupg/gpg-agent.conf"
 _gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env"
 
 # Start gpg-agent if not started.
-if ! ps -U "$USER" -o ucomm | grep -q gpg-agent; then
+if ! ps -U "$USER" -o pid,ucomm | grep -q -- "${GPG_AGENT_PID:--1} gpg-agent"; then
   eval "$(gpg-agent --daemon | tee "$_gpg_agent_env")"
 else
   # Export environment variables.
