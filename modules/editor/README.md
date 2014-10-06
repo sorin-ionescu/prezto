@@ -49,8 +49,7 @@ To indicate when the editor is completing, add the following to your
     zstyle ':prezto:module:editor:info:completing' format '...'
 
 Then add `$editor_info[context]`, where context is *keymap*, *insert*, or
-*overwrite*, to `$PROMPT` or `$RPROMPT` and call `editor-info` in the
-`prompt_name_preexec` hook function.
+*overwrite*, to `$PROMPT` or `$RPROMPT`.
 
 Authors
 -------
