@@ -5,6 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+if [[ -z "$BROWSER" ]]; then
+  print "$0: no web browser defined" >&2
+  return 1
+fi
+
 # TODO: Make the sections easier to use.
-open "http://nodejs.org/docs/$(node --version | sed 's/-.*//')/api/all.html#${1}"
+"$BROWSER" "http://nodejs.org/docs/$(node --version | sed 's/-.*//')/api/all.html#${1}"
 
