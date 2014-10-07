@@ -15,12 +15,21 @@ Aliases
   - `brewu` upgrades Homebrew.
   - `brewx` uninstalls a formula.
 
+  - `cask` is aliased to `brew cask`.
+  - `caskc` cleans up old cached downloads.
+  - `caskC` cleans up all cached downloads.
+  - `caski` installs a cask.
+  - `caskl` lists installed casks.
+  - `casks` searches for a cask.
+  - `caskx` uninstalls a cask.
+
 Authors
 -------
 
 *The authors of this module should be contacted via the [issue tracker][1].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
+  - [Griffin Yourick](https://github.com/tough-griff)
 
 [1]: https://github.com/sorin-ionescu/prezto/issues
 
