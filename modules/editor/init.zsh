@@ -61,7 +61,7 @@ key_info=(
 # bindkey failure.
 for key in "${(k)key_info[@]}"; do
   if [[ -z "$key_info[$key]" ]]; then
-    key_info["$key"]='�'
+    key_info[$key]='�'
   fi
 done
 
