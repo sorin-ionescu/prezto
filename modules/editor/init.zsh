@@ -29,6 +29,8 @@ zmodload zsh/terminfo
 typeset -gA key_info
 key_info=(
   'Control'   '\C-'
+  'ControlLeft'  '\e[1;5D \e[5D \e\e[D'  # sequences from Debian's inputrc
+  'ControlRight' '\e[1;5C \e[5C \e\e[C'
   'Escape'    '\e'
   'Meta'      '\M-'
   'Backspace' "^?"
@@ -56,6 +58,12 @@ key_info=(
   'Right'     "$terminfo[kcuf1]"
   'BackTab'   "$terminfo[kcbt]"
 )
+
+# additionally from Debian's inputrc
+if [[ "$TERM" = *rxvt* ]]; then
+  key_info[ControlLeft]+=' \eOd'
+  key_info[ControlRight]+=' \eOc'
+fi
 
 # Set empty $key_info values to an invalid UTF-8 sequence to induce silent
 # bindkey failure.
@@ -206,10 +214,12 @@ bindkey -d
 # Emacs Key Bindings
 #
 
-for key ("$key_info[Escape]"{B,b}) bindkey -M emacs "$key" emacs-backward-word
-for key ("$key_info[Escape]"{F,f}) bindkey -M emacs "$key" emacs-forward-word
-bindkey -M emacs "$key_info[Escape]$key_info[Left]" emacs-backward-word
-bindkey -M emacs "$key_info[Escape]$key_info[Right]" emacs-forward-word
+for key ("${(s: :)key_info[ControlLeft]}" \
+         "$key_info[Escape]"{B,b} "$key_info[Escape]$key_info[Left]")
+  bindkey -M emacs "$key" emacs-backward-word
+for key ("${(s: :)key_info[ControlRight]}" \
+         "$key_info[Escape]"{F,f} "$key_info[Escape]$key_info[Right]")
+  bindkey -M emacs "$key" emacs-forward-word
 
 # Kill to the beginning of the line.
 for key in "$key_info[Escape]"{K,k}
