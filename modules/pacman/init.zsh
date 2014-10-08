@@ -72,7 +72,7 @@ alias pacman-remove-orphans="${_pacman_sudo}${_pacman_frontend} --remove --recur
 # Synchronizes the local package and Arch Build System databases against the
 # repositories.
 if (( $+commands[abs] )); then
-  alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh && ${_pacman_sudo}abs"
+  alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh && sudo abs"
 else
   alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh"
 fi
