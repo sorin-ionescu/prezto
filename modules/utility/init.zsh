@@ -145,7 +145,11 @@ fi
 # Miscellaneous
 
 # Serves a directory via HTTP.
-alias http-serve='python -m SimpleHTTPServer'
+if (($+commands[python3]); then
+  alias http-serve='python -m http.server'
+elif (($+commands[python2]); then
+  alias http-serve='python -m SimpleHTTPServer'
+fi
 
 #
 # Functions
