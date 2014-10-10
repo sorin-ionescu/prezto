@@ -46,7 +46,7 @@ while (( $# > 0 )); do
       || rar ${${verbose:+v}:-l} "$1" ;;
     (*.7z) 7za l "$1" ;;
     (*)
-			print "$0: cannot list: $1" >&2
+      print "$0: cannot list: $1" >&2
       success=1
     ;;
   esac
