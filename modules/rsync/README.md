@@ -25,4 +25,3 @@ Authors
 [1]: http://rsync.samba.org
 [2]: http://help.bombich.com/kb/overview/credits#opensource
 [3]: https://github.com/sorin-ionescu/prezto/issues
-

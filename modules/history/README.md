@@ -41,4 +41,3 @@ Authors
 
 [1]: http://zsh.sourceforge.net/Guide/zshguide02.html#l16
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

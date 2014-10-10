@@ -50,4 +50,3 @@ pattern="$1"
 shift
 
 perl -n -l -e "print if ${invert:+not} m/${pattern//\//\\/}/${modifiers}" "$@"
-

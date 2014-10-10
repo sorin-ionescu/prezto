@@ -121,4 +121,3 @@ then
   # Sets the tab and window titles before command execution.
   add-zsh-hook preexec _terminal-set-titles-with-command
 fi
-

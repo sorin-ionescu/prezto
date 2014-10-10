@@ -9,4 +9,3 @@
 #
 
 _arguments '1:url:' && return 0
-

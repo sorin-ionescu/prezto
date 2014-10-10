@@ -23,4 +23,3 @@ rm "$clone_script"
 print '#!/bin/sh\n' > "$clone_script"
 print "aptitude install ${package_list}\n" >> "$clone_script"
 chmod +x "$clone_script"
-

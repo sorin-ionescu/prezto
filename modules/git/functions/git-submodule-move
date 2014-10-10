@@ -30,4 +30,3 @@ git-submodule-remove "$src"
 git submodule add "$url" "$dst"
 
 return 0
-

@@ -39,4 +39,3 @@ function add-zsh-trap {
 }
 
 add-zsh-trap "$@"
-

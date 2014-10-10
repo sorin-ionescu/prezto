@@ -19,4 +19,3 @@ if [[ -n "$VIRTUAL_ENV" ]]; then
   zformat -f virtualenv_formatted "$virtualenv_format" "v:${VIRTUAL_ENV:t}"
   python_info[virtualenv]="$virtualenv_formatted"
 fi
-

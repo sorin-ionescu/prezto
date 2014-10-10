@@ -327,4 +327,3 @@ else
 fi
 
 unset key{,map,bindings}
-

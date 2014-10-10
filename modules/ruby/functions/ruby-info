@@ -28,4 +28,3 @@ if [[ -n "$version" ]]; then
   zformat -f version_formatted "$version_format" "v:$version"
   ruby_info[version]="$version_formatted"
 fi
-

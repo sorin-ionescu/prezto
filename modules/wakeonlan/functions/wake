@@ -18,4 +18,3 @@ if (( ! $+commands[wakeonlan] )); then
 fi
 
 wakeonlan -f "$config_file"
-

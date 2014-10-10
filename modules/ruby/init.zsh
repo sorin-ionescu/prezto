@@ -63,4 +63,3 @@ if (( $+commands[bundle] )); then
     && print vendor/bundle >>! .gitignore \
     && print vendor/cache  >>! .gitignore'
 fi
-

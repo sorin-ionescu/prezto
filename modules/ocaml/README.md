@@ -25,4 +25,3 @@ Authors
 [1]: http://ocaml.org/
 [2]: http://opam.ocamlpro.com/
 [3]: https://github.com/sorin-ionescu/prezto/issues
-

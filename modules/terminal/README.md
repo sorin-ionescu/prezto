@@ -42,4 +42,3 @@ Authors
 
 [1]: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Expansion-of-Prompt-Sequences
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

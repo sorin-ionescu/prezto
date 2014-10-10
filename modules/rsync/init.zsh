@@ -28,4 +28,3 @@ alias rsync-update="${_rsync_cmd} --update"
 alias rsync-synchronize="${_rsync_cmd} --update --delete"
 
 unset _rsync_cmd
-

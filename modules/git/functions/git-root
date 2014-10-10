@@ -14,4 +14,3 @@ else
   print "$0: not a repository work tree: $PWD" >&2
   return 1
 fi
-

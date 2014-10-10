@@ -25,4 +25,3 @@ alias yumr='sudo yum remove'       # Removes package(s).
 alias yums='yum search'            # Searches for a package.
 alias yumu='sudo yum update'       # Updates packages.
 alias yumU='sudo yum upgrade'      # Upgrades packages.
-

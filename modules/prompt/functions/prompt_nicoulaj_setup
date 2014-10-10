@@ -58,4 +58,3 @@ function prompt_nicoulaj_setup {
 }
 
 prompt_nicoulaj_setup "$@"
-

@@ -17,4 +17,3 @@ _arguments \
   '1::pattern:' \
   '2::replacement:' \
   '3::files:_files' && return 0
-

@@ -11,4 +11,3 @@
 local expl
 
 _wanted directories expl 'directory' _path_files -/ || _message 'directory'
-

@@ -18,4 +18,3 @@ pacman --query --explicit --info \
         print $2
       }
     '
-

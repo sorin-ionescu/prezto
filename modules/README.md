@@ -192,4 +192,3 @@ Yum
 ---
 
 Defines yum aliases.
-

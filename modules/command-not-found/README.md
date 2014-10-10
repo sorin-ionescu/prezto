@@ -13,4 +13,3 @@ Authors
 
 [1]: https://code.launchpad.net/command-not-found
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

@@ -24,4 +24,3 @@ done < <(
 )
 
 _describe -t submodule 'submodules' submodules && return 0
-

@@ -38,4 +38,3 @@ Authors
 
 [1]: http://www.gnu.org/software/screen/
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

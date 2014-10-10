@@ -20,4 +20,3 @@ git fsck --unreachable 2> /dev/null \
       --merges \
       --no-walk \
       --stdin
-

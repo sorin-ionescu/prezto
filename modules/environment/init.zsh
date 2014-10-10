@@ -55,4 +55,3 @@ if zstyle -t ':prezto:environment:termcap' color; then
   export LESS_TERMCAP_ue=$'\E[0m'          # Ends underline.
   export LESS_TERMCAP_us=$'\E[01;32m'      # Begins underline.
 fi
-

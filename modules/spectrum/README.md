@@ -89,4 +89,3 @@ Authors
 
 [1]: http://lucentbeing.com/writing/archives/a-guide-to-256-color-codes/
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

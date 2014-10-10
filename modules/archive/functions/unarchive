@@ -76,4 +76,3 @@ while (( $# > 0 )); do
   (( $success == 0 )) && (( $remove_archive == 0 )) && rm "$1"
   shift
 done
-

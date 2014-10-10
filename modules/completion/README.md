@@ -21,4 +21,3 @@ Authors
 
 [1]: https://github.com/zsh-users/zsh-completions
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

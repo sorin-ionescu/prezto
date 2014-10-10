@@ -421,4 +421,3 @@ function git-info {
 }
 
 git-info "$@"
-

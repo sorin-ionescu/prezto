@@ -40,4 +40,3 @@ alias scr='screen'
 alias scrl='screen -list'
 alias scrn='screen -U -S'
 alias scrr='screen -a -A -U -D -R'
-

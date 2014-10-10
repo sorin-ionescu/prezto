@@ -51,4 +51,3 @@ replacement="$2"
 repeat 2 shift
 
 perl -i'.orig' -n -l -e "s/${pattern//\//\\/}/${replacement//\//\\/}/${modifiers}; print" "$@"
-

@@ -25,4 +25,3 @@ Authors
 [1]: http://www.openssh.com
 [2]: http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-agent&sektion=1
 [3]: https://github.com/sorin-ionescu/prezto/issues
-

@@ -16,4 +16,3 @@ else
   prompt 'off'
 fi
 unset prompt_argv
-

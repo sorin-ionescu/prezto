@@ -32,4 +32,3 @@ Authors
 
 [1]: http://rubyonrails.org
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

@@ -29,4 +29,3 @@ function coalesce {
   done
   return 1
 }
-

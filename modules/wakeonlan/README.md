@@ -34,4 +34,3 @@ Authors
 [1]: http://gsd.di.uminho.pt/jpo/software/wakeonlan/
 [2]: http://man.cx/wakeonlan
 [3]: https://github.com/sorin-ionescu/prezto/issues
-

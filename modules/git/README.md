@@ -332,4 +332,3 @@ Authors
 [6]: https://github.com/sorin-ionescu/prezto/issues
 [7]: https://github.com/sorin-ionescu/prezto/issues/219
 [8]: http://www.kernel.org/pub/software/scm/git/docs/git-log.html
-

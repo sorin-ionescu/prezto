@@ -12,4 +12,3 @@ fi
 
 # Initialize OPAM.
 eval "$(opam config env)"
-

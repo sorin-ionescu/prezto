@@ -18,4 +18,3 @@ if [[ -n "$ref" ]]; then
 else
   return 1
 fi
-

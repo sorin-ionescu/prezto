@@ -16,4 +16,3 @@ _arguments \
   '-x[ignore whitespace and comments]' \
   '1::pattern:' \
   '2::files:_files' && return 0
-

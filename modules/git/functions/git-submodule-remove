@@ -25,4 +25,3 @@ rm -rf "${1}"
 rm -rf "$(git-dir)/modules/${1}"
 
 return 0
-

@@ -58,4 +58,3 @@ for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
 done
 
 unset _gnu_utility_{p,cmds,cmd,pcmd}
-

@@ -20,4 +20,3 @@ function diff {
 }
 
 diff "$@"
-

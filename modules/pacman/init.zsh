@@ -82,4 +82,3 @@ fi
 alias pacU="${_pacman_sudo}${_pacman_frontend} --sync --refresh --sysupgrade"
 
 unset _pacman_{frontend,sudo}
-

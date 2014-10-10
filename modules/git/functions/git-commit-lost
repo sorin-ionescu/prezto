@@ -18,4 +18,3 @@ git fsck 2> /dev/null \
       --no-walk \
       --stdin \
       --pretty=format:${_git_log_oneline_format}
-

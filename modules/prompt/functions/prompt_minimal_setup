@@ -48,4 +48,3 @@ function prompt_minimal_setup {
 }
 
 prompt_minimal_setup "$@"
-

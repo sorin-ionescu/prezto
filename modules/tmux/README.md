@@ -64,4 +64,3 @@ Authors
 [3]: https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
 [4]: https://github.com/mxcl/homebrew
 [5]: https://github.com/sorin-ionescu/prezto/issues
-

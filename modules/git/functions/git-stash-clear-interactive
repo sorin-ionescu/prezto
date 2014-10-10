@@ -20,4 +20,3 @@ if [[ -f "$(git-dir)/refs/stash" ]]; then
     fi
   fi
 fi
-

@@ -15,4 +15,3 @@ elif [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
 else
   return 1
 fi
-

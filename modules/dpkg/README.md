@@ -39,4 +39,3 @@ Authors
 
 [1]: http://wiki.debian.org/Teams/Dpkg
 [2]: https://github.com/sorin-ionescu/prezto/issues
-

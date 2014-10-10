@@ -56,4 +56,3 @@ else
   print "$0: not a Git repository or remote not set" >&2
   return 1
 fi
-

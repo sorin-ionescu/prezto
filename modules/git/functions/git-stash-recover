@@ -16,4 +16,3 @@ for commit in "$@"; do
   git update-ref \
     -m "$(git log -1 --pretty="format:%s" "$commit")" refs/stash "$commit"
 done
-

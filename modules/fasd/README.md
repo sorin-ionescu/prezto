@@ -36,4 +36,3 @@ Authors
 [3]: https://github.com/rupa/z
 [4]: https://github.com/rupa/v
 [5]: https://github.com/sorin-ionescu/prezto/issues
-

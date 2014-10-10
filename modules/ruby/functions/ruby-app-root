@@ -16,4 +16,3 @@ while [[ "$root_dir" != '/' ]]; do
 done
 
 return 1
-

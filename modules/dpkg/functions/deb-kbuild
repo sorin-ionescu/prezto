@@ -12,4 +12,3 @@ MAKEFLAGS='' time fakeroot make-kpkg \
   --revision "$(date +"%Y%m%d")" \
   kernel_image \
   kernel_headers
-

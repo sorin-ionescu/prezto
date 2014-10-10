@@ -39,4 +39,3 @@ improve its performance, do not hesitate to fork and send pull requests.
 [3]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [4]: https://help.github.com/articles/using-pull-requests
 [5]: http://daringfireball.net/projects/markdown/syntax#img
-

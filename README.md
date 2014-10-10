@@ -114,4 +114,3 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: http://grml.org/zsh/zsh-lovers.html
-

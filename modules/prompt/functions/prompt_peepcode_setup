@@ -85,4 +85,3 @@ function prompt_peepcode_preview {
 }
 
 prompt_peepcode_setup "$@"
-

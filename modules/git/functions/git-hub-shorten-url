@@ -20,4 +20,3 @@ if (( $+commands[curl] )); then
 else
   print "$0: command not found: curl" >&2
 fi
-

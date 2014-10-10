@@ -20,4 +20,3 @@ find /bin /etc /lib /sbin /usr \
     \( -type d -printf '%p/\n' -o -print \) | sort > "$fs"
 
 comm -23 "$fs" "$db"
-

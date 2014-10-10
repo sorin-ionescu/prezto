@@ -38,4 +38,3 @@ case "$state" in
 esac
 
 return $ret
-
