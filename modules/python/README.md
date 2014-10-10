@@ -61,6 +61,29 @@ system site-packages directory.
 
     export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 
+### Settings
+
+#### Lazy loading
+
+By default, virtualenvwrapper is loaded in lazy mode. This behaviour can be disabled adding the following line to *~/.zpreztorc*:
+
+    zstyle ':prezto:module:python' lazy_venv 'no'
+
+#### Automatic virtualenv initialization
+
+To enable autoenv, add the following line to *~/.zpreztorc*:
+
+    zstyle ':prezto:module:python' autoenv 'yes'
+
+If a virtualenv is active, and was not activated by autoenv, then autoenv does nothing.
+Otherwise, autoenv activated or deactivates a virtual environment whenever a directory is changed; based on the following priority:
+
+    1. Name specified in a file named *.venv* in the cwd.
+    2. *.venv* file in git root. If folder is inside git repository.
+    3. Name of git root folder.
+    4. No virtualenv.
+
+
 Aliases
 -------
 
