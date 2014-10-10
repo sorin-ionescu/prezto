@@ -78,11 +78,6 @@ function _terminal-set-titles-with-path {
   set-tab-title "$truncated_path"
 }
 
-# Sets the Terminal.app proxy icon.
-function _terminal-set-terminal-app-proxy-icon {
-  printf '\e]7;%s\a' "file://$HOST${${1:-$PWD}// /%20}"
-}
-
 # Do not override precmd/preexec; append to the hook array.
 autoload -Uz add-zsh-hook
 
@@ -92,6 +87,9 @@ if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]] \
 then
   # Sets the Terminal.app current working directory before the prompt is
   # displayed.
+  function _terminal-set-terminal-app-proxy-icon {
+    printf '\e]7;%s\a' "file://${HOST}${PWD// /%20}"
+  }
   add-zsh-hook precmd _terminal-set-terminal-app-proxy-icon
 
   # Unsets the Terminal.app current working directory when a terminal
@@ -100,7 +98,7 @@ then
   # bar is no longer synchronized with real current working directory.
   function _terminal-unset-terminal-app-proxy-icon {
     if [[ "${2[(w)1]:t}" == (screen|tmux|dvtm|ssh|mosh) ]]; then
-      _terminal-set-terminal-app-proxy-icon ' '
+      print '\e]7;\a'
     fi
   }
   add-zsh-hook preexec _terminal-unset-terminal-app-proxy-icon
