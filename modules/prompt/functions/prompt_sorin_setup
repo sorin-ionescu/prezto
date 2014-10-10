@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Pascal Richier <pascoualito@gmail.com>
 #
 # Screenshots:
 #   http://i.imgur.com/nBEEZ.png
@@ -71,10 +72,38 @@ function prompt_sorin_setup {
     'prompt' ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
+  # Set User & Host
+  local userhost=${1:-''}
+  if [[ $userhost = "userhost" ]]; then
+    userhost='%B%F{green}[%F{yellow}%n%f@%F{red}%m%F{green}]%b'
+  else
+    userhost=''
+  fi
+
   # Define prompts.
-  PROMPT='%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT=$userhost'%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+}
+
+function prompt_sorin_help {
+  cat <<EOH
+This prompt allow you to show (or not) User & Host. You can invoke it thus:
+
+  prompt sorin [userhost]
+
+where userhost should be the exact string "userhost" if you want to print it, anything else if you don't want.
+EOH
+}
+
+function prompt_sorin_preview () {
+  if (( ! $#* )); then
+    prompt_preview_theme sorin
+    print
+    prompt_preview_theme sorin 'userhost'
+  else
+    prompt_preview_theme sorin "$@"
+  fi
 }
 
 prompt_sorin_setup "$@"
