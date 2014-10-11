@@ -1,22 +1,37 @@
 #
-# The oh-my-zsh cloud theme ported to prezto
+# A minimal two-color theme.
 #
 # Authors:
-# Kevin Laude <nerfyoda@gmail.com>
+#   Kevin Laude <nerfyoda@gmail.com>
+#
+# Features:
+#   - One line, left aligned.
+#   - The prompt is prefixed by a character sequence of your choice.
+#   - Only displays the current directory instead of the full path.
+#   - Displays the current branch when in a git project (this requires loading
+#     the git module before prompt in ~/.zpreztorc).
+#   - Displays a character at the end of the prompt when in a git project with
+#     "dirty" files.
 #
 # Usage:
-# This prompt's prefix symbol and colors are customizable:
+#   This prompt's prefix symbol and colors are customizable:
+#     prompt cloud [<symbol>] [<color1>] [<color2>]
 #
-#   prompt cloud [<symbol>] [<color1>] [<color2>]
+#   In ~/.zpreztorc:
+#     zstyle ':prezto:module:prompt' theme 'cloud' \
+#       ['<symbol>'] \
+#       ['<color1>'] \
+#       ['<color2>']
 #
-# In ~/.zpreztorc:
-#   zstyle ':prezto:module:prompt' theme 'cloud' ['<symbol>'] ['<color1>'] ['<color2>']
-#
-# If these options are not provided, the symbol defaults to ☁ with colors cyan
-# and green.
+#   If these options are not provided, the symbol defaults to "☁" with colors
+#   cyan and green.
 #
 # Screenshots:
 #   http://i.imgur.com/mJCZ8rE.png
+#
+# Note:
+#   This is a port of the oh-my-zsh cloud theme, originally written by Phillip
+#   Ridlen <p@rdln.net> and Mark Drago <markdrago@gmail.com>
 #
 
 # Load dependencies.
@@ -104,4 +119,3 @@ function prompt_cloud_setup {
 }
 
 prompt_cloud_setup "$@"
-
