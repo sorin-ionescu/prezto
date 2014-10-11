@@ -80,20 +80,20 @@ function prompt_cloud_setup {
 
   # Set the theme prefix to a cloud or to the user's given characters.
   if [[ -n "$1" ]]; then
-    prefix=$1
+    prefix="$1"
   else
     prefix='☁'
   fi
 
   # Assign colors.
   if [[ -n "$2" ]]; then
-    primary_color=$2
+    primary_color="$2"
   else
     primary_color='cyan'
   fi
 
   if [[ -n "$3" ]]; then
-    secondary_color=$3
+    secondary_color="$3"
   else
     secondary_color='green'
   fi
