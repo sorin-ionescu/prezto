@@ -10,3 +10,6 @@
 [submodule "modules/prompt/external/powerline"]
 	path = modules/prompt/external/powerline
 	url = https://github.com/davidjrice/prezto_powerline.git
+[submodule "modules/prompt/external/agnoster"]
+	path = modules/prompt/external/agnoster
+	url = https://gist.github.com/3712874.git
