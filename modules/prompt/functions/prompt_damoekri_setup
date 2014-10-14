@@ -18,7 +18,7 @@ function prompt_damoekri_pwd {
     _prompt_damoekri_pwd="$MATCH"
     unset MATCH
   else
-    _prompt_damoekri_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+    _prompt_damoekri_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
   fi
 }
 
