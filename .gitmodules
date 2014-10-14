@@ -13,3 +13,6 @@
 [submodule "modules/prompt/external/agnoster"]
 	path = modules/prompt/external/agnoster
 	url = https://gist.github.com/3712874.git
+[submodule "modules/prompt/functions/pure"]
+	path = modules/prompt/external/pure
+	url = https://github.com/sindresorhus/pure.git
