@@ -44,7 +44,8 @@ Updating
 
 Pull the latest changes and update submodules.
 
-    git pull && git submodule update --init --recursive
+    git --git-dir "${ZDOTDIR:-$HOME}/.zprezto/.git" pull
+    git --git-dir "${ZDOTDIR:-$HOME}/.zprezto/.git" submodule update --init --recursive
 
 Usage
 -----
