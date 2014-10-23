@@ -1,0 +1,12 @@
+#Pip
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+#Virtual Environments
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+
+#Virtual Environment Wrapper
+export VIRTUALENVWRAPPER_PROJECT_FILENAME=.project
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_HOOK_DIR=$HOME/.virtualenvs

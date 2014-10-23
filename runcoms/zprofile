@@ -75,3 +75,11 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
+
+# Load all of our environment variables
+# Source Environment Variables
+for i in ${ZDOTDIR:-$HOME}/.zprofile.d/*; do
+    if [ -r "$i" ]; then
+        . $i
+    fi
+done

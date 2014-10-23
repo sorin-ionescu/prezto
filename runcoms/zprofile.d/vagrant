@@ -1,0 +1,1 @@
+export VAGRANT_VMWARE_FUSION_APP="$HOME/Applications/VMWare Fusion.app"
