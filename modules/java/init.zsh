@@ -14,6 +14,16 @@ fi
 # Local Module Installation
 #
 
+# Add manually installed jenv to path.
+if [[ -s "$HOME/.jenv/bin/jenv" ]]; then
+  path=("$HOME/.jenv/bin" $path)
+fi
+
+# Enable shims and autocompletion if jenv is available.
+if (( $+commands[jenv] )); then
+  eval "$(jenv init -)"
+fi
+
 # Preset Java environment variables in OS X if they are available.
 # The actual JAVA_HOME can be conveniently overriden as so:
 #   export JAVA_HOME=$JAVA_HOME_17
@@ -23,6 +33,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
   for jdk in "${jdks[@]}"; do
     /usr/libexec/java_home -v "${jdk}" 2> /dev/null >&2
     if (( $? == 0 )); then
+      # TODO: 'jenv add' and 'jenv rehash' at startup
+      # jenv add "$(/usr/libexec/java_home -v "${jdk}" 2> /dev/null)"
       export JAVA_HOME_$(echo "${jdk}" | tr -d '.')="$(/usr/libexec/java_home -v "${jdk}" 2> /dev/null)"
     fi
   done
