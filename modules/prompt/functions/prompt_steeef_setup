@@ -15,12 +15,12 @@
 function prompt_steeef_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="${_prompt_steeef_colors[7]}(%f${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}*%f${_prompt_steeef_colors[7]})%f"
+    branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
   else
-    branch_format="${_prompt_steeef_colors[7]}(%f${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[7]})%f"
+    branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
   fi
 
-  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${_prompt_steeef_colors[6]}on%f git:${branch_format}"
 
   vcs_info 'prompt'
 
@@ -89,10 +89,10 @@ function prompt_steeef_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="${_prompt_steeef_colors[7]}(%f${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[7]})%f"
-  local action_format="${_prompt_steeef_colors[7]}(%f${_prompt_steeef_colors[5]}%a%f${_prompt_steeef_colors[7]})%f"
-  local unstaged_format="${_prompt_steeef_colors[2]}*%f"
-  local staged_format="${_prompt_steeef_colors[5]}*%f"
+  local branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
+  local action_format="${_prompt_steeef_colors[5]}%a%f"
+  local unstaged_format="${_prompt_steeef_colors[2]} *%f"
+  local staged_format="${_prompt_steeef_colors[5]} *%f"
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
@@ -108,8 +108,8 @@ function prompt_steeef_setup {
 
   # Define prompts.
   PROMPT="
-${_prompt_steeef_colors[1]}%n%f ${_prompt_steeef_colors[7]}at%f ${_prompt_steeef_colors[5]}%m%f ${_prompt_steeef_colors[7]}in%f ${_prompt_steeef_colors[2]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]'"${_prompt_steeef_colors[6]}$%f "
+${_prompt_steeef_colors[1]}%n%f ${_prompt_steeef_colors[6]}at%f ${_prompt_steeef_colors[5]}%m%f ${_prompt_steeef_colors[6]}in%f ${_prompt_steeef_colors[2]}%~%f "'${vcs_info_msg_0_}'"
+"'$python_info[virtualenv]'"${_prompt_steeef_colors[4]}$%f "
   RPROMPT=''
 }
 
