@@ -20,7 +20,7 @@ function prompt_steeef_precmd {
     branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
   fi
 
-  zstyle ':vcs_info:*:prompt:*' formats "${_prompt_steeef_colors[6]}on%f git:${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${_prompt_steeef_colors[6]}on%f git:${branch_format}" "%r"
 
   vcs_info 'prompt'
 
@@ -100,7 +100,7 @@ function prompt_steeef_setup {
   zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
   zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
   zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
-  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}" "%r"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   # Set python-info parameters.
