@@ -1,0 +1,20 @@
+#
+# Get  ignore template from https://gitignore.io.
+#
+# Authors:
+#   Haojia Che <haojia.che@gmail.com>
+#
+#  Use `git-ignore-template` or `git-ignore-template list` to get the list
+#  Uset `git-ignore-template <template name>` to get the template 
+#
+#   Example:
+#   `git-ignore-template java` to get a  gitignore template for java.
+#
+
+function git-ignore-template() {
+    if [ $@ ]; then
+        curl -L -s https://www.gitignore.io/api/$@;
+    else
+        curl -L -s https://www.gitignore.io/api/list;
+    fi
+}
