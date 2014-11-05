@@ -23,6 +23,7 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
+# Added new modules after prompt
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
@@ -32,7 +33,12 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt'
+  'prompt' \
+  'git' \
+  'archive' \
+  'homebrew' \
+  'osx' \
+  'ssh'
 
 #
 # Editor
