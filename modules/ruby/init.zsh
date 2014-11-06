@@ -28,6 +28,8 @@ elif (( $+commands[chruby-exec] )); then
   source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
   if zstyle -t ':prezto:module:ruby:chruby' auto-switch; then
     source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
+    # If a default ruby is configured for the user, switch to it
+    chruby_auto
   fi
 
 # Prepend local gems bin directories to PATH.
