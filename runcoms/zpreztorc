@@ -152,3 +152,6 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Auto start a session when Zsh is launched in a SSH connection.
 # zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+
+# Integrate iTerm with Tmux (see: https://code.google.com/p/iterm2/wiki/TmuxIntegration )
+# zstyle ':prezto:module:tmux:iterm' integrate 'true'
