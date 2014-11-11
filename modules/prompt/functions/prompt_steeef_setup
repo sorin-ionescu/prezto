@@ -99,7 +99,7 @@ function prompt_steeef_setup {
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
   zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
   zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
-  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format} ${action_format}"
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}" "%r"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
