@@ -22,18 +22,12 @@ fi
 #
 # Auto Start
 #
-ITERM_INTEGRATION=
-if ([[ $TERM_PROGRAM = iTerm.app ]] && \
-  zstyle -t ':prezto:module:tmux:iterm' integrate \
-); then
-    ITERM_INTEGRATION=-CC
-fi
 
 if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
 ); then
-    tmux start-server
+  tmux start-server
 
   # Create a 'prezto' session if no session has been defined in tmux.conf.
   if ! tmux has-session 2> /dev/null; then
