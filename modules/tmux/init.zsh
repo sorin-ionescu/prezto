@@ -13,6 +13,12 @@ if (( ! $+commands[tmux] )); then
   return 1
 fi
 
+if ( [[ $TERM_PROGRAM = iTerm.app ]] && \
+  zstyle -t ':prezto:module:tmux:iterm' integrate \
+); then
+    ITERM_INTEGRATION=-CC
+fi
+
 #
 # Auto Start
 #
@@ -32,12 +38,12 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   fi
 
   # Attach to the 'prezto' session or to the last session used.
-  exec tmux attach-session
+  exec tmux $ITERM_INTEGRATION attach-session
 fi
 
 #
 # Aliases
 #
 
-alias tmuxa='tmux attach-session'
+alias tmuxa='tmux $ITERM_INTEGRATION attach-session'
 alias tmuxl='tmux list-sessions'

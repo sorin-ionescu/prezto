@@ -30,6 +30,18 @@ in *tmux.conf*:
 
     set-option -g destroy-unattached [on | off]
 
+#### OSX iTerm2 Integration
+
+iTerm2 offers significant integration with tmux. This can be enabled by adding the following line to *zpreztorc*:
+
+    zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+
+See more information on iTerm2 and tmux integration on the following pages:
+
+[iTerm2 Download page](http://iterm2.com/downloads.html)
+
+[iTerm2 and tmux Integration](https://code.google.com/p/iterm2/wiki/TmuxIntegration)
+
 Aliases
 -------
 
