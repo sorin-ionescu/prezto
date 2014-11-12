@@ -20,15 +20,25 @@ following line to *zpreztorc*:
 
     zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
-In both cases, it will create a background session named _prezto_ if the tmux
-server is not started.
+In both cases the tmux server will be started and a background session
+named _prezto_ will be created if a session doesn't already exist.
 
-With `auto-start` enabled, you may want to control how multiple sessions are
-managed. The `destroy-unattached` option of tmux controls if the unattached
-sessions must be kept alive, making sessions available for later use, configured
-in *tmux.conf*:
+By default every shell shares a set of windows but has an independent
+view. Detaching from one of these sessions removes the view but the
+open windows persist. This is accomplished by setting the
+`destroy-unattached` option to `on` for each session.
 
-    set-option -g destroy-unattached [on | off]
+Some users prefer that all new shells share the same session so that
+the view for each shell is in sync. This useful for advanced users
+that create multiple sessions and want to manually navigate between
+them. To accomplish this behavior set the `mode` option to `shared` in
+*zpreztorc*,
+
+    zstyle ':prezto:module:tmux:auto-start' mode shared
+
+You can customize the background session by creating a new session in
+your `.tmux.conf` file.
+
 
 Aliases
 -------
