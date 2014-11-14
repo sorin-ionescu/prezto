@@ -46,7 +46,7 @@ The most basic example of this function can be seen below.
 If the `prompt_name_setup` function is customizable via parameters, a help
 function **should** be defined. The user will access it via `prompt -h name`.
 
-The most basic example of this function can be seen bellow.
+The most basic example of this function can be seen below.
 
     function prompt_name_help {
       cat <<EOH
@@ -63,7 +63,7 @@ The most basic example of this function can be seen bellow.
 If the `prompt_name_setup` function is customizable via parameters, a preview
 function **should** be defined. The user will access it via `prompt -p name`.
 
-The most basic example of this function can be seen bellow.
+The most basic example of this function can be seen below.
 
     function prompt_name_preview {
       if (( $# > 0 )); then
@@ -91,7 +91,7 @@ a function before you calling it.
 
 **Do not register hook functions. They will be registered by the `prompt` function.**
 
-The most basic example of this function can be seen bellow.
+The most basic example of this function can be seen below.
 
     function prompt_name_precmd {
       if (( $+functions[git-info] )); then
