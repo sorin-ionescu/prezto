@@ -42,7 +42,7 @@ function _pj () {
   typeset -a projects
   projects=($PROJECT_PATHS/*)
   projects=$projects:t
-  _arguments '*:file:($projects)'
+  _arguments "*:file:($projects)"
 }
 
 compdef _pj pj
