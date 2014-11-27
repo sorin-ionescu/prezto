@@ -35,6 +35,13 @@ if grep 'enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
 
   # Load the SSH module for additional processing.
   pmodload 'ssh'
+
+  # ssh doesn't set the gpg-agent tty when asking for the key.
+  # This updates the tty before every command as a workaround
+  function _gpg-agent-update-tty() {
+    gpg-connect-agent updatestartuptty /bye > /dev/null
+  }
+  add-zsh-hook preexec _gpg-agent-update-tty
 fi
 
 # Clean up.
