@@ -15,7 +15,7 @@ _gpg_agent_conf="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.conf"
 _gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env"
 
 # Start gpg-agent if not started.
-if [[ -z "$GPG_AGENT_INFO" ]]; then
+if [[ -z "$GPG_AGENT_INFO" && ! -S "${GNUPGHOME:-$HOME/.gnupg}/S.gpg-agent" ]]; then
   # Export environment variables.
   source "$_gpg_agent_env" 2> /dev/null
 
