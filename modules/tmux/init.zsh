@@ -17,6 +17,12 @@ fi
 # Auto Start
 #
 
+if ([[ "$TERM_PROGRAM" = 'iTerm.app' ]] && \
+  zstyle -t ':prezto:module:tmux:iterm' integrate \
+); then
+  _tmux_iterm_integration='-CC'
+fi
+
 if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
@@ -32,12 +38,12 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   fi
 
   # Attach to the 'prezto' session or to the last session used.
-  exec tmux attach-session
+  exec tmux $_tmux_iterm_integration attach-session
 fi
 
 #
 # Aliases
 #
 
-alias tmuxa='tmux attach-session'
+alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
 alias tmuxl='tmux list-sessions'

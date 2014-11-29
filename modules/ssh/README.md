@@ -4,7 +4,8 @@ SSH
 Provides for an easier use of [SSH][1] by setting up [ssh-agent][2].
 
 This module is disabled on Mac OS X due to custom Apple SSH support rendering it
-unnecessary.
+unnecessary. Use `ssh-add -K` to store identities in Keychain; they will be
+added to `ssh-agent` automatically and persist between reboots.
 
 Settings
 --------
