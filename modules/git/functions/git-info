@@ -335,12 +335,11 @@ function git-info {
     while IFS=$'\n' read line; do
       # Count added, deleted, modified, renamed, unmerged, untracked, dirty.
       # T (type change) is undocumented, see http://git.io/FnpMGw.
-      # For a table of scenarii, see http://i.imgur.com/2YLu1.png.
-      [[ "$line" == ([ACDMT][\ MT]|[ACMT]D)\ * ]] && (( added++ ))
-      [[ "$line" == [\ ACMRT]D\ * ]] && (( deleted++ ))
-      [[ "$line" == ?[MT]\ * ]] && (( modified++ ))
-      [[ "$line" == R?\ * ]] && (( renamed++ ))
-      [[ "$line" == (AA|DD|U?|?U)\ * ]] && (( unmerged++ ))
+      [[ "$line" == ([CDMRTUXB\?\ ]A|A[CDMRTUXB\?\ ])\ * ]] && (( added++ ))
+      [[ "$line" == ([ACMRTUXB\?\ ]D|D[ACMRTUXB\?\ ])\ * ]] && (( deleted++ ))
+      [[ "$line" == ([ACDRTUXB\?\ ]M|M[ACDRTUXB\?\ ])\ * ]] && (( modified++ ))
+      [[ "$line" == ([ACDMTUXB\?\ ]R|R[ACDMTUXB\?\ ])\ * ]] && (( renamed++ ))
+      [[ "$line" == (AA|DD|U\?|\?U)\ * ]] && (( unmerged++ ))
       [[ "$line" == \?\?\ * ]] && (( untracked++ ))
       (( dirty++ ))
     done < <(${(z)status_cmd} 2> /dev/null)
