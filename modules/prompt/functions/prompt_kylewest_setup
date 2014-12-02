@@ -58,7 +58,7 @@ function prompt_kylewest_setup {
   zstyle ':prezto:module:ruby:info:version' format '%F{blue}[%v]%f'
 
   # Define prompts.
-  PROMPT='%F{cyan}%c%f ${git_info[prompt]}${editor_info[keymap]} '
+  PROMPT='%F{cyan}%c%f ${git_info:+${(e)git_info[prompt]}}${editor_info[keymap]} '
   RPROMPT='${ruby_info[version]}'
 }
 

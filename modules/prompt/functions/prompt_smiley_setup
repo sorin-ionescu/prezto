@@ -57,7 +57,7 @@ function prompt_smiley_setup {
   zstyle ':prezto:module:git:info:keys' format 'prompt' '(%b%D)'
 
   # Define prompts.
-  PROMPT='$python_info[virtualenv]$ruby_info[version]${git_info[prompt]} %B%c%b %(?:%F{green}ツ%f:%F{red}✖%f) '
+  PROMPT='$python_info[virtualenv]$ruby_info[version]${git_info:+${(e)git_info[prompt]}} %B%c%b %(?:%F{green}ツ%f:%F{red}✖%f) '
   RPROMPT='${editor_info[overwrite]}${VIM:+" %B%F{green}V%f%b"}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
