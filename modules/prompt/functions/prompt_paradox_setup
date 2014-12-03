@@ -18,7 +18,7 @@ pmodload 'helper'
 
 # Define variables.
 _prompt_paradox_current_bg='NONE'
-_prompt_paradox_segment_separator='⮀'
+_prompt_paradox_segment_separator=''
 _prompt_paradox_start_time=$SECONDS
 
 function prompt_paradox_start_segment {
@@ -129,7 +129,7 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:added' format ' ✚'
   zstyle ':prezto:module:git:info:ahead' format ' ⬆'
   zstyle ':prezto:module:git:info:behind' format ' ⬇'
-  zstyle ':prezto:module:git:info:branch' format '⭠ %b'
+  zstyle ':prezto:module:git:info:branch' format ' %b'
   zstyle ':prezto:module:git:info:commit' format '➦ %.7c'
   zstyle ':prezto:module:git:info:deleted' format ' ✖'
   zstyle ':prezto:module:git:info:dirty' format ' ⁝'
