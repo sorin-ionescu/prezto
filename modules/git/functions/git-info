@@ -95,6 +95,8 @@ function git-info {
   setopt LOCAL_OPTIONS
   setopt EXTENDED_GLOB
 
+  local git_dir="$(git-dir)"
+
   local action
   local action_format
   local action_formatted
