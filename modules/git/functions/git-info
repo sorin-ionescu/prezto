@@ -95,8 +95,6 @@ function git-info {
   setopt LOCAL_OPTIONS
   setopt EXTENDED_GLOB
 
-  local git_dir="$(git-dir)"
-
   local action
   local action_format
   local action_formatted
@@ -169,6 +167,8 @@ function git-info {
   if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
     return 1
   fi
+
+  local git_dir="$(git-dir)"
 
   if (( $# > 0 )); then
     if [[ "$1" == [Oo][Nn] ]]; then
