@@ -15,3 +15,12 @@ pmodload 'helper'
 
 # Source module files.
 source "${0:h}/alias.zsh"
+
+#
+# Functions
+#
+
+# Create .gitignore files using gitignore.io service
+function gi() {
+  curl -L -s https://www.gitignore.io/api/$@
+}
