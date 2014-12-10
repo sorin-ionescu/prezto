@@ -6,7 +6,7 @@
 #
 
 # Return if requirements are not found.
-if [[ "$OSTYPE" != darwin* ]]; then
+if [[ "$OSTYPE" != (darwin|linux)* ]]; then
   return 1
 fi
 
