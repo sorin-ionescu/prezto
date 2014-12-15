@@ -6,6 +6,15 @@
 #
 
 #
+# Configuration
+#
+
+# Set PREZTO_DIR to the default value if not already set
+if [ -z "${PREZTO_DIR}" ]; then
+  PREZTO_DIR=${ZDOTDIR:-$HOME}/.zprezto
+fi
+
+#
 # Version Check
 #
 
@@ -31,7 +40,7 @@ function pmodload {
   pmodules=("$argv[@]")
 
   # Add functions to $fpath.
-  fpath=(${pmodules:+${ZDOTDIR:-$HOME}/.zprezto/modules/${^pmodules}/functions(/FN)} $fpath)
+  fpath=(${pmodules:+${PREZTO_DIR}/modules/${^pmodules}/functions(/FN)} $fpath)
 
   function {
     local pfunction
@@ -40,7 +49,7 @@ function pmodload {
     setopt LOCAL_OPTIONS EXTENDED_GLOB
 
     # Load Prezto functions.
-    for pfunction in ${ZDOTDIR:-$HOME}/.zprezto/modules/${^pmodules}/functions/$~pfunction_glob; do
+    for pfunction in ${PREZTO_DIR}/modules/${^pmodules}/functions/$~pfunction_glob; do
       autoload -Uz "$pfunction"
     done
   }
