@@ -1,7 +1,7 @@
 Transfer.sh
 ==========
 
-Defines [transfer][https://transfer.sh/] aliases for easy file sharing from the commandline.
+Defines [transfer][https://transfer.sh/] alias for easy file sharing from the commandline.
 
 Authors
 -------
