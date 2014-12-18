@@ -55,6 +55,3 @@ transfer() {
     # cleanup
     rm -f $tmpfile
 }
-
-alias transfer=transfer
-
