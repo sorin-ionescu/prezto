@@ -146,8 +146,8 @@ alias du='du -kh'
 if (( $+commands[htop] )); then
   alias top=htop
 else
-  alias topc='top -o cpu'
-  alias topm='top -o vsize'
+  alias topc='top -o %CPU'
+  alias topm='top -o %MEM'
 fi
 
 # Miscellaneous
