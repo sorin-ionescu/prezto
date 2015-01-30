@@ -15,12 +15,12 @@
 function prompt_steeef_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
+    branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
   else
-    branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
+    branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
   fi
 
-  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${_prompt_steeef_colors[6]}on%f git:${branch_format}" "%r"
 
   vcs_info 'prompt'
 
@@ -44,19 +44,41 @@ function prompt_steeef_setup {
   # Use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     _prompt_steeef_colors=(
-      "%F{81}"  # Turquoise
-      "%F{166}" # Orange
-      "%F{135}" # Purple
-      "%F{161}" # Hotpink
-      "%F{118}" # Limegreen
+      "%F{37}"  # Turquoise
+      "%F{136}" # Orange
+      "%F{125}" # Purple
+      "%F{160}" # Hotpink
+      "%F{64}" # Limegreen
+      "%F{254}"
+      "%F{230}"
+      "%F{166}"
+      "%F{160}"
+      "%F{33}"
+      "%F{234}"
+      "%F{235}"
+      "%F{240}"
+      "%F{241}"
+      "%F{244}"
+      "%F{245}"
     )
   else
     _prompt_steeef_colors=(
-      "%F{cyan}"
-      "%F{yellow}"
-      "%F{magenta}"
-      "%F{red}"
-      "%F{green}"
+      "%F{cyan}"     # 1
+      "%F{yellow}"   # 2
+      "%F{magenta}"  # 3
+      "%F{red}"      # 4
+      "%F{green}"    # 5
+      "%F{white}"    # 6
+      "%F{brwhite}"  # 7
+      "%F{brred}"    # 8
+      "%F{red}"      # 9
+      "%F{blue}"     # 10
+      "%F{brblack}"  # 11
+      "%F{black}"    # 12
+      "%F{brgreen}"  # 13
+      "%F{bryellow}" # 14
+      "%F{brblue}"   # 15
+      "%F{brcyan}"   # 16
     )
   fi
 
@@ -67,18 +89,18 @@ function prompt_steeef_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
-  local action_format="(${_prompt_steeef_colors[5]}%a%f)"
-  local unstaged_format="${_prompt_steeef_colors[2]}●%f"
-  local staged_format="${_prompt_steeef_colors[5]}●%f"
+  local branch_format="${_prompt_steeef_colors[1]}%b%f%u%c"
+  local action_format="${_prompt_steeef_colors[5]}%a%f"
+  local unstaged_format="${_prompt_steeef_colors[2]} *%f"
+  local staged_format="${_prompt_steeef_colors[5]} *%f"
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
   zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
   zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
-  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
-  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format} ${action_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}" "%r"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   # Set python-info parameters.
@@ -86,8 +108,8 @@ function prompt_steeef_setup {
 
   # Define prompts.
   PROMPT="
-${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]'"$ "
+${_prompt_steeef_colors[1]}%n%f ${_prompt_steeef_colors[6]}at%f ${_prompt_steeef_colors[5]}%m%f ${_prompt_steeef_colors[6]}in%f ${_prompt_steeef_colors[2]}%~%f "'${vcs_info_msg_0_}'"
+"'$python_info[virtualenv]'"${_prompt_steeef_colors[4]}$%f "
   RPROMPT=''
 }
 
