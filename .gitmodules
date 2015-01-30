@@ -15,4 +15,4 @@
 	url = https://gist.github.com/3712874.git
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
-	url = https://github.com/sindresorhus/pure.git
+	url = https://github.com/yuya373/pure.git
