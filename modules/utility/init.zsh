@@ -146,8 +146,15 @@ alias du='du -kh'
 if (( $+commands[htop] )); then
   alias top=htop
 else
-  alias topc='top -o cpu'
-  alias topm='top -o vsize'
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Mac OS X
+    alias topc='top -o cpu'
+    alias topm='top -o vsize'
+  else
+  # Linux or Cygwin
+    alias topc='top -o %CPU'
+    alias topm='top -o %MEM'
+  fi
 fi
 
 # Miscellaneous
