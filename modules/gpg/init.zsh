@@ -20,7 +20,7 @@ if [[ -z "$GPG_AGENT_INFO" && ! -S "${GNUPGHOME:-$HOME/.gnupg}/S.gpg-agent" ]]; 
   source "$_gpg_agent_env" 2> /dev/null
 
   # Start gpg-agent if not started.
-  if ! ps -U "$USER" -o pid,ucomm | grep -q -- "${${${(s.:.)GPG_AGENT_INFO}[2]}:--1} gpg-agent"; then
+  if ! ps -U "$LOGNAME" -o pid,ucomm | grep -q -- "${${${(s.:.)GPG_AGENT_INFO}[2]}:--1} gpg-agent"; then
     eval "$(gpg-agent --daemon | tee "$_gpg_agent_env")"
   fi
 fi
