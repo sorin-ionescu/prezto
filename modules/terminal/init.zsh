@@ -74,7 +74,12 @@ function _terminal-set-titles-with-path {
   local truncated_path="${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}"
   unset MATCH
 
-  set-window-title "$abbreviated_path"
+  if zstyle -t ':prezto:module:terminal' auto-tmux-title && [[ -n "$TMUX" ]]
+  then
+    set-window-title "$truncated_path"
+  else
+    set-window-title "$abbreviated_path"
+  fi
   set-tab-title "$truncated_path"
 }
 
@@ -111,7 +116,8 @@ fi
 
 # Set up non-Apple terminals.
 if zstyle -t ':prezto:module:terminal' auto-title \
-  && ( ! [[ -n "$STY" || -n "$TMUX" ]] )
+      && ( ! [[ -n "$STY" ]] ) \
+      && ( ( ! [[ -n "$TMUX" ]] ) || zstyle -t ':prezto:module:terminal' auto-tmux-title )
 then
   # Sets the tab and window titles before the prompt is displayed.
   add-zsh-hook precmd _terminal-set-titles-with-path
@@ -119,3 +125,4 @@ then
   # Sets the tab and window titles before command execution.
   add-zsh-hook preexec _terminal-set-titles-with-command
 fi
+
