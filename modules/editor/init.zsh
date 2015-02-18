@@ -29,8 +29,8 @@ zmodload zsh/terminfo
 typeset -gA key_info
 key_info=(
   'Control'      '\C-'
-  'ControlLeft'  '\e[1;5D \e[5D \e\e[D \eOd'
-  'ControlRight' '\e[1;5C \e[5C \e\e[C \eOc'
+  'ControlLeft'  '\e[1;5D \e[5D \e[D \eOd'
+  'ControlRight' '\e[1;5C \e[5C \e[C \eOc'
   'Escape'       '\e'
   'Meta'         '\M-'
   'Backspace'    "^?"
