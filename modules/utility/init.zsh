@@ -146,7 +146,7 @@ alias du='du -kh'
 if (( $+commands[htop] )); then
   alias top=htop
 else
-  if [[ "$OSTYPE" == darwin*|*bsd* ]]; then
+  if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
     alias topc='top -o cpu'
     alias topm='top -o vsize'
   else
