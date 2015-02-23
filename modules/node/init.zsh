@@ -7,7 +7,7 @@
 #
 
 # Return if requirements are not found.
-if (( ! $+commands[nvm] || ! $+commands[node] )); then
+if (( ! $+commands[nvm] && ! $+commands[node] )); then
   return 1
 fi
 
