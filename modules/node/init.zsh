@@ -6,6 +6,11 @@
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[nvm] || ! $+commands[node] )); then
+  return 1
+fi
+
 # Load manually installed NVM into the shell session.
 if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
   source "$HOME/.nvm/nvm.sh"
