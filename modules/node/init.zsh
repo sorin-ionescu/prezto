@@ -20,11 +20,6 @@ elif (( $+commands[brew] )) && [[ -d "$(brew --prefix nvm 2>/dev/null)" ]]; then
   source $(brew --prefix nvm)/nvm.sh
 fi
 
-# Return if requirements are not found.
-if (( ! $+commands[node] )); then
-  return 1
-fi
-
 # Load NPM completion.
 if (( $+commands[npm] )); then
   cache_file="${0:h}/cache.zsh"
