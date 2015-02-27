@@ -9,6 +9,7 @@
 local version
 local version_format
 local version_formatted
+local version_manager
 
 # Clean up previous $ruby_info.
 unset ruby_info
@@ -16,15 +17,18 @@ typeset -gA ruby_info
 
 if (( $+commands[rvm-prompt] )); then
   version="$(rvm-prompt)"
+  version_manager="rvm"
 elif (( $+commands[rbenv] )); then
   version="$(rbenv version-name)"
+  version_manager="rbenv"
 elif (( $+commands[ruby] )); then
   version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
+  version_manager="ruby"
 fi
 
 # Format version.
 if [[ -n "$version" ]]; then
   zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
-  zformat -f version_formatted "$version_format" "v:$version"
+  zformat -a version_formatted ":" "$version_manager:$version"
   ruby_info[version]="$version_formatted"
 fi
