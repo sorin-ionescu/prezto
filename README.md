@@ -1,4 +1,4 @@
-Prezto — Instantly Awesome Zsh
+Prezto — Instantly Awesome Zsh ----------  My Fork
 ==============================
 
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
