@@ -1,0 +1,262 @@
+#
+# Exposes Linux Standard Base and uname informations via the $sys_info associative array.
+#
+# Authors:
+#   Emmanuel Bouthenot <kolter@openics.org>
+#
+
+# Gets the SYS informations.
+typeset -gA sys_info
+
+function sys-info {
+  local lsb_id
+  local lsb_id_format
+  local lsb_id_formatted
+  local lsb_description
+  local lsb_description_format
+  local lsb_description_formatted
+  local lsb_release
+  local lsb_release_format
+  local lsb_release_formatted
+  local lsb_codename
+  local lsb_codename_format
+  local lsb_codename_formatted
+  local uname_all
+  local uname_all_format
+  local uname_all_formatted
+  local uname_hw
+  local uname_hw_format
+  local uname_hw_formatted
+  local uname_kernel_name
+  local uname_kernel_name_format
+  local uname_kernel_name_formatted
+  local uname_kernel_release
+  local uname_kernel_release_format
+  local uname_kernel_release_formatted
+  local uname_kernel_version
+  local uname_kernel_version_format
+  local uname_kernel_version_formatted
+  local uname_machine
+  local uname_machine_format
+  local uname_machine_formatted
+  local uname_nodename
+  local uname_nodename_format
+  local uname_nodename_formatted
+  local uname_processor
+  local uname_processor_format
+  local uname_processor_formatted
+  local uname_os
+  local uname_os_format
+  local uname_os_formatted
+  local chroot
+  local chroot_format
+  local chroot_formatted
+  local ssh_tty
+  local ssh_tty_format
+  local ssh_tty_formatted
+  local ssh_server_address
+  local ssh_server_address_format
+  local ssh_server_address_formatted
+  local ssh_server_port
+  local ssh_server_port_format
+  local ssh_server_port_formatted
+  local ssh_client_address
+  local ssh_client_address_format
+  local ssh_client_address_formatted
+  local ssh_client_port
+  local ssh_client_port_format
+  local ssh_client_port_formatted
+
+  local -A info_formats
+  local info_format
+
+  if (( $+commands[lsb_release] )); then
+    # FORMAT LSB_ID
+    zstyle -s ':prezto:module:sys:info:lsb_id' format 'lsb_id_format'
+    if [[ -n "$lsb_id_format" ]]; then
+      lsb_id="$(lsb_release --short --id)"
+      if [[ -n "$lsb_id" ]]; then
+        zformat -f lsb_id_formatted "$lsb_id_format" "i:$lsb_id"
+      fi
+    fi
+    # FORMAT LSB_DESCRIPTION
+    zstyle -s ':prezto:module:sys:info:lsb_description' format 'lsb_description_format'
+    if [[ -n "$lsb_description_format" ]]; then
+      lsb_description="$(lsb_release --short --description)"
+      if [[ -n "$lsb_description" ]]; then
+        zformat -f lsb_description_formatted "$lsb_description_format" "d:$lsb_description"
+      fi
+    fi
+    # FORMAT LSB_RELEASE
+    zstyle -s ':prezto:module:sys:info:lsb_release' format 'lsb_release_format'
+    if [[ -n "$lsb_release_format" ]]; then
+      lsb_release="$(lsb_release --short --release)"
+      if [[ -n "$lsb_release" ]]; then
+        zformat -f lsb_release_formatted "$lsb_release_format" "r:$lsb_release"
+      fi
+    fi
+    # FORMAT LSB_CODENAME
+    zstyle -s ':prezto:module:sys:info:lsb_codename' format 'lsb_codename_format'
+    if [[ -n "$lsb_codename_format" ]]; then
+      lsb_codename="$(lsb_release --short --codename)"
+      if [[ -n "$lsb_codename" ]]; then
+        zformat -f lsb_codename_formatted "$lsb_codename_format" "c:$lsb_codename"
+      fi
+    fi
+  fi
+
+  if (( $+commands[uname] )); then
+    # UNAME ALL
+    zstyle -s ':prezto:module:sys:info:uname_all' format 'uname_all_format'
+    if [[ -n "$uname_all_format" ]]; then
+      uname_all="$(uname -a)"
+      if [[ -n "$uname_all" ]]; then
+        zformat -f uname_all_formatted "$uname_all_format" "A:$uname_all"
+      fi
+    fi
+    # UNAME HW
+    zstyle -s ':prezto:module:sys:info:uname_hw' format 'uname_hw_format'
+    if [[ -n "$uname_hw_format" ]]; then
+      uname_hw="$(uname -i)"
+      if [[ -n "$uname_hw" ]]; then
+        zformat -f uname_hw_formatted "$uname_hw_format" "H:$uname_hw"
+      fi
+    fi
+    # UNAME KERNEL_NAME
+    zstyle -s ':prezto:module:sys:info:uname_kernel_name' format 'uname_kernel_name_format'
+    if [[ -n "$uname_kernel_name_format" ]]; then
+      uname_kernel_name="$(uname -s)"
+      if [[ -n "$uname_kernel_name" ]]; then
+        zformat -f uname_kernel_name_formatted "$uname_kernel_name_format" "K:$uname_kernel_name"
+      fi
+    fi
+    # UNAME KERNEL_RELEASE
+    zstyle -s ':prezto:module:sys:info:uname_kernel_release' format 'uname_kernel_release_format'
+    if [[ -n "$uname_kernel_release_format" ]]; then
+      uname_kernel_release="$(uname -r)"
+      if [[ -n "$uname_kernel_release" ]]; then
+        zformat -f uname_kernel_release_formatted "$uname_kernel_release_format" "R:$uname_kernel_release"
+      fi
+    fi
+    # UNAME KERNEL_VERSION
+    zstyle -s ':prezto:module:sys:info:uname_kernel_version' format 'uname_kernel_version_format'
+    if [[ -n "$uname_kernel_version_format" ]]; then
+      uname_kernel_version="$(uname -v)"
+      if [[ -n "$uname_kernel_version" ]]; then
+        zformat -f uname_kernel_version_formatted "$uname_kernel_version_format" "V:$uname_kernel_version"
+      fi
+    fi
+    # UNAME MACHINE
+    zstyle -s ':prezto:module:sys:info:uname_machine' format 'uname_machine_format'
+    if [[ -n "$uname_machine_format" ]]; then
+      uname_machine="$(uname -m)"
+      if [[ -n "$uname_machine" ]]; then
+        zformat -f uname_machine_formatted "$uname_machine_format" "M:$uname_machine"
+      fi
+    fi
+    # UNAME NODENAME
+    zstyle -s ':prezto:module:sys:info:uname_nodename' format 'uname_nodename_format'
+    if [[ -n "$uname_nodename_format" ]]; then
+      uname_nodename="$(uname -n)"
+      if [[ -n "$uname_nodename" ]]; then
+        zformat -f uname_nodename_formatted "$uname_nodename_format" "N:$uname_nodename"
+      fi
+    fi
+    # UNAME PROCESSOR
+    zstyle -s ':prezto:module:sys:info:uname_processor' format 'uname_processor_format'
+    if [[ -n "$uname_processor_format" ]]; then
+      uname_processor="$(uname -p)"
+      if [[ -n "$uname_processor" ]]; then
+        zformat -f uname_processor_formatted "$uname_processor_format" "P:$uname_processor"
+      fi
+    fi
+    # UNAME OS
+    zstyle -s ':prezto:module:sys:info:uname_os' format 'uname_os_format'
+    if [[ -n "$uname_os_format" ]]; then
+      # -o option is not supported on all OS (at least Linux and FreeBSD)
+      uname_os="$(uname -o 2>/dev/null)"
+      if [[ -n "$uname_os" ]]; then
+        zformat -f uname_os_formatted "$uname_os_format" "O:$uname_os"
+      fi
+    fi
+  fi
+  # CHROOT
+  zstyle -s ':prezto:module:sys:info:chroot' format 'chroot_format'
+  if [[ -n "$chroot_format" ]]; then
+    if [[ -f /etc/debian_chroot ]]; then
+      chroot="Debian"
+    fi
+    if [[ -n "$chroot" ]]; then
+      zformat -f chroot_formatted "$chroot_format" "C:$chroot"
+    fi
+  fi
+  # SSH CONNECTION
+  if [[ -n "${SSH_CONNECTION}" ]]; then
+    zstyle -s ':prezto:module:sys:info:ssh_tty' format 'ssh_tty_format'
+    if [[ -n "$ssh_tty_format" ]]; then
+      if [[ -n "${SSH_TTY}" ]]; then
+        ssh_tty="${SSH_TTY}"
+      fi
+      if [[ -n "$ssh_tty" ]]; then
+        zformat -f ssh_tty_formatted "$ssh_tty_format" "T:$ssh_tty"
+      fi
+    fi
+    echo ${SSH_CONNECTION} | read ssh_client_address ssh_client_port ssh_server_address ssh_server_port
+    zstyle -s ':prezto:module:sys:info:ssh_server_address' format 'ssh_server_address_format'
+    if [[ -n "$ssh_server_address_format" ]]; then
+      if [[ -n "$ssh_server_address" ]]; then
+        zformat -f ssh_server_address_formatted "$ssh_server_address_format" "X:$ssh_server_address"
+      fi
+    fi
+    zstyle -s ':prezto:module:sys:info:ssh_server_port' format 'ssh_server_port_format'
+    if [[ -n "$ssh_server_port_format" ]]; then
+      if [[ -n "$ssh_server_port" ]]; then
+        zformat -f ssh_server_port_formatted "$ssh_server_port_format" "Y:$ssh_server_port"
+      fi
+    fi
+    zstyle -s ':prezto:module:sys:info:ssh_client_address' format 'ssh_client_address_format'
+    if [[ -n "$ssh_client_address_format" ]]; then
+      if [[ -n "$ssh_client_address" ]]; then
+        zformat -f ssh_client_address_formatted "$ssh_client_address_format" "x:$ssh_client_address"
+      fi
+    fi
+    zstyle -s ':prezto:module:sys:info:ssh_client_port' format 'ssh_client_port_format'
+    if [[ -n "$ssh_client_port_format" ]]; then
+      if [[ -n "$ssh_client_port" ]]; then
+        zformat -f ssh_client_port_formatted "$ssh_client_port_format" "y:$ssh_client_port"
+      fi
+    fi
+  fi
+
+  # Format info.
+  zstyle -a ':prezto:module:sys:info:keys' format 'info_formats'
+  for info_format in ${(k)info_formats}; do
+    zformat -f REPLY "$info_formats[$info_format]" \
+      "i:$lsb_id_formatted" \
+      "d:$lsb_description_formatted" \
+      "r:$lsb_release_formatted" \
+      "c:$lsb_codename_formatted" \
+      "A:$uname_all_formatted" \
+      "H:$uname_hw_formatted" \
+      "K:$uname_kernel_name_formatted" \
+      "R:$uname_kernel_release_formatted" \
+      "V:$uname_kernel_version_formatted" \
+      "M:$uname_machine_formatted" \
+      "N:$uname_nodename_formatted" \
+      "P:$uname_processor_formatted" \
+      "O:$uname_os_formatted" \
+      "C:$chroot_formatted" \
+      "T:$ssh_tty_formatted" \
+      "X:$ssh_server_address_formatted" \
+      "Y:$ssh_server_port_formatted" \
+      "x:$ssh_client_address_formatted" \
+      "y:$ssh_client_port_formatted"
+    sys_info[$info_format]="$REPLY"
+  done
+
+  unset REPLY
+
+  return 0
+}
+
+sys-info "$@"
