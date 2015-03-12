@@ -10,6 +10,10 @@ Aliases
     directory.
   - `pushdf` pushes the current working directory onto the directory queue and
     changes the current working director to the current _Finder_ directory.
+  - `lock` invokes Fast User Switching to lock the screen.
+  - `snap` saves a screen shot to the current directory providing a 1 second delay for app switching.
+  - `mute` kills the system volume. Adjusting volume through System Preferences or the keyboard will undo this.
+  - `unmute` is the opposite of `mute`.
 
 Functions
 ---------
