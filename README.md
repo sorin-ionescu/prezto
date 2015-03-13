@@ -39,6 +39,12 @@ If you are not able to find certain commands after switching to *Prezto*,
 modify the `PATH` variable in *~/.zprofile* then open a new Zsh terminal
 window or tab.
 
+If you are using Putty in Windows and some characters in prompt arent display 
+correctly then install "DejaVu Sans Mono" font and use it in Putty (also 
+configure Putty for UTF8). See [howto configure putty][9].
+
+    choco install dejavufonts
+
 Updating
 --------
 
@@ -115,3 +121,4 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: http://grml.org/zsh/zsh-lovers.html
+[9]: http://superuser.com/questions/393834/how-to-configure-putty-to-display-these-characters
