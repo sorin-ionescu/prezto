@@ -38,12 +38,12 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   fi
 
   # Attach to the 'prezto' session or to the last session used.
-  exec tmux "$_tmux_iterm_integration" attach-session
+  exec tmux $_tmux_iterm_integration attach-session
 fi
 
 #
 # Aliases
 #
 
-alias tmuxa="tmux $_tmux_iterm_integration attach-session"
+alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
 alias tmuxl='tmux list-sessions'

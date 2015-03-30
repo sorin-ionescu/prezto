@@ -102,6 +102,14 @@ alias lc='lt -c'         # Lists sorted by date, most recent last, shows change 
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls'            # I often screw this up.
 
+# Grep
+if zstyle -t ':prezto:module:utility:grep' color; then
+  export GREP_COLOR='37;45'           # BSD.
+  export GREP_COLORS="mt=$GREP_COLOR" # GNU.
+
+  alias grep="$aliases[grep] --color=auto"
+fi
+
 # Mac OS X Everywhere
 if [[ "$OSTYPE" == darwin* ]]; then
   alias o='open'
@@ -138,8 +146,13 @@ alias du='du -kh'
 if (( $+commands[htop] )); then
   alias top=htop
 else
-  alias topc='top -o cpu'
-  alias topm='top -o vsize'
+  if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
+    alias topc='top -o cpu'
+    alias topm='top -o vsize'
+  else
+    alias topc='top -o %CPU'
+    alias topm='top -o %MEM'
+  fi
 fi
 
 # Miscellaneous
@@ -183,5 +196,5 @@ function find-exec {
 
 # Displays user owned processes status.
 function psu {
-  ps -U "${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
+  ps -U "${1:-$LOGNAME}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
