@@ -13,8 +13,8 @@ if [[ -s '/etc/zsh_command_not_found' ]]; then
 elif [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
   source '/usr/share/doc/pkgfile/command-not-found.zsh'
 # Load command-not-found on Mac OS X with https://github.com/bfontaine/homebrew-command-not-found installed
-elif [[ $(type -f brew) ]] && [[ -s ${HANDLER=$(brew --prefix)/Library/Taps/bfontaine/homebrew-command-not-found/handler.sh} ]]; then
-  source "${HANDLER}"
+elif (( $+commands[brew] )) && [[ -s "$(brew --prefix)/Library/Taps/bfontaine/homebrew-command-not-found/handler.sh" ]]; then
+  source "$(brew --prefix)/Library/Taps/bfontaine/homebrew-command-not-found/handler.sh"
 # Return if requirements are not found.
 else
   return 1
