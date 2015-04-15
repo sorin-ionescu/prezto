@@ -123,12 +123,16 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #   'pattern' \
 #   'cursor' \
 #   'root'
-#
+
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
 #   'builtin' 'bg=blue' \
 #   'command' 'bg=blue' \
 #   'function' 'bg=blue'
+
+# Set syntax highlighting patterns
+# zstyle ':prezto:module:syntax-highlighting' patterns \
+#   'rm -rf *' 'fg=white,bold,bg=red'
 
 #
 # Terminal

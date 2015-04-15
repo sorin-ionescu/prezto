@@ -50,6 +50,16 @@ green, add the following to *zpreztorc*:
       'command' 'bg=blue' \
       'function' 'bg=blue'
 
+### Highlighting Patterns
+
+The pattern highlighter enables highlighting user defined patterns.
+
+For example, to highlight commands starting with `rm -rf` in red, add the
+following to *zpreztorc*:
+
+    zstyle ':prezto:module:syntax-highlighting' patterns \
+      'rm -rf *' 'fg=white,bold,bg=red'
+
 Authors
 -------
 
