@@ -61,6 +61,25 @@ system site-packages directory.
 
     export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 
+If you have [pyenv-virtualenvwrapper][6] installed, it is going to be used
+instead.
+
+pyenv-virtualenv
+----------------
+
+[pyenv-virtualenv][5] is a new alternative to the virtualenvwrapper. It is a
+pyenv plugin that provides a `pyenv virtualenv` command to create virtualenvs
+for Python.
+
+### Usage
+
+Install pyenv-virtualenv.
+
+Virtual environments are stored in *~/.pyenv/versions/*.
+
+As pyenv-virtualenvwrapper doesn't seem to play nice with pyenv-virtualenv,
+then if it's installed, it's going to be used instead of pyenv-virtualenv.
+
 Aliases
 -------
 
@@ -96,4 +115,6 @@ Authors
 [2]: http://www.doughellmann.com/projects/virtualenvwrapper/
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: https://github.com/yyuu/pyenv
-[5]: https://github.com/sorin-ionescu/prezto/issues
+[5]: https://github.com/yyuu/pyenv-virtualenv
+[6]: https://github.com/yyuu/pyenv-virtualenvwrapper
+[7]: https://github.com/sorin-ionescu/prezto/issues
