@@ -28,6 +28,14 @@ To disable `make` highlighting, add the following line to *zpreztorc*:
 
     zstyle ':prezto:module:utility:make' color 'no'
 
+### Interactive aliases
+
+By default `rm`, `cp`, `mv` and `ln` are aliased with the `-i` flag, which
+makes the commands interactive. To disable this behavior you can set the
+following in *zpreztorc*:
+
+    zstyle ':prezto:module:utility:aliases' interactive 'no'
+
 Aliases
 -------
 
