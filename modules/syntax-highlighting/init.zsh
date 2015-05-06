@@ -26,3 +26,6 @@ for syntax_highlighting_style in "${(k)syntax_highlighting_styles[@]}"; do
   ZSH_HIGHLIGHT_STYLES[$syntax_highlighting_style]="$syntax_highlighting_styles[$syntax_highlighting_style]"
 done
 unset syntax_highlighting_style{s,}
+
+# Set highlighting patterns.
+zstyle -a ':prezto:module:syntax-highlighting' patterns 'ZSH_HIGHLIGHT_PATTERNS'
