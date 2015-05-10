@@ -1,86 +1,108 @@
 #
-# Provide a cheap helper for temporary directory/file creation
-#
-# $Header: firefox-profile/functions/fhp                 Exp $
-# $Aythor: (c) 2011-2014 -tclover <tokiclover@gmail.com> Exp $
-# $License: MIT (or 2-clause/new/simplified BSD)         Exp $
-# $Version: 0.2 2014/09/09 21:09:26                      Exp $
+# $Header: firefox-home-profile/functions/checkpath     Exp $
+# $Aythor: (c) 2012-015 -tclover <tokiclover@gmail.com> Exp $
+# $License: MIT (or 2-clause/new/simplified BSD)        Exp $
+# $Version: 0.7 2015/05/05 21:09:26                     Exp $
 #
 
 function die {
 	local ret=$?
-	print -P " %F{red}%1x: %F{yellow}%U%I%u:%f $argv" >&2
+	print -P " %F{red}*%f ${(%):-%1x}: $argv" >&2
 	return $ret
 }
 
-function usage {
+function checkpath {
+	function usage {
 	cat <<-EOH
-usage: mktmp [-d|-f] [-m <mode>] [-o <owner[:group]>] [-g <group>] TEMPLATE
-  -d, --dir           create a directory
-  -f, --file          create a file
-  -o, --owner <name>  owner naame
-  -g, --group <name>  group name
-  -m, --mode <1700>   octal mode
-  -h, --help          help/exit
+usage: ${(%):-%1x} [-p] [-d|-f] [-m mode] [-o owner[:group]] TEMPLATE|DIR|FILE
+  -d, --dir           (Create a) directory
+  -f, --file          (Create a) file
+  -P, --pipe          (Create a) pipe (FIFO)
+  -o, --owner <name>  Use owner name
+  -g, --group <name>  Use group name
+  -m, --mode <1700>   Use octal mode
+  -c, --checkpath     Enable check mode
+  -p, --tmpdir[=DIR]  Enable mktmp mode
+  -q, --quiet         Enable quiet mode
+  -h, --help          Help/Exit
 EOH
 return
 }
+	(( $# == 0 )) && usage
+	local args temp=-XXXXXX type
+	args="$(getopt \
+		-o Pcdfg:hm:o:p::q \
+		-l checkpath,dir,file,group:,tmpdir:: \
+		-l help,mode:,owner:,pipe,quiet \
+		-s sh -n checkpath -- "$@")"
+	(( $? == 0 )) || usage
+	eval set -- $args
+	args=
 
-test $# -ge 1 -a -n "$1" || return
-
-local type temp=XXXXXX tmpdir=${TMPDIR:-/tmp}
-for (( ; $# > 1; ))
-	case $1 {
-		(-d|--dir)
-			type=dir
-			shift;;
-		(-f|--file)
-			type=file
-			shift;;
-		(-h|--help)
-			usage;;
-		(-m|--mode)
-			local mode=$2
-			shift 2;;
-		(-o|--owner)
-			local owner="$2"
-			shift 2;;
-		(-g|-group)
-			local group="$2"
-			shift 2;;
-	 	(*)
-			die "invalid argument $@"
-			return;;
+	local group mode owner task tmp quiet
+	for (( ; $# > 1; )) {
+		case $1 {
+			(-c|--chec*) task=chk  ;;
+			(-p|--tmpd*) task=tmp tmpdir=${2:-$TMPDIR}; shift;;
+			(-d|--dir) args=-d type=dir;;
+			(-f|--file)  type=file ;;
+			(-P|--pipe)  type=pipe ;;
+			(-h|--help)  usage     ;;
+			(-m|--mode)  mode=$2   ; shift;;
+			(-o|--owner) owner=$2  ; shift;;
+			(-g|-group)  group=$2  ; shift;;
+			(-q|--quiet) quiet=true;;
+			(*) shift; break       ;;
+		}
+		shift
 	}
-
-test -n "$1" -a "${1%-$temp}" != "$1"
-if (( $? )) {
-	die "invalid/null TEMPLATE"
-	return
-}
-(( $+commands[uuidgen] )) && temp=$($commands[uuidgen] --random)
-local tmp="$tmpdir/${1%$temp}$temp[1,6]"
-
-if [[ $type == "dir" ]] {
-	mkdir -p ${mode:+-m$mode} "$tmp"
-	if (( $? )) {
-		die "failed to make $tmp"
+	if ! [ $# -eq 1 -a -n "$1" ]; then
+		die "Invalid argument(s)/TEMPLATE"
 		return
+	fi
+
+	case $task {
+		(tmp)
+		quiet= tmpdir=${tmpdir:-/tmp}
+		if [[ ${1%$temp} = $1 ]] {
+			die "Invalid TEMPLATE"
+			return
+		}
+		if (( $+commands[mktemp] )) {
+			tmp=$($commands[mktemp] -p $tmpdir $args $1)
+		} else {
+			(( $+commands[uuidgen] )) && temp=$($commands[uuidgen] --random)
+			tmp=$tmpdir/${1%-*}-$temp[1,6]
+		}
+		;;
+		(*)
+		tmp=$1
 	}
-} else {
-	mkdir -p "$tmp:h" && touch "$tmp"
-	if (( $? )) {
-		die "failed to make $tmp"
-		return
+	case $type {
+		(dir)
+		[[ -d $tmp ]] || mkdir -p $tmp
+		;;
+		(*)
+		[[ -e $tmp ]] || mkdir -p $tmp:h && break
+		case $type {
+			(pipe) mkfifo $tmp;;
+			(file) touch  $tmp;;
+		}
+		;;
 	}
-	(( $+mode )) && chmod $mode "$tmp"
+
+	(( $? == 0 )) || { die "Failed to create ${tmp}"; return; }
+	[[ -h $tmp ]] && return
+	[[ -n $owner ]] && chown $owner $tmp
+	[[ -n $group ]] && chgrp $group $tmp
+	[[ -n $mode  ]] && chmod $mode  $tmp
+	[[ -n $quiet ]] || print $tmp
 }
 
-(( $+owner )) && chown $owner "$tmp"
-(( $+group )) && chgrp $group "$tmp"
-
-print "$tmp"
+if [[ ${(%):-%1x} == (checkpath|mktmp)(|.zsh) ]] {
+	checkpath "$@"
+}
 
 #
-# vim:fenc=utf-8:ft=zsh:ci:pi:sts=2:sw=2:ts=2:
+# vim:fenc=utf-8:ft=zsh:ci:pi:sts=0:sw=2:ts=2:
 #
