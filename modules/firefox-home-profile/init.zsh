@@ -1,21 +1,22 @@
 #
-# firefox home profile (fhp) maintains the profile
-# in a tmpfs or zram backed filesystem
+# Firefox-Home-Profile (fhp) maintains profile & associated
+# cache directory in a tmpfs (or zram backed) filesystem
 #
-# $Header: firefox-profile/init.zsh                      Exp $
-# $Aythor: (c) 2011-2014 -tclover <tokiclover@gmail.com> Exp $
+# $Header: firefox-home-profile/init.zsh                 Exp $
+# $Aythor: (c) 2012-2015 -tclover <tokiclover@gmail.com> Exp $
 # $License: MIT (or 2-clause/new/simplified BSD)         Exp $
-# $Version: 3.0 2014/09/26 21:09:26                      Exp $
+# $Version: 4.0 2015/05/05 21:09:26                      Exp $
 #
 
+#
 # Initialize the temporary directory with an anonymous function
+#
 function {
-	local compressor profile zramdir zsh_hook
-
-	zstyle -s ':prezto:module:firefox-profile' profile 'profile'
-	zstyle -s ':prezto:module:firefox-profile' compressor 'compressor'
-	zstyle -b ':prezto:module:firefox-profile' zsh-hook 'zsh_hook'
-	zstyle -s ':prezto:module:firefox-profile' zramdir 'zramdir'
+	local compressor profile tmpdir zsh_hook
+	zstyle -s ':prezto:module:FHP' profile 'profile'
+	zstyle -s ':prezto:module:FHP' compressor 'compressor'
+	zstyle -b ':prezto:module:FHP' zsh-hook 'zsh_hook'
+	zstyle -s ':prezto:module:FHP' tmpdir 'tmpdir'
 
 	# Define a little helper to handle fatal errors
 	function die {
@@ -25,65 +26,57 @@ function {
 	}
 
 	if (( $+compressor )) {
-:		${compressor:=lz4 -1 -}
-		zstyle ':prezto:module:firefox-profile' compressor "$compressor"
+	:	${compressor:=lz4 -1 -}
+		zstyle ':prezto:module:FHP' compressor "$compressor"
 	}
-
 	setopt LOCAL_OPTIONS EXTENDED_GLOB
-
 :	${profile:=$(print $HOME/.mozilla/firefox/*.default(/N:t))}
 	if [[ -z $profile ]] {
-		die "null firefox home profile"
-		return
+		die "Null firefox home profile"
+		return 1
 	}
 
-	[[ ${profile%.default} == $profile ]] && profile+=.default
-	zstyle ':prezto:module:firefox-profile' profile "$profile"
+	case $profile {
+		(*.default) ;;
+		(*) profile+=.default;;
+	}
+	zstyle ':prezto:module:FHP' profile "$profile"
+	local ext=.tar.$compressor[(w)1]
+:	${tmpdir:=${TMPDIR:-/tmp/$USER}}
 
 	if (( $zsh_hook )) {
 		autoload -Uz add-zsh-hook
 		add-zsh-hook zshexit fhp
 	}
 
-	local ext=.tar.$compressor[(w)1]
-	local fhpdir="$HOME"/.mozilla/firefox/$profile
-:	${TMPDIR:=/tmp/$USER}
+	[[ -d "$tmpdir" ]] || mkdir -p -m 1700 "$TMPDIR" ||
+	{ die "no suitable directory found"; return 2; }
 
-	[[ -n $zramdir ]] || [[ -d "$TMPDIR" ]] || mkdir -p -m1700 "$TMPDIR"
-	if (( $? )) {
-		die "no suitable directory found"
-		return
-	}
-
-	mount | grep -q "$fhpdir" && return
-	
-	if [[ ! -f "$fhpdir$ext" ]] || [[ ! -f "$fhpdir.old$ext" ]] {
-		pushd -q "$fhpdir:h" || return
-		tar -Ocp $profile | $=compressor $profile$ext
-		if (( $? )) {
-			popd -q
-			die "failed to pack a new tarball"
-			return
+	local c dir mktmp=checkpath DIR
+	for dir ("$HOME"/.{,cache/}mozilla/firefox/$profile) {
+		grep -q "$dir" /proc/mounts && continue
+		pushd -q "$dir:h" || continue
+		if [[ ! -f "$profile$ext" ]] || [[ ! -f "$profile.old$ext" ]] {
+			tar -Ocp $profile | $=compressor $profile$ext ||
+			{ die "failed to pack a new tarball"; continue; }
 		}
 		popd -q
+
+		case "$dir" {
+			(*.cache/*) c=c;;
+			(*) c=p;;
+		}
+		(( $+commands[mktemp] )) && mktmp=$commands[mktemp]
+		DIR=$($mktmp -p "$tmpdir"  -d fh${c}-XXXXXX)
+		sudo mount --bind "$DIR" "$dir" ||
+		{ die "failed to mount $DIR"; continue; }
 	}
 
-	local mktmp=mktmp mntdir
-	(( $+commands[mktemp] )) && mktmp=$commands[mktemp]
-
-	[[ -n $zramdir ]] &&
-		mntdir=$($mktmp -d "$zramdir"/fhp-XXXXXX) ||
-		mntdir=$($mktmp -d "$TMPDIR"/fhp-XXXXXX)
-
-	sudo mount --bind "$mntdir" "$fhpdir"
-	if (( $? )) {
-		die "failed to mount $mntdir"
-		return
-	}
-
+	#
 	# Finaly, start the firefox home profile
+	#
 	#(( $+functions[fhp] )) || autoload -Uz fhp
-	if zstyle -t ':prezto:module:firefox-profile' start-profile; then
+	if zstyle -t ':prezto:module:FHP' decompress; then
 		fhp
 	fi
 }
