@@ -1,9 +1,9 @@
-Firefox home profile (fhp)
+Firefox-Home-Profile (FHP)
 ======
 
-Maintains firefox home profile '$HOME/.mozilla/firefox/abcd1234.default' on Unix
-systems in a tmpfs or zram backed filesystem to get a very responsive browser,
-with a tarball back up saved in '$HOME/.mozilla/firefox'.
+Maintains firefox home profile '$HOME/.{,cache/}mozilla/firefox/abcd1234.default' on Unix
+systems in a tmpfs (or zram backed filesystem) to get a very responsive browser,
+with a tarball back up saved in '$HOME/.{,cache/}mozilla/firefox'.
 
 Using a compressor like lz4 or lzo(p) make compression/decompression seamless,
 so no need to remove the autoload of the function. Although, it can be commented
@@ -16,9 +16,9 @@ Settings
 This module can guess a profile to maintain by looking at the previous directory,
 by looking at the previous directory, however a user can set the following:
 
-    zstyle ':prezto:module:firefox-profile' profile 'abcd1234'
-    zstyle ':prezto:module:firefox-profile' compressor 'lzop -1'
-    zstyle ':prezto:module:firefox-profile' zsh-hook 'yes'
+    zstyle ':prezto:module:FHP' profile 'abcd1234'
+    zstyle ':prezto:module:FHP' compressor 'lzop -1'
+    zstyle ':prezto:module:FHP' zsh-hook 'yes'
 
 The second setting select a compressor to be used instead of default is 'lz4 -1'.
 
@@ -37,12 +37,6 @@ This will ensure very low latency when browsing the intertubes and removing the
 profile in the fly *really* remove any trace of your browsing history because
 everything is in memory, but firing up a 'fhp' command will nullify this effect.
 
-### Zram baccked File System
-
-Aleternatively, one can pass a root directory in zram backed filesystem:
-
-    zstyle ':prezto:module:firefox-profile' zramdir 'directory'
-
 ### Auto-saving/Auto-start profile
 
 Of course, one can save a profile at regular time interval using a cron job or
@@ -50,7 +44,7 @@ something similar.
 
 A profile can be auto-started by setting:
 
-    zstyle ':prezto:module:firefox-profile' start-profile 'yes'
+    zstyle ':prezto:module:FHP' decompress 'yes'
 
 Customizations
 -------
@@ -61,7 +55,7 @@ users. The following can be done in that case in *zpreztorc*.
 
     zpmodules=(environment editor prompt helper utility precompile)
     if [[ ${TTY/tty} == $TTY ]] && [[ $EUID != 0 ]] {
-      zpmodules=($zpmodules firefox-profile)
+      zpmodules=($zpmodules firefox-home-profile)
     }
     zstyle ':prezto:load' pmodule $zpmodules
     unset zpmodules
