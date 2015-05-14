@@ -1,48 +1,43 @@
 #
-# firefox home profile (fhp) module to maintain the profile
-# in a tmpfs or zram backed filesystem
-#
-# $Header: firefox-home-profile/functions/fhp            Exp $
+# $Header: browser-home-profile/functions/bhp            Exp $
 # $Aythor: (c) 2012-2015 -tclover <tokiclover@gmail.com> Exp $
 # $License: MIT (or 2-clause/new/simplified BSD)         Exp $
-# $Version: 4.0 2015/05/05                               Exp $
+# $Version: 1.0 2015/05/14                               Exp $
 #
 
-function die {
-	local ret=$?
-	print -P " %F{red}%1x: %F{yellow}%U%I%u:%f $argv" >&2
-	popd -q
-	return $ret
-}
+function bhp {
+	local PROFILE ext name=bhp profile tarball
+	zstyle -s ':prezto:module:BHP' PROFILE 'PROFILE'
+	zstyle -s ':prezto:module:BHP' compressor 'compressor'
+	ext=.tar.${compressor[(w)1]} profile=${PROFILE:t}
 
-local dir compressor profile tarball
-zstyle -s ':prezto:module:FHP' profile 'profile'
-zstyle -s ':prezto:module:FHP' compressor 'compressor'
-local ext=.tar.$compressor[(w)1]
+	for dir (${HOME}/.${PROFILE} ${HOME}/.cache/${PROFILE#config/}) {
+		[[ -d ${dir} ]] || continue
+		pr_begin "Setting up tarball..."
+		pushd -q ${dir:h} || continue
 
-for dir ("$HOME"/.{,cache/}mozilla/firefox) {
-	pushd -q "$dir" || continue
-	if [[ -f $profile/.unpacked ]] {
-		if [[ -f $profile$ext ]] {
-			mv -f $profile{,.old}$ext ||
-				{ die "Failed to override the old tarball"; continue; }
-		}
-		tar -X $profile/.unpacked -Ocp $profile | $=compressor $profile$ext ||
-			die "Failed to repack a new tarball"
+		if [[ -f ${profile}/.unpacked ]]; then
+			if [[ -f ${profile}${ext} ]] {
+				mv -f ${profile}${ext} ${profile}.old${ext} ||
+					{ pr_end 1 Moving; continue; }
+			}
+			tar -X ${profile}/.unpacked -Ocp ${profile} | \
+				${=compressor} ${profile}${ext} ||
+				{ pr_end 1 Packing; continue; }
+		else
+			if [[ -f ${profile}${ext} ]]; then
+				tarball=${profile}${ext}
+			elif [[ -f ${profile}.old${ext} ]]; then
+				tarball=${profile}.old${ext}
+			else
+				pr_warn "No tarball found."; continue
+			fi
+			${compressor[(w)1]} -cd ${tarball} | tar -xp &&
+				touch ${profile}/.unpacked ||
+				{ pr_end 1 Unpacking; continue; }
+		fi
 		popd -q
-	} else {
-		compressor=$compressor[(w)1]
-		if [[ -f $profile$ext ]] {
-			tarball=$profile$ext
-		} elif [[ -f $profile.old$ext ]] {
-			tarball=$profile.old$ext
-		} else {
-			die "No tarball found"
-			continue
-		}
-		$compressor -cd $tarball | tar -xp && touch $profile/.unpacked ||
-			die "Failed to unpack profile tarball"
-		popd -q
+		pr_end ${?}
 	}
 }
 
