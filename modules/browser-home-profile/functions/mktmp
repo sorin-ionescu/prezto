@@ -1,106 +1,84 @@
 #
-# $Header: firefox-home-profile/functions/checkpath     Exp $
+# $Header: browser-home-profile/functions/mktmp         Exp $
 # $Aythor: (c) 2012-015 -tclover <tokiclover@gmail.com> Exp $
 # $License: MIT (or 2-clause/new/simplified BSD)        Exp $
-# $Version: 0.7 2015/05/05 21:09:26                     Exp $
+# $Version: 0.7 2015/05/14 21:09:26                     Exp $
 #
 
-function die {
-	local ret=$?
-	print -P " %F{red}*%f ${(%):-%1x}: $argv" >&2
-	return $ret
-}
-
-function checkpath {
-	function usage {
-	cat <<-EOH
-usage: ${(%):-%1x} [-p] [-d|-f] [-m mode] [-o owner[:group]] TEMPLATE|DIR|FILE
-  -d, --dir           (Create a) directory
+function mktmp {
+	function mktmp-help {
+		cat <<-EOH
+	usage: mktmp [-p] [-d|-f] [-m mode] [-o owner[:group] TEMPLATE-XXXXXX
+ 	-d, --dir           (Create a) directory
   -f, --file          (Create a) file
-  -P, --pipe          (Create a) pipe (FIFO)
   -o, --owner <name>  Use owner name
   -g, --group <name>  Use group name
-  -m, --mode <1700>   Use octal mode
-  -c, --checkpath     Enable check mode
+  -m, --mode   1700   Use octal mode
   -p, --tmpdir[=DIR]  Enable mktmp mode
-  -q, --quiet         Enable quiet mode
   -h, --help          Help/Exit
-EOH
-return
-}
-	(( $# == 0 )) && usage
-	local args temp=-XXXXXX type
-	args="$(getopt \
-		-o Pcdfg:hm:o:p::q \
-		-l checkpath,dir,file,group:,tmpdir:: \
-		-l help,mode:,owner:,pipe,quiet \
-		-s sh -n checkpath -- "$@")"
-	(( $? == 0 )) || usage
-	eval set -- $args
-	args=
+	EOH
+	}
 
-	local group mode owner task tmp quiet
-	for (( ; $# > 1; )) {
-		case $1 {
-			(-c|--chec*) task=chk  ;;
-			(-p|--tmpd*) task=tmp tmpdir=${2:-$TMPDIR}; shift;;
-			(-d|--dir) args=-d type=dir;;
-			(-f|--file)  type=file ;;
-			(-P|--pipe)  type=pipe ;;
-			(-h|--help)  usage     ;;
-			(-m|--mode)  mode=$2   ; shift;;
-			(-o|--owner) owner=$2  ; shift;;
-			(-g|-group)  group=$2  ; shift;;
-			(-q|--quiet) quiet=true;;
-			(*) shift; break       ;;
+	if (( ${#} == 0 )) {
+		mktmp-help
+		return 1
+	}
+
+	local ARGS name=mktmp
+	ARGS="$(getopt \
+		-o dfg:hm:o:p:: \
+		-l dir,file,group:,tmpdir::	-l help,mode:owner: \
+		-s sh -n mktmp -- "${@}")"
+	if (( ${?} != 0 )) { mktmp-help; return 2; }
+	eval set -- ${ARGS}
+	ARGS=
+
+	local group mode owner temp=-XXXXXX tmp type
+	while true; do
+		case ${1} {
+			(-p|--tmpd*) tmpdir=${2:-${TMPDIR:-/tmp}}; shift;;
+			(-h|--help) mktmp_help; return;;
+			(-m|--mode)  mode=${2} ; shift;;
+			(-o|--owner) owner=${2}; shift;;
+			(-g|--group) group=${2}; shift;;
+			(-d|--dir) ARGS=-d type=dir;;
+			(-f|--file)  type=file;;
+			(*) shift; break;;
 		}
 		shift
-	}
-	if ! [ $# -eq 1 -a -n "$1" ]; then
-		die "Invalid argument(s)/TEMPLATE"
-		return
+	done
+
+	if ! ([[ ${#} == 1 ]] && [[ -n ${1} ]]); then
+		pr_error "Invalid argument(s)"
+		return 3
 	fi
-
-	case $task {
-		(tmp)
-		quiet= tmpdir=${tmpdir:-/tmp}
-		if [[ ${1%$temp} = $1 ]] {
-			die "Invalid TEMPLATE"
-			return
-		}
-		if (( $+commands[mktemp] )) {
-			tmp=$($commands[mktemp] -p $tmpdir $args $1)
-		} else {
-			(( $+commands[uuidgen] )) && temp=$($commands[uuidgen] --random)
-			tmp=$tmpdir/${1%-*}-$temp[1,6]
-		}
-		;;
-		(*)
-		tmp=$1
-	}
-	case $type {
-		(dir)
-		[[ -d $tmp ]] || mkdir -p $tmp
-		;;
-		(*)
-		[[ -e $tmp ]] || mkdir -p $tmp:h && break
-		case $type {
-			(pipe) mkfifo $tmp;;
-			(file) touch  $tmp;;
-		}
-		;;
+	case ${1} {
+		(*${temp}) ;;
+		(*) pr_error "Invalid TEMPLATE"; return 4;;
 	}
 
-	(( $? == 0 )) || { die "Failed to create ${tmp}"; return; }
-	[[ -h $tmp ]] && return
-	[[ -n $owner ]] && chown $owner $tmp
-	[[ -n $group ]] && chgrp $group $tmp
-	[[ -n $mode  ]] && chmod $mode  $tmp
-	[[ -n $quiet ]] || print $tmp
+	if (( ${+commands[mktemp]} )); then
+		tmp="$(mktemp ${tmpdir:+-p} ${tmpdir} ${ARGS} ${1})"
+	else
+		(( ${+commands[uuidgen]} )) && temp=$(uuidgen --random)
+		tmp="${tmpdir}/${1%-*}-${temp:1:6}"
+	fi
+	case ${type} {
+		(dir) [[ -d ${tmp} ]] || mkdir -p ${tmp};;
+		(*)   [[ -e ${tmp} ]] || { mkdir -p ${tmp:h}; touch  ${tmp}; };;
+	}
+	if (( ${?} != 0 )) {
+		pr_error "Failed to create ${tmp}"
+		return 5
+	}
+	[[ -h ${tmp} ]] && return
+	(( -n ${owner} )) && chown ${owner} ${tmp}
+	(( -n ${group} )) && chgrp ${group} ${tmp}
+	(( -n ${mode}  )) && chmod ${mode}  ${tmp}
 }
 
-if [[ ${(%):-%1x} == (checkpath|mktmp)(|.zsh) ]] {
-	checkpath "$@"
+case ${(%):-%1x} {
+	(mktmp*) mktmp "${@}";;
 }
 
 #
