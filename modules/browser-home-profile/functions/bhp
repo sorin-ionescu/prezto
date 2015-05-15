@@ -13,31 +13,31 @@ function bhp {
 
 	for dir (${HOME}/.${PROFILE} ${HOME}/.cache/${PROFILE#config/}) {
 		[[ -d ${dir} ]] || continue
-		pr_begin "Setting up tarball..."
+		pr-begin "Setting up tarball..."
 		pushd -q ${dir:h} || continue
 
 		if [[ -f ${profile}/.unpacked ]]; then
 			if [[ -f ${profile}${ext} ]] {
 				mv -f ${profile}${ext} ${profile}.old${ext} ||
-					{ pr_end 1 Moving; continue; }
+					{ pr-end 1 Moving; continue; }
 			}
 			tar -X ${profile}/.unpacked -Ocp ${profile} | \
 				${=compressor} ${profile}${ext} ||
-				{ pr_end 1 Packing; continue; }
+				{ pr-end 1 Packing; continue; }
 		else
 			if [[ -f ${profile}${ext} ]]; then
 				tarball=${profile}${ext}
 			elif [[ -f ${profile}.old${ext} ]]; then
 				tarball=${profile}.old${ext}
 			else
-				pr_warn "No tarball found."; continue
+				pr-warn "No tarball found."; continue
 			fi
 			${compressor[(w)1]} -cd ${tarball} | tar -xp &&
 				touch ${profile}/.unpacked ||
-				{ pr_end 1 Unpacking; continue; }
+				{ pr-end 1 Unpacking; continue; }
 		fi
 		popd -q
-		pr_end ${?}
+		pr-end ${?}
 	}
 }
 
