@@ -1,5 +1,5 @@
 #
-# Opens a new Terminal.app/iTerm.app tab in the current directory.
+# Opens a new Terminal.app/iTerm.app/iTerm2.app tab in the current directory.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -33,6 +33,19 @@ EOF
         launch session "Default Session"
         set current_session to current session
         tell current_session
+          write text "${command}"
+        end tell
+      end tell
+    end tell
+EOF
+}
+
+[[ "$the_app" == 'iTerm2' ]] && {
+  osascript 2>/dev/null <<EOF
+    tell application "iTerm2"
+      tell current window
+        create tab with default profile
+        tell current session of current tab
           write text "${command}"
         end tell
       end tell
