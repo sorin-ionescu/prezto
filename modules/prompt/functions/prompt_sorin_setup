@@ -9,7 +9,7 @@
 #
 
 #
-# 16 TERMINAL COLORS
+# 16 Terminal Colors
 # -- ---------------
 #  0 black
 #  1 red
@@ -78,7 +78,7 @@ function prompt_sorin_precmd {
   prompt_sorin_pwd
 
   # Define prompts.
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}${INSIDE_EMACS:+" %B%F{6}E%f%b"}%f'
+  RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
