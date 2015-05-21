@@ -33,7 +33,7 @@ version is 4.3.17.
 
   5. Restart Zsh:
   
-        exec $SHELL -l
+        exec $SHELL -li
 
 ### Troubleshooting
 
