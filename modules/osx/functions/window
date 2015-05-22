@@ -1,0 +1,37 @@
+#
+# Opens a new Terminal.app/iTerm2.app window in the current directory.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+local command="cd \\\"$PWD\\\""
+(( $# > 0 )) && command="${command}; $*"
+
+the_app=$(
+  osascript 2>/dev/null <<EOF
+    tell application "System Events"
+      name of first item of (every process whose frontmost is true)
+    end tell
+EOF
+)
+
+[[ "$the_app" == 'Terminal' ]] && {
+  osascript 2>/dev/null <<EOF
+    tell application "System Events"
+      tell process "Terminal" to keystroke "n" using command down
+      tell application "Terminal" to do script "${command}" in front window
+    end tell
+EOF
+}
+
+[[ "$the_app" == 'iTerm2' ]] && {
+  osascript 2>/dev/null <<EOF
+    tell application "iTerm2"
+      create window with default profile
+      tell current session of current window
+        write text "${command}"
+      end tell
+    end tell
+EOF
+}
