@@ -13,8 +13,7 @@ Aliases
   - `brewi` installs a formula.
   - `brewl` lists installed formulae.
   - `brews` searches for a formula.
-  - `brewU` upgrades Homebrew and outdated brews.
-  - `brewu` upgrades Homebrew.
+  - `brewu` updates Homebrew and formulae.
   - `brewx` uninstalls a formula.
 
 ### Homebrew Cask
