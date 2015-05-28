@@ -38,7 +38,7 @@ function mktmp {
 	while true; do
 		case ${1} {
 			(-p|--tmpd*) tmpdir=${2:-${TMPDIR:-/tmp}}; shift;;
-			(-h|--help) mktmp_help; return;;
+			(-h|--help) mktmp-help; return;;
 			(-m|--mode)  mode=${2} ; shift;;
 			(-o|--owner) owner=${2}; shift;;
 			(-g|--group) group=${2}; shift;;
