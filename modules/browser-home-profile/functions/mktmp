@@ -1,8 +1,9 @@
+#!/bin/zsh
 #
 # $Header: browser-home-profile/functions/mktmp         Exp $
 # $Aythor: (c) 2012-015 -tclover <tokiclover@gmail.com> Exp $
 # $License: MIT (or 2-clause/new/simplified BSD)        Exp $
-# $Version: 0.7 2015/05/14 21:09:26                     Exp $
+# $Version: 0.8 2015/05/24 21:09:26                     Exp $
 #
 
 function mktmp {
@@ -14,7 +15,7 @@ function mktmp {
   -o, --owner <name>  Use owner name
   -g, --group <name>  Use group name
   -m, --mode   1700   Use octal mode
-  -p, --tmpdir[=DIR]  Enable mktmp mode
+  -p, --tmpdir=DIR    Use temp-dir
   -h, --help          Help/Exit
 	EOH
 	}
@@ -26,8 +27,8 @@ function mktmp {
 
 	local ARGS name=mktmp
 	ARGS="$(getopt \
-		-o dfg:hm:o:p:: \
-		-l dir,file,group:,tmpdir::	-l help,mode:owner: \
+		-o dfg:hm:o:p: \
+		-l dir,file,group:,tmpdir:,help,mode:owner: \
 		-s sh -n mktmp -- "${@}")"
 	if (( ${?} != 0 )) { mktmp-help; return 2; }
 	eval set -- ${ARGS}
@@ -56,13 +57,19 @@ function mktmp {
 		(*${temp}) ;;
 		(*) pr-error "Invalid TEMPLATE"; return 4;;
 	}
-
-	if (( ${+commands[mktemp]} )); then
-		tmp="$(mktemp ${tmpdir:+-p} ${tmpdir} ${ARGS} ${1})"
-	else
+	local mktmp
+	if (( ${+commands[mktemp]} )) {
+		mktmp=mktemp
+	} elif (( ${+commands[busybox]} )) {
+		mktmp='busybox mktemp'
+	}
+	if (( ${+mktmp} )) {
+		tmp=$(${mktmp} ${tmpdir:+-p} ${tmpdir} ${ARGS} ${1})
+	}
+	if [[ ! -e ${tmp} ]] {
 		(( ${+commands[uuidgen]} )) && temp=$(uuidgen --random)
 		tmp="${tmpdir}/${1%-*}-${temp:1:6}"
-	fi
+	}
 	case ${type} {
 		(dir) [[ -d ${tmp} ]] || mkdir -p ${tmp};;
 		(*)   [[ -e ${tmp} ]] || { mkdir -p ${tmp:h}; touch  ${tmp}; };;
@@ -72,9 +79,10 @@ function mktmp {
 		return 5
 	}
 	[[ -h ${tmp} ]] && return
-	(( -n ${owner} )) && chown ${owner} ${tmp}
-	(( -n ${group} )) && chgrp ${group} ${tmp}
-	(( -n ${mode}  )) && chmod ${mode}  ${tmp}
+	[[ -n ${owner} ]] && chown ${owner} ${tmp}
+	[[ -n ${group} ]] && chgrp ${group} ${tmp}
+	[[ -n ${mode}  ]] && chmod ${mode}  ${tmp}
+	print ${tmp}
 }
 
 case ${(%):-%1x} {
