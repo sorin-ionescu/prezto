@@ -44,19 +44,21 @@ function prompt_sorin_pwd {
 }
 
 function prompt_sorin_git_info {
-  # Append Git status.
-  if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
-    alias typeset='typeset -g'
-    source "$_prompt_sorin_precmd_async_data"
-    RPROMPT+='${git_info:+${(e)git_info[status]}}'
-    unalias typeset
+  if (( _prompt_sorin_precmd_async_pid > 0 )); then
+    # Append Git status.
+    if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
+      alias typeset='typeset -g'
+      source "$_prompt_sorin_precmd_async_data"
+      RPROMPT+='${git_info:+${(e)git_info[status]}}'
+      unalias typeset
+    fi
+
+    # Reset PID.
+    _prompt_sorin_precmd_async_pid=0
+
+    # Redisplay prompt.
+    zle && zle reset-prompt
   fi
-
-  # Reset PID.
-  _prompt_sorin_precmd_async_pid=0
-
-  # Redisplay prompt.
-  zle && zle reset-prompt
 }
 
 function prompt_sorin_precmd_async {
