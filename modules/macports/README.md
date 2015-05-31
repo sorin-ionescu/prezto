@@ -1,4 +1,4 @@
-Macports
+MacPorts
 ========
 
 Defines MacPorts aliases and adds MacPorts directories to path variables.

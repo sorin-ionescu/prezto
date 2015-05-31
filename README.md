@@ -86,7 +86,8 @@ License
 (The MIT License)
 
 Copyright (c) 2009-2011 Robby Russell and contributors.
-Copyright (c) 2011-2014 Sorin Ionescu and contributors.
+
+Copyright (c) 2011-2015 Sorin Ionescu and contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -107,7 +108,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [1]: http://www.zsh.org
-[2]: http://i.imgur.com/AzjmpwM.png "sorin theme"
+[2]: http://i.imgur.com/nrGV6pg.png "sorin theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com

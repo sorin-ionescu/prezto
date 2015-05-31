@@ -26,6 +26,11 @@ Directory
 
 Sets directory options and defines directory aliases.
 
+DNF
+---
+
+Defines dnf aliases.
+
 Dpkg
 ----
 
@@ -92,7 +97,7 @@ Homebrew
 
 Defines Homebrew aliases.
 
-Macports
+MacPorts
 --------
 
 Defines MacPorts aliases and adds MacPorts directories to path variables.
