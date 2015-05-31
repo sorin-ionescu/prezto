@@ -82,7 +82,7 @@ function prompt_sorin_precmd {
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    kill -TERM "$_prompt_sorin_precmd_async_pid" &>/dev/null
+    kill -KILL "$_prompt_sorin_precmd_async_pid" &>/dev/null
   fi
 
   # Compute slow commands in the background.
