@@ -136,4 +136,13 @@ function prompt_sorin_setup {
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
+function prompt_sorin_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2>/dev/null
+  prompt_preview_theme 'sorin'
+}
+
 prompt_sorin_setup "$@"
