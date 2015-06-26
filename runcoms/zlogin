@@ -1,8 +1,14 @@
+# Sourced in login shells after .zshrc
+# Commands that should be exectued only in login shells
+# Do not set environment variables
+# Do not define alias, functions, options, etc.
+# Set terminal type
+# Execute external commands (fortune, msgs, etc)
 #
-# Executes commands at login post-zshrc.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# $ZDOTDIR/.zshenv
+# $ZDOTDIR/.zprofile
+# $ZDOTDIR/.zshrc
+# $ZDOTDIR/.zlogin
 #
 
 # Execute code that does not affect the current session in the background.
@@ -21,3 +27,20 @@ if (( $+commands[fortune] )); then
     print
   fi
 fi
+
+echo "Last logins:"
+last -5 $USER
+echo
+
+echo "$BASH $BASH_VERSION"
+date -u +"%a %e %b %Y %H:%M:%S GMT"
+date -u +"%FT%TZ    %Y-%jT%TZ     %Y-W%W-%wT%TZ"
+date    +"%FT%T     %Y-%jT%T      %Y-W%W-%wT%T"
+astrodate.py --jd --mjd --suffix --spacing=8
+echo
+
+# Setup by subsystem
+for f in `find $HOME/Library/Scripts/config -name '*.shlogin'`; do
+    source "$f"
+done
+
