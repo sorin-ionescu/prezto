@@ -43,6 +43,10 @@ if (( $+commands[virtualenvwrapper.sh] )); then
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
   source "$commands[virtualenvwrapper.sh]"
+
+  if (( $+functions[workon-cwd] )); then
+    workon-cwd
+  fi
 fi
 
 #
