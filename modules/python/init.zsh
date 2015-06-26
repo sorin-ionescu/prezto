@@ -42,6 +42,12 @@ if zstyle -T ':prezto:module:python' skip-virtualenvwrapper-init; then
   # Disable the virtualenv prompt.
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
+  source "$commands[virtualenvwrapper.sh]"
+
+  if (( $+functions[workon-cwd] )); then
+    workon-cwd
+  fi
+
   if (( $+commands[pyenv-virtualenvwrapper] )); then
     pyenv virtualenvwrapper
   elif (( $+commands[pyenv-virtualenv-init] )); then
