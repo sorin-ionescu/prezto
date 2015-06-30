@@ -31,6 +31,11 @@ DNF
 
 Defines dnf aliases.
 
+Docker
+---
+
+Sets the environment variables to work with docker through boot2docker
+
 Dpkg
 ----
 
