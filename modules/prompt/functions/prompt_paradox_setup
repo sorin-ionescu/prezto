@@ -157,7 +157,7 @@ function prompt_paradox_setup {
   PROMPT='
 ${(e)$(prompt_paradox_build_prompt)}
  ${editor_info[keymap]} '
-  RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
+  RPROMPT='%F{blue}[%F{green}%D{%Y-%m-%dT%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 

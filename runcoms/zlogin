@@ -28,9 +28,9 @@ if (( $+commands[fortune] )); then
   fi
 fi
 
-echo "Last logins:"
-last -5 $USER
-echo
+#echo "Last logins:"
+#last -5 $USER
+#echo
 
 echo "$BASH $BASH_VERSION"
 date -u +"%a %e %b %Y %H:%M:%S GMT"

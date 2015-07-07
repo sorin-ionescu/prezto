@@ -21,7 +21,8 @@ else
     declare RPS1='%DT%*'
 fi
 
-set -o vi
+setopt histsubstpattern
+setopt vi
 
 # General Settings
 declare -x CALENDAR_DIR="/usr/share/calendar"
@@ -34,7 +35,7 @@ alias ls="ls -FGh"
 alias su="su -m"
 alias ping="ping -c 4"
 alias sed="sed -E"
-alias grep="grep -nHEI --color --exclude-dir=\.git --exclude-dir=\.hg --exclude-dir=\.svn --exclude-dir=build --exclude-dir=dist --exclude=tags"
+alias grep="grep -anHE --color --exclude-dir=\.git --exclude-dir=\.hg --exclude-dir=\.svn --exclude-dir=build --exclude-dir=dist --exclude=tags"
 
 if [ "$ZSH_VERSION" ]; then
     autoload -U compinit
@@ -42,11 +43,25 @@ if [ "$ZSH_VERSION" ]; then
 
     # cd hook
     autoload -U add-zsh-hook
+
+    title-bar() {
+	[[ -t 1 ]] || return
+	case $TERM in
+	    sun-cmd)
+		print -Pn "\e]l%~\e\\"
+	    ;;
+	    *xterm*|rxvt|(dt|k|E)term)
+		print -Pn "\e]1;%~\a"
+	    ;;
+	esac
+    }
+    add-zsh-hook precmd title-bar
+
     load-local-conf() {
 	# check file exists, is regular file and is readable:
 	if [[ -f .sh_source && -r .sh_source ]]; then
-	source .sh_source
-    fi
+	    source .sh_source
+	fi
     }
     add-zsh-hook chpwd load-local-conf
 fi
