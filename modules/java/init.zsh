@@ -28,18 +28,19 @@ fi
 # The actual JAVA_HOME can be conveniently overriden as so:
 #   export JAVA_HOME=$JAVA_HOME_17
 if [[ "$OSTYPE" == darwin* ]]; then
-
-  jdks=("1.5" "1.6" "1.7" "1.8")
-  for jdk in "${jdks[@]}"; do
-    /usr/libexec/java_home -v "${jdk}" 2> /dev/null >&2
+  _jdks=(1.{5..8} 9)
+  for _jdk in "${_jdks[@]}"; do
+    _java_home="$(/usr/libexec/java_home -v "${_jdk}" 2> /dev/null)"
     if (( $? == 0 )); then
       # TODO: 'jenv add' and 'jenv rehash' at startup
-      # jenv add "$(/usr/libexec/java_home -v "${jdk}" 2> /dev/null)"
-      export JAVA_HOME_$(echo "${jdk}" | tr -d '.')="$(/usr/libexec/java_home -v "${jdk}" 2> /dev/null)"
+      # jenv add "$_java_home"
+      export JAVA_HOME_${_jdk#1.}="$_java_home"
     fi
   done
 
   export JAVA_HOME=${JAVA_HOME_18:-$(/usr/libexec/java_home 2> /dev/null)}
+
+  unset _jdks
 fi
 
 #
