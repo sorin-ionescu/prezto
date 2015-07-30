@@ -173,6 +173,11 @@ Syntax Highlighting
 
 Integrates zsh-syntax-highlighting into Prezto.
 
+symfony2
+--------
+
+Defines Symfony2 basic command aliases and enables command completion.
+
 Terminal
 --------
 
