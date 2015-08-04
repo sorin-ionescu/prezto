@@ -11,15 +11,11 @@
 
 export LANG=en_US.UTF-8
 
-declare UNAME_S=`/usr/bin/uname -s`
-declare UNAME_M=`/usr/bin/uname -m`
-declare UNAME_N=`/usr/bin/uname -n`
-
 # Setup path
 path=(
     $HOME/Library/Scripts/bin/`/usr/bin/uname -s`/`/usr/bin/uname -m`
     $HOME/Library/Scripts/bin/`/usr/bin/uname -s`
-    $HOME/Library/Scripts/sh
+    $HOME/Library/Scripts/bin/
     $HOME/Library/Python/bin
     /opt/local/bin  /usr/local/bin  /usr/bin  /bin
     /opt/local/sbin /usr/local/sbin /usr/sbin /sbin
@@ -56,7 +52,7 @@ manpath=(
 #umask 077
 
 # Setup by operating system type
-case $UNAME_S in
+case `/usr/bin/uname -s` in
     Darwin)
 	path=($path /System/Applications /Applications)
 
@@ -68,7 +64,7 @@ case $UNAME_S in
 esac
 
 # Setup by processor type
-case $UNAME_M in
+case `/usr/bin/uname -m` in
     powerpc)
     ;;
 
@@ -77,7 +73,7 @@ case $UNAME_M in
 esac
 
 # Setup by host name
-case $UNAME_N in
+case `/usr/bin/uname -n` in
     helsten)
     ;;
 
@@ -92,10 +88,5 @@ done
 
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath mailpath path
-
-# Cleanup
-unset UNAME_S
-unset UNAME_M
-unset UNAME_N
 
 
