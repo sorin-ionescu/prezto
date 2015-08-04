@@ -13,12 +13,12 @@ export LANG=en_US.UTF-8
 
 # Setup path
 path=(
+    /opt/local/bin  /usr/local/bin  /usr/bin  /bin
+    /opt/local/sbin /usr/local/sbin /usr/sbin /sbin
     $HOME/Library/Scripts/bin/`/usr/bin/uname -s`/`/usr/bin/uname -m`
     $HOME/Library/Scripts/bin/`/usr/bin/uname -s`
     $HOME/Library/Scripts/bin/
     $HOME/Library/Python/bin
-    /opt/local/bin  /usr/local/bin  /usr/bin  /bin
-    /opt/local/sbin /usr/local/sbin /usr/sbin /sbin
     /usr/X11R6/bin
     /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 )
