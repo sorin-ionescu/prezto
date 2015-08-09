@@ -32,12 +32,13 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt' \
   'archive' \
   'history-substring-search' \
   'homebrew' \
   'syntax-highlighting' \
+  'git' \
   'z' \
+  'prompt' \
 
 #
 # Autosuggestions
