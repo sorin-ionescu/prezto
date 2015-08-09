@@ -29,6 +29,10 @@ This setting affects all aliases and functions that call `git-status`.
 Aliases
 -------
 
+Aliases are enabled by default. You can disable them with:
+
+    zstyle ':prezto:module:git:alias' skip 'yes'
+
 ### Git
 
   - `g` is short for `git`.
