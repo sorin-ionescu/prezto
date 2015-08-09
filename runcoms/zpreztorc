@@ -37,6 +37,7 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'homebrew' \
   'syntax-highlighting' \
+  'z' \
 
 #
 # Autosuggestions

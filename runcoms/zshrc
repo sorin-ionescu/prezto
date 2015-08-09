@@ -11,13 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-
-if source "${HOME}/dotfiles/antigen.zsh"; then
-  antigen bundle rupa/z --loc=z.sh
-
-  antigen apply
-fi
-
 unalias rm
 source "${HOME}/dotfiles/aliases"
 export LANG="en_US.UTF-8"
