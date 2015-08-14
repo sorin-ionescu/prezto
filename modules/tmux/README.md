@@ -44,6 +44,8 @@ Aliases
 
   - `tmuxa` attaches or switches to a tmux session.
   - `tmuxl` lists sessions managed by the tmux server.
+  - `tmuxn` creates or attaches to a session named for the passed argument or,
+  if non is provided, the current working directory.
 
 Caveats
 -------
