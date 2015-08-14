@@ -36,10 +36,10 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+#Set the the list of directories that cd searches.
+cdpath=(
+  /Users/myockey/Projects
+)
 
 # Set the list of directories that Zsh searches for programs.
 path=(
