@@ -32,6 +32,9 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'tmux' \
+  'ruby' \
+  'git' \
   'prompt'
 
 #
