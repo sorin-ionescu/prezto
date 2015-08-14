@@ -41,9 +41,14 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   exec tmux $_tmux_iterm_integration attach-session
 fi
 
+# Initialize the session naming convention and update it before every command
+set-conventional-session-name
+preexec_functions=(${preexec_functions[@]} "set-conventional-session-name")
+
 #
 # Aliases
 #
 
 alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
 alias tmuxl='tmux list-sessions'
+alias tmuxn='tmux-new-session'

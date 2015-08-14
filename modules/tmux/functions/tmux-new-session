@@ -1,0 +1,24 @@
+#
+# Creates or reattaches to a tmux session based on a naming convention
+#
+# Author:
+#   Michael Yockey <myockey@gmail.com>
+#
+
+local name
+
+if [[ -n $1 ]]; then
+  name=$1
+else
+  name=$TMUX_CONVENTIONAL_SESSION_NAME
+fi
+
+tmux list-sessions | grep -q "^$name:"
+
+if [ $? = 0 ]; then
+  tmux attach-session -t $name
+else
+  tmux new-session -s $name
+fi
+
+return 0

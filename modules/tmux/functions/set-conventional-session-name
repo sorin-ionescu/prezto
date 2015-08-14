@@ -1,0 +1,9 @@
+#
+# Defines the naming convention for tmux-new-session
+#
+# Author:
+#   Michael Yockey <myockey@gmail.com>
+#
+
+TMUX_CONVENTIONAL_SESSION_NAME=$(basename $(pwd))
+

@@ -1,0 +1,3 @@
+#compdef tmux-new-session
+
+compadd $(tmux list-sessions -F \#S | sed "s/[\* ]//g")
