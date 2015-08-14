@@ -42,8 +42,23 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
 fi
 
 #
+# Functions
+#
+
+tmux-new-session() {
+  local name=$(basename $(pwd))
+  tmux list-sessions | grep -q "^$name:"
+  if [ $? = 0 ]; then
+    tmux attach-session -t $name
+  else
+    tmux new-session -s $name
+  fi
+}
+
+#
 # Aliases
 #
 
 alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
 alias tmuxl='tmux list-sessions'
+alias tmuxn='tmux-new-session'
