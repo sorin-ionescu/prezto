@@ -66,8 +66,9 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-# Increase the number of errors based on the length of the typed word.
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+# Increase the number of errors based on the length of the typed word. But make
+# sure to cap (at 7) the max-errors to avoid hanging.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
