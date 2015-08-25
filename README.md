@@ -26,6 +26,9 @@ version is 4.3.17.
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         done
+      
+      NB: The above will not overwrite or update any existing `.zshrc`. Therefore, if you
+      have an existing `.zshrc` you must manually add the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"`.
 
   4. Set Zsh as your default shell:
 
