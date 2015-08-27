@@ -43,6 +43,28 @@ if [ -d $HOME/.rvm/bin ]; then
     path=($path $HOME/.rvm/bin)
 fi
 
+# Editors
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+export LESSEDIT='vim'
+
+
+# Language
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+  fi
+
+
+# Temporary Files
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$LOGNAME"
+    mkdir -p -m 700 "$TMPDIR"
+    fi
+
+    TMPPREFIX="${TMPDIR%/}/zsh"
+
+
 # Go
 if [ -d /usr/local/go/bin ]; then
     path=($path /usr/local/go/bin)

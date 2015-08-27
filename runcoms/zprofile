@@ -24,40 +24,20 @@
 # | $ZDOTDIR/.zlogin   |   H   |       |        |
 # +--------------------+-------+-------+--------+
 
-# Browser
-case `/usr/bin/uname -s` in
-    Darwin)
-	export BROWSER='open'
-	;;
-esac
-
-# Editors
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-export LESSEDIT='vim'
-
-# Language
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
+##
+## Reset the path because some systems put path_helper in /etc/zprofile
+## which reorders the path that I setup in ~/.zshenv
+echo $PATH | \grep '^/opt/'
+if [ $? -eq 1 ]; then
+    path=(
+	/opt/local/bin  /usr/local/bin  /usr/bin  /bin
+	/opt/local/sbin /usr/local/sbin /usr/sbin /sbin
+	$HOME/Library/Scripts/bin/`/usr/bin/uname -s`/`/usr/bin/uname -m`
+	$HOME/Library/Scripts/bin/`/usr/bin/uname -s`
+	$HOME/Library/Scripts/bin/
+	$HOME/Library/Python/bin
+	/usr/X11R6/bin
+	/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+    )
 fi
-
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
-# Temporary Files
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
 
