@@ -18,4 +18,6 @@ if [[ -n "$VIRTUAL_ENV" ]]; then
   zstyle -s ':prezto:module:python:info:virtualenv' format 'virtualenv_format'
   zformat -f virtualenv_formatted "$virtualenv_format" "v:${VIRTUAL_ENV:t}"
   python_info[virtualenv]="$virtualenv_formatted"
+  PY_VERSION=`python -V 2>&1`
+  python_info[version]="py-"$PY_VERSION[(w)2]
 fi
