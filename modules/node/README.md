@@ -27,7 +27,7 @@ following style inside the `prompt_name_setup` function.
     # %v - Node.js version.
     # %f - Node.js fork (either node or iojs).
     zstyle ':prezto:module:node:info:version' format 'version:%v'
-    zstyle ':prezto:module:node:info:version' format 'fork:%f'
+    zstyle ':prezto:module:node:info:fork' format 'fork:%f'
 
 Then add `$node_info[version]` and/or `$node_info[fork]` to either `$PROMPT` or `$RPROMPT` and call
 `node-info` in `prompt_name_preexec` hook function.
