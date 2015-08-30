@@ -21,13 +21,15 @@ Functions
 Theming
 -------
 
-To display the version number of the current Node.js version, define the
+To display the version number or fork of the current Node.js or io.js version, define the
 following style inside the `prompt_name_setup` function.
 
     # %v - Node.js version.
+    # %f - Node.js fork (either node or iojs).
     zstyle ':prezto:module:node:info:version' format 'version:%v'
+    zstyle ':prezto:module:node:info:version' format 'fork:%f'
 
-Then add `$node_info[version]` to either `$PROMPT` or `$RPROMPT` and call
+Then add `$node_info[version]` and/or `$node_info[fork]` to either `$PROMPT` or `$RPROMPT` and call
 `node-info` in `prompt_name_preexec` hook function.
 
 Authors
@@ -37,6 +39,7 @@ Authors
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Zeh Rizzatti](https://github.com/zehrizzatti)
+  - [Robbie Trencheny](https://github.com/robbiet480)
 
 [1]: http://nodejs.org
 [2]: http://npmjs.org
