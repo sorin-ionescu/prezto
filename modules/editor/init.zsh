@@ -247,6 +247,13 @@ bindkey -M vicmd "v" edit-command-line
 bindkey -M vicmd "u" undo
 bindkey -M vicmd "$key_info[Control]R" redo
 
+
+# Allow remapping of command-mode key
+zstyle -s ':prezto:module:editor' escape-remap 'escape_remap'
+if [[ ! -z "$escape_remap" ]]; then
+  bindkey -M viins "$escape_remap" vi-cmd-mode
+fi
+
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
   bindkey -M vicmd "?" history-incremental-pattern-search-backward
   bindkey -M vicmd "/" history-incremental-pattern-search-forward
