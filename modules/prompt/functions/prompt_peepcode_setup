@@ -10,16 +10,13 @@
 #   http://i.imgur.com/LhgmW.png
 #
 
-function +vi-git-status() {
-  # Check for untracked files or updated submodules since vcs_info does not.
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    hook_com[unstaged]=' %F{8}✗%f'
-  fi
-}
-
 function prompt_peepcode_precmd {
-  vcs_info
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
 
+  # Get Ruby information.
   if (( $+functions[ruby-info] )); then
     ruby-info
   fi
@@ -34,18 +31,19 @@ function prompt_peepcode_setup {
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
 
-  # Add hook for calling vcs_info before each command.
+  # Add a hook for calling info functions before each command.
   add-zsh-hook precmd prompt_peepcode_precmd
 
-  # Set vcs_info parameters.
-  zstyle ':vcs_info:*' enable git
-  zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' get-revision true
-  zstyle ':vcs_info:*' use-simple true
-  zstyle ':vcs_info:*' unstagedstr ' %F{8}✗%f'
-  zstyle ':vcs_info:*' formats ' %F{8}%b%f %F{white}%.7i%f%u'
-  zstyle ':vcs_info:*' actionformats ' %F{8}%b%f %F{white}%.7i%f +%a%u'
-  zstyle ':vcs_info:git*+set-message:*' hooks git-status
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'no'
+  zstyle ':prezto:module:git:info:action' format ' +%s'
+  zstyle ':prezto:module:git:info:branch' format ' %F{8}%b%f'
+  zstyle ':prezto:module:git:info:commit' format ' %F{white}%.7c%f'
+  zstyle ':prezto:module:git:info:indexed' format ' '
+  zstyle ':prezto:module:git:info:unindexed' format ' '
+  zstyle ':prezto:module:git:info:untracked' format ' '
+  zstyle ':prezto:module:git:info:dirty' format ' %F{8}✗%f'
+  zstyle ':prezto:module:git:info:keys' format 'rprompt' '%b%c%s%D'
 
   # Set ruby-info parameters.
   zstyle ':prezto:module:ruby:info:version' format ' %F{white}%v%f'
@@ -54,7 +52,7 @@ function prompt_peepcode_setup {
   PROMPT="
 %~
 %(?.%F{green}${1:-☻ }%f.%F{red}${1:-☻ }%f) "
-RPROMPT='${ruby_info[version]}${vcs_info_msg_0_}'
+RPROMPT='${ruby_info[version]}${git_info[rprompt]}'
 
 }
 
