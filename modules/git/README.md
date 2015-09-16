@@ -208,6 +208,10 @@ Aliases
   - `gwX` removes files from the working tree and from the index recursively and
     forcefully.
 
+### Miscellaneous
+
+  - `g..` change to the top-level directory of the current repository.
+
 ### Shadows
 
 The following aliases may shadow system commands:
