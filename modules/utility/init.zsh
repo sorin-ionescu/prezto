@@ -111,15 +111,11 @@ if zstyle -t ':prezto:module:utility:grep' color; then
 fi
 
 # Mac OS X Everywhere
-if [[ "$OSTYPE" == darwin* ]]; then
-  alias o='open'
-elif [[ "$OSTYPE" == cygwin* ]]; then
+if [[ "$OSTYPE" == cygwin* ]]; then
   alias o='cygstart'
   alias pbcopy='tee > /dev/clipboard'
   alias pbpaste='cat /dev/clipboard'
 else
-  alias o='xdg-open'
-
   if (( $+commands[xclip] )); then
     alias pbcopy='xclip -selection clipboard -in'
     alias pbpaste='xclip -selection clipboard -out'
@@ -128,6 +124,20 @@ else
     alias pbpaste='xsel --clipboard --output'
   fi
 fi
+
+function o() {
+  open_cmd='xdg-open'
+  if [[ "$OSTYPE" == darwin* ]]; then
+    open_cmd='open'
+  elif [[ "$OSTYPE" == cygwin* ]]; then
+    open_cmd='cygstart'
+  fi
+
+  for f in "$@"
+  do
+    $open_cmd $f
+  done
+}
 
 alias pbc='pbcopy'
 alias pbp='pbpaste'
