@@ -11,23 +11,12 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_damoekri_pwd {
-  local pwd="${PWD/#$HOME/~}"
-
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_damoekri_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_damoekri_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-  fi
-}
-
-function prompt_damoekri_precmd {
+prompt_damoekri_precmd() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  prompt_damoekri_pwd
+  _prompt_damoekri_pwd=$(promptpwd)
 
   # Get Git repository information.
   if (( $+functions[git-info] )); then

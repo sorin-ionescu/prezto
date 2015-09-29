@@ -32,18 +32,7 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_sorin_pwd {
-  local pwd="${PWD/#$HOME/~}"
-
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_sorin_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-  fi
-}
-
-function prompt_sorin_git_info {
+prompt_sorin_git_info() {
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
     # Append Git status.
     if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
@@ -77,7 +66,7 @@ function prompt_sorin_precmd {
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  prompt_sorin_pwd
+  _prompt_sorin_pwd=$(promptpwd)
 
   # Define prompts.
   RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'

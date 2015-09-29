@@ -1,0 +1,14 @@
+# prompt setup function common to many prompts
+# moved to external function to reduce code redundancy
+
+local current_pwd="${PWD/#$HOME/~}"
+local ret_directory
+
+if [[ "$current_pwd" == (#m)[/~] ]]; then
+  ret_directory="$MATCH"
+  unset MATCH
+else
+  ret_directory="${${${${(@j:/:M)${(@s:/:)current_pwd}##.#?}:h}%/}//\%/%%}/${${current_pwd:t}//\%/%%}"
+fi
+
+print "$ret_directory"

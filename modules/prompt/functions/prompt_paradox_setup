@@ -59,18 +59,7 @@ function prompt_paradox_build_prompt {
   prompt_paradox_end_segment
 }
 
-function prompt_paradox_pwd {
-  local pwd="${PWD/#$HOME/~}"
-
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_paradox_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_paradox_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-  fi
-}
-
-function prompt_paradox_print_elapsed_time {
+prompt_paradox_print_elapsed_time() {
   local end_time=$(( SECONDS - _prompt_paradox_start_time ))
   local hours minutes seconds remainder
 
@@ -94,7 +83,7 @@ function prompt_paradox_precmd {
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  prompt_paradox_pwd
+  _prompt_paradox_pwd=$(promptpwd)
 
   # Get Git repository information.
   if (( $+functions[git-info] )); then
