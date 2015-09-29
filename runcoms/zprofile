@@ -24,20 +24,11 @@
 # | $ZDOTDIR/.zlogin   |   H   |       |        |
 # +--------------------+-------+-------+--------+
 
-##
-## Reset the path because some systems put path_helper in /etc/zprofile
-## which reorders the path that I setup in ~/.zshenv
-echo $PATH | \grep '^/opt/'
+echo $PATH | \grep -q '^/opt/'
 if [ $? -eq 1 ]; then
-    path=(
-	/opt/local/bin  /usr/local/bin  /usr/bin  /bin
-	/opt/local/sbin /usr/local/sbin /usr/sbin /sbin
-	$HOME/Library/Scripts/bin/`/usr/bin/uname -s`/`/usr/bin/uname -m`
-	$HOME/Library/Scripts/bin/`/usr/bin/uname -s`
-	$HOME/Library/Scripts/bin/
-	$HOME/Library/Python/bin
-	/usr/X11R6/bin
-	/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
-    )
+    echo ~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+
+    echo Apple put path_helper in /etc/zprofile again.
+    echo Just move it to /etc/zshenv.
+    echo ~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+
 fi
 

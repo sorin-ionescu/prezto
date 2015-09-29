@@ -25,6 +25,7 @@
 # | $ZDOTDIR/.zlogin   |   H   |       |        |
 # +--------------------+-------+-------+--------+
 
+
 export LANG=en_US.UTF-8
 
 # Setup path
