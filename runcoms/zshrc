@@ -11,3 +11,21 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+alias c='clear'
+alias lsa='ls -a'
+alias v='vim'
+
+#RaspberryPi
+export RPI=10.1.1.202
+
+# Git
+alias g='git'
+alias gb='git branch -v'
+alias gco='git checkout'
+alias gst='git status'
+
+# URBN
+export MISL_LOCAL_DEV='http://localhost:8800'
+alias MobileServices='cd ~/URBNLocal/source/MobileServices'
+alias MISLWebUI='cd ~/URBNLocal/source/MISLWebUI'
+
