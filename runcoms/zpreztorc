@@ -37,6 +37,7 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'syntax-highlighting' \
   'git' \
+  'node' \
   'z' \
   'prompt' \
 
