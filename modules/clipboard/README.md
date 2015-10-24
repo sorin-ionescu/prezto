@@ -3,7 +3,4 @@ Clipboard
 
 Integrates zsh clipboard with system clipboard.
 
-Settings
---------
-
-Make sure to set IS_MAC_OS correctly in init.zsh.
+On OSX, uses pbcopy and pbpaste. On cygwin, uses /dev/clipboard. On linux, requires either xclip or xsel be installed.

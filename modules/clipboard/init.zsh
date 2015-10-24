@@ -5,20 +5,18 @@
 #   Nir Friedman <quicknir@gmail.com>
 #
 
-# If running Mac OS, set this to 1
-local IS_MAC_OS=0
-
-if [[ IS_MAC_OS -eq 0 ]]; then
-  function cutbuffer() {
-    zle .$WIDGET
-    echo $CUTBUFFER | xclip -selection clipboard
-  }
-else
-  function cutbuffer() {
-    zle .$WIDGET
+function cutbuffer {
+  zle .$WIDGET
+  if [[ "$OSTYPE" == darwin* ]]; then
     echo $CUTBUFFER | pbcopy
-  }
-fi
+  elif [[ "$OSTYPE" == cygwin* ]]; then
+    echo $CUTBUFFER | tee > /dev/clipboard
+  elif (( $+commands[xclip] )); then
+    echo $CUTBUFFER | xclip -selection clipboard
+  elif (( $+commands[xsel] )); then
+    echo $CUTBUFFER | xsel --clipboard --input
+  fi
+}
 
 zle_cut_widgets=(
   vi-backward-delete-char
@@ -33,30 +31,28 @@ zle_cut_widgets=(
   vi-yank-eol
 )
 
-for widget in $zle_cut_widgets
-do
+for widget in $zle_cut_widgets; do
   zle -N $widget cutbuffer
 done
 
-
-if [[ IS_MAC_OS -eq 0 ]]; then
-  function putbuffer() {
+function putbuffer {
+  if [[ "$OSTYPE" == darwin* ]]; then
+    zle copy-region-as-kill "$(pbcopy)"
+  elif [[ "$OSTYPE" == cygwin* ]]; then
+    zle copy-region-as-kill "$(cat /dev/clipboard)"
+  elif (( $+commands[xclip] )); then
     zle copy-region-as-kill "$(xclip -o -selection clipboard)"
-    zle .$WIDGET
-  }
-else
-  function putbuffer() {
-    zle copy-region-as-kill "$(pbpaste)"
-    zle .$WIDGET
-  }
-fi
+  elif (( $+commands[xsel] )); then
+    zle copy-region-as-kill "$(xsel --clipboard --output)"
+  fi
+  zle .$WIDGET
+}
 
 zle_put_widgets=(
   vi-put-after
   vi-put-before
 )
 
-for widget in $zle_put_widgets
-do
+for widget in $zle_put_widgets; do
   zle -N $widget putbuffer
 done
