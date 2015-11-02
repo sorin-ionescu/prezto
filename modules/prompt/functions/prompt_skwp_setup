@@ -13,7 +13,7 @@
 #   http://i.imgur.com/gLgVp6Y.png
 #
 
-function prompt_skwp_precmd {
+prompt_skwp_precmd() {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
@@ -25,7 +25,7 @@ function prompt_skwp_precmd {
   fi
 }
 
-function prompt_skwp_setup {
+prompt_skwp_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

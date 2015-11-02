@@ -7,7 +7,7 @@
 #
 
 # Adds a function name to a list to be called when a trap is triggered.
-function add-zsh-trap {
+add-zsh-trap() {
   if (( $# < 2 )); then
     print "usage: $0 type function" >&2
     return 1
@@ -26,7 +26,7 @@ function add-zsh-trap {
 
   if (( ! $+functions[TRAP${1}] )); then
     eval "
-      function TRAP${1} {
+      TRAP${1}() {
         for trap_function in \"\$TRAP${1}_FUNCTIONS[@]\"; do
           if (( \$+functions[\$trap_function] )); then
             \"\$trap_function\" \"\$1\"

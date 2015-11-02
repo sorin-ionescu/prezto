@@ -9,18 +9,18 @@
 #   http://i.imgur.com/zLZNK.png
 #
 
-function +vi-git_status {
++vi-git_status() {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
     hook_com[unstaged]='%F{red}●%f'
   fi
 }
 
-function prompt_minimal_precmd {
+prompt_minimal_precmd() {
   vcs_info
 }
 
-function prompt_minimal_setup {
+prompt_minimal_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

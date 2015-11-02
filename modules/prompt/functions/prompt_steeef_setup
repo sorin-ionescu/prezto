@@ -12,7 +12,7 @@
 #   http://i.imgur.com/HyRvv.png
 #
 
-function prompt_steeef_precmd {
+prompt_steeef_precmd() {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
     branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
@@ -29,7 +29,7 @@ function prompt_steeef_precmd {
   fi
 }
 
-function prompt_steeef_setup {
+prompt_steeef_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

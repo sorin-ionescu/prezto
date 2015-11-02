@@ -50,7 +50,7 @@ for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
   _gnu_utility_pcmd="${_gnu_utility_p}${_gnu_utility_cmd}"
   if (( ${+commands[${_gnu_utility_pcmd}]} )); then
     eval "
-      function ${_gnu_utility_cmd} {
+      ${_gnu_utility_cmd}() {
         '${commands[${_gnu_utility_pcmd}]}' \"\$@\"
       }
     "

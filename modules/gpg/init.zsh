@@ -37,7 +37,7 @@ if grep 'enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
   pmodload 'ssh'
 
   # Updates the GPG-Agent TTY before every command since SSH does not set it.
-  function _gpg-agent-update-tty {
+  _gpg-agent-update-tty() {
     gpg-connect-agent UPDATESTARTUPTTY /bye >/dev/null
   }
   add-zsh-hook preexec _gpg-agent-update-tty
