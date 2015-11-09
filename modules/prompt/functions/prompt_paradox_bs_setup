@@ -45,7 +45,7 @@ function prompt_paradox_end_segment {
 }
 
 function prompt_paradox_build_prompt {
-  prompt_paradox_start_segment black default '%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
+  prompt_paradox_start_segment black default '%F{blue}%n%F{red}@%F{green}%m%f%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)'
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
 
   if [[ -n "$git_info" ]]; then
