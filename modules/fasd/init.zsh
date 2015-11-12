@@ -9,10 +9,8 @@
 # Load dependencies.
 pmodload 'editor'
 
-# Return if requirements are not found.
-if (( ! $+commands[fasd] )); then
-  return 1
-fi
+# Source module file.
+source "${0:h}/external/fasd" || return 1
 
 #
 # Initialization
