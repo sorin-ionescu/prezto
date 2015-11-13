@@ -12,8 +12,8 @@ Aliases
   - `sfcl` clears the application cache for a given environment.
   - `sfsr` runs PHP built-in web server.
   - `sfcw` warms up the cache.
-  - `sfroute` displays the configured routes.
-  - `sfcontaoainer` displays all configured public services.
+  - `sfrd` displays the configured routes.
+  - `sfcd` displays all configured public services.
   - `sfgb` helps you generates new bundles.
 
 *The authors of this module should be contacted via the [issue tracker][2].*
@@ -27,6 +27,6 @@ sf='`_symfony_console`'
 sfcl='sf cache:clear'
 sfsr='sf server:run -vvv'
 sfcw='sf cache:warmup'
-sfroute='sf router:debug'
-sfcontainer='sf container:debug'
+sfrd='sf router:debug'
+sfcd='sf container:debug'
 sfgb='sf generate:bundle'
