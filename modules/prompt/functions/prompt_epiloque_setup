@@ -1,0 +1,92 @@
+#
+# A simple theme that displays only relevant information.
+#
+# Authors:
+#   Julien Nicoulaud <julien.nicoulaud@gmail.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Mark Milstein <mark@epiloque.com>
+#
+# Features:
+#   - One line.
+#   - VCS information in the right prompt.
+#   - Only shows the path on the left prompt by default.
+#   - Crops the path to a defined length and only shows the path relative to
+#     the current VCS repository root.
+#   - Uses a different color depending on if the last command succeeded/failed.
+#   - Shows user@hostname if connected through SSH.
+#   - Shows if logged in as root or not.
+#
+# Screenshots:
+#   http://i.imgur.com/Xe1bu.png
+#
+# 16 Terminal Colors
+# -- ---------------
+#  0 black
+#  1 red
+#  2 green
+#  3 yellow
+#  4 blue
+#  5 magenta
+#  6 cyan
+#  7 white
+#  8 bright black
+#  9 bright red
+# 10 bright green
+# 11 bright yellow
+# 12 bright blue
+# 13 bright magenta
+# 14 bright cyan
+# 15 bright white
+#
+function prompt_epiloque_pwd {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_epiloque_pwd="$MATCH"
+    unset MATCH
+  else
+    _prompt_epiloque_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%} "
+  fi
+}
+
+function prompt_epiloque_precmd {
+  prompt_epiloque_pwd
+  vcs_info
+}
+
+function prompt_epiloque_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add hook for calling vcs_info before each command.
+  add-zsh-hook precmd prompt_epiloque_precmd
+
+  # Customizable parameters.
+  local max_path_chars=30
+  local user_char='%F{11}❯❯❯'
+  local root_char='%F{11}❯❯❯❯'
+  local success_color='%F{15}'
+  local failure_color='%F{8}'
+  local vcs_info_color='%F{15}'
+
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' unstagedstr '!'
+  zstyle ':vcs_info:*' stagedstr '+'
+  zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
+  zstyle ':vcs_info:*' formats "%S" "%r/%s/%b %u%c"
+  zstyle ':vcs_info:*' nvcsformats "%~" ""
+
+  # Define prompts.
+  PROMPT="%(?.${success_color}.${failure_color})${SSH_TTY:+%n@%m }%B%${max_path_chars}<...<"'${_prompt_epiloque_pwd}'"%<<%(!.${root_char}.${user_char})%b%f "
+  RPROMPT="${vcs_info_color}"'${vcs_info_msg_1_}'"%f"
+  SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
+}
+
+prompt_epiloque_setup "$@"
