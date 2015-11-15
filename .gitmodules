@@ -4,15 +4,12 @@
 [submodule "modules/syntax-highlighting/external"]
 	path = modules/syntax-highlighting/external
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "modules/completion/external"]
-	path = modules/completion/external
-	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "modules/prompt/external/powerline"]
 	path = modules/prompt/external/powerline
 	url = https://github.com/davidjrice/prezto_powerline.git
 [submodule "modules/prompt/external/agnoster"]
 	path = modules/prompt/external/agnoster
-	url = https://gist.github.com/3712874.git
+	url = https://github.com/agnoster/agnoster-zsh-theme.git
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
