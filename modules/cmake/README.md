@@ -15,16 +15,19 @@ $ mb -DSOME_EXTRA_FLAGS="foo"
 ### Options
 
 ```sh
-# Set the install prefix.
+# Set the install prefix (else CMake's default prefix will be used)
 zstyle ':prezto:module:cmake' install-prefix '/usr'
 
-# Set the build prefix.
+# Set the build prefix (else '_build' will be used)
 zstyle ':prezto:module:cmake' build-prefix '_build'
 
-# Set the build profiles.
+# Set the build profiles (else Debug and Release will be used)
 zstyle ':prezto:module:cmake' profiles 'Debug' 'Release'
 
-# Whether to support clang as well.
+# Set the generator (else CMake's default generator will be used)
+zstyle ':prezto:module:cmake' generator 'Unix Makefiles'
+
+# Whether to support clang as well (default is 'yes')
 zstyle ':prezto:module:cmake' support-clang 'yes'
 ```
 
