@@ -1,7 +1,7 @@
 Symfony2
 =============
 
-Defines [Symfony2][1] basic command aliases and enables command completion.
+Defines [Symfony][1] basic command aliases and enables command completion.
 This module ported from the symfony2 plugin of oh-my-zsh.
 Refs: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/symfony2/symfony2.plugin.zsh
 
@@ -12,8 +12,8 @@ Aliases
   - `sfcl` clears the application cache for a given environment.
   - `sfsr` runs PHP built-in web server.
   - `sfcw` warms up the cache.
-  - `sfrd` displays the configured routes.
-  - `sfcd` displays all configured public services.
+  - `sfdr` displays the configured routes.
+  - `sfdc` displays all configured public services.
   - `sfgb` helps you generates new bundles.
 
 *The authors of this module should be contacted via the [issue tracker][2].*
@@ -27,6 +27,6 @@ sf='`_symfony_console`'
 sfcl='sf cache:clear'
 sfsr='sf server:run -vvv'
 sfcw='sf cache:warmup'
-sfrd='sf router:debug'
-sfcd='sf container:debug'
+sfdc='sf debug:container'
+sfdr='sf debug:router'
 sfgb='sf generate:bundle'
