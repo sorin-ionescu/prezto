@@ -1,0 +1,5 @@
+#compdef wherefrom
+
+_arguments \
+  "1:Download URL" \
+  "*:Downloaded File:_files"

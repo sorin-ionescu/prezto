@@ -1,0 +1,39 @@
+#
+# Tells Finder where a file was downloaded from
+#
+# List of spotlight metadata keys https://developer.apple.com/library/mac/#docum
+#
+# Authors:
+#   josho
+#
+
+local url
+local success
+
+if (( $# < 2 )); then
+  cat >&2 <<EOF
+Usage: $0 <url> [file ...]
+EOF
+return 1
+fi
+
+url=$1
+shift
+
+while (( $# > 0 )); do
+  if [[ -f "$1" ]]; then
+    # A json plist containing the Downloaded from URL
+    local plist='["'"$url"'"]'
+
+    # Convert to a hexdump representation of a binary plist
+    # In xxd set the max column count to avoid line breaks
+    local binplist=`echo -n "$plist" | plutil -convert binary1 -o - - | xxd -p -c 256`
+
+    xattr -wx 'com.apple.metadata:kMDItemWhereFroms' "$binplist" "$1"
+
+  else
+    print "$0: cannot read: $1" >&2
+    success=1
+  fi
+  shift
+done

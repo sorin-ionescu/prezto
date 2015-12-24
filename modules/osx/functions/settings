@@ -1,0 +1,36 @@
+#
+# Opens a new Terminal window using the specified settings
+#
+# Authors:
+#   josho
+#
+
+if (( $# < 1 )); then
+  local known_settings
+  known_settings=$(osascript 2>/dev/null <<EOF
+    tell application "Terminal" to get name of every settings set
+EOF
+)
+  cat >&2 <<EOF
+Usage: $0 [${known_settings}]
+EOF
+  return 1
+fi
+
+local settings=$1
+local the_app=$(
+  osascript 2>/dev/null <<EOF
+    tell application "System Events"
+      name of first item of (every process whose frontmost is true)
+    end tell
+EOF
+)
+
+if [[ "$the_app" == 'Terminal' ]]; then
+  osascript 2>/dev/null <<EOF
+    tell application "Terminal" to set current settings of first window to settings set "$settings"
+EOF
+else
+  echo Unsupported terminal
+  return 1
+fi

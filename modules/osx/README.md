@@ -23,6 +23,8 @@ Functions
   - `osx-rm-dir-metadata` deletes .DS\_Store, \_\_MACOSX cruft.
   - `osx-ls-download-history` displays the Mac OS X download history.
   - `osx-rm-download-history` deletes the Mac OS X download history.
+  - `wherefrom` sets the Mac OS X download location for a file.
+  - `settings` changes the terminal settings for the current window.
 
 Authors
 -------
