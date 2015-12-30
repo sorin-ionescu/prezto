@@ -18,7 +18,7 @@ pmodload 'helper'
 
 # Define variables.
 _prompt_paradox_current_bg='NONE'
-_prompt_paradox_segment_separator=''
+_prompt_paradox_segment_separator='⮀'
 _prompt_paradox_start_time=$SECONDS
 
 function prompt_paradox_start_segment {
@@ -125,20 +125,20 @@ function prompt_paradox_setup {
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:action' format ' ⁝ %s'
-  zstyle ':prezto:module:git:info:added' format ' ✚'
-  zstyle ':prezto:module:git:info:ahead' format ' ⬆'
-  zstyle ':prezto:module:git:info:behind' format ' ⬇'
-  zstyle ':prezto:module:git:info:branch' format ' %b'
+  zstyle ':prezto:module:git:info:action' format '! %s'
+  zstyle ':prezto:module:git:info:added' format '✚'
+  zstyle ':prezto:module:git:info:ahead' format '⬆'
+  zstyle ':prezto:module:git:info:behind' format '⬇'
+  zstyle ':prezto:module:git:info:branch' format '⭠ %b'
   zstyle ':prezto:module:git:info:commit' format '➦ %.7c'
-  zstyle ':prezto:module:git:info:deleted' format ' ✖'
-  zstyle ':prezto:module:git:info:dirty' format ' ⁝'
-  zstyle ':prezto:module:git:info:modified' format ' ✱'
+  zstyle ':prezto:module:git:info:deleted' format '✖'
+  zstyle ':prezto:module:git:info:dirty' format '⁝'
+  zstyle ':prezto:module:git:info:modified' format '✱'
   zstyle ':prezto:module:git:info:position' format '%p'
-  zstyle ':prezto:module:git:info:renamed' format ' ➙'
-  zstyle ':prezto:module:git:info:stashed' format ' S'
-  zstyle ':prezto:module:git:info:unmerged' format ' ═'
-  zstyle ':prezto:module:git:info:untracked' format ' ?'
+  zstyle ':prezto:module:git:info:renamed' format '➙'
+  zstyle ':prezto:module:git:info:stashed' format 'S'
+  zstyle ':prezto:module:git:info:unmerged' format '═'
+  zstyle ':prezto:module:git:info:untracked' format '?'
   zstyle ':prezto:module:git:info:keys' format \
     'ref' '$(coalesce "%b" "%p" "%c")' \
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
