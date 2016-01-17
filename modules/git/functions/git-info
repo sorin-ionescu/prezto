@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Gets the Git special action (am, bisect, cherry, merge, rebase).
+# Gets the Git special action (am, bisect, cherry, merge, rebase, revert).
 # Borrowed from vcs_info and edited.
 function _git-action {
   local action_dir
@@ -18,6 +18,8 @@ function _git-action {
   local rebase_formatted
   local rebase_interactive_formatted
   local rebase_merge_formatted
+  local revert_formatted
+  local revert_sequence_formatted
 
   for action_dir in \
     "${git_dir}/rebase-apply" \
@@ -75,6 +77,18 @@ function _git-action {
     else
       zstyle -s ':prezto:module:git:info:action:cherry-pick' format 'cherry_pick_formatted' || cherry_pick_formatted='cherry-pick'
       print "$cherry_pick_formatted"
+    fi
+
+    return 0
+  fi
+
+  if [[ -f "${git_dir}/REVERT_HEAD" ]]; then
+    if [[ -d "${git_dir}/sequencer" ]] ; then
+      zstyle -s ':prezto:module:git:info:action:revert-sequence' format 'revert_sequence_formatted' || revert_sequence_formatted='revert-sequence'
+      print "$revert_sequence_formatted"
+    else
+      zstyle -s ':prezto:module:git:info:action:revert' format 'revert_formatted' || revert_formatted='revert'
+      print "$revert_formatted"
     fi
 
     return 0

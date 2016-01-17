@@ -389,6 +389,8 @@ The following contexts must be enabled with the following zstyle:
 | rebase               |    value    | Rebasing
 | rebase-interactive   |    value    | Rebasing interactively
 | rebase-merge         |    value    | Rebasing merge
+| revert               |    value    | Reverting
+| revert-sequence      |    value    | Reverting sequence
 
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.
