@@ -17,9 +17,7 @@ fi
 # Auto Start
 #
 
-if ([[ "$TERM_PROGRAM" = 'iTerm.app' ]] && \
-  zstyle -t ':prezto:module:tmux:iterm' integrate \
-); then
+if (zstyle -t ':prezto:module:tmux:iterm' integrate); then
   _tmux_iterm_integration='-CC'
 fi
 
