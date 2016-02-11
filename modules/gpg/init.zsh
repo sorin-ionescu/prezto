@@ -29,7 +29,7 @@ fi
 export GPG_TTY="$(tty)"
 
 # Integrate with the SSH module.
-if grep 'enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
+if grep '^enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
   # Load required functions.
   autoload -Uz add-zsh-hook
 
