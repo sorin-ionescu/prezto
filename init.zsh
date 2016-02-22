@@ -111,3 +111,6 @@ unset zfunction{s,}
 zstyle -a ':prezto:load' pmodule 'pmodules'
 pmodload "$pmodules[@]"
 unset pmodules
+
+# Set alias to update Prezto.
+alias prezto-update='(cd "${ZDOTDIR:-$HOME}/.zprezto/"; git pull && git submodule update --init --recursive)'

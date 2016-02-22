@@ -46,6 +46,10 @@ Pull the latest changes and update submodules.
 
     git pull && git submodule update --init --recursive
 
+Or use the alias:
+
+    prezto-update
+
 Usage
 -----
 
