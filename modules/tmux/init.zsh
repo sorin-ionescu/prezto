@@ -37,8 +37,8 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
       set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
-  # Attach to the 'prezto' session or to the last session used.
-  exec tmux $_tmux_iterm_integration attach-session
+  # Attach to the 'prezto' session or to the last session used. (detach first)
+  exec tmux $_tmux_iterm_integration -d attach-session
 fi
 
 #
