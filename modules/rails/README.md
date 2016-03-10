@@ -12,6 +12,7 @@ Aliases
   - `rordm` migrates the database.
   - `rordM` migrates the database and recreates the test database.
   - `rordr` rolls the database schema back to the previous version.
+  - `rordR` resets the database schema (does db:drop db:setup).
   - `rorg` generates new code.
   - `rorl` displays the log.
   - `rorlc` truncates logs to zero bytes.
