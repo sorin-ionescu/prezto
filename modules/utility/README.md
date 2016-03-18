@@ -105,7 +105,7 @@ Aliases
 
 ### Resource Usage
 
-  - `df` displays free disk space using human readable units.
+  - `df` displays free disk space using human readable units (aliases to `pydf`, if installed).
   - `du` displays disk usage using human readable units.
   - `top` displays information about processes (aliased to `htop`, if installed).
   - `topc` displays information about processes sorted by CPU usage (`htop` not

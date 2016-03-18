@@ -142,7 +142,12 @@ elif (( $+commands[wget] )); then
 fi
 
 # Resource Usage
-alias df='df -kh'
+if (( $+commands[pydf] )); then
+  alias df=pydf
+else
+  alias df='df -kh'
+fi
+
 alias du='du -kh'
 
 if (( $+commands[htop] )); then
