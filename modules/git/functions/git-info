@@ -215,7 +215,8 @@ function git-info {
   fi
 
   # Get the branch.
-  branch="${$(git symbolic-ref HEAD 2> /dev/null)#refs/heads/}"
+  branch="${$(git symbolic-ref HEAD 2> /dev/null)#refs/heads/}" \
+      || branch="$(git rev-parse --short HEAD 2> /dev/null)"
 
   # Format branch.
   zstyle -s ':prezto:module:git:info:branch' format 'branch_format'
