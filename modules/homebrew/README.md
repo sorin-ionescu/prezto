@@ -26,6 +26,13 @@ Aliases
   - `casks` searches for a cask.
   - `caskx` uninstalls a cask.
 
+Completion
+----------
+
+### Homebrew
+
+Sourced from [Homebrew official repository](2)
+
 Authors
 -------
 
@@ -33,5 +40,7 @@ Authors
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Griffin Yourick](https://github.com/tough-griff)
+  - [Nevin Valsaraj](http://github.com/nevinvalsaraj)
 
 [1]: https://github.com/sorin-ionescu/prezto/issues
+[2]: https://github.com/Homebrew/homebrew/blob/master/Library/Contributions/brew_zsh_completion.zsh
