@@ -56,15 +56,19 @@ Aliases are enabled by default. You can disable them with:
 
 ### Commit
 
-  - `gc` records changes to the repository.
-  - `gca` stages all modified and deleted files.
-  - `gcm` records changes to the repository with the given message.
+  - `gc`  records changes to the repository.
+  - `gca`  stages all modified and deleted files.
+  - `gcm`  records changes to the repository with the given message.
+  - `gcS`  records changes to the repository. (Signed)
+  - `gcSa` stages all modified and deleted files. (Signed)
+  - `gcSm` records changes to the repository with the given message. (Signed)  - `gco`  checks out a branch or paths to work tree.
   - `gcam` stages all modified and deleted files, and records changes to the repository with the given message.
-  - `gco` checks out a branch or paths to work tree.
-  - `gcO` checks out hunks from the index or the tree interactively.
-  - `gcf` amends the tip of the current branch using the same log message as
-    *HEAD*.
+  - `gcO`  checks out hunks from the index or the tree interactively.
+  - `gcf`  amends the tip of the current branch using the same log message as
+  - `gcSf` amends the tip of the current branch using the same log message as
+    *HEAD*. (Signed)
   - `gcF` amends the tip of the current branch.
+  - `gcSF` amends the tip of the current branch. (Signed)
   - `gcp` applies changes introduced by existing commits.
   - `gcP` applies changes introduced by existing commits without committing.
   - `gcr` reverts existing commits by reverting patches and recording new
