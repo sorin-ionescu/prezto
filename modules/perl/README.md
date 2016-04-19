@@ -51,6 +51,24 @@ Aliases
   - `plbu` uninstalls a Perl version.
   - `plbx` temporarily sets the Perl version to use.
 
+Functions
+---------
+
+  - `perl-info` exposes information about the Perl environment via the
+    `$perl_info` associative array.
+
+Theming
+-------
+
+To display the name of the currach Perl version in a prompt, define the
+following style in the `prompt_name_setup` function.
+
+    # %v - perl version.
+    zstyle ':prezto:module:perl:info:version' format 'version:%v'
+
+Then add `$perl_info[version]` to `$PROMPT` or `$RPROMPT` and call
+`perl-info` in the `prompt_name_precmd` hook function.
+
 Authors
 -------
 
