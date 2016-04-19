@@ -30,6 +30,14 @@ Perlbrew
 An alternative to the above is to use [Perlbrew][2], which allows for the
 management of multiple, isolated Perl installations in the home directory.
 
+plenv
+-----
+
+Yet another alternative is [plenv][3]. This is inspired from rbenv and enables
+switching between multiple binary installations.
+
+The subcommands of plenv is similar with rbenv.
+
 Aliases
 -------
 
@@ -50,6 +58,24 @@ Aliases
   - `plbs` switches to a Perl version.
   - `plbu` uninstalls a Perl version.
   - `plbx` temporarily sets the Perl version to use.
+
+### plenv
+
+  - `plv` manages Perl environments.
+  - `plvc` List all available plenv commands.
+  - `plvl` Set or show the local application-specific Perl version.
+  - `plvg` Set or show the global Perl version.
+  - `plvs` Set or show the shell-specific Perl version.
+  - `plvi` Install a Perl version using the perl-build plugin.
+  - `plvu` Uninstall a specific Perl version.
+  - `plvr` Rehash plenv shims (run this after installing executables).
+  - `plvv` Show the current Perl version and its origin.
+  - `plvV` List all Perl versions available to plenv.
+  - `plvw` Display the full path to an executable.
+  - `plvW` List all Perl versions that contain the given executable.
+  - `plvm` List cpan modules in current perl.
+  - `plvM` Migrate cpan modules from other version.
+  - `plvI` Install cpanm.
 
 Functions
 ---------
@@ -72,10 +98,11 @@ Then add `$perl_info[version]` to `$PROMPT` or `$RPROMPT` and call
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+*The authors of this module should be contacted via the [issue tracker][4].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://www.perl.org
 [2]: http://perlbrew.pl
-[3]: https://github.com/sorin-ionescu/prezto/issues
+[3]: https://github.com/tokuhirom/plenv
+[4]: https://github.com/sorin-ionescu/prezto/issues
