@@ -4,6 +4,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
+#   Patrick Bos <egpbos@gmail.com>
 #
 
 # Load manually installed pyenv into the shell session.
@@ -44,6 +45,14 @@ if (( $? && $+commands[virtualenvwrapper.sh] )); then
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
   source "$commands[virtualenvwrapper.sh]"
+fi
+
+# Load conda into the shell session, if requested
+zstyle -T ':prezto:module:python' conda-init
+if (( $? && $+commands[conda] )); then
+  if (( $(conda ..changeps1) )); then
+    echo "To make sure Conda doesn't change your prompt (should do that in the prompt module) run:\n  conda config --set changeps1 false"
+  fi
 fi
 
 #
