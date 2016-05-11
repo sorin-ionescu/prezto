@@ -8,6 +8,7 @@
 #   Isaac Wolkerstorfer <i@agnoster.net>
 #   Jeff Sandberg <paradox460@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Patrick Bos <egpbos@gmail.com>
 #
 # Screenshots:
 #   http://i.imgur.com/0XIWX.png
@@ -48,12 +49,12 @@ function prompt_paradox_build_prompt {
   prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
 
-  if [[ -n "$git_info" ]]; then
-    prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
-  fi
-
   if [[ -n "$python_info" ]]; then
     prompt_paradox_start_segment white black '${(e)python_info[virtualenv]}'
+  fi
+
+  if [[ -n "$git_info" ]]; then
+    prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
 
   prompt_paradox_end_segment
@@ -101,13 +102,17 @@ function prompt_paradox_precmd {
     git-info
   fi
 
+  # Get Python environment information
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
+
   # Calculate and print the elapsed time.
   prompt_paradox_print_elapsed_time
 }
 
 function prompt_paradox_preexec {
   _prompt_paradox_start_time="$SECONDS"
-  python-info
 }
 
 function prompt_paradox_setup {
@@ -149,7 +154,7 @@ function prompt_paradox_setup {
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
 
   # %v - virtualenv name.
-  zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
+  zstyle ':prezto:module:python:info:virtualenv' format '🐍  %v'
 
   # Define prompts.
   PROMPT='
