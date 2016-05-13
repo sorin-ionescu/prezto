@@ -9,8 +9,11 @@
 # General
 #
 
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:*:*:*' menu yes select
+
 # Set case-sensitivity for completion, history lookup, etc.
-# zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' case-sensitive 'no'
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
@@ -31,7 +34,14 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
+  'ssh' \
   'completion' \
+  'homebrew' \
+  'osx' \
+  'git' \
+  'tmux' \
+  'syntax-highlighting' \
+  'history-substring-search' \
   'prompt'
 
 #
@@ -46,10 +56,10 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 #
 # Git
@@ -116,7 +126,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #
 
 # Set the SSH identities to load into the agent.
-# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 #
 # Syntax Highlighting
@@ -124,19 +134,19 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set syntax highlighters.
 # By default, only the main highlighter is enabled.
-# zstyle ':prezto:module:syntax-highlighting' highlighters \
-#   'main' \
-#   'brackets' \
-#   'pattern' \
-#   'line' \
-#   'cursor' \
-#   'root'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
 #
 # Set syntax highlighting styles.
-# zstyle ':prezto:module:syntax-highlighting' styles \
-#   'builtin' 'bg=blue' \
-#   'command' 'bg=blue' \
-#   'function' 'bg=blue'
+zstyle ':prezto:module:syntax-highlighting' styles \
+  'builtin' 'fg=green' \
+  'command' 'fg=blue' \
+  'function' 'fg=white'
 
 #
 # Terminal
@@ -159,7 +169,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
-# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+zstyle ':prezto:module:tmux:iterm' integrate 'yes'

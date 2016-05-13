@@ -11,3 +11,101 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+#DEFAULT_USER='tprice'
+
+# Add homebrew to the completion path
+fpath=("/usr/local/bin/" $fpath)
+
+# Configure chruby
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby ruby-2.3.1
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
+# why would you type 'cd dir' if you could just type 'dir'?
+setopt AUTO_CD
+
+# If we have a glob this will expand it
+setopt GLOB_COMPLETE
+setopt PUSHD_MINUS
+
+# 10 second wait if you do something that will delete everything.  I wish I'd had this before...
+setopt RM_STAR_WAIT
+
+# use magic (this is default, but it can't hurt!)
+setopt ZLE
+
+setopt NO_HUP
+
+# Case insensitive globbing
+setopt NO_CASE_GLOB
+
+# Be Reasonable!
+setopt NUMERIC_GLOB_SORT
+
+# I don't know why I never set this before.
+setopt EXTENDED_GLOB
+
+# hows about arrays be awesome?  (that is, frew${cool}frew has frew surrounding all the variables, not just first and last
+setopt RC_EXPAND_PARAM
+
+# Aliases
+alias git=hub
+alias g="git"
+alias pull='git pull'
+alias push='git push'
+alias status='git status'
+alias sort=gsort
+alias ls='gls --color=always'
+alias grep="grep --color=always"
+alias egrep="egrep --color=always"
+alias lslsa='gls -lsa'
+alias lsl='gls -l'
+alias lsld='gls -ld'
+alias lah='gls -lah'
+
+export EDITOR="/usr/local/bin/mate -w"
+export HISTSIZE=32768
+export HISTFILESIZE=$HISTSIZE
+export HISTCONTROL=ignoredups
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+export LANG="en_US"
+export LC_ALL="en_US.UTF-8"
+export LESS_TERMCAP_md="$ORANGE"
+export MANPAGER="less -X"
+export GREP_OPTIONS="--color=auto"
+
+export LS_COLORS='di=1;34:ln=35:so=32:pi=0;33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=1;34:ow=1;34:'
+
+# Who doesn't want home and end to work?
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
+
+# Incremental search is elite!
+bindkey -M vicmd "/" history-incremental-search-backward
+bindkey -M vicmd "?" history-incremental-search-forward
+
+# Search based on what you typed in already
+bindkey -M vicmd "//" history-beginning-search-backward
+bindkey -M vicmd "??" history-beginning-search-forward
+
+bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^S" history-incremental-pattern-search-forward
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey -e
+bindkey "[C" forward-word
+bindkey "[D" backward-word
+
+# it's like, space AND completion.  Gnarlbot.
+bindkey -M viins ' ' magic-space
+
+zman() {
+  PAGER="less -g -s '+/^       "$1"'" man zshall
+}
+
+eval "$(direnv hook zsh)"
+eval `gdircolors -b ~/.dircolors`
+eval "$(thefuck --alias)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
