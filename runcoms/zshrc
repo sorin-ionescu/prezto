@@ -14,13 +14,18 @@ fi
 
 #DEFAULT_USER='tprice'
 
-# Add homebrew to the completion path
-fpath=("/usr/local/bin/" $fpath)
+# Source local sensitive exports
+source ~/.zlocalenv
 
 # Configure chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 chruby ruby-2.3.1
 source /usr/local/opt/chruby/share/chruby/auto.sh
+
+# Add homebrew to the completion path
+fpath=("/usr/local/bin/" $fpath)
+# Advanced autocomplete
+autoload -U compinit && compinit -i
 
 # why would you type 'cd dir' if you could just type 'dir'?
 setopt AUTO_CD
