@@ -33,8 +33,9 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   # Branch (b)
   alias gb='git branch'
   alias gbc='git checkout -b'
-  alias gbl='git branch -v'
-  alias gbL='git branch -av'
+  alias gbv='git branch -v'
+  alias gbV='git branch -vv'
+  alias gba='git branch -av'
   alias gbx='git branch -d'
   alias gbX='git branch -D'
   alias gbm='git branch -m'
@@ -46,6 +47,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gc='git commit --verbose'
   alias gca='git commit --verbose --all'
   alias gcm='git commit --message'
+  alias gcam='git commit --all --message'
   alias gco='git checkout'
   alias gcO='git checkout --patch'
   alias gcf='git commit --amend --reuse-message HEAD'
@@ -58,7 +60,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gcl='git-commit-lost'
 
   # Conflict (C)
-  alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+  alias gCl='git --no-pager diff --name-only --diff-filter=U'
   alias gCa='git add $(gCl)'
   alias gCe='git mergetool $(gCl)'
   alias gCo='git checkout --ours --'
@@ -158,6 +160,8 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias giu='git add --update'
   alias gid='git diff --no-ext-diff --cached'
   alias giD='git diff --no-ext-diff --cached --word-diff'
+  alias gii='git update-index --assume-unchanged'
+  alias giI='git update-index --no-assume-unchanged'
   alias gir='git reset'
   alias giR='git reset --patch'
   alias gix='git rm -r --cached'
