@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Joel Kuzmarski <leoj3n@gmail.com>
 #
 
 #
@@ -72,6 +73,7 @@ alias gdx='git ls-files --deleted'
 alias gdm='git ls-files --modified'
 alias gdu='git ls-files --other --exclude-standard'
 alias gdk='git ls-files --killed'
+alias gdh='git ls-files -v | grep "^h " | cut -d" " -f2-'
 alias gdi='git status --porcelain --short --ignored | sed -n "s/^!! //p"'
 
 # Fetch (f)
@@ -98,6 +100,8 @@ alias gir='git reset'
 alias giR='git reset --patch'
 alias gix='git rm -r --cached'
 alias giX='git rm -rf --cached'
+alias gih='git update-index --assume-unchanged'
+alias gis='git update-index --no-assume-unchanged'
 
 # Log (l)
 alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'

@@ -84,6 +84,7 @@ Aliases
   - `gdm` lists modified files.
   - `gdu` lists untracked files.
   - `gdk` lists killed files.
+  - `gdh` lists hidden files.
   - `gdi` lists ignored files.
 
 ### Fetch
@@ -113,6 +114,8 @@ Aliases
   - `giR` resets the current index interactively.
   - `gix` removes files/directories from the index (recursively).
   - `giX` removes files/directories from the index (recursively and forced).
+  - `gih` hides files/directories from the index.
+  - `gis` shows files/directories hidden from the index.
 
 ### Log
 
