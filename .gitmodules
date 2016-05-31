@@ -12,7 +12,10 @@
 	url = https://github.com/davidjrice/prezto_powerline.git
 [submodule "modules/prompt/external/agnoster"]
 	path = modules/prompt/external/agnoster
-	url = https://gist.github.com/3712874.git
+	url = https://github.com/agnoster/agnoster-zsh-theme.git
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule "modules/autosuggestions/external"]
+	path = modules/autosuggestions/external
+	url = https://github.com/tarruda/zsh-autosuggestions

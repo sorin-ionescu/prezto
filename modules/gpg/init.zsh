@@ -30,6 +30,9 @@ export GPG_TTY="$(tty)"
 
 # Integrate with the SSH module.
 if grep 'enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
   # Override the ssh-agent environment file default path.
   _ssh_agent_env="$_gpg_agent_env"
 
