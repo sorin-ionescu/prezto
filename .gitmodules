@@ -25,3 +25,6 @@
 [submodule "modules/prompt/external/statusline"]
 	path = modules/prompt/external/statusline
 	url = https://github.com/el1t/statusline.git
+[submodule "modules/external/emoji-cli"]
+	path = modules/external/emoji-cli
+	url = https://github.com/b4b4r07/emoji-cli
