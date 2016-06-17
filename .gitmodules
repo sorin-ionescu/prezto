@@ -19,9 +19,6 @@
 [submodule "modules/autosuggestions/external"]
 	path = modules/autosuggestions/external
 	url = https://github.com/tarruda/zsh-autosuggestions
-[submodule "modules/z/external"]
-	path = modules/z/external
-	url = https://github.com/rupa/z.git
 [submodule "modules/prompt/external/statusline"]
 	path = modules/prompt/external/statusline
 	url = https://github.com/el1t/statusline.git
