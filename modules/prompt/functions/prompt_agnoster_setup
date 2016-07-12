@@ -1,0 +1,100 @@
+# vim:ft=zsh ts=2 sw=2 sts=2
+# A Prezto version of Agnoster, a Powerline-inspired theme for Zsh.
+#
+# This theme requires a [patched Powerline
+# font](https://github.com/powerline/fonts). In addition, it looks better with
+# the [Solarized theme](https://github.com/altercation/solarized/).
+#
+# Based in the
+# [original theme](https://github.com/agnoster/agnoster-zsh-theme), in the
+# [Oh My Zsh version of
+# Agnoster](https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/agnoster.zsh-theme),
+# and in the [Powerlevel9k theme](https://github.com/bhilburn/powerlevel9k).
+#
+# Uses the 'editor' and the 'git' Prezto modules.
+#
+# Author:
+#   Eric Nielsen <eric@amalgamar.com.br>
+#
+
+prompt_agnoster_precmd() {
+  RETVAL=$?
+  if [[ $+functions[git-info] ]]; then
+    git-info
+  fi
+}
+
+prompt_agnoster_separate_segment() {
+  print -n "%K{$1}"
+  if [[ -n "$2" ]]; then
+    print -n "%F{$2}${editor_info[keymap]}"
+  fi
+}
+
+prompt_agnoster_end_segment() {
+  print -n "%k%F{$1}${editor_info[keymap]}%f "
+}
+
+prompt_agnoster_build() {
+  # status and context segment
+  local segment=''
+  [[ $RETVAL -ne 0 ]] && segment+=' %F{red}✘'
+  [[ $UID -eq 0 ]] && segment+=' %F{yellow}⚡'
+  [[ $(jobs -l | wc -l) -gt 0 ]] && segment+=' %F{cyan}⚙'
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    segment+=' %F{%(!.yellow.default)}$USER@%m%f'
+  fi
+  local bg=''
+  if [[ -n $segment ]]; then
+    prompt_agnoster_separate_segment black; bg=black
+    print -n "$segment "
+  fi
+  # dir segment
+  prompt_agnoster_separate_segment blue $bg; bg=blue
+  print -n ' %F{black}%~ '
+  # git segment
+  if [[ -n "$git_info" ]]; then
+    local new_bg="${git_info[color]}"
+    prompt_agnoster_separate_segment $new_bg $bg; bg=$new_bg
+    print -n ' %F{black}${(e)git_info[prompt]} '
+  fi
+  # end
+  prompt_agnoster_end_segment $bg
+}
+
+prompt_agnoster_setup() {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_agnoster_precmd
+
+  zstyle ':prezto:module:editor:info:keymap:primary' format ''
+  zstyle ':prezto:module:editor:info:keymap:alternate' format '%S%s'
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info:branch' format ' %b'
+  zstyle ':prezto:module:git:info:commit' format '➦ %.7c'
+  zstyle ':prezto:module:git:info:ahead' format ' ↑%A'
+  zstyle ':prezto:module:git:info:behind' format ' ↓%B'
+  zstyle ':prezto:module:git:info:stashed' format ' ⍟%S'
+  zstyle ':prezto:module:git:info:indexed' format ' ✚'
+  zstyle ':prezto:module:git:info:unindexed' format ' ●'
+  zstyle ':prezto:module:git:info:untracked' format ' ?'
+  zstyle ':prezto:module:git:info:action' format ' | %s'
+  zstyle ':prezto:module:git:info:clean' format 'green'
+  zstyle ':prezto:module:git:info:dirty' format 'yellow'
+  zstyle ':prezto:module:git:info:keys' format \
+    'prompt' '$(coalesce "%b" "%c")%A%B%S%i%I%s' \
+    'color' '%C%D'
+
+  PROMPT='${(e)$(prompt_agnoster_build)}'
+  RPROMPT=''
+}
+
+prompt_agnoster_setup "$@"
+
