@@ -14,6 +14,8 @@ fi
 
 eval "$(rbenv init -)"
 
+export PGDATA=/usr/local/var/postgres
+
 alias g='git'
 alias bi='bundle install'
 alias be='bundle exec'
