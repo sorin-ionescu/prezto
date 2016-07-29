@@ -33,9 +33,9 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'archive' \
-  'history-substring-search' \
   'homebrew' \
   'syntax-highlighting' \
+  'history-substring-search' \
   'git' \
   'node' \
   'z' \
