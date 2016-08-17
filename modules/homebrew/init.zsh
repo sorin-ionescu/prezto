@@ -23,6 +23,9 @@ alias brewo='brew outdated'
 alias brews='brew search'
 alias brewu='brew update && brew upgrade'
 alias brewx='brew remove'
+alias bubo='brew update && brew outdated'
+alias bubc='brew upgrade --all && brew cleanup'
+alias bubu='bubo && bubc'
 
 # Homebrew Cask
 alias cask='brew cask'
