@@ -6,7 +6,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+local -a raw_output
 local version
+local gemset
 local version_format
 local version_formatted
 
@@ -15,9 +17,9 @@ unset ruby_info
 typeset -gA ruby_info
 
 if (( $+commands[rvm-prompt] )); then
-  version="$(rvm-prompt)"
-elif (( $+commands[rbenv] )); then
-  version="$(rbenv version-name)"
+  raw_output=($(rvm-prompt v g | tr '@' ' '))
+  version=$raw_output[1]
+  gemset=$raw_output[2]
 elif (( $+commands[ruby] )); then
   version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
 fi
@@ -25,6 +27,9 @@ fi
 # Format version.
 if [[ -n "$version" ]]; then
   zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
-  zformat -f version_formatted "$version_format" "v:$version"
+  zformat -f version_formatted "$version_format" "v:$version" "g:${gemset:=default}"
   ruby_info[version]="$version_formatted"
+  ruby_info[gemset]="$gemset"
 fi
+
+#  vim: set ts=8 sw=2 tw=0 ft=zsh et :
