@@ -1,0 +1,19 @@
+#
+# Lists the heads of branches and last modification time and user
+# Stolen from someone's git alias file, unfortunately do not remember original source.
+# My work was limited to reformatting this to work as a zsh alias
+#
+# Authors:
+#   Unknown
+#   Anton Stroganov <stroganov.a@gmail.com>
+#
+
+if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+  print "$0: not a repository work tree: $PWD" >&2
+  return 1
+fi
+
+for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/); do 
+  git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n"
+done \
+  | awk '! a[$0]++'
