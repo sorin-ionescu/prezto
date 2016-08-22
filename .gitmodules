@@ -9,7 +9,8 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "modules/completion/external"]
 	path = modules/completion/external
-	url = https://github.com/zsh-users/zsh-completions.git
+	url = https://github.com/baberthal/zsh-completions.git
+	branch = master
 [submodule "modules/prompt/external/powerline"]
 	path = modules/prompt/external/powerline
 	url = https://github.com/davidjrice/prezto_powerline.git
