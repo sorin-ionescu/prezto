@@ -10,7 +10,6 @@
 [submodule "modules/completion/external"]
 	path = modules/completion/external
 	url = https://github.com/baberthal/zsh-completions.git
-	branch = master
 [submodule "modules/prompt/external/powerline"]
 	path = modules/prompt/external/powerline
 	url = https://github.com/davidjrice/prezto_powerline.git
