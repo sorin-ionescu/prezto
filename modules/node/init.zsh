@@ -41,3 +41,7 @@ if (( $+commands[npm] )); then
 
   unset cache_file
 fi
+
+alias npmD="npm install --save-dev"
+alias npmS="npm install --save"
+alias npmG="npm install -g"
