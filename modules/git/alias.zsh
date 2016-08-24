@@ -27,51 +27,56 @@ zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_subm
 #
 
 if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
+  # If the `hub` command exists, use that in place of git
+  if (( $+commands[hub] )); then
+    alias git='hub'
+  fi
+
   # Git
   alias g='git'
 
+  # Add (a)
+  alias ga='git add'
+  alias gaa='git add --all'
+  alias gapa='git add --patch'
+  alias gau='git add --update'
+
   # Branch (b)
   alias gb='git branch'
-  alias gba='git branch --all --verbose'
+  alias gba='git branch -a'
   alias gbc='git checkout -b'
-  alias gbd='git branch --delete'
-  alias gbD='git branch --delete --force'
-  alias gbl='git branch --verbose'
-  alias gbL='git branch --all --verbose'
-  alias gbm='git branch --move'
-  alias gbM='git branch --move --force'
-  alias gbr='git branch --move'
-  alias gbR='git branch --move --force'
+  alias gbl='git branch -v'
+  alias gbL='git branch -av'
+  alias gbr='git branch --remote'
+  alias gbx='git branch -d'
+  alias gbX='git branch -D'
+  alias gbm='git branch -m'
+  alias gbM='git branch -M'
   alias gbs='git show-branch'
-  alias gbS='git show-branch --all'
-  alias gbv='git branch --verbose'
-  alias gbV='git branch --verbose --verbose'
-  alias gbx='git branch --delete'
-  alias gbX='git branch --delete --force'
+  alias gbS='git show-branch -a'
 
   # Commit (c)
-  alias gc='git commit --verbose'
-  alias gca='git commit --verbose --all'
-  alias gcm='git commit --message'
-  alias gcS='git commit -S --verbose'
-  alias gcSa='git commit -S --verbose --all'
-  alias gcSm='git commit -S --message'
-  alias gcam='git commit --all --message'
+  alias gc='git commit -v'
+  alias gc!='git commit -v --amend'
+  alias gcn!='git commit -v --no-edit --amend'
+  alias gca='git commit -v -a'
+  alias gca!='git commit -v -a --amend'
+  alias gcan!='git commit -v -a --no-edit --amend'
+  alias gcans!='git commit -v -a -s --no-edit --amend'
+  alias gcam='git commit -a -m'
+  alias gcmsg='git commit --message'
+  alias gcb='git checkout -b'
   alias gco='git checkout'
   alias gcO='git checkout --patch'
-  alias gcf='git commit --amend --reuse-message HEAD'
-  alias gcSf='git commit -S --amend --reuse-message HEAD'
-  alias gcF='git commit --verbose --amend'
-  alias gcSF='git commit -S --verbose --amend'
+  alias gcm='git checkout master'
   alias gcp='git cherry-pick --ff'
   alias gcP='git cherry-pick --no-commit'
   alias gcr='git revert'
   alias gcR='git reset "HEAD^"'
   alias gcs='git show'
-  alias gcl='git-commit-lost'
 
   # Conflict (C)
-  alias gCl='git --no-pager diff --name-only --diff-filter=U'
+  alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
   alias gCa='git add $(gCl)'
   alias gCe='git mergetool $(gCl)'
   alias gCo='git checkout --ours --'
@@ -79,84 +84,22 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gCt='git checkout --theirs --'
   alias gCT='gCt $(gCl)'
 
-  # Data (d)
-  alias gd='git ls-files'
-  alias gdc='git ls-files --cached'
-  alias gdx='git ls-files --deleted'
-  alias gdm='git ls-files --modified'
-  alias gdu='git ls-files --other --exclude-standard'
-  alias gdk='git ls-files --killed'
+  # Diff (d)
+  alias gd='git diff --no-ext-diff'
+  alias gdca='git diff --no-ext-diff --cached'
+  alias giD='git diff --no-ext-diff --cached --word-diff'
+  alias gir='git reset'
+  alias giR='git reset --patch'
+  alias gix='git rm -r --cached'
+  alias giX='git rm -rf --cached'
   alias gdi='git status --porcelain --short --ignored | sed -n "s/^!! //p"'
 
   # Fetch (f)
   alias gf='git fetch'
-  alias gfa='git fetch --all'
+  alias gfa='git fetch --all --prune'
   alias gfc='git clone'
   alias gfm='git pull'
   alias gfr='git pull --rebase'
-
-  # Flow (F)
-  alias gFi='git flow init'
-  alias gFf='git flow feature'
-  alias gFb='git flow bugfix'
-  alias gFl='git flow release'
-  alias gFh='git flow hotfix'
-  alias gFs='git flow support'
-
-  alias gFfl='git flow feature list'
-  alias gFfs='git flow feature start'
-  alias gFff='git flow feature finish'
-  alias gFfp='git flow feature publish'
-  alias gFft='git flow feature track'
-  alias gFfd='git flow feature diff'
-  alias gFfr='git flow feature rebase'
-  alias gFfc='git flow feature checkout'
-  alias gFfm='git flow feature pull'
-  alias gFfx='git flow feature delete'
-
-  alias gFbl='git flow bugfix list'
-  alias gFbs='git flow bugfix start'
-  alias gFbf='git flow bugfix finish'
-  alias gFbp='git flow bugfix publish'
-  alias gFbt='git flow bugfix track'
-  alias gFbd='git flow bugfix diff'
-  alias gFbr='git flow bugfix rebase'
-  alias gFbc='git flow bugfix checkout'
-  alias gFbm='git flow bugfix pull'
-  alias gFbx='git flow bugfix delete'
-
-  alias gFll='git flow release list'
-  alias gFls='git flow release start'
-  alias gFlf='git flow release finish'
-  alias gFlp='git flow release publish'
-  alias gFlt='git flow release track'
-  alias gFld='git flow release diff'
-  alias gFlr='git flow release rebase'
-  alias gFlc='git flow release checkout'
-  alias gFlm='git flow release pull'
-  alias gFlx='git flow release delete'
-
-  alias gFhl='git flow hotfix list'
-  alias gFhs='git flow hotfix start'
-  alias gFhf='git flow hotfix finish'
-  alias gFhp='git flow hotfix publish'
-  alias gFht='git flow hotfix track'
-  alias gFhd='git flow hotfix diff'
-  alias gFhr='git flow hotfix rebase'
-  alias gFhc='git flow hotfix checkout'
-  alias gFhm='git flow hotfix pull'
-  alias gFhx='git flow hotfix delete'
-
-  alias gFsl='git flow support list'
-  alias gFss='git flow support start'
-  alias gFsf='git flow support finish'
-  alias gFsp='git flow support publish'
-  alias gFst='git flow support track'
-  alias gFsd='git flow support diff'
-  alias gFsr='git flow support rebase'
-  alias gFsc='git flow support checkout'
-  alias gFsm='git flow support pull'
-  alias gFsx='git flow support delete'
 
   # Grep (g)
   alias gg='git grep'
@@ -166,19 +109,6 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias ggv='git grep --invert-match'
   alias ggw='git grep --word-regexp'
 
-  # Index (i)
-  alias gia='git add'
-  alias giA='git add --patch'
-  alias giu='git add --update'
-  alias gid='git diff --no-ext-diff --cached'
-  alias giD='git diff --no-ext-diff --cached --word-diff'
-  alias gii='git update-index --assume-unchanged'
-  alias giI='git update-index --no-assume-unchanged'
-  alias gir='git reset'
-  alias giR='git reset --patch'
-  alias gix='git rm -r --cached'
-  alias giX='git rm -rf --cached'
-
   # Log (l)
   alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
   alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
@@ -187,6 +117,9 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias glg='git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"'
   alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
   alias glc='git shortlog --summary --numbered'
+  alias glog='git log --oneline --decorate --graph'
+  alias gloga='git log --oneline --decorate --graph --all'
+  alias glp="_git_log_prettily"
 
   # Merge (m)
   alias gm='git merge'
@@ -194,34 +127,50 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gmF='git merge --no-ff'
   alias gma='git merge --abort'
   alias gmt='git mergetool'
+  alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
+  alias gmom='git merge origin/master'
+  alias gmum='git merge upstream/master'
 
   # Push (p)
   alias gp='git push'
-  alias gpf='git push --force-with-lease'
-  alias gpF='git push --force'
+  alias ggpush='git push origin $(git-branch-current)'
+  alias gpf='git push --force'
   alias gpa='git push --all'
   alias gpA='git push --all && git push --tags'
   alias gpt='git push --tags'
   alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
+  alias ggpull='git pull origin $(git-branch-current)'
   alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
+  alias gpd='git push --dry-run'
+  alias gpu='git push upstream'
+  alias gpv='git push -v'
+  alias gprb='git pull --rebase'
 
-  # Rebase (r)
-  alias gr='git rebase'
-  alias gra='git rebase --abort'
-  alias grc='git rebase --continue'
-  alias gri='git rebase --interactive'
-  alias grs='git rebase --skip'
+  # Rebase (rb)
+  alias grb='git rebase'
+  alias grbm='git rebase master'
+  alias grba='git rebase --abort'
+  alias grbc='git rebase --continue'
+  alias grbi='git rebase --interactive'
+  alias grbs='git rebase --skip'
 
-  # Remote (R)
-  alias gR='git remote'
-  alias gRl='git remote --verbose'
-  alias gRa='git remote add'
-  alias gRx='git remote rm'
-  alias gRm='git remote rename'
-  alias gRu='git remote update'
-  alias gRp='git remote prune'
-  alias gRs='git remote show'
-  alias gRb='git-hub-browse'
+  # Remote (r)
+  alias gr='git remote'
+  alias grl='git remote --verbose'
+  alias grv='git remote --verbose'
+  alias gra='git remote add'
+  alias grrm='git remote remove'
+  alias grmv='git remote rename'
+  alias grup='git remote update'
+  alias grp='git remote prune'
+  alias grs='git remote show'
+  alias grset='git remote set-url'
+  alias grbrowse='git-hub-browse'
+
+  # Reset (r)
+  alias grh='git reset HEAD'
+  alias grhh='git reset HEAD --hard'
+  alias gru='git reset --'
 
   # Stash (s)
   alias gs='git stash'
@@ -231,11 +180,16 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gsl='git stash list'
   alias gsL='git-stash-dropped'
   alias gsd='git stash show --patch --stat'
-  alias gsp='git stash pop'
+  alias gstp='git stash pop'
   alias gsr='git-stash-recover'
   alias gss='git stash save --include-untracked'
   alias gsS='git stash save --patch --no-keep-index'
   alias gsw='git stash save --include-untracked --keep-index'
+
+  # Status
+  alias gsb='git status -sb'
+  alias gss='git status -s'
+  alias gst='git status'
 
   # Submodule (S)
   alias gS='git submodule'
