@@ -4,6 +4,7 @@
 #
 # Authors:
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
+#   Robbie Trencheny <me@robbiet.us>
 #
 
 local version
@@ -14,11 +15,19 @@ unset node_info
 typeset -gA node_info
 
 if (( $+functions[nvm_version] )); then
-  version="${$(nvm_version)#v}"
+  version="${$(nvm_version)#iojs-#v}"
+  if nvm_is_iojs_version "$(nvm_version)"; then
+    fork="$(nvm_iojs_prefix)"
+  else
+    fork="$(nvm_node_prefix)"
+  fi
 fi
 
 if [[ "$version" != (none|) ]]; then
   zstyle -s ':prezto:module:node:info:version' format 'version_format'
   zformat -f version_formatted "$version_format" "v:$version"
+  zstyle -s ':prezto:module:node:info:fork' format 'fork_format'
+  zformat -f fork_formatted "$fork_format" "f:$fork"
   node_info[version]="$version_formatted"
+  node_info[fork]="$fork_formatted"
 fi
