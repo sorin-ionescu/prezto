@@ -1,74 +1,34 @@
+# Sourced in login shells before .zshrc
+# Commands that should be exectued only in login shells
+# Do not set environment variables
+# Do not define alias, functions, options, etc.
 #
-# Executes commands at login pre-zshrc.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# +--------------------+-------+-------+--------+
+# |                    | Inter | Inter | Script |
+# |                    | Login |       |        |
+# +====================+=======+=======+========+
+# | /etc/zshenv        |   A   |   A   |   A    |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zshenv   |   B   |   B   |   B    |
+# +--------------------+-------+-------+--------+
+# | /etc/zprofile      |   C   |       |        |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zprofile |   D   |       |        |
+# +--------------------+-------+-------+--------+
+# | /etc/zshrc         |   E   |   C   |        |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zshrc    |   F   |   D   |        |
+# +--------------------+-------+-------+--------+
+# | /etc/zlogin        |   G   |       |        |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zlogin   |   H   |       |        |
+# +--------------------+-------+-------+--------+
 
-#
-# Browser
-#
-
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+echo $PATH | \grep -q '^/opt/'
+if [ $? -eq 1 ]; then
+    echo ~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+
+    echo Apple put path_helper in /etc/zprofile again.
+    echo Just move it to /etc/zshenv.
+    echo ~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+
 fi
 
-#
-# Editors
-#
-
-export EDITOR='nano'
-export VISUAL='nano'
-export PAGER='less'
-
-#
-# Language
-#
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-
-#
-# Paths
-#
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  /usr/local/{bin,sbin}
-  $path
-)
-
-#
-# Less
-#
-
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"

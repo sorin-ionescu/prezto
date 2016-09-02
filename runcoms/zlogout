@@ -1,9 +1,11 @@
-#
-# Executes commands at logout.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# Sourced when login shells exit
+
+if [ -z "${TERM_PROGRAM}" ]
+then
+	if klist -s
+	then kdestroy
+	fi
+fi
 
 # Print the message.
 cat <<-EOF

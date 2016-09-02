@@ -1,11 +1,131 @@
+# Sourced on all invocations of shell unless -f option is set
+# Command Search Path
+# Important Environment Variables
+# Do not produce output
+# Do not assume tty
 #
-# Defines environment variables.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# +--------------------+-------+-------+--------+
+# |                    | Inter | Inter | Script |
+# |                    | Login |       |        |
+# +====================+=======+=======+========+
+# | /etc/zshenv        |   A   |   A   |   A    |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zshenv   |   B   |   B   |   B    |
+# +--------------------+-------+-------+--------+
+# | /etc/zprofile      |   C   |       |        |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zprofile |   D   |       |        |
+# +--------------------+-------+-------+--------+
+# | /etc/zshrc         |   E   |   C   |        |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zshrc    |   F   |   D   |        |
+# +--------------------+-------+-------+--------+
+# | /etc/zlogin        |   G   |       |        |
+# +--------------------+-------+-------+--------+
+# | $ZDOTDIR/.zlogin   |   H   |       |        |
+# +--------------------+-------+-------+--------+
 
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
+
+export LANG=en_US.UTF-8
+
+# Setup path
+path=(
+    /opt/local/bin  /usr/local/bin  /usr/bin  /bin
+    /opt/local/sbin /usr/local/sbin /usr/sbin /sbin
+    $HOME/Library/Scripts/bin/`/usr/bin/uname -s`/`/usr/bin/uname -m`
+    $HOME/Library/Scripts/bin/`/usr/bin/uname -s`
+    $HOME/Library/Scripts/bin/
+    $HOME/Library/Python/bin
+    /usr/X11R6/bin
+    /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+)
+
+if [ -d $HOME/.rvm/bin ]; then
+    path=($path $HOME/.rvm/bin)
 fi
+
+# Editors
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+export LESSEDIT='vim'
+
+
+# Language
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+  fi
+
+
+# Temporary Files
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$LOGNAME"
+    mkdir -p -m 700 "$TMPDIR"
+    fi
+
+    TMPPREFIX="${TMPDIR%/}/zsh"
+
+
+# Go
+if [ -d /usr/local/go/bin ]; then
+    path=($path /usr/local/go/bin)
+    declare -x GOPATH="/Users/lanhel/Developer/SpaceMonkey/katamari/go"
+fi
+
+
+# Setup MANPATH
+manpath=(
+    $HOME/man
+    /opt/local/man
+    /usr/local/share/man
+    /usr/local/man
+    /usr/share/man
+    /usr/man
+)
+
+# Set the the list of directories that cd searches.
+# cdpath=(
+#   $cdpath
+# )
+# Setup file creation mask
+#umask 077
+
+# Setup by operating system type
+case `/usr/bin/uname -s` in
+    Darwin)
+	path=($path /System/Applications /Applications)
+
+	declare -x MANPATH=`echo $MANPATH | sed 's*'$HOME/man'*'$HOME/Library/man'*g'`
+	;;
+
+    linux*)
+    ;;
+esac
+
+# Setup by processor type
+case `/usr/bin/uname -m` in
+    powerpc)
+    ;;
+
+    i386)
+    ;;
+esac
+
+# Setup by host name
+case `/usr/bin/uname -n` in
+    helsten)
+    ;;
+
+    pfiefferhorn)
+    ;;
+esac
+
+# Setup by subsystem
+for f in `find $HOME/Library/Scripts/config -name '*.shenv' -print`; do
+    source "$f"
+done
+
+# Ensure path arrays do not contain duplicates
+typeset -gU cdpath fpath mailpath path
+
+
