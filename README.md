@@ -1,37 +1,40 @@
-Prezto — Instantly Awesome Zsh
-==============================
+# Prezto — Instantly Awesome Zsh
+
 
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
 
-Installation
-------------
+## Prerequisites
 
-Prezto will work with any recent release of Zsh, but the minimum required
-version is 4.3.17.
+Obviously you need to install [Zsh][1]. Prezto will work with any recent release of Zsh, but the minimum required version is 4.3.17.
 
-  1. Launch Zsh:
+## Installation
 
-        zsh
+### Automated installation
 
-  2. Clone the repository:
+`curl -sL https://github.com/sorin-ionescu/prezto/raw/install.zsh | zsh -`
 
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+### Manual installation:
 
-  3. Create a new Zsh configuration by copying the Zsh configuration files
-     provided:
+```bash
+# 1. Launch Zsh:
+zsh
 
-        setopt EXTENDED_GLOB
-        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-        done
+# 2. Clone the repository:
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-  4. Set Zsh as your default shell:
+# 3. Create a new Zsh configuration by copying the Zsh configuration files provided:
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
 
-        chsh -s /bin/zsh
+# 4. Set Zsh as your default shell:
+chsh -s /bin/zsh
 
-  5. Open a new Zsh terminal window or tab.
+# 5. Open a new Zsh terminal window or tab.
+```
 
 ### Troubleshooting
 
@@ -67,21 +70,21 @@ accompanying README files to learn of what is available.
 
      ![sorin theme][2]
 
-Customization
--------------
+## Customization
+
 
 The project is managed via [Git][3]. It is highly recommended that you fork this
 project; so, that you can commit your changes and push them to [GitHub][4] to
 not lose them. If you do not know how to use Git, follow this [tutorial][5] and
 bookmark this [reference][6].
 
-Resources
----------
+## Resources
+
 
 The [Zsh Reference Card][7] and the [zsh-lovers][8] man page are indispensable.
 
-License
--------
+## License
+
 
 (The MIT License)
 

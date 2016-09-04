@@ -1,29 +1,12 @@
 #!/usr/bin/env zsh
 setopt PIPEFAIL
 setopt EXTENDED_GLOB
-# setopt XTRACE prompt_subst
 
 ## Ensure colors are available.
 autoload -U colors && colors
 
 PREZTO_DIRECTORY="${ZDOTDIR:-$HOME}/.zprezto"
 PREZTO_GIT_REMOTE="https://github.com/ezintz/prezto.git"
-
-function is_osx {
-  if [[ "$OSTYPE" != darwin* ]]; then
-    return 1
-  fi
-
-  return 0
-}
-
-function is_linux {
-  if [[ "$OSTYPE" != linux* ]]; then
-    return 1
-  fi
-
-  return 0
-}
 
 function print_header {
   printf "\n${fg[blue]}%s${reset_color}\n" "$@"
@@ -63,14 +46,9 @@ function is_confirmed {
   return 1
 }
 
-function cleanup {
-  print_header "Cleanup"
-}
-
 TRAPINT() {
   print ""
   print_error "Caught SIGINT, aborting."
-  cleanup
   return $(( 128 + $1 ))
 }
 
