@@ -6,7 +6,7 @@ setopt EXTENDED_GLOB
 autoload -U colors && colors
 
 PREZTO_DIRECTORY="${ZDOTDIR:-$HOME}/.zprezto"
-PREZTO_GIT_REMOTE="https://github.com/ezintz/prezto.git"
+PREZTO_GIT_REMOTE="https://github.com/sorin-ionescu/prezto.git"
 
 function print_header {
   printf "\n${fg[blue]}%s${reset_color}\n" "$@"
