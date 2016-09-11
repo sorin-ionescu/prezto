@@ -16,6 +16,7 @@ eval "$(rbenv init -)"
 
 export PGDATA=/usr/local/var/postgres
 export GOPATH=$HOME/.go
+export EDITOR=atom
 
 alias g='git'
 alias bi='bundle install'
