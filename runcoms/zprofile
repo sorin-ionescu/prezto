@@ -1,76 +1,66 @@
-#
-# Executes commands at login pre-zshrc.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+export ZEXTRA_DIR="${ZEXTRA_DIR:=${HOME}/.zextra}"
+# [[ -s "${ZEXTRA_DIR}/env.zsh" ]] && source "$ZEXTRA_DIR/env.zsh"
+[[ -s "${ZEXTRA_DIR}/directories.zsh" ]] && source "${ZEXTRA_DIR}/directories.zsh"
 
-#
-# Browser
-#
+export TIMEFMT=$'%J:\nreal\t%*E\nuser\t%U\nsys\t%S\n'
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
+unset zle_bracketed_paste
 
-#
-# Editors
-#
-
-export EDITOR='nano'
-export VISUAL='nano'
+export BROWSER='open'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
+bindkey -v
 
-#
-# Language
-#
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export KEYTIMEOUT=1
 
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
+export GOPATH=${HOME}/golang
+export GOROOT=/usr/local/opt/go/libexec
+export JBOSS_HOME=/usr/local/opt/jboss-as/libexec
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+export ECLIPSE_HOME="${HOME}/Applications/Eclipse.app/Contents/Eclipse"
+export ANDROID_HOME=$HOME/projects/android/sdk
+export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
+export USE_CCACHE=1
 
-#
-# Paths
-#
-
-# Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/{bin,sbin}
+  ${HOME}/bin
+  /usr/local/{bin,sbin,heroku/bin}
+  /Applications/Postgres.app/Contents/Versions/9.5/bin
   $path
+  ${JBOSS_HOME}/bin
+  ${HOME}/Library/Developer
+  ${GOPATH}/bin
+  ${GOROOT}/bin
+  /opt/chefdk/bin
 )
 
-#
-# Less
-#
+fpath=(
+  ${HOME}/.zextra/completions
+  ${HOME}/.zextra/functions
+  $fpath
+)
+autoload gi clean-compiled-funcs signing-cert man mount-android umount-android \
+  name-dir pygless recompile-funcs take use-ruby
 
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
+[[ -x /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
+[[ -f "${HOME}/.env" ]] && source "${HOME}/.env"
+
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-#
-# Temporary Files
-#
-#
-# Set TMPDIR if the variable is not set/empty or the directory doesn't exist
-if [[ -z "${TMPDIR}" ]]; then
-  export TMPDIR="/tmp/zsh-${UID}"
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$LOGNAME"
+  mkdir -p -m 700 "$TMPDIR"
 fi
 
-if [[ ! -d "${TMPDIR}" ]]; then
-  mkdir -m 700 "${TMPDIR}"
-fi
+TMPPREFIX="${TMPDIR%/}/zsh"
+
+#  vim: set ts=8 sw=2 tw=0 ft=zsh et :
