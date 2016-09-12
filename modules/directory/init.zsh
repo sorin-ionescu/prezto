@@ -27,7 +27,7 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 # Aliases
 #
 
-alias d='dirs -v'
+alias d='dirs -v | head -10'
 alias md='mkdir -p'
 alias rd=rmdir
 alias -- -='cd -'
