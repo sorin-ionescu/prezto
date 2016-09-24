@@ -178,5 +178,6 @@ export GOPATH=/Users/ali
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export RBENV_ROOT=/usr/local/var/rbenv
 
+export PATH=$PATH:/Users/ali/Documents/omnisharp-server/OmniSharp/bin/Debug/
 
 
