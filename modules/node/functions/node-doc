@@ -11,4 +11,4 @@ if [[ -z "$BROWSER" ]]; then
 fi
 
 # TODO: Make the sections easier to use.
-"$BROWSER" "http://nodejs.org/docs/$(node --version | sed 's/-.*//')/api/all.html#${1}"
+"$BROWSER" "http://nodejs.org/docs/$(node --version | sed 's/-.*//')/api/${1}.html"
