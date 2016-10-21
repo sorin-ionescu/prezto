@@ -22,3 +22,6 @@
 [submodule "modules/deer/external"]
 	path = modules/deer/external
 	url = https://github.com/Vifon/deer.git
+[submodule "modules/zsh-notify/external"]
+	path = modules/zsh-notify/external
+	url = https://github.com/marzocchi/zsh-notify.git
