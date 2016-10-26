@@ -74,6 +74,7 @@ fi
 
 alias todo=/usr/local/bin/todo.sh
 alias t=/usr/local/bin/todo.sh
+alias ld='ls -ld */'
 
 
 TMPPREFIX="${TMPDIR%/}/zsh"
