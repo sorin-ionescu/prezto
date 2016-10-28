@@ -31,3 +31,5 @@ alias caski='brew cask install'
 alias caskl='brew cask list'
 alias casks='brew cask search'
 alias caskx='brew cask uninstall'
+# see https://github.com/caskroom/homebrew-cask/issues/309
+alias casku='for c in `brew cask list`; do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done'
