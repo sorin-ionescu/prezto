@@ -168,6 +168,11 @@ alias gSs='git submodule sync'
 alias gSu='git submodule foreach git pull origin master'
 alias gSx='git-submodule-remove'
 
+# Tags (t)
+# see http://stackoverflow.com/questions/1841341/remove-local-tags-that-are-no-longer-on-the-remote-repository
+alias gtd="diff <(git tag | sort) <( git ls-remote --tags origin | cut -f2 | grep -v '\^' | sed 's#refs/tags/##' | sort)"
+alias gtp="git fetch --prune origin +refs/tags/*:refs/tags/*"
+
 # Working Copy (w)
 alias gws='git status --ignore-submodules=${_git_status_ignore_submodules} --short'
 alias gwS='git status --ignore-submodules=${_git_status_ignore_submodules}'
