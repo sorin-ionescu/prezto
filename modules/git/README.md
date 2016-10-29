@@ -53,6 +53,7 @@ Aliases
   - `gc` records changes to the repository.
   - `gca` stages all modified and deleted files.
   - `gcm` records changes to the repository with the given message.
+  - `gcM` same as `gcm` but adds a GPG signature to the commit.
   - `gco` checks out a branch or paths to work tree.
   - `gcO` checks out hunks from the index or the tree interactively.
   - `gcf` amends the tip of the current branch using the same log message as
