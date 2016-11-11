@@ -19,6 +19,10 @@ if [[ -f ~/.local-exports ]]; then
   source ~/.local-exports
 fi
 
+if [[ -f ~/.tokenrc ]]; then
+  source ~/.tokenrc
+fi
+
 # Vi mode
 bindkey -v
 export KEYTIMEOUT=22
