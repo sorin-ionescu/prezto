@@ -13,6 +13,9 @@ if [[ -s "$DOTFILES/zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+# load the default before the modules load
+autoload -Uz compinit && compinit
+
 source_if_present() {
 	if [ -f "$1" ]; then
 		. "$1"
