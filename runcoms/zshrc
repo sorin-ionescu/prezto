@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 #
 # Executes commands at the start of an interactive session.
 #
@@ -6,8 +8,28 @@
 #
 
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [[ -s "$DOTFILES/zprezto/init.zsh" ]]; then
+  source "$DOTFILES/zprezto/init.zsh"
 fi
 
 # Customize to your needs...
+# load the default before the modules load
+autoload -Uz compinit && compinit
+
+source_if_present() {
+	if [ -f "$1" ]; then
+		. "$1"
+	fi
+}
+
+# Reload profile
+alias reload!=". $HOME/.zshrc"
+
+path=(
+  $HOME/bin
+  $DOTFILES/bin
+  /usr/local/opt/coreutils
+  $path
+)
+
+source_if_present "$DOTFILES/system/load.sh"
