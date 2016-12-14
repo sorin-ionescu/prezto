@@ -32,6 +32,7 @@ Defines [Docker][1] aliases.
   - `dkrmi` Remove one or more images
   - `dkrmC` Clean up exited containers
   - `dkrmI` Clean up dangling images
+  - `dkrmV` Clean up unused volumes ( Docker >= 1.9 )
   - `dks` Start one or more stopped containers
   - `dkS` Restart a container
   - `dkss` Display a live stream of container(s) resource usage statistics
@@ -50,6 +51,7 @@ Defines [Docker][1] aliases.
   - `dkma` Get or set the active machine
   - `dkmcp` Copy files between machines
   - `dkme` Set up the environment for the Docker client
+        (eg: `dkme staging` to toggle to staging)
   - `dkmin` Inspect information about a machine
   - `dkmip` Get the IP address of a machine
   - `dkmk` Kill a machine

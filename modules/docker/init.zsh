@@ -7,12 +7,14 @@
 
 # Return if requirements are not found.
 if (( ! $+commands[docker] )); then
-  return 1
+    return 1
 fi
 
 #
 # Functions
 #
+
+# Set Docker Machine environment
 function dkme {
     eval $(docker-machine env $1)
 }
@@ -62,6 +64,9 @@ alias dkrmC='docker rm $(docker ps -a | grep Exited | awk '"'"'{ print $1 }'"'"'
 
 # Clean up dangling images
 alias dkrmI='docker rmi $(docker images -f dangling=true -q)'
+
+# Clean up dangling volumes
+alias dkrmV='docker volume rm $(docker volume ls -qf dangling=true)'
 
 ## Non aliased docker commands:
 # commit   -- Create a new image from a container's changes
