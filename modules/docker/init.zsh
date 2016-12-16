@@ -125,6 +125,7 @@ alias dkcs='docker-compose start'
 alias dkcsc='docker-compose scale'
 alias dkcS='docker-compose restart'
 alias dkcu='docker-compose up'
+alias dkcU='docker-compose up -d'
 alias dkcV='docker-compose version'
 alias dkcx='docker-compose stop'
 

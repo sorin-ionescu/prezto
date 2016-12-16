@@ -86,6 +86,8 @@ Defines [Docker][1] aliases.
   - `dkcsc` Set number of containers for a service
   - `dkcS` Restart services
   - `dkcu` Create and start containers
+  - `dkcU` Create and start containers in detached mode:
+        Run containers in the background, print new container names
   - `dkcV` Show the Docker-Compose version information
   - `dkcx` Stop services
 
