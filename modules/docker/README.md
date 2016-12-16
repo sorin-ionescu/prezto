@@ -25,8 +25,8 @@ Defines [Docker][1] aliases.
   - `dkps` List containers
   - `dkpsa` List all containers (default lists just running)
   - `dkr` Run a command in a new container
-  - `dkR` Run an interactive command in a new container and automatically remove
-  the container when it exits
+  - `dkR` Run an interactive command in a new container
+          and automatically remove the container when it exits
   - `dkRe` like `dkR` and set entry point to `/bin/bash`
   - `dkrm` Remove one or more containers
   - `dkrmi` Remove one or more images
@@ -51,7 +51,7 @@ Defines [Docker][1] aliases.
   - `dkma` Get or set the active machine
   - `dkmcp` Copy files between machines
   - `dkme` Set up the environment for the Docker client
-        (eg: `dkme staging` to toggle to staging)
+           (eg: `dkme staging` to toggle to staging)
   - `dkmin` Inspect information about a machine
   - `dkmip` Get the IP address of a machine
   - `dkmk` Kill a machine
@@ -73,6 +73,8 @@ Defines [Docker][1] aliases.
 
   - `dkc` is short for `docker-compose`
   - `dkcb` Build or rebuild services
+  - `dkcB` Build or rebuild services
+           and do not use cache when building the image
   - `dkcd` Stop and remove containers, networks, images, and volumes
   - `dkce` Execute a command in a running container
   - `dkck` Kill containers
@@ -87,7 +89,7 @@ Defines [Docker][1] aliases.
   - `dkcS` Restart services
   - `dkcu` Create and start containers
   - `dkcU` Create and start containers in detached mode:
-        Run containers in the background, print new container names
+           Run containers in the background, print new container names
   - `dkcV` Show the Docker-Compose version information
   - `dkcx` Stop services
 

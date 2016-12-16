@@ -112,6 +112,7 @@ alias dkmx='docker-machine stop'
 
 alias dkc='docker-compose'
 alias dkcb='docker-compose build'
+alias dkcB='docker-compose build --no-cache'
 alias dkcd='docker-compose down'
 alias dkce='docker-compose exec'
 alias dkck='docker-compose kill'
