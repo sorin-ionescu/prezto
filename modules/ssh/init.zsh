@@ -6,8 +6,14 @@
 #
 
 # Return if requirements are not found.
-if [[ "$OSTYPE" == darwin* ]] || (( ! $+commands[ssh-agent] )); then
+if (( ! $+commands[ssh-agent] )); then
   return 1
+fi
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    _ssh_add_cmd="ssh-add -A"
+else
+    _ssh_add_cmd="ssh-add"
 fi
 
 # Set the path to the SSH directory.
@@ -40,11 +46,11 @@ fi
 if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   zstyle -a ':prezto:module:ssh:load' identities '_ssh_identities'
   if (( ${#_ssh_identities} > 0 )); then
-    ssh-add "$_ssh_dir/${^_ssh_identities[@]}" 2> /dev/null
+    ${(s: :)_ssh_add_cmd} "$_ssh_dir/${^_ssh_identities[@]}" 2> /dev/null
   else
-    ssh-add 2> /dev/null
+    ${(s: :)_ssh_add_cmd} 2> /dev/null
   fi
 fi
 
 # Clean up.
-unset _ssh_{dir,identities} _ssh_agent_{env,sock}
+unset _ssh_{dir,identities} _ssh_agent_{env,sock} _ssh_add_cmd
