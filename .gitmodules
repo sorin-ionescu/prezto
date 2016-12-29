@@ -22,3 +22,6 @@
 [submodule "modules/autoenv/external"]
 	path = modules/autoenv/external
 	url = https://github.com/horosgrisa/autoenv
+[submodule "modules/deer/external"]
+	path = modules/deer/external
+	url = https://github.com/Vifon/deer.git
