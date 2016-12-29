@@ -37,8 +37,9 @@ zstyle ':prezto:load' pmodule \
 #
 # Deer
 #
+
 # Set key bindings
-zstyle ':prezto:module:deer' key-bindings '^k'
+# zstyle ':prezto:module:deer' key-bindings '^k'
 
 #
 # Autosuggestions
