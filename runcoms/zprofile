@@ -66,8 +66,4 @@ fi
 # Temporary Files
 #
 
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="$(mktemp -d)"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
+TMPPREFIX="$(mktemp -d)/zsh"
