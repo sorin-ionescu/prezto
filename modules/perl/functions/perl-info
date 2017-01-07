@@ -15,7 +15,7 @@ unset perl_info
 typeset -gA perl_info
 
 if (( $+commands[perlbrew] )); then
-  version=${${(F)${(f)"$(perlbrew list)"}:# *}[(w)2]}
+  version="${PERLBREW_PERL##*perl-}"
 elif (( $+commands[plenv] )); then
   version=$(plenv version-name)
 elif (( $+commands[perl] )); then
