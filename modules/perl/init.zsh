@@ -11,7 +11,7 @@ if (( ! $+commands[perl] )); then
 fi
 
 #
-# Load Perlbrew
+# Load Perlbrew or plenv
 #
 
 # Load Perlbrew into the shell session.
@@ -22,6 +22,15 @@ if [[ -s "${HOME}/perl5/perlbrew/etc/bashrc" ]]; then
   if [[ -s "${HOME}/perl5/perlbrew/etc/perlbrew-completion.bash" ]]; then
     source "${HOME}/perl5/perlbrew/etc/perlbrew-completion.bash"
   fi
+
+# Load manually installed plenv into the shell session.
+elif [[ -s "$HOME/.plenv/bin/plenv" ]]; then
+  path=("$HOME/.plenv/bin" $path)
+  eval "$(plenv init - --no-rehash zsh)"
+
+# Load package manager installed plenv into the shell session.
+elif (( $+commands[plenv] )); then
+  eval "$(plenv init - --no-rehash zsh)"
 fi
 
 #
