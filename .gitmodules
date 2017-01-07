@@ -7,6 +7,9 @@
 [submodule "modules/completion/external"]
 	path = modules/completion/external
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "modules/autosuggestions/external"]
+	path = modules/autosuggestions/external
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "modules/prompt/external/powerline"]
 	path = modules/prompt/external/powerline
 	url = https://github.com/davidjrice/prezto_powerline.git
@@ -16,6 +19,12 @@
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
-[submodule "modules/autosuggestions/external"]
-	path = modules/autosuggestions/external
-	url = https://github.com/tarruda/zsh-autosuggestions
+[submodule "modules/autoenv/external"]
+	path = modules/autoenv/external
+	url = https://github.com/horosgrisa/autoenv
+[submodule "modules/deer/external"]
+	path = modules/deer/external
+	url = https://github.com/Vifon/deer.git
+[submodule "modules/zsh-notify/external"]
+	path = modules/zsh-notify/external
+	url = https://github.com/marzocchi/zsh-notify.git

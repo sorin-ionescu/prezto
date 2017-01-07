@@ -40,6 +40,7 @@ alias gbm='git branch -m'
 alias gbM='git branch -M'
 alias gbs='git show-branch'
 alias gbS='git show-branch -a'
+alias gbf='git-branch-list'
 
 # Commit (c)
 alias gc='git commit --verbose'
@@ -84,7 +85,7 @@ alias gfr='git pull --rebase'
 alias gg='git grep'
 alias ggi='git grep --ignore-case'
 alias ggl='git grep --files-with-matches'
-alias ggL='git grep --files-without-matches'
+alias ggL='git grep --files-without-match'
 alias ggv='git grep --invert-match'
 alias ggw='git grep --word-regexp'
 

@@ -6,7 +6,7 @@
 #
 
 # Return if requirements are not found.
-if [[ "$OSTYPE" == darwin* ]] || (( ! $+commands[ssh-agent] )); then
+if [[ `uname -s` == "Darwin" ]] && [[ `uname -r | awk -F. '{print $1}'` -le 15 ]] || (( ! $+commands[ssh-agent] )); then
   return 1
 fi
 

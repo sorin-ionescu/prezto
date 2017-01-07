@@ -3,9 +3,11 @@ SSH
 
 Provides for an easier use of [SSH][1] by setting up [ssh-agent][2].
 
-This module is disabled on Mac OS X due to custom Apple SSH support rendering it
-unnecessary. Use `ssh-add -K` to store identities in Keychain; they will be
-added to `ssh-agent` automatically and persist between reboots.
+This module is disabled on Mac OS X versions less than 10.12 (Sierra) due to
+custom Apple SSH support rendering it unnecessary. Use `ssh-add -K` to store
+identities in Keychain; they will be added to `ssh-agent` automatically and
+persist between reboots. This support was removed in macOS Sierra to [re-align
+behavior with mainstream OpenSSH](https://openradar.appspot.com/27348363).
 
 Settings
 --------
