@@ -10,4 +10,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Add env.sh
+source ~/Projects/config/env.sh
+
 # Customize to your needs...
