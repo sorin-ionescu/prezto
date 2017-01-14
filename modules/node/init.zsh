@@ -9,10 +9,14 @@
 # Load manually installed NVM into the shell session.
 if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
   source "$HOME/.nvm/nvm.sh"
-
-# Load package manager installed NVM into the shell session.
+  
+# OSX: Homebrew
 elif (( $+commands[brew] )) && [[ -d "$(brew --prefix nvm 2>/dev/null)" ]]; then
   source $(brew --prefix nvm)/nvm.sh
+
+# Arch Linux: Pacman
+elif [[ -s "/usr/share/nvm/nvm.sh" ]]; then
+  source "/usr/share/nvm/nvm.sh"
 
 # Return if requirements are not found.
 elif (( ! $+commands[node] )); then
