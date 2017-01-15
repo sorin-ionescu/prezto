@@ -6,8 +6,9 @@
 #
 
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+mypath=$(readlink -f "${ZDOTDIR:-$HOME}/.zshrc")
+prezto_home=${mypath:h:h}
+
+source "${prezto_home}/init.zsh"
 
 # Customize to your needs...
