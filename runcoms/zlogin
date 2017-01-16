@@ -1,23 +1,36 @@
+# /etc/zsh/zlogin: system-wide .zlogin file for zsh(1).
 #
-# Executes commands at login post-zshrc.
+# This file is sourced only for login shells. It
+# should contain commands that should be executed only
+# in login shells. It should be used to set the terminal
+# type and run a series of external commands (fortune,
+# msgs, from, etc.)
+# Executes commands at login post-zshrc
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# Global Order: zshenv, zprofile, zshrc, zlogin
 #
 
 # Execute code that does not affect the current session in the background.
 {
-  # Compile the completion dump to increase startup speed.
-  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
-  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+# Compile the completion dump to increase startup speed.
+zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
     zcompile "$zcompdump"
-  fi
+fi
 } &!
+
+# Ajouter ceci dans ~/.zlogin ou ~/.zprofile pour lancer startx au demarrage de la session
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx # Pour lancer 1 seul VM
+#[[ -z $DISPLAY && $XDG_VTNR -le 2 ]] && exec startx # Autre variante pour lancer plusieurs VM avec la config par defaut de .xinitrc sur les tty1,2et3.
+[[ -z $DISPLAY && $XDG_VTNR -eq 3 ]] && exec startx ~/.xinitrc xmonad # Pour lancer kde sur le tty3
 
 # Print a random, hopefully interesting, adage.
 if (( $+commands[fortune] )); then
-  if [[ -t 0 || -t 1 ]]; then
-    fortune -s
-    print
-  fi
+    if [[ -t 0 || -t 1 ]]; then
+        fortune -s
+        print
+    fi
 fi
+
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
