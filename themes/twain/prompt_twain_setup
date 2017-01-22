@@ -1,0 +1,54 @@
+#
+# A light theme showing only minimal information in colour:
+# - Current directory, optionally prefixed with the user and host
+# - Git repo and branch, with markers for staged and unstaged changes.
+# - Battery change meter on the right, with colour based on charge,
+#   and only appearing when battery is below 90% charge.
+#
+# Authors:
+#   Samuel Clements <samuel@borntyping.co.uk>
+#
+# Screenshots:
+#   http://misc.borntyping.co.uk/twain-screenshots/Twain.png
+#
+#   http://misc.borntyping.co.uk/twain-screenshots/Repo.png
+#   http://misc.borntyping.co.uk/twain-screenshots/Repo%20%28with%20markers%29.png
+#
+#   http://misc.borntyping.co.uk/twain-screenshots/Charge25.png
+#   http://misc.borntyping.co.uk/twain-screenshots/Charge50.png
+#   http://misc.borntyping.co.uk/twain-screenshots/Charge75.png
+#
+
+function battery_charge {
+    # Get the current battery charge
+    echo `python ~/.oh-my-zsh/themes/twain/charge.py` 2>/dev/null
+}
+
+function prompt_twain_setup() {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+    prompt_opts=(cr percent subst)
+
+    autoload -Uz add-zsh-hook
+    autoload -Uz vcs_info
+    
+    add-zsh-hook precmd vcs_info
+
+    zstyle ':omz:completion' indicator '%B%F{red}...%f%b'
+    
+    zstyle ':vcs_info:*' enable git svn hg bzr
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:*' stagedstr '%B%F{green}+%f%b'
+    zstyle ':vcs_info:*' unstagedstr '%B%F{red}+%f%b'
+    zstyle ':vcs_info:*' formats 'on branch %F{blue}%r:%b%f%c%u '
+    zstyle ':vcs_info:*' actionformats 'on branch %F{blue}%r:%b%f%c%u %F{cyan}%a%f '
+
+    PROMPT='%B%F{blue}%~%f%b ${vcs_info_msg_0_}❯  '
+    # Uncomment to add 'user at host ' to the prompt
+    #PROMPT='%F{red}%n%f at %F{yellow}%m%f in $(PROMPT)'
+    RPROMPT='%(?..[ %F{red}%?%f ] )$(battery_charge)'
+    SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f? '
+}
+
+prompt_twain_setup "$@"
+
