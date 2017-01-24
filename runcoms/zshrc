@@ -1,13 +1,34 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+############################
 # Customize to your needs...
+############################
+export PSQL_EDITOR="vi"
+
+export KAFKA09=$MYSW/kafka
+export HADOOP_HOME=/usr/local/opt/hadoop/libexec/etc/hadoop
+export HIVE_HOME=/usr/local/opt/hive/libexec
+export HCAT_HOME=/usr/local/opt/hive/libexec/hcatalog
+export HOMEBREW_CASK_OPTS=--caskroom=/opt/homebrew-cask/Caskroom
+
+# node
+export NVM_DIR="$HOME/.nvm"
+
+# alias
+alias sz='source ~/.zshrc'
+alias ez='code -n ~/.zprezto/'
+
+alias cdsrc='cd $MYSRC'
+alias cdsw='cd $MYSW'
+alias cdscript='cd $MYSCRIPTS'
+alias cdapi='cd $MYSRC/api-server && nvm use'
+alias cdevent-sink='cd $MYSRC/event-sink'
+alias cdui='cd $MYSRC/ui'
+alias cdkafka='cd $KAFKA09'
+alias cdspark='cd $MYSW/spark'
+
+source $MYSCRIPTS/appuri.env
+source $MYSCRIPTS/api-server.env

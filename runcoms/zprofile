@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR="code -n"
+export VISUAL="code -n"
 export PAGER='less'
 
 #
@@ -28,6 +28,24 @@ export PAGER='less'
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
+
+
+#
+# Others
+#
+export MYSRC=$HOME/src
+export MYSW=$HOME/sw
+export MYSCRIPTS=$MYSRC/scripts
+
+# AWS
+export AWS_DEFAULT_REGION=us-west-2
+
+# GO
+export GOROOT=/usr/local/go
+export GOPATH=$MYSRC/gopath
+
+# java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home
 
 #
 # Paths
@@ -45,6 +63,8 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   $path
+  $GOPATH/bin
+  $MYSCRIPTS
 )
 
 #
