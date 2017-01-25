@@ -20,15 +20,19 @@ export NVM_DIR="$HOME/.nvm"
 # alias
 alias sz='source ~/.zshrc'
 alias ez='code -n ~/.zprezto/'
+alias ec='code -n $MYDEV'
 
 alias cdsrc='cd $MYSRC'
 alias cdsw='cd $MYSW'
-alias cdscript='cd $MYSCRIPTS'
+alias cddev='cd $MYDEV'
+
 alias cdapi='cd $MYSRC/api-server && nvm use'
 alias cdevent-sink='cd $MYSRC/event-sink'
 alias cdui='cd $MYSRC/ui'
 alias cdkafka='cd $KAFKA09'
 alias cdspark='cd $MYSW/spark'
 
-source $MYSCRIPTS/appuri.env
-source $MYSCRIPTS/api-server.env
+source $MYDEV/appuri.env
+source $MYDEV/api-server.env
+
+source <(kubectl completion zsh)

@@ -35,7 +35,7 @@ fi
 #
 export MYSRC=$HOME/src
 export MYSW=$HOME/sw
-export MYSCRIPTS=$MYSRC/scripts
+export MYDEV=$HOME/dev
 
 # AWS
 export AWS_DEFAULT_REGION=us-west-2
@@ -64,7 +64,7 @@ path=(
   /usr/local/{bin,sbin}
   $path
   $GOPATH/bin
-  $MYSCRIPTS
+  $MYDEV
 )
 
 #
