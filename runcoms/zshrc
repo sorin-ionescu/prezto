@@ -6,10 +6,12 @@ fi
 ############################
 # Customize to your needs...
 ############################
+unsetopt correct
+
 export PSQL_EDITOR="vi"
 
 export KAFKA09=$MYSW/kafka
-export HADOOP_HOME=/usr/local/opt/hadoop/libexec/etc/hadoop
+export HADOOP_HOME=/usr/local/opt/hadoop/libexec
 export HIVE_HOME=/usr/local/opt/hive/libexec
 export HCAT_HOME=/usr/local/opt/hive/libexec/hcatalog
 export HOMEBREW_CASK_OPTS=--caskroom=/opt/homebrew-cask/Caskroom
@@ -27,10 +29,7 @@ alias cdsw='cd $MYSW'
 alias cddev='cd $MYDEV'
 
 alias cdapi='cd $MYSRC/api-server && nvm use'
-alias cdevent-sink='cd $MYSRC/event-sink'
-alias cdui='cd $MYSRC/ui'
-alias cdkafka='cd $KAFKA09'
-alias cdspark='cd $MYSW/spark'
+unalias gb
 
 source $MYDEV/appuri.env
 source $MYDEV/api-server.env
