@@ -46,6 +46,20 @@ if (( $? && $+commands[virtualenvwrapper.sh] )); then
   source "$commands[virtualenvwrapper.sh]"
 fi
 
+# Load PIP completion.
+if (( $+commands[pip] )); then
+  cache_file="${0:h}/cache.zsh"
+
+  if [[ "$commands[pip]" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+    # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
+    pip completion --zsh | sed -e "s|compctl -K [-_[:alnum:]]* pip|& pip2 pip3|" >! "$cache_file" 2> /dev/null
+  fi
+
+  source "$cache_file"
+
+  unset cache_file
+fi
+
 #
 # Aliases
 #
