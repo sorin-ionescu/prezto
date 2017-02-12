@@ -17,6 +17,9 @@ fi
 # Beep on error in line editor.
 setopt BEEP
 
+# Treat these characters as part of a word.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
 #
 # Variables
 #
