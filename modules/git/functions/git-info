@@ -168,6 +168,8 @@ function git-info {
     return 1
   fi
 
+  local git_dir="$(git-dir)"
+
   if (( $# > 0 )); then
     if [[ "$1" == [Oo][Nn] ]]; then
       git config --bool prompt.showinfo true
