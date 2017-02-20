@@ -159,6 +159,7 @@ Aliases
   - `gRa` adds a new remote.
   - `gRx` removes a remote.
   - `gRm` renames a remote.
+  - `gRe` sets the URL of a remote.
   - `gRu` fetches remotes updates.
   - `gRp` prunes all stale remote tracking branches.
   - `gRs` displays information about a given remote.
