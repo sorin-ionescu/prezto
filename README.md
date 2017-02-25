@@ -64,7 +64,6 @@ accompanying README files to learn of what is available.
   2. To preview a theme, type `prompt -p name`.
   3. Load the theme you like in *~/.zpreztorc* then open a new Zsh terminal
      window or tab.
-
      ![sorin theme][2]
 
 Customization
