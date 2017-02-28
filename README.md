@@ -23,7 +23,9 @@ version is 4.3.17.
      provided:
 
         setopt EXTENDED_GLOB
+        # (.N) means only glob files, and don't crash if there aren't any.
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+          # :t means tail; eg. rcfile=/path/to/file.ext then ${rcfile:t}=file.ext
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         done
 
