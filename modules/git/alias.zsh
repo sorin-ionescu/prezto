@@ -73,6 +73,7 @@ alias gdm='git ls-files --modified'
 alias gdu='git ls-files --other --exclude-standard'
 alias gdk='git ls-files --killed'
 alias gdi='git status --porcelain --short --ignored | sed -n "s/^!! //p"'
+alias gdI='git ls-files -v `git rev-parse --show-toplevel` | grep "^[a-z]"'
 
 # Fetch (f)
 alias gf='git fetch'
