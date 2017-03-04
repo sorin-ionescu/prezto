@@ -16,76 +16,162 @@ fi
 
 # Set Docker Machine environment
 function dkme {
+    if (( ! $+commands[docker-machine] )); then
+        return 1
+    fi
+
     eval $(docker-machine env $1)
+}
+
+# Set Docker Machine default machine
+function dkmd {
+    if (( ! $+commands[docker-machine] )); then
+        return 1
+    fi
+
+    pushd ~/.docker/machine/machines
+
+    if [[ ! -d $1 ]]; then
+        echo "Docker machine '$1' does not exists. Abort."
+        popd
+        return 1
+    fi
+
+    if [[ -L default ]]; then
+        eval $(rm -f default)
+    elif [[ -d default ]]; then
+        echo "A default manchine already exists. Abort."
+        popd
+        return 1
+    elif [[ -e default ]]; then
+        echo "A file named 'default' already exists. Abort."
+        popd
+        return 1
+    fi
+
+    eval $(ln -s $1 default)
+    popd
 }
 
 #
 # Aliases
 #
 
+# Docker
 alias dk='docker'
 alias dka='docker attach'
 alias dkb='docker build'
 alias dkd='docker diff'
+alias dkdf='docker system df'
 alias dke='docker exec'
 alias dkE='docker exec -it'
 alias dkh='docker history'
 alias dki='docker images'
 alias dkin='docker inspect'
+alias dkim='docker import'
 alias dkk='docker kill'
 alias dkl='docker logs'
 alias dkli='docker login'
 alias dklo='docker logout'
-alias dkn='docker network'
+alias dkls='docker ps'
 alias dkp='docker pause'
 alias dkP='docker unpause'
+alias dkpl='docker pull'
+alias dkph='docker push'
 alias dkps='docker ps'
 alias dkpsa='docker ps -a'
 alias dkr='docker run'
 alias dkR='docker run -it --rm'
 alias dkRe='docker run -it --rm --entrypoint /bin/bash'
+alias dkRM='docker system prune'
 alias dkrm='docker rm'
 alias dkrmi='docker rmi'
 alias dkrn='docker rename'
 alias dks='docker start'
 alias dkS='docker restart'
 alias dkss='docker stats'
-alias dksw='docker swarm'
+alias dksv='docker save'
 alias dkt='docker tag'
 alias dktop='docker top'
 alias dkup='docker update'
-alias dkv='docker volume'
-alias dkV='docker version'
+alias dkV='docker volume'
+alias dkv='docker version'
 alias dkw='docker wait'
 alias dkx='docker stop'
 
-# Clean up exited containers
-alias dkrmC='docker rm $(docker ps -a | grep Exited | awk '"'"'{ print $1 }'"'"')'
+alias dkC='docker container'
+alias dkCa='docker container attach'
+alias dkCcp='docker container cp'
+alias dkCd='docker container diff'
+alias dkCe='docker container exec'
+alias dkCin='docker container inspect'
+alias dkCk='docker container kill'
+alias dkCl='docker container logs'
+alias dkCls='docker container ls'
+alias dkCp='docker container pause'
+alias dkCpr='docker container prune'
+alias dkCrn='docker container rename'
+alias dkCS='docker container restart'
+alias dkCrm='docker container rm'
+alias dkCr='docker container run'
+alias dkCR='docker container run -it --rm'
+alias dkCRe='docker container run -it --rm --entrypoint /bin/bash'
+alias dkCs='docker container start'
+alias dkCss='docker container stats'
+alias dkCx='docker container stop'
+alias dkCtop='docker container top'
+alias dkCP='docker container unpause'
+alias dkCup='docker container update'
+alias dkCw='docker container wait'
 
-# Clean up dangling images
-alias dkrmI='docker rmi $(docker images -f dangling=true -q)'
+alias dkI='docker image'
+alias dkIb='docker image build'
+alias dkIh='docker image history'
+alias dkIim='docker image import'
+alias dkIin='docker image inspect'
+alias dkIls='docker image ls'
+alias dkIpr='docker image prune'
+alias dkIpl='docker image pull'
+alias dkIph='docker image push'
+alias dkIrm='docker image rm'
+alias dkIsv='docker image save'
+alias dkIt='docker image tag'
 
-# Clean up dangling volumes
+alias dkV='docker volume'
+alias dkVin='docker volume inspect'
+alias dkVls='docker volume ls'
+alias dkVpr='docker volume prune'
+alias dkVrm='docker volume rm'
+
+alias dkN='docker network'
+alias dkNs='docker network connect'
+alias dkNx='docker network disconnect'
+alias dkNin='docker network inspect'
+alias dkNls='docker network ls'
+alias dkNpr='docker network prune'
+alias dkNrm='docker network rm'
+
+alias dkY='docker system'
+alias dkYdf='docker system df'
+alias dkYpr='docker system prune'
+
+alias dkK='docker stack'
+alias dkKls='docker stack ls'
+alias dkKps='docker stack ps'
+alias dkKrm='docker stack rm'
+
+alias dkW='docker swarm'
+
+# Clean up exited containers (docker < 1.13)
+alias dkrmC='docker rm $(docker ps -qaf status=exited)'
+
+# Clean up dangling images (docker < 1.13)
+alias dkrmI='docker rmi $(docker images -qf dangling=true)'
+
+# Clean up dangling volumes (docker < 1.13)
 alias dkrmV='docker volume rm $(docker volume ls -qf dangling=true)'
 
-## Non aliased docker commands:
-# commit   -- Create a new image from a container's changes
-# cp       -- Copy files/folders between a container and the local filesystem
-# create   -- Create a new container
-# daemon   -- Enable daemon mode
-# events   -- Get real time events from the server
-# export   -- Export a container's filesystem as a tar archive
-# import   -- Import the contents from a tarball to create a filesystem image
-# info     -- Display system-wide information
-# load     -- Load an image from a tar archive or STDIN
-# node     -- Manage Docker Swarm nodes
-# port     -- List port mappings or a specific mapping for the container
-# pull     -- Pull an image or a repository from a registry
-# push     -- Push an image or a repository to a registry
-# save     -- Save one or more images to a tar archive (streamed to STDOUT by default)
-# search   -- Search the Docker Hub for images
-# service  -- Manage Docker services
-
+# Docker Machine
 alias dkm='docker-machine'
 alias dkma='docker-machine active'
 alias dkmcp='docker-machine scp'
@@ -103,13 +189,10 @@ alias dkmst='docker-machine status'
 alias dkmS='docker-machine restart'
 alias dkmu='docker-machine url'
 alias dkmup='docker-machine upgrade'
-alias dkmV='docker-machine version'
+alias dkmv='docker-machine version'
 alias dkmx='docker-machine stop'
 
-# Non aliased docker-machine commands:
-# config  -- Print the connection config for machine
-# create  -- Create a machine
-
+# Docker Compose
 alias dkc='docker-compose'
 alias dkcb='docker-compose build'
 alias dkcB='docker-compose build --no-cache'
@@ -117,24 +200,19 @@ alias dkcd='docker-compose down'
 alias dkce='docker-compose exec'
 alias dkck='docker-compose kill'
 alias dkcl='docker-compose logs'
-alias dkp='docker-compose pause'
-alias dkP='docker-compose unpause'
+alias dkcls='docker-compose ps'
+alias dkcp='docker-compose pause'
+alias dkcP='docker-compose unpause'
+alias dkcpl='docker-compose pull'
+alias dkcph='docker-compose push'
 alias dkcps='docker-compose ps'
 alias dkcr='docker-compose run'
+alias dkcR='docker-compose run --rm'
 alias dkcrm='docker-compose rm'
 alias dkcs='docker-compose start'
 alias dkcsc='docker-compose scale'
 alias dkcS='docker-compose restart'
 alias dkcu='docker-compose up'
 alias dkcU='docker-compose up -d'
-alias dkcV='docker-compose version'
+alias dkcv='docker-compose version'
 alias dkcx='docker-compose stop'
-
-## Non aliased docker-compose commands:
-# bundle  -- Generate a Docker bundle from the Compose file
-# config  -- Validate and view the compose file
-# create  -- Create services
-# events  -- Receive real time events from containers
-# port    -- Print the public port for a port binding
-# pull    -- Pull service images
-# push    -- Push service images
