@@ -86,8 +86,11 @@ function pmodload {
 # Prezto Initialization
 #
 
-# Find the dir Prezto is installed to
-ZPREZTODIR=${ZPREZTODIR:-${ZDOTDIR:-$HOME}/.zprezto}
+# This finds the directory prezto is installed to so plugin managers don't need
+# to rely on dirty hacks to force prezto into a directory. Additionally, it
+# needs to be done here because inside the pmodload function ${0:h} evaluates to
+# the current directory of the shell rather than the prezto dir.
+ZPREZTODIR=${0:h}
 
 # Source the Prezto configuration file.
 if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
