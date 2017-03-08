@@ -29,3 +29,8 @@ source ${MYENV}/redshift.env
 source ${MYENV}/k8s.env
 source ${MYENV}/kafka.env
 source ${MYENV}/spark.env
+
+path=(
+  $path
+  $MYTOOL
+)
