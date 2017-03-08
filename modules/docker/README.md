@@ -176,12 +176,15 @@ Defines [Docker][1] aliases and functions.
 - `dkcV` Show the Docker-Compose version information
 - `dkcx` Stop services
 
-## Author
+## Support
 
-*The author of this module should be contacted via the [issue tracker][3].*
+If you're having problems, use the [Prezto issue tracker][2].
 
-- [François Vantomme](https://github.com/akarzim)
+## Acknowledgements
+
+This module is a copy of [akarzim/zsh-docker-aliases][3] by [François Vantomme][4] (MIT License).
 
 [1]: https://www.docker.com/
-[2]: https://github.com/zplug/zplug
-[3]: https://github.com/akarzim/zsh-docker-aliases/issues
+[2]: https://github.com/zsh-users/prezto/issues
+[3]: https://github.com/akarzim/zsh-docker-aliases
+[4]: https://github.com/akarzim
