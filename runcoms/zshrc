@@ -9,29 +9,23 @@ fi
 unsetopt correct
 
 export PSQL_EDITOR="vi"
-
-export KAFKA09=$MYSW/kafka
-export HADOOP_HOME=/usr/local/opt/hadoop/libexec
-export HIVE_HOME=/usr/local/opt/hive/libexec
-export HCAT_HOME=/usr/local/opt/hive/libexec/hcatalog
 export HOMEBREW_CASK_OPTS=--caskroom=/opt/homebrew-cask/Caskroom
 
-# node
-export NVM_DIR="$HOME/.nvm"
+export MYENV=$HOME/.myenv
+export MYSRC=$HOME/src
+export MYSW=$HOME/sw
+export MYTOOL=$HOME/tool
 
-# alias
 alias sz='source ~/.zshrc'
-alias ez='code -n ~/.zprezto/'
-alias ec='code -n $MYDEV'
+alias ez='code -n ~/.zprezto/ '
+alias et='code -n $MYTOOL'
 
-alias cdsrc='cd $MYSRC'
-alias cdsw='cd $MYSW'
-alias cddev='cd $MYDEV'
-
-alias cdapi='cd $MYSRC/api-server && nvm use'
-unalias gb
-
-source $MYDEV/appuri.env
-source $MYDEV/api-server.env
-
-source <(kubectl completion zsh)
+source ${MYENV}/aws.env
+source ${MYENV}/go.env
+source ${MYENV}/nodejs.env
+source ${MYENV}/java.env
+source ${MYENV}/appuri.env
+source ${MYENV}/redshift.env
+source ${MYENV}/k8s.env
+source ${MYENV}/kafka.env
+source ${MYENV}/spark.env

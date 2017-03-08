@@ -1,3 +1,5 @@
 *.zwc
 *.zwc.old
 modules/*/cache.zsh
+appuri.env
+redshift.env
