@@ -22,6 +22,12 @@ alias brewl='brew list'
 alias brews='brew search'
 alias brewu='brew update && brew upgrade --all'
 alias brewx='brew remove'
+alias brewd='brew doctor'
+alias brewS='brew services'
+alias brewSl='brew services list'
+alias brewSa='brew services start'
+alias brewSx='brew services stop'
+alias brewSr='brew services restart'
 
 # Homebrew Cask
 alias cask='brew cask'
