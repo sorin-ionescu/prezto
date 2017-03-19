@@ -1,0 +1,62 @@
+# A two lines theme in black/red/white.
+#
+# Authors:
+#   meh. <meh@paranoici.org>
+#
+# Features:
+#   - Two lines.
+#   - VCS information for git, bzr hg svn and cvs.
+#   - ls colors themed to be consistent with the theme.
+#   - grep colors themed to be consistent with the theme.
+#
+# Screenshots:
+#   http://i.imgur.com/qdvpt.png
+
+function +vi-git-status() {
+  # Untracked files.
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    hook_com[unstaged]=' %F{red}⚑%f'
+  fi
+}
+
+function prompt_darkblood_setup() {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  add-zsh-hook precmd vcs_info
+
+  zstyle ':vcs_info:*' enable bzr git hg svn cvs
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' stagedstr ' %F{green}⚑%f'
+  zstyle ':vcs_info:*' unstagedstr ' %F{yellow}⚑%f'
+  zstyle ':vcs_info:*' formats ' %F{red}[%B%F{white}%b%%b%u%F{red}]%f'
+  zstyle ':vcs_info:*' actionformats " %F{red}[%B%F{white}%b%%b%u%F{red}|%B%F{white}%a%f%%b%F{red}]%f"
+  zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%%b%F{red}|%B%F{white}%r%%b%f'
+  zstyle ':vcs_info:git*+set-message:*' hooks git-status
+
+  local out_name="%F{red}[%B%F{white}%n%b%F{red}@%B%F{white}%M%f%b%F{red}]%f"
+  local out_tty="%F{red}[%B%F{white}/dev/%l%b%F{red}]%f"
+  local out_path="%F{red}[%B%F{white}%~%b%F{red}]"
+  local out_error="%(?,,%F{red}[%B%F{white}%?%f%b%F{red}])"
+
+  PS1="%F{red}┌${out_name} ${out_tty}"'${vcs_info_msg_0_}'" ${out_error}"$'\n'"%F{red}└${out_path}>%f "
+  PS2=" %F{red}|>%f "
+
+  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+  if zstyle -t ':omz:plugin:history-substring-search' enable \
+      && zstyle -t ':omz:plugin:history-substring-search' color
+  then
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=white,bold"
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=red,fg=white,bold"
+  fi
+
+  export LS_COLORS='no=00:fi=00:rs=0:di=01;37:ln=04;37:mh=00:pi=04;31:so=01;07;40;37:do=01;07;40;37:bd=01;30:cd=01;30:or=01;05;37;41:mi=31:su=30;41:sg=30;41:ca=00:tw=07;01;41;37:ow=01;37;41:st=04;01;37:ex=31:'
+  export GREP_COLORS='ms=1;37:fn=0;31:se=1;37'
+}
+
+prompt_darkblood_setup "$@"
