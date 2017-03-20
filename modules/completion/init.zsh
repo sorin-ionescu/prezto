@@ -12,7 +12,8 @@ if [[ "$TERM" == 'dumb' ]]; then
 fi
 
 # Add zsh-completions to $fpath.
-fpath=("${0:h}/external/src" $fpath)
+zstyle -s ':prezto:module:completion' path 'prefpath'
+fpath=("$prefpath" "${0:h}/external/src" $fpath)
 
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
