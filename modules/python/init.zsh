@@ -34,8 +34,28 @@ if (( ! $+commands[python] && ! $+commands[pyenv] )); then
   return 1
 fi
 
+# Load pyenv's virtualenvwrapper into the shell session.
+if [[ $(pyenv commands) == *virtualenvwrapper* ]] 2&> /dev/null; then
+  # Prefer pyenv over virtualenv.
+  export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+
+  # Set the directory where virtual environments are stored.
+  export WORKON_HOME="$HOME/.virtualenvs"
+
+  # Disable the virtualenv prompt.
+  VIRTUAL_ENV_DISABLE_PROMPT=1
+
+  pyenv virtualenvwrapper
+
+# Load pyenv's virtualenvs into the shell session.
+elif [[ $(pyenv commands) == *virtualenv-init* ]] 2&> /dev/null; then
+  # Disable the virtualenv prompt.
+  VIRTUAL_ENV_DISABLE_PROMPT=1
+
+  eval "$(pyenv virtualenv-init -)"
+
 # Load virtualenvwrapper into the shell session.
-if (( $+commands[virtualenvwrapper.sh] )); then
+elif (( $+commands[virtualenvwrapper.sh] )); then
   # Set the directory where virtual environments are stored.
   export WORKON_HOME="$HOME/.virtualenvs"
 
