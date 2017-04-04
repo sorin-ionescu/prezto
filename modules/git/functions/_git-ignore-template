@@ -1,0 +1,26 @@
+#compdef _gitignireio git-ignore-template
+#autoload
+
+#
+# Completes git-ignore-template
+#
+# Authors:
+#   Haojia Che <haojia.che@gmail.com>
+#
+
+typeset -A opt_args
+
+_arguments -C \
+    '1::ignore:->ignores' \
+&& ret=0
+
+list=(`git-ignore-template`)
+
+case "$state" in
+    (ignores)
+        languages=(`echo  $list| tr "," "\n"`)
+        _describe 'templates' languages && ret=0
+    ;;
+esac;
+
+return 1;

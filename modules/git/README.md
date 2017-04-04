@@ -237,6 +237,7 @@ Functions
   - `git-stash-recover` recovers given dropped stashed states.
   - `git-submodule-move` moves a submodule.
   - `git-submodule-remove` removes a submodule.
+  - `git-ignore-template` get gitignore template from [gitignore.io][9]
 
 Theming
 -------
@@ -332,3 +333,4 @@ Authors
 [6]: https://github.com/sorin-ionescu/prezto/issues
 [7]: https://github.com/sorin-ionescu/prezto/issues/219
 [8]: http://www.kernel.org/pub/software/scm/git/docs/git-log.html
+[9]: https://gitignore.io/
