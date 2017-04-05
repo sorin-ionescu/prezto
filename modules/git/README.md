@@ -42,6 +42,7 @@ Aliases
   - `gbs` lists branches and their commits with ancestry graphs.
   - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
+  - `gbf` list all branches in order of last modification and who the last committer was
   - `gbx` deletes a branch.
   - `gbX` deletes a branch irrespective of its merged status.
   - `gbm` renames a branch.
