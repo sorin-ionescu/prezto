@@ -89,7 +89,7 @@ License
 
 Copyright (c) 2009-2011 Robby Russell and contributors.
 
-Copyright (c) 2011-2015 Sorin Ionescu and contributors.
+Copyright (c) 2011-2016 Sorin Ionescu and contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
