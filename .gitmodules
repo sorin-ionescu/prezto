@@ -19,3 +19,6 @@
 [submodule "modules/autosuggestions/external"]
 	path = modules/autosuggestions/external
 	url = https://github.com/tarruda/zsh-autosuggestions
+[submodule "modules/autoenv/external"]
+	path = modules/autoenv/external
+	url = https://github.com/horosgrisa/autoenv
