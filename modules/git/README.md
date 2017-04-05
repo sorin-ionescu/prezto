@@ -193,6 +193,11 @@ Aliases
   - `gSu` fetches and merges the latest changes for all submodule.
   - `gSx` removes a submodule.
 
+### Tag
+
+  - `gt` lists tags or creates tag.
+  - `gtl` lists tags matching pattern.
+
 ### Working directory
 
   - `gws` displays working-tree status in the short format.
