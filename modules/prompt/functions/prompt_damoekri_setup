@@ -11,7 +11,7 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_damoekri_pwd {
+prompt_damoekri_pwd() {
   local pwd="${PWD/#$HOME/~}"
 
   if [[ "$pwd" == (#m)[/~] ]]; then
@@ -22,7 +22,7 @@ function prompt_damoekri_pwd {
   fi
 }
 
-function prompt_damoekri_precmd {
+prompt_damoekri_precmd() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -40,7 +40,7 @@ function prompt_damoekri_precmd {
   fi
 }
 
-function prompt_damoekri_setup {
+prompt_damoekri_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

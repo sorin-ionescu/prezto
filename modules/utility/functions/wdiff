@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function wdiff {
+wdiff() {
   if zstyle -t ':prezto:module:utility:wdiff' color; then
     if (( $+commands[wdiff] )); then
       command wdiff \

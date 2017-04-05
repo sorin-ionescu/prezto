@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function mand {
+mand() {
   if (( $# > 0 )); then
     open "dash://manpages:$1" 2>/dev/null
     if (( $? != 0 )); then

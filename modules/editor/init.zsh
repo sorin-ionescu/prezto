@@ -81,7 +81,7 @@ zle -N edit-command-line
 
 # Exposes information about the Zsh Line Editor via the $editor_info associative
 # array.
-function editor-info {
+editor-info() {
   # Clean up previous $editor_info.
   unset editor_info
   typeset -gA editor_info
@@ -110,13 +110,13 @@ function editor-info {
 zle -N editor-info
 
 # Updates editor information when the keymap changes.
-function zle-keymap-select {
+zle-keymap-select() {
   zle editor-info
 }
 zle -N zle-keymap-select
 
 # Enables terminal application mode and updates editor information.
-function zle-line-init {
+zle-line-init() {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
   if (( $+terminfo[smkx] )); then
@@ -130,7 +130,7 @@ function zle-line-init {
 zle -N zle-line-init
 
 # Disables terminal application mode and updates editor information.
-function zle-line-finish {
+zle-line-finish() {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
   if (( $+terminfo[rmkx] )); then
@@ -144,14 +144,14 @@ function zle-line-finish {
 zle -N zle-line-finish
 
 # Toggles emacs overwrite mode and updates editor information.
-function overwrite-mode {
+overwrite-mode() {
   zle .overwrite-mode
   zle editor-info
 }
 zle -N overwrite-mode
 
 # Enters vi insert mode and updates editor information.
-function vi-insert {
+vi-insert() {
   zle .vi-insert
   zle editor-info
 }
@@ -159,21 +159,21 @@ zle -N vi-insert
 
 # Moves to the first non-blank character then enters vi insert mode and updates
 # editor information.
-function vi-insert-bol {
+vi-insert-bol() {
   zle .vi-insert-bol
   zle editor-info
 }
 zle -N vi-insert-bol
 
 # Enters vi replace mode and updates editor information.
-function vi-replace  {
+vi-replace() {
   zle .vi-replace
   zle editor-info
 }
 zle -N vi-replace
 
 # Expands .... to ../..
-function expand-dot-to-parent-directory-path {
+expand-dot-to-parent-directory-path() {
   if [[ $LBUFFER = *.. ]]; then
     LBUFFER+='/..'
   else
@@ -183,7 +183,7 @@ function expand-dot-to-parent-directory-path {
 zle -N expand-dot-to-parent-directory-path
 
 # Displays an indicator when completing.
-function expand-or-complete-with-indicator {
+expand-or-complete-with-indicator() {
   local indicator
   zstyle -s ':prezto:module:editor:info:completing' format 'indicator'
   print -Pn "$indicator"
@@ -193,7 +193,7 @@ function expand-or-complete-with-indicator {
 zle -N expand-or-complete-with-indicator
 
 # Inserts 'sudo ' at the beginning of the line.
-function prepend-sudo {
+prepend-sudo() {
   if [[ "$BUFFER" != su(do|)\ * ]]; then
     BUFFER="sudo $BUFFER"
     (( CURSOR += 5 ))

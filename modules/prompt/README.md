@@ -36,7 +36,7 @@ including a function that displays help or a function used to preview it.
 
 The most basic example of this function can be seen below.
 
-    function prompt_name_setup {
+    prompt_name_setup() {
       PROMPT='%m%# '
       RPROMPT=''
     }
@@ -48,7 +48,7 @@ function **should** be defined. The user will access it via `prompt -h name`.
 
 The most basic example of this function can be seen below.
 
-    function prompt_name_help {
+    prompt_name_help() {
       cat <<EOH
     This prompt is color-scheme-able. You can invoke it thus:
 
@@ -65,7 +65,7 @@ function **should** be defined. The user will access it via `prompt -p name`.
 
 The most basic example of this function can be seen below.
 
-    function prompt_name_preview {
+    prompt_name_preview() {
       if (( $# > 0 )); then
         prompt_preview_theme theme "$@"
       else
@@ -93,7 +93,7 @@ a function before you calling it.
 
 The most basic example of this function can be seen below.
 
-    function prompt_name_precmd {
+    prompt_name_precmd() {
       if (( $+functions[git-info] )); then
         git-info
       fi
