@@ -52,6 +52,10 @@ function prompt_paradox_build_prompt {
     prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
 
+  if [[ -n "$python_info" ]]; then
+    prompt_paradox_start_segment white black '${(e)python_info[virtualenv]}'
+  fi
+
   prompt_paradox_end_segment
 }
 
@@ -103,6 +107,7 @@ function prompt_paradox_precmd {
 
 function prompt_paradox_preexec {
   _prompt_paradox_start_time="$SECONDS"
+  python-info
 }
 
 function prompt_paradox_setup {
@@ -142,6 +147,9 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'ref' '$(coalesce "%b" "%p" "%c")' \
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
+
+  # %v - virtualenv name.
+  zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
 
   # Define prompts.
   PROMPT='
