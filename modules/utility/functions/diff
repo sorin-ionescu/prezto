@@ -10,7 +10,15 @@ function diff {
     if (( $+commands[colordiff] )); then
       command colordiff --unified "$@"
     elif (( $+commands[git] )); then
-      git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
+      local diffr=0
+      for x; do
+        if [ "$x" = '-r' ]; then diffr=1; fi
+      done
+      if [ $diffr -eq 0 ]; then
+        git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
+      else 
+        command diff --unified "$@"
+      fi
     else
       command diff --unified "$@"
     fi
