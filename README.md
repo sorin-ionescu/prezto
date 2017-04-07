@@ -35,6 +35,13 @@ version is 4.3.17.
 
   5. Open a new Zsh terminal window or tab.
 
+
+Updating
+------------
+
+        git pull && git pull --recurse-submodules
+        
+
 ### Troubleshooting
 
 If you are not able to find certain commands after switching to *Prezto*,
