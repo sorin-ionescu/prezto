@@ -23,6 +23,7 @@ Functions
   - `osx-rm-dir-metadata` deletes .DS\_Store, \_\_MACOSX cruft.
   - `osx-ls-download-history` displays the Mac OS X download history.
   - `osx-rm-download-history` deletes the Mac OS X download history.
+  - `tab-title` sets the tab title (works in both _Terminal_ and [_iTerm_][3]).
 
 Authors
 -------

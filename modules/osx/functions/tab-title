@@ -1,0 +1,14 @@
+#
+# Changes the current tab title
+#
+# Authors:
+#   nstCactus <snstCactus@gmail.com>
+#
+
+
+
+function tab-title {
+  echo -ne "\033]0;"$*"\007"
+}
+
+tab-title "$@"
