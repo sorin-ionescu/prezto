@@ -38,8 +38,10 @@ function prompt_sorin_pwd {
   if [[ "$pwd" == (#m)[/~] ]]; then
     _prompt_sorin_pwd="$MATCH"
     unset MATCH
-  else
+  elif [[ "$SORIN_PROMPT_SHORT_PWD" == 'Y' ]]; then
     _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+  else
+    _prompt_sorin_pwd="$pwd"
   fi
 }
 
@@ -129,6 +131,12 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
     'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
+
+  # See if our user has turned off shortened pwd (default to on)
+  zstyle -s ':prezto:module:prompt:theme:sorin' shortPWD \
+       'SORIN_PROMPT_SHORT_PWD' \
+    || SORIN_PROMPT_SHORT_PWD='Y'
+  SORIN_PROMPT_SHORT_PWD="${(C)SORIN_PROMPT_SHORT_PWD[1,1]}"
 
   # Define prompts.
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
