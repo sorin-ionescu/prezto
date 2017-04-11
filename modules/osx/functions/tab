@@ -40,7 +40,7 @@ EOF
 EOF
 }
 
-[[ "$the_app" == 'iTerm2']] && {
+[[ "$the_app" == 'iTerm2' ]] && {
   osascript 2>/dev/null <<EOF
     tell application "iTerm2"
       tell current window
