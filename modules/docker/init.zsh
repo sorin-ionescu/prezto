@@ -40,7 +40,7 @@ function dkmd {
   if [[ -L default ]]; then
     eval $(rm -f default)
   elif [[ -d default ]]; then
-    echo "A default manchine already exists. Abort."
+    echo "A default machine already exists. Abort."
     popd
     return 1
   elif [[ -e default ]]; then
