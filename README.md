@@ -29,6 +29,12 @@ version is 4.3.17.
         done
         ```
 
+    Note: If you already have any of the given config files, ln will error. In
+    simple cases you can add `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
+    the bottom of your `.zshrc` to load prezto but keep your config intact. For
+    more complicated setups, it is recommended that you back up your original
+    configs and replace them with the provided prezto runcoms.
+
   4. Set Zsh as your default shell:
 
         `chsh -s /bin/zsh`
