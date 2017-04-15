@@ -8,6 +8,7 @@
 #   Isaac Wolkerstorfer <i@agnoster.net>
 #   Jeff Sandberg <paradox460@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Patrick Bos <egpbos@gmail.com>
 #
 # Screenshots:
 #   http://i.imgur.com/0XIWX.png
@@ -90,15 +91,17 @@ function prompt_paradox_precmd {
     git-info
   fi
 
+  # Get Python environment information.
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
+
   # Calculate and print the elapsed time.
   prompt_paradox_print_elapsed_time
 }
 
 function prompt_paradox_preexec {
   _prompt_paradox_start_time="$SECONDS"
-  if (( $+functions[python-info] )); then
-    python-info
-  fi
 }
 
 function prompt_paradox_setup {
