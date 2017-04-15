@@ -23,6 +23,17 @@ improve its performance, do not hesitate to fork and send pull requests.
    - Open a [pull request][4] that relates to but one subject with a clear
      title and description in grammatically correct, complete sentences.
 
+#### Code Style
+
+   - Indent using 2 spaces. No tabs.
+   - Put `; do` and `; then` on the same line as the `while`, `for` or `if`.
+   - Local variables should be used whenever possible.
+   - Use `snake_case` for variable and function naming.
+   - Local variables should be lower cased.
+   - Global variables should be upper cased.
+   - Use `$(command)` instead of backticks.
+   - Avoid `eval` if possible.
+
 #### Modules
 
    - A *README.md* must be present.
