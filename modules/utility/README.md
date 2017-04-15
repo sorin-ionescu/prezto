@@ -66,6 +66,7 @@ Aliases
   - `_` executes a command as another user (`sudo`).
   - `b` opens the default web browser.
   - `cp` copies files and directories interactively.
+  - `diffu` shorthand for `diff --unified`
   - `e` opens the default editor.
   - `ln` links files and directories interactively.
   - `mkdir` creates directories, including intermediary directories.
