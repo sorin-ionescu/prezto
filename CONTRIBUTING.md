@@ -33,6 +33,7 @@ improve its performance, do not hesitate to fork and send pull requests.
    - Global variables should be upper cased.
    - Use `$(command)` instead of backticks.
    - Avoid `eval` if possible.
+   - Prefer `zstyle` over environment variables for configuration.
 
 #### Modules
 
