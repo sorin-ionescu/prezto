@@ -49,6 +49,7 @@ alias sftp='noglob sftp'
 alias _='sudo'
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
+alias diffu="diff --unified"
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
 alias ln="${aliases[ln]:-ln} -i"
 alias mkdir="${aliases[mkdir]:-mkdir} -p"
