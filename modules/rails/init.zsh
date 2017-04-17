@@ -50,8 +50,8 @@ alias Rtestlog='tail -f log/test.log'
 alias rails='_rails_command'
 compdef _rails_command=rails
 
-alias rake='_rake_command'
-compdef _rake_command=rake
+# alias rake='_rake_command'
+# compdef _rake_command=rake
 
 alias ror='rails'
 alias rorc='rails console'
