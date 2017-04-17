@@ -32,16 +32,16 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
 
   # Branch (b)
   alias gb='git branch'
-  alias gbc='git checkout -b'
-  alias gbv='git branch -v'
-  alias gbV='git branch -vv'
   alias gba='git branch -av'
-  alias gbx='git branch -d'
-  alias gbX='git branch -D'
+  alias gbc='git checkout -b'
+  alias gbd='git branch -d'
+  alias gbD='git branch -D'
   alias gbm='git branch -m'
   alias gbM='git branch -M'
   alias gbs='git show-branch'
   alias gbS='git show-branch -a'
+  alias gbv='git branch -v'
+  alias gbV='git branch -vv'
 
   # Commit (c)
   alias gc='git commit --verbose'
