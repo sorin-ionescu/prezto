@@ -40,17 +40,17 @@ Aliases are enabled by default. You can disable them with:
 ### Branch
 
   - `gb` lists, creates, renames, and deletes branches.
-  - `gba` lists all local and remote branches and their commits.
   - `gbc` creates a new branch.
-  - `gbd` deletes a branch.
-  - `gbD` deletes a branch irrespective of its merged status.
+  - `gbl` lists branches and their commits. (also `gbv`)
+  - `gbL` lists all local and remote branches and their commits.
   - `gbm` renames a branch.
   - `gbM` renames a branch even if the new branch name already exists.
   - `gbs` lists branches and their commits with ancestry graphs.
   - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
-  - `gbv` lists branches with verbose information about their commits.
   - `gbV` lists branches with more verbose information about their commits.
+  - `gbx` deletes a branch. (also `gbd`)
+  - `gbX` deletes a branch irrespective of its merged status. (also `gbD`)
 
 
 ### Commit
