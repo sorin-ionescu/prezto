@@ -35,15 +35,20 @@ if (( ! $+commands[python] && ! $+commands[pyenv] )); then
 fi
 
 # Load virtualenvwrapper into the shell session, unless requested not to
-zstyle -t ':prezto:module:python' skip-virtualenvwrapper-init
-if (( $? && $+commands[virtualenvwrapper.sh] )); then
+if zstyle -T ':prezto:module:python' skip-virtualenvwrapper-init; then
   # Set the directory where virtual environments are stored.
   export WORKON_HOME="${WORKON_HOME:-$HOME/.virtualenvs}"
 
   # Disable the virtualenv prompt.
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
-  source "$commands[virtualenvwrapper.sh]"
+  if (( $+commands[pyenv-virtualenvwrapper] )); then
+    pyenv virtualenvwrapper
+  elif (( $+commands[pyenv-virtualenv-init] )); then
+    eval "$(pyenv virtualenv-init -)"
+  elif (( $+commands[virtualenvwrapper.sh] )); then
+    source "$commands[virtualenvwrapper.sh]"
+  fi
 fi
 
 # Load PIP completion.
