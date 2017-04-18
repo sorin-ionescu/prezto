@@ -25,7 +25,7 @@ installed:
   - *.xz* requires `unxz`.
   - *.lzma* requires `unlzma`.
   - *.Z* requires `uncompress`.
-  - *.zip* requires `unzip`.
+  - *.zip*, *.jar* requires `unzip`.
   - *.rar* requires `unrar` or `rar`.
   - *.7z* requires `7za`.
   - *.deb* requires `ar`, `tar`.
