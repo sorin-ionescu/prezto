@@ -15,12 +15,12 @@ fi
 #
 
 # Load Perlbrew into the shell session.
-if [[ -s "${HOME}/perl5/perlbrew/etc/bashrc" ]]; then
-  source "${HOME}/perl5/perlbrew/etc/bashrc"
+if [[ -s "${PERLBREW_ROOT:-$HOME/perl5/perlbrew}/etc/bashrc" ]]; then
+  source "${PERLBREW_ROOT:-$HOME/perl5/perlbrew}/etc/bashrc"
 
   # Load Perlbrew completion.
-  if [[ -s "${HOME}/perl5/perlbrew/etc/perlbrew-completion.bash" ]]; then
-    source "${HOME}/perl5/perlbrew/etc/perlbrew-completion.bash"
+  if [[ -s "${PERLBREW_ROOT:-$HOME/perl5/perlbrew}/etc/perlbrew-completion.bash" ]]; then
+    source "${PERLBREW_ROOT:-$HOME/perl5/perlbrew}/etc/perlbrew-completion.bash"
   fi
 
 # Load manually installed plenv into the shell session.
