@@ -40,7 +40,7 @@ Aliases are enabled by default. You can disable them with:
 ### Branch
 
   - `gb` lists, creates, renames, and deletes branches.
-  - `gbc` creates a new branch.
+  - `gbc` creates and checks out a new branch.
   - `gbl` lists branches and their commits.
   - `gbL` lists local and remote branches and their commits.
   - `gbs` lists branches and their commits with ancestry graphs.
