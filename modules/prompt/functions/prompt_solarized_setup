@@ -1,0 +1,156 @@
+#
+# A theme based on Steve Losh's prompt with VCS_INFO integration
+# Tweaked with solarized colors for 256/16 color modes
+#
+# Authors:
+#   Steve Losh <steve@stevelosh.com>
+#   Bart Trojanowski <bart@jukie.net>
+#   Brian Carper <brian@carper.ca>
+#   solarized <solarized@gmail.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
+#
+#  Activate in .zshrc:
+#
+#  zstyle ':omz:module:prompt' theme 'solarized'
+#
+#  and settings:
+#
+#  zstyle ':omz:module:prompt:solarized' 256colors 'yes'
+#  zstyle ':omz:module:prompt:solarized' dark 'yes'
+#
+#  custom hostname colours
+#
+#  zstyle ':omz:module:prompt:solarized' hostname 'red'
+#  zstyle ':omz:module:prompt:solarized' hostname2 'blue'
+#
+#
+
+function virtualenv_info {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    print "(${VIRTUAL_ENV:t}) "
+  fi
+}
+
+function prompt_solarized_precmd {
+  if [[ -n "$__PROMPT_solarized_VCS_UPDATE" ]] ; then
+    # Check for untracked files or updated submodules since vcs_info doesn't.
+    if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+      __PROMPT_solarized_VCS_UPDATE=1
+      fmt_branch=" ($prompt_orange%b%f%u%c$prompt_red●%f)"
+    else
+      fmt_branch=" ($prompt_orange%b%f%u%c)"
+    fi
+    zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
+
+    vcs_info 'prompt'
+    __PROMPT_solarized_VCS_UPDATE=''
+  fi
+}
+
+function prompt_solarized_preexec {
+  case "$(history $HISTCMD)" in
+    (*git*)
+      __PROMPT_solarized_VCS_UPDATE=1
+    ;;
+    (*svn*)
+      __PROMPT_solarized_VCS_UPDATE=1
+    ;;
+  esac
+}
+
+function prompt_solarized_chpwd {
+  __PROMPT_solarized_VCS_UPDATE=1
+}
+
+function prompt_solarized_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  add-zsh-hook precmd prompt_solarized_precmd
+  add-zsh-hook preexec prompt_solarized_preexec
+  add-zsh-hook chpwd prompt_solarized_chpwd
+
+  __PROMPT_solarized_VCS_UPDATE=1
+
+  zstyle -b ':omz:module:prompt:solarized' 256colors '_prompt_256colors'
+  if is-true "${_prompt_256colors}"; then
+      prompt_base03="%F{234}"  # brblack base03
+      prompt_base02="%F{235}"  # black base02
+      prompt_base01="%F{240}"  # brgreen base01
+      prompt_base00="%F{241}"  # bryellow base00
+      prompt_base0="%F{244}"  # brblue base0
+      prompt_base1="%F{245}"  # brcyan base1
+      prompt_base2="%F{254}" # white base2
+      prompt_base3="%F{230}" # brwhite base3
+      prompt_yellow="%F{136}" # yellow yellow
+      prompt_orange="%F{166}" # brred orange
+      prompt_red="%F{160}" # red red
+      prompt_magenta="%F{125}" # magenta magenta
+      prompt_violet="%F{61}" # brmagenta violet
+      prompt_blue="%F{33}" # blue blue
+      prompt_cyan="%F{37}" # cyan cyan
+      prompt_green="%F{64}" # green green
+  else
+      prompt_base03="%F{black}%FX{bold}"  # brblack base03
+      prompt_base02="%F{black}"  # black base02
+      prompt_base01="%F{green}%FX{bold}"  # brgreen base01
+      prompt_base00="%F{yellow}%FX{bold}"  # bryellow base00
+      prompt_base0="%F{blue}%FX{bold}"  # brblue base0
+      prompt_base1="%F{cyan}%FX{bold}"  # brcyan base1
+      prompt_base2="%F{white}" # white base2
+      prompt_base3="%F{white}%FX{bold}" # brwhite base3
+      prompt_yellow="%F{yellow}" # yellow yellow
+      prompt_orange="%F{red}%FX{bold}" # brred orange
+      prompt_red="%F{red}" # red red
+      prompt_magenta="%F{magenta}" # magenta magenta
+      prompt_violet="%F{magenta}%FX{bold}" # brmagenta violet
+      prompt_blue="%F{blue}" # blue blue
+      prompt_cyan="%F{cyan}" # cyan cyan
+      prompt_green="%F{green}" # green green
+  fi
+  # Enable VCS systems you use.
+  zstyle ':vcs_info:*' enable git hg svn cvs
+
+  # check-for-changes can be really slow.
+  # You should disable it if you work with large repositories.
+  zstyle ':vcs_info:*:prompt:*' check-for-changes true
+
+  # Formats:
+  # %b - branchname
+  # %u - unstagedstr (see below)
+  # %c - stagedstr (see below)
+  # %a - action (e.g. rebase-i)
+  # %R - repository path
+  # %S - path in the repository
+  local fmt_branch=" ($prompt_orange%b%f%u%c)"
+  local fmt_action=" ($prompt_blue%a%f)"
+  local fmt_unstaged="$prompt_red+%f"
+  local fmt_staged="$prompt_green+%f"
+
+  zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
+  zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${fmt_branch} ${fmt_action}"
+  zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
+  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+
+  prompt_host=$prompt_green
+  zstyle -a ':omz:module:prompt:solarized' $HOST '_prompt_host'
+  if [ ! -z $_prompt_host ]; then
+    prompt_host=$"prompt_$_prompt_host"
+  fi
+  zstyle -b ':omz:module:prompt:solarized' dark '_prompt_dark'
+  if is-true "${_prompt_dark}"; then
+    PROMPT="%(!.$prompt_red.$prompt_green)%n%f$prompt_base1 at $prompt_host%m%f$prompt_base1 in $prompt_base01%~%f"'${vcs_info_msg_0_}'"
+"'$(virtualenv_info)'"$prompt_base1 %# $prompt_base0"
+  else
+    PROMPT="%(!.$prompt_red.$prompt_green)%n%f$prompt_base01 at $prompt_host%m%f$prompt_base01 in $prompt_base1%~%f"'${vcs_info_msg_0_}'"
+"'$(virtualenv_info)'"$prompt_base01 %# $prompt_base00"
+  fi
+}
+
+prompt_solarized_setup "$@"
