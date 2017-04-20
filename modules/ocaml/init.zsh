@@ -6,9 +6,9 @@
 #
 
 # Return if requirements are not found.
-if [[ ! -f "$HOME/.opam/opam-init/init.zsh" ]]; then
+if [[ ! -f "${OPAMROOT:-$HOME/.opam}/opam-init/init.zsh" ]]; then
   return 1
 fi
 
 # Initialize OPAM.
-source "$HOME/.opam/opam-init/init.zsh"
+source "${OPAMROOT:-$HOME/.opam}/opam-init/init.zsh"
