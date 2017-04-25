@@ -150,21 +150,10 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
    'root'
 
 # Set syntax highlighting styles.
-<<<<<<< HEAD
  zstyle ':prezto:module:syntax-highlighting' styles \
    'builtin' 'bg=blue' \
    'command' 'bg=blue' \
    'function' 'bg=blue'
-=======
-# zstyle ':prezto:module:syntax-highlighting' styles \
-#   'builtin' 'bg=blue' \
-#   'command' 'bg=blue' \
-#   'function' 'bg=blue'
-#
-# Set syntax pattern styles.
-# zstyle ':prezto:module:syntax-highlighting' pattern \
-#   'rm*-rf*' 'fg=white,bold,bg=red'
->>>>>>> 4f87376b507c712c0d401b43f1819604cb40833e
 
 #
 # Terminal
