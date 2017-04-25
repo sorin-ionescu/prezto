@@ -8,14 +8,12 @@
 function diff {
   if zstyle -t ':prezto:module:utility:diff' color; then
     if (( $+commands[colordiff] )); then
-      command diff --unified "$@" | colordiff --difftype diffu
-    elif (( $+commands[git] )); then
-      git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
+      command colordiff "$@"
     else
-      command diff --unified "$@"
+      command diff "$@"
     fi
   else
-    command diff --unified "$@"
+    command diff "$@"
   fi
 }
 

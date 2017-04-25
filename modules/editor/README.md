@@ -20,6 +20,13 @@ To enable the auto conversion of .... to ../.., add the following to
 
     zstyle ':prezto:module:editor' dot-expansion 'yes'
 
+### PS Context
+
+To enable the prompt context to be set, add the following to your
+*zpreztorc*.
+
+    zstyle ':prezto:module:editor' ps-context 'yes'
+
 Theming
 -------
 

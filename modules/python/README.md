@@ -56,10 +56,10 @@ is used. Replace *Developer* with your projects directory.
 
 The variable `$VIRTUALENVWRAPPER_VIRTUALENV_ARGS` tells virtualenvwrapper what
 arguments to pass to `virtualenv`. For example, set the value to
-*--no-site-packages* to ensure that all new environments are isolated from the
+*--system-site-packages* to ensure that all new environments have access to the
 system site-packages directory.
 
-    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
 
 Aliases
 -------
