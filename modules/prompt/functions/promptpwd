@@ -9,6 +9,8 @@ local ret_directory
 if [[ "$current_pwd" == (#m)[/~] ]]; then
   ret_directory="$MATCH"
   unset MATCH
+elif zstyle -t ':prezto:module:prompt' long-pwd; then
+  ret_directory=${current_pwd}
 else
   ret_directory="${${${${(@j:/:M)${(@s:/:)current_pwd}##.#?}:h}%/}//\%/%%}/${${current_pwd:t}//\%/%%}"
 fi

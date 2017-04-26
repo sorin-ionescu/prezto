@@ -97,6 +97,9 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'sorin'
 
+# Display pwd in long format for themes that use promptpwd function
+# zstyle ':prezto:module:prompt' long-pwd 'yes'
+
 #
 # Ruby
 #
