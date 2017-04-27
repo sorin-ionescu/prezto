@@ -44,6 +44,8 @@ if (( $? && $+commands[virtualenvwrapper.sh] )); then
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
   source "$commands[virtualenvwrapper.sh]"
+elif [[ -e "/etc/bash_completion.d/virtualenvwrapper" ]]; then 
+  source "/etc/bash_completion.d/virtualenvwrapper"
 fi
 
 # Load PIP completion.
