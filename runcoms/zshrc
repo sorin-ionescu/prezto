@@ -1,13 +1,36 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+############################
 # Customize to your needs...
+############################
+unsetopt correct
+
+export PSQL_EDITOR="vi"
+export HOMEBREW_CASK_OPTS=--caskroom=/opt/homebrew-cask/Caskroom
+
+export MYENV=$HOME/.myenv
+export MYSRC=$HOME/src
+export MYSW=$HOME/sw
+export MYTOOL=$HOME/tool
+
+alias sz='source ~/.zshrc'
+alias ez='code -n ~/.zprezto/ '
+alias et='code -n $MYTOOL'
+
+source ${MYENV}/aws.env
+source ${MYENV}/go.env
+source ${MYENV}/nodejs.env
+source ${MYENV}/java.env
+source ${MYENV}/appuri.env
+source ${MYENV}/redshift.env
+source ${MYENV}/k8s.env
+source ${MYENV}/kafka.env
+source ${MYENV}/spark.env
+
+path=(
+  $path
+  $MYTOOL
+)
