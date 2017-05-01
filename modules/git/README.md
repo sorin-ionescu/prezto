@@ -41,15 +41,16 @@ Aliases are enabled by default. You can disable them with:
 
   - `gb` lists, creates, renames, and deletes branches.
   - `gbc` creates a new branch.
-  - `gbl` lists branches and their commits.
-  - `gbL` lists local and remote branches and their commits.
+  - `gbl` lists branches and their commits. (also `gbv`)
+  - `gbL` lists all local and remote branches and their commits.
+  - `gbm` renames a branch.
+  - `gbM` renames a branch even if the new branch name already exists.
   - `gbs` lists branches and their commits with ancestry graphs.
   - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
-  - `gbx` deletes a branch.
-  - `gbX` deletes a branch irrespective of its merged status.
-  - `gbm` renames a branch.
-  - `gbM` renames a branch even if the new branch name already exists.
+  - `gbV` lists branches with more verbose information about their commits.
+  - `gbx` deletes a branch. (also `gbd`)
+  - `gbX` deletes a branch irrespective of its merged status. (also `gbD`)
 
 
 ### Commit
@@ -57,6 +58,7 @@ Aliases are enabled by default. You can disable them with:
   - `gc` records changes to the repository.
   - `gca` stages all modified and deleted files.
   - `gcm` records changes to the repository with the given message.
+  - `gcam` stages all modified and deleted files, and records changes to the repository with the given message.
   - `gco` checks out a branch or paths to work tree.
   - `gcO` checks out hunks from the index or the tree interactively.
   - `gcf` amends the tip of the current branch using the same log message as
@@ -188,6 +190,8 @@ Aliases are enabled by default. You can disable them with:
   - `giu` adds file contents to the index (updates only known files).
   - `gid` displays changes between the index and a named commit (diff).
   - `giD` displays changes between the index and a named commit (word diff).
+  - `gii` temporarily ignore differences in a given file.
+  - `giI` unignore differences in a given file.
   - `gir` resets the current HEAD to the specified state.
   - `giR` resets the current index interactively.
   - `gix` removes files/directories from the index (recursively).
