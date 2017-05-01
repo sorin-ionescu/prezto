@@ -43,8 +43,9 @@ Aliases are enabled by default. You can disable them with:
   - `gbc` creates a new branch.
   - `gbl` lists branches and their commits. (also `gbv`)
   - `gbL` lists all local and remote branches and their commits.
-  - `gbm` renames a branch.
-  - `gbM` renames a branch even if the new branch name already exists.
+  - `gbr` renames a branch. (also `gbm`)
+  - `gbR` renames a branch even if the new branch name already exists. (also
+    `gbM`)
   - `gbs` lists branches and their commits with ancestry graphs.
   - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
