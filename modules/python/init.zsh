@@ -67,6 +67,14 @@ if (( $+commands[pip] )); then
   unset cache_file
 fi
 
+# Load pyenv-virtualenv into the shell session.
+if (( $+commands[pyenv-virtualenv-init] )); then
+  # Disable the virtualenv prompt.
+  VIRTUAL_ENV_DISABLE_PROMPT=1
+
+  eval "$(pyenv virtualenv-init -)";
+fi
+
 #
 # Aliases
 #
