@@ -14,8 +14,8 @@ fi
 # Add zsh-completions to $fpath.
 fpath=("${0:h}/external/src" $fpath)
 
-# Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
+# Load and initialize the completion system ignoring checks of insecure directories but still dumping to cache.
+autoload -Uz compinit && compinit -C -d ~/.zcompdump
 
 #
 # Options
