@@ -46,6 +46,8 @@ if zstyle -T ':prezto:module:python' skip-virtualenvwrapper-init; then
     pyenv virtualenvwrapper
   elif (( $+commands[pyenv-virtualenv-init] )); then
     eval "$(pyenv virtualenv-init -)"
+  elif (( $+commands[virtualenvwrapper_lazy.sh] )); then
+    source "$commands[virtualenvwrapper_lazy.sh]"
   elif (( $+commands[virtualenvwrapper.sh] )); then
     source "$commands[virtualenvwrapper.sh]"
   fi
