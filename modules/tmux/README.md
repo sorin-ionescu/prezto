@@ -23,6 +23,10 @@ following line to *zpreztorc*:
 In both cases, it will create a background session named _prezto_ if the tmux
 server is not started.
 
+You can change the default session name with:
+
+    zstyle ':prezto:module:tmux' session 'YOUR DEFAULT SESSION NAME'
+
 With `auto-start` enabled, you may want to control how multiple sessions are
 managed. The `destroy-unattached` option of tmux controls if the unattached
 sessions must be kept alive, making sessions available for later use, configured
