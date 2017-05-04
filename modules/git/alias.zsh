@@ -226,6 +226,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gsl='git stash list'
   alias gsL='git-stash-dropped'
   alias gsd='git stash show --patch --stat'
+  alias gsD='gsd; echo "Untracked files:"; git diff --stat --patch 4b825dc642cb6eb9a060e54bf8d69288fbee4904 "stash^3"'
   alias gsp='git stash pop'
   alias gsr='git-stash-recover'
   alias gss='git stash save --include-untracked'
