@@ -6,7 +6,7 @@
 #
 
 # Return if requirements are not found.
-if [[ "$OSTYPE" == darwin* ]] || (( ! $+commands[ssh-agent] )); then
+if (( ! $+commands[ssh-agent] )); then
   return 1
 fi
 
