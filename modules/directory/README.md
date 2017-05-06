@@ -24,6 +24,15 @@ Aliases
   - `d` prints the contents of the directory stack.
   - `1 ... 9` changes the directory to the **n** previous one.
 
+Settings
+--------
+
+### Persist Dirstack
+
+To persist the dirstack across sessions, add the following to *zpreztorc*:
+
+    zstyle ':prezto:module:directory' persist-dirstack 'yes'
+
 Authors
 -------
 
