@@ -19,3 +19,6 @@
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule "modules/bd/external"]
+	path = modules/bd/external
+	url = https://github.com/Tarrasch/zsh-bd.git
