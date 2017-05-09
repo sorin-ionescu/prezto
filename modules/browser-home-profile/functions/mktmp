@@ -1,0 +1,94 @@
+#!/bin/zsh
+#
+# $Header: browser-home-profile/functions/mktmp         Exp $
+# $Aythor: (c) 2012-015 -tclover <tokiclover@gmail.com> Exp $
+# $License: MIT (or 2-clause/new/simplified BSD)        Exp $
+# $Version: 0.8 2015/05/24 21:09:26                     Exp $
+#
+
+function mktmp {
+	function mktmp-help {
+		cat <<-EOH
+	usage: mktmp [-p] [-d|-f] [-m mode] [-o owner[:group] TEMPLATE-XXXXXX
+ 	-d, --dir           (Create a) directory
+  -f, --file          (Create a) file
+  -o, --owner <name>  Use owner name
+  -g, --group <name>  Use group name
+  -m, --mode   1700   Use octal mode
+  -p, --tmpdir=DIR    Use temp-dir
+  -h, --help          Help/Exit
+	EOH
+	}
+
+	if (( ${#} == 0 )) {
+		mktmp-help
+		return 1
+	}
+
+	local ARGS name=mktmp
+	ARGS="$(getopt \
+		-o dfg:hm:o:p: \
+		-l dir,file,group:,tmpdir:,help,mode:owner: \
+		-s sh -n mktmp -- "${@}")"
+	if (( ${?} != 0 )) { mktmp-help; return 2; }
+	eval set -- ${ARGS}
+	ARGS=
+
+	local group mode owner temp=-XXXXXX tmp type
+	while true; do
+		case ${1} {
+			(-p|--tmpd*) tmpdir=${2:-${TMPDIR:-/tmp}}; shift;;
+			(-h|--help) mktmp-help; return;;
+			(-m|--mode)  mode=${2} ; shift;;
+			(-o|--owner) owner=${2}; shift;;
+			(-g|--group) group=${2}; shift;;
+			(-d|--dir) ARGS=-d type=dir;;
+			(-f|--file)  type=file;;
+			(*) shift; break;;
+		}
+		shift
+	done
+
+	if ! ([[ ${#} == 1 ]] && [[ -n ${1} ]]); then
+		pr-error "Invalid argument(s)"
+		return 3
+	fi
+	case ${1} {
+		(*${temp}) ;;
+		(*) pr-error "Invalid TEMPLATE"; return 4;;
+	}
+	local mktmp
+	if (( ${+commands[mktemp]} )) {
+		mktmp=mktemp
+	} elif (( ${+commands[busybox]} )) {
+		mktmp='busybox mktemp'
+	}
+	if (( ${+mktmp} )) {
+		tmp=$(${mktmp} ${tmpdir:+-p} ${tmpdir} ${ARGS} ${1})
+	}
+	if [[ ! -e ${tmp} ]] {
+		(( ${+commands[uuidgen]} )) && temp=$(uuidgen --random)
+		tmp="${tmpdir}/${1%-*}-${temp:1:6}"
+	}
+	case ${type} {
+		(dir) [[ -d ${tmp} ]] || mkdir -p ${tmp};;
+		(*)   [[ -e ${tmp} ]] || { mkdir -p ${tmp:h}; touch  ${tmp}; };;
+	}
+	if (( ${?} != 0 )) {
+		pr-error "Failed to create ${tmp}"
+		return 5
+	}
+	[[ -h ${tmp} ]] && return
+	[[ -n ${owner} ]] && chown ${owner} ${tmp}
+	[[ -n ${group} ]] && chgrp ${group} ${tmp}
+	[[ -n ${mode}  ]] && chmod ${mode}  ${tmp}
+	print ${tmp}
+}
+
+case ${(%):-%1x} {
+	(mktmp*) mktmp "${@}";;
+}
+
+#
+# vim:fenc=utf-8:ft=zsh:ci:pi:sts=0:sw=2:ts=2:
+#
