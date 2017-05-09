@@ -97,8 +97,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
   source "${ZDOTDIR:-$HOME}/.zpreztorc"
 fi
 
-# Disable color and theme in dumb terminals.
-if [[ "$TERM" == 'dumb' ]]; then
+# Disable color and theme in dumb terminals (unless we're in emacs).
+if [[ "$TERM" == 'dumb' && "$EMACS" != 't' ]]; then
   zstyle ':prezto:*:*' color 'no'
   zstyle ':prezto:module:prompt' theme 'off'
 fi
