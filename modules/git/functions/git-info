@@ -198,7 +198,7 @@ function git-info {
 
   # Format stashed.
   zstyle -s ':prezto:module:git:info:stashed' format 'stashed_format'
-  if [[ -n "$stashed_format" && -f "$(git-dir)/refs/stash" ]]; then
+  if [[ -n "$stashed_format" && -f "${git_dir}/refs/stash" ]]; then
     stashed="$(git stash list 2> /dev/null | wc -l | awk '{print $1}')"
     if [[ -n "$stashed" ]]; then
       zformat -f stashed_formatted "$stashed_format" "S:$stashed"
