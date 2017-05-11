@@ -1,0 +1,20 @@
+# prompt setup function common to many prompts
+# moved to external function to reduce code redundancy
+
+setopt localoptions extendedglob
+
+local current_pwd="${PWD/#$HOME/~}"
+local ret_directory
+
+if [[ "$current_pwd" == (#m)[/~] ]]; then
+  ret_directory="$MATCH"
+  unset MATCH
+elif zstyle -m ':prezto:module:prompt' pwd-length 'full'; then
+  ret_directory=${PWD}
+elif zstyle -m ':prezto:module:prompt' pwd-length 'long'; then
+  ret_directory=${current_pwd}
+else
+  ret_directory="${${${${(@j:/:M)${(@s:/:)current_pwd}##.#?}:h}%/}//\%/%%}/${${current_pwd:t}//\%/%%}"
+fi
+
+print "$ret_directory"

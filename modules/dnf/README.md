@@ -15,7 +15,7 @@ Aliases
   - `dnfr` removes package(s).
   - `dnfs` searches for a package.
   - `dnfu` updates packages.
-  - `dnfU` upgrates packages.
+  - `dnfU` upgrades packages.
 
 Authors
 -------

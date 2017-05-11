@@ -16,7 +16,7 @@ if [[ -z "$url" ]]; then
 fi
 
 if (( $+commands[curl] )); then
-  curl -s -i 'http://git.io' -F "url=$url" | grep 'Location:' | sed 's/Location: //'
+  curl -s -i 'http://git.io' -F "url=$url" | sed -n 's/^Location: //p'
 else
   print "$0: command not found: curl" >&2
 fi

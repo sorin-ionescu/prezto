@@ -12,6 +12,12 @@ module.
 The Prezto Fasd configuration differs from the default. The default aliases have
 been disabled.
 
+Installation
+------------
+
+Since fasd is not an external module it needs to be installed.
+`brew install fasd`
+
 Aliases
 -------
 

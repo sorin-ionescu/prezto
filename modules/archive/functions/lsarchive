@@ -40,7 +40,7 @@ while (( $# > 0 )); do
       && tar --lzma -t${verbose:+v}f "$1" \
       || lzcat "$1" | tar x${verbose:+v}f - ;;
     (*.tar) tar t${verbose:+v}f "$1" ;;
-    (*.zip) unzip -l${verbose:+v} "$1" ;;
+    (*.zip|*.jar) unzip -l${verbose:+v} "$1" ;;
     (*.rar) unrar &> /dev/null \
       && unrar ${${verbose:+v}:-l} "$1" \
       || rar ${${verbose:+v}:-l} "$1" ;;

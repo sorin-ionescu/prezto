@@ -23,5 +23,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://rsync.samba.org
-[2]: http://help.bombich.com/kb/overview/credits#opensource
+[2]: https://bombich.com/kb/ccc4/credits#rsync
 [3]: https://github.com/sorin-ionescu/prezto/issues

@@ -29,6 +29,10 @@ This setting affects all aliases and functions that call `git-status`.
 Aliases
 -------
 
+Aliases are enabled by default. You can disable them with:
+
+    zstyle ':prezto:module:git:alias' skip 'yes'
+
 ### Git
 
   - `g` is short for `git`.
@@ -37,15 +41,17 @@ Aliases
 
   - `gb` lists, creates, renames, and deletes branches.
   - `gbc` creates a new branch.
-  - `gbl` lists branches and their commits.
-  - `gbL` lists local and remote branches and their commits.
+  - `gbl` lists branches and their commits. (also `gbv`)
+  - `gbL` lists all local and remote branches and their commits.
+  - `gbr` renames a branch. (also `gbm`)
+  - `gbR` renames a branch even if the new branch name already exists. (also
+    `gbM`)
   - `gbs` lists branches and their commits with ancestry graphs.
   - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
-  - `gbx` deletes a branch.
-  - `gbX` deletes a branch irrespective of its merged status.
-  - `gbm` renames a branch.
-  - `gbM` renames a branch even if the new branch name already exists.
+  - `gbV` lists branches with more verbose information about their commits.
+  - `gbx` deletes a branch. (also `gbd`)
+  - `gbX` deletes a branch irrespective of its merged status. (also `gbD`)
 
 
 ### Commit
@@ -53,6 +59,7 @@ Aliases
   - `gc` records changes to the repository.
   - `gca` stages all modified and deleted files.
   - `gcm` records changes to the repository with the given message.
+  - `gcam` stages all modified and deleted files, and records changes to the repository with the given message.
   - `gco` checks out a branch or paths to work tree.
   - `gcO` checks out hunks from the index or the tree interactively.
   - `gcf` amends the tip of the current branch using the same log message as
@@ -89,9 +96,84 @@ Aliases
 ### Fetch
 
   - `gf` downloads objects and references from another repository.
+  - `gfa` downloads objects and references from all remote repositories.
   - `gfc` clones a repository into a new directory.
   - `gfm` fetches from and merges with another repository or local branch.
   - `gfr` fetches from and rebases on another repository or local branch.
+
+### Flow
+
+  - `gFi` is short for `git flow init`
+
+#### Feature
+
+  - `gFf` is short for `git flow feature`
+  - `gFfl` is short for `git flow feature list`
+  - `gFfs` is short for `git flow feature start`
+  - `gFff` is short for `git flow feature finish`
+  - `gFfp` is short for `git flow feature publish`
+  - `gFft` is short for `git flow feature track`
+  - `gFfd` is short for `git flow feature diff`
+  - `gFfr` is short for `git flow feature rebase`
+  - `gFfc` is short for `git flow feature checkout`
+  - `gFfm` is short for `git flow feature pull`
+  - `gFfx` is short for `git flow feature delete`
+
+#### Bugfix
+
+  - `gFb` is short for `git flow bugfix`
+  - `gFbl` is short for `git flow bugfix list`
+  - `gFbs` is short for `git flow bugfix start`
+  - `gFbf` is short for `git flow bugfix finish`
+  - `gFbp` is short for `git flow bugfix publish`
+  - `gFbt` is short for `git flow bugfix track`
+  - `gFbd` is short for `git flow bugfix diff`
+  - `gFbr` is short for `git flow bugfix rebase`
+  - `gFbc` is short for `git flow bugfix checkout`
+  - `gFbm` is short for `git flow bugfix pull`
+  - `gFbx` is short for `git flow bugfix delete`
+
+#### Release
+
+  - `gFl` is short for `git flow release`
+  - `gFll` is short for `git flow release list`
+  - `gFls` is short for `git flow release start`
+  - `gFlf` is short for `git flow release finish`
+  - `gFlp` is short for `git flow release publish`
+  - `gFlt` is short for `git flow release track`
+  - `gFld` is short for `git flow release diff`
+  - `gFlr` is short for `git flow release rebase`
+  - `gFlc` is short for `git flow release checkout`
+  - `gFlm` is short for `git flow release pull`
+  - `gFlx` is short for `git flow release delete`
+
+#### Hotfix
+
+  - `gFh` is short for `git flow hotfix`
+  - `gFhl` is short for `git flow hotfix list`
+  - `gFhs` is short for `git flow hotfix start`
+  - `gFhf` is short for `git flow hotfix finish`
+  - `gFhp` is short for `git flow hotfix publish`
+  - `gFht` is short for `git flow hotfix track`
+  - `gFhd` is short for `git flow hotfix diff`
+  - `gFhr` is short for `git flow hotfix rebase`
+  - `gFhc` is short for `git flow hotfix checkout`
+  - `gFhm` is short for `git flow hotfix pull`
+  - `gFhx` is short for `git flow hotfix delete`
+
+#### Support
+
+  - `gFs` is short for `git flow support`
+  - `gFsl` is short for `git flow support list`
+  - `gFss` is short for `git flow support start`
+  - `gFsf` is short for `git flow support finish`
+  - `gFsp` is short for `git flow support publish`
+  - `gFst` is short for `git flow support track`
+  - `gFsd` is short for `git flow support diff`
+  - `gFsr` is short for `git flow support rebase`
+  - `gFsc` is short for `git flow support checkout`
+  - `gFsm` is short for `git flow support pull`
+  - `gFsx` is short for `git flow support delete`
 
 ### Grep
 
@@ -109,6 +191,8 @@ Aliases
   - `giu` adds file contents to the index (updates only known files).
   - `gid` displays changes between the index and a named commit (diff).
   - `giD` displays changes between the index and a named commit (word diff).
+  - `gii` temporarily ignore differences in a given file.
+  - `giI` unignore differences in a given file.
   - `gir` resets the current HEAD to the specified state.
   - `giR` resets the current index interactively.
   - `gix` removes files/directories from the index (recursively).
@@ -214,6 +298,7 @@ The following aliases may shadow system commands:
 
   - `gpt` shadows the [GUID partition table maintenance utility][4].
   - `gs` shadows the [Ghostscript][5].
+  - `gb` shadows the [GB][9].
 
 If you frequently use the above commands, you may wish to remove said aliases
 from this module or to disable them at the bottom of the zshrc with `unalias`.
@@ -332,3 +417,4 @@ Authors
 [6]: https://github.com/sorin-ionescu/prezto/issues
 [7]: https://github.com/sorin-ionescu/prezto/issues/219
 [8]: http://www.kernel.org/pub/software/scm/git/docs/git-log.html
+[9]: https://getgb.io/
