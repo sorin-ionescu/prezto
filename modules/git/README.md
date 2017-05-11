@@ -65,9 +65,8 @@ Aliases are enabled by default. You can disable them with:
   - `gcam` stages all modified and deleted files, and records changes to the repository with the given message.
   - `gco` checks out a branch or paths to work tree.
   - `gcO` checks out hunks from the index or the tree interactively.
-  - `gcf` amends the tip of the current branch using the same log message as
-  - `gcSf` amends the tip of the current branch using the same log message as
-    *HEAD*. (Signed)
+  - `gcf` amends the tip of the current branch using the same log message as *HEAD*. 
+  - `gcSf` amends the tip of the current branch using the same log message as *HEAD*. (Signed)
   - `gcF` amends the tip of the current branch.
   - `gcSF` amends the tip of the current branch. (Signed)
   - `gcp` applies changes introduced by existing commits.
