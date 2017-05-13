@@ -6,7 +6,7 @@
 #
 
 # Return if requirements are not found.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ "$TERM" == 'dumb' ]] || [[ "$TERM" == 'eterm-color' ]]; then
   return 1
 fi
 
