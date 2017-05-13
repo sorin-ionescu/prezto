@@ -1,0 +1,22 @@
+#
+# Exposes information about the PHP environment via the $php_info associative
+# array.
+#
+# Authors:
+#   Taufek Johar <taufek@gmail.com>
+#
+
+local version
+
+# Clean up previous $php_info.
+unset php_info
+typeset -gA php_info
+
+if (( $+commands[php] )); then
+  version="${${$(php --version)[(w)1,(w)2]}/ /-}"
+fi
+
+# Format version.
+if [[ -n "$version" ]]; then
+  php_info[version]="$version"
+fi
