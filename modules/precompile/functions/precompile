@@ -1,0 +1,65 @@
+#
+# recompile zsh functions/scripts found in $fpath
+#
+# $Header: precompile/functions/precompile               Exp $
+# $Aythor: (c) 2014 -tclover <tokiclover@gmail.com>      Exp $
+# $License: MIT (or 2-clause/new/simplified BSD)         Exp $
+# $Version: 0.2 2014/09/25 11:09:26                      Exp $
+#
+
+function usage {
+	cat <<-EOH
+ usage: precompile [options]
+   -f, --fpath-append    replace/append compiled file
+   -s, --system-fpath    compile sytem wide fpath(s)
+   -h, --help            print this help message
+EOH
+return
+}
+
+setopt LOCAL_OPTIONS EXTENDED_GLOB NULL_GLOB
+unsetopt KSH_ARRAYS
+
+for (( ; $# > 0; ))
+	case $1 {
+		(-f|--fpath-append)
+			local fpath_append=true
+			shift;;
+		(-s|--system-fpath)
+			local system_fpath=true
+			shift;;
+		(-h|--help)
+			usage
+			return;;
+		(*)
+			break;;
+	}
+
+(( $+functions[zrecompile] )) || autoload -Uz zrecompile || return
+
+for (( i=1; i <= $#fpath; ++i )) {
+	local dir=$fpath[i]
+	local zwc=${dir:t}.zwc
+
+	[[ $dir == (.|..) || $dir == (.|..)/* ]] && continue
+	if [[ ${dir#$HOME} == $dir ]] {
+		if (( ! $+system_fpath )) {
+			if (( $+fpath_append )) && [[ -e $fpath[i].zwc ]] {
+				zrecompile -q -t $fpath[i].zwc || fpath[i]=$fpath[i].zwc
+			}
+			continue
+		}
+	}
+	[[ -w $dir:h ]] && pushd -q $dir:h || continue
+
+	typeset -a files
+	files=(${zwc%.zwc}/^([.]*|README*)*(N-.))
+
+	[[ -n $files ]] && zrecompile -p -U -z $=argv $zwc $files &&
+	(( $+fpath_append )) && fpath[i]=$fpath[i].zwc
+	popd -q
+}
+
+#
+# vim:fenc=utf-8:ft=zsh:ci:pi:sts=2:sw=2:ts=2: 
+#
