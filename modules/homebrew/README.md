@@ -1,7 +1,8 @@
 Homebrew
 ========
 
-Defines Homebrew aliases.
+Defines Homebrew aliases, and if loaded before the completion module, adds
+homebrew-installed completions.
 
 Aliases
 -------

@@ -31,3 +31,7 @@ alias caski='brew cask install'
 alias caskl='brew cask list'
 alias casks='brew cask search'
 alias caskx='brew cask uninstall'
+
+if (( $+commands[brew] )); then
+  fpath=(`brew --prefix`/share/zsh/site-functions $fpath)
+fi
