@@ -62,6 +62,10 @@ setopt EXTENDED_GLOB
 # hows about arrays be awesome?  (that is, frew${cool}frew has frew surrounding all the variables, not just first and last
 setopt RC_EXPAND_PARAM
 
+# NVM 
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
 # Aliases
 alias git=hub
 alias g="git"
@@ -86,9 +90,11 @@ export LANG="en_US"
 export LC_ALL="en_US.UTF-8"
 export LESS_TERMCAP_md="$ORANGE"
 export MANPAGER="less -X"
-export GREP_OPTIONS="--color=auto"
+#export GREP_OPTIONS="--color=auto"
 
 export LS_COLORS='di=1;34:ln=35:so=32:pi=0;33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=1;34:ow=1;34:'
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 # Who doesn't want home and end to work?
 bindkey '\e[1~' beginning-of-line
@@ -122,3 +128,13 @@ eval `gdircolors -b ~/.dircolors`
 eval "$(thefuck --alias)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source /usr/local/share/zsh/site-functions/_awless
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
+export CLOUDSDK_PYTHON=/usr/bin/python
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
