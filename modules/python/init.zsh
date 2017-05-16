@@ -109,7 +109,7 @@ if (( $+commands[pip] )); then
   unset cache_file
 
   # Load auto workon cwd hook
-  if zstyle -t ':prezto:module:python' auto-cwd-virtualenv 'yes'; then
+  if zstyle -t ':prezto:module:python:virtualenv' auto-switch 'yes'; then
     # Auto workon when changing directory
     add-zsh-hook chpwd _python-workon-cwd
   fi
