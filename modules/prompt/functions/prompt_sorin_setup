@@ -38,8 +38,7 @@
 # Load dependencies.
 pmodload 'helper'
 
-function _prompt_sorin_async_job {
-  prompt_sorin_style
+function prompt_sorin_async_job {
   local output=''
   builtin cd -q $1
   if (( $+functions[python-info] )); then
@@ -57,7 +56,7 @@ function _prompt_sorin_async_job {
   print $output
 }
 
-function _prompt_sorin_callback {
+function prompt_sorin_callback {
   local job=$1 code=$2 output=$3 exec_time=$4
 
   if [[ -n $output ]]; then
@@ -69,7 +68,7 @@ function _prompt_sorin_callback {
   fi
 }
 
-function _prompt_sorin_precmd {
+function prompt_sorin_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -82,13 +81,14 @@ function _prompt_sorin_precmd {
   # Kill any currently running async jobs
   async_flush_jobs 'prompt_sorin'
 
-  # We need the worker's env to be up to date, so here we are restarting the worker
+  # Stop the existing worker and start another. Worker needs to restart due to
+  # environment changes from workon (virtualenv) or rvm
   async_stop_worker 'prompt_sorin'
   async_start_worker 'prompt_sorin' -n -u
-  async_register_callback 'prompt_sorin' _prompt_sorin_callback
+  async_register_callback 'prompt_sorin' prompt_sorin_callback
 
   # Kick off async jobs
-  async_job 'prompt_sorin' _prompt_sorin_async_job "$(pwd)"
+  async_job 'prompt_sorin' prompt_sorin_async_job "$(pwd)"
 }
 
 function prompt_sorin_setup {
@@ -100,25 +100,9 @@ function prompt_sorin_setup {
   autoload -Uz add-zsh-hook
   autoload -Uz async && async
 
-  # Start async worker
-  # async_start_worker 'prompt_sorin' -n -u
-
-  # Register callback
-  # async_register_callback 'prompt_sorin' _prompt_sorin_callback
-
   # Add hook for calling git-info before each command.
-  add-zsh-hook precmd _prompt_sorin_precmd
+  add-zsh-hook precmd prompt_sorin_precmd
 
-  # Apply styles
-  prompt_sorin_style
-
-  # Define prompts.
-  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
-  RPROMPT=''
-  SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
-}
-
-function prompt_sorin_style {
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{7}...%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{1}❯%F{3}❯%F{2}❯%f%b'
@@ -148,6 +132,11 @@ function prompt_sorin_style {
 
   # Set python-info parameters.
   zstyle ':prezto:module:python:info:virtualenv' format ' %F{4}pyenv%f:%F{2}%v%f'
+
+  # Define prompts.
+  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
+  RPROMPT=''
+  SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
 function prompt_sorin_preview {
