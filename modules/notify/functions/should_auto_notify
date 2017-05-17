@@ -1,0 +1,35 @@
+# Check if it makes sense to load the notify module.
+#
+# Checks for requirements, that it is an xsession, etc.
+#
+# Authors:
+#   Alex Reece <awreece@gmail.com>
+#
+
+if ! zstyle -t ':prezto:module:notify' auto-notify; then
+  return 1
+fi
+
+case "$OSTYPE" in
+  (darwin*) 
+    # TODO(awreece) Disable if ssh with no windows?
+    is-callable terminal-notifier || is-callable growlnotify
+    ;;
+  (linux-gnu*)
+    # Disable if don't have X.
+    if [[ -z $XAUTHORITY ]]; then
+      return 1
+    fi
+
+    # We need both of these functions to operate.
+    if (( ! $+commands[notify-send] || ! $+commands[xprop] )); then
+      return 1
+    fi
+
+    return 0
+    ;;
+  (*)
+    # If we don't know, then just disable.
+    return 1
+    ;;
+esac

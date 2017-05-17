@@ -1,0 +1,40 @@
+# Sends a notification that the last command completed.
+#
+# Assumes $terminal_window_id is the id of the terminals window and that
+# last_comand module is loaded.
+#
+# Authors:
+#   Alex Reece <awreece@gmail.com>
+#
+
+message=$(printf "Command \"%s\" finished (%d) after %s." \
+    $last_command \
+    $last_command_status \
+    $(time_to_human $last_command_time))
+
+# We duplicate a lot of the functionality of notify, but it means we can
+# have this nifty callback to select the window that finished.
+
+# TODO(awreece) Add support for user defined callback.
+case "$OSTYPE" in
+  (darwin*)
+    if is-callable terminal-notifier && 
+       ! zstyle -t ':prezto:module:notify' force-growl; then
+      callback="osascript -e 'tell application \"Terminal\"' \
+                          -e 'activate' \
+                          -e 'set index of window id $terminal_window_id to 1' \
+                          -e 'end tell'"
+      terminal-notifier -message $message -execute $callback >/dev/null
+    elif is-callable growlnotify; then
+      growlnotify --message $message
+    else
+     return 1
+    fi
+    ;;
+  (linux-gnu*)
+    notify-send "Command finished" $message
+    ;;
+  (*)
+    return 1
+    ;;
+esac

@@ -1,0 +1,81 @@
+#
+# A simple theme that displays relevant, contextual information.
+#
+# Authors:
+#   Alex Reece <awreece@gmail.com>
+#
+# Screenshots:
+#   http://codearcana.com/posts/2013/11/06/my-zsh-theme.html
+#   http://codearcana.com/images/zsh_theme.png
+#
+
+function prompt_awreece_help {
+cat <<EOH
+Prompt will look like:
+#############################################################################
++----------- Last part in path to current working directory.
+|
+|        +-- A '#' if root shell, colored green if the last command was
+|        |   successful and red otherwise.
+|        |
+|        |   Duration of last command, colored green if last command --+
+|        |   was successful and red otherwise.                         |
+|        |                                                             |
+|        |   ssh user and hostname -------------------------+          |
+|        |   (if connected via ssh).                        |          |
+|        |                                                  |          |
+|        |   Full path to current working --+               |          |
+|        |   directory (if longer than      |               |          |
+|        |   than 1 segment).               |               |          |
+|        |                                  |               |          |
+|        |   Number of background jobs --+  |               |          |
+|        |   (if any).                   |  |               |          |
+v        v                               v  v               v          v
+#############################################################################
+Developer%                               1& ~/bin/Developer [alex@cmu] 2.001s
+EOH
+}
+
+function prompt_awreece_setup {
+  prompt_opts=(cr percent subst)
+
+  # Load prerequisites.
+  pmodload 'last_command'
+
+  # Variables used for prompts.
+  local background_job_status='%(1j.%F{yellow}%j&%f .)'
+  local full_directory='%(2~.%F{blue}%~%f .)'
+  local ssh_host=''
+  if prompt_awreece_is_ssh; then
+    ssh_host='%F{cyan}[%n@%m]%f '
+  fi
+  local command_time='%(?.%F{green}.%F{red})$(prompt_awreece_command_time)%f'
+
+  # Define prompts.
+  PROMPT='%F{blue}%1~%f%F{magenta}%#%f '
+  RPROMPT="${background_job_status}${full_directory}${ssh_host}${command_time}"
+}
+
+function prompt_awreece_command_time {
+  time_to_human $last_command_time
+}
+
+# Return a zero exit status (true) iff the current shell is controlled via ssh.
+function prompt_awreece_is_ssh {
+  # Actually, sudo etc clear a bunch of environment variables, including
+  # SSH_CONNECTION, so this doesn't always work. Unfortunately, I don't know
+  # the best way to make it work. For now, I'll hide it in a function and I can
+  # update it when I figure out a better way later.
+  [[ -n $SSH_CONNECTION ]]
+}
+
+function prompt_awreece_preview {
+  local +h PROMPT='%# '
+  local +h RPROMPT=''
+  # Set a last_command_time to make it interesting.
+  local +h last_commmand_time=3.14159
+
+  prompt_preview_theme 'awreece' "$@"
+}
+
+prompt_awreece_setup "$@"

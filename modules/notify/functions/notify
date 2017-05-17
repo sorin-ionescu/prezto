@@ -1,0 +1,27 @@
+# Pops up a notification with the provided arg.
+#
+# Authors:
+#   Alex Reece <awreece@gmail.com>
+#
+
+# I actually want all the args as one string.
+message="$*"
+
+case "$OSTYPE" in
+  (darwin*)
+    if is-callable terminal-notifier && \
+       ! zstyle -t ':prezto:module:notify' force-growl; then
+      terminal-notifier >/dev/null -message $message
+    elif is-callable growlnotify; then
+      growlnotify --message $message
+    else
+      return 1
+    fi
+    ;;
+  (linux-gnu*)
+    notify-send $message
+    ;;
+  (*)
+    return 1
+    ;;
+esac
