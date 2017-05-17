@@ -23,9 +23,7 @@ function is-true {
 
 # Prints the first non-empty string in the arguments array.
 function coalesce {
-  for arg in $argv; do
-    print "$arg"
-    return 0
-  done
-  return 1
+  print "${${(s: :)@}[1]}"
 }
+
+
