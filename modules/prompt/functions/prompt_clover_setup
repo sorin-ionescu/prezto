@@ -1,0 +1,173 @@
+#
+# A theme based on (...) Extravagant Prompt with vcs_info integration.
+#
+# $Header: prompt_clover_setup                                   Exp $
+# $Authors: (c) 2011-2014 -tclover <tokiclover@gmail.com>        Exp $
+# $Licence: MIT or 2-clause/new/simplified BSD                   Exp $
+# $Version: 2.0 2014/09/09                                       Exp $
+# $Screenshots: https://imgur.com/10w3Tzu.png                    Exp $
+#
+
+function prompt_clover_help {
+	cat <<-EOH
+usage: prompt clover [options] [color-list: 4|8 colors]
+  -a, --no-apm       disable APM checking
+  -t, --no-titlebar  disable titlebar
+EOH
+}
+
+function prompt_clover_precmd {
+	# Load required function
+	autoload -Uz vcs_info
+	
+	# Define vcs info formats
+	zstyle ':vcs_info:*' enable bzr hg git svn
+	zstyle ':vcs_info:*:prompt:*' check-for-changes true
+	zstyle ':vcs_info:*:prompt:*' unstagedstr '*'
+	zstyle ':vcs_info:*:prompt:*' actionformats '%a'
+	zstyle ':vcs_info:*:prompt:*' formats '·%s·%b%u'
+	zstyle ':vcs_info:*:prompt:*' branchformat '%b'
+	zstyle ':vcs_info:*:prompt:*' nvcsformats ''
+	vcs_info 'prompt'
+
+	# Truncate the path if it's too long
+	local offset width
+	case $TERM {
+		(xterm*|*rxvt*) offset=2;;
+		(linux)         offset=1;;
+		(*)             offset=0;;
+	}
+	(( width = $COLUMNS - $offset ))
+	
+	local promptsize=${#${(%):--(%#·%m/%l·%D{%m/%d}:%H:%M)--(${(%)vcs_info_msg_0_[1,15]})--}}
+	local pwdsize=${#${(%):-%~}}
+
+	if (( ($promptsize + $pwdsize) > $width )) {
+		(( prompt_color[len] = $width - $promptsize ))
+	} else {
+		prompt_color[fil]=\${(l.$(( $width - $promptsize - $pwdsize ))..$prompt_color[bar].)}
+	}
+}
+
+function prompt_clover_preexec {
+	if [[ $TERM == "screen" ]] {
+		local cmd=${1[(wr)^(*=*|sudo|-*)]}
+		print -n "\ek$cmd\e\\"
+	}
+}
+
+function prompt_clover_setup {
+	typeset -A -g prompt_color
+
+	# Load required function
+	autoload -Uz add-zsh-hook
+
+	# Add required hook-functions
+	add-zsh-hook precmd  prompt_clover_precmd
+	add-zsh-hook preexec prompt_clover_preexec
+
+	for (( ; true; ))
+	case $1 in
+		(-a|--no-apm)
+			prompt_color[apm]=false
+			shift;;
+		(-t|--no-tilebar)
+			prompt_color[titlebar]=false
+			shift;;
+		(*) break;;
+	esac
+
+	# Need this so the prompt will work
+	setopt PROMPT_SUBST
+	setopt EXTENDED_GLOB
+	unsetopt BRACE_CCL
+
+	# See if we can use colors.
+	autoload colors zsh/terminfo
+	if [[ $terminfo[colors] -ge 8 ]] { colors }
+	typeset -a color_arg
+	prompt_color[c0]="%{$terminfo[sgr0]%}"
+
+	if [[ $# == 8 ]] && [[ $terminfo[colors] -ge 256 ]] {
+		for (( i=1; i<=8; i++ ))
+			prompt_color[c$i]="%{$color[${(L)argv[$i]}]%}"
+	} elif [[ $# == 4 ]] {
+		color_arg=($argv[@])
+	} else {
+		color_arg=(blue green magenta red)
+	}
+	for (( i=1, j=1; i<=4; i++, j+=2 )) {
+		prompt_color[c$j]="%{$fg_bold[${(L)color_arg[$i]}]%}"
+		prompt_color[c$(($j+1))]="%{$fg[${(L)color_arg[$i]}]%}"
+	}
+
+	# Use extended characters to get a nicer look:
+	# 	s=shift u=upper l=lower|left c=corner
+	typeset -A altchar
+	set -A altchar ${(s..)terminfo[acsc]}
+	prompt_color[set]="%{$terminfo[enacs]%}"
+	prompt_color[s-in]="%{$terminfo[smacs]%}"
+	prompt_color[s-out]="%{$terminfo[rmacs]%}"
+	prompt_color[bar]=${altchar[q]:--}
+	prompt_color[ulc]=${altchar[l]:--}
+	prompt_color[llc]=${altchar[m]:--}
+	prompt_color[lrc]=${altchar[j]:--}
+	prompt_color[urc]=${altchar[k]:--}
+	unset altchar
+	
+	# Decide if we need to set titlebar text
+	(( $+prompt_color[titlebar] )) ||
+	case $TERM {
+		(xterm*|*rxvt*)
+			prompt_color[titlebar]=$'%{\e]0;%#:%m:%y:%~:${COLUMNS}x${LINES}\a%}'
+			;;
+		(screen)
+			prompt_color[titlebar]=$'%{\e_screen:\005(\005t):%#:%m:%y\a:%~:${COLUMNS}x${LINES}\a\e\\%}'
+			;;
+		(*)
+			prompt_color[titlebar]=''
+			;;
+		}
+
+	# Decide whether to set a screen title
+	if [[ $TERM == "screen" ]] {
+		prompt_color[screen]=$'%{\ekzsh\e\\%}'
+	} else {
+		prompt_color[screen]=''
+	}
+
+	# APM detection
+	(( $+prompt_color[apm] )) ||
+	if (( $+commands[ibam] )) {
+		prompt_color[apm]='$prompt_color[c7]${${$(ibam --percentbattery)[(f)1]}[(w)-2]}%%(${${result[(f)3]}[(w)-1]})$prompt_color[c2]·'
+	} elif (( $+commands[apm] )) {
+		prompt_color[apm]='$prompt_color[c7]${$(apm)[(w)5,(w)6]/\%:/%%}$prompt_color[c2]·'
+	} else { prompt_color[apm]='' }
+
+	# Finally, set up the prompt
+	PROMPT='$prompt_color[set]$prompt_color[screen]${(e)prompt_color[titlebar]}\
+$prompt_color[c6]$prompt_color[s-in]$prompt_color[ulc]$prompt_color[c2]$prompt_color[bar]\
+$prompt_color[s-out]($prompt_color[c5]%(!.$prompt_color[c7].$prompt_color[c3])%#$prompt_color[c5]\
+$prompt_color[c2]·$prompt_color[c5]%m:%l$prompt_color[c2]·$prompt_color[c5]\
+${(e)prompt_color[apm]}$prompt_color[c1]%D{%m/%d}$prompt_color[c6]·%D{%H:%M}$prompt_color[c2])$prompt_color[s-in]\
+$prompt_color[bar]$prompt_color[c5]$prompt_color[bar]${(%e)prompt_color[fil]}\
+$prompt_color[c2]$prompt_color[bar]$prompt_color[s-out]($prompt_color[c5]%\
+$prompt_color[len]<...<%~%<<$prompt_color[c1]${(%)vcs_info_msg_0_[1,15]}$prompt_color[c5]$prompt_color[c2]\
+)$prompt_color[s-in]$prompt_color[bar]$prompt_color[c6]$prompt_color[urc]$prompt_color[s-out]
+$prompt_color[c6]$prompt_color[s-in]$prompt_color[llc]$prompt_color[c2]$prompt_color[bar]$prompt_color[s-out]\
+%(!.$prompt_color[c7].$prompt_color[c3])»$prompt_color[c0] '
+
+	RPROMPT=' %(?..$prompt_color[c2]$prompt_color[s-out]($prompt_color[c7]%?$prompt_color[c2]%))\
+«$prompt_color[s-in]$prompt_color[bar]$prompt_color[c6]$prompt_color[lrc]$prompt_color[s-out]$prompt_color[c0]'
+
+	PS2='$prompt_color[c6]$prompt_color[s-in]$prompt_color[bar]$prompt_color[s-out]\
+$prompt_color[c2]$prompt_color[s-in]$prompt_color[bar]$prompt_color[s-out](\
+$prompt_color[c4]%_$prompt_color[c2])$prompt_color[s-in]$prompt_color[bar]$prompt_color[s-out]\
+$prompt_color[c6]$prompt_color[s-in]$prompt_color[bar]$prompt_color[s-out]$prompt_color[c0] '
+}
+
+prompt_clover_setup "$@"
+
+#
+# vim:fenc=utf-8:ft=zsh:sts=0:sw=2:ts=2:
+#
