@@ -27,3 +27,19 @@ source "$fasd_cache"
 unset fasd_cache
 
 export PATH=~/.local/bin:$PATH
+
+# timing the commands
+function ts_preexec() {
+  timer=${timer:-$SECONDS}
+}
+add-zsh-hook preexec ts_preexec
+
+function ts_precmd() {
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    export RPROMPT="%t %F{cyan}${timer_show}s %{$reset_color%}"
+    unset timer
+  fi
+}
+add-zsh-hook precmd ts_precmd
+
