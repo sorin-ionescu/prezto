@@ -201,9 +201,13 @@ zle -N expand-dot-to-parent-directory-path
 function expand-or-complete-with-indicator {
   local indicator
   zstyle -s ':prezto:module:editor:info:completing' format 'indicator'
-  print -Pn "$indicator"
-  zle expand-or-complete
-  zle redisplay
+  if [[ -z "${indicator}" ]]; then
+    zle expand-or-complete
+  else
+    print -Pn "$indicator"
+    zle expand-or-complete
+    zle redisplay
+  fi
 }
 zle -N expand-or-complete-with-indicator
 
