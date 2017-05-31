@@ -11,3 +11,25 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+eval "$(rbenv init -)"
+
+export PGDATA=/usr/local/var/postgres
+export GOPATH=$HOME/.go
+export EDITOR=atom
+
+alias g='git'
+alias bi='bundle install'
+alias be='bundle exec'
+alias hb='hub browse'
+
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
