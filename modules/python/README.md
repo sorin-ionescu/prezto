@@ -61,6 +61,15 @@ system site-packages directory.
 
     export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
 
+### Additional Options
+
+There is a hook to enable auto-switching to virtualenvs when switching into a
+directory where the root of the project matches a virtualenv name.
+
+This can be enabled with:
+
+    zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+
 Aliases
 -------
 
