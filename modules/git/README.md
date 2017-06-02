@@ -316,6 +316,7 @@ Functions
   - `git-hub-shorten-url` shortens GitHub URLs.
   - `git-info` exposes repository information via the `$git_info` associative
     array.
+  - `git-ignore-add` adds any passed paramaters to the root's .gitignore.
   - `git-root` displays the path to the working tree root.
   - `git-stash-clear-interactive` asks for confirmation before clearing the stash.
   - `git-stash-dropped` lists dropped stashed states.
