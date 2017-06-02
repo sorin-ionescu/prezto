@@ -4,6 +4,7 @@
 # Authors:
 #   Benjamin Boudreau <dreurmail@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Matt Hamilton <m@tthamilton.com>
 #
 # Tips:
 #   https://wiki.archlinux.org/index.php/Pacman_Tips
@@ -32,6 +33,9 @@ else
   _pacman_sudo='sudo '
 fi
 
+# Set package compression and type
+_pacman_package_ext='.pkg.tar.xz'
+
 #
 # Aliases
 #
@@ -40,10 +44,13 @@ fi
 alias pac="${_pacman_frontend}"
 
 # Installs packages from repositories.
-alias paci="${_pacman_sudo}${_pacman_frontend} --sync"
+alias paci="${_pacman_sudo}${_pacman_frontend} --sync --sysupgrade"
 
 # Installs packages from files.
 alias pacI="${_pacman_sudo}${_pacman_frontend} --upgrade"
+
+# Installs all packages in local directory
+alias pacd="${_pacman_sudo}${_pacman_frontend} --upgrade *${_pacman_package_ext}"
 
 # Removes packages and unneeded dependencies.
 alias pacx="${_pacman_sudo}${_pacman_frontend} --remove"
@@ -72,13 +79,13 @@ alias pacman-remove-orphans="${_pacman_sudo}${_pacman_frontend} --remove --recur
 # Synchronizes the local package and Arch Build System databases against the
 # repositories.
 if (( $+commands[abs] )); then
-  alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh && sudo abs"
+  alias pacU="${_pacman_sudo}${_pacman_frontend} --sync --refresh && sudo abs"
 else
-  alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh"
+  alias pacU="${_pacman_sudo}${_pacman_frontend} --sync --refresh"
 fi
 
 # Synchronizes the local package database against the repositories then
 # upgrades outdated packages.
-alias pacU="${_pacman_sudo}${_pacman_frontend} --sync --refresh --sysupgrade"
+alias pacu="${_pacman_sudo}${_pacman_frontend} --sync --refresh --sysupgrade"
 
-unset _pacman_{frontend,sudo}
+unset _pacman_{frontend,sudo,package_ext}

@@ -27,15 +27,16 @@ Aliases
   - `pac` is short for `pacman`.
   - `paci` installs packages from repositories.
   - `pacI` installs packages from files.
+  - `pacd` installs all packages in the current directory.
   - `pacx` removes packages and unneeded dependencies.
   - `pacX` removes packages, their configuration, and unneeded dependencies.
   - `pacq` displays information about a package from the repositories.
   - `pacQ` displays information about a package from the local database.
   - `pacs` searches for packages in the repositories.
   - `pacS` searches for packages in the local database.
-  - `pacu` synchronizes the local package and Arch Build System (requires `abs`)
+  - `pacU` synchronizes the local package and Arch Build System (requires `abs`)
     databases against the repositories.
-  - `pacU` synchronizes the local package database against the repositories then
+  - `pacu` synchronizes the local package database against the repositories then
     upgrades outdated packages.
   - `pacman-list-orphans` lists orphan packages.
   - `pacman-remove-orphans` removes orphan packages.
