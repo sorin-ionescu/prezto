@@ -35,6 +35,9 @@ version is 4.3.17.
      more complicated setups, it is recommended that you back up your original
      configs and replace them with the provided prezto runcoms.
 
+    NB: The above will not overwrite or update any existing `.zshrc`. Therefore, if you
+    have an existing `.zshrc` you must manually add the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"`.
+
   4. Set Zsh as your default shell:
 
         `chsh -s /bin/zsh`
