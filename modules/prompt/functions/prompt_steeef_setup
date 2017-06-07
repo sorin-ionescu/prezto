@@ -72,6 +72,12 @@ function prompt_steeef_setup {
   local unstaged_format="${_prompt_steeef_colors[2]}●%f"
   local staged_format="${_prompt_steeef_colors[5]}●%f"
 
+  # Set editor-info parameters.
+  zstyle ':prezto:module:editor:info:keymap:primary' format '1'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '1'
+
+  _prompt_steeef_character='$(if [[ $editor_info[keymap] = 1 ]]; then if [[ $editor_info[overwrite] = 1 ]]; then echo "&"; else echo "$"; fi; else echo "%%"; fi)'
+
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
@@ -87,7 +93,7 @@ function prompt_steeef_setup {
   # Define prompts.
   PROMPT="
 ${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]'"$ "
+"'$python_info[virtualenv]${(e)_prompt_steeef_character} '
   RPROMPT=''
 }
 
