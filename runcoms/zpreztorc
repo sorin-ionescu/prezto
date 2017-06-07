@@ -1,6 +1,13 @@
 #
 # Sets Prezto options.
 #
+# See:
+#   https://dotfiles.github.io/
+#   http://joshsymonds.com/blog/2014/06/12/shell-awesomeness-with-prezto/
+#   http://jeromedalbert.com/migrate-from-oh-my-zsh-to-prezto/
+#   http://mikebuss.com/2014/04/07/customizing-prezto/
+#   http://mikebuss.com/2014/02/02/a-beautiful-productive-terminal-experience/
+#
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
@@ -23,6 +30,7 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
+# Its ok to load modules that dont apply (they check for requirements)
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
@@ -32,6 +40,12 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'homebrew' \
+  'osx' \
+  'git' \
+  'tmux' \
+  'syntax-highlighting' \
+  'history-substring-search' \
   'prompt'
 
 #
@@ -46,10 +60,10 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 # Allow the zsh prompt context to be shown.
 #zstyle ':prezto:module:editor' ps-context 'yes'
@@ -73,13 +87,13 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #
 
 # Set the query found color.
-# zstyle ':prezto:module:history-substring-search:color' found ''
+zstyle ':prezto:module:history-substring-search:color' found ''
 
 # Set the query not found color.
-# zstyle ':prezto:module:history-substring-search:color' not-found ''
+zstyle ':prezto:module:history-substring-search:color' not-found ''
 
 # Set the search globbing flags.
-# zstyle ':prezto:module:history-substring-search' globbing-flags ''
+zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
 #
 # Pacman
