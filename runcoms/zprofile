@@ -70,4 +70,4 @@ if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="$(mktemp -d)"
 fi
 
-TMPPREFIX="${TMPDIR%/}/zsh"
+export TMPPREFIX="${TMPDIR%/}/zsh"
