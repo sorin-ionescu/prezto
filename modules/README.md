@@ -77,6 +77,11 @@ GPG
 
 Provides for an easier use of GPG by setting up gpg-agent.
 
+Groovy
+------
+
+Loads the Groovy enVironment Manager
+
 Haskell
 -------
 
