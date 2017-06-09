@@ -1,11 +1,17 @@
 #
 # A simple theme that displays relevant, contextual information.
 #
+# - Git branch
+# - Python environment
+# - Ruby environment (gemset)
+#
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Matthew Crenshaw <sgt@squig.gs>
 #
 # Screenshots:
 #   http://i.imgur.com/nrGV6pg.png
+#   http://i.imgur.com/w2ein8H.png
 #
 
 #
@@ -32,33 +38,34 @@
 # Load dependencies.
 pmodload 'helper'
 
-prompt_sorin_git_info() {
-  if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    # Append Git status.
-    if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
-      alias typeset='typeset -g'
-      source "$_prompt_sorin_precmd_async_data"
-      RPROMPT+='${git_info:+${(e)git_info[status]}}'
-      unalias typeset
-    fi
+function prompt_sorin_async_job {
+  local output=''
+  builtin cd -q $1
+  if (( $+functions[python-info] )); then
+    python-info
+    output+=" ${python_info:+${(e)python_info[virtualenv]}}"
+  fi
+  if (( $+functions[ruby-info] )); then
+    ruby-info
+    output+=" ${ruby_info:+${(e)ruby_info[version]}}"
+  fi
+  if (( $+functions[git-info] )); then
+    git-info
+    output+=" ${git_info:+${(e)git_info[status]}}"
+  fi
+  print $output
+}
 
-    # Reset PID.
-    _prompt_sorin_precmd_async_pid=0
+function prompt_sorin_callback {
+  local job=$1 code=$2 output=$3 exec_time=$4
+
+  if [[ -n $output ]]; then
+    # Append to rprompt
+    RPROMPT+=$output
 
     # Redisplay prompt.
     zle && zle reset-prompt
   fi
-}
-
-function prompt_sorin_precmd_async {
-  # Get Git repository information.
-  if (( $+functions[git-info] )); then
-    git-info
-    typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
-  fi
-
-  # Signal completion to parent process.
-  kill -WINCH $$
 }
 
 function prompt_sorin_precmd {
@@ -71,26 +78,27 @@ function prompt_sorin_precmd {
   # Define prompts.
   RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
 
-  # Kill the old process of slow commands if it is still running.
-  if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    kill -KILL "$_prompt_sorin_precmd_async_pid" &>/dev/null
-  fi
+  # Kill any currently running async jobs
+  async_flush_jobs 'prompt_sorin'
 
-  # Compute slow commands in the background.
-  trap prompt_sorin_git_info WINCH
-  prompt_sorin_precmd_async &!
-  _prompt_sorin_precmd_async_pid=$!
+  # Stop the existing worker and start another. Worker needs to restart due to
+  # environment changes from workon (virtualenv) or rvm
+  async_stop_worker 'prompt_sorin'
+  async_start_worker 'prompt_sorin' -n -u
+  async_register_callback 'prompt_sorin' prompt_sorin_callback
+
+  # Kick off async jobs
+  async_job 'prompt_sorin' prompt_sorin_async_job "$(pwd)"
 }
 
 function prompt_sorin_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
-  _prompt_sorin_precmd_async_pid=0
-  _prompt_sorin_precmd_async_data="${TMPPREFIX}-prompt_sorin_data"
 
   # Load required functions.
   autoload -Uz add-zsh-hook
+  autoload -Uz async && async
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_sorin_precmd
@@ -118,6 +126,12 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
     'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
+
+  # Set ruby-info parameters.
+  zstyle ':prezto:module:ruby:info:version' format ' %F{4}rbenv%f:%F{2}%v%f'
+
+  # Set python-info parameters.
+  zstyle ':prezto:module:python:info:virtualenv' format ' %F{4}pyenv%f:%F{2}%v%f'
 
   # Define prompts.
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
