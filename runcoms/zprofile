@@ -65,9 +65,14 @@ fi
 #
 # Temporary Files
 #
+#
+if [[ -z "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/zsh-$UID"
+fi
 
 if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="$(mktemp -d)"
+  mkdir "$TMPDIR"
+  chmod 700 "$TMPDIR"
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
