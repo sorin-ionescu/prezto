@@ -150,16 +150,12 @@ fi
 
 alias du='du -kh'
 
-if (( $+commands[htop] )); then
-  alias top=htop
+if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
+  alias topc='top -o cpu'
+  alias topm='top -o vsize'
 else
-  if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
-    alias topc='top -o cpu'
-    alias topm='top -o vsize'
-  else
-    alias topc='top -o %CPU'
-    alias topm='top -o %MEM'
-  fi
+  alias topc='top -o %CPU'
+  alias topm='top -o %MEM'
 fi
 
 # Miscellaneous
