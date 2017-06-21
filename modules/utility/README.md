@@ -107,11 +107,9 @@ Aliases
 
   - `df` displays free disk space using human readable units (aliases to `pydf`, if installed).
   - `du` displays disk usage using human readable units.
-  - `top` displays information about processes (aliased to `htop`, if installed).
-  - `topc` displays information about processes sorted by CPU usage (`htop` not
-    installed).
-  - `topm` displays information about processes sorted by RAM usage (`htop` not
-    installed).
+  - `top` displays information about processes.
+  - `topc` displays information about processes sorted by CPU usage.
+  - `topm` displays information about processes sorted by RAM usage.
 
 ### Miscellaneous
 
