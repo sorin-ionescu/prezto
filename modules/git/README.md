@@ -102,6 +102,7 @@ Aliases are enabled by default. You can disable them with:
   - `gf` downloads objects and references from another repository.
   - `gfa` downloads objects and references from all remote repositories.
   - `gfc` clones a repository into a new directory.
+  - `gfcr` clones a repository into a new directory including all submodules.
   - `gfm` fetches from and merges with another repository or local branch.
   - `gfr` fetches from and rebases on another repository or local branch.
 
