@@ -322,6 +322,9 @@ for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
 done
 
+# Delete key deletes character in vimcmd cmd mode instead of weird default functionality
+bindkey -M vicmd "$key_info[Delete]" delete-char
+
 # Do not expand .... to ../.. during incremental search.
 if zstyle -t ':prezto:module:editor' dot-expansion; then
   bindkey -M isearch . self-insert 2> /dev/null
