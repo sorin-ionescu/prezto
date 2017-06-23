@@ -17,6 +17,29 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 unset min_zsh_version
 
+# zprezto convenience updater
+function zprezto-update {
+    local OWD="$(pwd)"
+    cd -- "${ZPREZTODIR}"
+    local orig_branch="$(git symbolic-ref HEAD 2>/dev/null | cut -d '/' -f 3)"
+    if [[ "$orig_branch" == "master" ]]; then
+        git fetch
+        if [[ "$(git status -uno | grep behind)" ]]; then
+            printf "There is an update availible. Trying to pull"
+            if git pull --ff-only; then
+                printf "Syncing submodules\n"
+                git submodule update --recursive
+            else
+                printf "Unable to fast-forward the changes. You can fix this by running 'cd %s' and then 'git pull' to manually pull and possibly merge in changes\n"
+            fi
+        else
+            printf "There are no updates.\n"
+        fi
+    else
+        printf "zprezto install at '%s' is not on the master branch (you're on '%s') Unable to automatically update.\n" "${ZPREZTODIR}" "${orig_branch}"
+    fi
+    cd -- "${OWD}"
+}
 #
 # Module Loader
 #
