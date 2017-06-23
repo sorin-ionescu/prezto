@@ -48,6 +48,13 @@ zstyle ':prezto:load' pmodule \
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'emacs'
 
+# Set the time for zsh to wait for additional keypresses. In vi mode you
+# can set this to 1 (0.01s) to remove the delay from entering and
+# exiting vicmd mode. The default is 0.4s (KEYTIMEOUT=40)
+# Recommended in vi mode, but setting too low in emacs mode will not allow
+# time to enter additional keypresses.
+#export KEYTIMEOUT=1
+
 # Auto convert .... to ../..
 # zstyle ':prezto:module:editor' dot-expansion 'yes'
 
