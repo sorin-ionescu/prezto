@@ -25,15 +25,13 @@ improve its performance, do not hesitate to fork and send pull requests.
 
 #### Code Style
 
-   - Indent using 2 spaces. No tabs.
-   - Put `; do` and `; then` on the same line as the `while`, `for` or `if`.
+This project follows the [Google Shell Style Guide][5] when possible. However,
+there are a number of additional things to keep in mind.
+
    - Local variables should be used whenever possible.
-   - Use `snake_case` for variable and function naming.
-   - Local variables should be lower cased.
-   - Global variables should be upper cased.
-   - Use `$(command)` instead of backticks.
-   - Avoid `eval` if possible.
    - Prefer `zstyle` over environment variables for configuration.
+   - Use the `my_func()` syntax for defining functions.
+   - The 80 character hard limit can be waved for readability.
 
 #### Modules
 
@@ -44,10 +42,11 @@ improve its performance, do not hesitate to fork and send pull requests.
 #### Themes
 
    - A screenshots section must be present in the file header.
-   - The pull request description must have [embedded screenshots][5].
+   - The pull request description must have [embedded screenshots][6].
 
 [1]: https://github.com/sorin-ionescu/prezto/contributors
 [2]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 [3]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [4]: https://help.github.com/articles/using-pull-requests
-[5]: http://daringfireball.net/projects/markdown/syntax#img
+[5]: https://google.github.io/styleguide/shell.xml
+[6]: http://daringfireball.net/projects/markdown/syntax#img
