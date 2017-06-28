@@ -30,9 +30,13 @@ local zprezto_plugins=(
   history
   directory
   spectrum
+#  git #
   utility
   completion
+#  syntax-highlighting #
   prompt
+#  history-substring-search #
+#  autosuggestions #
 )
 zstyle ':prezto:load' pmodule $zprezto_plugins
 
