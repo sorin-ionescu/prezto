@@ -21,6 +21,10 @@ zstyle -s ':prezto:module:git:log:brief' format '_git_log_brief_format' \
 # Status
 zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_submodules' \
   || _git_status_ignore_submodules='none'
+  
+# Diff
+zstyle -s ':prezto:module:git:diff:word-diff' mode '_git_diff_word_diff_mode' \
+  || _git_diff_word_diff_mode='plain'
 
 #
 # Aliases
@@ -171,7 +175,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias giA='git add --patch'
   alias giu='git add --update'
   alias gid='git diff --no-ext-diff --cached'
-  alias giD='git diff --no-ext-diff --cached --word-diff'
+  alias giD='git diff --no-ext-diff --cached --word-diff=${_git_diff_word_diff_mode}'
   alias gii='git update-index --assume-unchanged'
   alias giI='git update-index --no-assume-unchanged'
   alias gir='git reset'
@@ -253,7 +257,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gws='git status --ignore-submodules=${_git_status_ignore_submodules} --short'
   alias gwS='git status --ignore-submodules=${_git_status_ignore_submodules}'
   alias gwd='git diff --no-ext-diff'
-  alias gwD='git diff --no-ext-diff --word-diff'
+  alias gwD='git diff --no-ext-diff --word-diff=${_git_diff_word_diff_mode}'
   alias gwr='git reset --soft'
   alias gwR='git reset --hard'
   alias gwc='git clean -n'
