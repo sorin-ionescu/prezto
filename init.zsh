@@ -18,28 +18,51 @@ fi
 unset min_zsh_version
 
 # zprezto convenience updater
-function zprezto-update {
-    local OWD="$(pwd)"
-    cd -- "${ZPREZTODIR}"
-    local orig_branch="$(git symbolic-ref HEAD 2>/dev/null | cut -d '/' -f 3)"
-    if [[ "$orig_branch" == "master" ]]; then
-        git fetch
-        if [[ "$(git status -uno | grep behind)" ]]; then
-            printf "There is an update availible. Trying to pull"
-            if git pull --ff-only; then
-                printf "Syncing submodules\n"
-                git submodule update --recursive
-            else
-                printf "Unable to fast-forward the changes. You can fix this by running 'cd %s' and then 'git pull' to manually pull and possibly merge in changes\n"
-            fi
-        else
-            printf "There are no updates.\n"
-        fi
+# The function is surrounded by ( ) instead of { } so it starts in a subshell
+# and won't affect the environment of the calling shell
+function zprezto-update () (
+  function cannot-fast-forward {
+    local STATUS="$1"
+    [[ "${STATUS}" ]] && printf "%s\n" "${STATUS}"
+    printf "Unable to fast-forward the changes. You can fix this by "
+    printf "running\ncd '%s' and then\n'git pull' " "${ZPREZTODIR}"
+    printf "to manually pull and possibly merge in changes\n"
+  }
+  cd -q -- "${ZPREZTODIR}" || return 7
+  local orig_branch="$(git symbolic-ref HEAD 2>/dev/null | cut -d '/' -f 3)"
+  if [[ "$orig_branch" == "master" ]]; then
+    git fetch || return "$?"
+    local UPSTREAM=$(git rev-parse '@{u}')
+    local LOCAL=$(git rev-parse @)
+    local REMOTE=$(git rev-parse "$UPSTREAM")
+    local BASE=$(git merge-base @ "$UPSTREAM")
+    if [[ $LOCAL == $REMOTE ]]; then
+      printf "There are no updates.\n"
+      return 0
+    elif [[ $LOCAL == $BASE ]]; then
+      printf "There is an update availible. Trying to pull.\n\n"
+      if git pull --ff-only; then
+        printf "Syncing submodules\n"
+        git submodule update --recursive
+        return $?
+      else
+        cannot-fast-forward
+        return 1
+      fi
+    elif [[ $REMOTE == $BASE ]]; then
+      cannot-fast-forward "Commits in master that aren't in upstream."
+      return 1
     else
-        printf "zprezto install at '%s' is not on the master branch (you're on '%s') Unable to automatically update.\n" "${ZPREZTODIR}" "${orig_branch}"
+      cannot-fast-forward "Upstream and local have diverged."
+      return 1
     fi
-    cd -- "${OWD}"
-}
+  else
+    printf "zprezto install at '%s' is not on the master branch " "${ZPREZTODIR}"
+    printf "(you're on '%s')\nUnable to automatically update.\n" "${orig_branch}"
+    return 1
+  fi
+  return 1
+)
 #
 # Module Loader
 #
