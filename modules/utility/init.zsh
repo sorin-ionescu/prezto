@@ -41,8 +41,26 @@ alias ftp='noglob ftp'
 alias history='noglob history'
 alias locate='noglob locate'
 alias rake='noglob rake'
-alias rsync='noglob rsync'
-alias scp='noglob scp'
+alias rsync='noglob rsync_scp_wrap rsync'
+alias scp='noglob rsync_scp_wrap scp'
+# This function wraps rsync and scp so that remote paths are not globbed
+# but local paths are globbed. This is because the programs have their own
+# globbing for remote paths. The wrap function globs args starting in / and ./
+# and doesn't glob paths with : in it as these are interpreted as remote paths
+# by these programs unless the path starts with / or ./
+function rsync_scp_wrap {
+  local args=( )
+  local cmd="$1"
+  shift
+  local i
+  for i in "$@"; do case $i in
+    ( ./* ) args+=( ${~i} ) ;; # glob
+    (  /* ) args+=( ${~i} ) ;; # glob
+    ( *:* ) args+=( ${i}  ) ;; # noglob
+    (  *  ) args+=( ${~i} ) ;; # glob
+  esac; done
+  command $cmd "${(@)args}"
+}
 alias sftp='noglob sftp'
 
 # Define general aliases.
