@@ -23,7 +23,7 @@ unset min_zsh_version
 function zprezto-update () (
   function cannot-fast-forward {
     local STATUS="$1"
-    [[ "${STATUS}" ]] && printf "%s\n" "${STATUS}"
+    [[ -n "${STATUS}" ]] && printf "%s\n" "${STATUS}"
     printf "Unable to fast-forward the changes. You can fix this by "
     printf "running\ncd '%s' and then\n'git pull' " "${ZPREZTODIR}"
     printf "to manually pull and possibly merge in changes\n"
