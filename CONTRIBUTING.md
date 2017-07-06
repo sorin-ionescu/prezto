@@ -30,7 +30,7 @@ there are a number of additional things to keep in mind.
 
    - Local variables should be used whenever possible.
    - Prefer `zstyle` over environment variables for configuration.
-   - Use the `my_func()` syntax for defining functions.
+   - Use the function keyword to define functions.
    - The 80 character hard limit can be waved for readability.
 
 #### Using an Alternative zprezto Directory
