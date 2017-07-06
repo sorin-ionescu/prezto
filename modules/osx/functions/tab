@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function tab {
+
 local command="cd \\\"$PWD\\\""
 (( $# > 0 )) && command="${command}; $*"
 
@@ -50,3 +52,5 @@ EOF
     end tell
 EOF
 }
+
+# }

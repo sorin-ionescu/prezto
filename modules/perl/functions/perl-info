@@ -6,6 +6,8 @@
 #   JINNOUCHI Yasushi <delphinus@remora.cx>
 #
 
+# function perl-info {
+
 local version
 local version_format
 local version_formatted
@@ -28,3 +30,5 @@ if [[ -n "$version" ]]; then
   zformat -f version_formatted "$version_format" "v:$version"
   perl_info[version]="$version_formatted"
 fi
+
+# }

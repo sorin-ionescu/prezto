@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function git-hub-shorten-url {
+
 local url="$1"
 
 if [[ "$url" == '-' ]]; then
@@ -20,3 +22,5 @@ if (( $+commands[curl] )); then
 else
   print "$0: command not found: curl" >&2
 fi
+
+# }
