@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function diff {
+diff() {
   if zstyle -t ':prezto:module:utility:diff' color; then
     if (( $+commands[colordiff] )); then
       command colordiff "$@"

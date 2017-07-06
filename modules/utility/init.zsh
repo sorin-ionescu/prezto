@@ -48,7 +48,7 @@ alias scp='noglob rsync_scp_wrap scp'
 # globbing for remote paths. The wrap function globs args starting in / and ./
 # and doesn't glob paths with : in it as these are interpreted as remote paths
 # by these programs unless the path starts with / or ./
-function rsync_scp_wrap {
+rsync_scp_wrap() {
   local args=( )
   local cmd="$1"
   shift
@@ -190,36 +190,36 @@ fi
 #
 
 # Makes a directory and changes to it.
-function mkdcd {
+mkdcd() {
   [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
 }
 
 # Changes to a directory and lists its contents.
-function cdls {
+cdls() {
   builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
 
 # Pushes an entry onto the directory stack and lists its contents.
-function pushdls {
+pushdls() {
   builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
 
 # Pops an entry off the directory stack and lists its contents.
-function popdls {
+popdls() {
   builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
 
 # Prints columns 1 2 3 ... n.
-function slit {
+slit() {
   awk "{ print ${(j:,:):-\$${^@}} }"
 }
 
 # Finds files and executes a command on them.
-function find-exec {
+find-exec() {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
 }
 
 # Displays user owned processes status.
-function psu {
+psu() {
   ps -U "${1:-$LOGNAME}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }

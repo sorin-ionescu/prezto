@@ -50,7 +50,7 @@ prompt_sorin_git_info() {
   fi
 }
 
-function prompt_sorin_precmd_async {
+prompt_sorin_precmd_async() {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
@@ -77,7 +77,7 @@ function prompt_sorin_precmd_async {
   kill -WINCH $$
 }
 
-function prompt_sorin_precmd {
+prompt_sorin_precmd() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -98,7 +98,7 @@ function prompt_sorin_precmd {
   _prompt_sorin_precmd_async_pid=$!
 }
 
-function prompt_sorin_setup {
+prompt_sorin_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -141,7 +141,7 @@ function prompt_sorin_setup {
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
-function prompt_sorin_preview {
+prompt_sorin_preview() {
   local +h PROMPT=''
   local +h RPROMPT=''
   local +h SPROMPT=''

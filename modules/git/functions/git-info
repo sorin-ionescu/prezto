@@ -7,7 +7,7 @@
 
 # Gets the Git special action (am, bisect, cherry, merge, rebase).
 # Borrowed from vcs_info and edited.
-function _git-action {
+_git-action() {
   local action_dir
   local git_dir="$(git-dir)"
   local apply_formatted
@@ -90,7 +90,7 @@ function _git-action {
 }
 
 # Gets the Git status information.
-function git-info {
+git-info() {
   # Extended globbing is needed to parse repository status.
   setopt LOCAL_OPTIONS
   setopt EXTENDED_GLOB

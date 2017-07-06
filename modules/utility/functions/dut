@@ -6,7 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function dut {
+dut() {
   (( $# == 0 )) && set -- *
 
   if grep -q -i 'GNU' < <(du --version 2>&1); then

@@ -34,7 +34,7 @@ if (( ! $+commands[python] && ! $+commands[pyenv] )); then
   return 1
 fi
 
-function _python-workon-cwd {
+_python-workon-cwd() {
   # Check if this is a Git repo
   local GIT_REPO_ROOT=""
   local GIT_TOPLEVEL="$(git rev-parse --show-toplevel 2> /dev/null)"

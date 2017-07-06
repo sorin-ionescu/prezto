@@ -15,7 +15,7 @@ fi
 #
 
 # Set Docker Machine environment
-function dkme {
+dkme() {
   if (( ! $+commands[docker-machine] )); then
     return 1
   fi
@@ -24,7 +24,7 @@ function dkme {
 }
 
 # Set Docker Machine default machine
-function dkmd {
+dkmd() {
   if (( ! $+commands[docker-machine] )); then
     return 1
   fi
