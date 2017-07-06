@@ -19,11 +19,11 @@
 #   http://i.imgur.com/Xe1bu.png
 #
 
-function prompt_nicoulaj_precmd {
+prompt_nicoulaj_precmd() {
   vcs_info
 }
 
-function prompt_nicoulaj_setup {
+prompt_nicoulaj_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

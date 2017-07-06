@@ -22,7 +22,7 @@ _prompt_paradox_current_bg='NONE'
 _prompt_paradox_segment_separator=''
 _prompt_paradox_start_time=$SECONDS
 
-function prompt_paradox_start_segment {
+prompt_paradox_start_segment() {
   local bg fg
   [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
   [[ -n "$2" ]] && fg="%F{$2}" || fg="%f"
@@ -35,7 +35,7 @@ function prompt_paradox_start_segment {
   [[ -n "$3" ]] && print -n "$3"
 }
 
-function prompt_paradox_end_segment {
+prompt_paradox_end_segment() {
   if [[ -n "$_prompt_paradox_current_bg" ]]; then
     print -n " %k%F{$_prompt_paradox_current_bg}$_prompt_paradox_segment_separator"
   else
@@ -45,7 +45,7 @@ function prompt_paradox_end_segment {
   _prompt_paradox_current_bg=''
 }
 
-function prompt_paradox_build_prompt {
+prompt_paradox_build_prompt() {
   prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
 
@@ -79,7 +79,7 @@ prompt_paradox_print_elapsed_time() {
   fi
 }
 
-function prompt_paradox_precmd {
+prompt_paradox_precmd() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -100,11 +100,11 @@ function prompt_paradox_precmd {
   prompt_paradox_print_elapsed_time
 }
 
-function prompt_paradox_preexec {
+prompt_paradox_preexec() {
   _prompt_paradox_start_time="$SECONDS"
 }
 
-function prompt_paradox_setup {
+prompt_paradox_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

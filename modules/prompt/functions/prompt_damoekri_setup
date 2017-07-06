@@ -29,7 +29,7 @@ prompt_damoekri_precmd() {
   fi
 }
 
-function prompt_damoekri_setup {
+prompt_damoekri_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

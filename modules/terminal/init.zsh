@@ -12,7 +12,7 @@ if [[ "$TERM" == (dumb|linux|*bsd*|eterm*) ]]; then
 fi
 
 # Sets the terminal window title.
-function set-window-title {
+set-window-title() {
   local title_format{,ted}
   zstyle -s ':prezto:module:terminal:window-title' format 'title_format' || title_format="%s"
   zformat -f title_formatted "$title_format" "s:$argv"
@@ -20,7 +20,7 @@ function set-window-title {
 }
 
 # Sets the terminal tab title.
-function set-tab-title {
+set-tab-title() {
   local title_format{,ted}
   zstyle -s ':prezto:module:terminal:tab-title' format 'title_format' || title_format="%s"
   zformat -f title_formatted "$title_format" "s:$argv"
@@ -28,7 +28,7 @@ function set-tab-title {
 }
 
 # Sets the terminal multiplexer tab title.
-function set-multiplexer-title {
+set-multiplexer-title() {
   local title_format{,ted}
   zstyle -s ':prezto:module:terminal:multiplexer-title' format 'title_format' || title_format="%s"
   zformat -f title_formatted "$title_format" "s:$argv"
@@ -36,7 +36,7 @@ function set-multiplexer-title {
 }
 
 # Sets the tab and window titles with a given command.
-function _terminal-set-titles-with-command {
+_terminal-set-titles-with-command() {
   emulate -L zsh
   setopt EXTENDED_GLOB
 
@@ -69,7 +69,7 @@ function _terminal-set-titles-with-command {
 }
 
 # Sets the tab and window titles with a given path.
-function _terminal-set-titles-with-path {
+_terminal-set-titles-with-path() {
   emulate -L zsh
   setopt EXTENDED_GLOB
 
@@ -94,7 +94,7 @@ if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]] \
 then
   # Sets the Terminal.app current working directory before the prompt is
   # displayed.
-  function _terminal-set-terminal-app-proxy-icon {
+  _terminal-set-terminal-app-proxy-icon() {
     printf '\e]7;%s\a' "file://${HOST}${PWD// /%20}"
   }
   add-zsh-hook precmd _terminal-set-terminal-app-proxy-icon
@@ -103,7 +103,7 @@ then
   # multiplexer or remote connection is started since it can no longer be
   # updated, and it becomes confusing when the directory displayed in the title
   # bar is no longer synchronized with real current working directory.
-  function _terminal-unset-terminal-app-proxy-icon {
+  _terminal-unset-terminal-app-proxy-icon() {
     if [[ "${2[(w)1]:t}" == (screen|tmux|dvtm|ssh|mosh) ]]; then
       print '\e]7;\a'
     fi

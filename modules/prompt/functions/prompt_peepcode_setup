@@ -10,7 +10,7 @@
 #   http://i.imgur.com/LhgmW.png
 #
 
-function prompt_peepcode_precmd {
+prompt_peepcode_precmd() {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
@@ -22,7 +22,7 @@ function prompt_peepcode_precmd {
   fi
 }
 
-function prompt_peepcode_setup {
+prompt_peepcode_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -56,7 +56,7 @@ RPROMPT='${ruby_info[version]}${git_info[rprompt]}'
 
 }
 
-function prompt_peepcode_help {
+prompt_peepcode_help() {
   cat <<EOH
 This prompt's last command exit status symbol is customizable:
 
@@ -66,7 +66,7 @@ If this option is not provided, the symbol defaults to ☻.
 EOH
 }
 
-function prompt_peepcode_preview {
+prompt_peepcode_preview() {
   local +h PROMPT='%# '
   local +h RPROMPT=''
   local +h SPROMPT=''

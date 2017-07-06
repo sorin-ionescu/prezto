@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function make {
+make() {
   if zstyle -t ':prezto:module:utility:make' color; then
     if (( $+commands[colormake] )); then
       colormake "$@"

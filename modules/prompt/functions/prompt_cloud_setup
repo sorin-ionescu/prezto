@@ -37,7 +37,7 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_cloud_precmd {
+prompt_cloud_precmd() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -47,7 +47,7 @@ function prompt_cloud_precmd {
   fi
 }
 
-function prompt_cloud_help {
+prompt_cloud_help() {
   cat <<EOT
 This prompt's prefix symbol and colors are customizable:
 
@@ -61,7 +61,7 @@ and green.
 EOT
 }
 
-function prompt_cloud_preview {
+prompt_cloud_preview() {
   if (( $# > 0 )); then
     prompt_preview_theme 'cloud' "$@"
   else
@@ -73,7 +73,7 @@ function prompt_cloud_preview {
   fi
 }
 
-function prompt_cloud_setup {
+prompt_cloud_setup() {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)

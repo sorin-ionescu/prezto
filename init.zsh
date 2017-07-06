@@ -18,10 +18,10 @@ fi
 unset min_zsh_version
 
 # zprezto convenience updater
-# The function is surrounded by ( ) instead of { } so it starts in a subshell
+# The function is surrounded by ( ) instead of() { } so it starts in a subshell
 # and won't affect the environment of the calling shell
-function zprezto-update () (
-  function cannot-fast-forward {
+zprezto-update() (
+  cannot-fast-forward() {
     local STATUS="$1"
     [[ -n "${STATUS}" ]] && printf "%s\n" "${STATUS}"
     printf "Unable to fast-forward the changes. You can fix this by "
@@ -68,7 +68,7 @@ function zprezto-update () (
 #
 
 # Loads Prezto modules.
-function pmodload {
+pmodload() {
   local -a pmodules
   local pmodule
   local pfunction_glob='^([_.]*|prompt_*_setup|README*|*~)(-.N:t)'
