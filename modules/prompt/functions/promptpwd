@@ -1,6 +1,8 @@
 # prompt setup function common to many prompts
 # moved to external function to reduce code redundancy
 
+# function promptpwd {
+
 setopt localoptions extendedglob
 
 local current_pwd="${PWD/#$HOME/~}"
@@ -18,3 +20,5 @@ else
 fi
 
 print "$ret_directory"
+
+# }

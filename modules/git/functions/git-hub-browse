@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function git-hub-browse {
+
 if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
   print "$0: not a repository work tree: $PWD" >&2
   return 1
@@ -56,3 +58,5 @@ else
   print "$0: not a Git repository or remote not set" >&2
   return 1
 fi
+
+# }
