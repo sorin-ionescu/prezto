@@ -6,12 +6,26 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+local version
+local version_format
+local version_formatted
 local virtualenv_format
 local virtualenv_formatted
 
 # Clean up previous $python_info.
 unset python_info
 typeset -gA python_info
+
+if (( $+commands[pyenv] )); then
+  version="${"$(pyenv version)"%% *}"
+fi
+
+# Format version.
+if [[ -n "$version" ]]; then
+  zstyle -s ':prezto:module:python:info:version' format 'version_format'
+  zformat -f version_formatted "$version_format" "v:$version"
+  python_info[version]="${version_formatted}"
+fi
 
 # Format virtualenv.
 if [[ -n "$VIRTUAL_ENV" ]]; then
