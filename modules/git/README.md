@@ -317,7 +317,7 @@ Functions
   - `git-commit-lost` lists lost commits.
   - `git-dir` displays the path to the Git directory.
   - `git-hub-browse` opens the [GitHub][3] repository in the default browser.
-  - `git-hub-shorten-url` shortens GitHub URLs.
+  - `git-hub-shorten-url` shortens [GitHub URLs][10].
   - `git-info` exposes repository information via the `$git_info` associative
     array.
   - `git-root` displays the path to the working tree root.
@@ -422,3 +422,4 @@ Authors
 [7]: https://github.com/sorin-ionescu/prezto/issues/219
 [8]: http://www.kernel.org/pub/software/scm/git/docs/git-log.html
 [9]: https://getgb.io/
+[10]: https://github.com/blog/985-git-io-github-url-shortener
