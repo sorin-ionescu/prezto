@@ -282,6 +282,32 @@ fi
 # Emacs and Vi Key Bindings
 #
 
+# Unbound keys in vicmd and viins mode will cause really odd things to happen
+# such as the casing of all the characters you have typed changing or other
+# undefined things. In emacs mode they just insert a tilde, but bind these keys
+# in the main keymap to a noop op so if there is no keybind in the users mode
+# it will fall back and do nothing.
+function _prezto-zle-noop {  ; }
+zle -N _prezto-zle-noop
+local unbound_keys=(
+  "${key_info[F1]}"
+  "${key_info[F2]}"
+  "${key_info[F3]}"
+  "${key_info[F4]}"
+  "${key_info[F5]}"
+  "${key_info[F6]}"
+  "${key_info[F7]}"
+  "${key_info[F8]}"
+  "${key_info[F9]}"
+  "${key_info[F10]}"
+  "${key_info[F11]}"
+  "${key_info[F12]}"
+  "${key_info[PageUp]}"
+  "${key_info[PageDown]}"
+)
+for keymap in $unbound_keys; do
+  bindkey -M main "${keymap}" _prezto-zle-noop
+done
 # Ctrl + Left and Ctrl + Right bindings to forward/backward word
 for keymap in viins vicmd; do
   for key in "${(s: :)key_info[ControlLeft]}"
