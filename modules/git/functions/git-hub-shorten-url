@@ -7,20 +7,22 @@
 
 # function git-hub-shorten-url {
 
-local url="$1"
+local url="$1" code="$2"
 
 if [[ "$url" == '-' ]]; then
   read url <&0
 fi
 
 if [[ -z "$url" || ! "$url" =~ ^https?:\/\/.*github.com\/ ]]; then
-  print "usage: $0 [ url | - ] ; must be a github.com URL" >&2
+  print "usage: $0 [ url | - ] [code] ; url must be a github.com URL" >&2
+  return 1
 fi
 
 if (( $+commands[curl] )); then
-  curl -s -i 'https://git.io' -F "url=$url" | sed -n 's/^Location: //p'
+  curl -s -i 'https://git.io' -F "url=$url" ${(s: :)code:+ -F "code=$code"} | sed -n 's/^Location: //p'
 else
   print "$0: command not found: curl" >&2
+  return 1
 fi
 
 # }
