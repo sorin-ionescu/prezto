@@ -30,6 +30,7 @@ there are a number of additional things to keep in mind.
 
    - Local variables should be used whenever possible.
    - Prefer `zstyle` over environment variables for configuration.
+   - Prefer (( ... )) over [[ ... ]] for arithmetic expression.
    - Use the function keyword to define functions.
    - The 80 character hard limit can be waved for readability.
 
