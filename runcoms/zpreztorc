@@ -7,6 +7,13 @@
 
 #
 # General
+# This file define the mains settings for zprezto
+# If you want customization follow theses steps :
+#   * cd "${ZDOTDIR:-$HOME}"
+#   * cp .zpreztorc .zpreztorc.local
+#   * Then edit the .zpreztorc.local
+# It will avoid you to have trouble when trying to update
+# Prezto
 #
 
 # Set case-sensitivity for completion, history lookup, etc.
@@ -186,3 +193,8 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set the default session name:
 # zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
+
+# Load zpreztorc.local
+if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc.local" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zpreztorc.local"
+fi
