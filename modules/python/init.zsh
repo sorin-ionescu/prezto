@@ -98,6 +98,10 @@ if zstyle -T ':prezto:module:python' skip-virtualenvwrapper-init; then
     source "$commands[virtualenvwrapper_lazy.sh]"
   elif (( $+commands[virtualenvwrapper.sh] )); then
     source "$commands[virtualenvwrapper.sh]"
+  elif  [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh ]]; then
+    source /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
+  elif  [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
   fi
 fi
 
