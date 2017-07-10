@@ -289,7 +289,8 @@ fi
 # it will fall back and do nothing.
 function _prezto-zle-noop {  ; }
 zle -N _prezto-zle-noop
-local unbound_keys=(
+local -a unbound_keys
+unbound_keys=(
   "${key_info[F1]}"
   "${key_info[F2]}"
   "${key_info[F3]}"
