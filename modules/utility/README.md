@@ -65,17 +65,13 @@ Aliases
 
   - `_` executes a command as another user (`sudo`).
   - `b` opens the default web browser.
-  - `cp` copies files and directories interactively.
   - `diffu` shorthand for `diff --unified`
   - `e` opens the default editor.
-  - `ln` links files and directories interactively.
   - `mkdir` creates directories, including intermediary directories.
-  - `mv` moves files and directories interactively.
   - `p` opens the default pager.
   - `po` removes a directory from the stack and changes to it (`popd`).
   - `pu` changes the directory and pushes the old directory onto the stack
     (`pushd`).
-  - `rm` removes files and directories interactively.
   - `sa` search aliases for a word.
   - `type` displays all the attribute values of a shell parameter.
 
@@ -110,6 +106,19 @@ Aliases
   - `top` displays information about processes.
   - `topc` displays information about processes sorted by CPU usage.
   - `topm` displays information about processes sorted by RAM usage.
+
+### Safe ops
+
+By default, `cp`,`ln`, `mv`, and `rm` are aliased to their interactive variants.
+If this is not desired, you can disable it by adding
+`zstyle ':prezto:module:utility' safe-ops no` to your zpreztorc.
+
+In addition, the following aliases have been added:
+
+  - `cpi` copies files and directories interactively.
+  - `lni` links files and directories interactively.
+  - `mvi` moves files and directories interactively.
+  - `rmi` removes files and directories interactively.
 
 ### Miscellaneous
 
