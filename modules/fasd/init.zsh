@@ -9,8 +9,11 @@
 # Load dependencies.
 pmodload 'editor'
 
-# Source module file.
-source "${0:h}/external/fasd" || return 1
+# If the command doesn't exist externally, we need to fall back to the bundled
+# submodule.
+if (( ! $+commands[fasd] )); then
+  source "${0:h}/external/fasd" || return 1
+fi
 
 #
 # Initialization
