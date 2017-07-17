@@ -6,28 +6,26 @@
 #
 
 # IEx
-alias i='iex'
 alias ips='iex -S mix phoenix.server'
 alias ism='iex -S mix'
 
 # Mix
-alias m='mix'
-alias mr='mix run'
+alias mrun='mix run'
 alias mrnh='mix run --no-halt'
 alias mrl='mix release'
-alias mt='mix test'
+alias mtt='mix test'
 alias mts='mix test --stale'
 alias mtw='mix test.watch'
-alias mx='mix xref'
+alias mxr='mix xref'
 
-alias mn='mix new'
+alias mnew='mix new'
 alias mns='mix new --sup'
 alias mat='mix app.tree'
 
 alias mab='mix archive.build'
 alias mai='mix archive.install'
 
-alias mc='mix compile'
+alias mcp='mix compile'
 alias mcv='mix compile --verbose'
 alias mcx='mix compile.xref'
 

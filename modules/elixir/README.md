@@ -6,26 +6,24 @@ Defines [Elixir][1] aliases.
 Aliases
 -------
 
- - `i`='iex' runs interactive elixir
  - `ips`='iex -S mix phoenix.server' runs iex in phoenix app
  - `ism`='iex -S mix' runs iex in current elixir package
 
- - `m`='mix' runs the default task
- - `mr`='mix run' runs the given file or expression
+ - `mrun`='mix run' runs the given file or expression
  - `mrnh`='mix run --no-halt' does not halt the system after running the command
  - `mrl`='mix release' build an executable release (require [distillery](https://github.com/bitwalker/distillery))
- - `mt`='mix test' runs a project's tests
+ - `mtt`='mix test' runs a project's tests
  - `mts`='mix test --stale' runs only tests which reference modules that changed since the last `test --stale`
- - `mx`='mix xref' performs cross reference checks
+ - `mxr`='mix xref' performs cross reference checks
 
- - `mn`='mix new' creates a new Elixir project
+ - `mnew`='mix new' creates a new Elixir project
  - `mns`='mix new --sup' creates a new Elixir project with a supervision tree
  - `mat`='mix app.tree' prints the application tree
 
  - `mab`='mix archive.build' archives this project into a .ez file
  - `mai`='mix archive.install' installs an archive locally
 
- - `mc`='mix compile' compiles source files
+ - `mcp`='mix compile' compiles source files
  - `mcv`='mix compile --verbose' compiles source files with verbose mode
  - `mcx`='mix compile.xref' performs remote dispatch checking
 
