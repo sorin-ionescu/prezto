@@ -191,7 +191,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # Utility
 #
 
-# safe-ops is enabled by default. This aliases rm, mv, cp, and ln so that they
-# prompt before deleting or copying over files. Set to no to disable this safer
+# Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
+# before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-# zstyle ':prezto:module:utility' safe-ops yes
+# zstyle ':prezto:module:utility' safe-ops 'yes'
