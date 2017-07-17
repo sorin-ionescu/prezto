@@ -57,8 +57,8 @@ Aliases
   - `history`
   - `locate`
   - `rake`
-  - `rsync`
-  - `scp`
+  - `rsync` (selectively enabled for local files)
+  - `scp` (selectively enabled for local files)
   - `sftp`
 
 ### General
@@ -139,6 +139,7 @@ Functions
   - `mkdcd` makes a directory and changes to it.
   - `popdls` pops an entry off the directory stack and lists its contents.
   - `pushdls` pushes an entry onto the directory stack and lists its contents.
+  - `noremoteglob` enable local path globbing but disable remote path globbing.
 
 ### Developer
 
