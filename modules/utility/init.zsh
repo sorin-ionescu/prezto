@@ -41,33 +41,8 @@ alias ftp='noglob ftp'
 alias history='noglob history'
 alias locate='noglob locate'
 alias rake='noglob rake'
-alias rsync='noglob rsync_wrap'
-alias scp='noglob scp_wrap'
-# This function wraps rsync and scp so that remote paths are not globbed
-# but local paths are globbed. This is because the programs have their own
-# globbing for remote paths. The wrap function globs args starting in / and ./
-# and doesn't glob paths with : in it as these are interpreted as remote paths
-# by these programs unless the path starts with / or ./
-function rsync_scp_wrap {
-  local args=( )
-  local cmd="$1"
-  shift
-  local i
-  for i in "$@"; do case $i in
-    ( ./* ) args+=( ${~i} ) ;; # glob
-    (  /* ) args+=( ${~i} ) ;; # glob
-    ( *:* ) args+=( ${i}  ) ;; # noglob
-    (  *  ) args+=( ${~i} ) ;; # glob
-  esac; done
-  command $cmd "${(@)args}"
-}
-function rsync_wrap {
-  rsync_scp_wrap "rsync" "$@"
-}
-function scp_wrap {
-  rsync_scp_wrap "scp" "$@"
-}
-
+alias rsync='noglob noremoteglob rsync'
+alias scp='noglob noremoteglob scp'
 alias sftp='noglob sftp'
 
 # Define general aliases.
@@ -238,4 +213,24 @@ function find-exec {
 # Displays user owned processes status.
 function psu {
   ps -U "${1:-$LOGNAME}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
+}
+
+# Enables globbing selectively on path arguments.
+# Globbing is enabled on local paths (starting in '/' and './') and disabled
+# on remote paths (containing ':' but not starting in '/' and './'). This is
+# useful for programs that have their own globbing for remote paths.
+# Currently, this is used by default for 'rsync' and 'scp'.
+# Example:
+#   - Local: '*.txt', './foo:2017*.txt', '/var/*:log.txt'
+#   - Remote: user@localhost:foo/
+function noremoteglob {
+  local -a argo
+  local cmd="$1"
+  for arg in ${argv:2}; do case $arg in
+    ( ./* ) argo+=( ${~arg} ) ;; # local relative, glob
+    (  /* ) argo+=( ${~arg} ) ;; # local absolute, glob
+    ( *:* ) argo+=( ${arg}  ) ;; # remote, noglob
+    (  *  ) argo+=( ${~arg} ) ;; # default, glob
+  esac; done
+  command $cmd "${(@)argo}"
 }
