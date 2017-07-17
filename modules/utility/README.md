@@ -109,9 +109,11 @@ Aliases
 
 ### Safe ops
 
-By default, `cp`,`ln`, `mv`, and `rm` are aliased to their interactive variants.
-If this is not desired, you can disable it by adding
-`zstyle ':prezto:module:utility' safe-ops no` to your zpreztorc.
+By default, `cp`,`ln`, `mv` and `rm` are aliased to their interactive variants.
+If this is not desired, it can be disabled by adding the following line to
+*zpreztorc*:
+
+    zstyle ':prezto:module:utility' safe-ops 'no'.
 
 In addition, the following aliases have been added:
 
