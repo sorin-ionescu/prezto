@@ -175,9 +175,13 @@ elif (( $+commands[wget] )); then
   alias get='wget --continue --progress=bar --timestamping'
 fi
 
-# Resource Usage
-if (( $+commands[pydf] )); then
-  alias df=pydf
+if zstyle -s ':prezto:module:utility' pydf 'yes'; then
+  # Resource Usage
+  if (( $+commands[pydf] )); then
+    alias df=pydf
+  else
+    alias df='df -kh'
+  fi
 else
   alias df='df -kh'
 fi
