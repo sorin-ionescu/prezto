@@ -1,7 +1,11 @@
-# prompt setup function common to many prompts
-# moved to external function to reduce code redundancy
+#
+# Prompt setup function commonly used by prompt themes.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
 
-# function promptpwd {
+# function prompt-pwd {
 
 setopt localoptions extendedglob
 
@@ -18,6 +22,8 @@ elif zstyle -m ':prezto:module:prompt' pwd-length 'long'; then
 else
   ret_directory="${${${${(@j:/:M)${(@s:/:)current_pwd}##.#?}:h}%/}//\%/%%}/${${current_pwd:t}//\%/%%}"
 fi
+
+unset current_pwd
 
 print "$ret_directory"
 

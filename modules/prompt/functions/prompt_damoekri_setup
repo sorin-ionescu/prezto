@@ -16,7 +16,7 @@ prompt_damoekri_precmd() {
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  _prompt_damoekri_pwd=$(promptpwd)
+  _prompt_damoekri_pwd=$(prompt-pwd)
 
   # Get Git repository information.
   if (( $+functions[git-info] )); then

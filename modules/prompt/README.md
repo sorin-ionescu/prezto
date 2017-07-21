@@ -26,6 +26,14 @@ in *zpreztorc*.
 zstyle ':prezto:module:prompt' pwd-length 'short'
 ```
 
+### Prompt Display Length
+
+To change working directory prompt display length from 'short', set the
+following to 'long' (without '~' expansion) or 'full' (with '~' expansion)
+in *zpreztorc*.
+
+    zstyle ':prezto:module:prompt' pwd-length 'short'
+
 Theming
 -------
 

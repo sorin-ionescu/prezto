@@ -84,7 +84,7 @@ function prompt_paradox_precmd {
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  _prompt_paradox_pwd=$(promptpwd)
+  _prompt_paradox_pwd=$(prompt-pwd)
 
   # Get Git repository information.
   if (( $+functions[git-info] )); then
