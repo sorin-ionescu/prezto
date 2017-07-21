@@ -144,7 +144,7 @@ Functions
 
 ### Developer
 
-  - `diff` highlights diff output (requires `colordiff` or `Git`).
+  - `diff` highlights diff output (requires `colordiff`).
   - `make` highlights make output (requires `colormake`).
   - `wdiff` highlights wdiff output (requires `wdiff `or `Git`).
 
