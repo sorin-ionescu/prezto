@@ -52,14 +52,18 @@ The variable `$PROJECT_HOME` tells virtualenvwrapper where to place project
 working directories. It must be set and the directory created before `mkproject`
 is used. Replace *Developer* with your projects directory.
 
-    export PROJECT_HOME="$HOME/Developer"
+```sh
+export PROJECT_HOME="$HOME/Developer"
+```
 
 The variable `$VIRTUALENVWRAPPER_VIRTUALENV_ARGS` tells virtualenvwrapper what
 arguments to pass to `virtualenv`. For example, set the value to
 *--system-site-packages* to ensure that all new environments have access to the
 system site-packages directory.
 
-    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
+```sh
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
+```
 
 ### Additional Options
 
@@ -68,7 +72,9 @@ directory where the root of the project matches a virtualenv name.
 
 This can be enabled with:
 
-    zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+```sh
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+```
 
 Aliases
 -------

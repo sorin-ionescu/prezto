@@ -3,7 +3,9 @@ Modules
 
 Load modules in *zpreztorc*. The order matters.
 
-    zstyle ':prezto:load' pmodule 'environment' 'terminal'
+```sh
+zstyle ':prezto:load' pmodule 'environment' 'terminal'
+```
 
 Archive
 -------

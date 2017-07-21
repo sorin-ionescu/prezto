@@ -15,14 +15,18 @@ The format of the [git-log][8] output is configurable via the following style,
 where context is *brief*, *oneline*, and *medium*, which will be passed to the
 `--pretty=format:` switch.
 
-    zstyle ':prezto:module:git:log:context' format ''
+```sh
+zstyle ':prezto:module:git:log:context' format ''
+```
 
 ### Status
 
 Retrieving the status of a repository with submodules can take a long time.
 Submodules may be ignored when they are *dirty*, *untracked*, *all*, or *none*.
 
-    zstyle ':prezto:module:git:status:ignore' submodules 'all'
+```sh
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
+```
 
 This setting affects all aliases and functions that call `git-status`.
 
@@ -31,7 +35,9 @@ Aliases
 
 Aliases are enabled by default. You can disable them with:
 
-    zstyle ':prezto:module:git:alias' skip 'yes'
+```sh
+zstyle ':prezto:module:git:alias' skip 'yes'
+```
 
 ### Git
 
@@ -335,7 +341,9 @@ To display information about the current repository in a prompt, define the
 following styles in the `prompt_name_setup` function, where the syntax for
 setting a style is as follows.
 
-    zstyle ':prezto:module:git:info:context:subcontext' format 'string'
+```sh
+zstyle ':prezto:module:git:info:context:subcontext' format 'string'
+```
 
 ### Main Contexts
 
@@ -362,7 +370,9 @@ setting a style is as follows.
 
 The following contexts must be enabled with the following zstyle:
 
-    zstyle ':prezto:module:git:info' verbose 'yes'
+```sh
+zstyle ':prezto:module:git:info' verbose 'yes'
+```
 
 ### Verbose Contexts
 
@@ -395,14 +405,18 @@ The following contexts must be enabled with the following zstyle:
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.
 
-    zstyle ':prezto:module:git:info:branch' format 'branch:%b'
-    zstyle ':prezto:module:git:info:remote' format 'remote:%R'
+```sh
+zstyle ':prezto:module:git:info:branch' format 'branch:%b'
+zstyle ':prezto:module:git:info:remote' format 'remote:%R'
+```
 
 Second, format how the above attributes are displayed in prompts.
 
-    zstyle ':prezto:module:git:info:keys' format \
-      'prompt'  ' git(%b)' \
-      'rprompt' '[%R]'
+```sh
+zstyle ':prezto:module:git:info:keys' format \
+  'prompt'  ' git(%b)' \
+  'rprompt' '[%R]'
+```
 
 Last, add `$git_info[prompt]` to `$PROMPT` and `$git_info[rprompt]` to
 `$RPROMPT` respectively and call `git-info` in the `prompt_name_preexec` hook

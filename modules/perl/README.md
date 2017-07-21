@@ -14,15 +14,19 @@ Mac OS X in *~/Library/Perl/5.12* by altering the environment.
 
 For Perl versions older than 5.14, install *local::lib*.
 
-    curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
-    tar xvf local-lib-1.008004.tar.gz
-    cd local-lib-1.008004
-    perl Makefile.PL --bootstrap=$HOME/Library/Perl/5.12
-    make && make test && make install
+```console
+curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
+tar xvf local-lib-1.008004.tar.gz
+cd local-lib-1.008004
+perl Makefile.PL --bootstrap=$HOME/Library/Perl/5.12
+make && make test && make install
+```
 
 Install *cpanminus*:
 
-    curl -L http://cpanmin.us | perl - --self-upgrade
+```console
+curl -L http://cpanmin.us | perl - --self-upgrade
+```
 
 Perlbrew
 --------
@@ -86,11 +90,13 @@ Functions
 Theming
 -------
 
-To display the name of the currach Perl version in a prompt, define the
+To display the name of the current Perl version in a prompt, define the
 following style in the `prompt_name_setup` function.
 
-    # %v - perl version.
-    zstyle ':prezto:module:perl:info:version' format 'version:%v'
+```sh
+# %v - perl version.
+zstyle ':prezto:module:perl:info:version' format 'version:%v'
+```
 
 Then add `$perl_info[version]` to `$PROMPT` or `$RPROMPT` and call
 `perl-info` in the `prompt_name_precmd` hook function.
