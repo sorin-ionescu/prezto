@@ -14,7 +14,9 @@ Settings
 
 To load multiple identities, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_dsa' 'id_github'
+```sh
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_dsa' 'id_github'
+```
 
 Authors
 -------

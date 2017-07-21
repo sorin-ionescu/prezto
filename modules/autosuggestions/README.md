@@ -35,11 +35,15 @@ positive results.
 To enable highlighting for this module only, add the following line to
 *zpreztorc*:
 
-    zstyle ':prezto:module:autosuggestions' color 'yes'
+```sh
+zstyle ':prezto:module:autosuggestions' color 'yes'
+```
 
 To set the query found color, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:autosuggestions:color' found ''
+```sh
+zstyle ':prezto:module:autosuggestions:color' found ''
+```
 
 Authors
 -------

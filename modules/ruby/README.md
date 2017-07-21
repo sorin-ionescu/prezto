@@ -45,7 +45,9 @@ rbenv.
 To enable auto switching the Ruby version on directory change based on the
 .ruby-version file, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+```sh
+zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+```
 
 Bundler
 -------

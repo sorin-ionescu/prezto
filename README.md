@@ -13,21 +13,25 @@ version is 4.3.17.
 
   1. Launch Zsh:
 
-        `zsh`
+    ```console
+    zsh
+    ```
 
   2. Clone the repository:
 
-        `git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"`
+     ```console
+     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+     ```
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:
 
-        ```
-        setopt EXTENDED_GLOB
-        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-        done
-        ```
+     ```sh
+     setopt EXTENDED_GLOB
+     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+     done
+     ```
 
      Note: If you already have any of the given config files, ln will error. In
      simple cases you can add `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
@@ -37,7 +41,9 @@ version is 4.3.17.
 
   4. Set Zsh as your default shell:
 
-        `chsh -s /bin/zsh`
+     ```console
+     chsh -s /bin/zsh
+     ```
 
   5. Open a new Zsh terminal window or tab.
 
@@ -57,9 +63,11 @@ into the `$ZPREZTODIR` directory and resolve them yourself.
 
 To pull the latest changes and update submodules manually:
 
-    cd $ZPREZTODIR
-    git pull
-    git submodule update --init --recursive
+```console
+cd $ZPREZTODIR
+git pull
+git submodule update --init --recursive
+```
 
 Usage
 -----
