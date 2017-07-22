@@ -13,9 +13,9 @@ version is 4.3.17.
 
   1. Launch Zsh:
 
-    ```console
-    zsh
-    ```
+     ```console
+     zsh
+     ```
 
   2. Clone the repository:
 
