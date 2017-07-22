@@ -16,6 +16,19 @@ _ssh_dir="$HOME/.ssh"
 # Set the path to the environment file if not set by another module.
 _ssh_agent_env="${_ssh_agent_env:-${TMPDIR:-/tmp}/ssh-agent.env.$UID}"
 
+# Due to the predictability of the env file, check the env file exists and is
+# owned by current EUID before trusting it.
+if [[ -f "$_ssh_agent_env" && ! -O "$_ssh_agent_env" ]]; then
+  cat 1>&2 <<-EOF
+	ERROR: Cannot trust the SSH agent environment variables persistence
+	file because it is owned by another user.
+	The ssh-agent will not be started.
+	$_ssh_agent_env
+	EOF
+  unset _ssh_{dir,agent_env}
+  return 1
+fi
+
 # If a socket exists at SSH_AUTH_SOCK, assume ssh-agent is already running and
 # skip starting it.
 if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
