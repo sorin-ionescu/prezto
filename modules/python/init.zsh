@@ -106,16 +106,21 @@ if zstyle -T ':prezto:module:python' skip-virtualenvwrapper-init; then
 fi
 
 # Load PIP completion.
-if (( $+commands[pip] )); then
+if (( $#commands[(i)pip(|[23])] )); then
   cache_file="${0:h}/cache.zsh"
 
-  if [[ "$commands[pip]" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+  # Detect and use first one available among 'pip', 'pip2', 'pip3' variants
+  pip_command="$commands[(i)pip(|[23])]"
+
+  if [[ "$pip_command" -nt "$cache_file" || ! -s "$cache_file" ]]; then
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
-    pip completion --zsh | sed -e "s|compctl -K [-_[:alnum:]]* pip|& pip2 pip3|" >! "$cache_file" 2> /dev/null
+    $pip_command completion --zsh \
+      | sed -e "s|compctl -K [-_[:alnum:]]* pip|& pip2 pip3|" >! "$cache_file" 2> /dev/null
   fi
 
   source "$cache_file"
   unset cache_file
+  unset pip_command
 fi
 
 #
