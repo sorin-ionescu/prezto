@@ -33,39 +33,31 @@
 pmodload 'helper'
 
 function prompt_sorin_git_info {
-  local _git_target
-  local _git_post_target
-
-  # We split on : because it's a character which isn't allowed in ref names.
+  # We can safely split on ':' because it isn't allowed in ref names.
   IFS=':' read _git_target _git_post_target <<<"$3"
 
   # The target actually contains 3 space separated possibilities, so we need to
   # make sure we grab the first one.
-  _git_target=${(z)_git_target}
-  _git_target=$(coalesce ${_git_target[@]})
+  _git_target=$(coalesce ${(@)${(z)_git_target}})
 
-  # If what we're looking at is empty, we clear out the git portion of the
-  # prompt and return early.
   if [[ -z "$_git_target" ]]; then
+    # No git target detected, flush the git fragment and redisplay the prompt.
     if [[ -n "$_prompt_sorin_git" ]]; then
       _prompt_sorin_git=''
       zle && zle reset-prompt
     fi
-
-    return
+  else
+    # Git target detected, update the git fragment and redisplay the prompt.
+    _prompt_sorin_git="${_git_target}${_git_post_target}"
+    zle && zle reset-prompt
   fi
-
-  _prompt_sorin_git="${_git_target}${_git_post_target}"
-
-  # Redisplay prompt.
-  zle && zle reset-prompt
 }
 
 function prompt_sorin_async_git {
   cd -q "$1"
   if (( $+functions[git-info] )); then
     git-info
-    echo ${git_info[status]}
+    print ${git_info[status]}
   fi
 }
 
@@ -81,10 +73,12 @@ function prompt_sorin_precmd {
 
   # Handle updating git data. We also clear the git prompt data if we're in a
   # different git root now.
-  local new_git_root="$(git-dir 2>/dev/null)"
-  if [[ $new_git_root != $_sorin_cur_git_root ]]; then
-    _prompt_sorin_git=''
-    _sorin_cur_git_root=$new_git_root
+  if (( $+functions[git-dir] )); then
+    local new_git_root="$(git-dir 2>/dev/null)"
+    if [[ $new_git_root != $_sorin_cur_git_root ]]; then
+      _prompt_sorin_git=''
+      _sorin_cur_git_root=$new_git_root
+    fi
   fi
 
   # Compute slow commands in the background.
