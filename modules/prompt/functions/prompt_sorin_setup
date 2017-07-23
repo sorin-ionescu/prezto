@@ -46,7 +46,7 @@ prompt_sorin_git_info() {
     _prompt_sorin_precmd_async_pid=0
 
     # Redisplay prompt.
-    zle && zle reset-prompt
+    zle && zle .reset-prompt
   fi
 }
 
