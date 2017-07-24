@@ -307,7 +307,8 @@ unbound_keys=(
   "${key_info[PageDown]}"
 )
 for keymap in $unbound_keys; do
-  bindkey -M main "${keymap}" _prezto-zle-noop
+  bindkey -M viins "${keymap}" _prezto-zle-noop
+  bindkey -M vicmd "${keymap}" _prezto-zle-noop
 done
 # Ctrl + Left and Ctrl + Right bindings to forward/backward word
 for keymap in viins vicmd; do
