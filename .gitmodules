@@ -22,3 +22,6 @@
 [submodule "modules/fasd/external"]
 	path = modules/fasd/external
 	url = https://github.com/clvv/fasd.git
+[submodule "modules/prompt/external/async"]
+	path = modules/prompt/external/async
+	url = https://github.com/mafredri/zsh-async.git
