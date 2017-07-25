@@ -56,6 +56,20 @@ is used. Replace *Developer* with your projects directory.
 export PROJECT_HOME="$HOME/Developer"
 ```
 
+The variable `VIRTUALENVWRAPPER_PYTHON` tells virtualenvwrapper to use the
+specified full path of `python` interpreter overriding the `$PATH` search.
+
+```sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+```
+
+The variable `VIRTUALENVWRAPPER_VIRTUALENV` tells virtualenvwrapper to use the
+specified full path of `virtualenv` binary overriding the `$PATH` search.
+
+```sh
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+```
+
 The variable `$VIRTUALENVWRAPPER_VIRTUALENV_ARGS` tells virtualenvwrapper what
 arguments to pass to `virtualenv`. For example, set the value to
 *--system-site-packages* to ensure that all new environments have access to the
@@ -76,10 +90,20 @@ This can be enabled with:
 zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 ```
 
+virtualenvwrapper is automatically initialized if pre-requisites are met
+(`$VIRTUALENVWRAPPER_VIRTUALENV` is explicitly set or `virtualenv` is in
+`$PATH`). This can be disabled with:
+
+```
+zstyle ':prezto:module:python:virtualenv' initialize 'no'
+```
+
 Aliases
 -------
 
   - `py` is short for `python`.
+  - `py2` is short for `python2`.
+  - `py3` is short for `python3`.
 
 Functions
 ---------
