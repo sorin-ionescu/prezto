@@ -12,7 +12,7 @@ fi
 
 # Set the default paths to gpg-agent files.
 _gpg_agent_conf="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.conf"
-_gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env"
+_gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env.$UID"
 
 # Start gpg-agent if not started.
 if [[ -z "$GPG_AGENT_INFO" && ! -S "${GNUPGHOME:-$HOME/.gnupg}/S.gpg-agent" ]]; then
