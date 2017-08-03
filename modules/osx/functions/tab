@@ -10,7 +10,7 @@
 local command="cd \\\"$PWD\\\""
 (( $# > 0 )) && command="${command}; $*"
 
-the_app=$(
+local the_app=$(
   osascript 2>/dev/null <<EOF
     tell application "System Events"
       name of first item of (every process whose frontmost is true)

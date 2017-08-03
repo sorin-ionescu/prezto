@@ -1,0 +1,10 @@
+#compdef settings
+
+_known_settings=$(osascript 2>/dev/null <<EOF
+    tell application "Terminal" to get name of every settings set
+EOF
+)
+
+_arguments \
+  "1:Terminal Settings:( \${(s:, :)_known_settings} )"
+
