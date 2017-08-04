@@ -39,7 +39,7 @@ if (( $references[(i)$reference] == $#references + 1 )); then
 fi
 
 if [[ "$reference" == 'HEAD' ]]; then
-  reference="$(git rev-parse HEAD 2>/dev/null)"
+  reference="$(git rev-parse HEAD 2> /dev/null)"
 fi
 
 file="$3"

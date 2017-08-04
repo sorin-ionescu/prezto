@@ -74,7 +74,7 @@ function prompt_sorin_precmd {
   # Handle updating git data. We also clear the git prompt data if we're in a
   # different git root now.
   if (( $+functions[git-dir] )); then
-    local new_git_root="$(git-dir 2>/dev/null)"
+    local new_git_root="$(git-dir 2> /dev/null)"
     if [[ $new_git_root != $_sorin_cur_git_root ]]; then
       _prompt_sorin_git=''
       _sorin_cur_git_root=$new_git_root
@@ -142,7 +142,7 @@ function prompt_sorin_preview {
   local +h RPROMPT=''
   local +h SPROMPT=''
 
-  editor-info 2>/dev/null
+  editor-info 2> /dev/null
   prompt_preview_theme 'sorin'
 }
 
