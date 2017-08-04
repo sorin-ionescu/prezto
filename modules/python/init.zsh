@@ -92,16 +92,16 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
   # Disable the virtualenv prompt.
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
-  if (( $+commands[pyenv] )); then
-    if (( $+commands[pyenv-virtualenv-init] )); then
-      eval "$(pyenv virtualenv-init -)"
-    fi
+  # Enable 'virtualenv' with 'pyenv'.
+  if (( $+commands[pyenv] && $+commands[pyenv-virtualenv-init] )); then
+    eval "$(pyenv virtualenv-init -)"
+    # Optionall activate 'virtualenvwrapper' with 'pyenv' is available.
     if (( $#commands[(i)pyenv-virtualenvwrapper(_lazy|)] )); then
       pyenv "${${(@O)commands[(I)pyenv-virtualenvwrapper(_lazy|)]}[1]#pyenv-}"
     fi
   else
-    # Try 'virtualenvwrapper' without 'pyenv' wrapper in '$path' and other
-    # known locations on a Debian based system.
+    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper in '$path'
+    # and other known locations on a Debian based system.
     virtenv_sources=(
       ${(@Ov)commands[(I)virtualenvwrapper(_lazy|).sh]}
       /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
