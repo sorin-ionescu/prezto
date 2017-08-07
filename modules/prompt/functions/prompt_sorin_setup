@@ -83,6 +83,11 @@ function prompt_sorin_precmd {
 
   # Compute slow commands in the background.
   async_job async_sorin_git prompt_sorin_async_git "$PWD"
+  
+  # Run python info (this should be fast and not require async)
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
 }
 
 function prompt_sorin_setup {
@@ -122,6 +127,9 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
     'status' '%b %p %c:%s%A%B%S%a%d%m%r%U%u'
+    
+  # Set python-info parameters.
+  zstyle ':prezto:module:python:info:virtualenv' format '(%v)'
 
   # Get the async worker set up
   async_start_worker async_sorin_git -n
@@ -133,7 +141,7 @@ function prompt_sorin_setup {
 
   # Define prompts.
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_sorin_git}'
+  RPROMPT='$python_info[virtualenv] ${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_devel_git}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
