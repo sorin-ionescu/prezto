@@ -93,7 +93,9 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
   # Enable 'virtualenv' with 'pyenv'.
-  if (( $+commands[pyenv] && $+commands[pyenv-virtualenv-init] )); then
+  if (( $+commands[pyenv] )) && \
+     pyenv commands | command grep -q virtualenv-init
+  then
     eval "$(pyenv virtualenv-init -)"
     # Optionall activate 'virtualenvwrapper' with 'pyenv' is available.
     if (( $#commands[(i)pyenv-virtualenvwrapper(_lazy|)] )); then
