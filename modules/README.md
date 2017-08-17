@@ -185,6 +185,11 @@ Terminal
 
 Sets terminal window and tab titles.
 
+TheFuck
+-----------------
+
+Integrates thefuck tool into Prezto
+
 Tmux
 ----
 
