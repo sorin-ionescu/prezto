@@ -5,9 +5,9 @@
 #   Luciano Mores <leslau@gmail.com>
 #
 
-if [[ -z $commands[thefuck] ]]; then
+if (( ! $+commands[thefuck] )); then
     echo 'thefuck is not installed, you should "pip install thefuck" first'
-    return -1
+    return 1
 fi
 
 # Register alias
