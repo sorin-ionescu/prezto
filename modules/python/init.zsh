@@ -92,18 +92,25 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
   # Disable the virtualenv prompt.
   VIRTUAL_ENV_DISABLE_PROMPT=1
 
-  # Enable 'virtualenv' with 'pyenv'.
-  if (( $+commands[pyenv] )) && \
-     pyenv commands | command grep -q virtualenv-init
-  then
+  # Create a sorted array of available virtualenv related 'pyenv' commands to
+  # look for plugins of interest. Scanning shell '$path' isn't enough as they
+  # can exist in 'pyenv' synthesized paths (e.g., '~/.pyenv/plugins') instead.
+  local -a pyenv_plugins
+  if (( $+commands[pyenv] )); then
+    pyenv_plugins=(${(@oM)${(f)"$(pyenv commands --no-sh 2>/dev/null)"}:#virtualenv*})
+  fi
+
+  if (( $pyenv_plugins[(i)virtualenv-init] <= $#pyenv_plugins )); then
+    # Enable 'virtualenv' with 'pyenv'.
     eval "$(pyenv virtualenv-init -)"
-    # Optionall activate 'virtualenvwrapper' with 'pyenv' is available.
-    if (( $#commands[(i)pyenv-virtualenvwrapper(_lazy|)] )); then
-      pyenv "${${(@O)commands[(I)pyenv-virtualenvwrapper(_lazy|)]}[1]#pyenv-}"
+
+    # Optionally activate 'virtualenvwrapper' plugin when available.
+    if (( $pyenv_plugins[(i)virtualenvwrapper(_lazy|)] <= $#pyenv_plugins )); then
+      pyenv "$pyenv_plugins[(R)virtualenvwrapper(_lazy|)]"
     fi
   else
-    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper in '$path'
-    # and other known locations on a Debian based system.
+    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper if available
+    # in '$path' or in an alternative location on a Debian based system.
     virtenv_sources=(
       ${(@Ov)commands[(I)virtualenvwrapper(_lazy|).sh]}
       /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
@@ -114,6 +121,8 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
 
     unset virtenv_sources
   fi
+
+  unset pyenv_plugins
 fi
 
 # Load PIP completion.
