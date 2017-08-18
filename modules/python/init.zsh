@@ -108,7 +108,10 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
       ${(@Ov)commands[(I)virtualenvwrapper(_lazy|).sh]}
       /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
     )
-    source "${virtenv_sources[1]}"
+    if (( $#virtenv_sources )); then
+      source "${virtenv_sources[1]}"
+    fi
+
     unset virtenv_sources
   fi
 fi
