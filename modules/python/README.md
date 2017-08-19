@@ -28,8 +28,7 @@ documentation.
 
 ### Usage
 
-Install packages into the per user site directory with `easy_install --user` or
-`pip install --user`.
+Install packages into the per user site directory with `pip install --user`.
 
 virtualenvwrapper
 -----------------
