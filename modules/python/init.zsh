@@ -9,10 +9,12 @@
 # Load manually installed pyenv into the shell session.
 if [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
   path=("$HOME/.pyenv/bin" $path)
+  export PYENV_ROOT=$(pyenv root)
   eval "$(pyenv init -)"
 
 # Load package manager installed pyenv into the shell session.
 elif (( $+commands[pyenv] )); then
+  export PYENV_ROOT=$(pyenv root)
   eval "$(pyenv init -)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
