@@ -11,11 +11,12 @@ Integrates [zsh-autosuggestions][1] into Prezto, which implements the
 of a previously entered command and Zsh suggests commands as you type based on
 history and completions.
 
-If this module is used in conjuncture with the *syntax-highlighting* module, it
-must be loaded **after** it.
+If this module is used in conjunction with the *syntax-highlighting* module,
+the *syntax-highlighting* module must be loaded **after** this module.
 
-If this module is used in conjuncture with the *history-substring-search*
-module, it must be loaded **after** it.
+If this module is used in conjunction with the *history-substring-search*
+module, the *history-substring-search* module must be loaded **after** this
+module.
 
 Contributors
 ------------
