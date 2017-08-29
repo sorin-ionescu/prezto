@@ -14,7 +14,7 @@ execution of `pyenv`.
 
 ### Usage
 
-Install Python versions with `pyenv install` into *~/.pyenv/versions*.
+Install Python versions with `pyenv install` into `~/.pyenv/versions`.
 
 Local Package Installation
 --------------------------
@@ -33,21 +33,21 @@ Install packages into the per user site directory with `pip install --user`.
 virtualenvwrapper
 -----------------
 
-[virtualenvwrapper][2] is a frontend to the popular [virtualenv][3] utility.
+[`virtualenvwrapper`][2] is a frontend to the popular [`virtualenv`][3] utility.
 
-virtualenv creates isolated Python environments and virtualenvwrapper provides
+`virtualenv` creates isolated Python environments and `virtualenvwrapper` provides
 convenient shell functions to create, switch, and manage them.
 
 ### Usage
 
-Install virtualenvwrapper.
+Install `virtualenvwrapper`.
 
-Virtual environments are stored in *~/.virtualenvs*.
+Virtual environments are stored in `~/.virtualenvs`.
 
 There are configuration variables that have to be set to enable certain features.
-If you wish to use these features, export the variables in *~/.zshenv*
+If you wish to use these features, export the variables in [`zshenv`][6].
 
-The variable `$PROJECT_HOME` tells virtualenvwrapper where to place project
+The variable `$PROJECT_HOME` tells `virtualenvwrapper` where to place project
 working directories. It must be set and the directory created before `mkproject`
 is used. Replace *Developer* with your projects directory.
 
@@ -55,23 +55,23 @@ is used. Replace *Developer* with your projects directory.
 export PROJECT_HOME="$HOME/Developer"
 ```
 
-The variable `VIRTUALENVWRAPPER_PYTHON` tells virtualenvwrapper to use the
-specified full path of `python` interpreter overriding the `$PATH` search.
+The variable `VIRTUALENVWRAPPER_PYTHON` tells `virtualenvwrapper` to use the
+specified full path of the `python` interpreter overriding the `$PATH` search.
 
 ```sh
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 ```
 
-The variable `VIRTUALENVWRAPPER_VIRTUALENV` tells virtualenvwrapper to use the
+The variable `VIRTUALENVWRAPPER_VIRTUALENV` tells `virtualenvwrapper` to use the
 specified full path of `virtualenv` binary overriding the `$PATH` search.
 
 ```sh
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 ```
 
-The variable `$VIRTUALENVWRAPPER_VIRTUALENV_ARGS` tells virtualenvwrapper what
+The variable `$VIRTUALENVWRAPPER_VIRTUALENV_ARGS` tells `virtualenvwrapper` what
 arguments to pass to `virtualenv`. For example, set the value to
-*--system-site-packages* to ensure that all new environments have access to the
+`--system-site-packages` to ensure that all new environments have access to the
 system site-packages directory.
 
 ```sh
@@ -89,7 +89,7 @@ This can be enabled with:
 zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 ```
 
-virtualenvwrapper is automatically initialized if pre-requisites are met
+`virtualenvwrapper` is automatically initialized if pre-requisites are met
 (`$VIRTUALENVWRAPPER_VIRTUALENV` is explicitly set or `virtualenv` is in
 `$PATH`). This can be disabled with:
 
@@ -135,3 +135,4 @@ Authors
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: https://github.com/yyuu/pyenv
 [5]: https://github.com/sorin-ionescu/prezto/issues
+[6]: https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
