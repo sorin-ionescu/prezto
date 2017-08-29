@@ -31,7 +31,7 @@ installed:
   - *.7z* requires `7za`.
   - *.deb* requires `ar`, `tar`.
 
-Additionally, if `pigz' and/or `pbzip2` are installed, `archive` will use them over
+Additionally, if `pigz` and/or `pbzip2` are installed, `archive` will use them over
 their traditional counterparts, `gzip` and `bzip2` respectively, to take full advantage
 of all available CPU cores for compression.
 
