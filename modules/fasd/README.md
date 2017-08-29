@@ -15,8 +15,8 @@ been disabled.
 Installation
 ------------
 
-Since fasd is not an external module it needs to be installed.
-`brew install fasd`
+`fasd` is bundled with prezto as a git submodule. Alternatively, you can manually install `fasd`.
+If a manual install is found, it will be used instead of the bundled version.
 
 Aliases
 -------
