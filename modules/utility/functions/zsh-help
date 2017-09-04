@@ -1,0 +1,59 @@
+# Function to search zsh's man pages in a convenient way
+function zsh-help {
+    function zsh-help-join { # Joins the arguments into a string delimited by $separator
+        local separator=$1;
+        local arr=$*;
+        arr=${arr:${#separator}+1}; # < Line needed so result doesn't start with
+        arr=${arr// /$separator};   # a separator.
+        <<<$arr
+    }
+    local case='-i'
+    local section='zshall'
+    local debug=''
+    local pattern=''
+    # by default search only things at start of line
+    local prefix='^\s*'
+    if [[ $# < 1 || $1 == "--help" ]]; then
+        printf "Looks up things in the zsh documentation.\n"
+        printf "Press 'n' to search forward 'N' to search backwards for the term.\n"
+        printf "Usage: $0 [-a] search term(s)\n"
+        printf "Option --all will seach for the term anywhere, not just at the start of a line.\n"
+        return 1
+    fi
+    if [[ $1 == '--zsh-help-debug' ]]; then
+        debug=1
+        shift
+    fi
+    if [[ $1 == "--all" ]]; then
+        shift; prefix='' # We're searching everything, so remove the prefix
+    fi
+    if [[ $1 == "test" && $# == 1 ]]; then
+        case=''
+        pattern='^CONDITIONAL EXPRESSIONS$'
+    elif [[ ($1 == "-eq" || $1 == "-ne" || $1 == "-lt" || $1 == "-gt" || $1 == "-le" || $1 == "-ge") && $# == 1 ]]; then
+        case=''
+        pattern="${prefix}exp1\s+${1}\s+exp2"
+    elif [[ $1 == 'zstyle' ]]; then
+        pattern=$(join '\s+' "$@")
+        section=ZSHMODULES
+    fi
+    # If it wasn't one of the special-cased things, check ZSHBUILTINS first. If
+    # not found there, we will search ZSHALL
+    if [[ $pattern == "" ]]; then
+        section=ZSHBUILTINS
+        pattern="${prefix}$(join '\s+' "$@")"
+        # If it exists there, keep ZSHBUILTINS as the section
+        if man --pager="less ${case} -p '${pattern}'" "${section}" > /dev/null 2>&1; then
+            true
+        else # Otherwise we use zshall
+            echo here
+            local section='ZSHALL'
+            pattern="${prefix}$(join '\s+' "$@")"
+        fi
+    fi
+    if [[ ${debug} ]]; then echo man --pager="less ${case} -p '${pattern}'" "${section}"; sleep 2; fi
+    man --pager="less ${case} -p '${pattern}'" "${section}"
+    local rtrn=$?
+    unfunction zsh-help-join # unfunction so it's not in the global scope
+    return $?
+}
