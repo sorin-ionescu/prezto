@@ -26,6 +26,15 @@ in *zpreztorc*.
 zstyle ':prezto:module:prompt' pwd-length 'short'
 ```
 
+### Display Return Value
+
+Some prompts display the return value in the prompt. If a prompt has support,
+this can be disabled with the following snippet.
+
+```sh
+zstyle ':prezto:module:prompt' show-return-val 'no'
+```
+
 Theming
 -------
 
