@@ -98,7 +98,7 @@ Aliases
   - `lu` lists sorted by date, most recent last, shows access time.
   - `sl` lists directory contents (`ls`).
 
-### Mac OS X Everywhere
+### macOS Everywhere
 
   - `o` opens files and directories (`open` or `xdg-open`).
   - `get` downloads files (`curl` or `wget`).
