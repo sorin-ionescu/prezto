@@ -19,8 +19,8 @@ function prompt_jml_git_info {
     if [[ -s "$_prompt_jml_precmd_async_data" ]]; then
       alias typeset='typeset -g'
       source "$_prompt_jml_precmd_async_data"
-      ruby-info
       RPROMPT+='${ruby_info[version]} '
+      RPROMPT+='${python_info[virtualenv]}'
       RPROMPT+='${git_info:+${(e)git_info[status]}}'
       unalias typeset
     fi
@@ -34,10 +34,20 @@ function prompt_jml_git_info {
 }
 
 function prompt_jml_precmd_async {
-# Get Git repository information.
+  # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
     typeset -p git_info >! "$_prompt_jml_precmd_async_data"
+  fi
+
+  if (( $+functions[ruby-info] )); then
+    ruby-info
+    typeset -p ruby_info >>! "$_prompt_jml_precmd_async_data"
+  fi
+
+  if (( $+functions[python-info] )); then
+    python-info
+    typeset -p python_info >>! "$_prompt_jml_precmd_async_data"
   fi
 
   # Signal completion to parent process.
@@ -89,6 +99,9 @@ function prompt_jml_setup {
 
   # Ruby Version
   zstyle ':prezto:module:ruby:info:version' format '%F{1}%v%f@%F{4}%g%f'
+
+  # Python Virtual Environment
+  zstyle ':prezto:module:python:info:virtualenv' format '%F{3}[%v]%f'
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
