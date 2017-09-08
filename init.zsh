@@ -41,7 +41,7 @@ function zprezto-update {
         printf "There are no updates.\n"
         return 0
       elif [[ $LOCAL == $BASE ]]; then
-        printf "There is an update availible. Trying to pull.\n\n"
+        printf "There is an update available. Trying to pull.\n\n"
         if git pull --ff-only; then
           printf "Syncing submodules\n"
           git submodule update --recursive
