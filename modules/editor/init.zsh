@@ -28,9 +28,11 @@ WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 zmodload zsh/terminfo
 typeset -gA key_info
 key_info=(
-  'Control'      '\C-'
-  'ControlLeft'  '\e[1;5D \e[5D \e\e[D \eOd'
-  'ControlRight' '\e[1;5C \e[5C \e\e[C \eOc'
+  'Control'         '\C-'
+  'ControlLeft'     '\e[1;5D \e[5D \e\e[D \eOd'
+  'ControlRight'    '\e[1;5C \e[5C \e\e[C \eOc'
+  'ControlPageUp'   '\e[5;5~'
+  'ControlPageDown' '\e[6;5~'
   'Escape'       '\e'
   'Meta'         '\M-'
   'Backspace'    "^?"
@@ -305,6 +307,8 @@ unbound_keys=(
   "${key_info[F12]}"
   "${key_info[PageUp]}"
   "${key_info[PageDown]}"
+  "${key_info[ControlPageUp]}"
+  "${key_info[ControlPageDown]}"
 )
 for keymap in $unbound_keys; do
   bindkey -M viins "${keymap}" _prezto-zle-noop
