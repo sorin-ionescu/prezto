@@ -10,4 +10,57 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Customize for my needs ...
+
+### Setting default theme for zsh shell
+prompt agnoster
+
+### Remove hostname from the prompt
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
+### USER ALIAS
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias ls='ls -GFh'
+alias ll='ls -FGlAhp'
+alias less='less -FSRXc'
+cd() { builtin cd "$@"; ll; }
+alias cd..='cd ../'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias .3='cd ../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../../'
+alias .6='cd ../../../../../../'
+alias edit='subl'
+alias f='open -a Finder ./'
+alias ~="cd ~"
+alias c='clear'
+alias cls='clear;ll'
+alias which='type -all'
+alias path='echo -e ${PATH//:/\\n}'
+alias show_options='shopt'
+alias fix_stty='stty sane'
+alias cic='set completion-ignore-case On'
+mcd () { mkdir -p "$1" && cd "$1"; }
+trash () { command mv "$@" ~/.Trash ; }
+ql () { qlmanage -p "$*" >& /dev/null; }
+alias DT='tee ~/Desktop/terminalOut.txt'
+alias numFiles='echo $(ls -1 | wc -l)'
+
+
+### GIT ALIAS
+alias githist="git log --pretty='%h - %s' --author='Lathendra Uddaraju'"
+alias githistall="git log --pretty='%h - %s'"
+
+
+### SEARCHING
+alias qfind="find . -name "
+ff () { /usr/bin/find . -name "$@" ; }
+ffs () { /usr/bin/find . -name "$@"'*' ; }
+ffe () { /usr/bin/find . -name '*'"$@" ; }
