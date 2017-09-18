@@ -57,9 +57,11 @@ while (( $# > 0 )); do
     (*.lzma) unlzma "$1" ;;
     (*.Z) uncompress "$1" ;;
     (*.zip|*.jar) unzip "$1" -d $extract_dir ;;
-    (*.rar) unrar &> /dev/null \
-      && unrar x -ad "$1" \
-      || rar x -ad "$1" ;;
+    (*.rar) ( (( $+commands[unrar] )) \
+      && unrar x -ad "$1" ) \
+      || ( (( $+commands[rar] )) \
+      && rar x -ad "$1" ) \
+      || unar -d "$1" ;;
     (*.7z) 7za x "$1" ;;
     (*.deb)
       mkdir -p "$extract_dir/control"
