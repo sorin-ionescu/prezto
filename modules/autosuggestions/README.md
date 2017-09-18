@@ -12,10 +12,10 @@ of a previously entered command and Zsh suggests commands as you type based on
 history and completions.
 
 If this module is used in conjunction with the *syntax-highlighting* module,
-the *syntax-highlighting* module must be loaded **after** this module.
+this module must be loaded **after** the *syntax-highlighting* module.
 
 If this module is used in conjunction with the *history-substring-search*
-module, the *history-substring-search* module must be loaded **after** this
+module, this module must be loaded **after** the the *history-substring-search*
 module.
 
 Contributors
