@@ -7,7 +7,7 @@ part of a previously entered command and press up and down to cycle through
 matching commands.
 
 If this module is used in conjunction with the *syntax-highlighting* module,
-this module must be loaded **after** the the *syntax-highlighting* module.
+this module must be loaded **after** the *syntax-highlighting* module.
 
 Contributors
 ------------

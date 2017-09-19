@@ -15,7 +15,7 @@ If this module is used in conjunction with the *syntax-highlighting* module,
 this module must be loaded **after** the *syntax-highlighting* module.
 
 If this module is used in conjunction with the *history-substring-search*
-module, this module must be loaded **after** the the *history-substring-search*
+module, this module must be loaded **after** the *history-substring-search*
 module.
 
 Contributors
