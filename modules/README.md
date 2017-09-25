@@ -104,6 +104,10 @@ Homebrew
 
 Defines Homebrew aliases.
 
+Laravel
+--------
+Defines Laravel 5 aliases.
+
 MacPorts
 --------
 
