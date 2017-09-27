@@ -29,7 +29,6 @@ alias mkdir='mkdir -pv'
 alias ls='ls -GFh'
 alias ll='ls -FGlAhp'
 alias less='less -FSRXc'
-cd() { builtin cd "$@"; ll; }
 alias cd..='cd ../'
 alias ..='cd ../'
 alias ...='cd ../../'
