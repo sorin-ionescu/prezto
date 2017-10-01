@@ -12,11 +12,11 @@ setopt localoptions extendedglob
 local current_pwd="${PWD/#$HOME/~}"
 local ret_directory
 
-if [[ "$current_pwd" == (#m)[/~] ]]; then
+if zstyle -m ':prezto:module:prompt' pwd-length 'full'; then
+  ret_directory=${PWD}
+elif [[ "$current_pwd" == (#m)[/~] ]]; then
   ret_directory="$MATCH"
   unset MATCH
-elif zstyle -m ':prezto:module:prompt' pwd-length 'full'; then
-  ret_directory=${PWD}
 elif zstyle -m ':prezto:module:prompt' pwd-length 'long'; then
   ret_directory=${current_pwd}
 else
