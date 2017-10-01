@@ -19,6 +19,8 @@ elif [[ "$current_pwd" == (#m)[/~] ]]; then
   unset MATCH
 elif zstyle -m ':prezto:module:prompt' pwd-length 'long'; then
   ret_directory=${current_pwd}
+elif zstyle -m ':prezto:module:prompt' pwd-length 'tail'; then
+  ret_directory=${current_pwd:t}
 else
   ret_directory="${${${${(@j:/:M)${(@s:/:)current_pwd}##.#?}:h}%/}//\%/%%}/${${current_pwd:t}//\%/%%}"
 fi
