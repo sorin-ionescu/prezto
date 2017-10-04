@@ -39,11 +39,20 @@ fi
 # Load identities.
 if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   zstyle -a ':prezto:module:ssh:load' identities '_ssh_identities'
-  # Check for Linux system and ssh-askpass presence
-  if [[ "$OSTYPE" == linux* ]] && [[ ! -a /usr/lib/ssh/x11-ssh-askpass ]]; then
-    ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}"  2> /dev/null
+  # ssh-add has strange requirements for running SSH_ASKPASS, so we duplicate
+  # them here. Essentially, if the other requirements are met, we redirect stdin
+  # from /dev/null in order to meet the final requirement.
+  #
+  # From ssh-add(1):
+  # If ssh-add needs a passphrase, it will read the passphrase from the current
+  # terminal if it was run from a terminal. If ssh-add does not have a terminal
+  # associated with it but DISPLAY and SSH_ASKPASS are set, it will execute the
+  # program specified by SSH_ASKPASS and open an X11 window to read the
+  # passphrase.
+  if [[ -n "$DISPLAY" && -x "$SSH_ASKPASS" ]]; then
+    ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}" < /dev/null 2> /dev/null
   else
-    ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}"  < /dev/null 2> /dev/null
+    ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}" 2> /dev/null
   fi
 fi
 
