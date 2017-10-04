@@ -39,11 +39,12 @@ fi
 # Load identities.
 if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   zstyle -a ':prezto:module:ssh:load' identities '_ssh_identities'
+  _identities=("${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}")
   # Check for Linux system and ssh-askpass presence
-  if [[ "$OSTYPE" == linux* ]] && [[ ! -a /usr/lib/ssh/x11-ssh-askpass ]]; then
-    ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}"  2> /dev/null
+  if [[ "$OSTYPE" == linux* && ! -x "$SSH_ASKPASS" ]]; then
+    ssh-add "${_identities[@]}"  2> /dev/null
   else
-    ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}"  < /dev/null 2> /dev/null
+    ssh-add "${_identities[@]}"  < /dev/null 2> /dev/null
   fi
 fi
 
