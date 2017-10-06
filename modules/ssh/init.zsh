@@ -44,11 +44,15 @@ if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   # passphrase.
   if [[ -n "$DISPLAY" && -x "$SSH_ASKPASS" ]]; then
     ssh-add "${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}}" < /dev/null 2> /dev/null
-  elif [[ "$OSTYPE" == darwin* ]]; then
-    # macOS: `ssh-add -A` will load all identities defined in Keychain
-    ssh-add -A 2> /dev/null
   else
     ssh-add ${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}} 2> /dev/null
+  fi
+
+  if [[ "$OSTYPE" == darwin* ]]; then
+    # macOS: `ssh-add -A` will load all identities defined in Keychain.
+    # Assume `/usr/bin/ssh-add` is Apple customized version that understands
+    # the `-A` switch.
+    /usr/bin/ssh-add -A
   fi
 fi
 
