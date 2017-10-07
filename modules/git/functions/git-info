@@ -139,6 +139,9 @@ function git-info {
   local dirty=0
   local dirty_format
   local dirty_formatted
+  local error=0
+  local error_format
+  local error_formatted
   local ignore_submodules
   local indexed=0
   local indexed_format
@@ -351,6 +354,7 @@ function git-info {
   else
     # Use porcelain status for easy parsing.
     status_cmd="command git status --porcelain --ignore-submodules=${ignore_submodules:-none}"
+    ${(z)status_cmd} &> /dev/null || error=1
 
     # Get current status.
     while IFS=$'\n' read line; do
@@ -411,6 +415,12 @@ function git-info {
     zstyle -s ':prezto:module:git:info:clean' format 'clean_formatted'
   fi
 
+  # Format error.
+  if (( error > 0 )); then
+    zstyle -s ':prezto:module:git:info:error' format 'error_format'
+    zformat -f error_formatted "$error_format" "E:$error"
+  fi
+
   # Format info.
   zstyle -a ':prezto:module:git:info:keys' format 'info_formats'
   for info_format in ${(k)info_formats}; do
@@ -423,6 +433,7 @@ function git-info {
       "c:$commit_formatted" \
       "d:$deleted_formatted" \
       "D:$dirty_formatted" \
+      "E:$error_formatted" \
       "i:$indexed_formatted" \
       "I:$unindexed_formatted" \
       "m:$modified_formatted" \
