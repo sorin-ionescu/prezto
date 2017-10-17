@@ -78,9 +78,15 @@ function pmodload {
   local pmodule_location
   local pfunction_glob='^([_.]*|prompt_*_setup|README*|*~)(-.N:t)'
 
-  # Any dirs which prezto modules can be loaded from. Currently this is only the
-  # main modules dir and the optional contrib dir.
-  pmodule_dirs=("$ZPREZTODIR/modules" "$ZPREZTODIR/contrib")
+  # Load in any additional directories and warn if they don't exist
+  zstyle -a ':prezto:load' pmodule-dirs 'user_pmodule_dirs'
+  for user_dir in "$user_pmodule_dirs[@]"; do
+    if [[ ! -d "$user_dir" ]]; then
+      echo "$0: Missing user module dir: $user_dir"
+    fi
+  done
+
+  pmodule_dirs=("$ZPREZTODIR/modules" "$ZPREZTODIR/contrib" "$user_pmodule_dirs[@]")
 
   # $argv is overridden in the anonymous function.
   pmodules=("$argv[@]")
