@@ -32,8 +32,8 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'ssh' \
-  'node' \
   'completion' \
+  'node' \
   'homebrew' \
   'osx' \
   'ruby' \
