@@ -7,6 +7,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function deb-history {
+
 case "$1" in
   (install)
     zgrep --no-filename 'install ' $(ls -rt /var/log/dpkg*)
@@ -34,3 +36,5 @@ Commands:
 EOF
   ;;
 esac
+
+# }

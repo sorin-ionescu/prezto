@@ -7,7 +7,8 @@
 
 function mand {
   if (( $# > 0 )); then
-    open "dash://manpages:$1" 2>/dev/null
+    zstyle -s ':prezto:module:osx:man' dash-keyword 'dashkw' || dashkw='manpages'
+    open "dash://$dashkw:$1" 2> /dev/null
     if (( $? != 0 )); then
       print "$0: Dash is not installed" >&2
       break
@@ -15,6 +16,8 @@ function mand {
   else
     print 'What manual page do you want?' >&2
   fi
+
+  unset dashkw
 }
 
 mand "$@"

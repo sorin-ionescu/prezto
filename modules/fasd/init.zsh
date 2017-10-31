@@ -9,9 +9,10 @@
 # Load dependencies.
 pmodload 'editor'
 
-# Return if requirements are not found.
+# If the command doesn't exist externally, we need to fall back to the bundled
+# submodule.
 if (( ! $+commands[fasd] )); then
-  return 1
+  source "${0:h}/external/fasd" || return 1
 fi
 
 #

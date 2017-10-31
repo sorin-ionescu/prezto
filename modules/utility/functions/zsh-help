@@ -1,0 +1,102 @@
+#
+# Provides a much easier way to search and access ZSH's manual. First checks for
+# terms at the start of the manual, then checks if it's at start of a line allowing
+# whitespace.
+#
+# Authors:
+#   Samantha McVey <samantham@posteo.net>
+#
+
+# function zsh-help {
+
+local usage="$(
+cat <<EOF
+usage: $0 [--help] [--zsh-help-debug] [--all] search term(s)
+Options:
+    --all - search for the term anywhere, not just at the start of a line.
+    --help - show this help message
+    --zsh-help-debug - print out the regex search choosenq instead of searching
+Looks up things in the zsh documentation. --all must come after --zsh-help-debug
+if used together.
+Uses less as the pager. Press 'n' to search forward 'N' to search backwards.
+Case is ignored unless capital letters appear in the search term.
+EOF
+)"
+#function zsh-help {
+    function _zsh-help-join { # Joins the arguments into a string delimited by $separator
+        local separator=$1;
+        local arr=$*;
+        arr=${arr:${#separator}+1}; # < Line needed so result doesn't start with
+        arr=${arr// /$separator};   # a separator.
+        <<<$arr
+    }
+    local case='-i'; local section='ZSHALL'; local debug=''; local pattern=''
+    function _zsh-help-try-query {
+        local case="$1"; local pattern="$2"; local i=''
+        local array=( ZSHBUILTINS ZSHALL ZSHMODULES )
+        for i in ${array}; do
+            if [[ ${debug} ]]; then printf "Looking in %s for: %s %s\n" "${i}" "${case}" "${pattern}" 1>&2; fi
+            if man --pager='' ${i} | grep -E ${case} "${pattern}" > /dev/null; then
+                printf "%s" "${i}"; return 0;
+            fi
+        done
+        return 1
+    }
+    # By default search only things at start of line
+    local first_prefix='^'
+    local prefix='^\s*'
+    if [[ ${1} == '--zsh-help-debug' ]]; then
+        shift; debug=1
+    fi
+    if [[ ${1} == "--all" ]]; then
+        shift; first_prefix='' # We're searching everything, so remove the prefix
+    fi
+    if [[ $# < 1 || $1 == "--help" ]]; then
+        printf "%s\n" "${usage}"
+        unfunction _zsh-help-join; unfunction _zsh-help-try-query; # unfunction so it's not in the global scope
+        return 1
+    fi
+    if [[ ${1} == "test" && $# == 1 ]]; then
+        case=''
+        pattern='^CONDITIONAL EXPRESSIONS$'
+    elif [[ ($1 == "-eq" || $1 == "-ne" || $1 == "-lt" || $1 == "-gt" || $1 == "-le" || $1 == "-ge") && $# == 1 ]]; then
+        case=''
+        pattern="${prefix}exp1\s+${1}\s+exp2"
+    elif [[ $1 == 'zstyle' ]]; then
+        pattern=$(_zsh-help-join '\s+' "$@")
+        section=ZSHMODULES
+    fi
+    # If it wasn't one of the special-cased things, check ZSHBUILTINS first. If
+    # not found there, we will search ZSHALL
+    if [[ ${pattern} == "" ]]; then
+        pattern="$(_zsh-help-join '\s+' "$@")"
+        # search for sections at the start of the man page first
+        section=$(_zsh-help-try-query "${case}" "${first_prefix}${pattern}")
+        # If it exists there, keep ZSHBUILTINS as the section
+        if (( $? == 0 )); then
+            pattern="${first_prefix}${pattern}"
+        elif [[ "${prefix}" ]]; then
+            # if not found, search for the term preceeded by whitetext
+            section=$(_zsh-help-try-query "${case}" "${prefix}${pattern}")
+            if (( $? == 0 )); then
+                pattern="${prefix}${pattern}"
+            else
+                pattern=""
+            fi
+        fi
+        if [[ ! ${pattern} ]]; then  # Otherwise we use zshall
+            printf "Can't find term\n" 2>&1
+            unfunction _zsh-help-join; unfunction _zsh-help-try-query; # unfunction so it's not in the global scope
+            return 1;
+        fi
+    fi
+    local command="man --pager=\"less ${case} -p '${pattern}'\" \"${section}\""
+    if [[ ${debug} ]]; then
+        printf "\nFinal search term is:\n"; printf "%s\n" "${command}";
+    else
+        eval $command
+    fi
+    local rtrn=$?
+    unfunction _zsh-help-join; unfunction _zsh-help-try-query; # unfunction so it's not in the global scope
+    return $?
+#}

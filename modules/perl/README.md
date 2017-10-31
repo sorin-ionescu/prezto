@@ -14,21 +14,33 @@ Mac OS X in *~/Library/Perl/5.12* by altering the environment.
 
 For Perl versions older than 5.14, install *local::lib*.
 
-    curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
-    tar xvf local-lib-1.008004.tar.gz
-    cd local-lib-1.008004
-    perl Makefile.PL --bootstrap=$HOME/Library/Perl/5.12
-    make && make test && make install
+```console
+curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
+tar xvf local-lib-1.008004.tar.gz
+cd local-lib-1.008004
+perl Makefile.PL --bootstrap=$HOME/Library/Perl/5.12
+make && make test && make install
+```
 
 Install *cpanminus*:
 
-    curl -L http://cpanmin.us | perl - --self-upgrade
+```console
+curl -L http://cpanmin.us | perl - --self-upgrade
+```
 
 Perlbrew
 --------
 
 An alternative to the above is to use [Perlbrew][2], which allows for the
 management of multiple, isolated Perl installations in the home directory.
+
+plenv
+-----
+
+Yet another alternative is [plenv][3]. This is inspired from rbenv and enables
+switching between multiple binary installations.
+
+The subcommands of plenv is similar with rbenv.
 
 Aliases
 -------
@@ -51,13 +63,52 @@ Aliases
   - `plbu` uninstalls a Perl version.
   - `plbx` temporarily sets the Perl version to use.
 
+### plenv
+
+  - `plv` manages Perl environments.
+  - `plvc` List all available plenv commands.
+  - `plvl` Set or show the local application-specific Perl version.
+  - `plvg` Set or show the global Perl version.
+  - `plvs` Set or show the shell-specific Perl version.
+  - `plvi` Install a Perl version using the perl-build plugin.
+  - `plvu` Uninstall a specific Perl version.
+  - `plvr` Rehash plenv shims (run this after installing executables).
+  - `plvv` Show the current Perl version and its origin.
+  - `plvV` List all Perl versions available to plenv.
+  - `plvw` Display the full path to an executable.
+  - `plvW` List all Perl versions that contain the given executable.
+  - `plvm` List cpan modules in current perl.
+  - `plvM` Migrate cpan modules from other version.
+  - `plvI` Install cpanm.
+
+Functions
+---------
+
+  - `perl-info` exposes information about the Perl environment via the
+    `$perl_info` associative array.
+
+Theming
+-------
+
+To display the name of the current Perl version in a prompt, define the
+following style in the `prompt_name_setup` function.
+
+```sh
+# %v - perl version.
+zstyle ':prezto:module:perl:info:version' format 'version:%v'
+```
+
+Then add `$perl_info[version]` to `$PROMPT` or `$RPROMPT` and call
+`perl-info` in the `prompt_name_precmd` hook function.
+
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+*The authors of this module should be contacted via the [issue tracker][4].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://www.perl.org
 [2]: http://perlbrew.pl
-[3]: https://github.com/sorin-ionescu/prezto/issues
+[3]: https://github.com/tokuhirom/plenv
+[4]: https://github.com/sorin-ionescu/prezto/issues
