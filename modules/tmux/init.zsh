@@ -23,7 +23,7 @@ if ([[ "$TERM_PROGRAM" = 'iTerm.app' ]] && \
   _tmux_iterm_integration='-CC'
 fi
 
-if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" ]] && ( \
+if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
 ); then
@@ -31,14 +31,14 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" ]] && ( \
 
   # Create a 'prezto' session if no session has been defined in tmux.conf.
   if ! tmux has-session 2> /dev/null; then
-    zstyle -s ':prezto:module:tmux:session' name tmux_session || tmux_session='prezto'
+    tmux_session='prezto'
     tmux \
       new-session -d -s "$tmux_session" \; \
       set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
-  # Attach to the 'prezto' session or to the last session used. (detach first)
-  exec tmux $_tmux_iterm_integration attach-session -d
+  # Attach to the 'prezto' session or to the last session used.
+  exec tmux $_tmux_iterm_integration attach-session
 fi
 
 #

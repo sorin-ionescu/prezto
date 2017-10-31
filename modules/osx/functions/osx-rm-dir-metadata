@@ -5,11 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# function osx-rm-dir-metadata {
-
 find "${@:-$PWD}" \( \
   -type f -name '.DS_Store' -o \
   -type d -name '__MACOSX' \
 \) -print0 | xargs -0 rm -rf
-
-# }

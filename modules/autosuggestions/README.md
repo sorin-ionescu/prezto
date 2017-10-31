@@ -11,12 +11,11 @@ Integrates [zsh-autosuggestions][1] into Prezto, which implements the
 of a previously entered command and Zsh suggests commands as you type based on
 history and completions.
 
-If this module is used in conjunction with the *syntax-highlighting* module,
-this module must be loaded **after** the *syntax-highlighting* module.
+If this module is used in conjuncture with the *syntax-highlighting* module, it
+must be loaded **after** it.
 
-If this module is used in conjunction with the *history-substring-search*
-module, this module must be loaded **after** the *history-substring-search*
-module.
+If this module is used in conjuncture with the *history-substring-search*
+module, it must be loaded **after** it.
 
 Contributors
 ------------
@@ -36,15 +35,11 @@ positive results.
 To enable highlighting for this module only, add the following line to
 *zpreztorc*:
 
-```sh
-zstyle ':prezto:module:autosuggestions' color 'yes'
-```
+    zstyle ':prezto:module:autosuggestions' color 'yes'
 
 To set the query found color, add the following line to *zpreztorc*:
 
-```sh
-zstyle ':prezto:module:autosuggestions:color' found ''
-```
+    zstyle ':prezto:module:autosuggestions:color' found ''
 
 Authors
 -------

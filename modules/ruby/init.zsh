@@ -53,7 +53,6 @@ alias rb='ruby'
 # Bundler
 if (( $+commands[bundle] )); then
   alias rbb='bundle'
-  alias rbbc='bundle clean'
   alias rbbe='bundle exec'
   alias rbbi='bundle install --path vendor/bundle'
   alias rbbl='bundle list'

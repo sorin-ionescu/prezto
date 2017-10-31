@@ -5,8 +5,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# function git-submodule-move {
-
 if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
   print "$0: not a repository work tree: $PWD" >&2
   return 1
@@ -32,5 +30,3 @@ git-submodule-remove "$src"
 git submodule add "$url" "$dst"
 
 return 0
-
-# }
