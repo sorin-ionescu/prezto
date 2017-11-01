@@ -226,6 +226,14 @@ function prepend-sudo {
 }
 zle -N prepend-sudo
 
+# Expand aliases
+function glob-alias {
+  zle _expand_alias
+  zle expand-word
+  zle magic-space
+}
+zle -N glob-alias
+
 # Reset to default key bindings.
 bindkey -d
 
@@ -368,6 +376,9 @@ for keymap in 'emacs' 'viins'; do
 
   # Insert 'sudo ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
+
+  # control-space expands all aliases, including global
+  bindkey -M "$keymap" "$key_info[Control] " glob-alias
 done
 
 # Delete key deletes character in vimcmd cmd mode instead of weird default functionality
