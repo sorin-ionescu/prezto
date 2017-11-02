@@ -6,8 +6,8 @@ the [Fish shell][2]'s history search feature, where the user can type in any
 part of a previously entered command and press up and down to cycle through
 matching commands.
 
-If this module is used in conjuncture with the *syntax-highlighting* module, it
-must be loaded **after** it.
+If this module is used in conjunction with the *syntax-highlighting* module,
+this module must be loaded **after** the *syntax-highlighting* module.
 
 Contributors
 ------------

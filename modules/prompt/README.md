@@ -26,6 +26,15 @@ in *zpreztorc*.
 zstyle ':prezto:module:prompt' pwd-length 'short'
 ```
 
+### Display Return Value
+
+Some prompts display the return value in the prompt. If a prompt has support,
+this can be disabled with the following snippet.
+
+```sh
+zstyle ':prezto:module:prompt' show-return-val 'no'
+```
+
 Theming
 -------
 
@@ -121,6 +130,18 @@ function prompt_name_precmd {
 }
 ```
 
+Troubleshooting
+---------------
+
+### Fonts aren't displaying properly.
+
+On most systems, themes which use special characters need to have a patched font
+installed and configured properly.
+
+Powerline provides some information on [terminal support][4] and [how to install
+patched fonts][5] which should fix most font issues.
+
+
 Authors
 -------
 
@@ -131,3 +152,5 @@ Authors
 [1]: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
 [2]: http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions
 [3]: https://github.com/sorin-ionescu/prezto/issues
+[4]: http://powerline.readthedocs.io/en/master/usage.html#terminal-emulator-requirements
+[5]: http://powerline.readthedocs.io/en/latest/installation.html#fonts-installation

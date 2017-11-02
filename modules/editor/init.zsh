@@ -28,9 +28,11 @@ WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 zmodload zsh/terminfo
 typeset -gA key_info
 key_info=(
-  'Control'      '\C-'
-  'ControlLeft'  '\e[1;5D \e[5D \e\e[D \eOd'
-  'ControlRight' '\e[1;5C \e[5C \e\e[C \eOc'
+  'Control'         '\C-'
+  'ControlLeft'     '\e[1;5D \e[5D \e\e[D \eOd'
+  'ControlRight'    '\e[1;5C \e[5C \e\e[C \eOc'
+  'ControlPageUp'   '\e[5;5~'
+  'ControlPageDown' '\e[6;5~'
   'Escape'       '\e'
   'Meta'         '\M-'
   'Backspace'    "^?"
@@ -224,6 +226,14 @@ function prepend-sudo {
 }
 zle -N prepend-sudo
 
+# Expand aliases
+function glob-alias {
+  zle _expand_alias
+  zle expand-word
+  zle magic-space
+}
+zle -N glob-alias
+
 # Reset to default key bindings.
 bindkey -d
 
@@ -305,6 +315,8 @@ unbound_keys=(
   "${key_info[F12]}"
   "${key_info[PageUp]}"
   "${key_info[PageDown]}"
+  "${key_info[ControlPageUp]}"
+  "${key_info[ControlPageDown]}"
 )
 for keymap in $unbound_keys; do
   bindkey -M viins "${keymap}" _prezto-zle-noop
@@ -364,6 +376,9 @@ for keymap in 'emacs' 'viins'; do
 
   # Insert 'sudo ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
+
+  # control-space expands all aliases, including global
+  bindkey -M "$keymap" "$key_info[Control] " glob-alias
 done
 
 # Delete key deletes character in vimcmd cmd mode instead of weird default functionality

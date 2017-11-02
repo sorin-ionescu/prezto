@@ -23,7 +23,7 @@ if ([[ "$TERM_PROGRAM" = 'iTerm.app' ]] && \
   _tmux_iterm_integration='-CC'
 fi
 
-if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
+if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
 ); then
