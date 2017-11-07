@@ -14,11 +14,15 @@ Each file should contain a line with the MAC address of the target device and
 the network broadcast address. For instance, there might be a file
 *~/.wakeonlan/leto* with the following contents:
 
-    00:11:22:33:44:55:66 192.168.0.255
+```conf
+00:11:22:33:44:55:66 192.168.0.255
+```
 
 To wake that device, use the following command:
 
-    wake leto
+```sh
+$ wake leto
+```
 
 For more information on the configuration file format, read the
 [wakeonlan man page][2].

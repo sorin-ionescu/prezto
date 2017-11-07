@@ -10,13 +10,61 @@
 #
 
 # Check for the minimum supported version.
-min_zsh_version='4.3.17'
+min_zsh_version='4.3.11'
 if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
-  print "prezto: old shell detected, minimum required: $min_zsh_version" >&2
+  printf "prezto: old shell detected, minimum required: %s\n" "$min_zsh_version" >&2
   return 1
 fi
 unset min_zsh_version
 
+# zprezto convenience updater
+# The function is surrounded by ( ) instead of { } so it starts in a subshell
+# and won't affect the environment of the calling shell
+function zprezto-update {
+  (
+    function cannot-fast-forward {
+      local STATUS="$1"
+      [[ -n "${STATUS}" ]] && printf "%s\n" "${STATUS}"
+      printf "Unable to fast-forward the changes. You can fix this by "
+      printf "running\ncd '%s' and then\n'git pull' " "${ZPREZTODIR}"
+      printf "to manually pull and possibly merge in changes\n"
+    }
+    cd -q -- "${ZPREZTODIR}" || return 7
+    local orig_branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
+    if [[ "$orig_branch" == "master" ]]; then
+      git fetch || return "$?"
+      local UPSTREAM=$(git rev-parse '@{u}')
+      local LOCAL=$(git rev-parse HEAD)
+      local REMOTE=$(git rev-parse "$UPSTREAM")
+      local BASE=$(git merge-base HEAD "$UPSTREAM")
+      if [[ $LOCAL == $REMOTE ]]; then
+        printf "There are no updates.\n"
+        return 0
+      elif [[ $LOCAL == $BASE ]]; then
+        printf "There is an update available. Trying to pull.\n\n"
+        if git pull --ff-only; then
+          printf "Syncing submodules\n"
+          git submodule update --recursive
+          return $?
+        else
+          cannot-fast-forward
+          return 1
+        fi
+      elif [[ $REMOTE == $BASE ]]; then
+        cannot-fast-forward "Commits in master that aren't in upstream."
+        return 1
+      else
+        cannot-fast-forward "Upstream and local have diverged."
+        return 1
+      fi
+    else
+      printf "zprezto install at '%s' is not on the master branch " "${ZPREZTODIR}"
+      printf "(you're on '%s')\nUnable to automatically update.\n" "${orig_branch}"
+      return 1
+    fi
+    return 1
+  )
+}
 #
 # Module Loader
 #

@@ -49,7 +49,7 @@ function _terminal-set-titles-with-command {
     local -A jobtexts_from_parent_shell
     jobtexts_from_parent_shell=(${(kv)jobtexts})
 
-    jobs "$job_name" 2>/dev/null > >(
+    jobs "$job_name" 2> /dev/null > >(
       read index discarded
       # The index is already surrounded by brackets: [1].
       _terminal-set-titles-with-command "${(e):-\$jobtexts_from_parent_shell$index}"

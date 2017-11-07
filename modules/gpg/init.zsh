@@ -12,7 +12,7 @@ fi
 
 # Set the default paths to gpg-agent files.
 _gpg_agent_conf="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.conf"
-_gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env"
+_gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env.$UID"
 
 # Start gpg-agent if not started.
 if [[ -z "$GPG_AGENT_INFO" && ! -S "${GNUPGHOME:-$HOME/.gnupg}/S.gpg-agent" ]]; then
@@ -29,7 +29,7 @@ fi
 export GPG_TTY="$(tty)"
 
 # Integrate with the SSH module.
-if grep 'enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
+if grep '^enable-ssh-support' "$_gpg_agent_conf" &> /dev/null; then
   # Load required functions.
   autoload -Uz add-zsh-hook
 

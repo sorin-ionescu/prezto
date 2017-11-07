@@ -1,16 +1,15 @@
-Please check if a similar issue already exists or has been closed before before opening your issue.
+<!-- Please check if a similar issue already exists or has been closed before before opening your issue. -->
 
 ### Description
-
-[Description of the bug or feature]
+<!-- Provide a general description of the bug or feature -->
 
 ### Expected behavior
 
-[What you expected to happen]
+<!-- What you expected to happen -->
 
 ### Actual behavior
 
-[What actually happened]
+<!-- What actually happened -->
 
 ### Steps to Reproduce
 

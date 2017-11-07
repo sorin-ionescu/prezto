@@ -6,6 +6,8 @@
 #   Matt Hamilton <m@tthamilton.com>
 #
 
+# function archive {
+
 local archive_name dir_to_archive _gzip_bin _bzip2_bin
 
 if (( $# != 2 )); then
@@ -65,3 +67,5 @@ case "${archive_name}" in
   (*.lzma) print "\n.lzma is only useful for single files, and does not capture permissions. Use .tar.lzma" ;;
   (*) print "\nunknown archive type for archive: ${archive_name}" ;;
 esac
+
+# }

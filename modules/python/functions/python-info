@@ -7,6 +7,8 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
+# function python-info {
+
 local virtualenv_format
 local virtualenv_formatted
 
@@ -27,3 +29,5 @@ if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
   zformat -f virtualenv_formatted "$virtualenv_format" "v:${CONDA_DEFAULT_ENV:t}"
   python_info[virtualenv]="$virtualenv_formatted"
 fi
+
+# }
