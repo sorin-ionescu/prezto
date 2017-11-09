@@ -20,6 +20,9 @@ if (( $+commands[rvm-prompt] )); then
   version="$(rvm-prompt)"
 elif (( $+commands[rbenv] )); then
   version="$(rbenv version-name)"
+  if [[ $version == "system" ]]; then
+    version=""
+  fi
 elif (( $+commands[ruby] )); then
   version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
 fi
