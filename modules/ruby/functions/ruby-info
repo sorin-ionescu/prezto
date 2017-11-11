@@ -19,7 +19,7 @@ unset ruby_info
 typeset -gA ruby_info
 
 if (( $+commands[rvm-prompt] )); then
-  raw_output=($(rvm-prompt v g | tr '@' ' '))
+  raw_output=($(rvm-prompt s v p g | tr '@' ' '))
   version=$raw_output[1]
   gemset=$raw_output[2]
 elif (( $+commands[rbenv] )); then
