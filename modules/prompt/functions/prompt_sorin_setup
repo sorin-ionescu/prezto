@@ -75,10 +75,10 @@ function prompt_sorin_async_tasks {
   fi
 
   # Kill the old process of slow commands if it is still running.
-  async_flush_jobs async_sorin_git
+  async_flush_jobs prompt_sorin
 
   # Compute slow commands in the background.
-  async_job async_sorin_git prompt_sorin_async_git "$PWD"
+  async_job prompt_sorin prompt_sorin_async_git "$PWD"
 }
 
 function prompt_sorin_precmd {
