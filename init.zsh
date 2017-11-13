@@ -72,35 +72,57 @@ function zprezto-update {
 # Loads Prezto modules.
 function pmodload {
   local -a pmodules
+  local -a pmodule_dirs
+  local -a locations
   local pmodule
+  local pmodule_location
   local pfunction_glob='^([_.]*|prompt_*_setup|README*|*~)(-.N:t)'
+
+  # Load in any additional directories and warn if they don't exist
+  zstyle -a ':prezto:load' pmodule-dirs 'user_pmodule_dirs'
+  for user_dir in "$user_pmodule_dirs[@]"; do
+    if [[ ! -d "$user_dir" ]]; then
+      echo "$0: Missing user module dir: $user_dir"
+    fi
+  done
+
+  pmodule_dirs=("$ZPREZTODIR/modules" "$ZPREZTODIR/contrib" "$user_pmodule_dirs[@]")
 
   # $argv is overridden in the anonymous function.
   pmodules=("$argv[@]")
-
-  # Add functions to $fpath.
-  fpath=(${pmodules:+$ZPREZTODIR/modules/${^pmodules}/functions(/FN)} $fpath)
-
-  function {
-    local pfunction
-
-    # Extended globbing is needed for listing autoloadable function directories.
-    setopt LOCAL_OPTIONS EXTENDED_GLOB
-
-    # Load Prezto functions.
-    for pfunction in $ZPREZTODIR/modules/${^pmodules}/functions/$~pfunction_glob; do
-      autoload -Uz "$pfunction"
-    done
-  }
 
   # Load Prezto modules.
   for pmodule in "$pmodules[@]"; do
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
       continue
-    elif [[ ! -d "$ZPREZTODIR/modules/$pmodule" ]]; then
-      print "$0: no such module: $pmodule" >&2
-      continue
     else
+      locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(/FN)})
+      if (( ${#locations} > 1 )); then
+        print "$0: conflicting module locations: $locations"
+        continue
+      elif (( ${#locations} < 1 )); then
+        print "$0: no such module: $pmodule"
+        continue
+      fi
+
+      # Grab the full path to this module
+      pmodule_location=${locations[1]}
+
+      # Add functions to $fpath.
+      fpath=(${pmodule_location}/functions(/FN) $fpath)
+
+      function {
+        local pfunction
+
+        # Extended globbing is needed for listing autoloadable function directories.
+        setopt LOCAL_OPTIONS EXTENDED_GLOB
+
+        # Load Prezto functions.
+        for pfunction in ${pmodule_location}/functions/$~pfunction_glob; do
+          autoload -Uz "$pfunction"
+        done
+      }
+
       if [[ -s "$ZPREZTODIR/modules/$pmodule/init.zsh" ]]; then
         source "$ZPREZTODIR/modules/$pmodule/init.zsh"
       fi
@@ -109,7 +131,7 @@ function pmodload {
         zstyle ":prezto:module:$pmodule" loaded 'yes'
       else
         # Remove the $fpath entry.
-        fpath[(r)${ZPREZTODIR}/modules/${pmodule}/functions]=()
+        fpath[(r)${pmodule_location}/functions]=()
 
         function {
           local pfunction
@@ -119,7 +141,7 @@ function pmodload {
           setopt LOCAL_OPTIONS EXTENDED_GLOB
 
           # Unload Prezto functions.
-          for pfunction in $ZPREZTODIR/modules/$pmodule/functions/$~pfunction_glob; do
+          for pfunction in ${pmodule_location}/functions/$~pfunction_glob; do
             unfunction "$pfunction"
           done
         }
