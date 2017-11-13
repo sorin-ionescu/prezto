@@ -96,8 +96,8 @@ accompanying README files to learn of what is available.
   2. Additional module directories can be added to the
      `:prezto:load:pmodule-dirs` setting in *~/.zpreztorc*.
 
-    Note that module names need to be unique or they will cause an error when
-    loading.
+     Note that module names need to be unique or they will cause an error when
+     loading.
 
      ```console
      zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
