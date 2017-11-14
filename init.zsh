@@ -96,7 +96,7 @@ function pmodload {
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
       continue
     else
-      locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(/FN)})
+      locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
       if (( ${#locations} > 1 )); then
         print "$0: conflicting module locations: $locations"
         continue
