@@ -211,6 +211,14 @@ zle -N expand-dot-to-parent-directory-path
 function expand-or-complete-with-indicator {
   local indicator
   zstyle -s ':prezto:module:editor:info:completing' format 'indicator'
+
+  # This is included to work around a bug in zsh which shows up when interacting
+  # with multi-line prompts.
+  if [[ -z "$indicator" ]]; then
+    zle expand-or-complete
+    return
+  fi
+
   print -Pn "$indicator"
   zle expand-or-complete
   zle redisplay
