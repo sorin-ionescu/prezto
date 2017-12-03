@@ -125,6 +125,8 @@ function pmodload {
 
       if [[ -s "${pmodule_location}/init.zsh" ]]; then
         source "${pmodule_location}/init.zsh"
+      elif [[ -s "${pmodule_location}/${pmodule}.plugin.zsh" ]]; then
+        source "${pmodule_location}/${pmodule}.plugin.zsh"
       fi
 
       if (( $? == 0 )); then
