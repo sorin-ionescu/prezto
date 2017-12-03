@@ -36,7 +36,7 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Set the the list of directories that cd searches.
+# Set the list of directories that cd searches.
 # cdpath=(
 #   $cdpath
 # )
@@ -81,7 +81,6 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 
 
 export GOPATH=/Users/ali
-#export GHSYNC_DIR='~/githubsync/'
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export RBENV_ROOT=/usr/local/var/rbenv
 

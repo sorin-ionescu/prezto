@@ -8,4 +8,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-_arguments '1:url:' && return 0
+local service="$service"
+
+zstyle ":completion:*:${service}:*:prefixes" ignored-patterns '^http(|s)://'
+zstyle ":completion:*:${service}:*:hosts" ignored-patterns '^*github.com'
+
+_arguments '1::GitHub URL:_urls' '2::code:' && return 0

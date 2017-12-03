@@ -54,4 +54,4 @@ fi
 alias deb-build='time dpkg-buildpackage -rfakeroot -us -uc'
 
 # Removes all kernel images and headers, except for the ones in use.
-alias deb-kclean='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea) ?not(~n`uname -r`))"'
+alias deb-kclean='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea) ?not(~n$(uname -r)))"'

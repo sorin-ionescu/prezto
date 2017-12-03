@@ -6,6 +6,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function ruby-info {
+
 local version
 local version_format
 local version_formatted
@@ -18,6 +20,9 @@ if (( $+commands[rvm-prompt] )); then
   version="$(rvm-prompt)"
 elif (( $+commands[rbenv] )); then
   version="$(rbenv version-name)"
+  if [[ $version == "system" ]]; then
+    version=""
+  fi
 elif (( $+commands[ruby] )); then
   version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
 fi
@@ -28,3 +33,5 @@ if [[ -n "$version" ]]; then
   zformat -f version_formatted "$version_format" "v:$version"
   ruby_info[version]="$version_formatted"
 fi
+
+# }
