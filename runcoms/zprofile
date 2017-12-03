@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
 #
@@ -44,6 +44,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /Users/ali/bin
   $path
 )
 
@@ -61,3 +62,33 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+#
+# Temporary Files
+#
+
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$LOGNAME"
+  mkdir -p -m 700 "$TMPDIR"
+fi
+
+alias todo=/usr/local/bin/todo.sh
+alias t=/usr/local/bin/todo.sh
+alias ld='ls -ld */'
+
+
+TMPPREFIX="${TMPDIR%/}/zsh"
+
+
+export GOPATH=/Users/ali
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export RBENV_ROOT=/usr/local/var/rbenv
+
+export PATH=$PATH:/Users/ali/Documents/omnisharp-server/OmniSharp/bin/Debug/
+
+
+export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export MONO_GAC_PREFIX="/usr/local"
+
+export PATH=~/.local/bin:$PATH
