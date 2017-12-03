@@ -211,6 +211,14 @@ zle -N expand-dot-to-parent-directory-path
 function expand-or-complete-with-indicator {
   local indicator
   zstyle -s ':prezto:module:editor:info:completing' format 'indicator'
+
+  # This is included to work around a bug in zsh which shows up when interacting
+  # with multi-line prompts.
+  if [[ -z "$indicator" ]]; then
+    zle expand-or-complete
+    return
+  fi
+
   print -Pn "$indicator"
   zle expand-or-complete
   zle redisplay
@@ -225,6 +233,14 @@ function prepend-sudo {
   fi
 }
 zle -N prepend-sudo
+
+# Expand aliases
+function glob-alias {
+  zle _expand_alias
+  zle expand-word
+  zle magic-space
+}
+zle -N glob-alias
 
 # Reset to default key bindings.
 bindkey -d
@@ -314,18 +330,24 @@ for keymap in $unbound_keys; do
   bindkey -M viins "${keymap}" _prezto-zle-noop
   bindkey -M vicmd "${keymap}" _prezto-zle-noop
 done
-# Ctrl + Left and Ctrl + Right bindings to forward/backward word
+
+# Keybinds for all keymaps
+for keymap in 'emacs' 'viins' 'vicmd'; do
+  bindkey -M "$keymap" "$key_info[Home]" beginning-of-line
+  bindkey -M "$keymap" "$key_info[End]" end-of-line
+done
+
+# Keybinds for all vi keymaps
 for keymap in viins vicmd; do
+  # Ctrl + Left and Ctrl + Right bindings to forward/backward word
   for key in "${(s: :)key_info[ControlLeft]}"
     bindkey -M "$keymap" "$key" vi-backward-word
   for key in "${(s: :)key_info[ControlRight]}"
     bindkey -M "$keymap" "$key" vi-forward-word
 done
 
+# Keybinds for emacs and vi insert mode
 for keymap in 'emacs' 'viins'; do
-  bindkey -M "$keymap" "$key_info[Home]" beginning-of-line
-  bindkey -M "$keymap" "$key_info[End]" end-of-line
-
   bindkey -M "$keymap" "$key_info[Insert]" overwrite-mode
   bindkey -M "$keymap" "$key_info[Delete]" delete-char
   bindkey -M "$keymap" "$key_info[Backspace]" backward-delete-char
@@ -368,6 +390,9 @@ for keymap in 'emacs' 'viins'; do
 
   # Insert 'sudo ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
+
+  # control-space expands all aliases, including global
+  bindkey -M "$keymap" "$key_info[Control] " glob-alias
 done
 
 # Delete key deletes character in vimcmd cmd mode instead of weird default functionality
