@@ -11,6 +11,8 @@
 
 local virtualenv_format
 local virtualenv_formatted
+local version_format
+local version_formatted
 
 # Clean up previous $python_info.
 unset python_info
@@ -28,6 +30,12 @@ if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
   zstyle -s ':prezto:module:python:info:virtualenv' format 'virtualenv_format'
   zformat -f virtualenv_formatted "$virtualenv_format" "v:${CONDA_DEFAULT_ENV:t}"
   python_info[virtualenv]="$virtualenv_formatted"
+fi
+
+zstyle -s ':prezto:module:python:info:version' format 'version_format'
+if [[ -n "$version_format" ]]; then
+  zformat -f version_formatted "$version_format" "v:${$(python3 --version)#Python }"
+  python_info[version]="$version_formatted"
 fi
 
 # }

@@ -135,6 +135,10 @@ following style in the `prompt_name_setup` function.
 Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
 `python-info` in the `prompt_name_preexec` hook function.
 
+Similarly, you can use `:prezto:module:python:info:version:format` with `%v` for
+the version and add `$python_info[version]` to your prompt for the current
+python version/
+
 Authors
 -------
 
