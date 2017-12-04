@@ -125,6 +125,8 @@ Functions
 
 Theming
 -------
+  - `python_info[virtualenv]` exposes virtualenv name
+  - `python_info[version]` exposes virtualenv python version (eg. py-3.4.1, py-2.7.6)
 
 To display the name of the current virtual enviroment in a prompt, define the
 following style in the `prompt_name_setup` function.
@@ -133,7 +135,7 @@ following style in the `prompt_name_setup` function.
     zstyle ':prezto:module:python:info:virtualenv' format 'virtualenv:%v'
 
 Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
-`python-info` in the `prompt_name_preexec` hook function.
+`python-info` in the `prompt_name_precmd` hook function.
 
 Authors
 -------
