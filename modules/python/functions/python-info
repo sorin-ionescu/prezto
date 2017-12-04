@@ -32,10 +32,12 @@ if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
   python_info[virtualenv]="$virtualenv_formatted"
 fi
 
-zstyle -s ':prezto:module:python:info:version' format 'version_format'
-if [[ -n "$version_format" ]]; then
-  zformat -f version_formatted "$version_format" "v:${$(python3 --version)#Python }"
-  python_info[version]="$version_formatted"
+if (( $+commands[python] )); then
+  zstyle -s ':prezto:module:python:info:version' format 'version_format'
+  if [[ -n "$version_format" ]]; then
+    zformat -f version_formatted "$version_format" "v:${$(python3 --version)#Python }"
+    python_info[version]="$version_formatted"
+  fi
 fi
 
 # }
