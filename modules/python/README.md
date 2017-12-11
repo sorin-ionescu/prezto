@@ -8,11 +8,15 @@ Settings
 
 This module supports virtual environments from conda and virtualenvwrapper. By default, only virtualenvwrapper is enabled. To disable virtualenvwrapper, add the following to *zpreztorc*.
 
-    zstyle ':prezto:module:python' skip-virtualenvwrapper-init 'on'
+```sh
+zstyle ':prezto:module:python' skip-virtualenvwrapper-init 'on'
+```
 
 Conda support is enabled by adding the following to *zpreztorc*.
 
-    zstyle ':prezto:module:python' conda-init 'on'
+```sh
+zstyle ':prezto:module:python' conda-init 'on'
+```
 
 Caution: using conda and virtualenvwrapper at the same time may cause conflicts.
 
@@ -106,8 +110,16 @@ zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 (`$VIRTUALENVWRAPPER_VIRTUALENV` is explicitly set or `virtualenv` is in
 `$PATH`). This can be disabled with:
 
-```
+```sh
 zstyle ':prezto:module:python:virtualenv' initialize 'no'
+```
+
+On some systems, the `python` binary doesn't exist so in order to get
+virtualenvwrapper to work, the path needs to specified. We do our best to detect
+this, but sometimes it needs manual intervention.
+
+```sh
+zstyle ':prezto:module:python:virtualenvwrapper' python-path /opt/python3/bin/python3
 ```
 
 Aliases
