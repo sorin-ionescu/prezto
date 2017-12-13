@@ -68,5 +68,5 @@ fi
 #
 
 alias wd='wunderline'
-alias todo='wunderline --today -l Work'
+alias todo='wunderline add --today -l Work'
 alias today='wunderline today'
