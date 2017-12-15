@@ -116,16 +116,19 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
     # in '$path' or in an alternative location on a Debian based system.
     #
     # If the python-path was manually specified, use that. Otherwise, if
-    # homebrew is installed we fall back to python3 then python2 in that
-    # order. This is needed to fix an issue with virtualenvwrapper as homebrew
-    # no longer shadows the system python.
+    # homebrew is installed and it wasn't overridden via environment variable
+    # we fall back to python3 then python2 in that order. This is needed to
+    # fix an issue with virtualenvwrapper as homebrew no longer shadows the
+    # system python.
     zstyle -s ':prezto:module:python:virtualenvwrapper' python-path '_venv_python'
     if [[ -n "$_venv_python" ]]; then
       export VIRTUALENVWRAPPER_PYTHON=$_venv_python
-    elif (( $+commands[brew] )) && (( $+commands[python3] )); then
-      export VIRTUALENVWRAPPER_PYTHON=$commands[python3]
-    elif (( $+commands[brew] )) && (( $+commands[python2] )); then
-      export VIRTUALENVWRAPPER_PYTHON=$commands[python2]
+    elif [[ -z "$VIRTUALENVWRAPPER_PYTHON" ]] && (( $+commands[brew] )); then
+      if (( $+commands[python3] )); then
+        export VIRTUALENVWRAPPER_PYTHON=$commands[python3]
+      elif (( $+commands[python2] )); then
+        export VIRTUALENVWRAPPER_PYTHON=$commands[python2]
+      fi
     fi
 
     virtenv_sources=(
