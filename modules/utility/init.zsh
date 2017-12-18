@@ -41,8 +41,8 @@ alias ftp='noglob ftp'
 alias history='noglob history'
 alias locate='noglob locate'
 alias rake='noglob rake'
-alias rsync='noglob noremoteglob rsync'
-alias scp='noglob noremoteglob scp'
+alias rsync='noglob rsync'
+alias scp='noglob scp'
 alias sftp='noglob sftp'
 
 # Define general aliases.
@@ -223,6 +223,10 @@ function psu {
 # Example:
 #   - Local: '*.txt', './foo:2017*.txt', '/var/*:log.txt'
 #   - Remote: user@localhost:foo/
+#
+# NOTE: This function is buggy and is not used anywhere until we can make sure
+# it's fixed. See https://github.com/sorin-ionescu/prezto/issues/1443 and
+# https://github.com/sorin-ionescu/prezto/issues/1521 for more information.
 function noremoteglob {
   local -a argo
   local cmd="$1"
