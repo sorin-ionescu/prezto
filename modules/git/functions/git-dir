@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function git-dir {
+
 local git_dir="${$(git rev-parse --git-dir):A}"
 
 if [[ -n "$git_dir" ]]; then
@@ -14,3 +16,5 @@ else
   print "$0: not a repository: $PWD" >&2
   return 1
 fi
+
+# }

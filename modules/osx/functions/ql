@@ -5,6 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function ql {
+
 if (( $# > 0 )); then
   qlmanage -p "$@" &> /dev/null
 fi
+
+# }
