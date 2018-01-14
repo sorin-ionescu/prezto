@@ -17,7 +17,7 @@ setopt PUSHD_SILENT         # Do not print the directory stack after pushd or po
 unsetopt PUSHD_MINUS
 setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
 setopt CDABLE_VARS          # Change directory to a path stored in a variable.
-unsetopt AUTO_NAME_DIRS       # Auto add variable-stored paths to ~ list.
+unsetopt AUTO_NAME_DIRS     # Don't set auto_name_dirs because it messes up prompts
 setopt MULTIOS              # Write to multiple descriptors.
 setopt EXTENDED_GLOB        # Use extended globbing syntax.
 unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
