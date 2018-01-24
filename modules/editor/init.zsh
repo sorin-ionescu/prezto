@@ -31,8 +31,14 @@ key_info=(
   'Control'         '\C-'
   'ControlLeft'     '\e[1;5D \e[5D \e\e[D \eOd'
   'ControlRight'    '\e[1;5C \e[5C \e\e[C \eOc'
-  'ControlPageUp'   '\e[5;5~'
-  'ControlPageDown' '\e[6;5~'
+  'ControlPageUp'   '\e[5;5~ \e[5~'
+  'ControlPageDown' '\e[6;5~ \e[6~'
+  'ControlUp'       '\e[1;5A \e[A'
+  'ControlDown'     '\e[1;5B \e[B'
+  'ControlHome'     '\e[1;5H \e[1~'
+  'ControlEnd'      '\e[1;5F'
+  'ControlInsert'   '\e[2;5~'
+  'ControlDelete'   '\e[3;5~'
   'Escape'       '\e'
   'Meta'         '\M-'
   'Backspace'    "^?"
@@ -242,6 +248,26 @@ function glob-alias {
 }
 zle -N glob-alias
 
+# Moves to the beginning of the buffer (as opposed to beginning of the line)
+function zle-move-to-buffer-beginning {
+  CURSOR=0
+}
+zle -N zle-move-to-buffer-beginning
+
+# Moves to the specified line number. In vi mode number is supplied first,
+# then the bound key
+function zle-move-to-line {
+  if [[ $NUMERIC ]]; then
+    CURSOR=0
+    NUMERIC=$(( $NUMERIC - 1 ))
+    zle down-line
+  else
+    CURSOR=$(( ${#BUFFER} - 1 ))
+    zle vi-beginning-of-line
+  fi
+}
+zle -N zle-move-to-line
+
 # Reset to default key bindings.
 bindkey -d
 
@@ -295,6 +321,15 @@ else
   bindkey -M vicmd "?" history-incremental-search-backward
   bindkey -M vicmd "/" history-incremental-search-forward
 fi
+
+# G Moves to the start of the last line if no numeric argument. Otherwise goes
+# to the line number. 9G goes to the 9th line. 1G to the 1st line.
+bindkey -M vicmd "G"  zle-move-to-line
+
+# By default "gg" is bound to beginning-of-buffer-or-history for viins, which
+# causes inconsistent things to happen (moving to the first history entry).
+# Bind move-to-buffer-beginning so it acts more like vim
+bindkey -M vicmd "gg" zle-move-to-buffer-beginning
 
 #
 # Emacs and Vi Key Bindings
