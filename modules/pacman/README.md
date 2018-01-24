@@ -14,7 +14,7 @@ options are pacman compatible).
 
 Please note that installing packages with an AUR Helper is not officially
 supported by Archlinux. It is currently recommended to manually build AUR
-packages using the [provided instructions][3]. The [aurtools][4] project has a
+packages using the [provided instructions][3]. The [aurutils][4] project has a
 set of small utilities to make this easier.
 
 To enable a Pacman frontend, add the following line to *zpreztorc*, substituting
