@@ -23,10 +23,6 @@ zstyle -s ':prezto:module:pacman' frontend '_pacman_frontend'
 
 if (( $+commands[$_pacman_frontend] )); then
   alias pacman="$_pacman_frontend"
-
-  if [[ -s "${0:h}/${_pacman_frontend}.zsh" ]]; then
-    source "${0:h}/${_pacman_frontend}.zsh"
-  fi
 else
   _pacman_frontend='pacman'
   _pacman_sudo='sudo '
@@ -80,5 +76,13 @@ fi
 # Synchronizes the local package database against the repositories then
 # upgrades outdated packages.
 alias pacU="${_pacman_sudo}${_pacman_frontend} --sync --refresh --sysupgrade"
+
+function aurget {
+  local target_dir="$1"
+  if [[ -n "$2" ]]; then
+    target_dir="$2"
+  fi
+  git clone "https://aur.archlinux.org/$1" "$target_dir"
+}
 
 unset _pacman_{frontend,sudo}
