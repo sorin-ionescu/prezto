@@ -15,7 +15,6 @@ fi
 #
 
 setopt BEEP                     # Beep on error in line editor.
-setopt INTERACTIVE_COMMENTS     # Enable comments in interactive shell.
 
 #
 # Variables
