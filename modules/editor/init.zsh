@@ -243,6 +243,9 @@ zle -N glob-alias
 
 # Toggle the comment character at the start of the line. This is meant to work
 # around a buggy implementation of pound-insert in zsh.
+#
+# This is currently only used for the emacs keys because vi-pound-insert has
+# been reported to work properly.
 function pound-toggle {
   if [[ "$BUFFER" = '#'* ]]; then
     # Because of an oddity in how zsh handles the cursor when the buffer size
@@ -294,7 +297,9 @@ if (( $+widgets[history-incremental-pattern-search-backward] )); then
     history-incremental-pattern-search-forward
 fi
 
-# Toggle comment at the start of the line.
+# Toggle comment at the start of the line. Note that we use pound-toggle which
+# is similar to pount insert, but meant to work around some issues that were
+# being seen in iTerm.
 bindkey -M emacs "$key_info[Escape];" pound-toggle
 
 
@@ -316,6 +321,9 @@ else
   bindkey -M vicmd "?" history-incremental-search-backward
   bindkey -M vicmd "/" history-incremental-search-forward
 fi
+
+# Toggle comment at the start of the line.
+bindkey -M vicmd "#" vi-pound-insert
 
 #
 # Emacs and Vi Key Bindings
