@@ -1,0 +1,53 @@
+local path_pbuilder usage opt_dist opt_safe cb_opt
+
+: ${path_pbuilder:=/var/cache/pbuilder}
+
+usage="$(
+cat <<EOF
+usage: $0 [-d dist] [-s] [command ...]
+
+Start cowbuilder with shell for named distribution.
+
+options:
+  -d dist  Start cowbuilder for distribution dist
+           When environment variable DIST is set this option can be
+           omitted.
+  -s       Safe changes on exit
+EOF
+)"
+
+if [[ -n $DIST ]]; then
+  opt_dist="-$DIST"
+else
+  opt_dist=
+fi
+
+while getopts ':d:s' opt; do
+  case "$opt" in
+    d)  opt_dist="-$OPTARG"
+        ;;
+    s)  opt_safe=--safe-after-login
+        ;;
+    :)
+        print "$0: option requires an argument: $OPTARG" >&2
+        print "$usage" >&2
+        return 1
+        ;;
+    \?) print "$0: unknown option: $OPTARG" >&2
+        print "$usage" >&2
+        return 1
+        ;;
+  esac
+done
+shift $(( $OPTIND - 1 ))
+
+if [[ -n $opt_safe ]]; then
+  cb_opt=$opt_safe "$@"
+else
+  cb_opt="$@"
+fi
+
+sudo -E cowbuilder \
+  --bindmount $HOME \
+  --login \
+  --basepath=${path_pbuilder}/base${opt_dist}.cow $cb_opt
