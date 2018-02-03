@@ -259,6 +259,10 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gRs` displays information about a given remote.
   - `gRb` opens a remote on [GitHub][3] in the default browser.
 
+### Stage
+
+  - `gap` stage changes interactively
+
 ### Stash
 
   - `gs` stashes the changes of the dirty working directory.
