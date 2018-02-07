@@ -17,6 +17,19 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 unset min_zsh_version
 
+typeset -F SECONDS
+
+function zdebuglog {
+  if ! zstyle -t ":prezto" debug; then
+    echo no debug
+    return
+  fi
+
+  local format="$1"
+  shift
+  printf "[%f] $format\n" $SECONDS "$@"
+}
+
 # zprezto convenience updater
 # The function is surrounded by ( ) instead of { } so it starts in a subshell
 # and won't affect the environment of the calling shell
@@ -93,7 +106,9 @@ function pmodload {
 
   # Load Prezto modules.
   for pmodule in "$pmodules[@]"; do
+    zdebuglog "Started loading %q" $pmodule
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
+      zdebuglog "Module %q already loaded" $pmodule
       continue
     else
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
@@ -131,6 +146,7 @@ function pmodload {
 
       if (( $? == 0 )); then
         zstyle ":prezto:module:$pmodule" loaded 'yes'
+        zdebuglog "Module %q loaded" $pmodule
       else
         # Remove the $fpath entry.
         fpath[(r)${pmodule_location}/functions]=()
@@ -148,6 +164,7 @@ function pmodload {
           done
         }
 
+        zdebuglog "Module %q failed to load" $pmodule
         zstyle ":prezto:module:$pmodule" loaded 'no'
       fi
     fi
