@@ -17,11 +17,12 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 unset min_zsh_version
 
+# Change the resolution of the SECONDS variable to be more useful for debugging.
 typeset -F SECONDS
 
+# logging convenience, mostly meant for debugging performance issues.
 function pdebuglog {
   if ! zstyle -t ":prezto" debug; then
-    echo no debug
     return
   fi
 
