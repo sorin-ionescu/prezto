@@ -19,7 +19,7 @@ unset min_zsh_version
 
 typeset -F SECONDS
 
-function zdebuglog {
+function pdebuglog {
   if ! zstyle -t ":prezto" debug; then
     echo no debug
     return
@@ -106,9 +106,9 @@ function pmodload {
 
   # Load Prezto modules.
   for pmodule in "$pmodules[@]"; do
-    zdebuglog "Started loading %q" $pmodule
+    pdebuglog "Started loading %q" $pmodule
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
-      zdebuglog "Module %q already loaded" $pmodule
+      pdebuglog "Module %q already loaded" $pmodule
       continue
     else
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
@@ -146,7 +146,7 @@ function pmodload {
 
       if (( $? == 0 )); then
         zstyle ":prezto:module:$pmodule" loaded 'yes'
-        zdebuglog "Module %q loaded" $pmodule
+        pdebuglog "Module %q loaded" $pmodule
       else
         # Remove the $fpath entry.
         fpath[(r)${pmodule_location}/functions]=()
@@ -164,7 +164,7 @@ function pmodload {
           done
         }
 
-        zdebuglog "Module %q failed to load" $pmodule
+        pdebuglog "Module %q failed to load" $pmodule
         zstyle ":prezto:module:$pmodule" loaded 'no'
       fi
     fi
