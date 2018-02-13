@@ -6,8 +6,8 @@ the [Fish shell][2]'s history search feature, where the user can type in any
 part of a previously entered command and press up and down to cycle through
 matching commands.
 
-If this module is used in conjuncture with the *syntax-highlighting* module, it
-must be loaded **after** it.
+If this module is used in conjunction with the *syntax-highlighting* module,
+this module must be loaded **after** the *syntax-highlighting* module.
 
 Contributors
 ------------
@@ -24,7 +24,9 @@ Settings
 To enable case-sensitivity for this module only, add the following line to
 *zpreztorc*:
 
-    zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
+```sh
+zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
+```
 
 ### Highlighting
 
@@ -34,19 +36,27 @@ positive results.
 To enable highlighting for this module only, add the following line to
 *zpreztorc*:
 
-    zstyle ':prezto:module:history-substring-search' color 'yes'
+```sh
+zstyle ':prezto:module:history-substring-search' color 'yes'
+```
 
 To set the query found color, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:history-substring-search:color' found ''
+```sh
+zstyle ':prezto:module:history-substring-search:color' found ''
+```
 
 To set the query not found color, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:history-substring-search:color' not-found ''
+```sh
+zstyle ':prezto:module:history-substring-search:color' not-found ''
+```
 
 To set the search globbing flags, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:history-substring-search' globbing-flags ''
+```sh
+zstyle ':prezto:module:history-substring-search' globbing-flags ''
+```
 
 Authors
 -------

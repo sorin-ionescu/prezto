@@ -48,16 +48,27 @@ alias sftp='noglob sftp'
 # Define general aliases.
 alias _='sudo'
 alias b='${(z)BROWSER}'
-alias cp="${aliases[cp]:-cp} -i"
+
+alias diffu="diff --unified"
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
-alias ln="${aliases[ln]:-ln} -i"
 alias mkdir="${aliases[mkdir]:-mkdir} -p"
-alias mv="${aliases[mv]:-mv} -i"
 alias p='${(z)PAGER}'
 alias po='popd'
 alias pu='pushd'
-alias rm="${aliases[rm]:-rm} -i"
+alias sa='alias | grep -i'
 alias type='type -a'
+
+# Safe ops. Ask the user before doing anything destructive.
+alias rmi="${aliases[rm]:-rm} -i"
+alias mvi="${aliases[mv]:-mv} -i"
+alias cpi="${aliases[cp]:-cp} -i"
+alias lni="${aliases[ln]:-ln} -i"
+if zstyle -T ':prezto:module:utility' safe-ops; then
+  alias rm='rmi'
+  alias mv='mvi'
+  alias cp='cpi'
+  alias ln='lni'
+fi
 
 # ls
 if is-callable 'dircolors'; then
@@ -140,25 +151,30 @@ elif (( $+commands[wget] )); then
 fi
 
 # Resource Usage
-alias df='df -kh'
+if (( $+commands[pydf] )); then
+  alias df=pydf
+else
+  alias df='df -kh'
+fi
+
 alias du='du -kh'
 
-if (( $+commands[htop] )); then
-  alias top=htop
+if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
+  alias topc='top -o cpu'
+  alias topm='top -o vsize'
 else
-  if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
-    alias topc='top -o cpu'
-    alias topm='top -o vsize'
-  else
-    alias topc='top -o %CPU'
-    alias topm='top -o %MEM'
-  fi
+  alias topc='top -o %CPU'
+  alias topm='top -o %MEM'
 fi
 
 # Miscellaneous
 
 # Serves a directory via HTTP.
-alias http-serve='python -m SimpleHTTPServer'
+if (( $+commands[python3] )); then
+  alias http-serve='python3 -m http.server'
+else
+  alias http-serve='python -m SimpleHTTPServer'
+fi
 
 #
 # Functions
@@ -197,4 +213,28 @@ function find-exec {
 # Displays user owned processes status.
 function psu {
   ps -U "${1:-$LOGNAME}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
+}
+
+# Enables globbing selectively on path arguments.
+# Globbing is enabled on local paths (starting in '/' and './') and disabled
+# on remote paths (containing ':' but not starting in '/' and './'). This is
+# useful for programs that have their own globbing for remote paths.
+# Currently, this is used by default for 'rsync' and 'scp'.
+# Example:
+#   - Local: '*.txt', './foo:2017*.txt', '/var/*:log.txt'
+#   - Remote: user@localhost:foo/
+#
+# NOTE: This function is buggy and is not used anywhere until we can make sure
+# it's fixed. See https://github.com/sorin-ionescu/prezto/issues/1443 and
+# https://github.com/sorin-ionescu/prezto/issues/1521 for more information.
+function noremoteglob {
+  local -a argo
+  local cmd="$1"
+  for arg in ${argv:2}; do case $arg in
+    ( ./* ) argo+=( ${~arg} ) ;; # local relative, glob
+    (  /* ) argo+=( ${~arg} ) ;; # local absolute, glob
+    ( *:* ) argo+=( ${arg}  ) ;; # remote, noglob
+    (  *  ) argo+=( ${~arg} ) ;; # default, glob
+  esac; done
+  command $cmd "${(@)argo}"
 }

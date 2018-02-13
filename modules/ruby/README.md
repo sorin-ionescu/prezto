@@ -8,7 +8,7 @@ Local Gem Installation
 ----------------------
 
 When a Ruby version manager is not detected, local gems are installed in
-*~/.gems*; otherwise, they are installed according to the manager.
+`~/.gems`; otherwise, they are installed according to the manager.
 
 RVM
 ---
@@ -35,7 +35,7 @@ not known to cause conflicts with shell scripts.
 chruby
 ------
 
-Yet another alternative is [chruby][6], which is simpler than both RVM and
+Yet another alternative is [chruby][4], which is simpler than both RVM and
 rbenv.
 
 ### Settings
@@ -43,15 +43,17 @@ rbenv.
 #### Auto-Switch
 
 To enable auto switching the Ruby version on directory change based on the
-.ruby-version file, add the following line to *zpreztorc*:
+`.ruby-version` file, add the following line to [`zpreztorc`][5]:
 
-    zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+```sh
+zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+```
 
 Bundler
 -------
 
 Manage gems that are not meant to be used as commands, such as application
-dependencies, with [Bundler][4].
+dependencies, with [Bundler][6].
 
 Aliases
 -------
@@ -63,15 +65,16 @@ Aliases
 ### Bundler
 
   - `rbb` manages ruby dependencies (`bundle`).
+  - `rbbc` cleans up unused gems in your bundler directory.
   - `rbbe` executes a script in the context of the current bundle.
-  - `rbbi` installs the gems specified in the *Gemfile* in *vendor/bundle*.
+  - `rbbi` installs the gems specified in the `Gemfile` in `vendor/bundle`.
   - `rbbI` installs the following:
-    - gems specified in the *Gemfile* in *vendor/bundle*.
-    - packages the gems into *vendor/cache*.
-    - appends bundler directories to  *.gitignore*.
+    - gems specified in the `Gemfile` in `vendor/bundle`.
+    - packages the gems into `vendor/cache`.
+    - appends bundler directories to  `.gitignore`.
   - `rbbl` lists all gems in the current bundle.
   - `rbbo` opens an installed gem in the editor.
-  - `rbbp` packages gem files into *vendor/cache*.
+  - `rbbp` packages gem files into `vendor/cache`.
   - `rbbu` updates gems to their latest version.
 
 Functions
@@ -96,13 +99,14 @@ Then add `$ruby_info[version]` to `$PROMPT` or `$RPROMPT` and call
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][5].*
+*The authors of this module should be contacted via the [issue tracker][7].*
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://www.ruby-lang.org
 [2]: https://rvm.io
 [3]: https://github.com/sstephenson/rbenv
-[4]: http://gembundler.com
-[5]: https://github.com/sorin-ionescu/prezto/issues
-[6]: https://github.com/postmodern/chruby
+[4]: https://github.com/postmodern/chruby
+[5]: https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zpreztorc
+[6]: http://gembundler.com
+[7]: https://github.com/sorin-ionescu/prezto/issues

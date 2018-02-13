@@ -10,6 +10,13 @@ nvm
 [nvm][5] allows for managing multiple, isolated Node.js installations in the
 home directory.
 
+nodenv
+------
+
+[nodenv][6] does one thing well. nodenv is concerned solely with switching
+Node versions. It's simple and predictable, Just Works, and is rock solid in
+production. nodenv is forked from the popular [rbenv][7].
+
 Functions
 ---------
 
@@ -24,8 +31,10 @@ Theming
 To display the version number of the current Node.js version, define the
 following style inside the `prompt_name_setup` function.
 
-    # %v - Node.js version.
-    zstyle ':prezto:module:node:info:version' format 'version:%v'
+```sh
+# %v - Node.js version.
+zstyle ':prezto:module:node:info:version' format 'version:%v'
+```
 
 Then add `$node_info[version]` to either `$PROMPT` or `$RPROMPT` and call
 `node-info` in `prompt_name_preexec` hook function.
@@ -43,3 +52,5 @@ Authors
 [3]: http://nodejs.org/api
 [4]: https://github.com/sorin-ionescu/prezto/issues
 [5]: https://github.com/creationix/nvm
+[6]: https://github.com/nodenv/nodenv
+[7]: https://github.com/sstephenson/rbenv

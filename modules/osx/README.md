@@ -3,6 +3,19 @@ OSX
 
 Defines [Mac OS X][1] aliases and functions.
 
+Settings
+--------
+
+### Dash Keyword
+
+To change the keyword used by `mand` to open man pages in [_Dash.app_][2] from
+its default value of 'manpages', add the following line in *zpreztorc* and
+replace the **keyword** with the one configured in [_Dash.app_][2].
+
+```sh
+zstyle ':prezto:module:osx:man' dash-keyword 'keyword'
+```
+
 Aliases
 -------
 

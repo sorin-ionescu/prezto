@@ -9,16 +9,17 @@
 # Load dependencies.
 pmodload 'editor'
 
-# Return if requirements are not found.
+# If the command doesn't exist externally, we need to fall back to the bundled
+# submodule.
 if (( ! $+commands[fasd] )); then
-  return 1
+  source "${0:h}/external/fasd" || return 1
 fi
 
 #
 # Initialization
 #
 
-cache_file="${0:h}/cache.zsh"
+cache_file="${TMPDIR:-/tmp}/prezto-fasd-cache.$UID.zsh"
 if [[ "${commands[fasd]}" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
   # Set the base init arguments.
   init_args=(zsh-hook)

@@ -12,6 +12,12 @@ module.
 The Prezto Fasd configuration differs from the default. The default aliases have
 been disabled.
 
+Installation
+------------
+
+`fasd` is bundled with prezto as a git submodule. Alternatively, you can manually install `fasd`.
+If a manual install is found, it will be used instead of the bundled version.
+
 Aliases
 -------
 

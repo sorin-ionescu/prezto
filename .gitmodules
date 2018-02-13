@@ -1,3 +1,6 @@
+[submodule "modules/autosuggestions/external"]
+	path = modules/autosuggestions/external
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "modules/history-substring-search/external"]
 	path = modules/history-substring-search/external
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
@@ -16,6 +19,12 @@
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
-[submodule "modules/autosuggestions/external"]
-	path = modules/autosuggestions/external
-	url = https://github.com/tarruda/zsh-autosuggestions
+[submodule "modules/fasd/external"]
+	path = modules/fasd/external
+	url = https://github.com/clvv/fasd.git
+[submodule "modules/prompt/external/async"]
+	path = modules/prompt/external/async
+	url = https://github.com/mafredri/zsh-async.git
+[submodule "modules/prompt/external/powerlevel9k"]
+	path = modules/prompt/external/powerlevel9k
+	url = https://github.com/bhilburn/powerlevel9k.git

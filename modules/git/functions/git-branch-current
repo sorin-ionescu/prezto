@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function git-branch-current {
+
 if ! git rev-parse 2> /dev/null; then
   print "$0: not a repository: $PWD" >&2
   return 1
@@ -18,3 +20,5 @@ if [[ -n "$ref" ]]; then
 else
   return 1
 fi
+
+# }

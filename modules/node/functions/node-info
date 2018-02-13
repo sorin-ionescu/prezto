@@ -6,6 +6,8 @@
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
 #
 
+# function node-info {
+
 local version
 local version_format
 local version_formatted
@@ -15,6 +17,8 @@ typeset -gA node_info
 
 if (( $+functions[nvm_version] )); then
   version="${$(nvm_version)#v}"
+elif (( $+commands[nodenv] )); then
+  version="${${$(nodenv version)#v}[(w)0]}"
 fi
 
 if [[ "$version" != (none|) ]]; then
@@ -22,3 +26,5 @@ if [[ "$version" != (none|) ]]; then
   zformat -f version_formatted "$version_format" "v:$version"
   node_info[version]="$version_formatted"
 fi
+
+# }

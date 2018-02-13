@@ -76,7 +76,7 @@ function prompt_cloud_preview {
 function prompt_cloud_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
 
   # Set the theme prefix to a cloud or to the user's given characters.
   if [[ -n "$1" ]]; then

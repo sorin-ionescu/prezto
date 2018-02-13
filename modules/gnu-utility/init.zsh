@@ -42,13 +42,13 @@ _gnu_utility_cmds=(
   'libtool' 'libtoolize'
 
   # Miscellaneous
-  'getopt' 'grep' 'indent' 'sed' 'tar' 'time' 'units' 'which'
+  'getopt' 'grep' 'indent' 'make' 'sed' 'tar' 'time' 'units' 'which'
 )
 
 # Wrap GNU utilities in functions.
 for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
   _gnu_utility_pcmd="${_gnu_utility_p}${_gnu_utility_cmd}"
-  if (( ${+commands[${_gnu_utility_pcmd}]} )); then
+  if (( ${+commands[${_gnu_utility_pcmd}]} && ! ${+builtins[${_gnu_utility_cmd}]} )); then
     eval "
       function ${_gnu_utility_cmd} {
         '${commands[${_gnu_utility_pcmd}]}' \"\$@\"

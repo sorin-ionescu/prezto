@@ -32,44 +32,53 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_sorin_pwd {
-  local pwd="${PWD/#$HOME/~}"
+function prompt_sorin_async_callback {
+  case $1 in
+    prompt_sorin_async_git)
+      # We can safely split on ':' because it isn't allowed in ref names.
+      IFS=':' read _git_target _git_post_target <<<"$3"
 
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_sorin_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-  fi
+      # The target actually contains 3 space separated possibilities, so we need to
+      # make sure we grab the first one.
+      _git_target=$(coalesce ${(@)${(z)_git_target}})
+
+      if [[ -z "$_git_target" ]]; then
+        # No git target detected, flush the git fragment and redisplay the prompt.
+        if [[ -n "$_prompt_sorin_git" ]]; then
+          _prompt_sorin_git=''
+          zle && zle reset-prompt
+        fi
+      else
+        # Git target detected, update the git fragment and redisplay the prompt.
+        _prompt_sorin_git="${_git_target}${_git_post_target}"
+        zle && zle reset-prompt
+      fi
+      ;;
+  esac
 }
 
-function prompt_sorin_git_info {
-  if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    # Append Git status.
-    if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
-      alias typeset='typeset -g'
-      source "$_prompt_sorin_precmd_async_data"
-      RPROMPT+='${git_info:+${(e)git_info[status]}}'
-      unalias typeset
-    fi
-
-    # Reset PID.
-    _prompt_sorin_precmd_async_pid=0
-
-    # Redisplay prompt.
-    zle && zle reset-prompt
-  fi
-}
-
-function prompt_sorin_precmd_async {
-  # Get Git repository information.
+function prompt_sorin_async_git {
+  cd -q "$1"
   if (( $+functions[git-info] )); then
     git-info
-    typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
+    print ${git_info[status]}
+  fi
+}
+
+function prompt_sorin_async_tasks {
+  # Initialize async worker. This needs to be done here and not in
+  # prompt_sorin_setup so the git formatting can be overridden by other prompts.
+  if (( !${prompt_prezto_async_init:-0} )); then
+    async_start_worker prompt_sorin -n
+    async_register_callback prompt_sorin prompt_sorin_async_callback
+    typeset -g prompt_prezto_async_init=1
   fi
 
-  # Signal completion to parent process.
-  kill -WINCH $$
+  # Kill the old process of slow commands if it is still running.
+  async_flush_jobs prompt_sorin
+
+  # Compute slow commands in the background.
+  async_job prompt_sorin prompt_sorin_async_git "$PWD"
 }
 
 function prompt_sorin_precmd {
@@ -77,31 +86,36 @@ function prompt_sorin_precmd {
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  prompt_sorin_pwd
+  _prompt_sorin_pwd=$(prompt-pwd)
 
-  # Define prompts.
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
-
-  # Kill the old process of slow commands if it is still running.
-  if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    kill -KILL "$_prompt_sorin_precmd_async_pid" &>/dev/null
+  # Handle updating git data. We also clear the git prompt data if we're in a
+  # different git root now.
+  if (( $+functions[git-dir] )); then
+    local new_git_root="$(git-dir 2> /dev/null)"
+    if [[ $new_git_root != $_sorin_cur_git_root ]]; then
+      _prompt_sorin_git=''
+      _sorin_cur_git_root=$new_git_root
+    fi
   fi
 
-  # Compute slow commands in the background.
-  trap prompt_sorin_git_info WINCH
-  prompt_sorin_precmd_async &!
-  _prompt_sorin_precmd_async_pid=$!
+  # Run python info (this should be fast and not require any async)
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
+
+  prompt_sorin_async_tasks
 }
 
 function prompt_sorin_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
   _prompt_sorin_precmd_async_pid=0
-  _prompt_sorin_precmd_async_data="${TMPPREFIX}-prompt_sorin_data"
+  _prompt_sorin_precmd_async_data=$(mktemp "${TMPDIR:-/tmp}/sorin-prompt-async-XXXXXXXXXX")
 
   # Load required functions.
   autoload -Uz add-zsh-hook
+  autoload -Uz async && async
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_sorin_precmd
@@ -128,11 +142,28 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{3}═%f%%b'
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
-    'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
+    'status' '%b %p %c:%s%A%B%S%a%d%m%r%U%u'
+
+  # Set up non-zero return value display
+  local show_return="✘ "
+  # Default is to show the return value
+  if zstyle -T ':prezto:module:prompt' show-return-val; then
+    show_return+='%? '
+  fi
+  # Set python-info format
+  zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7} '
+
+  # Get the async worker set up
+  _sorin_cur_git_root=''
+
+  _prompt_sorin_git=''
+  _prompt_sorin_pwd=''
 
   # Define prompts.
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
-  RPROMPT=''
+  RPROMPT='$python_info[virtualenv]${editor_info[overwrite]}%(?:: %F{1}'
+  RPROMPT+=${show_return}
+  RPROMPT+='%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_sorin_git}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
@@ -141,7 +172,7 @@ function prompt_sorin_preview {
   local +h RPROMPT=''
   local +h SPROMPT=''
 
-  editor-info 2>/dev/null
+  editor-info 2> /dev/null
   prompt_preview_theme 'sorin'
 }
 
