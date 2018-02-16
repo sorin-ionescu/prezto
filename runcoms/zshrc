@@ -12,17 +12,22 @@ fi
 
 SAVEHIST=10000
 HISTSIZE=10000
-HISTFILE=~/.zsh/zsh_history
-bindkey '\e[3~' delete-char
+HISTFILE=~/.zsh_history
 
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/nrn/x86_64/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
-export PYTHONPATH=$PYTHONPATH:"/Users/seeholzer/Documents/PhD/Projects/Bumps/Drift/nest/nest_build/lib/python2.7/site-packages"
-export DYLD_LIBRARY_PATH=:/Users/seeholzer/Documents/PhD/Projects/Bumps/Drift/nest/nest_build/lib/nest
+bindkey -e
+bindkey '^[[1;9C' forward-word
+bindkey '^[[1;9D' backward-word
+
+bindkey '^[a' beginning-of-line
+bindkey '^[e' end-of-line
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 alias ll='ls -lhA'
-alias ssh='ssh -l seeholze'
+
+# ensure osx catches ctrl commands in iterm
+# set -o emacs
 
 # why would you type 'cd dir' if you could just type 'dir'?
 setopt AUTO_CD
