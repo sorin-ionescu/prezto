@@ -46,6 +46,14 @@ To set the query found color, add the following line to *zpreztorc*:
 zstyle ':prezto:module:autosuggestions:color' found ''
 ```
 
+Troubleshooting
+---------------
+
+### Autosuggestions from previous sessions don't show up
+
+For autosuggestions from previous shell sessions to work, please make sure you
+also have the `history` module enabled.
+
 Authors
 -------
 
