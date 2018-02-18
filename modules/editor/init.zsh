@@ -127,7 +127,6 @@ function zle-reset-prompt {
       zle -R
     fi
   else
-    zle reset-prompt
     zle -R
   fi
 }
