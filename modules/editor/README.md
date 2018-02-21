@@ -26,6 +26,8 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 ### PS Context
 
+**NOTE:** *This is deprecated and will be removed in future versions.*
+
 To enable the prompt context to be set, add the following to your
 *zpreztorc*.
 
