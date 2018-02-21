@@ -151,12 +151,7 @@ elif (( $+commands[wget] )); then
 fi
 
 # Resource Usage
-if (( $+commands[pydf] )); then
-  alias df=pydf
-else
-  alias df='df -kh'
-fi
-
+alias df='df -kh'
 alias du='du -kh'
 
 if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
