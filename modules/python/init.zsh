@@ -82,6 +82,7 @@ function _python-workon-cwd {
 # Load auto workon cwd hook
 if zstyle -t ':prezto:module:python:virtualenv' auto-switch 'yes'; then
   # Auto workon when changing directory
+  autoload -Uz add-zsh-hook
   add-zsh-hook chpwd _python-workon-cwd
 fi
 
