@@ -8,7 +8,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+if ! is-true "$(command git rev-parse --is-inside-work-tree 2> /dev/null)"; then
   return 1
 fi
 
@@ -21,7 +21,7 @@ _arguments -C -s -S \
 
 case "$state" in
   (remote)
-    remotes=($(git config --get-regexp 'remote.*.url' | cut -d. -f2))
+    remotes=($(command git config --get-regexp 'remote.*.url' | cut -d. -f2))
 
     _describe -t branch 'remotes' remotes && ret=0
   ;;
@@ -29,7 +29,7 @@ case "$state" in
     remote="$words[(($CURRENT - 1))]"
 
     branches_or_tags=($(
-      git ls-remote --heads --tags "$remote" 2> /dev/null | cut -f2
+      command git ls-remote --heads --tags "$remote" 2> /dev/null | cut -f2
     ))
 
     branches=(HEAD ${${(M)branches_or_tags[@]##refs/heads/?##}##refs/heads/})
@@ -39,7 +39,7 @@ case "$state" in
     _describe -t tag 'tags' tags && ret=0
   ;;
   (file)
-    files=(${(0)"$(_call_program files git ls-files -z --exclude-standard 2> /dev/null)"})
+    files=(${(0)"$(_call_program files command git ls-files -z --exclude-standard 2> /dev/null)"})
     _wanted file expl 'file' _multi_parts - / files && ret=0
   ;;
 esac
