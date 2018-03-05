@@ -178,15 +178,15 @@ function git-info {
   typeset -gA git_info
 
   # Return if not inside a Git repository work tree.
-  if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+  if ! is-true "$(command git rev-parse --is-inside-work-tree 2> /dev/null)"; then
     return 1
   fi
 
   if (( $# > 0 )); then
     if [[ "$1" == [Oo][Nn] ]]; then
-      git config --bool prompt.showinfo true
+      command git config --bool prompt.showinfo true
     elif [[ "$1" == [Oo][Ff][Ff] ]]; then
-      git config --bool prompt.showinfo false
+      command git config --bool prompt.showinfo false
     else
       print "usage: $0 [ on | off ]" >&2
     fi
@@ -194,7 +194,7 @@ function git-info {
   fi
 
   # Return if git-info is disabled.
-  if ! is-true "${$(git config --bool prompt.showinfo):-true}"; then
+  if ! is-true "${$(command git config --bool prompt.showinfo):-true}"; then
     return 1
   fi
 
@@ -204,7 +204,7 @@ function git-info {
   # Format commit.
   zstyle -s ':prezto:module:git:info:commit' format 'commit_format'
   if [[ -n "$commit_format" ]]; then
-    commit="$(git rev-parse HEAD 2> /dev/null)"
+    commit="$(command git rev-parse HEAD 2> /dev/null)"
     if [[ -n "$commit" ]]; then
       zformat -f commit_formatted "$commit_format" "c:$commit"
     fi
@@ -213,7 +213,7 @@ function git-info {
   # Format stashed.
   zstyle -s ':prezto:module:git:info:stashed' format 'stashed_format'
   if [[ -n "$stashed_format" && -f "$(git-dir)/refs/stash" ]]; then
-    stashed="$(git stash list 2> /dev/null | wc -l | awk '{print $1}')"
+    stashed="$(command git stash list 2> /dev/null | wc -l | awk '{print $1}')"
     if [[ -n "$stashed" ]]; then
       zformat -f stashed_formatted "$stashed_format" "S:$stashed"
     fi
@@ -229,7 +229,7 @@ function git-info {
   fi
 
   # Get the branch.
-  branch="${$(git symbolic-ref HEAD 2> /dev/null)#refs/heads/}"
+  branch="${$(command git symbolic-ref HEAD 2> /dev/null)#refs/heads/}"
 
   # Format branch.
   zstyle -s ':prezto:module:git:info:branch' format 'branch_format'
@@ -240,7 +240,7 @@ function git-info {
   # Format position.
   zstyle -s ':prezto:module:git:info:position' format 'position_format'
   if [[ -z "$branch" && -n "$position_format" ]]; then
-    position="$(git describe --contains --all HEAD 2> /dev/null)"
+    position="$(command git describe --contains --all HEAD 2> /dev/null)"
     if [[ -n "$position" ]]; then
       zformat -f position_formatted "$position_format" "p:$position"
     fi
@@ -250,7 +250,7 @@ function git-info {
   zstyle -s ':prezto:module:git:info:remote' format 'remote_format'
   if [[ -n "$branch" && -n "$remote_format" ]]; then
     # Gets the remote name.
-    remote_cmd='git rev-parse --symbolic-full-name --verify HEAD@{upstream}'
+    remote_cmd='command git rev-parse --symbolic-full-name --verify HEAD@{upstream}'
     remote="${$(${(z)remote_cmd} 2> /dev/null)##refs/remotes/}"
     if [[ -n "$remote" ]]; then
       zformat -f remote_formatted "$remote_format" "R:$remote"
@@ -261,7 +261,7 @@ function git-info {
   zstyle -s ':prezto:module:git:info:behind' format 'behind_format'
   if [[ -n "$branch" && ( -n "$ahead_format" || -n "$behind_format" ) ]]; then
     # Gets the commit difference counts between local and remote.
-    ahead_and_behind_cmd='git rev-list --count --left-right HEAD...@{upstream}'
+    ahead_and_behind_cmd='command git rev-list --count --left-right HEAD...@{upstream}'
 
     # Get ahead and behind counts.
     ahead_and_behind="$(${(z)ahead_and_behind_cmd} 2> /dev/null)"
@@ -290,7 +290,7 @@ function git-info {
     if [[ -n "$indexed_format" ]]; then
       ((
         indexed+=$(
-          git diff-index \
+          command git diff-index \
             --no-ext-diff \
             --name-only \
             --cached \
@@ -310,7 +310,7 @@ function git-info {
     if [[ -n "$unindexed_format" ]]; then
       ((
         unindexed+=$(
-          git diff-files \
+          command git diff-files \
             --no-ext-diff \
             --name-only \
             --ignore-submodules=${ignore_submodules:-none} \
@@ -328,7 +328,7 @@ function git-info {
     if [[ -n "$untracked_format" ]]; then
       ((
         untracked+=$(
-          git ls-files \
+          command git ls-files \
             --other \
             --exclude-standard \
             2> /dev/null \
@@ -343,7 +343,7 @@ function git-info {
     (( dirty = indexed + unindexed + untracked ))
   else
     # Use porcelain status for easy parsing.
-    status_cmd="git status --porcelain --ignore-submodules=${ignore_submodules:-none}"
+    status_cmd="command git status --porcelain --ignore-submodules=${ignore_submodules:-none}"
 
     # Get current status.
     while IFS=$'\n' read line; do

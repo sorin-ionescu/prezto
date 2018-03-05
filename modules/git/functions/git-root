@@ -7,7 +7,7 @@
 
 # function git-root {
 
-local root="$(git rev-parse --show-toplevel 2> /dev/null)"
+local root="$(command git rev-parse --show-toplevel 2> /dev/null)"
 
 if [[ -n "$root" ]]; then
   print "$root"

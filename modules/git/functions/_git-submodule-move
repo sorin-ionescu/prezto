@@ -8,7 +8,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+if ! is-true "$(command git rev-parse --is-inside-work-tree 2> /dev/null)"; then
   return 1
 fi
 
@@ -25,7 +25,7 @@ case "$state" in
     while IFS=$'\n' read submodule; do
       submodules+=("$submodule")
     done < <(
-      git config --file "$(git-root)/.gitmodules" --list \
+      command git config --file "$(git-root)/.gitmodules" --list \
         | grep '.path=' \
         | cut -d= -f2-
     )
