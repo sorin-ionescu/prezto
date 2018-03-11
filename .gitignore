@@ -2,3 +2,4 @@
 *.zwc.old
 modules/*/cache.zsh
 contrib
+.DS_Store
