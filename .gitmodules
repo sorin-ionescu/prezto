@@ -28,3 +28,6 @@
 [submodule "modules/prompt/external/powerlevel9k"]
 	path = modules/prompt/external/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
+[submodule "modules/alias-tips"]
+	path = modules/alias-tips
+	url = https://github.com/djui/alias-tips
