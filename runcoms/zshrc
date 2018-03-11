@@ -37,6 +37,13 @@ npm() {
     npm "$@"
 }
 
+
+# Colors
+
+d="${ZDOTDIR:-$HOME}/.zprezto/.dircolors"
+eval "$(gdircolors $d)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 # Aliases
 
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
