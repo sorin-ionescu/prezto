@@ -12,6 +12,8 @@ fi
 
 # Customize to your needs...
 
+DEFAULT_USER=`whoami`
+
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
 export PATH="/usr/local/php5/bin:$PATH"
 export PATH=/usr/local/anaconda3/bin:"$PATH"
@@ -36,7 +38,6 @@ npm() {
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
     npm "$@"
 }
-
 
 # Colors
 
