@@ -11,3 +11,28 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH="/usr/local/php5/bin:$PATH"
+export PATH=/usr/local/anaconda3/bin:"$PATH"
+
+nvm() {
+    unset -f nvm
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    nvm "$@"
+}
+ 
+node() {
+    unset -f node
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    node "$@"
+}
+ 
+npm() {
+    unset -f npm
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    npm "$@"
+}
