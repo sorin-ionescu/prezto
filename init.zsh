@@ -106,7 +106,7 @@ function pmodload {
     else
       setopt CASE_GLOB
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
-      setopt ${cg}_CASE_GLOB
+      setopt ${case_glob_prefix}_CASE_GLOB
       if (( ${#locations} > 1 )); then
         print "$0: conflicting module locations: $locations"
         continue
