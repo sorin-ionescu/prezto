@@ -76,8 +76,16 @@ function pmodload {
   local -a locations
   local pmodule
   local pmodule_location
-  local pfunction_glob='^([_.]*|prompt_*_setup|README*|*~)(-.N:t)'
 
+  # For some reason, Termux fails to locate the "prompt" module when NO_CASE_GLOB
+  # is set, but simply setting CASE_GLOB messes up the prompt itself.
+  # This temporarily enables it for the two globs, then immediately resets it.
+  # Adapted from https://unix.stackexchange.com/a/42031
+  local case_glob_prefix=NO
+  [[ -o CASE_GLOB ]] && case_glob_prefix= 
+  setopt CASE_GLOB
+  local pfunction_glob='^([_.]*|prompt_*_setup|README*|*~)(-.N:t)'
+  setopt ${case_glob_prefix}_CASE_GLOB
   # Load in any additional directories and warn if they don't exist
   zstyle -a ':prezto:load' pmodule-dirs 'user_pmodule_dirs'
   for user_dir in "$user_pmodule_dirs[@]"; do
@@ -95,8 +103,11 @@ function pmodload {
   for pmodule in "$pmodules[@]"; do
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
       continue
-    else
+    else 
+ 
+      setopt CASE_GLOB
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
+      setopt ${cg}_CASE_GLOB
       if (( ${#locations} > 1 )); then
         print "$0: conflicting module locations: $locations"
         continue
