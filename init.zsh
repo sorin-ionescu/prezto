@@ -103,8 +103,7 @@ function pmodload {
   for pmodule in "$pmodules[@]"; do
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
       continue
-    else 
- 
+    else
       setopt CASE_GLOB
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
       setopt ${cg}_CASE_GLOB
