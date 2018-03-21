@@ -18,25 +18,26 @@ local version_formatted
 unset ruby_info
 typeset -gA ruby_info
 
-if (( $+commands[rvm-prompt] )); then
-  raw_output=($(rvm-prompt s v p g | tr '@' ' '))
-  version=$raw_output[1]
-  gemset=$raw_output[2]
-elif (( $+commands[rbenv] )); then
-  version="$(rbenv version-name)"
-  if [[ $version == "system" ]]; then
-    version=""
-  fi
-elif (( $+commands[ruby] )); then
-  version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
-fi
+# Grab formatting for anything we might have to do
+zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
 
-# Format version.
-if [[ -n "$version" ]]; then
-  zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
-  zformat -f version_formatted "$version_format" "v:$version" "g:${gemset:=default}"
-  ruby_info[version]="$version_formatted"
-  ruby_info[gemset]="$gemset"
+if [[ -n "$version_format" ]]; then
+  if (( $+commands[rvm-prompt] )); then
+    raw_output=($(rvm-prompt s v p g | tr '@' ' '))
+    version=$raw_output[1]
+    gemset=$raw_output[2]
+  elif (( $+commands[rbenv] )); then
+    version="$(rbenv version-name)"
+  elif (( $+commands[ruby] )); then
+    version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
+  fi
+
+  # Format version.
+  if [[ -n "$version" ]]; then
+    zformat -f version_formatted "$version_format" "v:$version" "g:${gemset:=default}"
+    ruby_info[version]="$version_formatted"
+    ruby_info[gemset]="$gemset"
+  fi
 fi
 
 # }
