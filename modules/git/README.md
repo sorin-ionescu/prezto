@@ -114,6 +114,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gfcr` clones a repository into a new directory including all submodules.
   - `gfm` fetches from and merges with another repository or local branch.
   - `gfp` prunes local tracking branches that do not exist on remote anymore.
+  - `gfP` forcefully prunes local tracking branches that do not exist on remote anymore.
   - `gfr` fetches from and rebases on another repository or local branch.
 
 ### Flow
