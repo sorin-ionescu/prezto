@@ -82,6 +82,8 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gcR` removes the *HEAD* commit.
   - `gcs` displays various types of objects.
   - `gcl` lists lost commits.
+  - `gcy` displays commits yet to be applied to upstream in the short format.
+  - `gcY` displays commits yet to be applied to upstream.
 
 ### Conflict
 
