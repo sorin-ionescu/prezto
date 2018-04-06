@@ -116,21 +116,20 @@ function editor-info {
 }
 zle -N editor-info
 
-# Reset the prompt based on the current context and whether the prompt utilizes
-# the editor:info zstyle. If the prompt does utilize the editor:info, we must
-# reset the prompt, otherwise the change in the prompt will never update. If the
-# prompt does not utilize the editor:info, we simply redisplay the command line.
+# Reset the prompt based on the current context and
+# the ps-context option.
 function zle-reset-prompt {
-  # Explicitly check to see if there is an editor info keymap set that would
-  # require a reset of the prompt
-  if zstyle -L ':prezto:module:editor:info*' | grep -v 'completing' > /dev/null 2>&1; then
+  if zstyle -t ':prezto:module:editor' ps-context; then
     # If we aren't within one of the specified contexts, then we want to reset
     # the prompt with the appropriate editor_info[keymap] if there is one.
     if [[ $CONTEXT != (select|cont) ]]; then
       zle reset-prompt
+      zle -R
     fi
+  else
+    zle reset-prompt
+    zle -R
   fi
-  zle -R
 }
 zle -N zle-reset-prompt
 
