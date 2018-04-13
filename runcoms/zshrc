@@ -10,4 +10,24 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+alias p="cd ~/projects"
+alias v="vagrant"
+alias g="git"
+alias c="clear"
+alias gl="git log --oneline --graph --decorate --all"
+
+# NVM
+export NVM_DIR="/Users/harrygreen/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Android SDK location
+export ANDROID_HOME="/Users/harrygreen/Library/Android/sdk"
+
+# Yarn Package Manager
+export PATH="$PATH:`yarn global bin`"
+
+# Global Composer Packages
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+# Terminal Markdown Viewer - Theme Configuration
+export MDV_THEME=1027.0309
