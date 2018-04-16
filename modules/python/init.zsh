@@ -19,7 +19,7 @@ elif (( $+commands[pyenv] )); then
   eval "$(pyenv init -)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
-# ~/Library/Python on Mac OS X and ~/.local elsewhere, to PATH. The
+# ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
 # path can be overridden using PYTHONUSERBASE.
 else
   if [[ -n "$PYTHONUSERBASE" ]]; then

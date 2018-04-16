@@ -1,5 +1,5 @@
 #
-# Enables local Perl module installation on Mac OS X and defines aliases.
+# Enables local Perl module installation on macOS and defines aliases.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>

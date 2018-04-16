@@ -1,5 +1,5 @@
 #
-# Defines Mac OS X aliases and functions.
+# Defines macOS aliases and functions.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
