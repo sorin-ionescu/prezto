@@ -20,7 +20,7 @@ if grep -q 'xattrs' <(rsync --help 2>&1); then
   _rsync_cmd="${_rsync_cmd} --acls --xattrs"
 fi
 
-# Mac OS X and HFS+ Enhancements
+# macOS and HFS+ Enhancements
 # http://help.bombich.com/kb/overview/credits#opensource
 if [[ "$OSTYPE" == darwin* ]] && grep -q 'file-flags' <(rsync --help 2>&1); then
   _rsync_cmd="${_rsync_cmd} --crtimes --fileflags --protect-decmpfs --force-change"

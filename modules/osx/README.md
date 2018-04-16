@@ -1,7 +1,7 @@
 OSX
 ===
 
-Defines [Mac OS X][1] aliases and functions.
+Defines [macOS][1] aliases and functions.
 
 Settings
 --------
@@ -34,8 +34,8 @@ Functions
   - `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
   - `ql` previews files in Quick Look.
   - `osx-rm-dir-metadata` deletes .DS\_Store, \_\_MACOSX cruft.
-  - `osx-ls-download-history` displays the Mac OS X download history.
-  - `osx-rm-download-history` deletes the Mac OS X download history.
+  - `osx-ls-download-history` displays the macOS download history.
+  - `osx-rm-download-history` deletes the macOS download history.
 
 Authors
 -------

@@ -128,7 +128,7 @@ if zstyle -t ':prezto:module:utility:grep' color; then
   alias grep="${aliases[grep]:-grep} --color=auto"
 fi
 
-# Mac OS X Everywhere
+# macOS Everywhere
 if [[ "$OSTYPE" == darwin* ]]; then
   alias o='open'
 elif [[ "$OSTYPE" == cygwin* ]]; then
