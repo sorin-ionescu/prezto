@@ -149,7 +149,9 @@ if (( $#commands[(i)pip(|[23])] )); then
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
   pip_command="$commands[(i)pip(|[23])]"
 
-  if [[ "$pip_command" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+  if [[ "$pip_command" -nt "$cache_file" \
+        || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
+        || ! -s "$cache_file" ]]; then
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
     $pip_command completion --zsh \
       | sed -e "s|compctl -K [-_[:alnum:]]* pip|& pip2 pip3|" >! "$cache_file" 2> /dev/null

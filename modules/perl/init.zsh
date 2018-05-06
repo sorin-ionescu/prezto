@@ -43,7 +43,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   perl_path="$HOME/Library/Perl/5.12"
 
   if [[ -f "$perl_path/lib/perl5/local/lib.pm" ]]; then
-    if [[ ! -s "$cache_file" ]]; then
+    if [[ "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" || ! -s "$cache_file" ]]; then
       perl -I$perl_path/lib/perl5 -Mlocal::lib=$perl_path >! "$cache_file"
     fi
 
