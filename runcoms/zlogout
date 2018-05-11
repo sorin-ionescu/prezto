@@ -9,12 +9,12 @@
 [[ -o INTERACTIVE && -t 2 ]] && {
 
 # To print a message on logout:
-# uncomment the commented-out lines below, an
-# insert your content below the cat:
+# uncomment all of the commented-out lines below, and
+# insert your content at <your message here>
 
 # cat <<-EOF
 #
-# add your message here
+# <your message here>
 #
 # EOF
 #
