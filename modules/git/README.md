@@ -233,7 +233,8 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 ### Push
 
   - `gp` updates remote refs along with associated objects.
-  - `gpf` forcefully updates remote refs along with associated objects.
+  - `gpf` forcefully updates remote refs along with associated objects using the safer `--force-with-lease` option.
+  - `gpF` forcefully updates remote refs along with associated objects using the riskier `--force` option.
   - `gpa` updates remote branches along with associated objects.
   - `gpA` updates remote branches and tags along with associated objects.
   - `gpt` updates remote tags along with associated objects.
