@@ -20,7 +20,7 @@ Integrates zsh-autosuggestions into Prezto.
 Command-Not-Found
 -----------------
 
-Loads the command-not-found tool on Debian-based distributions.
+Loads the command-not-found tool on macOS or Debian-based distributions.
 
 Completion
 ----------
