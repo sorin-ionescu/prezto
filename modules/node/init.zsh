@@ -32,7 +32,9 @@ fi
 if (( $+commands[npm] )); then
   cache_file="${TMPDIR:-/tmp}/prezto-node-cache.$UID.zsh"
 
-  if [[ "$commands[npm]" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+  if [[ "$commands[npm]" -nt "$cache_file" \
+        || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
+        || ! -s "$cache_file" ]]; then
     # npm is slow; cache its output.
     npm completion >! "$cache_file" 2> /dev/null
   fi

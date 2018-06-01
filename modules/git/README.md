@@ -82,6 +82,8 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gcR` removes the *HEAD* commit.
   - `gcs` displays various types of objects.
   - `gcl` lists lost commits.
+  - `gcy` displays commits yet to be applied to upstream in the short format.
+  - `gcY` displays commits yet to be applied to upstream.
 
 ### Conflict
 
@@ -231,7 +233,8 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 ### Push
 
   - `gp` updates remote refs along with associated objects.
-  - `gpf` forcefully updates remote refs along with associated objects.
+  - `gpf` forcefully updates remote refs along with associated objects using the safer `--force-with-lease` option.
+  - `gpF` forcefully updates remote refs along with associated objects using the riskier `--force` option.
   - `gpa` updates remote branches along with associated objects.
   - `gpA` updates remote branches and tags along with associated objects.
   - `gpt` updates remote tags along with associated objects.
@@ -288,6 +291,11 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gSu` fetches and merges the latest changes for all submodule.
   - `gSx` removes a submodule.
 
+### Tag
+
+  - `gt` lists tags or creates tag.
+  - `gtl` lists tags matching pattern.
+
 ### Working directory
 
   - `gws` displays working-tree status in the short format.
@@ -307,9 +315,10 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 
 The following aliases may shadow system commands:
 
-  - `gpt` shadows the [GUID partition table maintenance utility][4].
-  - `gs` shadows the [Ghostscript][5].
   - `gb` shadows the [GB][9].
+  - `gm` shadows the [Graphics Magick image processor][11].
+  - `gpt` shadows the [GUID partition table maintenance utility][4].
+  - `gs` shadows the [Ghostscript interpreter and previewer][5].
 
 If you frequently use the above commands, you may wish to remove said aliases
 from this module or to disable them at the bottom of the zshrc with `unalias`.
@@ -434,9 +443,10 @@ Authors
 [2]: https://github.com/defunkt/hub
 [3]: https://www.github.com
 [4]: http://www.manpagez.com/man/8/gpt/
-[5]: http://linux.die.net/man/1/gs
+[5]: http://www.manpagez.com/man/1/gs/
 [6]: https://github.com/sorin-ionescu/prezto/issues
 [7]: https://github.com/sorin-ionescu/prezto/issues/219
 [8]: http://www.kernel.org/pub/software/scm/git/docs/git-log.html
 [9]: https://getgb.io/
 [10]: https://github.com/blog/985-git-io-github-url-shortener
+[11]: http://www.manpagez.com/man/1/gm/

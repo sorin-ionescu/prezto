@@ -7,7 +7,7 @@
 
 # function git-dir {
 
-local git_dir="${$(git rev-parse --git-dir):A}"
+local git_dir="${$(command git rev-parse --git-dir):A}"
 
 if [[ -n "$git_dir" ]]; then
   print "$git_dir"
