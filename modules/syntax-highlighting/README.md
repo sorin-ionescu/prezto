@@ -3,9 +3,11 @@ Syntax Highlighting
 
 Integrates [zsh-syntax-highlighting][1] into Prezto.
 
-This module should be loaded *second to last*, where last is the *prompt*
-module, unless used in conjuncture with the *history-substring-search* module
-where it must be loaded **before** it.
+This module should be loaded before the *prompt* module.
+
+Additionally, if this module is used in conjunction with the
+*history-substring-search* module, this module must be loaded **before** the
+*history-substring-search* module.
 
 Contributors
 ------------
