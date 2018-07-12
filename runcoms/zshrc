@@ -22,11 +22,14 @@ prompt_context() {
   fi
 }
 
+. /usr/local/etc/profile.d/z.sh
+
 ### USER ALIAS
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias ls='ls -GFh'
+# alias la="ls -la"
 alias ll='ls -FGlAhp'
 alias less='less -FSRXc'
 alias cd..='cd ../'
@@ -53,13 +56,19 @@ alias DT='tee ~/Desktop/terminalOut.txt'
 alias numFiles='echo $(ls -1 | wc -l)'
 
 
-### GIT ALIAS
-alias githist="git log --pretty='%h - %s' --author='Lathendra Uddaraju'"
-alias githistall="git log --pretty='%h - %s'"
-
+### GIT COMMANDS
+alias githist="git log --author=lathen --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)%an%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit"
+alias allgithist="git log --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)%an%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit"
+gitlog () { git log --name-status --diff-filter="ACDMRT" -1 -U "$1"; }
+getgithist() { git log --author=$1 --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)%an%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit -24; }
 
 ### SEARCHING
 alias qfind="find . -name "
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias hg='history | grep '
 ff () { /usr/bin/find . -name "$@" ; }
 ffs () { /usr/bin/find . -name "$@"'*' ; }
 ffe () { /usr/bin/find . -name '*'"$@" ; }
+search () { grep --color=auto -nrI "$1" ${3-.} --include="${2-*}" --exclude='./env/*' --exclude='./.*' } 
