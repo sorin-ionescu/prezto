@@ -1,77 +1,102 @@
+#
+# 16 Terminal Colors
+# -- ---------------
+#  0 black
+#  1 red
+#  2 green
+#  3 yellow
+#  4 blue
+#  5 magenta
+#  6 cyan
+#  7 white
+#  8 bright black
+#  9 bright red
+# 10 bright green
+# 11 bright yellow
+# 12 bright blue
+# 13 bright magenta
+# 14 bright cyan
+# 15 bright white
+#
+
+# load dependencies
 pmodload 'helper'
-# source "${ZEXTRA_DIR}/lib/prompt_info_functions.zsh"
 
-function prompt_jml_pwd {
-  local pwd="${PWD/#$HOME/~}"
+function prompt_jml_async_callback {
+  case $1 in
+    prompt_jml_async_git )
+      # We can safely split on ':' because it isn't allowed in ref names.
+      IFS=':' read _git_target _git_post_target <<<"$3"
 
-  if [[ "$pwd" == (#m)[/~] ]]
-  then
-    _prompt_jml_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_jml_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-  fi
+      # The target actually contains 3 space separated possibilities, so we need to
+      # make sure we grab the first one.
+      if [[ -z "$_git_target" ]]; then
+        # No git target detected, flush the git fragment and redisplay the prompt.
+        if [[ -n "$_prompt_jml_git" ]]; then
+          _prompt_jml_git=''
+          zle && zle reset-prompt
+        fi
+      else
+        # Git target detected, update the git fragment and redisplay the prompt.
+        _prompt_jml_git="${_git_target}${_git_post_target}"
+        zle && zle reset-prompt
+      fi
+      ;;
+  esac
 }
 
-function prompt_jml_git_info {
-  if (( _prompt_jml_precmd_async_pid > 0 )); then
-    # Append Git status.
-    if [[ -s "$_prompt_jml_precmd_async_data" ]]; then
-      alias typeset='typeset -g'
-      source "$_prompt_jml_precmd_async_data"
-      RPROMPT+='${ruby_info[version]} '
-      RPROMPT+='${python_info[virtualenv]}'
-      RPROMPT+='${git_info:+${(e)git_info[status]}}'
-      unalias typeset
-    fi
-
-    # Reset PID.
-    _prompt_jml_precmd_async_pid=0
-
-    # Redisplay prompt.
-    zle && zle reset-prompt
-  fi
-}
-
-function prompt_jml_precmd_async {
-  # Get Git repository information.
+function prompt_jml_async_git {
+  cd -q "$1"
   if (( $+functions[git-info] )); then
     git-info
-    typeset -p git_info >! "$_prompt_jml_precmd_async_data"
+    print ${git_info[status]}
+  fi
+}
+
+function prompt_jml_async_tasks {
+  # Initialize async worker. This needs to be done here and not in
+  # prompt_jml_setup so the git formatting can be overridden by other prompts.
+  if (( !${prompt_prezto_async_init:-0} )); then
+    async_start_worker prompt_jml -n
+    async_register_callback prompt_jml prompt_jml_async_callback
+    typeset -g prompt_prezto_async_init=1
   fi
 
-  if (( $+functions[ruby-info] )); then
-    ruby-info
-    typeset -p ruby_info >>! "$_prompt_jml_precmd_async_data"
-  fi
+  # Kill the old process of slow commands if it is still running.
+  async_flush_jobs prompt_jml
 
-  if (( $+functions[python-info] )); then
-    python-info
-    typeset -p python_info >>! "$_prompt_jml_precmd_async_data"
-  fi
-
-  # Signal completion to parent process.
-  kill -WINCH $$
+  # Compute slow commands in the background.
+  async_job prompt_jml prompt_jml_async_git "$PWD"
 }
 
 function prompt_jml_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
-  prompt_jml_pwd
+  # Format PWD.
+  _prompt_jml_pwd=$(prompt-pwd)
 
-  # Define prompts.
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{3}⚠  %f)${VIM:+" %B%F{6}V%f%b"}'
-
-  # Kill the old process of slow commands if it is still running.
-  if (( _prompt_jml_precmd_async_pid > 0 )); then
-    kill -KILL "$_prompt_jml_precmd_async_pid" &>/dev/null
+  # Handle updating git data. We also clear the git prompt data if we're in a
+  # different git root now.
+  if (( $+functions[git-dir] )); then
+    local new_git_root="$(git-dir 2> /dev/null)"
+    if [[ $new_git_root != $_jml_cur_git_root ]]; then
+      _prompt_jml_git=''
+      _jml_cur_git_root=$new_git_root
+    fi
   fi
 
-  # Compute slow commands in the background.
-  trap prompt_jml_git_info WINCH
-  prompt_jml_precmd_async &!
-  _prompt_jml_precmd_async_pid=$!
+  # Run python info (this should be fast and not require any async)
+  # if (( $+functions[python-info] )); then
+  #   python-info
+  # fi
+
+  # Run ruby info (this should be fast and not require any async)
+  if (( $+functions[ruby-info] )); then
+    ruby-info
+  fi
+
+  prompt_jml_async_tasks
 }
 
 function prompt_jml_setup {
@@ -79,29 +104,20 @@ function prompt_jml_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
   _prompt_jml_precmd_async_pid=0
-  _prompt_jml_precmd_async_data="${TMPPREFIX}-prompt_jml_data"
+  _prompt_jml_precmd_async_data=$(mktemp "${TMPDIR:-/tmp}/jml-prompt-async-XXXXXXXXXX")
 
   # Load required functions.
   autoload -Uz add-zsh-hook
+  autoload -Uz async && async
+
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_jml_precmd
-  if [[ $COLUMNS -lt 80 ]]; then
-    sep=$'\n'
-  else
-    sep=" "
-  fi
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{7}...%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary' format '%B%F{13}❯%F{4}❯%F{6}❯%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{3}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format '%B%F{6}❮%F{4}❮%F{13}❮%f%b'
-
-  # Ruby Version
-  zstyle ':prezto:module:ruby:info:version' format '%F{1}%v%f@%F{4}%g%f'
-
-  # Python Virtual Environment
-  zstyle ':prezto:module:python:info:virtualenv' format '%F{3}[%v]%f'
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
@@ -119,11 +135,35 @@ function prompt_jml_setup {
   zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{3}═%f%%b'
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
-    'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
+    'status' '%b:%s%A%B%S%a%d%m%r%U%u'
+    # 'status' '%b %p %s%A%B%S%a%d%m%r%U%u'
+
+  # Set up non-zero return value display
+  local show_return="⚠ "
+  # Default is to show the return value
+  if zstyle -T ':prezto:module:prompt' show-return-val; then
+    show_return+='%? '
+  fi
+  # Set python-info format
+  zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7}'
+  # Set ruby-info format
+  zstyle ':prezto:module:ruby:info:version' format '%F{1}%v%f@%F{4}%g%f'
+
+  # Get the async worker set up
+  _jml_cur_git_root=''
+
+  _prompt_jml_git=''
+  _prompt_jml_pwd=''
+  _prompt_jml_lhs=''
+  _prompt_jml_mid=''
 
   # Define prompts.
-  PROMPT='%B%F{3}%n%b%f %F{6}${_prompt_jml_pwd}%f%(!. %B%F{1}#%f%b.)${sep}${editor_info[keymap]} %(?::%F{4}[%?]%f )'
-  RPROMPT=
+  PROMPT='%B%F{3}%n%b%f %F{6}${_prompt_jml_pwd}%(!. %B%F{1}#%f%b.) %f%B(%f%b${ruby_info[version]}%f%B%)%f%b'
+  PROMPT+=$'\n'
+  PROMPT+='${editor_info[keymap]} '
+  RPROMPT='${editor_info[overwrite]}%(?:: %F{3}'
+  RPROMPT+=${show_return}
+  RPROMPT+='%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_jml_git}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 

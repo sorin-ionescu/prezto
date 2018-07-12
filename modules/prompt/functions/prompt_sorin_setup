@@ -177,3 +177,5 @@ function prompt_sorin_preview {
 }
 
 prompt_sorin_setup "$@"
+
+#  vim: set ts=8 sw=2 tw=80 ft=zsh et :
