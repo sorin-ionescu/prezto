@@ -19,6 +19,8 @@ if (( $+functions[nvm_version] )); then
   version="${$(nvm_version)#v}"
 elif (( $+commands[nodenv] )); then
   version="${${$(nodenv version)#v}[(w)0]}"
+elif (( $+commands[node] )) ; then
+  version="${$(node -v)#v}"  
 fi
 
 if [[ "$version" != (none|) ]]; then
