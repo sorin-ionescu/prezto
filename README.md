@@ -88,8 +88,8 @@ accompanying README files to learn of what is available.
   3. Load the theme you like in *~/.zpreztorc* then open a new Zsh terminal
      window or tab.
 
-     ![sorin theme][2]
-
+     ![sorin theme][2]  
+     Note that the 'git' module may be required for special symbols to appear, such as those on the right of the above image. Add `'git'` to the list under `zstyle ':prezto:load' pmodule \ ` in your `.zpreztorc` to enable this module.
 ### External Modules
 
   1. By default modules will be loaded from */modules* and */contrib*.
