@@ -126,6 +126,6 @@ This project is licensed under the MIT License.
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
-[6]: http://gitref.org
+[6]: https://git.github.io/git-reference/
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: http://grml.org/zsh/zsh-lovers.html
