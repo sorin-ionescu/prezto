@@ -14,7 +14,10 @@
 
 function prompt_steeef_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+  # Use either the zstyle or env variable to turn this off
+  if [[ "$STEEEF_UNTRACKED_DIRTY" != 0 ]] \
+     && zstyle -T ":prezto:module:prompt:steeef" untracked-dirty \
+     && [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
     branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c${_prompt_steeef_colors[4]}●%f)"
   else
     branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
