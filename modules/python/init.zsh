@@ -7,34 +7,33 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
-# Load manually installed pyenv into the shell session.
-if [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
-  path=("$HOME/.pyenv/bin" $path)
-  export PYENV_ROOT=$(pyenv root)
-  eval "$(pyenv init - --no-rehash zsh)"
-
-# Load package manager installed pyenv into the shell session.
-elif (( $+commands[pyenv] )); then
-  export PYENV_ROOT=$(pyenv root)
-  eval "$(pyenv init - --no-rehash zsh)"
-
-# Prepend PEP 370 per user site packages directory, which defaults to
-# ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
-# path can be overridden using PYTHONUSERBASE.
-else
-  if [[ -n "$PYTHONUSERBASE" ]]; then
-    path=($PYTHONUSERBASE/bin $path)
-  elif [[ "$OSTYPE" == darwin* ]]; then
-    path=($HOME/Library/Python/*/bin(N) $path)
-  else
-    # This is subject to change.
-    path=($HOME/.local/bin $path)
+if zstyle -t ':prezto:module:python:pyenv' auto-init 'yes'; then
+  # Load manually installed pyenv into the shell session.
+  if [[ -s "$HOME/.pyenv/bin/pyenv" ]] && (( ! $+commands[pyenv] )); then
+    path=("$HOME/.pyenv/bin" $path)
+    export PYENV_ROOT=$(pyenv root)
   fi
-fi
 
-# Return if requirements are not found.
-if (( ! $+commands[python] && ! $+commands[pyenv] )); then
-  return 1
+  # Return if requirements are not found.
+  if (( ! $+commands[python] && ! $+commands[pyenv] )); then
+    return 1
+  elif (( $+commands[python] )); then
+    if (( $+commands[pyenv] )) && [[ -z "$PYENV_SHELL" ]]; then
+      eval "$(pyenv init - --no-rehash zsh)"
+    fi
+
+    # Prepend PEP 370 per user site packages directory, which defaults to
+    # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
+    # path can be overridden using PYTHONUSERBASE.
+    if [[ -n "$PYTHONUSERBASE" ]]; then
+      path=($PYTHONUSERBASE/bin $path)
+    elif [[ "$OSTYPE" == darwin* ]]; then
+      path=($HOME/Library/Python/*/bin(N) $path)
+    else
+      # This is subject to change.
+      path=($HOME/.local/bin $path)
+    fi
+  fi
 fi
 
 function _python-workon-cwd {
