@@ -1,24 +1,24 @@
 #
-# Executes commands at login pre-zshrc.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# Start X
 
+if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+	exec startx
+fi
 #
 # Browser
 #
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+if [[ "$OSTYPE" == linux-gnu ]]; then
+  export BROWSER='qutebrowser'
 fi
 
 #
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
 #
