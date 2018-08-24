@@ -215,7 +215,8 @@ function git-info {
   if [[ -n "$stashed_format" ]]; then
     commondir=""
     if [[ -f "$(git-dir)/commondir" ]]; then
-      commondir="$(git-dir)/$(<$(git-dir)/commondir)"
+      commondir="$(<$(git-dir)/commondir)"
+      [[ "$commondir" =~ ^/ ]] || commondir="$(git-dir)/$commondir"
     fi
     if [[ -f "$(git-dir)/refs/stash" || ( -n "$commondir" && -f "$commondir/refs/stash" ) ]]; then
       stashed="$(command git stash list 2> /dev/null | wc -l | awk '{print $1}')"
