@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+    export TERM="xterm-256color"
+
     POWERLEVEL9K_MODE="nerdfont-complete"
     POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
     #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_right"
