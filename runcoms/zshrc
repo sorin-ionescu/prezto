@@ -11,3 +11,15 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+for config_file ($HOME/.yadr/zsh/*.zsh) source $config_file
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
+
+#autoload -Uz promptinit
+#promptinit
+#prompt steef_simplified
+#unalias mysql
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+POWERLEVEL9K_MODE='nerdfont-complete'
