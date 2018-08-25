@@ -23,4 +23,3 @@ for config_file ($HOME/.yadr/zsh/*.zsh) source $config_file
 #unalias mysql
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 POWERLEVEL9K_MODE='nerdfont-complete'
-
