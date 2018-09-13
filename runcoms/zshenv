@@ -9,3 +9,5 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+export PYENV_HOME="$HOME/.pyenv"
+export PATH="$PYENV_HOME/bin:$PATH"

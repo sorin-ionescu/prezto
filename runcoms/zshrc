@@ -169,3 +169,4 @@ for config_file ($HOME/.yadr/zsh/*.zsh) source $config_file
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 POWERLEVEL9K_MODE='nerdfont-complete'
 alias idea='/opt/idea-IU-182.4129.33/bin/idea.sh'
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
