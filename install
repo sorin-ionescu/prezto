@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# This script will add all required setup files in theie place.
+
+
+echo "Installing the required programs, please wait!"
+
+sudo pacman -S stow dialog zsh xfce4-terminal rofi gnupg2 i3-gaps xorg-xinit xorg-xmodmap htop mutt tmux ranger dunst compton feh git neofetch --no-confirm
+
+# Backing up old files.
+
+find ~ -maxdepth 1 -name .z* -exec tar -cvf ~/backup-zsh {} --remove-files \;
+find ~ -maxdepth 1 -name .config -exec tar -cvf ~/backup-config-dir {} --remove-files \; 
+
+# Now we are ready to install zsh and other programs
+
+cd ~/.cfg
+stow zsh
+cd ~
+for file in "${ZDOTDIR:-$HOME}/.zprezto/runcoms/"; do [[ -f $file && $file != README.md ]] || continue; ln -s "$file" "${ZDOTDIR:-$HOME}/.$file"; done
+cd ~/.cfg
+stow xfce
+stow rofi
+stow gpg
+stow i3
+stow xbindkeys
+stow neofetch
+stow htop
+stow mutt
+stow tmux
+stow compton
+stow git 
+stow dunst

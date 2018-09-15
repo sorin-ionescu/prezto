@@ -1,13 +1,75 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+
+
+# Source alias & functions
+
+if [[ -f ~/.dotfiles/zshrc ]]; then
+    source ~/.dotfiles/zshrc
+fi
+
+# Rehash
+
+zstyle ':completion:*' rehash true
+
+#if [ $(tty) = "/dev/tty1" ]; then
+#    sway
+#    export XKB_DEFAULT_OPTIONS=home:escape
+#    exit 0
+#fi
+export dil='root@192.168.1.101'
+export pkg='/var/cache/pacman/pkg'
+export gome='--homedir=mnt/qedgpg'
+
+#source /usr/share/zsh/share/antigen.zsh
+
+ncmpcppShow() { ncmpcpp <$TTY; zle redisplay; }
+zle -N ncmpcppShow
+bindkey '^[\' ncmpcppShow
+
+# History
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "$key[k]"   ]] && bindkey -- "$key[k]"   up-line-or-beginning-search
+[[ -n "$key[j]" ]] && bindkey -- "$key[j]" down-line-or-beginning-search
+
+# Alias completion
+
+setopt COMPLETE_ALIASES
+
+zstyle ':completion:*' menu select
+
+# I use zprezto and keep this file for alias, path and other stuff to be included on startup.
+
+if [ -f ~/bin/custom-alias ]; then
+    . ~/bin/custom-alias
+fi
+
+umask 022
+
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+
+set -o vi
+export BROWSER=qutebrowser
+export VISUAL=vim
+export EDITOR="$VISUAL"
+eval "$(hub alias -s)"
+fpath=(~/.zsh/completions $fpath)
+
