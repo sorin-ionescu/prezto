@@ -1,7 +1,16 @@
 Homebrew
 ========
 
-Defines Homebrew aliases.
+Defines Homebrew specific shell environment variables and aliases.
+
+Environment Variables
+---------------------
+
+Execute the following to list the environment variables loaded in the shell:
+
+```sh
+brew shellenv
+```
 
 Aliases
 -------

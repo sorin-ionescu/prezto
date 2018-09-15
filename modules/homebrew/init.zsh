@@ -11,6 +11,16 @@ if [[ "$OSTYPE" != (darwin|linux)* ]]; then
 fi
 
 #
+# Environmental Variables
+#
+
+# Load standard Homebrew shellenv into the shell session.
+# `brew shellenv` is relatively new, guard for legacy Homebrew.
+if (( $+commands[brew] )); then
+  eval "$(brew shellenv 2> /dev/null)"
+fi
+
+#
 # Aliases
 #
 
