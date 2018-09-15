@@ -26,10 +26,21 @@ alias brewx='brew remove'
 
 # Homebrew Cask
 alias cask='brew cask'
-alias caskc='brew cask cleanup --outdated'
-alias caskC='brew cask cleanup'
+alias caskc='hb_deprecated brew cask cleanup'
+alias caskC='hb_deprecated brew cask cleanup'
 alias caski='brew cask install'
 alias caskl='brew cask list'
 alias casko='brew cask outdated'
-alias casks='brew cask search'
+alias casks='hb_deprecated brew cask search'
 alias caskx='brew cask uninstall'
+
+function hb_deprecated {
+  local cmd="${argv[3]}"
+  local cmd_args=( ${(@)argv:4} )
+
+  printf "'brew cask %s' has been deprecated, " "${cmd}"
+  printf "using 'brew %s' instead\n" "${cmd}"
+
+  cmd_args=( ${(@)argv:4} )
+  command brew "${cmd}" ${(@)cmd_args}
+}

@@ -20,12 +20,9 @@ Aliases
 ### Homebrew Cask
 
   - `cask` is aliased to `brew cask`.
-  - `caskc` cleans up old cached downloads.
-  - `caskC` cleans up all cached downloads.
   - `caski` installs a cask.
   - `caskl` lists installed casks.
   - `casko` lists casks which have an update available.
-  - `casks` searches for a cask.
   - `caskx` uninstalls a cask.
 
 Authors
