@@ -4,7 +4,6 @@
 
 
 
-sudo pacman -S stow dialog zsh xfce4-terminal rofi gnupg2 i3-gaps xorg-xinit xorg-xmodmap htop mutt tmux ranger dunst compton feh git neofetch --no-confirm
 
 # Backing up old files.
 
