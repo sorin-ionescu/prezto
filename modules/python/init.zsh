@@ -7,15 +7,18 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
-# Load manually installed pyenv into the shell session.
-if [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
+# Load manually installed pyenv into the path
+if [[ -n "$PYENV_ROOT" && -s "$PYENV_ROOT/bin/pyenv" ]]; then
+  path=("$PYENV_ROOT/bin" $path)
+elif [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
   path=("$HOME/.pyenv/bin" $path)
-  export PYENV_ROOT=$(pyenv root)
-  eval "$(pyenv init - --no-rehash zsh)"
+fi
 
-# Load package manager installed pyenv into the shell session.
-elif (( $+commands[pyenv] )); then
-  export PYENV_ROOT=$(pyenv root)
+# Load pyenv into the current python session
+if (( $+commands[pyenv] )); then
+  if [[ -z "$PYENV_ROOT" ]]; then
+    export PYENV_ROOT=$(pyenv root)
+  fi
   eval "$(pyenv init - --no-rehash zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
@@ -57,7 +60,7 @@ function _python-workon-cwd {
   local ENV_NAME=""
   if [[ -f "$PROJECT_ROOT/.venv" ]]; then
     ENV_NAME="$(cat "$PROJECT_ROOT/.venv")"
-  elif [[ -f "$PROJECT_ROOT/.venv/bin/activate" ]];then
+  elif [[ -f "$PROJECT_ROOT/.venv/bin/activate" ]]; then
     ENV_NAME="$PROJECT_ROOT/.venv"
   elif [[ "$PROJECT_ROOT" != "." ]]; then
     ENV_NAME="${PROJECT_ROOT:t}"
