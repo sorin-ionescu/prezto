@@ -93,8 +93,11 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
   # Set the directory where virtual environments are stored.
   export WORKON_HOME="${WORKON_HOME:-$HOME/.virtualenvs}"
 
-  # Disable the virtualenv prompt.
-  export VIRTUAL_ENV_DISABLE_PROMPT=1
+  # Disable the virtualenv prompt. Note that we use the magic value used by the
+  # pure prompt because there's some additional logic in that prompt which tries
+  # to figure out if a user set this variable and disable the python portion of
+  # that prompt based on it which is the exact opposite of what we want to do.
+  export VIRTUAL_ENV_DISABLE_PROMPT=12
 
   # Create a sorted array of available virtualenv related 'pyenv' commands to
   # look for plugins of interest. Scanning shell '$path' isn't enough as they
