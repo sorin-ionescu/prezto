@@ -24,14 +24,14 @@ elif (( $+commands[python] )); then
   # Prepend PEP 370 per user site packages directory, which defaults to
   # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
   # path can be overridden using PYTHONUSERBASE.
-  if [[ -n "$PYTHONUSERBASE" ]]; then
-    path=($PYTHONUSERBASE/bin $path)
-  elif [[ "$OSTYPE" == darwin* ]]; then
-    path=($HOME/Library/Python/*/bin(N) $path)
-  else
-    # This is subject to change.
-    path=($HOME/.local/bin $path)
-  fi
+  # if [[ -n "$PYTHONUSERBASE" ]]; then
+  #   path=($PYTHONUSERBASE/bin $path)
+  # elif [[ "$OSTYPE" == darwin* ]]; then
+  #   path=($HOME/Library/Python/*/bin(N) $path)
+  # else
+  #   # This is subject to change.
+  #   path=($HOME/.local/bin $path)
+  # fi
 fi
 
 function _python-workon-cwd {
