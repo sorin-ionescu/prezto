@@ -8,8 +8,8 @@ Settings
 
 ### Highlighting
 
-If you have enabled color globally in *zpreztorc*, you may disable it for certain
-commands.
+If you have enabled color globally in *zpreztorc*, you may disable it for
+certain commands.
 
 To disable `ls` color, add the following line to *zpreztorc*; when coloring is
 disabled, type indicators (\*, /, =>, @, =, |, %) will be appended to entries.
@@ -109,7 +109,8 @@ Aliases
 
 ### Resource Usage
 
-  - `df` displays free disk space using human readable units (aliases to `pydf`, if installed).
+  - `df` displays free disk space using human readable units (aliases to `pydf`,
+    if installed).
   - `du` displays disk usage using human readable units.
   - `top` displays information about processes.
   - `topc` displays information about processes sorted by CPU usage.
