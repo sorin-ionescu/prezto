@@ -6,7 +6,9 @@ Enables local Python and local Python package installation.
 Settings
 --------
 
-This module supports virtual environments from conda and virtualenvwrapper. By default, only virtualenvwrapper is enabled. To disable virtualenvwrapper, add the following to *zpreztorc*.
+This module supports virtual environments from conda and virtualenvwrapper. By
+default, only virtualenvwrapper is enabled. To disable virtualenvwrapper, add
+the following to *zpreztorc*.
 
 ```sh
 zstyle ':prezto:module:python' skip-virtualenvwrapper-init 'on'
@@ -52,8 +54,8 @@ virtualenvwrapper
 
 [`virtualenvwrapper`][2] is a frontend to the popular [`virtualenv`][3] utility.
 
-`virtualenv` creates isolated Python environments and `virtualenvwrapper` provides
-convenient shell functions to create, switch, and manage them.
+`virtualenv` creates isolated Python environments and `virtualenvwrapper`
+provides convenient shell functions to create, switch, and manage them.
 
 ### Usage
 

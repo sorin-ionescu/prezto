@@ -1,9 +1,4 @@
 Autosuggestions
----------------
-
-Integrates zsh-autosuggestions into Prezto.
-
-Autosuggestions
 ===============
 
 Integrates [zsh-autosuggestions][1] into Prezto, which implements the

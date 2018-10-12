@@ -5,6 +5,13 @@ Sets general shell options and defines environment variables.
 
 This module must be loaded first.
 
+Contributors
+------------
+
+This module **MUST NOT** rely on any command not built in Zsh.
+
+Non-interactive environment variables should be defined in [`zshenv`][1].
+
 Options
 -------
 
@@ -37,13 +44,6 @@ Variables
   - `LESS_TERMCAP_so` begins standout-mode.
   - `LESS_TERMCAP_ue` ends underline.
   - `LESS_TERMCAP_us` begins underline.
-
-Contributors
-------------
-
-This module **MUST NOT** rely on any command not built in Zsh.
-
-Non-interactive environment variables should be defined in [`zshenv`][1].
 
 Authors
 -------

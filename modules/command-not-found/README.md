@@ -3,11 +3,12 @@ Command-Not-Found
 
 When you try to use a command that is not available locally, searches
 the package manager for a package offering that command and suggests
-the proper install command. 
+the proper install command.
 
-Debian-based and Arch Linux-based distributions use the [`command-not-found`][1] tool.
+Debian and Arch Linux based distributions use the [`command-not-found`][1] tool.
 
-macOS uses Homebrew's [`command-not-found` clone][2]. Note that you also need to [follow the instructions to tap the `command-not-found` homebrew repository][3].
+macOS uses Homebrew's [`command-not-found` clone][2]. Note that you also need to
+[follow the instructions][3] to tap the `command-not-found` homebrew repository.
 
 
 Authors
