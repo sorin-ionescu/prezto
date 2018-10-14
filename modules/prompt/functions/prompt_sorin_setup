@@ -144,16 +144,17 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'status' '%b %p %c:%s%A%B%S%a%d%m%r%U%u'
 
+  # Set python-info parameters.
+  zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7} '
+
   # Set up non-zero return value display
   local show_return="✘ "
   # Default is to show the return value
   if zstyle -T ':prezto:module:prompt' show-return-val; then
     show_return+='%? '
   fi
-  # Set python-info format
-  zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7} '
 
-  # Get the async worker set up
+  # Get the async worker set up.
   _sorin_cur_git_root=''
 
   _prompt_sorin_git=''
