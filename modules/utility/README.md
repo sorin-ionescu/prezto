@@ -18,6 +18,12 @@ disabled, type indicators (\*, /, =>, @, =, |, %) will be appended to entries.
 zstyle ':prezto:module:utility:ls' color 'no'
 ```
 
+To disable GNU coreutils `ls` to list directories grouped first, add the following line to *zpreztorc*:
+
+```sh
+zstyle ':prezto:module:utility:ls' dirs-first 'no'
+```
+
 To disable `diff` highlighting, add the following line to *zpreztorc*:
 
 ```sh
