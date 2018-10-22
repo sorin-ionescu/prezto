@@ -14,7 +14,8 @@ fi
 # Aliases
 #
 
-_rsync_cmd='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
+_rsync_cmd='rsync --verbose --progress --human-readable --compress --archive \
+  --hard-links --one-file-system'
 
 if grep -q 'xattrs' <(rsync --help 2>&1); then
   _rsync_cmd="${_rsync_cmd} --acls --xattrs"

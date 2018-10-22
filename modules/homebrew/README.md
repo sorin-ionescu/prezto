@@ -1,10 +1,10 @@
 Homebrew
 ========
 
-Defines Homebrew specific shell environment variables and aliases.
+Defines Homebrew specific environment variables and aliases.
 
-Environment Variables
----------------------
+Variables
+---------
 
 Execute the following to list the environment variables loaded in the shell:
 

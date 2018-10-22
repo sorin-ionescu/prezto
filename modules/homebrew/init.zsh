@@ -11,7 +11,7 @@ if [[ "$OSTYPE" != (darwin|linux)* ]]; then
 fi
 
 #
-# Environmental Variables
+# Variables
 #
 
 # Load standard Homebrew shellenv into the shell session.

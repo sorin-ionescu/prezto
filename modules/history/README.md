@@ -3,13 +3,6 @@ History
 
 Sets [history][1] options and defines history aliases.
 
-Variables
----------
-
-  - `HISTFILE` stores the path to the history file.
-  - `HISTSIZE` stores the maximum number of events to save in the internal history.
-  - `SAVEHIST` stores the maximum number of events to save in the history file.
-
 Options
 -------
 
@@ -25,6 +18,13 @@ Options
   - `HIST_SAVE_NO_DUPS` does not write a duplicate event to the history file.
   - `HIST_VERIFY` does not execute immediately upon history expansion.
   - `HIST_BEEP` beeps when accessing non-existent history.
+
+Variables
+---------
+
+  - `HISTFILE` stores the path to the history file.
+  - `HISTSIZE` stores the maximum number of events to save in the internal history.
+  - `SAVEHIST` stores the maximum number of events to save in the history file.
 
 Aliases
 -------
