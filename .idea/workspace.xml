@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b1f4df9d-b3f3-42cc-a740-60c2af4030e0" name="Default Changelist" comment="Merge branch 'master' of https://github.com/sorin-ionescu/prezto into local_prezto&#10;&#10;* 'master' of https://github.com/sorin-ionescu/prezto:&#10;  Fix issue #1635. Option to disable GNU ls to group directories first.&#10;  prompt/sorin: Minor cleanup and reordering&#10;  prompt/minimal: Add support for preview&#10;  prompt/steeef: Add basic support for editor_info and preview&#10;  Update submodule 'history-substring-search'&#10;  doc: More copyediting and formatting for consistency&#10;  general: Miscellaneous documentation updates&#10;  submodule: Updating submodules&#10;  doc: Bit of copyediting and formatting for consistency and clarification&#10;  environment: only enable bracketed paste on non-dumb terminals&#10;  python: respect PYENV_ROOT if already set&#10;  python: use pure's magic value for VIRTUAL_ENV_DISABLE_PROMPT&#10;  Updating submodules&#10;  homebrew: Cleanup homebrew aliases&#10;  homebrew: Replace deprecated casks with their brew counterpart&#10;  homebrew: Load standard Homebrew environment variables into shell session.&#10;  [git] Also check &quot;commondir&quot; when looking for a stash (#1620)&#10;&#10;# Conflicts:&#10;#&#9;modules/completion/external&#10;#&#9;modules/history-substring-search/external&#10;#&#9;modules/prompt/external/powerlevel9k&#10;#&#9;modules/prompt/external/pure&#10;#&#9;modules/syntax-highlighting/external">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prezto.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/archive/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/archive/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autosuggestions/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autosuggestions/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/command-not-found/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/command-not-found/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/completion/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/completion/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/completion/external" beforeDir="false" afterPath="$PROJECT_DIR$/modules/completion/external" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/completion/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/completion/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/editor/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/editor/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/environment/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/environment/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/environment/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/environment/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/git/functions/git-info" beforeDir="false" afterPath="$PROJECT_DIR$/modules/git/functions/git-info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/history-substring-search/external" beforeDir="false" afterPath="$PROJECT_DIR$/modules/history-substring-search/external" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/history/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/history/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/history/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/history/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/homebrew/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/homebrew/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/homebrew/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/homebrew/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/prompt/external/async" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/external/async" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/prompt/external/powerlevel9k" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/external/powerlevel9k" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/prompt/external/pure" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/external/pure" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/prompt/functions/prompt_minimal_setup" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/functions/prompt_minimal_setup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/prompt/functions/prompt_sorin_setup" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/functions/prompt_sorin_setup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/prompt/functions/prompt_steeef_setup" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/functions/prompt_steeef_setup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/python/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/python/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/python/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/rsync/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/rsync/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/syntax-highlighting/external" beforeDir="false" afterPath="$PROJECT_DIR$/modules/syntax-highlighting/external" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/utility/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/utility/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/utility/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/utility/init.zsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runcoms/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/runcoms/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runcoms/zprofile" beforeDir="false" afterPath="$PROJECT_DIR$/runcoms/zprofile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runcoms/zshenv" beforeDir="false" afterPath="$PROJECT_DIR$/runcoms/zshenv" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="518463918">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gitignore" value="1" />
+          <entry key="md" value="2" />
+          <entry key="zprofile" value="1" />
+          <entry key="zshenv" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Markdown" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="gitignore" value="16" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="16" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/runcoms/zshenv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/runcoms/zprofile">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/runcoms/zshenv" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/modules/prompt/external/pure/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="prezto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prezto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prezto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prezto" type="462c0819:PsiDirectoryNode" />
+              <item name="runcoms" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540901643703" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1f4df9d-b3f3-42cc-a740-60c2af4030e0" name="Default Changelist" comment="" />
+      <created>1540860877907</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1540860877907</updated>
+      <workItem from="1540860880226" duration="1344000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1344000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="Capture Tool" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Docker" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="R Packages" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="R Graphics" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/sorin-ionescu/prezto into local_prezto&#10;&#10;* 'master' of https://github.com/sorin-ionescu/prezto:&#10;  Fix issue #1635. Option to disable GNU ls to group directories first.&#10;  prompt/sorin: Minor cleanup and reordering&#10;  prompt/minimal: Add support for preview&#10;  prompt/steeef: Add basic support for editor_info and preview&#10;  Update submodule 'history-substring-search'&#10;  doc: More copyediting and formatting for consistency&#10;  general: Miscellaneous documentation updates&#10;  submodule: Updating submodules&#10;  doc: Bit of copyediting and formatting for consistency and clarification&#10;  environment: only enable bracketed paste on non-dumb terminals&#10;  python: respect PYENV_ROOT if already set&#10;  python: use pure's magic value for VIRTUAL_ENV_DISABLE_PROMPT&#10;  Updating submodules&#10;  homebrew: Cleanup homebrew aliases&#10;  homebrew: Replace deprecated casks with their brew counterpart&#10;  homebrew: Load standard Homebrew environment variables into shell session.&#10;  [git] Also check &quot;commondir&quot; when looking for a stash (#1620)&#10;&#10;# Conflicts:&#10;#&#9;modules/completion/external&#10;#&#9;modules/history-substring-search/external&#10;#&#9;modules/prompt/external/powerlevel9k&#10;#&#9;modules/prompt/external/pure&#10;#&#9;modules/syntax-highlighting/external" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/sorin-ionescu/prezto into local_prezto&#10;&#10;* 'master' of https://github.com/sorin-ionescu/prezto:&#10;  Fix issue #1635. Option to disable GNU ls to group directories first.&#10;  prompt/sorin: Minor cleanup and reordering&#10;  prompt/minimal: Add support for preview&#10;  prompt/steeef: Add basic support for editor_info and preview&#10;  Update submodule 'history-substring-search'&#10;  doc: More copyediting and formatting for consistency&#10;  general: Miscellaneous documentation updates&#10;  submodule: Updating submodules&#10;  doc: Bit of copyediting and formatting for consistency and clarification&#10;  environment: only enable bracketed paste on non-dumb terminals&#10;  python: respect PYENV_ROOT if already set&#10;  python: use pure's magic value for VIRTUAL_ENV_DISABLE_PROMPT&#10;  Updating submodules&#10;  homebrew: Cleanup homebrew aliases&#10;  homebrew: Replace deprecated casks with their brew counterpart&#10;  homebrew: Load standard Homebrew environment variables into shell session.&#10;  [git] Also check &quot;commondir&quot; when looking for a stash (#1620)&#10;&#10;# Conflicts:&#10;#&#9;modules/completion/external&#10;#&#9;modules/history-substring-search/external&#10;#&#9;modules/prompt/external/powerlevel9k&#10;#&#9;modules/prompt/external/pure&#10;#&#9;modules/syntax-highlighting/external" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runcoms/zshenv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runcoms/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runcoms/zprofile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
