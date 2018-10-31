@@ -2,40 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1f4df9d-b3f3-42cc-a740-60c2af4030e0" name="Default Changelist" comment="Merge branch 'master' of https://github.com/sorin-ionescu/prezto into local_prezto&#10;&#10;* 'master' of https://github.com/sorin-ionescu/prezto:&#10;  Fix issue #1635. Option to disable GNU ls to group directories first.&#10;  prompt/sorin: Minor cleanup and reordering&#10;  prompt/minimal: Add support for preview&#10;  prompt/steeef: Add basic support for editor_info and preview&#10;  Update submodule 'history-substring-search'&#10;  doc: More copyediting and formatting for consistency&#10;  general: Miscellaneous documentation updates&#10;  submodule: Updating submodules&#10;  doc: Bit of copyediting and formatting for consistency and clarification&#10;  environment: only enable bracketed paste on non-dumb terminals&#10;  python: respect PYENV_ROOT if already set&#10;  python: use pure's magic value for VIRTUAL_ENV_DISABLE_PROMPT&#10;  Updating submodules&#10;  homebrew: Cleanup homebrew aliases&#10;  homebrew: Replace deprecated casks with their brew counterpart&#10;  homebrew: Load standard Homebrew environment variables into shell session.&#10;  [git] Also check &quot;commondir&quot; when looking for a stash (#1620)&#10;&#10;# Conflicts:&#10;#&#9;modules/completion/external&#10;#&#9;modules/history-substring-search/external&#10;#&#9;modules/prompt/external/powerlevel9k&#10;#&#9;modules/prompt/external/pure&#10;#&#9;modules/syntax-highlighting/external">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prezto.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/archive/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/archive/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/autosuggestions/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autosuggestions/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/command-not-found/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/command-not-found/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/completion/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/completion/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/completion/external" beforeDir="false" afterPath="$PROJECT_DIR$/modules/completion/external" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/completion/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/completion/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/editor/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/editor/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/environment/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/environment/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/environment/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/environment/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/git/functions/git-info" beforeDir="false" afterPath="$PROJECT_DIR$/modules/git/functions/git-info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/history-substring-search/external" beforeDir="false" afterPath="$PROJECT_DIR$/modules/history-substring-search/external" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/history/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/history/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/history/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/history/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/homebrew/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/homebrew/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/homebrew/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/homebrew/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/prompt/external/async" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/external/async" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/prompt/external/powerlevel9k" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/external/powerlevel9k" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/prompt/external/pure" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/external/pure" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/prompt/functions/prompt_minimal_setup" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/functions/prompt_minimal_setup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/prompt/functions/prompt_sorin_setup" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/functions/prompt_sorin_setup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/prompt/functions/prompt_steeef_setup" beforeDir="false" afterPath="$PROJECT_DIR$/modules/prompt/functions/prompt_steeef_setup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/python/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/python/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/python/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/rsync/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/rsync/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/syntax-highlighting/external" beforeDir="false" afterPath="$PROJECT_DIR$/modules/syntax-highlighting/external" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/utility/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/utility/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/utility/init.zsh" beforeDir="false" afterPath="$PROJECT_DIR$/modules/utility/init.zsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runcoms/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/runcoms/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runcoms/zprofile" beforeDir="false" afterPath="$PROJECT_DIR$/runcoms/zprofile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runcoms/zshenv" beforeDir="false" afterPath="$PROJECT_DIR$/runcoms/zshenv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,9 +14,11 @@
     <session id="518463918">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -76,15 +45,19 @@
           <entry key="PLAIN_TEXT" value="16" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.spring.boot.mvc.usages" />
+      <usages-collector id="statistics.spring.boot.run.usages" />
+      <usages-collector id="statistics.vcs.git.usages" />
+      <usages-collector id="statistics.js.language.service.starts" />
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runcoms/zshenv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="165">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -97,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -128,8 +101,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="x" value="172" />
+    <option name="y" value="16" />
+    <option name="width" value="1400" />
+    <option name="height" value="1014" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -137,8 +112,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -155,6 +128,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -188,28 +163,25 @@
       <option name="presentableId" value="Default" />
       <updated>1540860877907</updated>
       <workItem from="1540860880226" duration="1344000" />
+      <workItem from="1540905763895" duration="612000" />
+      <workItem from="1540992032045" duration="78000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1344000" />
+    <option name="totallyTimeSpent" value="2034000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="Capture Tool" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25579977" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Docker" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -217,18 +189,25 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="R Packages" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="R Graphics" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Packages" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="R Graphics" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="right" id="SciView" order="8" />
+      <window_info anchor="right" id="Database" order="9" />
+      <window_info anchor="right" id="Palette&#9;" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="make" order="12" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,25 +229,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/runcoms/zshenv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/runcoms/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor />
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runcoms/zshenv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

@@ -181,3 +181,4 @@ jsondata='{"name": "'$volumename'","labels": "label1 label2","source": {"type": 
 curl -d $jsondata -H "Content-Type: application/json" -X POST --socks5-hostname localhost:9999 http://storage/volumes
 }
 alias mkvolcp='mkcallapi'
+alias cat='bat'
