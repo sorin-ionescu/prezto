@@ -36,6 +36,7 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'prompt' \
+  'custom' \
   'my_git' \
   'my_rails' \
   'my_ruby'

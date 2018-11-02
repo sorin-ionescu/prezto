@@ -16,3 +16,8 @@ if (( $+commands[bundle] )); then
   alias bi='b install --path vendor/bundle -j4'
   alias bu='b update'
 fi
+
+# Gem
+if (( $+commands[gem] )); then
+  alias gemi='gem install'
+fi
