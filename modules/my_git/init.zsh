@@ -58,6 +58,9 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias grv='git revert'
   alias gRh='git reset "HEAD^"'
 
+  # Diff (d)
+  alias gd='git diff'
+
   # Fetch (f)
   alias gf='git fetch'
   alias gfa='git fetch --all'
