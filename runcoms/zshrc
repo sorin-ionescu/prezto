@@ -11,3 +11,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+export PATH=$PATH:/usr/local/git/bin:/usr/local/bin
+eval $(docker-machine env)
+
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init -)"
+
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
