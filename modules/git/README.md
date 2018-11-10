@@ -220,6 +220,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `glg` displays the graph log.
   - `glb` displays the brief commit log.
   - `glc` displays the commit count for each contributor in descending order.
+  - `glss` displays GPG signatures in commits.
 
 ### Merge
 
