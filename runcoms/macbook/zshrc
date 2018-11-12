@@ -1,0 +1,6 @@
+#Load common configuration
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
+fi
+
+alias ssh="TERM=xterm-256color ssh"

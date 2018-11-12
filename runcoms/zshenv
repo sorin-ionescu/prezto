@@ -9,16 +9,3 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-#Define some custom variables
-export PROMOTION="$HOME/Dropbox/Studium/PROMOTION/"
-
-#PyModules (my python modules)
-export PYTHONPATH=$HOME/sw/PyModules
-
-#SciFi40 Software
-export PATH=$HOME/SciFi/lhcb-scifi40-software/bin:$PATH
-
-# ROOT6 (binary download)
-#source /Applications/root_v6.14.02/bin/thisroot.sh
-source /Applications/root_v6.14.04/bin/thisroot.sh

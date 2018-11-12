@@ -10,10 +10,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# ==========================
 # Customize to your needs...
-#Source miniconda2 installation here to be first in PATH
-export PATH=$HOME/sw/miniconda2/bin:$HOME/sw/miniconda2/envs/py3/bin:$PATH
-
+# ==========================
 # Turn off beep
 unsetopt beep
 
@@ -27,11 +26,11 @@ setopt append_history
 # Extended glob features (e.g. negate * with ^: ^*)
 setopt extendedglob
 
-alias ssh="TERM=xterm-256color ssh"
-
-#Set neovim to be the default vim
-alias vim="nvim"
-alias vi=vim
+#Set neovim to be the default vim if available
+if command -v nvim > /dev/null; then
+    alias vim="nvim"
+fi
+alias vi=vim  #Point to same as vim
 
 #Little function to plot the fullpath to a given file
 path () {
