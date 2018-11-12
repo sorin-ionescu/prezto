@@ -11,3 +11,104 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+#Source miniconda2 installation here to be first in PATH
+export PATH=$HOME/sw/miniconda2/bin:$HOME/sw/miniconda2/envs/py3/bin:$PATH
+
+# Turn off beep
+unsetopt beep
+
+# History
+HISTFILE=~/.zshhist
+HISTSIZE=100000
+SAVEHIST=100000
+setopt hist_ignore_dups
+setopt append_history
+
+# Extended glob features (e.g. negate * with ^: ^*)
+setopt extendedglob
+
+alias ssh="TERM=xterm-256color ssh"
+
+#Set neovim to be the default vim
+alias vim="nvim"
+alias vi=vim
+
+#Little function to plot the fullpath to a given file
+path () {
+  local totpath="$(cd $(dirname "$1") && pwd -P)/$(basename "$1")"
+  printf "$totpath" | pbcopy;
+  echo Copied "$totpath" to clipboard.
+}
+
+#Function to mount via ssh
+#First argument: server
+#Second argument (optional):
+sshmount () {
+  local VOLNAME=${1}${2//\//-}  #Replace / with - for the volname
+  local MOUNTDIR=$HOME/Mounts/$VOLNAME
+  #Check if directory is already mounted
+  if contains "`mount`" $MOUNTDIR
+  then
+    echo $MOUNTDIR is already mounted
+    return 1
+  else
+    mkdir -p $MOUNTDIR   #Create dir if it does not exist
+    if sshfs -o allow_other,auto_cache,reconnect,defer_permissions,noappledouble $1:$2 $MOUNTDIR -o volname=$VOLNAME
+    then   #Mount successful
+      echo Mounted $VOLNAME in $MOUNTDIR
+      return 0
+    else   #Error while trying to mount
+      echo Removing $MOUNTDIR...
+      umount $MOUNTDIR
+      rm -r $MOUNTDIR
+      return 1
+    fi
+  fi
+}
+
+#Helper function to check if an element is in a given list
+#Usage: contains aList anItem
+contains() {
+    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && return 0 || return 1
+}
+
+
+#Forward jupyter notebook server from remote via ssh
+#$1 is the remote host, $2 the port (optional, default=8889)
+sshjupyter () {
+    ssh -N -f -L localhost:${2:-8889}:localhost:${2:-8889} $1
+}
+
+
+sshvnc () {
+    ssh -N -f -L localhost:${2:-5900}:localhost:${2:-5900} $1
+}
+
+#============== Generic port forwarding functions =======================
+# Taken from: https://stackoverflow.com/questions/2241063/bash-script-to-setup-a-temporary-ssh-tunnel
+
+#Function establish a connection
+#Argument 1 is the remote host, 2 the remote port, 3 (optional) the local port
+sshforward () {
+    local host=${1}
+    local hostport=${2}
+    local localport=${3:-${hostport}}
+    echo "Forwarding local port ${localport} to ${host}:${hostport}..."
+    ssh -M -S ~/${host}:${localport} -fnNT -L localhost:${localport}:localhost:${hostport} ${host}
+}
+
+#Open a SOCKS tunnel
+sshsocks() {
+    local host=${1}
+    local port=${2:-8123}
+    echo "Opening SOCKS tunnel to ${host} on local port ${port}..."
+    ssh -M -S ~/${host}:${port} -D ${port} -fqN ${host}
+}
+
+#Function to close an established connection with sshforward
+sshclose () {
+    local host=${1}
+    local hostport=${2}
+    echo "Closing connection to ${host}:${hostport}..."
+    ssh -S ~/${host}:${hostport} -O exit ${host}
+}
