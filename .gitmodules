@@ -18,7 +18,7 @@
 	url = https://github.com/agnoster/agnoster-zsh-theme.git
 [submodule "modules/prompt/functions/pure"]
 	path = modules/prompt/external/pure
-	url = https://github.com/sindresorhus/pure.git
+        url = git@github.com:burneyy/pure.git
 [submodule "modules/fasd/external"]
 	path = modules/fasd/external
 	url = https://github.com/clvv/fasd.git
