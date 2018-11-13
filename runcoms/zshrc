@@ -32,6 +32,11 @@ if command -v nvim > /dev/null; then
 fi
 alias vi=vim  #Point to same as vim
 
+#Snakemake zsh completion
+if command -v snakemake > /dev/null; then
+    compdef _gnu_generic snakemake
+fi
+
 #Little function to plot the fullpath to a given file
 path () {
   local totpath="$(cd $(dirname "$1") && pwd -P)/$(basename "$1")"
@@ -78,6 +83,8 @@ sshjupyter () {
     ssh -N -f -L localhost:${2:-8889}:localhost:${2:-8889} $1
 }
 
+#Jupyter forwarding over ssh
+alias jupyter_forwarding="jupyter notebook --no-browser --port=8889"
 
 sshvnc () {
     ssh -N -f -L localhost:${2:-5900}:localhost:${2:-5900} $1

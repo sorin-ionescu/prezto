@@ -1,0 +1,10 @@
+#Load common configuration
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
+fi
+
+# Proxy command
+alias prox="export http_proxy=http://netgw01:8080/; export https_proxy=http://netgw01:8080/"
+prox
+
+alias rdesktop="rdesktop -g 1280x760 -u dabernin -d LBDAQ.CERN.CH"

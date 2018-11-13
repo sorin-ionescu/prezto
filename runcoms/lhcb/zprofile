@@ -1,0 +1,30 @@
+#Load common configuration
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zprofile" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zprofile"
+fi
+
+# ROOT
+setuproot=/opt/lhcb/root-6-10-08/bin/thisroot.sh
+if [ -f $setuproot ]; then
+    source $setuproot
+fi
+
+# Custom executables
+export PATH=$HOME/Executables/bin:$PATH
+export PATH=/opt/lhcb/lhcb-scifi40-software/bin:$PATH
+export PATH=/opt/lhcb/calibration/bin:$PATH
+export PATH=/opt/lhcb/ThresholdCalib/bin:$PATH
+export LD_LIBRARY_PATH=/opt/lhcb/lhcb-scifi40-software/bin:$LD_LIBRARY_PATH
+
+export DIM_DNS_NODE=localhost
+
+# added by Miniconda2 installer
+export PATH=/opt/Miniconda2/bin:/opt/Miniconda2/envs/Python3/bin:$PATH
+export QTDIR=/opt/Miniconda2/lib
+
+export PYTHONPATH=$HOME/PyModules:$PYTHONPATH
+
+if [[ -x "$(command -v scl_source)" ]]; then
+    echo "Enable devtoolset-6 (for e.g. gcc63)"
+    source scl_source enable devtoolset-6
+fi
