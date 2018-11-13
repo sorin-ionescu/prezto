@@ -175,26 +175,26 @@ function overwrite-mode {
 zle -N overwrite-mode
 
 # Enters vi insert mode and updates editor information.
-function vi-insert {
-  zle .vi-insert
-  zle editor-info
-}
-zle -N vi-insert
+#function vi-insert {
+#  zle .vi-insert
+#  zle editor-info
+#}
+#zle -N vi-insert
 
 # Moves to the first non-blank character then enters vi insert mode and updates
 # editor information.
-function vi-insert-bol {
-  zle .vi-insert-bol
-  zle editor-info
-}
-zle -N vi-insert-bol
+#function vi-insert-bol {
+#  zle .vi-insert-bol
+#  zle editor-info
+#}
+#zle -N vi-insert-bol
 
 # Enters vi replace mode and updates editor information.
-function vi-replace  {
-  zle .vi-replace
-  zle editor-info
-}
-zle -N vi-replace
+#function vi-replace  {
+#  zle .vi-replace
+#  zle editor-info
+#}
+#zle -N vi-replace
 
 # Expands .... to ../..
 function expand-dot-to-parent-directory-path {
