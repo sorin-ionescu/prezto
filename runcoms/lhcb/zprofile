@@ -26,5 +26,5 @@ export PYTHONPATH=$HOME/PyModules:$PYTHONPATH
 
 if [[ -x "$(command -v scl_source)" ]]; then
     echo "Enable devtoolset-6 (for e.g. gcc63)"
-    source scl_source enable devtoolset-6
+    emulate sh -c "source scl_source enable devtoolset-6"
 fi
