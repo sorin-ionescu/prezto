@@ -19,6 +19,7 @@ Defines [Docker][1] aliases and functions.
 - `dkk` Kill a running container
 - `dkkh` Send `kill -s HUP` signal to a running container
 - `dkl` Fetch the logs of a container
+- `dkL` Fetch and follow (`-f`) the logs of a container
 - `dkli` Log in to a Docker registry
 - `dklo` Log out from a Docker registry
 - `dkls` is alias for `dkps`
@@ -59,6 +60,7 @@ Defines [Docker][1] aliases and functions.
 - `dkCin` Display detailed information on one or more containers
 - `dkCk` Kill one or more running containers
 - `dkCl` Fetch the logs of a container
+- `dkCL` Fetch and follow (`-f`) the logs of a container
 - `dkCls` List containers
 - `dkCp` Pause all processes within one or more containers
 - `dkCpr` Remove all stopped containers
@@ -159,6 +161,7 @@ Defines [Docker][1] aliases and functions.
 - `dkce` Execute a command in a running container
 - `dkck` Kill containers
 - `dkcl` View output from containers
+- `dkcL` View and follow (`-f`) output from containers
 - `dkcls` is alias for `dkcps`
 - `dkcp` Pause services
 - `dkcP` Unpause services
