@@ -22,6 +22,7 @@ Aliases
 -------
 
   - `j` changes the current working directory interactively.
+  - `z` changes the current working directory, same functionality as `j` in [autojump][2].
 
 Completion
 ----------
