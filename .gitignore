@@ -2,3 +2,5 @@
 *.zwc.old
 modules/*/cache.zsh
 contrib
+.idea/*
+
