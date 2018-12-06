@@ -13,6 +13,9 @@ fi
 # ==========================
 # Customize to your needs...
 # ==========================
+#  Enable fzf if available
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Turn off beep
 unsetopt beep
 
