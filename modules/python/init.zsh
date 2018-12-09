@@ -150,7 +150,7 @@ fi
 
 # Load PIP completion.
 if (( $#commands[(i)pip(|[23])] )); then
-  cache_file="${TMPDIR:-/tmp}/prezto-python-cache.$UID.zsh"
+  cache_file="${TMPDIR:-/tmp}/prezto-pip-cache.$UID.zsh"
 
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
   pip_command="$commands[(i)pip(|[23])]"
