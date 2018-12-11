@@ -144,7 +144,7 @@ fi
 
 # Load PIP completion.
 if (( $#commands[(i)pip(|[23])] )); then
-  cache_file="${TMPDIR:-/tmp}/prezto-python-cache.$UID.zsh"
+  cache_file="${TMPDIR:-/tmp}/prezto-pip-cache.$UID.zsh"
 
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
   pip_command="$commands[(i)pip(|[23])]"
@@ -154,10 +154,11 @@ if (( $#commands[(i)pip(|[23])] )); then
         || ! -s "$cache_file" ]]; then
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
     $pip_command completion --zsh \
-      | sed -e "s|compctl -K [-_[:alnum:]]* pip|& pip2 pip3|" >! "$cache_file" 2> /dev/null
+      | sed -e "s|\(compctl -K [-_[:alnum:]]*\) pip|\1 pip pip2 pip3|" >! "$cache_file" 2> /dev/null
   fi
 
   source "$cache_file"
+
   unset cache_file pip_command
 fi
 
