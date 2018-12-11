@@ -16,6 +16,21 @@ fi
 #  Enable fzf if available
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Enable iTerm2 shell integration if available
+[ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
+
+# Change tmux window title to something meaningful
+#  Needs to have allow_rename set to on in .tmux.conf!
+if [[ -n "$TMUX" ]]; then
+    local prompt_command='printf "\033k'
+    [[ -n "$SSH_CONNECTION" ]] && prompt_command+="($(hostname -s)) "
+    prompt_command+='${PWD/#$HOME/"~"}\033\\"'
+
+    PROMPT_COMMAND=${prompt_command}
+    precmd() { eval "$PROMPT_COMMAND" }
+fi
+
+
 # Turn off beep
 unsetopt beep
 
