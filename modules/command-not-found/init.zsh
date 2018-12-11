@@ -17,11 +17,11 @@ elif [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
 # lookup mechanism (viz., `brew command command-not-found-init`) and instead
 # `find` it ourselves from `TAP_DIRECTORY` defined internally in Homebrew.
 elif (( $+commands[brew] )); then
-  cnf_command="$(brew --repository 2> /dev/null)"/Library/Taps/homebrew/homebrew-command-not-found/cmd/brew-command-not-found-init.rb
-  if [[ -s "$cnf_command" ]]; then
+  cnf_command=("$(brew --repository 2> /dev/null)"/Library/Taps/*/*/cmd/brew-command-not-found-init(|.rb)(.NL+0))
+  if (( $#cnf_command )); then
     cache_file="${TMPDIR:-/tmp}/prezto-brew-command-not-found-cache.$UID.zsh"
 
-    if [[ "$cnf_command" -nt "$cache_file" \
+    if [[ "${${(@o)cnf_command}[1]}" -nt "$cache_file" \
           || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
           || ! -s "$cache_file" ]]; then
       # brew command-not-found-init is slow; cache its output.
