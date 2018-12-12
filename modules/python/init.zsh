@@ -160,7 +160,7 @@ if (( $#commands[(i)pip(|[23])] )); then
         || ! -s "$cache_file" ]]; then
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
     $pip_command completion --zsh \
-      | sed -e "s|\(compctl -K [-_[:alnum:]]*\) pip|\1 pip pip2 pip3|" >! "$cache_file" 2> /dev/null
+      | sed -e "s|\(compctl -K [-_[:alnum:]]*\) pip.*|\1 pip pip2 pip3|" >! "$cache_file" 2> /dev/null
   fi
 
   source "$cache_file"
