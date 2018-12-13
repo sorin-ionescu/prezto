@@ -81,6 +81,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
      commits.
   - `gcR` removes the *HEAD* commit.
   - `gcs` displays various types of objects.
+  - `gcsS` displays commits with GPG signature.
   - `gcl` lists lost commits.
   - `gcy` displays commits yet to be applied to upstream in the short format.
   - `gcY` displays commits yet to be applied to upstream.
@@ -220,6 +221,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `glg` displays the graph log.
   - `glb` displays the brief commit log.
   - `glc` displays the commit count for each contributor in descending order.
+  - `glS` displays the log and checks the validity of signed commits.
 
 ### Merge
 
@@ -295,6 +297,8 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 
   - `gt` lists tags or creates tag.
   - `gtl` lists tags matching pattern.
+  - `gts` creates a signed tag.
+  - `gtv` validate a signed tag.
 
 ### Working directory
 
