@@ -9,6 +9,9 @@ Additionally, if this module is used in conjunction with the
 *history-substring-search* module, this module must be loaded **before** the
 *history-substring-search* module.
 
+To elaborate: The relative order of loading the modules would be 
+'syntax-highlighting', 'history-substring-search' and 'prompt'.
+
 Contributors
 ------------
 
