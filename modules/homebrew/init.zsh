@@ -45,12 +45,11 @@ alias casks='hb_deprecated brew cask search'
 alias caskx='brew cask uninstall'
 
 function hb_deprecated {
-  local cmd="${argv[3]}"
-  local cmd_args=( ${(@)argv:4} )
+  local cmd="${@[3]}"
+  local cmd_args="${@:4}"
 
   printf "'brew cask %s' has been deprecated, " "${cmd}"
   printf "using 'brew %s' instead\n" "${cmd}"
 
-  cmd_args=( ${(@)argv:4} )
-  command brew "${cmd}" ${(@)cmd_args}
+  command brew "${cmd}" "${=cmd_args}"
 }
