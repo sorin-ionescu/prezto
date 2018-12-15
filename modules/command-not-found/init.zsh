@@ -17,7 +17,9 @@ elif [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
 # lookup mechanism (viz., `brew command command-not-found-init`) and instead
 # `find` it ourselves from `TAP_DIRECTORY` defined internally in Homebrew.
 elif (( $+commands[brew] )); then
-  cnf_command=("$(brew --repository 2> /dev/null)"/Library/Taps/*/*/cmd/brew-command-not-found-init(|.rb)(.NL+0))
+  cnf_command=(
+    "$(brew --repository 2> /dev/null)"/Library/Taps/*/*/cmd/brew-command-not-found-init(|.rb)(.N)
+  )
   if (( $#cnf_command )); then
     cache_file="${TMPDIR:-/tmp}/prezto-brew-command-not-found-cache.$UID.zsh"
 
