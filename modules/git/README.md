@@ -67,7 +67,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gcm` records changes to the repository with the given message.
   - `gcS` records changes to the repository. (Signed)
   - `gcSa` stages all modified and deleted files. (Signed)
-  - `gcSm` records changes to the repository with the given message. (Signed)  - `gco`  checks out a branch or paths to work tree.
+  - `gcSm` records changes to the repository with the given message. (Signed)
   - `gcam` stages all modified and deleted files, and records changes to the repository with the given message.
   - `gco` checks out a branch or paths to work tree.
   - `gcO` checks out hunks from the index or the tree interactively.
