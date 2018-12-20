@@ -11,6 +11,7 @@ fi
 
 # Custom executables
 export PATH=$HOME/Executables/bin:$PATH
+export PATH=$HOME/scripts:$PATH
 export PATH=/opt/lhcb/lhcb-scifi40-software/bin:$PATH
 export PATH=/opt/lhcb/calibration/bin:$PATH
 export PATH=/opt/lhcb/ThresholdCalib/bin:$PATH
