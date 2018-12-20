@@ -8,3 +8,6 @@ alias prox="export http_proxy=http://netgw01:8080/; export https_proxy=http://ne
 prox
 
 alias rdesktop="rdesktop -g 1280x760 -u dabernin -d LBDAQ.CERN.CH"
+
+# Set umask to have rw rights for the scifi group
+umask g+rw

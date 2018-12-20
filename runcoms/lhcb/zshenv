@@ -1,1 +1,13 @@
-../zshenv
+#Load common configuration
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshenv" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshenv"
+fi
+
+#Dirty hack to emulate bashs "shopt -q login_shell"
+function shopt() {
+    if [[ "${@}" = "-q login_shell" ]]; then
+        return `setopt login`
+    else
+        return 1
+    fi
+}
