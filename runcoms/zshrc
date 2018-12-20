@@ -131,8 +131,9 @@ sshsocks() {
 
 #Function to close an established connection with sshforward
 sshclose () {
-    local host=${1}
-    local hostport=${2}
+    parts=(${(s_:_)1}) #split by colon
+    local host=${parts[1]}
+    local hostport=${parts[2]}
     echo "Closing connection to ${host}:${hostport}..."
     ssh -S ~/${host}:${hostport} -O exit ${host}
 }
