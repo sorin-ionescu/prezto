@@ -182,3 +182,4 @@ curl -d $jsondata -H "Content-Type: application/json" -X POST --socks5-hostname 
 }
 alias mkvolcp='mkcallapi'
 alias cat='bat'
+alias makeitso='brewu && ./Projects/update.sh'
