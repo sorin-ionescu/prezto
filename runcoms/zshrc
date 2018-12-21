@@ -168,11 +168,7 @@ for config_file ($HOME/.yadr/zsh/*.zsh) source $config_file
 #unalias mysql
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 POWERLEVEL9K_MODE='nerdfont-complete'
-alias idea='/opt/idea-IU-182.4129.33/bin/idea.sh'
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 function mkcallapi() {
@@ -181,5 +177,6 @@ jsondata='{"name": "'$volumename'","labels": "label1 label2","source": {"type": 
 curl -d $jsondata -H "Content-Type: application/json" -X POST --socks5-hostname localhost:9999 http://storage/volumes
 }
 alias mkvolcp='mkcallapi'
+
 alias cat='bat'
-alias makeitso='brewu && ./Projects/update.sh'
+alias makeitso='cd ~; brewu; ./Projects/update.sh'
