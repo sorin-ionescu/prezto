@@ -3,4 +3,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
 fi
 
-alias ssh="TERM=xterm-256color ssh"
+#SSH automatically renews kerberos ticket to CERN.CH if needed
+local _ssh=$(which ssh)  #Backup original ssh as _ssh
+ssh()
+{
+    if ! (klist > /dev/null 2>&1); then
+        printf "Renewing kerberos credentials for dabernin@CERN.CH..."
+        kinit dabernin@CERN.CH
+    fi
+
+    TERM=xterm-256color ${_ssh} $@
+}
