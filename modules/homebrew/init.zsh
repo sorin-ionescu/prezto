@@ -14,7 +14,7 @@ fi
 # Variables
 #
 
-# Load standard Homebrew shellenv into the shell session. 
+# Load standard Homebrew shellenv into the shell session.
 # Load 'HOMEBREW_' prefixed variables only. Avoid loading 'PATH' related
 # variables as they are already handled in standard zsh configuration.
 if (( $+commands[brew] )); then
@@ -34,6 +34,12 @@ alias brewo='brew outdated'
 alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewx='brew uninstall'
+
+# Homebrew Services
+alias bservl='brew services list'
+alias bservr='brew services restart'
+alias bservs='brew services start'
+alias bservx='brew services stop'
 
 # Homebrew Cask
 alias cask='brew cask'
