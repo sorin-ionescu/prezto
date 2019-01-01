@@ -181,15 +181,3 @@ alias mkvolcp='mkcallapi'
 alias cat='bat'
 alias makeitso='cd ~; brewu; ./Projects/update.sh'
 
-export WORKON_HOME=$HOME/.virtualenvs
-#export WORKON_HOME=/tmp/foo/.virtualenvs
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV="true"
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
-
