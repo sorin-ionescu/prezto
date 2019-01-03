@@ -26,6 +26,7 @@ Defines [Docker][1] aliases and functions.
 - `dkp` Pause all processes within one or more containers<Paste>
 - `dkP` Unpause all processes within one or more containers
 - `dkpl` Pull an image or a repository from a registry
+- `dkplI` Pull all tagged images
 - `dkph` Push an image or a repository to a registry
 - `dkps` List containers
 - `dkpsa` List all containers (default lists just running)
