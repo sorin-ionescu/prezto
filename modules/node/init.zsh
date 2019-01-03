@@ -34,7 +34,7 @@ fi
 typeset -A compl_commands=(
   npm   'npm completion'
   grunt 'grunt --completion=zsh'
-  gupl  'gulp --completion=zsh'
+  gulp  'gulp --completion=zsh'
 )
 
 for compl_command in "${(k)compl_commands[@]}"; do
