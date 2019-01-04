@@ -22,6 +22,12 @@ zstyle ':prezto:module:python' conda-init 'on'
 
 Caution: using conda and virtualenvwrapper at the same time may cause conflicts.
 
+Pip autocompletion cache is automatically generated. To disable, add the following.
+
+```sh
+zstyle ':prezto:module:python' pip-cache 'no'
+```
+
 Local Python Installation
 -------------------------
 

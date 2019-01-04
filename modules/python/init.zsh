@@ -149,7 +149,7 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
 fi
 
 # Load PIP completion.
-if (( $#commands[(i)pip(|[23])] )); then
+if zstyle -T ':prezto:module:python' pip-cache && (( $#commands[(i)pip(|[23])] )); then
   cache_file="${TMPDIR:-/tmp}/prezto-pip-cache.$UID.zsh"
 
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
