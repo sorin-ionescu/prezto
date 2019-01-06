@@ -110,8 +110,6 @@ function prompt_sorin_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent sp subst)
-  _prompt_sorin_precmd_async_pid=0
-  _prompt_sorin_precmd_async_data=$(mktemp "${TMPDIR:-/tmp}/sorin-prompt-async-XXXXXXXXXX")
 
   # Load required functions.
   autoload -Uz add-zsh-hook
