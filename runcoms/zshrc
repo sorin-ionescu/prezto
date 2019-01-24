@@ -166,30 +166,44 @@ for config_file ($HOME/.yadr/zsh/*.zsh) source $config_file
 #promptinit
 #prompt steef_simplified
 #unalias mysql
+
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 POWERLEVEL9K_MODE='nerdfont-complete'
 
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
-function mkcallapi() {
-volumename=$1
-jsondata='{"name": "'$volumename'","labels": "label1 label2","source": {"type": "volume", "volume": "myvolumename"},"config": {"sticky": false},"provider": null}'
-curl -d $jsondata -H "Content-Type: application/json" -X POST --socks5-hostname localhost:9999 http://storage/volumes
-}
-alias mkvolcp='mkcallapi'
+# Pinning my mysql to 5.6 for now
+export PATH=$PATH:/usr/local/Cellar/mysql@5.6/5.6.42/bin
+
+# todo - I think i want to set this snippet up as job on jenkins....maybe for continuous load testing?
+# will try to clean this out within a week or so
+#function mkcallapi() {
+#volumename=$1
+#jsondata='{"name": "'$volumename'","labels": "label1 label2","source": {"type": "volume", "volume": "myvolumename"},"config": {"sticky": #false},"provider": null}'
+#curl -d $jsondata -H "Content-Type: application/json" -X POST --socks5-hostname localhost:9999 http://storage/volumes
+#}
+#alias mkvolcp='mkcallapi'
 
 alias cat='bat'
 alias makeitso='cd ~; brewu; ./Projects/update.sh'
 
+# virtualenv & pyenv settings
 export WORKON_HOME=$HOME/.virtualenvs
-#export WORKON_HOME=/tmp/foo/.virtualenvs
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV="true"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+
 if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
     source /usr/local/bin/virtualenvwrapper.sh
 else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
 
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/jgartland/Projects/webdriverio/packages/wdio-lambda-runner/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/jgartland/Projects/webdriverio/packages/wdio-lambda-runner/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/jgartland/Projects/webdriverio/packages/wdio-lambda-runner/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/jgartland/Projects/webdriverio/packages/wdio-lambda-runner/node_modules/tabtab/.completions/sls.zsh
