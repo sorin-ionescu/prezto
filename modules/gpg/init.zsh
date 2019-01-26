@@ -11,9 +11,9 @@ if (( ! $+commands[gpg-agent] )); then
 fi
 
 # Set the default paths to gpg-agent files.
-_gpg_agent_conf="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.conf"
+_gpg_agent_conf="$(gpgconf --list-dir homedir)/gpg-agent.conf"
 _gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env.$UID"
-_gpg_agent_socket="$(gpgconf --list-dir | grep "agent-socket:.*" | sed "s/agent-socket://")"
+_gpg_agent_socket="$(gpgconf --list-dir agent-socket)"
 
 # Load environment variables from previous run
 source "$_gpg_agent_env" 2> /dev/null
