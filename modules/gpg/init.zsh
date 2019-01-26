@@ -22,7 +22,7 @@ source "$_gpg_agent_env" 2> /dev/null
 # Start gpg-agent if not started.
 if [[ -z "$GPG_AGENT_INFO" && ! -S "${_gpg_agent_socket}" ]]; then
   # Start gpg-agent if not started.
-  if ! ps -U "$LOGNAME" -o pid,ucomm | grep -q -- "^[0-9]* gpg-agent$"; then
+  if ! ps -U "$LOGNAME" -o pid,ucomm | grep -q -- "^ *[0-9]* gpg-agent$"; then
     eval "$(gpg-agent --daemon | tee "$_gpg_agent_env")"
   fi
 fi
