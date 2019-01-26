@@ -13,14 +13,16 @@ fi
 # Set the default paths to gpg-agent files.
 _gpg_agent_conf="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.conf"
 _gpg_agent_env="${TMPDIR:-/tmp}/gpg-agent.env.$UID"
+_gpg_agent_socket="$(gpgconf --list-dir | grep "agent-socket:.*" | sed "s/agent-socket://")"
 
 # Load environment variables from previous run
 source "$_gpg_agent_env" 2> /dev/null
 
+
 # Start gpg-agent if not started.
-if [[ -z "$GPG_AGENT_INFO" && ! -S "${GNUPGHOME:-$HOME/.gnupg}/S.gpg-agent" ]]; then
+if [[ -z "$GPG_AGENT_INFO" && ! -S ${_gpg_agent_socket}" ]]; then
   # Start gpg-agent if not started.
-  if ! ps -U "$LOGNAME" -o pid,ucomm | grep -q -- "${${${(s.:.)GPG_AGENT_INFO}[2]}:--1} gpg-agent"; then
+  if ! ps -U "$LOGNAME" -o pid,ucomm | grep -q -- "^[0-9]* gpg-agent$"; then
     eval "$(gpg-agent --daemon | tee "$_gpg_agent_env")"
   fi
 fi
