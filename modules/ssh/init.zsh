@@ -33,7 +33,6 @@ fi
 # Create a persistent SSH authentication socket.
 if [[ -S "$SSH_AUTH_SOCK" && "$SSH_AUTH_SOCK" != "$_ssh_agent_sock" ]]; then
   ln -sf "$SSH_AUTH_SOCK" "$_ssh_agent_sock"
-  export SSH_AUTH_SOCK="$_ssh_agent_sock"
 fi
 
 # Load identities.
