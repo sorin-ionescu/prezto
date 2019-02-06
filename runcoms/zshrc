@@ -17,6 +17,12 @@ alias g="git"
 alias c="clear"
 alias gl="git log --oneline --graph --decorate --all"
 
+# XDG Directories
+
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # NVM
 export NVM_DIR="/Users/harrygreen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -25,10 +31,15 @@ export NVM_DIR="/Users/harrygreen/.nvm"
 export ANDROID_HOME="/Users/harrygreen/Library/Android/sdk"
 
 # Yarn Package Manager
-export PATH="$PATH:`yarn global bin`"
+# export PATH="$PATH:`yarn global bin`"
 
 # Global Composer Packages
-export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
 # Terminal Markdown Viewer - Theme Configuration
 export MDV_THEME=1027.0309
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
