@@ -96,6 +96,11 @@ function prompt_jml_precmd {
     ruby-info
   fi
 
+  # Run node info (this should be fast and not require any async)
+  if (( $+functions[node-info] )); then
+    node-info
+  fi
+
   prompt_jml_async_tasks
 }
 
@@ -148,6 +153,8 @@ function prompt_jml_setup {
   zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7}'
   # Set ruby-info format
   zstyle ':prezto:module:ruby:info:version' format '%F{1}%v%f@%F{4}%g%f'
+  # Set node-info format
+  zstyle ':prezto:module:node:info:version' format '%F{2}%v%f'
 
   # Get the async worker set up
   _jml_cur_git_root=''
@@ -158,12 +165,12 @@ function prompt_jml_setup {
   _prompt_jml_mid=''
 
   # Define prompts.
-  PROMPT='%B%F{3}%n%b%f %F{6}${_prompt_jml_pwd}%(!. %B%F{1}#%f%b.) %f%B(%f%b${ruby_info[version]}%f%B%)%f%b'
+  PROMPT='%B%F{3}%n%b%f %F{6}${_prompt_jml_pwd}%(!. %B%F{1}#%f%b.) %f%B(%f%b${ruby_info[version]}%f%B%) %f%b[${node_info[version]}]%f%b'
   PROMPT+=$'\n'
   PROMPT+='${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{3}'
   RPROMPT+=${show_return}
-  RPROMPT+='%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_jml_git}'
+  RPROMPT+='%f)${_prompt_jml_git}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
