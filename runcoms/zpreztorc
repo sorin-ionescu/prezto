@@ -66,6 +66,13 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #zstyle ':prezto:module:editor' ps-context 'yes'
 
 #
+# Environment
+#
+
+# You may need to manually set your language environment
+zstyle ':prezto:environment' language 'en_US.UTF-8'
+
+#
 # Git
 #
 
