@@ -14,7 +14,7 @@
 # paste had a regression. Additionally, 5.2 added bracketed-paste-url-magic
 # which is generally better than url-quote-magic so we load that when possible.
 autoload -Uz is-at-least
-if [[ ${ZSH_VERSION} != 5.1.1 ]]; then
+if [[ ${ZSH_VERSION} != 5.1.1 && ${TERM} != "dumb" ]]; then
   if is-at-least 5.2; then
     autoload -Uz bracketed-paste-url-magic
     zle -N bracketed-paste bracketed-paste-url-magic

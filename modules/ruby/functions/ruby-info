@@ -33,7 +33,7 @@ if [[ -n "$version_format" ]]; then
   fi
 
   # Format version.
-  if [[ -n "$version" ]]; then
+  if [[ -n "$version" && "$version" != "system" ]]; then
     zformat -f version_formatted "$version_format" "v:$version" "g:${gemset:=default}"
     ruby_info[version]="$version_formatted"
     ruby_info[gemset]="$gemset"

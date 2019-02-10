@@ -47,4 +47,13 @@ function prompt_minimal_setup {
   RPROMPT=''
 }
 
+function prompt_minimal_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2> /dev/null
+  prompt_preview_theme 'minimal'
+}
+
 prompt_minimal_setup "$@"

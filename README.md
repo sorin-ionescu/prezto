@@ -33,10 +33,11 @@ version is 4.3.11.
      done
      ```
 
-     Note: If you already have any of the given config files, ln will error. In
-     simple cases you can add `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
-     the bottom of your `.zshrc` to load prezto but keep your config intact. For
-     more complicated setups, it is recommended that you back up your original
+     Note: If you already have any of the given configuration files, `ln` will
+     cause error. In simple cases you can load prezto by adding the line
+     `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to the bottom of your
+     `.zshrc` and keep the rest of your Zsh configuration intact. For more
+     complicated setups, it is recommended that you back up your original
      configs and replace them with the provided prezto runcoms.
 
   4. Set Zsh as your default shell:
@@ -89,6 +90,10 @@ accompanying README files to learn of what is available.
      window or tab.
 
      ![sorin theme][2]
+     Note that the 'git' module may be required for special symbols to appear,
+     such as those on the right of the above image. Add `'git'` to the `pmodule`
+     list (under `zstyle ':prezto:load' pmodule \` in your *~/.zpreztorc*) to
+     enable this module.
 
 ### External Modules
 
@@ -99,7 +104,7 @@ accompanying README files to learn of what is available.
      Note that module names need to be unique or they will cause an error when
      loading.
 
-     ```console
+     ```sh
      zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
      ```
 
@@ -126,6 +131,6 @@ This project is licensed under the MIT License.
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
-[6]: http://gitref.org
+[6]: https://git.github.io/git-reference/
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: http://grml.org/zsh/zsh-lovers.html

@@ -11,6 +11,17 @@ if [[ "$OSTYPE" != (darwin|linux)* ]]; then
 fi
 
 #
+# Variables
+#
+
+# Load standard Homebrew shellenv into the shell session.
+# Load 'HOMEBREW_' prefixed variables only. Avoid loading 'PATH' related
+# variables as they are already handled in standard zsh configuration.
+if (( $+commands[brew] )); then
+  eval "${(@M)${(f)"$(brew shellenv 2> /dev/null)"}:#export HOMEBREW*}"
+fi
+
+#
 # Aliases
 #
 
@@ -29,10 +40,20 @@ alias bubu='bubo && bubc'
 
 # Homebrew Cask
 alias cask='brew cask'
-alias caskc='brew cask cleanup --outdated'
-alias caskC='brew cask cleanup'
+alias caskc='hb_deprecated brew cask cleanup'
+alias caskC='hb_deprecated brew cask cleanup'
 alias caski='brew cask install'
 alias caskl='brew cask list'
 alias casko='brew cask outdated'
-alias casks='brew cask search'
+alias casks='hb_deprecated brew cask search'
 alias caskx='brew cask uninstall'
+
+function hb_deprecated {
+  local cmd="${@[3]}"
+  local cmd_args="${@:4}"
+
+  printf "'brew cask %s' has been deprecated, " "${cmd}"
+  printf "using 'brew %s' instead\n" "${cmd}"
+
+  command brew "${cmd}" "${=cmd_args}"
+}
