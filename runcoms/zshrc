@@ -1,3 +1,5 @@
+setopt ALIAS_FUNC_DEF
+
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 else
@@ -8,11 +10,16 @@ fi
 
 # random aliases
 alias ivm='vim' # I DO THIS ALL THE FUCKING TIME
+alias iv='vi' # See above
 alias nest="nest -u j.morgan.lieberthal@gmail.com -p kbner7xL@"
-alias beg="bundle exec guard"
+alias beg="RUBYOPT=\"-W0\" bundle exec guard"
 alias nr="repl.history"
+alias mux='tmuxinator'
 
 # pip aliases
+if (( ! $+commands[pip] )); then
+  alias pip="pip3"
+fi
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"
 alias pip3up="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U"
 
@@ -26,7 +33,10 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 
-[[ -s "${ZEXTRA_DIR}/directories.zsh" ]] && source "${ZEXTRA_DIR}/directories.zsh"
+# This mashes the rtags daemon
+unalias rdm
+
+# [[ -s "${ZEXTRA_DIR}/directories.zsh" ]] && source "${ZEXTRA_DIR}/directories.zsh"
 export RANGER_LOAD_DEFAULT_RC=false
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

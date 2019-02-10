@@ -39,9 +39,9 @@ zstyle ':prezto:load' pmodule \
   'autoenv' \
   'homebrew' \
   'osx' \
-  'node' \
   'history-substring-search' \
-  'ruby' \
+  'node' \
+  'rails' \
   'prompt'
 
 #
@@ -67,7 +67,7 @@ zstyle ':prezto:load' pmodule \
 zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 #
 # Git
@@ -117,7 +117,7 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+zstyle ':prezto:module:prompt' theme 'jml'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
@@ -129,21 +129,29 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # zstyle ':prezto:module:prompt' show-return-val 'yes'
 
 #
-# Python
-#
-
-# Auto switch the Python virtualenv on directory change.
-# zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
-
-# Automatically initialize virtualenvwrapper if pre-requisites are met.
-# zstyle ':prezto:module:python:virtualenv' initialize 'yes'
-
-#
 # Ruby
 #
 
 # Auto switch the Ruby version on directory change.
 # zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+zstyle ':prezto:module:ruby:rvm' auto-switch 'yes'
+
+#
+# Node
+#
+
+# Node.js version in prompt
+zstyle ':prezto:module:node:info:version' format '%v'
+
+#
+# Python
+#
+
+# Auto switch the Python virtualenv on directory change.
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+
+# Automatically initialize virtualenvwrapper if pre-requisites are met.
+zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 
 #
 # Screen
@@ -220,10 +228,4 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # behavior.
 # zstyle ':prezto:module:utility' safe-ops 'yes'
 
-#
-# Ruby
-#
-
-# Auto switch the Ruby version on directory change.
-zstyle ':prezto:module:ruby:rvm' auto-switch 'yes'
 #  vim: set ts=8 sw=2 tw=0 ft=zsh et :
