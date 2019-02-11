@@ -269,9 +269,11 @@ bindkey -d
 # Emacs Key Bindings
 #
 
-for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}"
+for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}" \
+  "${key_info[Escape]}${key_info[Left]}"
   bindkey -M emacs "$key" emacs-backward-word
-for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}"
+for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}" \
+  "${key_info[Escape]}${key_info[Right]}"
   bindkey -M emacs "$key" emacs-forward-word
 
 # Kill to the beginning of the line.
