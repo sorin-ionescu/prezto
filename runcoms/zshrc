@@ -10,13 +10,33 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Customise the Powerlevel9k prompts
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  dir
+  vcs
+  status
+)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+# Create a custom JavaScript prompt section
+POWERLEVEL9K_CUSTOM_JAVASCRIPT="echo -n '\ue781' JavaScript"
+POWERLEVEL9K_CUSTOM_JAVASCRIPT_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_JAVASCRIPT_BACKGROUND="yellow"
+
+# Load Nerd Fonts with Powerlevel9k theme for Zsh
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0C0'
+source ~/powerlevel9k/powerlevel9k.zsh-theme
+
 # Customize to your needs...
 
 DEFAULT_USER=`whoami`
 
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
-export PATH="/usr/local/php5/bin:$PATH"
-export PATH=/usr/local/anaconda3/bin:"$PATH"
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+source $(dirname $(gem which colorls))/tab_complete.sh
 
 nvm() {
     unset -f nvm
@@ -41,11 +61,12 @@ npm() {
 
 # Colors
 
-d="${ZDOTDIR:-$HOME}/.zprezto/.dircolors"
-eval "$(gdircolors $d)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# d="${ZDOTDIR:-$HOME}/.zprezto/.dircolors"
+# eval "$(gdircolors $d)"
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Aliases
 
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias localip="ipconfig getifaddr en0"
+alias lc='colorls -lA --sd'

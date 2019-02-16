@@ -119,7 +119,7 @@ zstyle ':prezto:module:autosuggestions' color 'yes'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'agnoster'
+# zstyle ':prezto:module:prompt' theme 'powerline'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
@@ -193,7 +193,7 @@ zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_vscale' 'id_y
 #
 
 # Auto set the tab and window titles.
-# zstyle ':prezto:module:terminal' auto-title 'yes'
+zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the window title format.
 # zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
