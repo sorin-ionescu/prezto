@@ -87,19 +87,13 @@ function prompt_jml_precmd {
   fi
 
   # Run python info (this should be fast and not require any async)
-  # if (( $+functions[python-info] )); then
-  #   python-info
-  # fi
+  (( $+functions[python-info] )) && python-info
 
   # Run ruby info (this should be fast and not require any async)
-  if (( $+functions[ruby-info] )); then
-    ruby-info
-  fi
+  (( $+functions[ruby-info] )) && ruby-info
 
   # Run node info (this should be fast and not require any async)
-  if (( $+functions[node-info] )); then
-    node-info
-  fi
+  (( $+functions[node-info] )) && node-info
 
   prompt_jml_async_tasks
 }
@@ -150,9 +144,10 @@ function prompt_jml_setup {
     show_return+='%? '
   fi
   # Set python-info format
-  zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7}'
+  zstyle ':prezto:module:python:info:virtualenv' format '%f@%F{3}%v%f'
+  zstyle ':prezto:module:python:info:version' format '%f%F{3}%v%F{7} '
   # Set ruby-info format
-  zstyle ':prezto:module:ruby:info:version' format '%F{1}%v%f@%F{4}%g%f'
+  zstyle ':prezto:module:ruby:info:version' format '%F{1}%v%f '
   # Set node-info format
   zstyle ':prezto:module:node:info:version' format '%F{2}%v%f'
 
@@ -165,7 +160,7 @@ function prompt_jml_setup {
   _prompt_jml_mid=''
 
   # Define prompts.
-  PROMPT='%B%F{3}%n%b%f %F{6}${_prompt_jml_pwd}%(!. %B%F{1}#%f%b.) %f%B(%f%b${ruby_info[version]}%f%B%) %f%b[${node_info[version]}]%f%b'
+  PROMPT='%B%F{3}%n%b%f %F{6}${_prompt_jml_pwd}%(!. %B%F{1}#%f%b.) %f%b[${python_info[version]}${python_info[virtualenv]}${ruby_info[version]}${node_info[version]}]%f%b'
   PROMPT+=$'\n'
   PROMPT+='${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{3}'

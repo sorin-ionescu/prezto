@@ -35,14 +35,14 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'prompt' \
   'git' \
-  'autoenv' \
   'homebrew' \
   'osx' \
   'history-substring-search' \
+  'python' \
   'node' \
-  'rails' \
-  'prompt'
+  'ruby'
 
 #
 # Autosuggestions
@@ -134,7 +134,7 @@ zstyle ':prezto:module:prompt' theme 'jml'
 
 # Auto switch the Ruby version on directory change.
 # zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
-zstyle ':prezto:module:ruby:rvm' auto-switch 'yes'
+# zstyle ':prezto:module:ruby:rvm' auto-switch 'yes'
 
 #
 # Node
@@ -148,10 +148,10 @@ zstyle ':prezto:module:node:info:version' format '%v'
 #
 
 # Auto switch the Python virtualenv on directory change.
-zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+# zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
-zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+# zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 
 #
 # Screen
@@ -168,7 +168,7 @@ zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 #
 
 # Set the SSH identities to load into the agent.
-# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa'
 
 #
 # Syntax Highlighting

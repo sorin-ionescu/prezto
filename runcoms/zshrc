@@ -1,4 +1,5 @@
 setopt ALIAS_FUNC_DEF
+export ZSH_ENABLE_COMPFIX=true
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -14,7 +15,7 @@ alias iv='vi' # See above
 alias nest="nest -u j.morgan.lieberthal@gmail.com -p kbner7xL@"
 alias beg="RUBYOPT=\"-W0\" bundle exec guard"
 alias nr="repl.history"
-alias mux='tmuxinator'
+alias mux="$commands[tmuxinator]"
 
 # pip aliases
 if (( ! $+commands[pip] )); then
@@ -34,9 +35,14 @@ alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 
 # This mashes the rtags daemon
-unalias rdm
+if (( $+aliases[rdm] )); then
+  unalias rdm
+fi
+
+if (( $+commands[direnv] )); then
+  eval "$(direnv hook zsh)"
+fi
 
 # [[ -s "${ZEXTRA_DIR}/directories.zsh" ]] && source "${ZEXTRA_DIR}/directories.zsh"
 export RANGER_LOAD_DEFAULT_RC=false
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
