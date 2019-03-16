@@ -76,7 +76,7 @@ fpath=(
   $fpath
 )
 
-autoload gi clean-compiled-funcs signing-cert man mount-android umount-android \
+autoload gi ck2 clean-compiled-funcs signing-cert man mount-android umount-android \
   name-dir pygless recompile-funcs take use-ruby
 
 [[ -x /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8 2>/dev/null)"
