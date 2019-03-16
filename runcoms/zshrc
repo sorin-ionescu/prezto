@@ -1,4 +1,5 @@
 setopt ALIAS_FUNC_DEF
+setopt COMPLETEALIASES
 export ZSH_ENABLE_COMPFIX=true
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -45,4 +46,4 @@ fi
 
 # [[ -s "${ZEXTRA_DIR}/directories.zsh" ]] && source "${ZEXTRA_DIR}/directories.zsh"
 export RANGER_LOAD_DEFAULT_RC=false
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
