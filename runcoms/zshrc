@@ -11,3 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# load all files in ./zshfile such as alias, util ...
+source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshfile/??*
