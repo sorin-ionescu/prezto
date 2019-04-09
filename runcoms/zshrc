@@ -66,3 +66,5 @@ export FNM_LOGLEVEL=info
 
       add-zsh-hook chpwd _fnm_autoload_hook \
         && _fnm_autoload_hook
+
+export PATH="$PATH:$HOME/.local/bin"
