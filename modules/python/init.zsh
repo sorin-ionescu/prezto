@@ -8,17 +8,12 @@
 #
 
 # Load manually installed pyenv into the path
-if [[ -n "$PYENV_ROOT" && -s "$PYENV_ROOT/bin/pyenv" ]]; then
-  path=("$PYENV_ROOT/bin" $path)
-elif [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
-  path=("$HOME/.pyenv/bin" $path)
-fi
+if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
+  path=("${PYENV_ROOT}/bin" $path)
+  eval "$(pyenv init - --no-rehash zsh)"
 
 # Load pyenv into the current python session
-if (( $+commands[pyenv] )); then
-  if [[ -z "$PYENV_ROOT" ]]; then
-    export PYENV_ROOT=$(pyenv root)
-  fi
+elif (( $+commands[pyenv] )); then
   eval "$(pyenv init - --no-rehash zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
