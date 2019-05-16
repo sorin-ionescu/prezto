@@ -1,5 +1,9 @@
 Prezto — Instantly Awesome Zsh
 ==============================
+This is a slightly lagging behind it's upstream, but is a mostly up to date copy of Sorin Ionescu's Prezto.  This is forked in order to contain a copy in git of my changes and to provide me a way to easily synchronize these changes across systems.  The primary files modified here-in are in the runcoms folder, which contains my .zshrc, .zpreztorc, .zlogin, and .zlogout.  You are welcome to clone this repo to get my configs, which are well-tested and used by me (and some of my coworkers) on numerous systems.  Obviously, I use a Mac, and most of my settings are changed with that in mind.  These configs work as-is on ZSH on FreeBSD 10.x as well.  Other environments YMMV.
+
+In addition to configuration changes, I maintain some patches within this fork that make Prezto play more nicely with a Mac using Homebrew to replace some out-of-date system services which do not include Apple-provided patches.
+
 
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
@@ -19,9 +23,9 @@ version is 4.3.11.
 
   2. Clone the repository:
 
-     ```console
-     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-     ```
+        ```console
+		git clone --recursive https://github.com/Tristor/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+		```
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:

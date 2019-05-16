@@ -11,3 +11,69 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+export PATH=/usr/local/bin:~/scripts:$PATH:/usr/sbin:/sbin
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+syspip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
+#Google Go (Golang)
+export GOPATH=$HOME/projects/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+#Haskell/Cabal
+export PATH=$HOME/.cabal/bin:$PATH
+
+#Node.JS
+
+if [[ -s $HOME/.nvm ]];
+ then 
+	setopt nullglob 
+	NVM_DIR=$HOME/.nvm 
+	source $NVM_DIR/nvm.sh 
+fi
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory extendedglob
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '${ZDOTDIR:-$HOME}.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Add homebrew to the completion path
+fpath=("/usr/local/bin/" $fpath)
+
+# RVM
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Editor Setting
+if [ "$(uname)" = "Darwin" ]; then #Only OS X
+    if [[ -x /usr/local/bin/mvim ]]; then # Prefer MacVim
+        export VISUAL="/usr/local/bin/mvim -v"
+    elif [[ -x /usr/local/bin/mate ]]; then #Alternatively use TextMate2 if MacVim is not installed
+        export VISUAL="/usr/local/bin/mate -w"
+    fi
+else
+    export VISUAL="/usr/local/bin/vim"
+fi
+export EDITOR="${VISUAL}"
+
+# Clean up git branches left over from git-flow after merge
+gitclean(){
+    git branch --merged | egrep -v "^\*|master|develop" | xargs -n 1 git branch -d
+}
