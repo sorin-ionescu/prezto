@@ -67,7 +67,7 @@ path () {
 #Second argument (optional):
 sshmount () {
   local VOLNAME=${1}${2//\//-}  #Replace / with - for the volname
-  local MOUNTDIR=$HOME/Mounts/$VOLNAME
+  local MOUNTDIR=/tmp/Mounts/$VOLNAME
   #Check if directory is already mounted
   if contains "`mount`" $MOUNTDIR
   then
