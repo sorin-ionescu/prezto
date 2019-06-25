@@ -9,7 +9,9 @@ To enable OpenSSH Agent protocol emulation, and make `gpg-agent` a drop-in
 replacement for `ssh-agent`, add the following line to
 *~/.gnupg/gpg-agent.conf*:
 
-    enable-ssh-support
+```conf
+enable-ssh-support
+```
 
 When OpenSSH Agent protocol emulation is enabled, this module will load the SSH
 module for additional processing.

@@ -6,6 +6,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function wake {
+
 local config_file="$HOME/.wakeonlan/$1"
 if [[ ! -s "$config_file" ]]; then
   print "$0: invalid device file: $1" >&2
@@ -18,3 +20,5 @@ if (( ! $+commands[wakeonlan] )); then
 fi
 
 wakeonlan -f "$config_file"
+
+# }

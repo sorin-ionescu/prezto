@@ -1,7 +1,16 @@
 Homebrew
 ========
 
-Defines Homebrew aliases.
+Defines Homebrew specific environment variables and aliases.
+
+Variables
+---------
+
+Execute the following to list the environment variables loaded in the shell:
+
+```sh
+brew shellenv
+```
 
 Aliases
 -------
@@ -12,18 +21,17 @@ Aliases
   - `brewC` cleans outdated brews, including keg-only, and their cached archives.
   - `brewi` installs a formula.
   - `brewl` lists installed formulae.
+  - `brewo` lists brews which have an update available.
   - `brews` searches for a formula.
-  - `brewu` updates Homebrew and formulae.
+  - `brewu` updates and upgrades Homebrew packages and formulae.
   - `brewx` uninstalls a formula.
 
 ### Homebrew Cask
 
   - `cask` is aliased to `brew cask`.
-  - `caskc` cleans up old cached downloads.
-  - `caskC` cleans up all cached downloads.
   - `caski` installs a cask.
   - `caskl` lists installed casks.
-  - `casks` searches for a cask.
+  - `casko` lists casks which have an update available.
   - `caskx` uninstalls a cask.
 
 Authors

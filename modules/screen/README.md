@@ -13,12 +13,16 @@ Starts a GNU Screen session automatically when Zsh is launched.
 To enable this feature when launching Zsh in a local terminal, add the
 following line to *zpreztorc*:
 
-    zstyle ':prezto:module:screen:auto-start' local 'yes'
+```sh
+zstyle ':prezto:module:screen:auto-start' local 'yes'
+```
 
 To enable this feature when launching Zsh in a SSH connection, add the
 following line to *zpreztorc*:
 
-    zstyle ':prezto:module:screen:auto-start' remote 'yes'
+```sh
+zstyle ':prezto:module:screen:auto-start' remote 'yes'
+```
 
 Aliases
 -------

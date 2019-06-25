@@ -23,7 +23,7 @@ function prompt_minimal_precmd {
 function prompt_minimal_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
 
   # Load required functions.
   autoload -Uz add-zsh-hook
@@ -45,6 +45,15 @@ function prompt_minimal_setup {
   # Define prompts.
   PROMPT='%2~${vcs_info_msg_0_} » '
   RPROMPT=''
+}
+
+function prompt_minimal_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2> /dev/null
+  prompt_preview_theme 'minimal'
 }
 
 prompt_minimal_setup "$@"

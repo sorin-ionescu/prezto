@@ -3,7 +3,7 @@ Rsync
 
 Defines [rsync][1] aliases.
 
-Mac OS X users are encouraged to use [Bombich's rsync][2], which has HFS+
+macOS users are encouraged to use [Bombich's rsync][2], which has HFS+
 enhancements.
 
 Aliases
@@ -23,5 +23,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://rsync.samba.org
-[2]: http://help.bombich.com/kb/overview/credits#opensource
+[2]: https://bombich.com/kb/ccc5/credits#rsync
 [3]: https://github.com/sorin-ionescu/prezto/issues
