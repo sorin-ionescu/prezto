@@ -36,5 +36,5 @@ export PATH=$PATH:$GOBIN
 
 
 # homebrew
-export PATH="/usr/local/bin:$PATH"
-
+# export PATH="/usr/local/bin:$PATH"
+# aleady added in .zprofile
