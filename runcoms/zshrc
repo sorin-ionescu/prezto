@@ -11,3 +11,30 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+
+# compinit
+autoload -U compinit  # 保管機能を有効化 -U...ビルトイン関数読込み時、ユーザ側で定義した aliasに上書きを防ぐ
+compinit # 実行する
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# bash_completion ... nvm の補完が効くようにする
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# typescript
+export PATH=$PATH:~/node_modules/typescript/bin
+
+# deno
+export PATH="$HOME/.deno/bin:$PATH"
+
+# # golang
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+
+# homebrew
+export PATH="/usr/local/bin:$PATH"
+
