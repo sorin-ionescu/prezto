@@ -38,3 +38,6 @@ export PATH=$PATH:$GOBIN
 # homebrew
 # export PATH="/usr/local/bin:$PATH"
 # aleady added in .zprofile
+
+# init prezto
+source "${ZDOTDIR:-$HOME}/dotfiles/.zprezto/init.zsh"
