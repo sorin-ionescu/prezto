@@ -6,6 +6,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function deb-clone {
+
 local clone_script="${0}.sh"
 local package_list=$(
   perl \
@@ -23,3 +25,5 @@ rm "$clone_script"
 print '#!/bin/sh\n' > "$clone_script"
 print "aptitude install ${package_list}\n" >> "$clone_script"
 chmod +x "$clone_script"
+
+# }

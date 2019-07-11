@@ -1,0 +1,34 @@
+#
+# Exposes information about the Perl environment via the $perl_info associative
+# array.
+#
+# Authors:
+#   JINNOUCHI Yasushi <delphinus@remora.cx>
+#
+
+# function perl-info {
+
+local version
+local version_format
+local version_formatted
+
+# Clean up previous $perl_info.
+unset perl_info
+typeset -gA perl_info
+
+if (( $+commands[perlbrew] )); then
+  version="${PERLBREW_PERL##*perl-}"
+elif (( $+commands[plenv] )); then
+  version=$(plenv version-name)
+elif (( $+commands[perl] )); then
+  version=$(perl -e 'printf "%vd", $^V')
+fi
+
+# Format version.
+if [[ -n "$version" ]]; then
+  zstyle -s ':prezto:module:perl:info:version' format 'version_format'
+  zformat -f version_formatted "$version_format" "v:$version"
+  perl_info[version]="$version_formatted"
+fi
+
+# }

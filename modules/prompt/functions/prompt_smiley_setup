@@ -36,7 +36,7 @@ function prompt_smiley_precmd {
 
 function prompt_smiley_setup {
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(percent subst)
+  prompt_opts=(cr percent sp subst)
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_smiley_precmd

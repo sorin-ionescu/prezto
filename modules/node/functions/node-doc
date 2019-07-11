@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function node-doc {
+
 if [[ -z "$BROWSER" ]]; then
   print "$0: no web browser defined" >&2
   return 1
@@ -12,3 +14,5 @@ fi
 
 # TODO: Make the sections easier to use.
 "$BROWSER" "http://nodejs.org/docs/$(node --version | sed 's/-.*//')/api/all.html#${1}"
+
+# }

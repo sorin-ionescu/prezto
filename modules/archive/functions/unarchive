@@ -5,11 +5,14 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function unarchive {
+
 local remove_archive
 local success
 local file_name
 local file_path
 local extract_dir
+local _gzip_bin _bzip2_bin _xz_bin
 
 if (( $# == 0 )); then
   cat >&2 <<EOF
@@ -28,6 +31,29 @@ if [[ "$1" == "-r" || "$1" == "--remove" ]]; then
   shift
 fi
 
+# here, we check for dropin/multi-threaded replacements
+# this should eventually be moved to modules/archive/init.zsh
+# as a global alias
+if (( $+commands[pigz] )); then
+  _gzip_bin='pigz'
+else
+  _gzip_bin='gzip'
+fi
+
+if (( $+commands[pixz] )); then
+  _xz_bin='pixz'
+else
+  _xz_bin='xz'
+fi
+
+if (( $+commands[lbzip2] )); then
+  _bzip2_bin='lbzip2'
+elif (( $+commands[pbzip2] )); then
+  _bzip2_bin='pbzip2'
+else
+  _bzip2_bin='bzip2'
+fi
+
 while (( $# > 0 )); do
   if [[ ! -s "$1" ]]; then
     print "$0: file not valid: $1" >&2
@@ -40,24 +66,24 @@ while (( $# > 0 )); do
   file_path="${1:A}"
   extract_dir="${file_name:r}"
   case "$1:l" in
-    (*.tar.gz|*.tgz) tar xvzf "$1" ;;
-    (*.tar.bz2|*.tbz|*.tbz2) tar xvjf "$1" ;;
-    (*.tar.xz|*.txz) tar --xz --help &> /dev/null \
-      && tar --xz -xvf "$1" \
-      || xzcat "$1" | tar xvf - ;;
+    (*.tar.gz|*.tgz) tar -xvf "$1" --use-compress-program="${_gzip_bin}" ;;
+    (*.tar.bz2|*.tbz|*.tbz2) tar -xvf "$1" --use-compress-program="${_bzip2_bin}" ;;
+    (*.tar.xz|*.txz) tar -xvf "$1" --use-compress-program="${_xz_bin}" ;;
     (*.tar.zma|*.tlz) tar --lzma --help &> /dev/null \
       && tar --lzma -xvf "$1" \
-      || lzcat "$1" | tar xvf - ;;
-    (*.tar) tar xvf "$1" ;;
+      || lzcat "$1" | tar -xvf - ;;
+    (*.tar) tar -xvf "$1" ;;
     (*.gz) gunzip "$1" ;;
     (*.bz2) bunzip2 "$1" ;;
     (*.xz) unxz "$1" ;;
     (*.lzma) unlzma "$1" ;;
     (*.Z) uncompress "$1" ;;
-    (*.zip) unzip "$1" -d $extract_dir ;;
-    (*.rar) unrar &> /dev/null \
-      && unrar x -ad "$1" \
-      || rar x -ad "$1" ;;
+    (*.zip|*.jar) unzip "$1" -d $extract_dir ;;
+    (*.rar) ( (( $+commands[unrar] )) \
+      && unrar x -ad "$1" ) \
+      || ( (( $+commands[rar] )) \
+      && rar x -ad "$1" ) \
+      || unar -d "$1" ;;
     (*.7z) 7za x "$1" ;;
     (*.deb)
       mkdir -p "$extract_dir/control"
@@ -78,3 +104,5 @@ while (( $# > 0 )); do
   (( $success == 0 )) && (( $remove_archive == 0 )) && rm "$1"
   shift
 done
+
+# }

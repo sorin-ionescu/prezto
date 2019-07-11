@@ -5,7 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-local root="$(git rev-parse --show-toplevel 2> /dev/null)"
+# function git-root {
+
+local root="$(command git rev-parse --show-toplevel 2> /dev/null)"
 
 if [[ -n "$root" ]]; then
   print "$root"
@@ -14,3 +16,5 @@ else
   print "$0: not a repository work tree: $PWD" >&2
   return 1
 fi
+
+# }

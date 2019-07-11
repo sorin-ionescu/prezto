@@ -8,25 +8,39 @@ Settings
 
 ### Highlighting
 
-If you have enabled color globally in *zpreztorc*, you may disable it for certain
-commands.
+If you have enabled color globally in *zpreztorc*, you may disable it for
+certain commands.
 
 To disable `ls` color, add the following line to *zpreztorc*; when coloring is
 disabled, type indicators (\*, /, =>, @, =, |, %) will be appended to entries.
 
-    zstyle ':prezto:module:utility:ls' color 'no'
+```sh
+zstyle ':prezto:module:utility:ls' color 'no'
+```
+
+To disable GNU coreutils `ls` to list directories grouped first, add the following line to *zpreztorc*:
+
+```sh
+zstyle ':prezto:module:utility:ls' dirs-first 'no'
+```
 
 To disable `diff` highlighting, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:utility:diff' color 'no'
+```sh
+zstyle ':prezto:module:utility:diff' color 'no'
+```
 
 To disable `wdiff` highlighting, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:utility:wdiff' color 'no'
+```sh
+zstyle ':prezto:module:utility:wdiff' color 'no'
+```
 
 To disable `make` highlighting, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:utility:make' color 'no'
+```sh
+zstyle ':prezto:module:utility:make' color 'no'
+```
 
 Aliases
 -------
@@ -48,6 +62,12 @@ Aliases
   - `mysql`
   - `rm`
 
+To disable all spelling corrections, add the following line to *zpreztorc*:
+
+```sh
+zstyle ':prezto:module:utility' correct 'no'
+```
+
 ### Disabled File Globbing
 
   - `bower`
@@ -57,24 +77,22 @@ Aliases
   - `history`
   - `locate`
   - `rake`
-  - `rsync`
-  - `scp`
+  - `rsync` (selectively enabled for local files)
+  - `scp` (selectively enabled for local files)
   - `sftp`
 
 ### General
 
   - `_` executes a command as another user (`sudo`).
   - `b` opens the default web browser.
-  - `cp` copies files and directories interactively.
+  - `diffu` shorthand for `diff --unified`
   - `e` opens the default editor.
-  - `ln` links files and directories interactively.
   - `mkdir` creates directories, including intermediary directories.
-  - `mv` moves files and directories interactively.
   - `p` opens the default pager.
   - `po` removes a directory from the stack and changes to it (`popd`).
   - `pu` changes the directory and pushes the old directory onto the stack
     (`pushd`).
-  - `rm` removes files and directories interactively.
+  - `sa` search aliases for a word.
   - `type` displays all the attribute values of a shell parameter.
 
 ### Files and Directories
@@ -92,7 +110,7 @@ Aliases
   - `lu` lists sorted by date, most recent last, shows access time.
   - `sl` lists directory contents (`ls`).
 
-### Mac OS X Everywhere
+### macOS Everywhere
 
   - `o` opens files and directories (`open` or `xdg-open`).
   - `get` downloads files (`curl` or `wget`).
@@ -103,13 +121,27 @@ Aliases
 
 ### Resource Usage
 
-  - `df` displays free disk space using human readable units.
+  - `df` displays free disk space using human readable units (aliases to `pydf`,
+    if installed).
   - `du` displays disk usage using human readable units.
-  - `top` displays information about processes (aliased to `htop`, if installed).
-  - `topc` displays information about processes sorted by CPU usage (`htop` not
-    installed).
-  - `topm` displays information about processes sorted by RAM usage (`htop` not
-    installed).
+  - `top` displays information about processes.
+  - `topc` displays information about processes sorted by CPU usage.
+  - `topm` displays information about processes sorted by RAM usage.
+
+### Safe ops
+
+By default, `cp`,`ln`, `mv` and `rm` are aliased to their interactive variants.
+If this is not desired, it can be disabled by adding the following line to
+*zpreztorc*:
+
+    zstyle ':prezto:module:utility' safe-ops 'no'.
+
+In addition, the following aliases have been added:
+
+  - `cpi` copies files and directories interactively.
+  - `lni` links files and directories interactively.
+  - `mvi` moves files and directories interactively.
+  - `rmi` removes files and directories interactively.
 
 ### Miscellaneous
 
@@ -130,10 +162,11 @@ Functions
   - `mkdcd` makes a directory and changes to it.
   - `popdls` pops an entry off the directory stack and lists its contents.
   - `pushdls` pushes an entry onto the directory stack and lists its contents.
+  - `noremoteglob` enable local path globbing but disable remote path globbing.
 
 ### Developer
 
-  - `diff` highlights diff output (requires `colordiff` or `Git`).
+  - `diff` highlights diff output (requires `colordiff`).
   - `make` highlights make output (requires `colormake`).
   - `wdiff` highlights wdiff output (requires `wdiff `or `Git`).
 

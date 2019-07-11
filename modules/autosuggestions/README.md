@@ -1,9 +1,4 @@
 Autosuggestions
----------------
-
-Integrates zsh-autosuggestions into Prezto.
-
-Autosuggestions
 ===============
 
 Integrates [zsh-autosuggestions][1] into Prezto, which implements the
@@ -11,11 +6,12 @@ Integrates [zsh-autosuggestions][1] into Prezto, which implements the
 of a previously entered command and Zsh suggests commands as you type based on
 history and completions.
 
-If this module is used in conjuncture with the *syntax-highlighting* module, it
-must be loaded **after** it.
+If this module is used in conjunction with the *syntax-highlighting* module,
+this module must be loaded **after** the *syntax-highlighting* module.
 
-If this module is used in conjuncture with the *history-substring-search*
-module, it must be loaded **after** it.
+If this module is used in conjunction with the *history-substring-search*
+module, this module must be loaded **after** the *history-substring-search*
+module.
 
 Contributors
 ------------
@@ -35,11 +31,23 @@ positive results.
 To enable highlighting for this module only, add the following line to
 *zpreztorc*:
 
-    zstyle ':prezto:module:autosuggestions' color 'yes'
+```sh
+zstyle ':prezto:module:autosuggestions' color 'yes'
+```
 
 To set the query found color, add the following line to *zpreztorc*:
 
-    zstyle ':prezto:module:autosuggestions:color' found ''
+```sh
+zstyle ':prezto:module:autosuggestions:color' found ''
+```
+
+Troubleshooting
+---------------
+
+### Autosuggestions from previous sessions don't show up
+
+For autosuggestions from previous shell sessions to work, please make sure you
+also have the `history` module enabled.
 
 Authors
 -------

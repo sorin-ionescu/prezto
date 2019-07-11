@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function prep {
+
 local usage pattern modifiers invert
 
 usage="$(
@@ -50,3 +52,5 @@ pattern="$1"
 shift
 
 perl -n -l -e "print if ${invert:+not} m/${pattern//\//\\/}/${modifiers}" "$@"
+
+# }

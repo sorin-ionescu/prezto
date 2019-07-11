@@ -5,7 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+# function git-hub-browse {
+
+if ! is-true "$(command git rev-parse --is-inside-work-tree 2> /dev/null)"; then
   print "$0: not a repository work tree: $PWD" >&2
   return 1
 fi
@@ -13,7 +15,7 @@ fi
 local remotes remote references reference file url
 
 remote="${1:-origin}"
-remotes=($(git config --get-regexp 'remote.*.url' | cut -d. -f2))
+remotes=($(command git config --get-regexp 'remote.*.url' | cut -d. -f2))
 
 if (( $remotes[(i)$remote] == $#remotes + 1 )); then
   print "$0: remote not found: $remote" >&2
@@ -21,14 +23,14 @@ if (( $remotes[(i)$remote] == $#remotes + 1 )); then
 fi
 
 url=$(
-  git config --get "remote.${remote}.url" \
+  command git config --get "remote.${remote}.url" \
     | sed -En "s/(git|https?)(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\4\/\5/p"
 )
 
 reference="${${2:-$(git-branch-current)}:-HEAD}"
 references=(
   HEAD
-  ${$(git ls-remote --heads --tags "$remote" | awk '{print $2}')##refs/(heads|tags)/}
+  ${$(command git ls-remote --heads --tags "$remote" | awk '{print $2}')##refs/(heads|tags)/}
 )
 
 if (( $references[(i)$reference] == $#references + 1 )); then
@@ -37,7 +39,7 @@ if (( $references[(i)$reference] == $#references + 1 )); then
 fi
 
 if [[ "$reference" == 'HEAD' ]]; then
-  reference="$(git rev-parse HEAD 2>/dev/null)"
+  reference="$(command git rev-parse HEAD 2> /dev/null)"
 fi
 
 file="$3"
@@ -56,3 +58,5 @@ else
   print "$0: not a Git repository or remote not set" >&2
   return 1
 fi
+
+# }

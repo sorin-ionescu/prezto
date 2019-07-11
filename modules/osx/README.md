@@ -1,7 +1,20 @@
 OSX
 ===
 
-Defines [Mac OS X][1] aliases and functions.
+Defines [macOS][1] aliases and functions.
+
+Settings
+--------
+
+### Dash Keyword
+
+To change the keyword used by `mand` to open man pages in [_Dash.app_][2] from
+its default value of 'manpages', add the following line in *zpreztorc* and
+replace the **keyword** with the one configured in [_Dash.app_][2].
+
+```sh
+zstyle ':prezto:module:osx:man' dash-keyword 'keyword'
+```
 
 Aliases
 -------
@@ -21,8 +34,8 @@ Functions
   - `tab` creates a new tab (works in both _Terminal_ and [_iTerm_][3]).
   - `ql` previews files in Quick Look.
   - `osx-rm-dir-metadata` deletes .DS\_Store, \_\_MACOSX cruft.
-  - `osx-ls-download-history` displays the Mac OS X download history.
-  - `osx-rm-download-history` deletes the Mac OS X download history.
+  - `osx-ls-download-history` displays the macOS download history.
+  - `osx-rm-download-history` deletes the macOS download history.
 
 Authors
 -------

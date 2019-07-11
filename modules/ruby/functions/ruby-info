@@ -6,6 +6,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# function ruby-info {
+
 local version
 local version_format
 local version_formatted
@@ -14,17 +16,23 @@ local version_formatted
 unset ruby_info
 typeset -gA ruby_info
 
-if (( $+commands[rvm-prompt] )); then
-  version="$(rvm-prompt)"
-elif (( $+commands[rbenv] )); then
-  version="$(rbenv version-name)"
-elif (( $+commands[ruby] )); then
-  version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
+# Grab formatting for anything we might have to do
+zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
+
+if [[ -n "$version_format" ]]; then
+  if (( $+commands[rvm-prompt] )); then
+    version="$(rvm-prompt)"
+  elif (( $+commands[rbenv] )); then
+    version="$(rbenv version-name)"
+  elif (( $+commands[ruby] )); then
+    version="${${$(ruby --version)[(w)1,(w)2]}/ /-}"
+  fi
+
+  # Format version.
+  if [[ -n "$version" && "$version" != "system" ]]; then
+    zformat -f version_formatted "$version_format" "v:$version"
+    ruby_info[version]="$version_formatted"
+  fi
 fi
 
-# Format version.
-if [[ -n "$version" ]]; then
-  zstyle -s ':prezto:module:ruby:info:version' format 'version_format'
-  zformat -f version_formatted "$version_format" "v:$version"
-  ruby_info[version]="$version_formatted"
-fi
+# }

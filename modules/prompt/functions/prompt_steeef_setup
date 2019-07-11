@@ -32,7 +32,7 @@ function prompt_steeef_precmd {
 function prompt_steeef_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
 
   # Load required functions.
   autoload -Uz add-zsh-hook
@@ -72,6 +72,9 @@ function prompt_steeef_setup {
   local unstaged_format="${_prompt_steeef_colors[2]}●%f"
   local staged_format="${_prompt_steeef_colors[5]}●%f"
 
+  # Set editor-info parameters.
+  zstyle ':prezto:module:editor:info:keymap:primary' format '$'
+
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
@@ -87,8 +90,17 @@ function prompt_steeef_setup {
   # Define prompts.
   PROMPT="
 ${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]'"$ "
+"'$python_info[virtualenv]${editor_info[keymap]} '
   RPROMPT=''
+}
+
+function prompt_steeef_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2> /dev/null
+  prompt_preview_theme 'steeef'
 }
 
 prompt_steeef_setup "$@"
