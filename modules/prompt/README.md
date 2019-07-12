@@ -130,6 +130,17 @@ function prompt_name_precmd {
 }
 ```
 
+### Keymap
+
+
+One of the defining features of a prompt is having it look different. To take full advantage of the features that prezto provides, you'll need to define at least the primary keymap format. E.g. (from the sorin prompt):
+
+```sh
+zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{1}❯%F{3}❯%F{2}❯%f%b'
+```
+
+If you do not do so, then the editor module will not be able to pick up and determine when it should update the prompt.
+
 Troubleshooting
 ---------------
 
