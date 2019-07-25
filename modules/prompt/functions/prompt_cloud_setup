@@ -104,6 +104,9 @@ function prompt_cloud_setup {
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_cloud_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:dirty' format "%%B%F{$secondary_color}]%f%%b %F{yellow}⚡%f"
@@ -119,3 +122,4 @@ function prompt_cloud_setup {
 }
 
 prompt_cloud_setup "$@"
+# vim: ft=zsh
