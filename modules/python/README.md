@@ -28,6 +28,10 @@ Local Python Installation
 [pyenv][4] builds and installs multiple Python versions locally in the home
 directory.
 
+```sh
+zstyle ':prezto:module:python:pyenv' auto-init 'yes'
+```
+
 This module prepends the pyenv directory to the path variable to enable the
 execution of `pyenv`.
 

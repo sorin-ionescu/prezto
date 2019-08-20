@@ -7,37 +7,31 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
-# Load manually installed pyenv into the path
-if [[ -n "$PYENV_ROOT" && -s "$PYENV_ROOT/bin/pyenv" ]]; then
-  path=("$PYENV_ROOT/bin" $path)
-elif [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
+# Load manually installed pyenv into the shell session.
+if [[ -s "$HOME/.pyenv/bin/pyenv" ]] && (( ! $+commands[pyenv] )); then
   path=("$HOME/.pyenv/bin" $path)
-fi
-
-# Load pyenv into the current python session
-if (( $+commands[pyenv] )); then
-  if [[ -z "$PYENV_ROOT" ]]; then
-    export PYENV_ROOT=$(pyenv root)
-  fi
-  eval "$(pyenv init - --no-rehash zsh)"
-
-# Prepend PEP 370 per user site packages directory, which defaults to
-# ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
-# path can be overridden using PYTHONUSERBASE.
-else
-  if [[ -n "$PYTHONUSERBASE" ]]; then
-    path=($PYTHONUSERBASE/bin $path)
-  elif [[ "$OSTYPE" == darwin* ]]; then
-    path=($HOME/Library/Python/*/bin(N) $path)
-  else
-    # This is subject to change.
-    path=($HOME/.local/bin $path)
-  fi
+  export PYENV_ROOT=$(pyenv root)
 fi
 
 # Return if requirements are not found.
 if (( ! $+commands[python] && ! $+commands[pyenv] )); then
   return 1
+elif (( $+commands[python] )); then
+  if (( $+commands[pyenv] )) && [[ -z "$PYENV_SHELL" ]]; then
+    eval "$(pyenv init - --no-rehash zsh)"
+  fi
+
+  # Prepend PEP 370 per user site packages directory, which defaults to
+  # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
+  # path can be overridden using PYTHONUSERBASE.
+  # if [[ -n "$PYTHONUSERBASE" ]]; then
+  #   path=($PYTHONUSERBASE/bin $path)
+  # elif [[ "$OSTYPE" == darwin* ]]; then
+  #   path=($HOME/Library/Python/*/bin(N) $path)
+  # else
+  #   # This is subject to change.
+  #   path=($HOME/.local/bin $path)
+  # fi
 fi
 
 function _python-workon-cwd {
