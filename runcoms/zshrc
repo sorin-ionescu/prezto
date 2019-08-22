@@ -41,3 +41,12 @@ export PATH=$PATH:$GOBIN
 
 # init prezto
 source "${ZDOTDIR:-$HOME}/dotfiles/.zprezto/init.zsh"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# pip
+export PATH="${ZDOTDIR:-$HOME}/.local/bin:$PATH"
+
