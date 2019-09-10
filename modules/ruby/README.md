@@ -32,6 +32,9 @@ multiple, isolated Ruby installations in the home directory.
 While it is not as feature rich as RVM, it is not loaded into the shell and is
 not known to cause conflicts with shell scripts.
 
+This will be loaded automatically if rbenv is installed to `$RBENV_ROOT`,
+`~/.rbenv`, or if the `rbenv` command is on the path.
+
 chruby
 ------
 

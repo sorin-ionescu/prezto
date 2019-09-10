@@ -35,6 +35,9 @@ execution of `pyenv`.
 
 Install Python versions with `pyenv install` into `~/.pyenv/versions`.
 
+This will be loaded automatically if pyenv is installed to `$PYENV_ROOT`,
+`~/.pyenv`, or if the `pyenv` command is on the path.
+
 Local Package Installation
 --------------------------
 
