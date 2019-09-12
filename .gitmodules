@@ -31,3 +31,6 @@
 [submodule "modules/prompt/external/powerlevel10k"]
 	path = modules/prompt/external/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "modules/prompt/external/bullet-train"]
+	path = modules/prompt/external/bullet-train
+	url = https://github.com/caiogondim/bullet-train.zsh
