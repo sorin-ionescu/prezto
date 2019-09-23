@@ -47,6 +47,8 @@ if ! zstyle -t ':prezto:module:git:alias' skip; then
   alias gbV='git branch --verbose --verbose'
   alias gbx='git branch --delete'
   alias gbX='git branch --delete --force'
+  # Delete local branches which have been merged
+  alias gbdm='git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d'
 
   # Commit (c)
   alias gc='git commit --verbose'

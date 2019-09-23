@@ -23,25 +23,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# NVM
-export NVM_DIR="/Users/harrygreen/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Android SDK location
-export ANDROID_HOME="/Users/harrygreen/Library/Android/sdk"
-
-# Yarn Package Manager
-# export PATH="$PATH:`yarn global bin`"
-
-# Global Composer Packages
-export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-
-# Terminal Markdown Viewer - Theme Configuration
-export MDV_THEME=1027.0309
-
-
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="$PATH:$HOME/.local/bin"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
