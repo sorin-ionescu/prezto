@@ -56,3 +56,6 @@ export SPACESHIP_PROMPT_ADD_NEWLINE=false
 export SPACESHIP_PROMPT_PREFIXES_SHOW=false
 export SPACESHIP_DOCKER_SHOW=false
 export SPACESHIP_PHP_SHOW=false
+
+# Disable command correction suggestions
+unsetopt correct
