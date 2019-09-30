@@ -17,6 +17,14 @@ alias g="git"
 alias c="clear"
 alias gl="git log --oneline --graph --decorate --all"
 
+# Reload zsh configuration
+alias reload="source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
+
+# Docker Control
+alias dstart="docker-compose up -d"
+alias dstop="docker-compose kill"
+alias dssh='docker exec -it $(docker ps | grep www | cut -d" " -f1) bash'
+
 # XDG Directories
 
 export XDG_DATA_HOME="$HOME/.local/share"
