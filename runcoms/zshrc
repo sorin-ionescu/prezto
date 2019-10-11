@@ -98,14 +98,14 @@ contains() {
 #Forward jupyter notebook server from remote via ssh
 #$1 is the remote host, $2 the port (optional, default=8889)
 sshjupyter () {
-    ssh -N -f -L localhost:${2:-8889}:localhost:${2:-8889} $1
+    sshforward $1 ${2:-8889}
 }
 
 #Jupyter forwarding over ssh
 alias jupyter_forwarding="jupyter notebook --no-browser --port=8889"
 
 sshvnc () {
-    ssh -N -f -L localhost:${2:-5900}:localhost:${2:-5900} $1
+    sshforward $1 ${2:-5900}
 }
 
 #============== Generic port forwarding functions =======================
