@@ -19,6 +19,7 @@ Aliases
 
   - `brewc` cleans outdated brews and their cached archives.
   - `brewi` installs a formula.
+  - `brewL` lists installed formulae that are not dependencies of another installed formula.
   - `brewl` lists installed formulae.
   - `brewo` lists brews which have an update available.
   - `brews` searches for a formula.
