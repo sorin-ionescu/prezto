@@ -18,7 +18,6 @@ Aliases
 ### Homebrew
 
   - `brewc` cleans outdated brews and their cached archives.
-  - `brewC` cleans outdated brews, including keg-only, and their cached archives.
   - `brewi` installs a formula.
   - `brewl` lists installed formulae.
   - `brewo` lists brews which have an update available.
