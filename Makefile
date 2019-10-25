@@ -72,6 +72,7 @@ image: .container/image ;
 	ln -s .zprezto/runcoms/zshenv /home/prezto/.zshenv
 	ln -s .zprezto/runcoms/zprofile /home/prezto/.zprofile
 	ln -s .zprezto/runcoms/zshrc /home/prezto/.zshrc
+	ln -s .zprezto/runcoms/zpreztorc /home/prezto/.zpreztorc
 	ln -s .zprezto/runcoms/zlogin /home/prezto/.zlogin
 	ln -s .zprezto/runcoms/zlogout /home/prezto/.zlogout
 	touch $@
