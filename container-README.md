@@ -8,6 +8,8 @@ in which to quickly make changes to either prezto-core or any plugin
 that may bein development, enabling automated testing and even
 continuous integration.
 
+[![asciicast](https://asciinema.org/a/277054.svg)](https://asciinema.org/a/277054)
+
 The container is a basic install of alpine linux, so the image
 download is reasonably small
 

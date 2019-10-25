@@ -96,8 +96,9 @@ run: .container/image
 # Removes the current container and image, so we can build a new one
 # from scratch. If you want a real clean slate, then "make realclean"
 clean:
-	docker container rm $(TAG):
-	docker image rm $(TAG):
+	docker container rm $(TAG)
+	docker image rm $(TAG)
+	rm -fv .container/*
 
 # Deep cleaning, will remove dangling (intermediate build) images
 # and containers for which a final image or container cannot be found
@@ -105,6 +106,7 @@ clean:
 # containers. Run every once in a while.
 realclean:
 	$(MAKE) clean
+	docker rmi $(TAG)
 	docker container prune
 	docker image prune
 
