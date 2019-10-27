@@ -14,6 +14,7 @@ COPY . src
 RUN cp src/Makefile .
 RUN make .clone
 RUN make src .homercs
+RUN rm Makefile
 # ENTRYPOINT ["/bin/zsh", "-"]
 # CMD ["/bin/zsh","-l","-o","verbose","-o","xtrace","-o","sourcetrace"]
 CMD ["/bin/zsh","-l"]
