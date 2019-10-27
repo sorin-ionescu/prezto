@@ -19,7 +19,7 @@ Here is a screencast showing what the container can do so far
 
 [![asciicast](https://asciinema.org/a/277054.svg)](https://asciinema.org/a/277054)
 
-The container is a basic install of [alpine linux][1] so the download
+The container is a basic install of [alpine linux](https://alpinelinux.org) so the download
 is reasonably small at around 200M, since  debian based images can
 weigh in around 1.5G.
 
@@ -59,7 +59,7 @@ in-place on prezto's directory hierarchy, as if it was just cloned
 recursively (v.gr for modules with extenral dependencies)
 
 Keep in mind that the containers created in this fashion are ephemeral,
-so anything you write on the contain'ers filesystem will be lost,
+so anything you write on the containers filesystem will be lost,
 unless you remove the `--rm` option like so:
 
 ```bash
@@ -89,7 +89,7 @@ Since the docker commands can be a bit verbose, the included Makefile
 automates some of the frequent steps in the workflow, although it can
 be replaced by shell functions  quite easily;
 
-```zsh
+```bash
 
 
 function prezto-container () {
@@ -187,4 +187,3 @@ function prezto-container () {
 #  vim: set ft=zsh sw=2 tw=0 fdm=manual et :
 ```
 hope this turns out to be useful.
-[1]:https://alpinelinux.org
