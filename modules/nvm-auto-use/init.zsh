@@ -1,5 +1,5 @@
 #
-# Integrates history-substring-search into Prezto.
+# Integrates `nvm` auto use shell integration into Prezto.
 #
 # Author:
 #   Jared Manning <hello.lambda.nerd@gmail.com>
