@@ -106,7 +106,7 @@ function prompt_steeef_setup {
     PROMPT_LINE1="${PROMPT_LINE1} (${_prompt_steeef_colors[5]}"'$KUBE_PS1_CONTEXT'"%f/${_prompt_steeef_colors[2]}"'$KUBE_PS1_NAMESPACE'"%f)"
   fi
   PROMPT="${PROMPT_LINE1}
-"'$python_info[virtualenv]${editor_info[keymap]} '
+"'$python_info[virtualenv]$ '
   RPROMPT=''
 }
 
