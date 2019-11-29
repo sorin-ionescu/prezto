@@ -93,9 +93,15 @@ function prompt_steeef_setup {
   # Set python-info parameters.
   zstyle ':prezto:module:python:info:virtualenv' format '(%v)'
 
+  # Set up non-zero return value display
+  local show_return=""
+  # Default is to show the return value
+  if zstyle -T ':prezto:module:prompt' show-return-val; then
+    show_return+=${_prompt_steeef_colors[4]}$'%(?..%?\n)'
+  fi
+
   # Define prompts.
-  PROMPT_LINE1="
-${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'""
+  PROMPT_LINE1="$show_return${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'""
   if [[ ${KUBE_PS1_ENABLED} != "off" ]]; then
     PROMPT_LINE1="${PROMPT_LINE1} (${_prompt_steeef_colors[5]}"'$KUBE_PS1_CONTEXT'"%f/${_prompt_steeef_colors[2]}"'$KUBE_PS1_NAMESPACE'"%f)"
   fi
