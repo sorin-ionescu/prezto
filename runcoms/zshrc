@@ -11,3 +11,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export PATH="/usr/local/sbin:$PATH"
+source ~/repo/mktools/mktools/.aliases
+
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
