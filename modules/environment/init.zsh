@@ -38,7 +38,8 @@ setopt INTERACTIVE_COMMENTS # Enable comments in interactive shell.
 setopt RC_QUOTES            # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
 unsetopt MAIL_WARNING       # Don't print a warning message if a mail file has been accessed.
 
-stty -ixon                  # Allow mapping Ctrl+S and Ctrl+Q shortcuts
+# Allow mapping Ctrl+S and Ctrl+Q shortcuts
+(( $+commands[stty] )) && stty -ixon
 
 #
 # Jobs
