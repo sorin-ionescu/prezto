@@ -111,7 +111,7 @@ function pmodload {
       pmodule_location=${locations[-1]}
 
       # Add functions to $fpath.
-      fpath=(${pmodule_location}/functions(/FN) $fpath)
+      fpath=(${pmodule_location}/functions(-/FN) $fpath)
 
       function {
         local pfunction
