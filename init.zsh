@@ -98,8 +98,13 @@ function pmodload {
     else
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
       if (( ${#locations} > 1 )); then
-        print "$0: conflicting module locations: $locations"
-        continue
+        if zstyle -t ':prezto:load' pmodule-allow-overrides 'yes'; then
+          # Use the final location as an override when there are module name conflicts
+          locations=($locations[-1])
+        else
+          print "$0: conflicting module locations: $locations"
+          continue
+        fi
       elif (( ${#locations} < 1 )); then
         print "$0: no such module: $pmodule"
         continue
