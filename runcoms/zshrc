@@ -10,6 +10,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# History configuration
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt HIST_IGNORE_ALL_DUPS # ignore duplicated commands history list
+setopt SHARE_HISTORY # share command history data between sessions
+
 alias h="cd ~"
 alias p="cd ~/projects"
 alias v="vagrant"
