@@ -98,15 +98,17 @@ function pmodload {
     else
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
       if (( ${#locations} > 1 )); then
-        print "$0: conflicting module locations: $locations"
-        continue
+        if ! zstyle -t ':prezto:load' pmodule-allow-overrides 'yes'; then
+          print "$0: conflicting module locations: $locations"
+          continue
+        fi
       elif (( ${#locations} < 1 )); then
         print "$0: no such module: $pmodule"
         continue
       fi
 
       # Grab the full path to this module
-      pmodule_location=${locations[1]}
+      pmodule_location=${locations[-1]}
 
       # Add functions to $fpath.
       fpath=(${pmodule_location}/functions(/FN) $fpath)
