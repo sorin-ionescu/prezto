@@ -72,28 +72,41 @@ if zstyle -T ':prezto:module:utility' safe-ops; then
   alias ln="${aliases[ln]:-ln} -i"
 fi
 
-# ls
-if is-callable 'dircolors'; then
-  # GNU Core Utilities
+function -define-coreutils-aliases {
+  # Prefix will either be g or empty. This is to account for GNU Coreutils being
+  # installed alongside BSD Coreutils
+  local prefix=$1
 
   if zstyle -T ':prezto:module:utility:ls' dirs-first; then
-    alias ls="${aliases[ls]:-ls} --group-directories-first"
+    alias ${prefix}ls="${aliases[${prefix}ls]:-${prefix}ls} --group-directories-first"
   fi
 
   if zstyle -t ':prezto:module:utility:ls' color; then
     # Call dircolors to define colors if they're missing
     if [[ -z "$LS_COLORS" ]]; then
       if [[ -s "$HOME/.dir_colors" ]]; then
-        eval "$(dircolors --sh "$HOME/.dir_colors")"
+        eval "$(${prefix}dircolors --sh "$HOME/.dir_colors")"
       else
-        eval "$(dircolors --sh)"
+        eval "$(${prefix}dircolors --sh)"
       fi
     fi
 
-    alias ls="${aliases[ls]:-ls} --color=auto"
+    alias ${prefix}ls="${aliases[${prefix}ls]:-${prefix}ls} --color=auto"
   else
-    alias ls="${aliases[ls]:-ls} -F"
+    alias ${prefix}ls="${aliases[${prefix}ls]:-${prefix}ls} -F"
   fi
+}
+
+# ls
+
+# GNU Core Utilities
+if is-callable 'gdircolors'; then
+  -define-coreutils-aliases g
+  alias ls="${aliases[gls]:-gls}"
+
+elif is-callable 'dircolors'; then
+  -define-coreutils-aliases
+
 else
   # BSD Core Utilities
   if zstyle -t ':prezto:module:utility:ls' color; then
