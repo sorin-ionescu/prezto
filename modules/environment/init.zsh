@@ -39,7 +39,7 @@ setopt RC_QUOTES            # Allow 'Henry''s Garage' instead of 'Henry'\''s Gar
 unsetopt MAIL_WARNING       # Don't print a warning message if a mail file has been accessed.
 
 # Allow mapping Ctrl+S and Ctrl+Q shortcuts
-[[ -n ${TTY:-} && $+commands[stty] == 1 ]] && stty -ixon <$TTY >$TTY
+[[ -r ${TTY:-} && -w ${TTY:-} && $+commands[stty] == 1 ]] && stty -ixon <$TTY >$TTY
 
 #
 # Jobs
