@@ -15,3 +15,5 @@ ssh()
 
     TERM=xterm-256color ${_ssh} $@
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
