@@ -6,6 +6,7 @@
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
 #
 
+function load_nvm() {
 # Load manually installed NVM into the shell session.
 if [[ -s "${NVM_DIR:=$HOME/.nvm}/nvm.sh" ]]; then
   source "${NVM_DIR}/nvm.sh"
@@ -55,3 +56,6 @@ for compl_command in "${(k)compl_commands[@]}"; do
 done
 
 unset compl_command{s,}
+}
+
+lazy_load load_nvm nvm node npm gulp eslint yarn standard react-native npx prisma prettier
