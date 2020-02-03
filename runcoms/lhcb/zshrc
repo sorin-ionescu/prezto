@@ -11,3 +11,5 @@ alias rdesktop="rdesktop -g 1280x760 -u dabernin -d LBDAQ.CERN.CH"
 
 # Set umask to have rw rights for the scifi group
 umask g+rw
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
