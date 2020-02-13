@@ -22,7 +22,7 @@ elif (( $+commands[pyenv] )); then
 else
   if [[ -n "$PYTHONUSERBASE" ]]; then
     path=($PYTHONUSERBASE/bin $path)
-  elif [[ "$OSTYPE" == darwin* ]]; then
+  elif is-darwin; then
     path=($HOME/Library/Python/*/bin(N) $path)
   else
     # This is subject to change.
