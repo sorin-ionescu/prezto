@@ -30,27 +30,22 @@ function coalesce {
   return 1
 }
 
-# Checks if running on macOS Darwin.
+# is true on MacOS Darwin
 function is-darwin {
   [[ "$OSTYPE" == darwin* ]]
 }
 
-# Checks if running on Linux.
+# is true on Linux's
 function is-linux {
   [[ "$OSTYPE" == linux* ]]
 }
 
-# Checks if running on BSD.
+# is true on BSD's
 function is-bsd {
   [[ "$OSTYPE" == *bsd* ]]
 }
 
-# Checks if running on Cygwin (Windows).
+# is true on Cygwin (Windows)
 function is-cygwin {
   [[ "$OSTYPE" == cygwin* ]]
-}
-
-# Checks if running on termux (Android).
-function is-termux {
-  [[ "$OSTYPE" == linux-android ]]
 }

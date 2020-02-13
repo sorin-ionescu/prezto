@@ -10,9 +10,6 @@ if (( ! $+commands[rsync] )); then
   return 1
 fi
 
-# Load dependencies.
-pmodload 'helper'
-
 #
 # Aliases
 #
@@ -20,19 +17,14 @@ pmodload 'helper'
 _rsync_cmd='rsync --verbose --progress --human-readable --compress --archive \
   --hard-links --one-file-system'
 
-autoload -Uz is-at-least
-if is-at-least 3.1 ${"$(rsync --version 2>&1)"[(w)3]}; then
+if grep -q 'xattrs' <(rsync --help 2>&1); then
+  _rsync_cmd="${_rsync_cmd} --acls --xattrs"
+fi
 
-  # ACL and extended attributes support
-  if grep -q 'xattrs' <(rsync --help 2>&1); then
-    _rsync_cmd="${_rsync_cmd} --acls --xattrs"
-  fi
-
-  # macOS Enhancements
-  # https://bombich.com/kb/ccc5/credits
-  if is-darwin && grep -q 'file-flags' <(rsync --help 2>&1); then
-    _rsync_cmd="${_rsync_cmd} --crtimes --fileflags --force-change"
-  fi
+# macOS and HFS+ Enhancements
+# https://bombich.com/kb/ccc5/credits
+if is-darwin && grep -q 'file-flags' <(rsync --help 2>&1); then
+  _rsync_cmd="${_rsync_cmd} --crtimes --fileflags --protect-decmpfs --force-change"
 fi
 
 alias rsync-copy="${_rsync_cmd}"

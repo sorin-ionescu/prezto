@@ -5,11 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Load dependencies.
-pmodload 'helper'
-
 # Return if requirements are not found.
-if ! is-darwin && ! is-linux; then
+if ! is-darwin || ! is-linux; then
   return 1
 fi
 
@@ -39,9 +36,21 @@ alias brewu='brew upgrade'
 alias brewx='brew uninstall'
 
 # Homebrew Cask
-alias caski='brew install --cask'
-alias caskl='brew list --cask'
-alias casko='brew outdated --cask'
-alias casks='brew search --cask'
-alias casku='brew upgrade --cask'
-alias caskx='brew uninstall --cask'
+alias cask='brew cask'
+alias caskc='hb_deprecated brew cask cleanup'
+alias caskC='hb_deprecated brew cask cleanup'
+alias caski='brew cask install'
+alias caskl='brew cask list'
+alias casko='brew cask outdated'
+alias casks='hb_deprecated brew cask search'
+alias caskx='brew cask uninstall'
+
+function hb_deprecated {
+  local cmd="${@[3]}"
+  local cmd_args="${@:4}"
+
+  printf "'brew cask %s' has been deprecated, " "${cmd}"
+  printf "using 'brew %s' instead\n" "${cmd}"
+
+  command brew "${cmd}" "${=cmd_args}"
+}
