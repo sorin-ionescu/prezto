@@ -7,8 +7,8 @@
 #
 
 # Load manually installed NVM into the shell session.
-if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
-  source "$HOME/.nvm/nvm.sh"
+if [[ -s "${NVM_DIR:=$HOME/.nvm}/nvm.sh" ]]; then
+  source "${NVM_DIR}/nvm.sh"
 
 # Load package manager installed NVM into the shell session.
 elif (( $+commands[brew] )) && \
@@ -17,8 +17,8 @@ elif (( $+commands[brew] )) && \
   unset nvm_prefix
 
 # Load manually installed nodenv into the shell session.
-elif [[ -s "$HOME/.nodenv/bin/nodenv" ]]; then
-  path=("$HOME/.nodenv/bin" $path)
+elif [[ -s "${NODENV_ROOT:=$HOME/.nodenv}/bin/nodenv" ]]; then
+  path=("${NODENV_ROOT}/bin" $path)
   eval "$(nodenv init - --no-rehash zsh)"
 
 # Load package manager installed nodenv into the shell session.
