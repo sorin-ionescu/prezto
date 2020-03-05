@@ -29,7 +29,12 @@ alias reload="source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
 # Docker Control
 alias dstart="docker-compose up -d"
 alias dstop="docker-compose kill"
-alias dssh='docker exec -it $(docker ps | grep www | cut -d" " -f1) bash'
+
+# Usage: dssh [container-name]
+# Example: dssh www
+dssh(){
+	docker exec -it `docker ps | grep ${1:-www} | awk '{print $1}'` bash
+}
 
 # XDG Directories
 
