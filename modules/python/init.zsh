@@ -149,6 +149,10 @@ if (( $#commands[(i)pip(|[23])] )); then
 
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
   pip_command="$commands[(i)pip(|[23])]"
+  # If the pip_command is a pyenv shim then ask pyenv for actual location
+  if [[ $+commands[pyenv] && "$pip_command" == *shims/pip* ]]; then
+    pip_command="$(pyenv which "${pip_command:t}" 2>/dev/null)"
+  fi
 
   if [[ "$pip_command" -nt "$cache_file" \
         || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
