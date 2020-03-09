@@ -219,6 +219,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   - `gld` displays the diff log.
   - `glo` displays the one line log.
   - `glg` displays the graph log.
+  - `glgc` displays the graph log in compact form.
   - `glb` displays the brief commit log.
   - `glc` displays the commit count for each contributor in descending order.
   - `glS` displays the log and checks the validity of signed commits.
