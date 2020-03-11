@@ -43,7 +43,9 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'syntax-highlighting' \
   'fasd' \
-  'autosuggestions'
+  'autosuggestions' \
+  'node'
+
 #
 # Autosuggestions
 #
