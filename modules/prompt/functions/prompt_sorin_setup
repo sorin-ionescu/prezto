@@ -32,29 +32,25 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_sorin_async_callback {
-  case $1 in
-    prompt_sorin_async_git)
-      # We can safely split on ':' because it isn't allowed in ref names.
-      IFS=':' read _git_target _git_post_target <<<"$3"
+function prompt_sorin_async_git_callback {
+  # We can safely split on ':' because it isn't allowed in ref names.
+  IFS=':' read _git_target _git_post_target <<<"$3"
 
-      # The target actually contains 3 space separated possibilities, so we need to
-      # make sure we grab the first one.
-      _git_target=$(coalesce ${(@)${(z)_git_target}})
+  # The target actually contains 3 space separated possibilities, so we need to
+  # make sure we grab the first one.
+  _git_target=$(coalesce ${(@)${(z)_git_target}})
 
-      if [[ -z "$_git_target" ]]; then
-        # No git target detected, flush the git fragment and redisplay the prompt.
-        if [[ -n "$_prompt_sorin_git" ]]; then
-          _prompt_sorin_git=''
-          zle && zle reset-prompt
-        fi
-      else
-        # Git target detected, update the git fragment and redisplay the prompt.
-        _prompt_sorin_git="${_git_target}${_git_post_target}"
-        zle && zle reset-prompt
-      fi
-      ;;
-  esac
+  if [[ -z "$_git_target" ]]; then
+    # No git target detected, flush the git fragment and redisplay the prompt.
+    if [[ -n "$_prompt_sorin_git" ]]; then
+      _prompt_sorin_git=''
+      zle && zle reset-prompt
+    fi
+  else
+    # Git target detected, update the git fragment and redisplay the prompt.
+    _prompt_sorin_git="${_git_target}${_git_post_target}"
+    zle && zle reset-prompt
+  fi
 }
 
 function prompt_sorin_async_git {
@@ -66,19 +62,21 @@ function prompt_sorin_async_git {
 }
 
 function prompt_sorin_async_tasks {
-  # Initialize async worker. This needs to be done here and not in
-  # prompt_sorin_setup so the git formatting can be overridden by other prompts.
-  if (( !${prompt_prezto_async_init:-0} )); then
-    async_start_worker prompt_sorin -n
-    async_register_callback prompt_sorin prompt_sorin_async_callback
-    typeset -g prompt_prezto_async_init=1
+  # If we've got a pending request, cancel it
+  if [[ -n "$_prompt_sorin_async_fd" ]] && { true <&$_prompt_sorin_async_fd } 2>/dev/null; then
+    # Close the file descriptor and remove the handler
+    exec {_prompt_sorin_async_fd}<&-
+    zle -F $_prompt_sorin_async_fd
   fi
 
-  # Kill the old process of slow commands if it is still running.
-  async_flush_jobs prompt_sorin
+  # Fork a process to fetch the git info and open a pipe to read from it
+  exec {_prompt_sorin_async_fd}< <(
+    # Fetch and print the suggestion
+    prompt_sorin_async_git "$PWD"
+  )
 
-  # Compute slow commands in the background.
-  async_job prompt_sorin prompt_sorin_async_git "$PWD"
+  # When the fd is readable, call the response handler
+  zle -F "$_prompt_sorin_async_fd" prompt_sorin_async_callback
 }
 
 function prompt_sorin_precmd {
@@ -113,7 +111,6 @@ function prompt_sorin_setup {
 
   # Load required functions.
   autoload -Uz add-zsh-hook
-  autoload -Uz async && async
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_sorin_precmd
