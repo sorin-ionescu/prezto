@@ -47,17 +47,33 @@ function prompt_nicoulaj_setup {
   local vcs_info_color='%F{242}'
 
   # Set vcs_info parameters.
-  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*' enable git hg
+  # The maximum number of vcs_info_msg_*_ variables.
+  zstyle ':vcs_info:*' max-exports 2
   zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' get-revision true
+  zstyle ':vcs_info:hg*:*' get-bookmarks true
+  zstyle ':vcs_info:hg*:*' use-simple true
   zstyle ':vcs_info:*' unstagedstr '!'
   zstyle ':vcs_info:*' stagedstr '+'
-  zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b %u%c (%a)"
-  zstyle ':vcs_info:*' formats "%S" "%r/%s/%b %u%c"
+  zstyle ':vcs_info:*' actionformats "%S" '%r/%s/(%b<%m>) %u%c (%a)'
+  zstyle ':vcs_info:*' formats "%S" "%r/%s/(%b<%m>)  %u%c"
   zstyle ':vcs_info:*' nvcsformats "%~" ""
+  zstyle ':vcs_info:hg+set-hgrev-format:*' hooks hg-shorthash
 
   # Define prompts.
   PROMPT="%(?.${success_color}.${failure_color})${SSH_TTY:+[%n@%m]}%B%${max_path_chars}<...<"'${vcs_info_msg_0_%%.}'"%<<%(!.${root_char}.${user_char})%b%f "
   RPROMPT="${vcs_info_color}"'${vcs_info_msg_1_}'"%f"
+}
+
+function +vi-hg-shorthash() {
+    local -a parents
+
+    parents=( ${(s:+:)hook_com[hash]} )
+    parents=( ${(@r:8:)parents} )
+    hook_com[rev-replace]=${(j:+:)parents}
+
+    ret=1
 }
 
 prompt_nicoulaj_setup "$@"
