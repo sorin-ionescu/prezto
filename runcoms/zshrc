@@ -41,3 +41,9 @@ export PATH=$PATH:$GOBIN
 
 # init prezto
 source "${ZDOTDIR:-$HOME}/dotfiles/.zprezto/init.zsh"
+
+# mysql
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+# XDG_CONFIG_HOME
+export XDG_CONFIG_HOME=~/.config
