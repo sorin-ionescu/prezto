@@ -8,8 +8,8 @@ local _ssh=$(which ssh)  #Backup original ssh as _ssh
 ssh()
 {
     if ! (/usr/bin/klist --test 2> /dev/null); then
-        printf "Renewing kerberos credentials for dabernin@CERN.CH..."
-        /usr/bin/kinit dabernin@CERN.CH
+        printf "Renewing kerberos credentials for dabernin@CERN.CH...\n"
+        /usr/bin/kinit --keychain dabernin@CERN.CH
         printf "done\n"
     fi
 
