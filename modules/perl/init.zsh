@@ -10,6 +10,9 @@ if (( ! $+commands[perl] )); then
   return 1
 fi
 
+# Load dependencies.
+pmodload 'helper'
+
 #
 # Load Perlbrew or plenv
 #
