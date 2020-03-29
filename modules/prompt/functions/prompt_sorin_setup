@@ -54,6 +54,13 @@ function prompt_sorin_async_callback {
         zle && zle reset-prompt
       fi
       ;;
+    "[async]")
+      # If something happend to the worker, prompt_sorin_async_callback will be
+      # called one last time. In this case, we look out for `hup` or `err` and
+      # restart the worker
+      [[ $5 = *'returned error hup'* ]] || [[ $5 = *'returned error err'* ]] \
+        && prompt_sorin_initialize_worker
+      ;;
   esac
 }
 
@@ -65,14 +72,28 @@ function prompt_sorin_async_git {
   fi
 }
 
+function prompt_sorin_initialize_worker {
+  # This function is idempotent - see comments below
+
+  # It is ok to call async_start_worker many times, since async.zsh ensures that no
+  # such worker exists before proceeding
+  async_start_worker prompt_sorin -n
+
+  # It is ok to call async_register_callback many times. In version
+  # 1.7.2 of async.zsh, all actions in async_register_callback are idempotent
+  # (setting ASYNC_CALLBACKS, trap)
+  async_register_callback prompt_sorin prompt_sorin_async_callback
+}
+
 function prompt_sorin_async_tasks {
   # Initialize async worker. This needs to be done here and not in
   # prompt_sorin_setup so the git formatting can be overridden by other prompts.
-  if (( !${prompt_prezto_async_init:-0} )); then
-    async_start_worker prompt_sorin -n
-    async_register_callback prompt_sorin prompt_sorin_async_callback
-    typeset -g prompt_prezto_async_init=1
-  fi
+
+  # Need to try and start workers all the time, in case something happened to
+  # the worker and it dies.
+  # If it dies, async_job will fail with "no such pty command: prompt_sorin"
+  # (See https://github.com/sorin-ionescu/prezto/issues/1736)
+  prompt_sorin_initialize_worker
 
   # Kill the old process of slow commands if it is still running.
   async_flush_jobs prompt_sorin
