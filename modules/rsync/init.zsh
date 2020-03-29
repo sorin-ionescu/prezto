@@ -10,6 +10,9 @@ if (( ! $+commands[rsync] )); then
   return 1
 fi
 
+# Load dependencies.
+pmodload 'helper'
+
 #
 # Aliases
 #
