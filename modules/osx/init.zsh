@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+pmodload 'helper'
+
 # Return if requirements are not found.
 if ! is-darwin; then
   return 1
