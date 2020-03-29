@@ -7,6 +7,9 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
+# Load dependencies
+pmodload 'helper'
+
 # Load manually installed pyenv into the path
 if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
   path=("${PYENV_ROOT}/bin" $path)
