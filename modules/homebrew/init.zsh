@@ -6,7 +6,7 @@
 #
 
 # Return if requirements are not found.
-if ! is-darwin || ! is-linux; then
+if ! is-darwin && ! is-linux; then
   return 1
 fi
 
