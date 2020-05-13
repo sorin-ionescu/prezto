@@ -18,3 +18,16 @@ fi
 if [[ -s "$HOME/Library/Python/3.7/bin" ]]; then
   export PATH=$PATH:$HOME/Library/Python/3.7/bin
 fi
+
+if [[ -s "HOME/bin" ]]; then
+  export PATH=$PATH:$HOME/bin
+fi
+
+create-idea-project () {
+    ~/fbsource/fbcode/javafoundations/scripts/create-idea-project --non-interactive "$@"
+}
+
+idea () {
+    ~/fbsource/fbcode/javafoundations/scripts/idea "$@"
+}
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
