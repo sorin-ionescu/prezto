@@ -19,7 +19,7 @@ if [[ -s "$HOME/Library/Python/3.7/bin" ]]; then
   export PATH=$PATH:$HOME/Library/Python/3.7/bin
 fi
 
-if [[ -s "HOME/bin" ]]; then
+if [[ -s "$HOME/bin" ]]; then
   export PATH=$PATH:$HOME/bin
 fi
 
