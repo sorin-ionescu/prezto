@@ -118,7 +118,11 @@ zstyle ':prezto:module:git:status:ignore' submodules 'none'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+if [ "$(uname 2> /dev/null)" != "Linux" ]; then
+  zstyle ':prezto:module:prompt' theme 'sorin'
+else
+  zstyle ':prezto:module:prompt' theme 'nicoulaj'
+fi
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
