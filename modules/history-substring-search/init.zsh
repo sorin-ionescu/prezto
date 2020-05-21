@@ -10,7 +10,9 @@
 pmodload 'editor'
 
 # Source module files.
-source "${0:h}/external/zsh-history-substring-search.zsh" || return 1
+if (( ! $+functions[history-substring-search-up] )); then
+  source "${0:h}/external/zsh-history-substring-search.zsh" || return 1
+fi
 
 #
 # Search
