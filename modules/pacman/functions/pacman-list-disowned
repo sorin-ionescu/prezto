@@ -8,7 +8,7 @@
 
 # function pacman-list-disowned {
 
-local tmp="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/pacman-disowned-$$"
+local tmp="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pacman-disowned-$$"
 local db="$tmp/db"
 local fs="$tmp/fs"
 

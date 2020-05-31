@@ -39,7 +39,7 @@ typeset -A compl_commands=(
 
 for compl_command in "${(k)compl_commands[@]}"; do
   if (( $+commands[$compl_command] )); then
-    cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/prezto-$compl_command-cache.zsh"
+    cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/$compl_command-cache.zsh"
 
     # Completion commands are slow; cache their output if old or missing.
     if [[ "$commands[$compl_command]" -nt "$cache_file" \

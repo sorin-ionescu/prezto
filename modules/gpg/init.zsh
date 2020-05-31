@@ -12,7 +12,7 @@ fi
 
 # Set the default paths to gpg-agent files.
 _gpg_agent_conf="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.conf"
-_gpg_agent_env="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/gpg-agent.env"
+_gpg_agent_env="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/gpg-agent.env"
 
 # Load environment variables from previous run
 source "$_gpg_agent_env" 2> /dev/null

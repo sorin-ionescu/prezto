@@ -21,7 +21,7 @@ elif (( $+commands[brew] )); then
     "$(brew --repository 2> /dev/null)"/Library/Taps/*/*/cmd/brew-command-not-found-init(|.rb)(.N)
   )
   if (( $#cnf_command )); then
-    cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/prezto-brew-command-not-found-cache.zsh"
+    cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/brew-command-not-found-cache.zsh"
 
     if [[ "${${(@o)cnf_command}[1]}" -nt "$cache_file" \
           || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \

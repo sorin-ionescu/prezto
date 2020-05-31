@@ -19,7 +19,7 @@ fi
 # Initialization
 #
 
-cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/prezto-fasd-cache.zsh"
+cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/fasd-cache.zsh"
 if [[ "${commands[fasd]}" -nt "$cache_file" \
       || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
       || ! -s "$cache_file"  ]]; then

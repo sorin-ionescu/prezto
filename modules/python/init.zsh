@@ -148,7 +148,7 @@ fi
 
 # Load PIP completion.
 if (( $#commands[(i)pip(|[23])] )); then
-  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/prezto-pip-cache.zsh"
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pip-cache.zsh"
 
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
   pip_command="$commands[(i)pip(|[23])]"
