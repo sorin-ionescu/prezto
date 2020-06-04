@@ -42,11 +42,12 @@ fi
 
 if is-darwin; then
   # Perl is slow; cache its output.
-  cache_file="${TMPDIR:-/tmp}/prezto-perl-cache.$UID.zsh"
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/perl-cache.zsh"
   perl_path="$HOME/Library/Perl/5.12"
 
   if [[ -f "$perl_path/lib/perl5/local/lib.pm" ]]; then
     if [[ "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+      mkdir -p "$cache_file:h"
       perl -I$perl_path/lib/perl5 -Mlocal::lib=$perl_path >! "$cache_file"
     fi
 
