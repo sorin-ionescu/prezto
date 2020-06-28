@@ -62,6 +62,12 @@ Aliases
   - `mysql`
   - `rm`
 
+To disable all spelling corrections, add the following line to *zpreztorc*:
+
+```sh
+zstyle ':prezto:module:utility' correct 'no'
+```
+
 ### Disabled File Globbing
 
   - `bower`

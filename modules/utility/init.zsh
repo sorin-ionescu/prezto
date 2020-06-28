@@ -11,7 +11,9 @@
 pmodload 'helper' 'spectrum'
 
 # Correct commands.
-setopt CORRECT
+if zstyle -T ':prezto:module:utility' correct; then
+  setopt CORRECT
+fi
 
 #
 # Aliases
@@ -64,10 +66,10 @@ alias mvi="${aliases[mv]:-mv} -i"
 alias cpi="${aliases[cp]:-cp} -i"
 alias lni="${aliases[ln]:-ln} -i"
 if zstyle -T ':prezto:module:utility' safe-ops; then
-  alias rm='rmi'
-  alias mv='mvi'
-  alias cp='cpi'
-  alias ln='lni'
+  alias rm="${aliases[rm]:-rm} -i"
+  alias mv="${aliases[mv]:-mv} -i"
+  alias cp="${aliases[cp]:-cp} -i"
+  alias ln="${aliases[ln]:-ln} -i"
 fi
 
 # ls
@@ -132,9 +134,9 @@ if zstyle -t ':prezto:module:utility:grep' color; then
 fi
 
 # macOS Everywhere
-if [[ "$OSTYPE" == darwin* ]]; then
+if is-darwin; then
   alias o='open'
-elif [[ "$OSTYPE" == cygwin* ]]; then
+elif is-cygwin; then
   alias o='cygstart'
   alias pbcopy='tee > /dev/clipboard'
   alias pbpaste='cat /dev/clipboard'
@@ -164,7 +166,7 @@ fi
 alias df='df -kh'
 alias du='du -kh'
 
-if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
+if is-darwin || is-bsd; then
   alias topc='top -o cpu'
   alias topm='top -o vsize'
 else

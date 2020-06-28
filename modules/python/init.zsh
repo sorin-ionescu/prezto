@@ -7,18 +7,16 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
+# Load dependencies
+pmodload 'helper'
+
 # Load manually installed pyenv into the path
-if [[ -n "$PYENV_ROOT" && -s "$PYENV_ROOT/bin/pyenv" ]]; then
-  path=("$PYENV_ROOT/bin" $path)
-elif [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
-  path=("$HOME/.pyenv/bin" $path)
-fi
+if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
+  path=("${PYENV_ROOT}/bin" $path)
+  eval "$(pyenv init - --no-rehash zsh)"
 
 # Load pyenv into the current python session
-if (( $+commands[pyenv] )); then
-  if [[ -z "$PYENV_ROOT" ]]; then
-    export PYENV_ROOT=$(pyenv root)
-  fi
+elif (( $+commands[pyenv] )); then
   eval "$(pyenv init - --no-rehash zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
@@ -27,7 +25,7 @@ if (( $+commands[pyenv] )); then
 else
   if [[ -n "$PYTHONUSERBASE" ]]; then
     path=($PYTHONUSERBASE/bin $path)
-  elif [[ "$OSTYPE" == darwin* ]]; then
+  elif is-darwin; then
     path=($HOME/Library/Python/*/bin(N) $path)
   else
     # This is subject to change.
@@ -150,7 +148,7 @@ fi
 
 # Load PIP completion.
 if (( $#commands[(i)pip(|[23])] )); then
-  cache_file="${TMPDIR:-/tmp}/prezto-pip-cache.$UID.zsh"
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pip-cache.zsh"
 
   # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
   pip_command="$commands[(i)pip(|[23])]"
@@ -158,6 +156,7 @@ if (( $#commands[(i)pip(|[23])] )); then
   if [[ "$pip_command" -nt "$cache_file" \
         || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
         || ! -s "$cache_file" ]]; then
+    mkdir -p "$cache_file:h"
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
     $pip_command completion --zsh \
       | sed -e "s/\(compctl -K [-_[:alnum:]]* pip\).*/\1{,2,3}{,.{0..9}}/" \

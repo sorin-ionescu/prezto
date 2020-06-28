@@ -91,28 +91,32 @@ function bindkey-all {
 # Exposes information about the Zsh Line Editor via the $editor_info associative
 # array.
 function editor-info {
-  # Clean up previous $editor_info.
-  unset editor_info
-  typeset -gA editor_info
+  # Ensure that we're going to set the editor-info for prompts that
+  # are prezto managed and/or compatible.
+  if zstyle -t ':prezto:module:prompt' managed; then
+    # Clean up previous $editor_info.
+    unset editor_info
+    typeset -gA editor_info
 
-  if [[ "$KEYMAP" == 'vicmd' ]]; then
-    zstyle -s ':prezto:module:editor:info:keymap:alternate' format 'REPLY'
-    editor_info[keymap]="$REPLY"
-  else
-    zstyle -s ':prezto:module:editor:info:keymap:primary' format 'REPLY'
-    editor_info[keymap]="$REPLY"
-
-    if [[ "$ZLE_STATE" == *overwrite* ]]; then
-      zstyle -s ':prezto:module:editor:info:keymap:primary:overwrite' format 'REPLY'
-      editor_info[overwrite]="$REPLY"
+    if [[ "$KEYMAP" == 'vicmd' ]]; then
+      zstyle -s ':prezto:module:editor:info:keymap:alternate' format 'REPLY'
+      editor_info[keymap]="$REPLY"
     else
-      zstyle -s ':prezto:module:editor:info:keymap:primary:insert' format 'REPLY'
-      editor_info[overwrite]="$REPLY"
-    fi
-  fi
+      zstyle -s ':prezto:module:editor:info:keymap:primary' format 'REPLY'
+      editor_info[keymap]="$REPLY"
 
-  unset REPLY
-  zle zle-reset-prompt
+      if [[ "$ZLE_STATE" == *overwrite* ]]; then
+        zstyle -s ':prezto:module:editor:info:keymap:primary:overwrite' format 'REPLY'
+        editor_info[overwrite]="$REPLY"
+      else
+        zstyle -s ':prezto:module:editor:info:keymap:primary:insert' format 'REPLY'
+        editor_info[overwrite]="$REPLY"
+      fi
+    fi
+
+    unset REPLY
+    zle zle-reset-prompt
+  fi
 }
 zle -N editor-info
 
@@ -269,9 +273,11 @@ bindkey -d
 # Emacs Key Bindings
 #
 
-for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}"
+for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}" \
+  "${key_info[Escape]}${key_info[Left]}"
   bindkey -M emacs "$key" emacs-backward-word
-for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}"
+for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}" \
+  "${key_info[Escape]}${key_info[Right]}"
   bindkey -M emacs "$key" emacs-forward-word
 
 # Kill to the beginning of the line.

@@ -10,6 +10,9 @@ if (( ! $+commands[rsync] )); then
   return 1
 fi
 
+# Load dependencies.
+pmodload 'helper'
+
 #
 # Aliases
 #
@@ -23,7 +26,7 @@ fi
 
 # macOS and HFS+ Enhancements
 # https://bombich.com/kb/ccc5/credits
-if [[ "$OSTYPE" == darwin* ]] && grep -q 'file-flags' <(rsync --help 2>&1); then
+if is-darwin && grep -q 'file-flags' <(rsync --help 2>&1); then
   _rsync_cmd="${_rsync_cmd} --crtimes --fileflags --protect-decmpfs --force-change"
 fi
 
