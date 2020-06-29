@@ -147,18 +147,25 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
 fi
 
 # Load PIP completion.
-if (( $#commands[(i)pip(|[23])] )); then
-  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pip-cache.zsh"
-
-  # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
+# Detect and use one available from among 'pip', 'pip2', 'pip3' variants
+if [[ -n "$PYENV_ROOT" ]]; then
+  for pip in pip{,2,3}; do
+    pip_command="$(pyenv which "$pip" 2>/dev/null)"
+    [[ -n "$pip_command" ]] && break
+  done
+  unset pip
+else
   pip_command="$commands[(i)pip(|[23])]"
+fi
+if [[ -n "$pip_command" ]]; then
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pip-cache.zsh"
 
   if [[ "$pip_command" -nt "$cache_file" \
         || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
         || ! -s "$cache_file" ]]; then
     mkdir -p "$cache_file:h"
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
-    $pip_command completion --zsh \
+    "$pip_command" completion --zsh \
       | sed -e "s/\(compctl -K [-_[:alnum:]]* pip\).*/\1{,2,3}{,.{0..9}}/" \
       >! "$cache_file" \
       2> /dev/null
@@ -166,8 +173,9 @@ if (( $#commands[(i)pip(|[23])] )); then
 
   source "$cache_file"
 
-  unset cache_file pip_command
+  unset cache_file
 fi
+unset pip_command
 
 # Load conda into the shell session, if requested
 zstyle -T ':prezto:module:python' conda-init
