@@ -275,7 +275,7 @@ function git-info {
 
     # Format ahead.
     if [[ -n "$ahead_format" ]]; then
-      ahead="$ahead_and_behind[(w)1]"
+      ahead="$ahead_and_behind[(pws:\t:)1]"
       if (( ahead > 0 )); then
         zformat -f ahead_formatted "$ahead_format" "A:$ahead"
       fi
@@ -283,7 +283,7 @@ function git-info {
 
     # Format behind.
     if [[ -n "$behind_format" ]]; then
-      behind="$ahead_and_behind[(w)2]"
+      behind="$ahead_and_behind[(pws:\t:)2]"
       if (( behind > 0 )); then
         zformat -f behind_formatted "$behind_format" "B:$behind"
       fi
