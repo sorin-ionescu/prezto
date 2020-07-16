@@ -45,9 +45,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # Disable command correction suggestions
 unsetopt correct
 
-
 # fnm (fast node manager)
-export PATH=/Users/hgreen/.fnm/current/bin:$PATH
 export FNM_MULTISHELL_PATH=/Users/hgreen/.fnm/current
 export FNM_DIR=/Users/hgreen/.fnm
 export FNM_NODE_DIST_MIRROR=https://nodejs.org/dist
@@ -66,27 +64,3 @@ export FNM_LOGLEVEL=info
 
       add-zsh-hook chpwd _fnm_autoload_hook \
         && _fnm_autoload_hook
-
-
-# fnm (fast node manager)
-export PATH=/Users/hgreen/.fnm/current/bin:$PATH
-export FNM_MULTISHELL_PATH=/Users/hgreen/.fnm/current
-export FNM_DIR=/Users/hgreen/.fnm
-export FNM_NODE_DIST_MIRROR=https://nodejs.org/dist
-export FNM_LOGLEVEL=info
-
-      autoload -U add-zsh-hook
-      _fnm_autoload_hook () {
-        if [[ -f .node-version && -r .node-version ]]; then
-          echo "fnm: Found .node-version"
-          fnm use
-        elif [[ -f .nvmrc && -r .nvmrc ]]; then
-          echo "fnm: Found .nvmrc"
-          fnm use
-        fi
-      }
-
-      add-zsh-hook chpwd _fnm_autoload_hook \
-        && _fnm_autoload_hook
-
-export PATH="$PATH:$HOME/.local/bin"
