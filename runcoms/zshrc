@@ -23,6 +23,8 @@ alias g="git"
 alias c="clear"
 alias gl="git log --oneline --graph --decorate --all"
 
+alias wttr="curl -s wttr.in | head -7"
+
 # Reload zsh configuration
 alias reload="source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
 
