@@ -7,3 +7,7 @@
 } &!
 
 { recompile-funcs &>/dev/null } &!
+
+{
+  tmux -L iterm -f ~/.tmux.skinny.conf start-server &>/dev/null
+} &!
