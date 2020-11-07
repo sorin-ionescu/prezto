@@ -12,7 +12,7 @@ local success
 local file_name
 local file_path
 local extract_dir
-local _gzip_bin _bzip2_bin _xz_bin
+local _gzip_bin _bzip2_bin _xz_bin _zstd_bin
 
 if (( $# == 0 )); then
   cat >&2 <<EOF
@@ -54,6 +54,8 @@ else
   _bzip2_bin='bzip2'
 fi
 
+_zstd_bin='zstd'
+
 while (( $# > 0 )); do
   if [[ ! -s "$1" ]]; then
     print "$0: file not valid: $1" >&2
@@ -72,6 +74,7 @@ while (( $# > 0 )); do
     (*.tar.zma|*.tlz) tar --lzma --help &> /dev/null \
       && tar --lzma -xvf "$1" \
       || lzcat "$1" | tar -xvf - ;;
+    (*.tar.zst|*.tzst) tar -xvf "$1" --use-compress-program="${_zstd_bin}" ;;
     (*.tar) tar -xvf "$1" ;;
     (*.gz) gunzip "$1" ;;
     (*.bz2) bunzip2 "$1" ;;
