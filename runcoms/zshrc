@@ -11,3 +11,137 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+. ~/z.sh
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export EDITOR="vim"
+export KEYTIMEOUT=1
+export TERM=xterm-256color
+export BROWSER="firefox"
+export _JAVA_AWT_WM_NONREPARENTING=1
+# export PATH="/data/anaconda3/bin:$PATH"  # commented out by conda initialize
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#
+# History
+#
+
+# Remouve Duplicate zsh History
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+
+HISTFILE=~/.zsh_history
+SAVEHIST=100000
+HISTSIZE=100000
+
+# Make some commands not show up in history
+HISTORY_IGNORE='(ls|ll|cd|cd ..|pwd|exit|date|history)'
+
+TMOUT=120
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
+
+# nnn file manager
+export NNN_TMPFILE="/tmp/nnn"
+
+
+n()
+
+{
+
+        nnn "$@"
+
+        if [ -f $NNN_TMPFILE ]; then
+                . $NNN_TMPFILE
+                rm $NNN_TMPFILE
+        fi
+}
+
+# starship prompt
+#eval "$(starship init zsh)"
+
+# GHC
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+
+# opam configuration
+test -r /home/perrierjouet/.opam/opam-init/init.zsh && . /home/perrierjouet/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+#
+# tmux
+#
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+#
+# Aliases
+#
+# Archlinux
+alias ctl='sudo systemctl '
+alias start=" sudo systemctl start"
+alias stop=" sudo systemctl stop"
+alias status=" sudo systemctl status"
+alias restart=" sudo systemctl restart"
+#alias reboot="sudo systemctl start reboot.target"
+alias rbt="reboot"
+
+alias c='clear'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mem='sudo sysctl -w vm.drop_caches=3'
+alias ccb='xsel -bc'
+
+# git
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+
+# lxc
+alias lxc-start="sudo lxc-start -n $1"
+alias lxc-stop="sudo lxc-stop -n $1"
+alias lxc-attach="sudo lxc-attach -n $1"
+
+#alias kubectl='microk8s kubectl'
+alias docker='sudo docker'
+
+#
+# pywal
+#
+#(cat ~/.cache/wal/sequences &)
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/data/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/data/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/data/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/data/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+#export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -t __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+fi
+
