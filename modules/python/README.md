@@ -2,6 +2,9 @@
 
 Enables local Python and local Python package installation.
 
+This module must be loaded _before_ the _`completion`_ module so that the
+provided completion definitions are loaded.
+
 ## Settings
 
 This module supports virtual environments from conda and
@@ -143,7 +146,7 @@ Then add `$python_info[virtualenv]` to `$PROMPT` or `$RPROMPT` and call
 
 Similarly, you can use `:prezto:module:python:info:version:format` with `%v` for
 the version and add `$python_info[version]` to your prompt for the current
-python version/
+python version.
 
 ## Authors
 
