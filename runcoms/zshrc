@@ -11,6 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
 . ~/z.sh
 
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -75,6 +76,8 @@ n()
 # opam configuration
 test -r /home/perrierjouet/.opam/opam-init/init.zsh && . /home/perrierjouet/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+
+
 #
 # tmux
 #
@@ -98,6 +101,11 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mem='sudo sysctl -w vm.drop_caches=3'
 alias ccb='xsel -bc'
+alias xrd='xrdb ~/.Xresources && xrdb -merge ~/.Xresources'
+
+# copy and paste
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # git
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
@@ -144,4 +152,5 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -t __init_nvm)" = function ]; then
   }
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
+
 

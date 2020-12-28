@@ -25,4 +25,3 @@ path=(/usr/local/bin
   /home/perrierjouet/go/bin
   /snap/bin/)
 export PATH
-
