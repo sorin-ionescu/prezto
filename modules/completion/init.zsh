@@ -40,6 +40,7 @@ if [[ $_comp_path(#qNmh-20) ]]; then
 else
   mkdir -p "$_comp_path:h"
   compinit -i -d "$_comp_path"
+  touch "$_comp_path"
 fi
 unset _comp_path
 
