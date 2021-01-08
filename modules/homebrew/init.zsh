@@ -41,7 +41,7 @@ alias brewx='brew uninstall'
 # Homebrew Cask
 alias caski='brew install --cask'
 alias caskl='brew list --cask'
-alias casko='brew outdated --outdate'
+alias casko='brew outdated --cask'
 alias casks='brew search --cask'
 alias caskx='brew uninstall --cask'
 
