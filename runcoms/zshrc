@@ -30,10 +30,15 @@ export PATH=$PATH:~/node_modules/typescript/bin
 export PATH="$HOME/.deno/bin:$PATH"
 
 # # golang
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+# export GOPATH=$HOME/go
+# export GOBIN=$GOPATH/bin
+# export PATH=$PATH:$GOBIN
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
 
+# gvm
+export GVM_ROOT=/Users/tsuzukikuribayashi/.gvm
+. $GVM_ROOT/scripts/gvm-default
 
 # homebrew
 # export PATH="/usr/local/bin:$PATH"
