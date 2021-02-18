@@ -36,6 +36,8 @@ Functions
   - `osx-rm-dir-metadata` deletes .DS\_Store, \_\_MACOSX cruft.
   - `osx-ls-download-history` displays the macOS download history.
   - `osx-rm-download-history` deletes the macOS download history.
+  - `showfiles` show hidden files in Finder.
+  - `hidefiles` hide hidden files from Finder.
 
 Authors
 -------
