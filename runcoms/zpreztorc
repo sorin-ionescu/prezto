@@ -28,17 +28,23 @@ zstyle ':prezto:*:*' color 'yes'
 # zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
 # Set the Prezto modules to load (browse modules).
-# The order matters.
-zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
-  'completion' \
-  'prompt'
+# The order matters. Comment out lines to not load them.
+local zprezto_plugins=(
+  environment
+  terminal
+  editor
+  history
+  directory
+  spectrum
+#  git  #
+  utility
+  completion
+#  syntax-highlighting  #
+  prompt
+#  history-substring-search  #
+#  autosuggestions  #
+)
+zstyle ':prezto:load' pmodule $zprezto_plugins
 
 #
 # Autosuggestions
@@ -164,26 +170,34 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #
 # Syntax Highlighting
 #
-
-# Set syntax highlighters.
+# local syntax_highlighting_modules=(
+#   main
+#   brackets
+#   pattern
+#   line
+#   cursor
+#   root
+# )
+# Set syntax highlighters (needs the zprezto syntax-highlighting module enabled to work)
 # By default, only the main highlighter is enabled.
-# zstyle ':prezto:module:syntax-highlighting' highlighters \
-#   'main' \
-#   'brackets' \
-#   'pattern' \
-#   'line' \
-#   'cursor' \
-#   'root'
+#
+# Uncomment the line below and optionally items in the array above.
+# zstyle ':prezto:module:syntax-highlighting' highlighters $syntax_highlighting_modules
 #
 # Set syntax highlighting styles.
-# zstyle ':prezto:module:syntax-highlighting' styles \
-#   'builtin' 'bg=blue' \
-#   'command' 'bg=blue' \
-#   'function' 'bg=blue'
+# local syntax_highlighting_styles=(
+#   builtin  bg=blue
+#   command  bg=blue
+#   function bg=blue
+# )
+# zstyle ':prezto:module:syntax-highlighting' styles $syntax_highlighting_styles
 #
+# local syntax_highlighting_patterns=(
+#   'rm*-rf*' fg=white,bold,bg=red
+# )
 # Set syntax pattern styles.
-# zstyle ':prezto:module:syntax-highlighting' pattern \
-#   'rm*-rf*' 'fg=white,bold,bg=red'
+# Uncomment the line below and syntax_highlighting_patterns array above.
+# zstyle ':prezto:module:syntax-highlighting' pattern $syntax_highlighting_patterns
 
 #
 # Terminal
