@@ -55,3 +55,6 @@ function fasd_cd {
 
 # Changes the current working directory interactively.
 alias j='fasd_cd -i'
+
+# Changes the current working directory, same functionality as j in autojump.
+alias z='fasd_cd'
