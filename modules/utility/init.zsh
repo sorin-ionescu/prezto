@@ -33,7 +33,7 @@ alias man='nocorrect man'
 alias mkdir='nocorrect mkdir'
 alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
-alias rm='nocorrect rm'
+# alias rm='nocorrect rm'
 
 # Disable globbing.
 alias bower='noglob bower'
@@ -65,12 +65,12 @@ alias rmi="${aliases[rm]:-rm} -i"
 alias mvi="${aliases[mv]:-mv} -i"
 alias cpi="${aliases[cp]:-cp} -i"
 alias lni="${aliases[ln]:-ln} -i"
-if zstyle -T ':prezto:module:utility' safe-ops; then
-  alias rm="${aliases[rm]:-rm} -i"
-  alias mv="${aliases[mv]:-mv} -i"
-  alias cp="${aliases[cp]:-cp} -i"
-  alias ln="${aliases[ln]:-ln} -i"
-fi
+# if zstyle -T ':prezto:module:utility' safe-ops; then
+  # alias rm="${aliases[rm]:-rm} -i"
+  # alias mv="${aliases[mv]:-mv} -i"
+  # alias cp="${aliases[cp]:-cp} -i"
+  # alias ln="${aliases[ln]:-ln} -i"
+# fi
 
 # ls
 if is-callable 'dircolors'; then
