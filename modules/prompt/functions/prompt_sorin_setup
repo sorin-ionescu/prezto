@@ -50,7 +50,7 @@ function prompt_sorin_async_callback {
         fi
       else
         # Git target detected, update the git fragment and redisplay the prompt.
-        _prompt_sorin_git="${_git_target}${_git_post_target}"
+        _prompt_sorin_git=" ${_git_target}${_git_post_target}"
         zle && zle reset-prompt
       fi
       ;;
@@ -169,10 +169,10 @@ function prompt_sorin_setup {
   _prompt_sorin_pwd=''
 
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}${_prompt_sorin_git}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
   RPROMPT='$python_info[virtualenv]${editor_info[overwrite]}%(?:: %F{1}'
   RPROMPT+=${show_return}
-  RPROMPT+='%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_sorin_git}'
+  RPROMPT+='%f)${VIM:+" %B%F{6}V%f%b"}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 

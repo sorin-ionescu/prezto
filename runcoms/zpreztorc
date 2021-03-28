@@ -38,7 +38,11 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt'
+  'prompt' \
+  'syntax-highlighting' \
+  'autosuggestions' \
+  'git' \
+  'ssh'
 
 #
 # Autosuggestions
@@ -73,7 +77,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-# zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility
@@ -121,7 +125,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
 # for longer or 'full' (with '~' expansion) for even longer prompt display.
-# zstyle ':prezto:module:prompt' pwd-length 'short'
+zstyle ':prezto:module:prompt' pwd-length 'long'
 
 # Set the prompt to display the return code along with an indicator for non-zero
 # return codes. This is not supported by all prompts.
@@ -159,7 +163,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #
 
 # Set the SSH identities to load into the agent.
-# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+zstyle ':prezto:module:ssh:load' identities 'id_ed25519'
 
 #
 # Syntax Highlighting
