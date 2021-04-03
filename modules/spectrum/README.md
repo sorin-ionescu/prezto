@@ -72,7 +72,7 @@ Though there are many effects, most terminals support at least bold formatting.
 | font-fifth                | no-font-fifth                |
 | font-sixth                | no-font-sixth                |
 | font-seventh              | no-font-seventh              |
-| font-eigth                | no-font-eigth                |
+| font-eighth               | no-font-eighth               |
 | font-ninth                | no-font-ninth                |
 
 ### Plain Text
