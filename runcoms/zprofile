@@ -35,6 +35,7 @@ export ECLIPSE_HOME="${HOME}/Applications/Eclipse.app/Contents/Eclipse"
 export ANDROID_HOME="${HOME}/projects/android/sdk"
 export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
 export USE_CCACHE=1
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 # export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-8.0/lib${DYLD_LIBRARY_PATH:+:${DYLD_LIBRARY_PATH}}
 # export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
@@ -42,9 +43,6 @@ export CIV6_DIR="${HOME}/Library/Application Support/Sid Meier's Civilization VI
 export STEAM_LIBRARY="/Volumes/SSD3/SteamLibrary/steamapps"
 
 export MAKEFLAGS="-j8"
-
-# POW config
-export POW_DOMAINS=test,local
 
 typeset -gU cdpath fpath mailpath path
 
@@ -72,7 +70,8 @@ path+=($(yarn global bin 2>/dev/null))
 fpath=(
   ${HOME}/.zextra/completions
   ${HOME}/.zextra/functions
-  /usr/local/share/zsh/functions
+  $(brew --prefix)/share/zsh/functions
+  $(brew --prefix)/share/zsh/site-functions
   $fpath
 )
 

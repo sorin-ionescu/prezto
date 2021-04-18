@@ -1,5 +1,5 @@
 setopt ALIAS_FUNC_DEF
-setopt COMPLETEALIASES
+# setopt COMPLETEALIASES
 export ZSH_ENABLE_COMPFIX=true
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -13,7 +13,7 @@ fi
 # random aliases
 alias ivm='vim' # I DO THIS ALL THE FUCKING TIME
 alias iv='vi' # See above
-alias nest="nest -u j.morgan.lieberthal@gmail.com -p kbner7xL@"
+# alias nest="nest -u j.morgan.lieberthal@gmail.com -p kbner7xL@"
 alias beg="RUBYOPT=\"-W0\" bundle exec guard"
 alias nr="repl.history"
 alias mux="$commands[tmuxinator]"
@@ -47,3 +47,5 @@ fi
 # [[ -s "${ZEXTRA_DIR}/directories.zsh" ]] && source "${ZEXTRA_DIR}/directories.zsh"
 export RANGER_LOAD_DEFAULT_RC=false
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export GPG_TTY="tty"
