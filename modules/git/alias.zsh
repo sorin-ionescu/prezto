@@ -68,7 +68,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gcb='git checkout -b'
   alias gco='git checkout'
   alias gcO='git checkout --patch'
-  alias gcm='git checkout master'
+  alias gcm='git checkout master || git checkout prime'
   alias gcp='git cherry-pick --ff'
   alias gcP='git cherry-pick --no-commit'
   alias gcr='git revert'
