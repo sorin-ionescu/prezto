@@ -5,8 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+pmodload 'helper'
+
 # Return if requirements are not found.
-if [[ "$OSTYPE" != (darwin|linux)* ]]; then
+if ! is-darwin && ! is-linux; then
   return 1
 fi
 
@@ -27,8 +30,8 @@ fi
 
 # Homebrew
 alias brewc='brew cleanup'
-alias brewC='brew cleanup --force'
 alias brewi='brew install'
+alias brewL='brew leaves'
 alias brewl='brew list'
 alias brewo='brew outdated'
 alias brews='brew search'

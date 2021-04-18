@@ -34,6 +34,9 @@ function prompt_peepcode_setup {
   # Add a hook for calling info functions before each command.
   add-zsh-hook precmd prompt_peepcode_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'no'
   zstyle ':prezto:module:git:info:action' format ' +%s'
@@ -83,3 +86,4 @@ function prompt_peepcode_preview {
 }
 
 prompt_peepcode_setup "$@"
+# vim: ft=zsh

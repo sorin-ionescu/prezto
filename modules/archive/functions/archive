@@ -8,7 +8,7 @@
 
 # function archive {
 
-local archive_name path_to_archive _gzip_bin _bzip2_bin
+local archive_name path_to_archive _gzip_bin _bzip2_bin _xz_bin
 
 if (( $# < 2 )); then
   cat >&2 <<EOF
@@ -40,7 +40,15 @@ else
   _gzip_bin='gzip'
 fi
 
-if (( $+commands[pbzip2] )); then
+if (( $+commands[pixz] )); then
+  _xz_bin='pixz'
+else
+  _xz_bin='xz'
+fi
+
+if (( $+commands[lbzip2] )); then
+  _bzip2_bin='lbzip2'
+elif (( $+commands[pbzip2] )); then
   _bzip2_bin='pbzip2'
 else
   _bzip2_bin='bzip2'
@@ -49,7 +57,7 @@ fi
 case "${archive_name}" in
   (*.tar.gz|*.tgz) tar -cvf "${archive_name}" --use-compress-program="${_gzip_bin}" "${=path_to_archive}" ;;
   (*.tar.bz2|*.tbz|*.tbz2) tar -cvf "${archive_name}" --use-compress-program="${_bzip2_bin}" "${=path_to_archive}" ;;
-  (*.tar.xz|*.txz) tar -cvJf "${archive_name}" "${=path_to_archive}" ;;
+  (*.tar.xz|*.txz) tar -cvf "${archive_name}" --use-compress-program="${_xz_bin}" "${=path_to_archive}" ;;
   (*.tar.lzma|*.tlz) tar -cvf "${archive_name}" --lzma "${=path_to_archive}" ;;
   (*.tar) tar -cvf "${archive_name}" "${=path_to_archive}" ;;
   (*.zip|*.jar) zip -r "${archive_name}" "${=path_to_archive}" ;;

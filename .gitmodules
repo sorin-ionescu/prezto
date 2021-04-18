@@ -31,3 +31,8 @@
 [submodule "modules/autoenv/external"]
 	path = modules/autoenv/external
 	url = https://github.com/Tarrasch/zsh-autoenv.git
+	shallow = true
+[submodule "modules/prompt/external/powerlevel10k"]
+	path = modules/prompt/external/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+	shallow = true

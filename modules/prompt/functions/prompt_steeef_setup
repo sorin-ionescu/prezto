@@ -41,6 +41,9 @@ function prompt_steeef_setup {
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_steeef_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     _prompt_steeef_colors=(
@@ -104,3 +107,4 @@ function prompt_steeef_preview {
 }
 
 prompt_steeef_setup "$@"
+# vim: ft=zsh

@@ -23,7 +23,7 @@ elif (( $+commands[node] )) ; then
   version="${$(node -v)#v}"  
 fi
 
-if [[ "$version" != (none|) ]]; then
+if [[ "$version" != (none|system) ]]; then
   zstyle -s ':prezto:module:node:info:version' format 'version_format'
   zformat -f version_formatted "$version_format" "v:$version"
   node_info[version]="$version_formatted"

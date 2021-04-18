@@ -43,6 +43,22 @@ A prompt theme is an autoloadable function file with a special name,
 project, themes **should** be placed in the *modules/prompt/functions*
 directory.
 
+### Required Variables
+
+To ensure that your function works with the editor-info module you'll need to
+set the following variable:
+
+```
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+```
+
+This is to ensure compatibility with outside prompts, while allowing prezto
+and prezto-compatible prompts to take full advantage of the editor module.
+This should be set in the `prompt_name_setup` function after you've added
+any additional hooks with `add-zsh-hook precmd prompt_name_precmd`. See below
+for additional information about functions and hooks.
+
 ### Theme Functions
 
 There are three theme functions, a setup function, a help function, and

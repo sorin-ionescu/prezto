@@ -8,11 +8,11 @@
 
 # function pacman-list-disowned {
 
-local tmp="${TMPDIR:-/tmp}/pacman-disowned-$UID-$$"
+local tmp="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pacman-disowned-$$"
 local db="$tmp/db"
 local fs="$tmp/fs"
 
-mkdir "$tmp"
+mkdir -p "$tmp"
 trap  'rm -rf "$tmp"' EXIT
 
 pacman --quiet --query --list | sort --unique > "$db"

@@ -35,6 +35,9 @@ function prompt_nicoulaj_setup {
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_nicoulaj_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Customizable parameters.
   local max_path_chars=30
   local user_char='❯'
@@ -58,3 +61,4 @@ function prompt_nicoulaj_setup {
 }
 
 prompt_nicoulaj_setup "$@"
+# vim: ft=zsh

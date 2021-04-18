@@ -7,18 +7,16 @@
 #   Patrick Bos <egpbos@gmail.com>
 #
 
+# Load dependencies
+pmodload 'helper'
+
 # Load manually installed pyenv into the path
-if [[ -n "$PYENV_ROOT" && -s "$PYENV_ROOT/bin/pyenv" ]]; then
-  path=("$PYENV_ROOT/bin" $path)
-elif [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
-  path=("$HOME/.pyenv/bin" $path)
-fi
+if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
+  path=("${PYENV_ROOT}/bin" $path)
+  eval "$(pyenv init - --no-rehash zsh)"
 
 # Load pyenv into the current python session
-if (( $+commands[pyenv] )); then
-  if [[ -z "$PYENV_ROOT" ]]; then
-    export PYENV_ROOT=$(pyenv root)
-  fi
+elif (( $+commands[pyenv] )); then
   eval "$(pyenv init - --no-rehash zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
@@ -27,7 +25,7 @@ if (( $+commands[pyenv] )); then
 else
   if [[ -n "$PYTHONUSERBASE" ]]; then
     path=($PYTHONUSERBASE/bin $path)
-  elif [[ "$OSTYPE" == darwin* ]]; then
+  elif is-darwin; then
     path=($HOME/Library/Python/*/bin(N) $path)
   else
     # This is subject to change.
@@ -73,7 +71,7 @@ function _python-workon-cwd {
   if [[ "$ENV_NAME" != "" ]]; then
     # Activate the environment only if it is not already active
     if [[ "$VIRTUAL_ENV" != "$WORKON_HOME/$ENV_NAME" ]]; then
-      if [[ -e "$WORKON_HOME/$ENV_NAME/bin/activate" ]]; then
+      if [[ -n "$WORKON_HOME" && -e "$WORKON_HOME/$ENV_NAME/bin/activate" ]]; then
         workon "$ENV_NAME" && export CD_VIRTUAL_ENV="$ENV_NAME"
       elif [[ -e "$ENV_NAME/bin/activate" ]]; then
         source $ENV_NAME/bin/activate && export CD_VIRTUAL_ENV="$ENV_NAME"
@@ -149,17 +147,25 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
 fi
 
 # Load PIP completion.
-if (( $#commands[(i)pip(|[23])] )); then
-  cache_file="${TMPDIR:-/tmp}/prezto-pip-cache.$UID.zsh"
-
-  # Detect and use one available from among 'pip', 'pip2', 'pip3' variants
+# Detect and use one available from among 'pip', 'pip2', 'pip3' variants
+if [[ -n "$PYENV_ROOT" ]]; then
+  for pip in pip{,2,3}; do
+    pip_command="$(pyenv which "$pip" 2>/dev/null)"
+    [[ -n "$pip_command" ]] && break
+  done
+  unset pip
+else
   pip_command="$commands[(i)pip(|[23])]"
+fi
+if [[ -n "$pip_command" ]]; then
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pip-cache.zsh"
 
   if [[ "$pip_command" -nt "$cache_file" \
         || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
         || ! -s "$cache_file" ]]; then
+    mkdir -p "$cache_file:h"
     # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
-    $pip_command completion --zsh \
+    "$pip_command" completion --zsh \
       | sed -e "s/\(compctl -K [-_[:alnum:]]* pip\).*/\1{,2,3}{,.{0..9}}/" \
       >! "$cache_file" \
       2> /dev/null
@@ -167,8 +173,9 @@ if (( $#commands[(i)pip(|[23])] )); then
 
   source "$cache_file"
 
-  unset cache_file pip_command
+  unset cache_file
 fi
+unset pip_command
 
 # Load conda into the shell session, if requested
 zstyle -T ':prezto:module:python' conda-init

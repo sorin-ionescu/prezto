@@ -32,6 +32,9 @@ function prompt_minimal_setup {
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_minimal_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
   zstyle ':vcs_info:*' check-for-changes true
@@ -57,3 +60,4 @@ function prompt_minimal_preview {
 }
 
 prompt_minimal_setup "$@"
+# vim: ft=zsh
