@@ -53,6 +53,16 @@ zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 Read [iTerm2 and tmux Integration][7] for more information.
 
+#### Custom Config File Path
+
+By default this plugin will use tmux's default config path (`$HOME/.tmux.conf`).
+If your config is stored elsewhere (in `XDG_CONFIG_HOME` for example), you can
+set the path using:
+
+```sh
+zstyle ':prezto:module:tmux:config' path "$XDG_CONFIG_HOME/tmux.conf"
+```
+
 Aliases
 -------
 
