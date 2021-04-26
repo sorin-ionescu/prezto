@@ -4,8 +4,8 @@ History
 Sets [history][1] options and defines history aliases.
 
 **Note:** If you are migrating from oh-my-zsh and want to keep your history, you
-will either need to set HISTFILE manually to `$HOME/.zsh_history` or rename
-`~/.zsh_history` to ~/.zhistory`.
+will either need to set `HISTFILE` manually to `$HOME/.zsh_history` or rename
+`~/.zsh_history` to `~/.zhistory`.
 
 Options
 -------
