@@ -3,9 +3,10 @@ History
 
 Sets [history][1] options and defines history aliases.
 
-**Note:** If you are migrating from oh-my-zsh and want to keep your history, you
-will either need to set HISTFILE manually to `$HOME/.zsh_history` or rename
-`~/.zsh_history` to ~/.zhistory`.
+**Note:** If you are migrating from [Oh My Zsh][2] and are not on a recent
+version of macOS and want to keep your history, you will either need to set
+`HISTFILE` manually to `$HOME/.zsh_history` or rename `~/.zsh_history` to
+`~/.zhistory`.
 
 Options
 -------
@@ -39,10 +40,11 @@ Aliases
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+*The authors of this module should be contacted via the [issue tracker][3].*
 
   - [Robby Russell](https://github.com/robbyrussell)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://zsh.sourceforge.net/Guide/zshguide02.html#l16
-[2]: https://github.com/sorin-ionescu/prezto/issues
+[2]: https://github.com/ohmyzsh/ohmyzsh
+[3]: https://github.com/sorin-ionescu/prezto/issues

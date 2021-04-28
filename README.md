@@ -59,7 +59,7 @@ Updating
 
 Run `zprezto-update` to automatically check if there is an update to zprezto.
 If there are no file conflicts, zprezto and its submodules will be
-automatically updated. If there are conflicts you will instructed to go into
+automatically updated. If there are conflicts you will be instructed to go into
 the `$ZPREZTODIR` directory and resolve them yourself.
 
 To pull the latest changes and update submodules manually:
