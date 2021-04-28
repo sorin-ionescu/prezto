@@ -11,3 +11,46 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+GOPATH=$(go env GOPATH)
+export PATH=$GOPATH/bin:$PATH
+export GOPATH=$GOPATH
+export GO111MODULE="on"
+# ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
+setopt hist_ignore_all_dups
+
+# スペースで始まるコマンド行はヒストリリストから削除
+setopt hist_ignore_space
+
+# 余分な空白は詰めて記録
+setopt hist_reduce_blanks
+
+# historyコマンドは履歴に登録しない
+setopt hist_no_store
+
+# history
+function peco-select-history() {
+  BUFFER=$(history -n 1 | tail -r | peco)
+  #BUFFER=$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+
+bindkey '^]' peco-src
+function peco-src() {
+  local base=$(ghq root)
+  local src=$(ghq list | peco --query "$LBUFFER")
+  if [ -n "$src" ]; then
+    BUFFER="cd $base/$src"
+    zle accept-line
+  fi
+  zle -R -c
+}
+zle -N peco-src
+
+# Activate SSH Agent
+if ! ssh-add -l > /dev/null 2>&1; then
+    ssh-add -K
+fi
