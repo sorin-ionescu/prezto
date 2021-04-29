@@ -13,5 +13,8 @@ fi
 # Load dependencies.
 pmodload 'helper'
 
+# Load 'run-help' function.
+autoload -Uz run-help-git
+
 # Source module files.
 source "${0:h}/alias.zsh"
