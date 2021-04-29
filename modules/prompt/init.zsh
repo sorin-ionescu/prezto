@@ -13,9 +13,12 @@ zstyle -a ':prezto:module:prompt' theme 'prompt_argv'
 if [[ "$TERM" == (dumb|linux|*bsd*) ]] || (( $#prompt_argv < 1 )); then
   prompt 'off'
 elif [[ "$prompt_argv[1]" == 'powerlevel9k' ]] ; then
-  printf "'powerlevel9k' has been deprecated and unsupported by its author, "
-  printf "consider migrating to 'powerlevel10k' instead.\n"
-  printf "Switching to prezto default prompt...\n"
+  <<EOW
+WARNING: Prezto does not support 'powerlevel9k' anymore as it has
+         been deprecated and is not supported by its author.
+         Consider migrating to 'powerlevel10k' instead.
+         Switching to prezto default prompt 'sorin'..."
+EOW
   prompt 'sorin'
 else
   prompt "$prompt_argv[@]"
