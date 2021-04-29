@@ -15,6 +15,9 @@ if zstyle -T ':prezto:module:utility' correct; then
   setopt CORRECT
 fi
 
+# Load 'run-help' function.
+autoload -Uz run-help-{ip,openssl,sudo}
+
 #
 # Aliases
 #
