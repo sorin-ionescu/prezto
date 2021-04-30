@@ -9,8 +9,7 @@
 
 # function zsh-help {
 
-local usage="$(
-cat <<EOF
+local usage="$(<<EOF
 usage: $0 [--help] [--zsh-help-debug] [--all] search term(s)
 Options:
     --all - search for the term anywhere, not just at the start of a line.

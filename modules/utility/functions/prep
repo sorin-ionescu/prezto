@@ -9,8 +9,7 @@
 
 local usage pattern modifiers invert
 
-usage="$(
-cat <<EOF
+usage="$(<<EOF
 usage: $0 [-option ...] [--] pattern [file ...]
 
 options:
