@@ -16,7 +16,9 @@ elif [[ "$prompt_argv[1]" == 'powerlevel9k' ]] ; then
   <<EOW
 WARNING: Prezto does not support 'powerlevel9k' anymore as it has
          been deprecated and is not supported by its author.
-         Consider migrating to 'powerlevel10k' instead.
+         Consider migrating to 'powerlevel10k' instead by setting:
+         zstyle ':prezto:module:prompt' theme 'powerlevel10k'
+         in .zpreztorc.
          Switching to prezto default prompt 'sorin'..."
 EOW
   prompt 'sorin'
