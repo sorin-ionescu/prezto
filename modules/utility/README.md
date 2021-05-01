@@ -2,6 +2,11 @@
 
 Defines general aliases and functions.
 
+**Note:** Some of the utilities configured in this module might be provided via
+GNU utilities with incompatible arguments on non-GNU systems. In such cases,
+using [*`gnu-utility`*][1] module is recommended and it must be loaded
+**before** this module.
+
 ## Settings
 
 ### Highlighting
@@ -107,7 +112,7 @@ zstyle ':prezto:module:utility' correct 'no'
 - `lt` lists sorted by date, most recent last.
 - `lc` lists sorted by date, most recent last, shows change time.
 - `lu` lists sorted by date, most recent last, shows access time.
-- `sl` lists directory contents (`ls`).
+- `sl` lists directory contents (correction for `ls`).
 
 ### macOS Everywhere
 
@@ -181,10 +186,11 @@ In addition, the following aliases have been added:
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
 - [Robby Russell](https://github.com/robbyrussell)
 - [Suraj N. Kurapati](https://github.com/sunaku)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/sorin-ionescu/prezto/issues
+[1]: ../gnu-utility#readme
+[2]: https://github.com/sorin-ionescu/prezto/issues
