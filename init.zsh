@@ -183,7 +183,7 @@ for zmodule ("$zmodules[@]") zmodload "zsh/${(z)zmodule}"
 unset zmodule{s,}
 
 # Load more specific 'run-help' function from $fpath.
-unalias run-help && autoload -Uz run-help
+(( $+aliases[run-help] )) && unalias run-help && autoload -Uz run-help
 
 # Autoload Zsh functions.
 zstyle -a ':prezto:load' zfunction 'zfunctions'
