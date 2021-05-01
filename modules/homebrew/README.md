@@ -23,15 +23,16 @@ Aliases
   - `brewl` lists installed formulae.
   - `brewo` lists brews which have an update available.
   - `brews` searches for a formula.
-  - `brewu` updates and upgrades Homebrew packages and formulae.
+  - `brewu` upgrades outdated formulae.
   - `brewx` uninstalls a formula.
 
 ### Homebrew Cask
 
-  - `cask` is aliased to `brew cask`.
   - `caski` installs a cask.
   - `caskl` lists installed casks.
   - `casko` lists casks which have an update available.
+  - `casks` searches for a cask.
+  - `casku` upgrades outdated casks.
   - `caskx` uninstalls a cask.
 
 Authors
