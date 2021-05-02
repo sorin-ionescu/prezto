@@ -3,10 +3,13 @@ History
 
 Sets [history][1] options and defines history aliases.
 
-**Note:** If you are migrating from [Oh My Zsh][2] and are not on a recent
-version of macOS and want to keep your history, you will either need to set
-`HISTFILE` manually to `$HOME/.zsh_history` or rename `~/.zsh_history` to
-`~/.zhistory`.
+**Note:** Default path of `HISTFILE` has changed from `${ZDOTDIR:-$HOME}/.zhistory`
+to `${ZDOTDIR:-$HOME}/.zsh_history`. The file will be automatically renamed if
+possible (when the new one doesn't exist). Otherwise, if you want to preserve
+previous history, you will need to move them from `${ZDOTDIR:-$HOME}/.zhistory`
+to `${ZDOTDIR:-$HOME}/.zsh_history`.
+
+Alternately, you can set `HISTFILE` manually to `${ZDOTDIR:-$HOME}/.zhistory`.
 
 Options
 -------
@@ -40,11 +43,11 @@ Aliases
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+*The authors of this module should be contacted via the [issue tracker][2].*
 
   - [Robby Russell](https://github.com/robbyrussell)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
+  - [Indrajit Raychaudhuri](https://github.com/indrajitr)
 
 [1]: http://zsh.sourceforge.net/Guide/zshguide02.html#l16
-[2]: https://github.com/ohmyzsh/ohmyzsh
-[3]: https://github.com/sorin-ionescu/prezto/issues
+[2]: https://github.com/sorin-ionescu/prezto/issues
