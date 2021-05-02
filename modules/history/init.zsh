@@ -26,7 +26,7 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 # Variables
 #
 
-HISTFILE="${HISTFILE:-${ZDOTDIR:-$HOME}/.zhistory}"  # The path to the history file.
+HISTFILE="${HISTFILE:-${ZDOTDIR:-$HOME}/.zsh_history}"  # The path to the history file.
 HISTSIZE=10000                   # The maximum number of events to save in the internal history.
 SAVEHIST=10000                   # The maximum number of events to save in the history file.
 
@@ -36,3 +36,28 @@ SAVEHIST=10000                   # The maximum number of events to save in the h
 
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
+if [[ -s "${OLD_HISTFILE::=${HISTFILE:h}/.zhistory}" ]]; then
+
+  # New 'HISTFILE' doesn't exist yet, rename legacy one if available and notify.
+  if [[ ! -s "$HISTFILE" ]]; then
+    <<EON
+NOTICE: Default path of 'HISTFILE' has changed from '${OLD_HISTFILE/#$HOME/~}'
+        to '${HISTFILE/#$HOME/~}'.
+        Attempting to rename the existing 'HISTFILE' ...
+EON
+    mv -v "$OLD_HISTFILE" "$HISTFILE"
+
+  # New 'HISTFILE' does exist and is older than legacy one, just warn.
+  elif [[ "$OLD_HISTFILE" -nt "$HISTFILE" ]]; then
+    <<EOW
+WARNING: Default path of 'HISTFILE' has changed from '${OLD_HISTFILE/#$HOME/~}'
+         to '${HISTFILE/#$HOME/~}'.
+         Either set 'HISTFILE' in '${${0:h}/#$HOME/~}'
+         or move previous history from '${OLD_HISTFILE/#$HOME/~}' to
+         '${HISTFILE/#$HOME/~}'.
+EOW
+  fi
+
+  unset OLD_HISTFILE
+fi
