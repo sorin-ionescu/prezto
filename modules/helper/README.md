@@ -13,6 +13,11 @@ Functions
   - `is-callable` checks if a name is a command, function, or alias.
   - `is-true` checks a boolean variable for "true".
   - `coalesce` prints the first non-empty string in the arguments array.
+  - `is-darwin` checks if running on macOS Darwin.
+  - `is-linux` checks if running on Linux.
+  - `is-bsd` checks if running on BSD.
+  - `is-cygwin` checks if running on Cygwin (Windows).
+  - `is-termux` checks if running on Termux (Android).
 
 Authors
 -------
