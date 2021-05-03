@@ -12,8 +12,8 @@ if [[ -s "${NVM_DIR:=$HOME/.nvm}/nvm.sh" ]]; then
 
 # Load package manager installed NVM into the shell session.
 elif (( $+commands[brew] )) && \
-  [[ -d "${nvm_prefix::="$(brew --prefix 2> /dev/null)"/opt/nvm}" ]]; then
-  source "$(brew --prefix nvm)/nvm.sh"
+      [[ -d "${nvm_prefix::="$(brew --prefix nvm 2> /dev/null)"}" ]]; then
+  source "${nvm_prefix}/nvm.sh"
   unset nvm_prefix
 
 # Load manually installed nodenv into the shell session.
