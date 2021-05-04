@@ -1,4 +1,4 @@
-# ZSH Docker Aliases
+# Docker
 
 Defines [Docker][1] aliases and functions.
 
@@ -21,14 +21,15 @@ Defines [Docker][1] aliases and functions.
 - `dkli` Log in to a Docker registry
 - `dklo` Log out from a Docker registry
 - `dkls` is alias for `dkps`
-- `dkp` Pause all processes within one or more containers<Paste>
+- `dkp` Pause all processes within one or more containers
 - `dkP` Unpause all processes within one or more containers
 - `dkpl` Pull an image or a repository from a registry
 - `dkph` Push an image or a repository to a registry
 - `dkps` List containers
 - `dkpsa` List all containers (default lists just running)
 - `dkr` Run a command in a new container
-- `dkR` Run an interactive command in a new container and automatically remove the container when it exits
+- `dkR` Run an interactive command in a new container and automatically remove
+  the container when it exits
 - `dkRe` like `dkR` and set entry point to `/bin/bash`
 - `dkrm` Remove one or more containers
 - `dkrmi` Remove one or more images
@@ -39,13 +40,14 @@ Defines [Docker][1] aliases and functions.
 - `dks` Start one or more stopped containers
 - `dkS` Restart a container
 - `dkss` Display a live stream of container(s) resource usage statistics
-- `dksv` Save one or more images to a tar archive (streamed to STDOUT by default)
+- `dksv` Save one or more images to a tar archive (streamed to STDOUT by
+  default)
 - `dkt` Tag an image into a repository
 - `dktop` Display the running processes of a container
 - `dkup` Update configuration of one or more containers
 - `dkV` Manage Docker volumes
 - `dkv` Show the Docker version information
-- `dkw` Block until a container stops, then print its exit code<Paste>
+- `dkw` Block until a container stops, then print its exit code
 - `dkx` Stop a running container
 
 #### container (C)
@@ -65,7 +67,8 @@ Defines [Docker][1] aliases and functions.
 - `dkCS` Restart one or more containers
 - `dkCrm` Remove one or more containers
 - `dkCr` Run a command in a new container
-- `dkCR` Run an interactive command in a new container and automatically remove the container when it exits
+- `dkCR` Run an interactive command in a new container and automatically remove
+  the container when it exits
 - `dkCRe` like `dkCR` and set entry point to `/bin/bash`
 - `dkCs` Start one or more stopped containers
 - `dkCss` Display a live stream of container(s) resource usage statistics
@@ -87,7 +90,8 @@ Defines [Docker][1] aliases and functions.
 - `dkIpl` Pull an image or a repository from a registry
 - `dkIph` Push an image or a repository to a registry
 - `dkIrm` Remove one or more images
-- `dkIsv` Save one or more images to a tar archive (streamed to STDOUT by default)
+- `dkIsv` Save one or more images to a tar archive (streamed to STDOUT by
+  default)
 - `dkIt` Tag an image into a repository
 
 #### volume (V)
