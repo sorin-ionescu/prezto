@@ -1,5 +1,4 @@
-Syntax Highlighting
-===================
+# Syntax Highlighting
 
 Integrates [zsh-syntax-highlighting][1] into Prezto.
 
@@ -9,23 +8,21 @@ Additionally, if this module is used in conjunction with the
 *history-substring-search* module, this module must be loaded **before** the
 *history-substring-search* module.
 
-To elaborate: The relative order of loading the modules would be 
+To elaborate: The relative order of loading the modules would be
 'syntax-highlighting', 'history-substring-search' and 'prompt'.
 
-Contributors
-------------
+## Contributors
 
 New features and bug fixes should be submitted to the
 [zsh-syntax-highlighting][1] project according to its rules and regulations.
 This module will be synchronized against it.
 
-Settings
---------
+## Settings
 
 ### Highlighting
 
 To enable highlighting for this module only, add the following line to
-*zpreztorc*:
+*~/.zpreztorc*:
 
 ```sh
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
@@ -36,7 +33,7 @@ zstyle ':prezto:module:syntax-highlighting' color 'yes'
 Syntax highlighting is accomplished by pluggable [highlighters][2]. This module
 only enables the *main* highlighter by default.
 
-To enable all highlighters, add the following to *zpreztorc*:
+To enable all highlighters, add the following to *~/.zpreztorc*:
 
 ```sh
 zstyle ':prezto:module:syntax-highlighting' highlighters \
@@ -53,7 +50,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 Each syntax highlighter defines styles used to highlight tokens.
 
 To highlight, for example, builtins, commands, and functions in blue instead of
-green, add the following to *zpreztorc*:
+green, add the following to *~/.zpreztorc*:
 
 ```sh
 zstyle ':prezto:module:syntax-highlighting' styles \
@@ -62,12 +59,11 @@ zstyle ':prezto:module:syntax-highlighting' styles \
   'function' 'bg=blue'
 ```
 
-Authors
--------
+## Authors
 
 *The authors of this module should be contacted via the [issue tracker][3].*
 
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+- [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/zsh-users/zsh-syntax-highlighting
 [2]: https://github.com/zsh-users/zsh-syntax-highlighting/tree/master/highlighters

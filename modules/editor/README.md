@@ -1,25 +1,21 @@
-Editor
-======
+# Editor
 
 Sets editor specific key bindings options and variables.
 
-Options
--------
+## Options
 
-  - `BEEP` beep on error in line editor.
+- `BEEP` beep on error in line editor.
 
-Variables
----------
+## Variables
 
-  - `WORDCHARS` treat a given set of characters as part of a word.
+- `WORDCHARS` treat a given set of characters as part of a word.
 
-Settings
---------
+## Settings
 
 ### Key bindings
 
-To enable key bindings, add the following to *zpreztorc*, and replace 'bindings'
-with 'emacs' or 'vi'.
+To enable key bindings, add the following to *~/.zpreztorc*, and replace
+'bindings' with 'emacs' or 'vi'.
 
 ```sh
 zstyle ':prezto:module:editor' key-bindings 'bindings'
@@ -28,7 +24,7 @@ zstyle ':prezto:module:editor' key-bindings 'bindings'
 ### Dot Expansion
 
 To enable the auto conversion of .... to ../.., add the following to
-*zpreztorc*.
+*~/.zpreztorc*.
 
 ```sh
 zstyle ':prezto:module:editor' dot-expansion 'yes'
@@ -37,14 +33,13 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 ### PS Context
 
 To enable the prompt context to be set, add the following to your
-*zpreztorc*.
+*~/.zpreztorc*.
 
 ```sh
 zstyle ':prezto:module:editor' ps-context 'yes'
 ```
 
-Theming
--------
+## Theming
 
 To indicate when the editor is in the primary keymap (emacs or viins), add
 the following to your `theme_prompt_setup` function.
@@ -84,8 +79,7 @@ zstyle ':prezto:module:editor:info:completing' format '...'
 Then add `$editor_info[context]`, where context is *keymap*, *insert*, or
 *overwrite*, to `$PROMPT` or `$RPROMPT`.
 
-Convenience Functions
----------------------
+## Convenience Functions
 
 ### bindkey-all
 
@@ -99,11 +93,10 @@ It will also pass through arguments so you can use bindkey-all to set bindings
 for all keymaps at once. If provided arguments it will *not* print out the
 names of each of the keymaps, and just run the command for each keymap.
 
-Authors
--------
+## Authors
 
 *The authors of this module should be contacted via the [issue tracker][1].*
 
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+- [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/sorin-ionescu/prezto/issues
