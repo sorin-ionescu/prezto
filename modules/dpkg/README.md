@@ -1,6 +1,6 @@
 # Dpkg
 
-Defines [*dpkg*][1] aliases and functions.
+Defines [_dpkg_][1] aliases and functions.
 
 ## Aliases
 
@@ -27,7 +27,7 @@ Defines [*dpkg*][1] aliases and functions.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Daniel Bolton](https://github.com/dbb)
 - [Benjamin Boudreau](https://github.com/dreur)

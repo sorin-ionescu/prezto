@@ -9,14 +9,16 @@ utilities will be broken.
 This module wraps GNU utilities in functions without a prefix for interactive
 use.
 
-This module must be loaded **before** the *utility* module.
+This module must be loaded _before_ the [_`utility`_][1] module so that GNU
+utilities enabled in this module are available for configuration in _`utility`_
+module.
 
 ## Settings
 
 ### Prefix
 
-To use a different prefix, add the following to *~/.zpreztorc*, and replace 'g'
-with the desired prefix:
+To use a different prefix, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_, and replace `'g'` with the desired prefix.
 
 ```sh
 zstyle ':prezto:module:gnu-utility' prefix 'g'
@@ -24,8 +26,9 @@ zstyle ':prezto:module:gnu-utility' prefix 'g'
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/sorin-ionescu/prezto/issues
+[1]: ../utility#readme
+[2]: https://github.com/sorin-ionescu/prezto/issues

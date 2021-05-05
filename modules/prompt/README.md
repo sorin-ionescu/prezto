@@ -6,19 +6,19 @@ Loads prompt [themes][1].
 
 ### Prompt Theme
 
-To select a prompt theme, add the following to *~/.zpreztorc*, and replace
-**name** with the name of the theme you wish to load. Setting it to **random**
-will load a random theme.
+To select a prompt theme, add the following to _`${ZDOTDIR:-$HOME}/.zpreztorc`_,
+and replace `'<name>'` with the name of the theme you wish to load. Setting it
+to `'random'` will load a random theme every time.
 
 ```sh
-zstyle ':prezto:module:prompt' theme 'name'
+zstyle ':prezto:module:prompt' theme '<name>'
 ```
 
 ### Prompt Display Length
 
 To change working directory prompt display length from 'short', set the
 following to 'long' (without `~` expansion) or 'full' (with `~` expansion) in
-*~/.zpreztorc*.
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
 ```sh
 zstyle ':prezto:module:prompt' pwd-length 'short'
@@ -37,13 +37,13 @@ zstyle ':prezto:module:prompt' show-return-val 'no'
 
 A prompt theme is an autoloadable function file with a special name,
 `prompt_name_setup`, placed anywhere in `$fpath`, but for the purpose of this
-project, themes **should** be placed in the *modules/prompt/functions*
+project, themes **should** be placed in the _modules/prompt/functions_
 directory.
 
 ### Required Variables
 
 To ensure that your function works with the editor-info module you'll need to
-set the following variable in *~/.zpreztorc*:
+set the following variable in _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 # Tell prezto we can manage this prompt
@@ -119,7 +119,7 @@ function prompt_name_preview {
 
 ### Hook Functions
 
-There are many Zsh [hook][2] functions, but mostly the *precmd* hook will be
+There are many Zsh [hook][2] functions, but mostly the _precmd_ hook will be
 used.
 
 #### `prompt_name_precmd`
@@ -156,7 +156,7 @@ patched fonts][5] which should fix most font issues.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+_The authors of this module should be contacted via the [issue tracker][3]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 

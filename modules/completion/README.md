@@ -3,7 +3,8 @@
 Loads and configures <kbd>TAB</kbd> completion and provides additional
 completions from the [zsh-completions][1] project.
 
-This module must be loaded **after** the *utility* module.
+This module must be loaded late _after_ the _`utility`_ module and all other
+modules that provide completion definitions.
 
 ## Options
 
@@ -14,24 +15,24 @@ This module must be loaded **after** the *utility* module.
 - `AUTO_LIST` automatically list choices on ambiguous completion.
 - `AUTO_PARAM_SLASH` if completed parameter is a directory, add a trailing
   slash (`/`).
-- `EXTENDED_GLOB` needed for file modification glob modifiers with *compinit*.
+- `EXTENDED_GLOB` needed for file modification glob modifiers with _compinit_.
 - `MENU_COMPLETE` do not autoselect the first completion entry.
 - `FLOW_CONTROL` disable start/stop characters in shell editor.
 
 ## Settings
 
-### Ignore */etc/hosts* Entries
+### Ignore _`/etc/hosts`_ Entries
 
-To ignore certain entries from static */etc/hosts* for host completion, add the
-following lines in *~/.zpreztorc* with the IP addresses of the hosts as they
-appear in */etc/hosts*. Both IP address and the corresponding hostname will be
-ignored during host completion. However, some of the entries ignored from
-*/etc/hosts* still might appear during completion because of their presence in
-*ssh* configuration or history).
+To ignore certain entries from static _`/etc/hosts`_ for host completion, add
+the following lines in _`${ZDOTDIR:-$HOME}/.zpreztorc`_ with the IP addresses of
+the hosts as they appear in _`/etc/hosts`_. Both IP address and the associated
+hostname(s) will be ignored during host completion. However, some of the entries
+ignored from _`/etc/hosts`_ still might appear during completion because of
+their presence in _ssh_ configuration or history).
 
 ```sh
 zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
-  '0.0.0.0' '127.0.0.1'
+    '0.0.0.0' '127.0.0.1'
 ```
 
 ## Contributors
@@ -41,7 +42,7 @@ its rules and regulations. This module will be synchronized against it.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 

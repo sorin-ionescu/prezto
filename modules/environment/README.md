@@ -6,9 +6,10 @@ This module must be loaded first.
 
 ## Contributors
 
-This module **MUST NOT** rely on any command not built in Zsh.
+This module **MUST NOT** rely on any command that is not built in Zsh.
 
-Non-interactive environment variables should be defined in [`zshenv`][1].
+Non-interactive environment variables should be defined in
+[_`${ZDOTDIR:-$HOME}/.zshenv`_][1].
 
 ## Options
 
@@ -43,9 +44,9 @@ Non-interactive environment variables should be defined in [`zshenv`][1].
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
+[1]: ../../runcoms#zshenv
 [2]: https://github.com/sorin-ionescu/prezto/issues

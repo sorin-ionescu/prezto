@@ -6,11 +6,11 @@ Enables local [Perl][1] module installation on macOS and defines aliases.
 
 Perl versions older than 5.14 do not support the local installation of Perl
 modules natively. This module allows for local installation of Perl modules on
-macOS in *`~/Library/Perl/5.12`* by altering the environment.
+macOS in _`~/Library/Perl/5.12`_ by altering the environment.
 
 ### Usage
 
-For Perl versions older than 5.14, install *`local::lib`*.
+For Perl versions older than 5.14, install _`local::lib`_.
 
 ```console
 curl -L -C - -O http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
@@ -20,7 +20,7 @@ perl Makefile.PL --bootstrap=$HOME/Library/Perl/5.12
 make && make test && make install
 ```
 
-Install *cpanminus*:
+Install _cpanminus_:
 
 ```console
 curl -L http://cpanmin.us | perl - --self-upgrade
@@ -33,10 +33,10 @@ management of multiple, isolated Perl installations in the home directory.
 
 ## plenv
 
-Yet another alternative is [*plenv*][3]. This is inspired from *rbenv* and
+Yet another alternative is [_plenv_][3]. This is inspired from _rbenv_ and
 enables switching between multiple binary installations.
 
-The subcommands of *plenv* is similar with *rbenv*.
+The subcommands of _plenv_ is similar with _rbenv_.
 
 ## Aliases
 
@@ -96,7 +96,7 @@ Then add `$perl_info[version]` to `$PROMPT` or `$RPROMPT` and call
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][4].*
+_The authors of this module should be contacted via the [issue tracker][4]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 

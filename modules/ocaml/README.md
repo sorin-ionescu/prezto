@@ -15,7 +15,7 @@ Install packages to your local package directory with `opam install`.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+_The authors of this module should be contacted via the [issue tracker][3]._
 
 - [Sebastian Wiesner](https://github.com/lunaryorn)
 

@@ -12,7 +12,7 @@ a recent version of Homebrew installed, you might also need to tap the
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][4].*
+_The authors of this module should be contacted via the [issue tracker][4]._
 
 - [Joseph Booker](https://github.com/sargas)
 - [Indrajit Raychaudhuri](https://github.com/indrajitr)
