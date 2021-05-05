@@ -22,7 +22,7 @@ Sets directory options and defines directory aliases.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+_The authors of this module should be contacted via the [issue tracker][1]._
 
 - [James Cox](https://github.com/imajes)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)

@@ -1,24 +1,24 @@
 # Node.js
 
 Provides utility functions for [Node.js][1], loads the Node Version Manager, and
-enables [*npm*][2] completion.
+enables [_npm_][2] completion.
 
 ## nvm
 
-[*nvm*][5] allows for managing multiple, isolated Node.js installations in the
+[_nvm_][5] allows for managing multiple, isolated Node.js installations in the
 home directory.
 
 This will be loaded automatically if nvm is installed in `$NVM_DIR`,
-*~/.nvm*, or nvm is installed with homebrew.
+_`~/.nvm`_, or nvm is installed with Homebrew.
 
 ## nodenv
 
-[*nodenv*][6] does one thing well - it is concerned solely with switching
+[_nodenv_][6] does one thing well - it is concerned solely with switching
 Node versions. It is simple and predictable, Just Works, and is rock solid in
-production. nodenv is forked from the popular [*rbenv*][7].
+production. nodenv is forked from the popular [_rbenv_][7].
 
 This will be loaded automatically if nodenv is installed in `$NODENV_ROOT`,
-*~/.nodenv*, or `nodenv` is on the path.
+_`~/.nodenv`_, or `nodenv` is on the path.
 
 ## Functions
 
@@ -42,7 +42,7 @@ Then add `$node_info[version]` to either `$PROMPT` or `$RPROMPT` and call
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][4].*
+_The authors of this module should be contacted via the [issue tracker][4]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 - [Zeh Rizzatti](https://github.com/zehrizzatti)

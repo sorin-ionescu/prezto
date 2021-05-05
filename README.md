@@ -21,8 +21,32 @@ version is **4.3.11**.
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
     ```
 
-03. Create a new Zsh configuration by copying the Zsh configuration files
-    provided:
+    <details>
+      <summary><em>Optional: Installing in <code>$XDG_CONFIG_HOME</code></em></summary>
+
+      Optionally, if you already have `$XDG_CONFIG_HOME` configured (usually as
+      _`$HOME/.config`_ by default) and intend to install Prezto under
+      _`$XDG_CONFIG_HOME/zsh`_ instead, you can clone the repository there and
+      configure `$ZDOTDIR` separately if not already configured.
+
+      - Clone the repository:
+
+        ```console
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+        ```
+
+      - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`${$HOME}/.zshenv`_:
+
+        ```sh
+        export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+        export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
+        source "$ZDOTDIR/.zshenv"
+        ```
+
+    </details>
+
+03. Create a new Zsh configuration by copying/linking the Zsh configuration
+    files provided:
 
     ```console
     setopt EXTENDED_GLOB
@@ -34,10 +58,10 @@ version is **4.3.11**.
     **Note:** If you already have any of the given configuration files, `ln` in
     the above operation will cause an error. In simple cases, you can load
     Prezto by adding the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
-    the bottom of your *${ZDOTDIR:-$HOME}/.zshrc* and keep the rest of your Zsh
-    configuration intact. For more complicated setups, we recommend that you
+    the bottom of your _`${ZDOTDIR:-$HOME}/.zshrc`_ and keep the rest of your
+    Zsh configuration intact. For more complicated setups, we recommend that you
     back up your original configs and replace them with the provided Prezto
-    *runcoms*.
+    [_`runcoms`_][10].
 
 04. Set Zsh as your default shell:
 
@@ -50,7 +74,7 @@ version is **4.3.11**.
 ### Troubleshooting
 
 If you are not able to find certain commands after switching to Prezto, modify
-the `PATH` variable in *${ZDOTDIR:-$HOME}/.zprofile* then open a new Zsh
+the `PATH` variable in _`${ZDOTDIR:-$HOME}/.zprofile`_ then open a new Zsh
 terminal window or tab.
 
 ## Updating
@@ -76,33 +100,33 @@ accompanying README files to learn about what is available.
 
 ### Modules
 
-01. Browse */modules* to see what is available.
-02. Load the modules you need in *${ZDOTDIR:-$HOME}/.zpreztorc* then open a new
-    Zsh terminal window or tab.
+01. Browse [_`modules`_][9] to see what is available.
+02. Load the modules you need in _`${ZDOTDIR:-$HOME}/.zpreztorc`_ and then open
+    a new Zsh terminal window or tab.
 
 ### Themes
 
 01. For a list of themes, type `prompt -l`.
 02. To preview a theme, type `prompt -p name`.
-03. Load the theme you like in *${ZDOTDIR:-$HOME}/.zpreztorc* then open a new
-    Zsh terminal window or tab.
+03. Load the theme you like in _`${ZDOTDIR:-$HOME}/.zpreztorc`_ and then
+    open a new Zsh terminal window or tab.
 
     ![sorin theme][2]
-    Note that the *git* module may be required for special symbols to appear,
-    such as those on the right of the above image. Add `'git'` to the `pmodule`
-    list (under `zstyle ':prezto:load' pmodule \` in your
-    *${ZDOTDIR:-$HOME}/.zpreztorc*) to enable this module.
+    Note that the [_`git`_][11] module may be required for special symbols to
+    appear, such as those on the right of the above image. Add `'git'` to the
+    `pmodule` list (under `zstyle ':prezto:load' pmodule \` in your
+    _`${ZDOTDIR:-$HOME}/.zpreztorc`_) to enable this module.
 
 ### External Modules
 
-01. By default modules will be loaded from */modules* and */contrib*.
+01. By default modules will be loaded from [_`/modules`_][9] and _`/contrib`_.
 02. Additional module directories can be added to the
-    `:prezto:load:pmodule-dirs` setting in *${ZDOTDIR:-$HOME}/.zpreztorc*.
+    `:prezto:load:pmodule-dirs` setting in _`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
     Note that module names need to be unique or they will cause an error when
     loading.
 
-    ```console
+    ```sh
     zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
     ```
 
@@ -129,3 +153,6 @@ This project is licensed under the MIT License.
 [6]: https://git.github.io/git-reference/
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: https://grml.org/zsh/zsh-lovers.html
+[9]: modules#readme
+[10]: runcoms#readme
+[11]: modules/git#readme

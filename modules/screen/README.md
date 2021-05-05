@@ -9,14 +9,14 @@ Defines [GNU Screen][1] aliases and provides for auto launching it at start-up.
 Starts a GNU Screen session automatically when Zsh is launched.
 
 To enable this feature when launching Zsh in a local terminal, add the following
-line to *~/.zpreztorc*:
+line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:screen:auto-start' local 'yes'
 ```
 
 To enable this feature when launching Zsh in a SSH connection, add the following
-line to *~/.zpreztorc*:
+line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:screen:auto-start' remote 'yes'
@@ -31,7 +31,7 @@ zstyle ':prezto:module:screen:auto-start' remote 'yes'
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 - [Georges Discry](https://github.com/gdiscry)

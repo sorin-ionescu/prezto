@@ -1,12 +1,13 @@
 # SSH
 
-Provides for an easier use of [SSH][1] by setting up [*ssh-agent*][2].
+Provides for an easier use of [SSH][1] by setting up [_ssh-agent_][2].
 
 ## Settings
 
 ### Identities
 
-To load multiple identities, add the following line to *~/.zpreztorc*:
+To load multiple identities, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_dsa' 'id_github'
@@ -14,7 +15,7 @@ zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_dsa' 'id_github'
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+_The authors of this module should be contacted via the [issue tracker][3]._
 
 [Sorin Ionescu](https://github.com/sorin-ionescu)
 

@@ -1,6 +1,6 @@
 # Modules
 
-Load modules in *~/.zpreztorc*. The order matters.
+Load modules in _`${ZDOTDIR:-$HOME}/.zpreztorc`_. The order matters.
 
 ```sh
 zstyle ':prezto:load' pmodule 'environment' 'terminal'
@@ -29,11 +29,11 @@ Sets directory options and defines directory aliases.
 
 ## DNF
 
-Defines *dnf* aliases.
+Defines _dnf_ aliases.
 
 ## Dpkg
 
-Defines *dpkg* aliases and functions.
+Defines _dpkg_ aliases and functions.
 
 ## Editor
 

@@ -17,7 +17,7 @@ Install packages into per user directories with `cabal install --user`.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sebastian Wiesner](https://github.com/lunaryorn)
 

@@ -3,34 +3,42 @@
 Enhances the [Git][1] distributed version control system by providing aliases,
 functions and by exposing repository status information to prompts.
 
-Git **1.7.2** is the [minimum required version][7].
+This module must be loaded _before_ the [_`completion`_][13] module so that the
+provided completion definitions are loaded automatically by _`completion`_
+module.
+
+**Note:** Git **1.7.2** is the [minimum required version][7].
 
 ## Settings
 
 ### Log
 
-The format of the [git-log][8] output is configurable via the following style,
-where context is *brief*, *oneline*, and *medium*, which will be passed to the
-`--pretty=format:` switch.
+To configure the format of the [git-log][8] output, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_, and replace `'<context>'` with `'brief'`,
+`'oneline'`, and `'medium'`. This will be passed to the `--pretty=format:`
+switch.
 
 ```sh
-zstyle ':prezto:module:git:log:context' format ''
+zstyle ':prezto:module:git:log:context' format '<context>'
 ```
 
 ### Status
 
-Retrieving the status of a repository with submodules can take a long time.
-Submodules may be ignored when they are *dirty*, *untracked*, *all*, or *none*.
+Retrieving the status of a repository with [git-submodule][9] can take a long
+time. To configure the submodules to ignore, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_, and replace `'<state>'` with `'dirty'`,
+`'untracked'`, `'all'`, or `'none'`.
 
 ```sh
-zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules '<state>'
 ```
 
 This setting affects all aliases and functions that call `git-status`.
 
 ## Aliases
 
-Aliases are enabled by default. You can disable them with:
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
 ```sh
 zstyle ':prezto:module:git:alias' skip 'yes'
@@ -68,15 +76,15 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 - `gco` checks out a branch or paths to work tree.
 - `gcO` checks out hunks from the index or the tree interactively.
 - `gcf` amends the tip of the current branch using the same log message as
-  *HEAD*.
+  _HEAD_.
 - `gcSf` amends the tip of the current branch using the same log message as
-  *HEAD*. (Signed)
+  _HEAD_. (Signed)
 - `gcF` amends the tip of the current branch.
 - `gcSF` amends the tip of the current branch. (Signed)
 - `gcp` applies changes introduced by existing commits.
 - `gcP` applies changes introduced by existing commits without committing.
 - `gcr` reverts existing commits by reverting patches and recording new commits.
-- `gcR` removes the *HEAD* commit.
+- `gcR` removes the _HEAD_ commit.
 - `gcs` displays various types of objects.
 - `gcsS` displays commits with GPG signature.
 - `gcl` lists lost commits.
@@ -239,13 +247,13 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 - `gpa` updates remote branches along with associated objects.
 - `gpA` updates remote branches and tags along with associated objects.
 - `gpt` updates remote tags along with associated objects.
-- `gpc` updates remote refs along with associated objects and adds *origin* as
+- `gpc` updates remote refs along with associated objects and adds _origin_ as
   an upstream reference for the current branch.
 - `gpp` pulls and pushes from origin to origin.
 
 ### Rebase (r)
 
-- `gr` forward-ports local commits to the updated upstream head.
+- `gr` forward-ports local commits to the updated upstream _HEAD_.
 - `gra` aborts the rebase.
 - `grc` continues the rebase after merge conflicts are resolved.
 - `gri` makes a list of commits to be rebased and opens the editor.
@@ -288,7 +296,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 - `gSl` lists the commits of all submodules.
 - `gSm` moves a submodule.
 - `gSs` synchronizes submodules' remote URL to the value specified in
-  *.gitmodules*.
+  _.gitmodules_.
 - `gSu` fetches and merges the latest changes for all submodule.
 - `gSx` removes a submodule.
 
@@ -318,7 +326,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 
 The following aliases may shadow system commands:
 
-- `gb` shadows the [GB][9].
+- `gb` shadows the [GB][10].
 - `gm` shadows the [GraphicsMagick image processor][11].
 - `gpt` shadows the [GUID partition table maintenance utility][4].
 - `gs` shadows the [Ghostscript interpreter and previewer][5].
@@ -335,7 +343,7 @@ You can temporarily bypass an alias by prefixing it with a backward slash:
 - `git-commit-lost` lists lost commits.
 - `git-dir` displays the path to the Git directory.
 - `git-hub-browse` opens the [GitHub][3] repository in the default browser.
-- `git-hub-shorten-url` shortens [GitHub URLs][10].
+- `git-hub-shorten-url` shortens [GitHub URLs][12].
 - `git-info` exposes repository information via the `$git_info` associative
   array.
 - `git-root` displays the path to the working tree root.
@@ -357,26 +365,26 @@ zstyle ':prezto:module:git:info:context:subcontext' format 'string'
 
 ### Main Contexts
 
-| Name      | Format Code | Description
-| --------- | :---------: | ----------------------------------------------------
-| action    |     %s      | Special action name
-| ahead     |     %A      | Commits ahead of remote count
-| behind    |     %B      | Commits behind of remote count
-| branch    |     %b      | Branch name
-| commit    |     %c      | Commit hash
-| position  |     %p      | Commits from the nearest tag count
-| remote    |     %R      | Remote name
-| stashed   |     %S      | Stashed states count
+| Name     | Format Code | Description                        |
+| -------- | :---------: | ---------------------------------- |
+| action   |     %s      | Special action name                |
+| ahead    |     %A      | Commits ahead of remote count      |
+| behind   |     %B      | Commits behind of remote count     |
+| branch   |     %b      | Branch name                        |
+| commit   |     %c      | Commit hash                        |
+| position |     %p      | Commits from the nearest tag count |
+| remote   |     %R      | Remote name                        |
+| stashed  |     %S      | Stashed states count               |
 
 ### Concise Contexts
 
-| Name      | Format Code | Description
-| --------- | :---------: | ----------------------------------------------------
-| clean     |     %C      | Clean state
-| dirty     |     %D      | Dirty files count
-| indexed   |     %i      | Indexed files count
-| unindexed |     %I      | Unindexed files count
-| untracked |     %u      | Untracked files count
+| Name      | Format Code | Description           |
+| --------- | :---------: | --------------------- |
+| clean     |     %C      | Clean state           |
+| dirty     |     %D      | Dirty files count     |
+| indexed   |     %i      | Indexed files count   |
+| unindexed |     %I      | Unindexed files count |
+| untracked |     %u      | Untracked files count |
 
 The following contexts must be enabled with the following zstyle:
 
@@ -386,31 +394,31 @@ zstyle ':prezto:module:git:info' verbose 'yes'
 
 ### Verbose Contexts
 
-| Name      | Format Code | Description
-| --------- | :---------: | ----------------------------------------------------
-| added     |     %a      | Added files count
-| clean     |     %C      | Clean state
-| deleted   |     %d      | Deleted files count
-| dirty     |     %D      | Dirty files count
-| modified  |     %m      | Modified files count
-| renamed   |     %r      | Renamed files count
-| unmerged  |     %U      | Unmerged files count
-| untracked |     %u      | Untracked files count
+| Name      | Format Code | Description           |
+| --------- | :---------: | --------------------- |
+| added     |     %a      | Added files count     |
+| clean     |     %C      | Clean state           |
+| deleted   |     %d      | Deleted files count   |
+| dirty     |     %D      | Dirty files count     |
+| modified  |     %m      | Modified files count  |
+| renamed   |     %r      | Renamed files count   |
+| unmerged  |     %U      | Unmerged files count  |
+| untracked |     %u      | Untracked files count |
 
 ### Special Action Contexts
 
-| Name                 |   Format    | Description
-| -------------------- | :---------: | -----------------------------------------
-| apply                |    value    | Applying patches
-| bisect               |    value    | Binary searching for changes
-| cherry-pick          |    value    | Cherry picking
-| cherry-pick-sequence |    value    | Cherry picking sequence
-| merge                |    value    | Merging
-| rebase               |    value    | Rebasing
-| rebase-interactive   |    value    | Rebasing interactively
-| rebase-merge         |    value    | Rebasing merge
-| revert               |    value    | Reverting
-| revert-sequence      |    value    | Reverting sequence
+| Name                 | Format | Description                  |
+| -------------------- | :----: | ---------------------------- |
+| apply                | value  | Applying patches             |
+| bisect               | value  | Binary searching for changes |
+| cherry-pick          | value  | Cherry picking               |
+| cherry-pick-sequence | value  | Cherry picking sequence      |
+| merge                | value  | Merging                      |
+| rebase               | value  | Rebasing                     |
+| rebase-interactive   | value  | Rebasing interactively       |
+| rebase-merge         | value  | Rebasing merge               |
+| revert               | value  | Reverting                    |
+| revert-sequence      | value  | Reverting sequence           |
 
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.
@@ -434,19 +442,21 @@ function.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][6].*
+_The authors of this module should be contacted via the [issue tracker][6]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 - [Colin Hebert](https://github.com/ColinHebert)
 
 [1]: https://www.git-scm.com
-[2]: https://github.com/defunkt/hub
+[2]: https://hub.github.com
 [3]: https://www.github.com
 [4]: https://www.manpagez.com/man/8/gpt/
 [5]: https://www.manpagez.com/man/1/gs/
 [6]: https://github.com/sorin-ionescu/prezto/issues
 [7]: https://github.com/sorin-ionescu/prezto/issues/219
-[8]: https://www.kernel.org/pub/software/scm/git/docs/git-log.html
-[9]: https://getgb.io/
-[10]: https://github.com/blog/985-git-io-github-url-shortener
+[8]: https://git-scm.com/docs/git-log
+[9]: https://git-scm.com/docs/git-submodule
+[10]: https://getgb.io/
 [11]: https://www.manpagez.com/man/1/gm/
+[12]: https://github.blog/2011-11-10-git-io-github-url-shortener
+[13]: ../completion#readme
