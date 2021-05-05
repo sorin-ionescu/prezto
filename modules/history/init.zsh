@@ -46,7 +46,7 @@ NOTICE: Default path of 'HISTFILE' has changed from '${OLD_HISTFILE/#$HOME/~}'
         to '${HISTFILE/#$HOME/~}'.
         Attempting to rename the existing 'HISTFILE' ...
 EON
-    mv -v "$OLD_HISTFILE" "$HISTFILE"
+    command mv -v "$OLD_HISTFILE" "$HISTFILE"
 
   # New 'HISTFILE' does exist and is older than legacy one, just warn.
   elif [[ "$OLD_HISTFILE" -nt "$HISTFILE" ]]; then
