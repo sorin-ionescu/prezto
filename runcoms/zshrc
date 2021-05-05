@@ -52,5 +52,11 @@ zle -N peco-src
 
 # Activate SSH Agent
 if ! ssh-add -l > /dev/null 2>&1; then
-    ssh-add -K
+  ssh-add -K
+fi
+
+# load local settings
+LOCAL_FILE="${HOME}/.zshrc_local"
+if [ -e $LOCAL_FILE ]; then
+  source $LOCAL_FILE
 fi
