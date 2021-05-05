@@ -1,6 +1,6 @@
 # Yum
 
-Defines [*yum*][1] aliases.
+Defines [_yum_][1] aliases.
 
 ## Aliases
 
@@ -17,7 +17,7 @@ Defines [*yum*][1] aliases.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 

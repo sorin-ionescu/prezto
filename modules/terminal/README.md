@@ -7,7 +7,7 @@ Sets terminal window and tab titles.
 ### Auto-Title
 
 To auto set the terminal window and tab titles with the current command or
-directory, add the following to *~/.zpreztorc*:
+directory, add the following to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:terminal' auto-title 'yes'
@@ -23,7 +23,8 @@ zstyle ':prezto:module:terminal' auto-title 'always'
 
 ### Title formats
 
-To format terminal window and tab titles, add the following to *~/.zpreztorc*:
+To format terminal window and tab titles, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
 ```sh
 zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
@@ -44,7 +45,7 @@ For a list of sequences, see [Expansion of Prompt Sequences][1].
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 - [Olaf Conradi](https://github.com/oohlaf)

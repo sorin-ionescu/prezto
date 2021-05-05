@@ -1,6 +1,6 @@
 # Tmux
 
-Defines [*tmux*][1] aliases and provides for auto launching it at start-up.
+Defines [_tmux_][1] aliases and provides for auto launching it at start-up.
 
 ## Settings
 
@@ -9,14 +9,14 @@ Defines [*tmux*][1] aliases and provides for auto launching it at start-up.
 Starts a tmux session automatically when Zsh is launched.
 
 To enable this feature when launching Zsh in a local terminal, add the following
-line to *~/.zpreztorc*:
+line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:tmux:auto-start' local 'yes'
 ```
 
 To enable this feature when launching Zsh in a SSH connection, add the following
-line to *~/.zpreztorc*:
+line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:tmux:auto-start' remote 'yes'
@@ -34,7 +34,7 @@ zstyle ':prezto:module:tmux:session' name '<YOUR DEFAULT SESSION NAME>'
 With `auto-start` enabled, you may want to control how multiple sessions are
 managed. The `destroy-unattached` option of tmux controls if the unattached
 sessions must be kept alive, making sessions available for later use, configured
-in *tmux.conf*:
+in _tmux.conf_:
 
 ```conf
 set-option -g destroy-unattached [on | off]
@@ -43,7 +43,7 @@ set-option -g destroy-unattached [on | off]
 #### iTerm2 Integration
 
 [iTerm2][6] offers significant integration with tmux. This can be enabled by
-adding the following line to *~/.zpreztorc*:
+adding the following line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
@@ -61,7 +61,7 @@ Read [iTerm2 and tmux Integration][7] for more information.
 On macOS, launching tmux can cause the error **launch_msg(...): Socket is not
 connected** to be displayed, which can be fixed by installing
 [reattach-to-user-namespace][3], available in [Homebrew][4], and adding the
-following to *tmux.conf*:
+following to _tmux.conf_:
 
 ```conf
 set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
@@ -72,7 +72,7 @@ about this and Prezto has already been [opened][2].
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][5].*
+_The authors of this module should be contacted via the [issue tracker][5]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 - [Colin Hebert](https://github.com/ColinHebert)

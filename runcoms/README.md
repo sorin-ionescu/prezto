@@ -14,19 +14,19 @@ not defined, Zsh will use the user's home directory.
 
 ## File Descriptions
 
-The configuration files are read in the following order:
+The [configuration files][1] are read in the following order:
 
-01. */etc/zshenv*
-02. *~/.zshenv*
-03. */etc/zprofile*
-04. *~/.zprofile*
-05. */etc/zshrc*
-06. *~/.zshrc*
-07. *~/.zpreztorc*
-08. */etc/zlogin*
-09. *~/.zlogin*
-10. *~/.zlogout*
-11. */etc/zlogout*
+01. *`/etc/zshenv`*
+02. *`${ZDOTDIR:-$HOME}/.zshenv`*
+03. *`/etc/zprofile`*
+04. *`${ZDOTDIR:-$HOME}/.zprofile`*
+05. *`/etc/zshrc`*
+06. *`${ZDOTDIR:-$HOME}/.zshrc`*
+07. *`${ZDOTDIR:-$HOME}/.zpreztorc`*
+08. *`/etc/zlogin`*
+09. *`${ZDOTDIR:-$HOME}/.zlogin`*
+10. *`${ZDOTDIR:-$HOME}/.zlogout`*
+11. *`/etc/zlogout`*
 
 ### zshenv
 
@@ -36,7 +36,7 @@ small as possible and should only define environment variables.
 ### zprofile
 
 This file is similar to *zlogin*, but it is sourced before *zshrc*. It was added
-for [KornShell][1] fans. See the description of *zlogin* below for what it may
+for [KornShell][2] fans. See the description of *zlogin* below for what it may
 contain.
 
 *zprofile* and *zlogin* are not meant to be used together but can be done so.
@@ -54,7 +54,7 @@ This file configures Prezto.
 
 This file is sourced by login shells after *zshrc*. Thus, it should contain
 commands that need to execute at login. It is usually used for messages such as
-[*fortune*][2], [*msgs*][3], or for the creation of files.
+[*fortune*][3], [*msgs*][4], or for the creation of files.
 
 This is not the file to define aliases, functions, shell options, and key
 bindings. It should not change the shell environment.
@@ -66,11 +66,12 @@ displaying messages and for deletion of files.
 
 ## Authors
 
-*The authors of these files should be contacted via the [issue tracker][4].*
+*The authors of these files should be contacted via the [issue tracker][5].*
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://www.kornshell.com
-[2]: https://en.wikipedia.org/wiki/Fortune_(Unix)
-[3]: https://www.manpagez.com/man/1/msgs
-[4]: https://github.com/sorin-ionescu/prezto/issues
+[1]: http://zsh.sourceforge.net/Intro/intro_3.html#SEC3
+[2]: https://www.kornshell.com
+[3]: https://en.wikipedia.org/wiki/Fortune_(Unix)
+[4]: https://www.manpagez.com/man/1/msgs
+[5]: https://github.com/sorin-ionescu/prezto/issues

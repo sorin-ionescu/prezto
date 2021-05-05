@@ -18,7 +18,7 @@ WARNING: Prezto does not support 'powerlevel9k' anymore as it has
          been deprecated and is not supported by its author.
          Consider migrating to 'powerlevel10k' instead by setting:
          zstyle ':prezto:module:prompt' theme 'powerlevel10k'
-         in ~/.zpreztorc.
+         in ${${ZDOTDIR:-$HOME}/#$HOME/~}/.zpreztorc.
          Switching to prezto default prompt 'sorin'..."
 EOW
   prompt 'sorin'

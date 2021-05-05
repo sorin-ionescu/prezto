@@ -6,11 +6,11 @@ aliases.
 ## Local Gem Installation
 
 When a Ruby version manager is not detected, local gems are installed in
-*~/.gems*; otherwise, they are installed according to the manager.
+_`~/.gems`_; otherwise, they are installed according to the manager.
 
 ## rvm
 
-An alternative to the above is to use [The Ruby Version Manager (*rvm*)][2],
+An alternative to the above is to use [The Ruby Version Manager (_rvm_)][2],
 which allows for managing multiple, isolated Ruby installations and gem sets in
 the home directory.
 
@@ -22,26 +22,26 @@ it is not first in `$PATH`.
 
 ## rbenv
 
-An alternative RVM is to use [*rbenv*][3], which allows for switching between
+An alternative RVM is to use [_rbenv_][3], which allows for switching between
 multiple, isolated Ruby installations in the home directory.
 
 While it is not as feature rich as RVM, it is not loaded into the shell and is
 not known to cause conflicts with shell scripts.
 
-This will be loaded automatically if *rbenv* is installed to `$RBENV_ROOT`,
-*~/.rbenv*, or if the `rbenv` command is on the path.
+This will be loaded automatically if _rbenv_ is installed to `$RBENV_ROOT`,
+_`~/.rbenv`_, or if the `rbenv` command is on the path.
 
 ## chruby
 
-Yet another alternative is [*chruby*][4], which is simpler than both *rvm* and
-*rbenv*.
+Yet another alternative is [_chruby_][4], which is simpler than both _rvm_ and
+_rbenv_.
 
 ### Settings
 
 #### Auto-Switch
 
 To enable auto switching the Ruby version on directory change based on the
-`.ruby-version` file, add the following line to *~/.zpreztorc*:
+`.ruby-version` file, add the following line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
@@ -67,7 +67,7 @@ dependencies, with [Bundler][5].
 - `rbbI` installs the following:
   - gems specified in the `Gemfile` in `vendor/bundle`.
   - packages the gems into `vendor/cache`.
-  - appends bundler directories to  `.gitignore`.
+  - appends bundler directories to `.gitignore`.
 - `rbbl` lists all gems in the current bundle.
 - `rbbo` opens an installed gem in the editor.
 - `rbbp` packages gem files into `vendor/cache`.
@@ -94,7 +94,7 @@ Then add `$ruby_info[version]` to `$PROMPT` or `$RPROMPT` and call
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][6].*
+_The authors of this module should be contacted via the [issue tracker][6]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 

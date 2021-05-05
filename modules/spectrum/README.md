@@ -79,7 +79,7 @@ Use `$BG[none]`, `$FG[none]`, or `$FX[none]` to turn off formatting.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [P.C. Shyamshankar](https://github.com/sykora)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)

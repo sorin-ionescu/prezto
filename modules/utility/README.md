@@ -2,46 +2,63 @@
 
 Defines general aliases and functions.
 
+This module must be loaded _before_ the [_`completion`_][1] module so that the
+provided completion definitions are loaded automatically by _`completion`_
+module.
+
 **Note:** Some of the utilities configured in this module might be provided via
 GNU utilities with incompatible arguments on non-GNU systems. In such cases,
-using [*`gnu-utility`*][1] module is recommended and it must be loaded
-**before** this module.
+using [_`gnu-utility`_][2] module is recommended and it must be loaded
+_before_ this module.
+
+To elaborate, the relative order of loading the modules would be
+_`gnu-utility`_, _`utility`_ and _`completion`_.
 
 ## Settings
 
 ### Highlighting
 
-If you have enabled color globally in *~/.zpreztorc*, you may disable it for
-certain commands.
+If you have enabled color globally in _`${ZDOTDIR:-$HOME}/.zpreztorc`_, you may
+disable it selectively for certain commands.
 
-To disable `ls` color, add the following line to *~/.zpreztorc*; when coloring
-is disabled, type indicators (`\*`, `/`, `=>`, `@`, `=`, `|`, `%`) will be
-appended to entries.
+To disable `ls` color, add the following to _`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+When coloring is disabled, type indicators (`\*`, `/`, `=>`, `@`, `=`, `|`, `%`)
+will be appended to entries.
 
 ```sh
 zstyle ':prezto:module:utility:ls' color 'no'
 ```
 
 To disable GNU coreutils `ls` to list directories grouped first, add the
-following line to *~/.zpreztorc*:
+following line to _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:utility:ls' dirs-first 'no'
 ```
 
-To disable `diff` highlighting, add the following line to *~/.zpreztorc*:
+To disable `grep` highlighting, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:utility:grep' color 'no'
+```
+
+To disable `diff` highlighting, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:utility:diff' color 'no'
 ```
 
-To disable `wdiff` highlighting, add the following line to *~/.zpreztorc*:
+To disable `wdiff` highlighting, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:utility:wdiff' color 'no'
 ```
 
-To disable `make` highlighting, add the following line to *~/.zpreztorc*:
+To disable `make` highlighting, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:utility:make' color 'no'
@@ -66,7 +83,8 @@ zstyle ':prezto:module:utility:make' color 'no'
 - `mysql`
 - `rm`
 
-To disable all spelling corrections, add the following line to *~/.zpreztorc*:
+To disable all spelling corrections, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:utility' correct 'no'
@@ -102,7 +120,7 @@ zstyle ':prezto:module:utility' correct 'no'
 ### Files and Directories
 
 - `ls` lists with directories grouped first (GNU only).
-- `l`  lists in one column, hidden files.
+- `l` lists in one column, hidden files.
 - `ll` lists human readable sizes.
 - `lr` lists human readable sizes, recursively.
 - `la` lists human readable sizes, hidden files.
@@ -136,7 +154,7 @@ zstyle ':prezto:module:utility' correct 'no'
 
 By default, `cp`,`ln`, `mv` and `rm` are aliased to their interactive variants.
 If this is not desired, it can be disabled by adding the following line to
-*~/.zpreztorc*:
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:utility' safe-ops 'no'.
@@ -157,7 +175,7 @@ In addition, the following aliases have been added:
 
 ### General
 
-- `slit` prints columns *1, 2, 3 ... n*.
+- `slit` prints columns _1, 2, 3 ... n_.
 
 ### Files and Directories
 
@@ -173,7 +191,7 @@ In addition, the following aliases have been added:
 
 - `diff` highlights diff output (requires `colordiff`).
 - `make` highlights make output (requires `colormake`).
-- `wdiff` highlights wdiff output (requires `wdiff `or `git`).
+- `wdiff` highlights wdiff output (requires `wdiff` or `git`).
 
 ### Resource usage
 
@@ -186,11 +204,12 @@ In addition, the following aliases have been added:
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][3]._
 
 - [Robby Russell](https://github.com/robbyrussell)
 - [Suraj N. Kurapati](https://github.com/sunaku)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: ../gnu-utility#readme
-[2]: https://github.com/sorin-ionescu/prezto/issues
+[1]: ../completion#readme
+[2]: ../gnu-utility#readme
+[3]: https://github.com/sorin-ionescu/prezto/issues

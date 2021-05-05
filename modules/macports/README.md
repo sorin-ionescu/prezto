@@ -14,7 +14,7 @@ Defines MacPorts aliases and adds MacPorts directories to path variables.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+_The authors of this module should be contacted via the [issue tracker][1]._
 
 - [Matt Cable](https://github.com/curiousstranger)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)

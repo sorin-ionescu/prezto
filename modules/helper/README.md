@@ -19,7 +19,7 @@ Provides helper functions for developing modules.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+_The authors of this module should be contacted via the [issue tracker][1]._
 
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 

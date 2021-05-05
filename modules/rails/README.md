@@ -21,7 +21,7 @@ Defines [Ruby on Rails][1] aliases.
 
 ## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
 - [Robby Russell](https://github.com/robbyrussell)
 - [Jake Bell](https://github.com/theunraveler)
