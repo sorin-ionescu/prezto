@@ -184,10 +184,15 @@ fi
 # Miscellaneous
 
 # Serves a directory via HTTP.
-if (( $+commands[python3] )); then
-  alias http-serve='python3 -m http.server'
-else
-  alias http-serve='python -m SimpleHTTPServer'
+if (( $#commands[(i)python(|[23])] )); then
+  autoload -Uz is-at-least
+  if is-at-least 3 ${"$(python --version 2>&1)"[(w)2]}; then
+    alias http-serve='python -m http.server'
+  elif (( $+commands[python3] )); then
+    alias http-serve='python3 -m http.server'
+  else
+    alias http-serve='$commands[(i)python(|2)] -m SimpleHTTPServer'
+  fi
 fi
 
 #
