@@ -5,13 +5,13 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function diff {
-  if zstyle -t ':prezto:module:utility:diff' color \
-    && (( $+commands[colordiff] )); then
-      command colordiff "$@"
-  else
-    command diff "$@"
-  fi
-}
+# function diff {
 
-diff "$@"
+if zstyle -t ':prezto:module:utility:diff' color \
+      && (( $+commands[colordiff] )); then
+  command colordiff "$@"
+else
+  command diff "$@"
+fi
+
+# }
