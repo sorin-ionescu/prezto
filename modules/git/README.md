@@ -66,26 +66,26 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 ### Commit (c)
 
 - `gc` records changes to the repository.
-- `gca` stages all modified and deleted files.
-- `gcm` records changes to the repository with the given message.
 - `gcS` records changes to the repository. (Signed)
-- `gcSa` stages all modified and deleted files. (Signed)
-- `gcSm` records changes to the repository with the given message. (Signed)
+- `gca` stages all modified and deleted files.
+- `gcaS` stages all modified and deleted files. (Signed)
+- `gcm` records changes to the repository with the given message.
+- `gcmS` records changes to the repository with the given message. (Signed)
 - `gcam` stages all modified and deleted files, and records changes to the
   repository with the given message.
 - `gco` checks out a branch or paths to work tree.
 - `gcO` checks out hunks from the index or the tree interactively.
 - `gcf` amends the tip of the current branch using the same log message as
   _HEAD_.
-- `gcSf` amends the tip of the current branch using the same log message as
+- `gcfS` amends the tip of the current branch using the same log message as
   _HEAD_. (Signed)
 - `gcF` amends the tip of the current branch.
-- `gcSF` amends the tip of the current branch. (Signed)
+- `gcFS` amends the tip of the current branch. (Signed)
 - `gcp` applies changes introduced by existing commits.
 - `gcP` applies changes introduced by existing commits without committing.
 - `gcr` reverts existing commits by reverting patches and recording new commits.
 - `gcR` removes the _HEAD_ commit.
-- `gcs` displays various types of objects.
+- `gcs` displays commits with various objects.
 - `gcsS` displays commits with GPG signature.
 - `gcl` lists lost commits.
 - `gcy` displays commits yet to be applied to upstream in the short format.
