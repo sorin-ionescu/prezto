@@ -64,6 +64,16 @@ _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 zstyle ':prezto:module:utility:make' color 'no'
 ```
 
+### Download Helper
+
+To configure the download helper to be used with alias `get`, add the following
+to _`${ZDOTDIR:-$HOME}/.zpreztorc`_, and replace `'<helper>'` with `'curl'`,
+`'wget'` or `'aria2c'`.
+
+```sh
+zstyle -s ':prezto:module:utility:download' helper '<helper>'
+```
+
 ## Aliases
 
 ### Disabled Spelling Correction
@@ -107,7 +117,7 @@ zstyle ':prezto:module:utility' correct 'no'
 
 - `_` executes a command as another user (`sudo`).
 - `b` opens the default web browser.
-- `diffu` shorthand for `diff --unified`
+- `diffu` shorthand for `diff --unified`.
 - `e` opens the default editor.
 - `mkdir` creates directories, including intermediary directories.
 - `p` opens the default pager.
@@ -135,7 +145,7 @@ zstyle ':prezto:module:utility' correct 'no'
 ### macOS Everywhere
 
 - `o` opens files and directories (`open` or `xdg-open`).
-- `get` downloads files (`curl` or `wget`).
+- `get` downloads files (`curl`, `wget` or `aria2c`).
 - `pbcopy` copies to the pasteboard (`pbcopy`, `xclip` or `xsel`).
 - `pbpaste` pastes from the pasteboard (`pbcopy`, `xclip` or `xsel`).
 - `pbc` copies to the pasteboard (`pbcopy`).

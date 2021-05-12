@@ -163,11 +163,21 @@ alias pbc='pbcopy'
 alias pbp='pbpaste'
 
 # File Download
-if (( $+commands[curl] )); then
-  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
-elif (( $+commands[wget] )); then
-  alias get='wget --continue --progress=bar --timestamping'
+zstyle -s ':prezto:module:utility:download' helper '_download_helper' || _download_helper='curl'
+
+typeset -A _download_helpers=(
+  aria2c  'aria2c --continue --remote-time --max-tries=0'
+  curl    'curl --continue-at - --location --progress-bar --remote-name --remote-time'
+  wget    'wget --continue --progress=bar --timestamping'
+)
+
+if (( $+commands[$_download_helper] && $+_download_helpers[$_download_helper] )); then
+  alias get="$_download_helpers[$_download_helper]"
+elif (( $+commands[curl] )); then
+  alias get="$_download_helpers[curl]"
 fi
+
+unset _download_helper{,s}
 
 # Resource Usage
 alias df='df -kh'
