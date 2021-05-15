@@ -3,6 +3,9 @@
 Provides utility functions for [Node.js][1], loads the Node Version Manager, and
 enables [_npm_][2] completion.
 
+This module must be loaded _before_ the _`completion`_ module so that the
+provided completion definitions are loaded.
+
 ## nodenv
 
 [_nodenv_][5] does one thing well - it is concerned solely with switching
