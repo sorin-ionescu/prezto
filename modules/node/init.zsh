@@ -5,6 +5,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
+#   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
 # Possible lookup locations.
@@ -36,30 +37,3 @@ elif (( $+commands[brew] )) \
 elif (( ! $+commands[node] )); then
   return 1
 fi
-
-# Load NPM and known helper completions.
-typeset -A _compl_commands=(
-  npm   'npm completion'
-  grunt 'grunt --completion=zsh'
-  gulp  'gulp --completion=zsh'
-)
-
-for _compl_command in "${(k)_compl_commands[@]}"; do
-  if (( $+commands[$_compl_command] )); then
-    cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/${_compl_command}-cache.zsh"
-
-    # Completion commands are slow; cache their output if old or missing.
-    if [[ "$commands[$_compl_command]" -nt "$cache_file" \
-          || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
-          || ! -s "$cache_file" ]]; then
-      mkdir -p "$cache_file:h"
-      command ${=_compl_commands[$_compl_command]} >! "$cache_file" 2> /dev/null
-    fi
-
-    source "$cache_file"
-
-    unset cache_file
-  fi
-done
-
-unset _compl_command{s,}
