@@ -37,3 +37,9 @@ elif (( $+commands[brew] )) \
 elif (( ! $+commands[node] )); then
   return 1
 fi
+
+#
+# Variables
+#
+
+N_PREFIX="${XDG_CONFIG_HOME:-$HOME/.config}/n"  # The path to 'n' cache.

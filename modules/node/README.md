@@ -23,6 +23,10 @@ home directory.
 This will be loaded automatically if nvm is installed in `$NVM_DIR`,
 _`$XDG_CONFIG_HOME/nvm`_, _`~/.nvm`_, or is installed with homebrew.
 
+## Variables
+
+- `N_PREFIX` stores the path to [_n_][8] cache.
+
 ## Functions
 
 - `node-doc` opens the Node.js online [API documentation][3] in the default
@@ -58,3 +62,4 @@ _The authors of this module should be contacted via the [issue tracker][4]._
 [5]: https://github.com/nodenv/nodenv
 [6]: https://github.com/sstephenson/rbenv
 [7]: https://github.com/nvm-sh/nvm
+[8]: https://github.com/tj/n
