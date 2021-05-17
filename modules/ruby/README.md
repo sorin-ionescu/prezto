@@ -6,11 +6,22 @@ aliases.
 ## Local Gem Installation
 
 When a Ruby version manager is not detected, local gems are installed in
-_`~/.gems`_; otherwise, they are installed according to the manager.
+_`~/.gem`_; otherwise, they are installed according to the manager.
+
+## rbenv
+
+An alternative RVM is to use [_rbenv_][2], which allows for switching between
+multiple, isolated Ruby installations in the home directory.
+
+While it is not as feature rich as RVM, it is not loaded into the shell and is
+not known to cause conflicts with shell scripts.
+
+This will be loaded automatically if _rbenv_ is installed to `$RBENV_ROOT`,
+_`~/.rbenv`_, or if the `rbenv` command is on the path.
 
 ## rvm
 
-An alternative to the above is to use [The Ruby Version Manager (_rvm_)][2],
+An alternative to the above is to use [The Ruby Version Manager (_rvm_)][3],
 which allows for managing multiple, isolated Ruby installations and gem sets in
 the home directory.
 
@@ -19,17 +30,6 @@ may conflict with shell scripts.
 
 Load this module as late as possible when using RVM since RVM will complain if
 it is not first in `$PATH`.
-
-## rbenv
-
-An alternative RVM is to use [_rbenv_][3], which allows for switching between
-multiple, isolated Ruby installations in the home directory.
-
-While it is not as feature rich as RVM, it is not loaded into the shell and is
-not known to cause conflicts with shell scripts.
-
-This will be loaded automatically if _rbenv_ is installed to `$RBENV_ROOT`,
-_`~/.rbenv`_, or if the `rbenv` command is on the path.
 
 ## chruby
 
@@ -99,8 +99,8 @@ _The authors of this module should be contacted via the [issue tracker][6]._
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://www.ruby-lang.org
-[2]: https://rvm.io
-[3]: https://github.com/sstephenson/rbenv
+[2]: https://github.com/rbenv/rbenv
+[3]: https://rvm.io
 [4]: https://github.com/postmodern/chruby
 [5]: https://gembundler.com
 [6]: https://github.com/sorin-ionescu/prezto/issues
