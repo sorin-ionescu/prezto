@@ -7,7 +7,8 @@ This module must be loaded _before_ the [_`completion`_][13] module so that the
 provided completion definitions are loaded automatically by _`completion`_
 module.
 
-**Note:** Git **1.7.2** is the [minimum required version][7].
+**Note:** Git **2.11** is the minimum required version for better
+[git-rev-list][7] and [git-submodule][14] support.
 
 ## Settings
 
@@ -460,3 +461,4 @@ _The authors of this module should be contacted via the [issue tracker][6]._
 [11]: https://www.manpagez.com/man/1/gm/
 [12]: https://github.blog/2011-11-10-git-io-github-url-shortener
 [13]: ../completion#readme
+[14]: https://github.com/sorin-ionescu/prezto/pull/1929
