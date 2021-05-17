@@ -3,22 +3,22 @@
 Provides utility functions for [Node.js][1], loads the Node Version Manager, and
 enables [_npm_][2] completion.
 
+## nodenv
+
+[_nodenv_][5] does one thing well - it is concerned solely with switching
+Node versions. It is simple and predictable, Just Works, and is rock solid in
+production. nodenv is forked from the popular [_rbenv_][6].
+
+This will be loaded automatically if nodenv is installed in `$NODENV_ROOT`,
+_`$XDG_CONFIG_HOME/nodenv`_, _`~/.nodenv`_, or `nodenv` is on the path.
+
 ## nvm
 
-[_nvm_][5] allows for managing multiple, isolated Node.js installations in the
+[_nvm_][7] allows for managing multiple, isolated Node.js installations in the
 home directory.
 
 This will be loaded automatically if nvm is installed in `$NVM_DIR`,
 _`$XDG_CONFIG_HOME/nvm`_, _`~/.nvm`_, or is installed with homebrew.
-
-## nodenv
-
-[_nodenv_][6] does one thing well - it is concerned solely with switching
-Node versions. It is simple and predictable, Just Works, and is rock solid in
-production. nodenv is forked from the popular [_rbenv_][7].
-
-This will be loaded automatically if nodenv is installed in `$NODENV_ROOT`,
-_`$XDG_CONFIG_HOME/nodenv`_, _`~/.nodenv`_, or `nodenv` is on the path.
 
 ## Functions
 
@@ -52,6 +52,6 @@ _The authors of this module should be contacted via the [issue tracker][4]._
 [2]: http://npmjs.org
 [3]: http://nodejs.org/api
 [4]: https://github.com/sorin-ionescu/prezto/issues
-[5]: https://github.com/nvm-sh/nvm
-[6]: https://github.com/nodenv/nodenv
-[7]: https://github.com/sstephenson/rbenv
+[5]: https://github.com/nodenv/nodenv
+[6]: https://github.com/sstephenson/rbenv
+[7]: https://github.com/nvm-sh/nvm
