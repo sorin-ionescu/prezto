@@ -252,7 +252,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip; then
   alias gSl='git submodule status'
   alias gSm='git-submodule-move'
   alias gSs='git submodule sync'
-  alias gSu='git submodule foreach git pull origin master'
+  alias gSu='git submodule update --remote --recursive'
   alias gSx='git-submodule-remove'
 
   # Tag (t)
