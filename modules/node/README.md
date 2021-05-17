@@ -27,6 +27,25 @@ _`$XDG_CONFIG_HOME/nvm`_, _`~/.nvm`_, or is installed with homebrew.
 
 - `N_PREFIX` stores the path to [_n_][8] cache.
 
+## Aliases
+
+### npm
+
+- `npmi` install a package.
+- `npml` list installed packages.
+- `npmo` check for outdated packages.
+- `npmp` publish a package.
+- `npmP` remove extraneous packages.
+- `npmr` run arbitrary package scripts.
+- `npms` search for packages.
+- `npmt` test a package.
+- `npmu` update packages.
+- `npmx` uninstalls a package.
+
+- `npmci` install a project with a clean slate.
+- `npmcit` install a project with a clean slate and run tests.
+- `npmit` install package(s) and run tests.
+
 ## Functions
 
 - `node-doc` opens the Node.js online [API documentation][3] in the default
