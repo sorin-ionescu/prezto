@@ -24,13 +24,13 @@ elif (( $+commands[nodenv] )); then
 
 # Load manually installed NVM into the shell session.
 elif [[ -s ${local_nvm::=$local_nvm_paths[1]} ]]; then
-  source "$local_nvm --no-use"
+  source "$local_nvm" --no-use
   unset local_nvm{,_paths}
 
 # Load package manager installed NVM into the shell session.
 elif (( $+commands[brew] )) \
       && [[ -d "${nvm_prefix::="$(brew --prefix nvm 2> /dev/null)"}" ]]; then
-  source "$nvm_prefix/nvm.sh --no-use"
+  source "$nvm_prefix/nvm.sh" --no-use
   unset nvm_prefix
 
 # Return if requirements are not found.
