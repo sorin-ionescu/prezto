@@ -7,7 +7,7 @@
 #
 
 # Return if requirements are not found.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ $TERM == 'dumb' ]]; then
   return 1
 fi
 
@@ -15,7 +15,7 @@ fi
 fpath=("${0:h}/external/src" $fpath)
 
 # Add completion for keg-only brewed curl when available.
-if (( $+commands[brew] && ! $+functions[_curl] )) \
+if (( $+commands[brew] )) \
       && [[ -d "${curl_prefix::="$(brew --prefix curl 2> /dev/null)"}" ]]; then
   fpath=("$curl_prefix/share/zsh/site-functions" $fpath)
   unset curl_prefix
