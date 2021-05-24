@@ -11,14 +11,21 @@
 # Load dependencies.
 pmodload 'helper'
 
-# Load manually installed pyenv into the path
-if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
-  path=("$PYENV_ROOT/bin" $path)
-  eval "$(pyenv init - --no-rehash zsh)"
+# Load manually installed or package manager installed pyenv into the shell
+# session.
+if [[ -s "${local_pyenv::=${PYENV_ROOT:-$HOME/.pyenv}/bin/pyenv}" ]] \
+      || (( $+commands[pyenv] )); then
 
-# Load pyenv into the current python session
-elif (( $+commands[pyenv] )); then
-  eval "$(pyenv init - --no-rehash zsh)"
+  # Ensure manually installed pyenv is added to path when present.
+  [[ -s $local_pyenv ]] && path=($local_pyenv:h $path)
+
+  # pyenv 2+ requires shims to be added to path before being initialized.
+  autoload -Uz is-at-least
+  if is-at-least 2 ${"$(pyenv --version 2>&1)"[(w)2]}; then
+    eval "$(pyenv init --path zsh)"
+  fi
+
+  eval "$(pyenv init - zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
@@ -33,6 +40,8 @@ else
     path=($HOME/.local/bin(N) $path)
   fi
 fi
+
+unset local_pyenv
 
 # Return if requirements are not found.
 if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] )); then

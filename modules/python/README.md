@@ -38,7 +38,9 @@ execution of `pyenv`.
 Install Python versions with `pyenv install` into _`~/.pyenv/versions`_.
 
 This will be loaded automatically if pyenv is installed to `$PYENV_ROOT`,
-_`~/.pyenv`_, or if the `pyenv` command is on the path.
+_`~/.pyenv`_, or if the `pyenv` command is on the path. By default, `PYENV_ROOT`
+is set to _`$HOME/.pyenv`_. You can set it to an alternate location and export
+it in [_`${ZDOTDIR:-$HOME}/.zshenv`_][6].
 
 ## Local Package Installation
 
