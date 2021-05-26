@@ -8,33 +8,33 @@
 #   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
-# Possible lookup locations.
+# Possible lookup locations for manually installed nodenv and nvm.
 local_nodenv_paths=({$NODENV_ROOT,{$XDG_CONFIG_HOME/,$HOME/.}nodenv}/bin/nodenv(N))
 local_nvm_paths=({$NVM_DIR,{$XDG_CONFIG_HOME/,$HOME/.}nvm}/nvm.sh(N))
 
-# Load manually installed nodenv into the shell session.
-if [[ -s ${local_nodenv::=$local_nodenv_paths[1]} ]]; then
-  path=("$local_nodenv:h" $path)
-  eval "$(nodenv init - --no-rehash zsh)"
-  unset local_nodenv{,_paths}
+# Load manually installed or package manager installed nodenv into the shell
+# session.
+if (( $#local_nodenv_paths || $+commands[nodenv] )); then
 
-# Load package manager installed nodenv into the shell session.
-elif (( $+commands[nodenv] )); then
-  eval "$(nodenv init - --no-rehash zsh)"
+  # Ensure manually installed nodenv is added to path when present.
+  [[ -s $local_nodenv_paths[1] ]] && path=($local_nodenv_paths[1]:h $path)
 
-# Load manually installed NVM into the shell session.
-elif [[ -s ${local_nvm::=$local_nvm_paths[1]} ]]; then
-  source "$local_nvm" --no-use
-  unset local_nvm{,_paths}
+  eval "$(nodenv init - zsh)"
 
-# Load package manager installed NVM into the shell session.
+# Load manually installed nvm into the shell session.
+elif (( $#local_nvm_paths )); then
+  source "$local_nvm_paths[1]" --no-use
+
+# Load package manager installed nvm into the shell session.
 elif (( $+commands[brew] )) \
-      && [[ -d "${nvm_prefix::="$(brew --prefix nvm 2> /dev/null)"}" ]]; then
-  source "$nvm_prefix/nvm.sh" --no-use
-  unset nvm_prefix
+      && [[ -d "${nvm_path::="$(brew --prefix 2> /dev/null)"/opt/nvm}" ]]; then
+  source "$nvm_path/nvm.sh" --no-use
+fi
+
+unset local_n{odenv,vm}_paths nvm_path
 
 # Return if requirements are not found.
-elif (( ! $+commands[node] )); then
+if (( ! $+commands[node] && ! $#functions[(i)n(odenv|vm)] )); then
   return 1
 fi
 
