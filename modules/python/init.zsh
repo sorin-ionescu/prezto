@@ -57,7 +57,7 @@ function _python-workon-cwd {
   # Check for virtualenv name override
   local ENV_NAME=""
   if [[ -f "$PROJECT_ROOT/.venv" ]]; then
-    ENV_NAME="$(cat "$PROJECT_ROOT/.venv")"
+    ENV_NAME="$(<"$PROJECT_ROOT/.venv")"
   elif [[ -f "$PROJECT_ROOT/.venv/bin/activate" ]]; then
     ENV_NAME="$PROJECT_ROOT/.venv"
   elif [[ "$PROJECT_ROOT" != "." ]]; then

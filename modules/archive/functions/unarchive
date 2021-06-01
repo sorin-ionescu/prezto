@@ -15,7 +15,7 @@ local extract_dir
 local _gzip_bin _bzip2_bin _xz_bin _zstd_bin
 
 if (( $# == 0 )); then
-  cat >&2 <<EOF
+  >&2 <<EOF
 usage: $0 [-option] [file ...]
 
 options:
