@@ -10,7 +10,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+
+
 # Customise the Powerlevel9k prompts
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
   dir
   vcs
@@ -34,28 +37,68 @@ source ~/.powerlevel9k/powerlevel9k.zsh-theme
 DEFAULT_USER=`whoami`
 
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="$HOME/pbaybara/Library/Python/3.8/bin:$PATH"
 
 
-nvm() {
-    unset -f nvm
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    nvm "$@"
+# nvm() {
+#     unset -f nvm
+#     export NVM_DIR=~/.nvm
+#     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#     nvm "$@"
+# }
+
+# node() {
+#     unset -f node
+#     export NVM_DIR=~/.nvm
+#     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#     node "$@"
+# }
+
+# npm() {
+#     unset -f npm
+#     export NVM_DIR=~/.nvm
+#     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#     npm "$@"
+# }
+
+lazy_load() {
+    # Act as a stub to another shell function/command. When first run, it will load the actual function/command then execute it.
+    # E.g. This made my zsh load 0.8 seconds faster by loading `nvm` when "nvm", "npm" or "node" is used for the first time
+    # $1: space separated list of alias to release after the first load
+    # $2: file to source
+    # $3: name of the command to run after it's loaded
+    # $4+: argv to be passed to $3
+    echo "Lazy loading $1 ..."
+
+    # $1.split(' ') using the s flag. In bash, this can be simply ($1) #http://unix.stackexchange.com/questions/28854/list-elements-with-spaces-in-zsh
+    # Single line won't work: local names=("${(@s: :)${1}}"). Due to http://stackoverflow.com/questions/14917501/local-arrays-in-zsh   (zsh 5.0.8 (x86_64-apple-darwin15.0))
+    local -a names
+    if [[ -n "$ZSH_VERSION" ]]; then
+        names=("${(@s: :)${1}}")
+    else
+        names=($1)
+    fi
+    unalias "${names[@]}"
+    . $2
+    shift 2
+    $*
 }
 
-node() {
-    unset -f node
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    node "$@"
+group_lazy_load() {
+    local script
+    script=$1
+    shift 1
+    for cmd in "$@"; do
+        alias $cmd="lazy_load \"$*\" $script $cmd"
+    done
 }
 
-npm() {
-    unset -f npm
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    npm "$@"
-}
+export NVM_DIR=~/.nvm
+group_lazy_load $HOME/.nvm/nvm.sh npx nvm node npm yarn lerna jest puppeteer git gp
+
+# gitginore.io
+# function gi() { curl -sLw n https://www.gitignore.io/api/$@ ;}
 
 # Colors
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -71,3 +114,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias localip="ipconfig getifaddr en0"
 alias lc='colorls -lA --sd'
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/pbaybara/.sdkman"
+[[ -s "/Users/pbaybara/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/pbaybara/.sdkman/bin/sdkman-init.sh"
