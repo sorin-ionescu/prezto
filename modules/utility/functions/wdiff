@@ -3,27 +3,30 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
-function wdiff {
-  if zstyle -t ':prezto:module:utility:wdiff' color; then
-    if (( $+commands[wdiff] )); then
-      command wdiff \
-        --avoid-wraps \
-        --start-delete="$(print -n $FG[red])" \
-        --end-delete="$(print -n $FG[none])" \
-        --start-insert="$(print -n $FG[green])" \
-        --end-insert="$(print -n $FG[none])" \
-        "$@" \
+# function wdiff {
+
+if zstyle -t ':prezto:module:utility:wdiff' color; then
+  if (( $+commands[wdiff] )); then
+    command wdiff \
+          --avoid-wraps \
+          --start-delete="$(print -n $FG[red])" \
+          --end-delete="$(print -n $FG[none])" \
+          --start-insert="$(print -n $FG[green])" \
+          --end-insert="$(print -n $FG[none])" \
+          "$@" \
       | sed 's/^\(@@\( [+-][[:digit:]]*,[[:digit:]]*\)\{2\} @@\)$/;5;6m\10m/g'
-    elif (( $+commands[git] )); then
-      command git --no-pager diff --color=auto --no-ext-diff --no-index --color-words "$@"
-    else
-      command wdiff "$@"
-    fi
+  elif (( $+commands[git] )); then
+    command git --no-pager diff --no-ext-diff --no-index --color=auto --color-words "$@"
   else
     command wdiff "$@"
   fi
-}
+elif (( ! $+commands[wdiff] && $+commands[git] )); then
+    command git --no-pager diff --no-ext-diff --no-index --color=never "$@"
+else
+  command wdiff "$@"
+fi
 
-wdiff "$@"
+# }

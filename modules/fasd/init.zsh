@@ -19,8 +19,10 @@ fi
 # Initialization
 #
 
-cache_file="${TMPDIR:-/tmp}/prezto-fasd-cache.$UID.zsh"
-if [[ "${commands[fasd]}" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
+cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/fasd-cache.zsh"
+if [[ "${commands[fasd]}" -nt "$cache_file" \
+      || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
+      || ! -s "$cache_file"  ]]; then
   # Set the base init arguments.
   init_args=(zsh-hook)
 
@@ -29,6 +31,7 @@ if [[ "${commands[fasd]}" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
     init_args+=(zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)
   fi
 
+  mkdir -p "$cache_file:h"
   # Cache init code.
   fasd --init "$init_args[@]" >! "$cache_file" 2> /dev/null
 fi

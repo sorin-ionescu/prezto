@@ -15,7 +15,7 @@ fi
 local remotes remote references reference file url
 
 remote="${1:-origin}"
-remotes=($(command git config --get-regexp 'remote.*.url' | cut -d. -f2))
+remotes=($(command git remote show))
 
 if (( $remotes[(i)$remote] == $#remotes + 1 )); then
   print "$0: remote not found: $remote" >&2
@@ -23,14 +23,14 @@ if (( $remotes[(i)$remote] == $#remotes + 1 )); then
 fi
 
 url=$(
-  command git config --get "remote.${remote}.url" \
-    | sed -En "s/(git|https?)(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\4\/\5/p"
+  command git remote get-url "$remote" \
+      | sed -En "s#(git@|https?://)(github.com)(:|/)(.+)/(.+)\.git#https://\2/\4/\5#p"
 )
 
 reference="${${2:-$(git-branch-current)}:-HEAD}"
 references=(
   HEAD
-  ${$(command git ls-remote --heads --tags "$remote" | awk '{print $2}')##refs/(heads|tags)/}
+  ${${(f)"$(command git ls-remote --heads --tags "$remote")"}##*refs/(heads|tags)/}
 )
 
 if (( $references[(i)$reference] == $#references + 1 )); then
@@ -45,9 +45,9 @@ fi
 file="$3"
 
 if [[ -n "$url" ]]; then
-  url="${url}/tree/${reference}/${file}"
+  url="$url/tree/$reference/$file"
 
-  if (( $+commands[$BROWSER] )); then
+  if [[ -z "$BROWSER" ]]; then
     "$BROWSER" "$url"
     return 0
   else

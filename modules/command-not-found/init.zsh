@@ -12,9 +12,11 @@ if [[ -s '/etc/zsh_command_not_found' ]]; then
 # Load command-not-found on Arch Linux-based distributions.
 elif [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
   source '/usr/share/doc/pkgfile/command-not-found.zsh'
-# Load command-not-found on Mac OS X when homebrew tap is configured.
-elif (( $+commands[brew] )) && brew command command-not-found-init > /dev/null 2>&1; then
-  eval "$(brew command-not-found-init)"
+# Load command-not-found on macOS when Homebrew tap is configured.
+elif (( $+commands[brew] )) \
+      && [[ -s "${hb_cnf_handler::="$(brew --repository 2> /dev/null)"/Library/Taps/homebrew/homebrew-command-not-found/handler.sh}" ]]; then
+  source "$hb_cnf_handler"
+  unset hb_cnf_handler
 # Return if requirements are not found.
 else
   return 1

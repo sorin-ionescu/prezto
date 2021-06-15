@@ -47,6 +47,9 @@ function prompt_giddie_setup {
   # Add hook to set up prompt parameters before each command.
   add-zsh-hook precmd prompt_giddie_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%F{green}...%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format '%F{yellow}--- COMMAND ---%f'
@@ -74,3 +77,4 @@ function prompt_giddie_setup {
 }
 
 prompt_giddie_setup "$@"
+# vim: ft=zsh

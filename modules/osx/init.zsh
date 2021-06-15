@@ -1,12 +1,15 @@
 #
-# Defines Mac OS X aliases and functions.
+# Defines macOS aliases and functions.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Load dependencies.
+pmodload 'helper'
+
 # Return if requirements are not found.
-if [[ "$OSTYPE" != darwin* ]]; then
+if ! is-darwin; then
   return 1
 fi
 

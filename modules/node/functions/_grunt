@@ -1,0 +1,15 @@
+#compdef grunt
+#autoload
+
+#
+# Grunt completion, delegating to grunt to do all the completion work.
+#
+# Authors:
+#   Indrajit Raychaudhuri <irc@indrajit.com>
+#
+
+if (( $+commands[grunt] )); then
+  eval "$(grunt --completion=zsh)"
+
+  _grunt_completion "$@"
+fi

@@ -36,6 +36,9 @@ function prompt_skwp_setup {
   # Add hook to set up prompt parameters before each command.
   add-zsh-hook precmd prompt_skwp_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     _prompt_skwp_colors=(
@@ -73,3 +76,4 @@ function prompt_skwp_setup {
 }
 
 prompt_skwp_setup "$@"
+# vim: ft=zsh

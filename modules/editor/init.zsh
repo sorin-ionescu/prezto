@@ -91,46 +91,49 @@ function bindkey-all {
 # Exposes information about the Zsh Line Editor via the $editor_info associative
 # array.
 function editor-info {
-  # Clean up previous $editor_info.
-  unset editor_info
-  typeset -gA editor_info
+  # Ensure that we're going to set the editor-info for prompts that
+  # are prezto managed and/or compatible.
+  if zstyle -t ':prezto:module:prompt' managed; then
+    # Clean up previous $editor_info.
+    unset editor_info
+    typeset -gA editor_info
 
-  if [[ "$KEYMAP" == 'vicmd' ]]; then
-    zstyle -s ':prezto:module:editor:info:keymap:alternate' format 'REPLY'
-    editor_info[keymap]="$REPLY"
-  else
-    zstyle -s ':prezto:module:editor:info:keymap:primary' format 'REPLY'
-    editor_info[keymap]="$REPLY"
-
-    if [[ "$ZLE_STATE" == *overwrite* ]]; then
-      zstyle -s ':prezto:module:editor:info:keymap:primary:overwrite' format 'REPLY'
-      editor_info[overwrite]="$REPLY"
+    if [[ "$KEYMAP" == 'vicmd' ]]; then
+      zstyle -s ':prezto:module:editor:info:keymap:alternate' format 'REPLY'
+      editor_info[keymap]="$REPLY"
     else
-      zstyle -s ':prezto:module:editor:info:keymap:primary:insert' format 'REPLY'
-      editor_info[overwrite]="$REPLY"
-    fi
-  fi
+      zstyle -s ':prezto:module:editor:info:keymap:primary' format 'REPLY'
+      editor_info[keymap]="$REPLY"
 
-  unset REPLY
-  zle zle-reset-prompt
+      if [[ "$ZLE_STATE" == *overwrite* ]]; then
+        zstyle -s ':prezto:module:editor:info:keymap:primary:overwrite' format 'REPLY'
+        editor_info[overwrite]="$REPLY"
+      else
+        zstyle -s ':prezto:module:editor:info:keymap:primary:insert' format 'REPLY'
+        editor_info[overwrite]="$REPLY"
+      fi
+    fi
+
+    unset REPLY
+    zle zle-reset-prompt
+  fi
 }
 zle -N editor-info
 
-# Reset the prompt based on the current context and whether the prompt utilizes
-# the editor:info zstyle. If the prompt does utilize the editor:info, we must
-# reset the prompt, otherwise the change in the prompt will never update. If the
-# prompt does not utilize the editor:info, we simply redisplay the command line.
+# Reset the prompt based on the current context and
+# the ps-context option.
 function zle-reset-prompt {
-  # Explicitly check to see if there is an editor info keymap set that would
-  # require a reset of the prompt
-  if zstyle -L ':prezto:module:editor:info*' | grep -v 'completing' > /dev/null 2>&1; then
+  if zstyle -t ':prezto:module:editor' ps-context; then
     # If we aren't within one of the specified contexts, then we want to reset
     # the prompt with the appropriate editor_info[keymap] if there is one.
     if [[ $CONTEXT != (select|cont) ]]; then
       zle reset-prompt
+      zle -R
     fi
+  else
+    zle reset-prompt
+    zle -R
   fi
-  zle -R
 }
 zle -N zle-reset-prompt
 
@@ -270,9 +273,11 @@ bindkey -d
 # Emacs Key Bindings
 #
 
-for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}"
+for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}" \
+  "${key_info[Escape]}${key_info[Left]}"
   bindkey -M emacs "$key" emacs-backward-word
-for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}"
+for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}" \
+  "${key_info[Escape]}${key_info[Right]}"
   bindkey -M emacs "$key" emacs-forward-word
 
 # Kill to the beginning of the line.
@@ -313,6 +318,7 @@ bindkey -M vicmd "$key_info[Control]X$key_info[Control]E" edit-command-line
 
 # Undo/Redo
 bindkey -M vicmd "u" undo
+bindkey -M viins "$key_info[Control]_" undo
 bindkey -M vicmd "$key_info[Control]R" redo
 
 if (( $+widgets[history-incremental-pattern-search-backward] )); then
