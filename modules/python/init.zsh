@@ -44,7 +44,7 @@ fi
 unset local_pyenv
 
 # Return if requirements are not found.
-if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] )); then
+if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
   return 1
 fi
 
