@@ -9,7 +9,7 @@
 
 if zstyle -t ':prezto:module:utility:diff' color \
       && (( $+commands[colordiff] )); then
-  command colordiff "$@"
+  command diff "$@" | colordiff
 else
   command diff "$@"
 fi
