@@ -11,3 +11,37 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+source ~/.profile
+export PATH="$JAVA_HOME/bin:$PATH"
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+DEFAULT_USER=yousihan
+prompt_context() {
+  if [[ "$USER" == "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    emojis=("⚡️" "🔥" "💀" "👑" "😎" "🐸" "🐵" "🦄" "🌈" "🍻" "🚀" "💡" "🎉" "🔑" "🇹🇭" "🚦" "🌙")
+    RAND_EMOJI_N=$(( $RANDOM % ${#emojis[@]} + 1))
+    prompt_segment black default "${emojis[$RAND_EMOJI_N]} "
+  fi
+}
+
+alias kprod="kubectl --context=us-east-1a -n amp-commerce-fraud-prod"
+alias kdev="kubectl --context=us-west-1a -n amp-commerce-fraud-dev"
+alias kplay="kubectl --context=us-west-1a -n amp-commerce-fraud-playground"
+
+gup () {
+  remote="$1"
+  branch="$2"
+  if [ -z $remote ]; then
+    echo "err: set remote, gup {remote} {branch}"
+    return 0
+  fi
+  if [ -z $branch ]; then
+    echo "err: set branch, gup {remote} {branch}"
+  fi
+  git fetch "$remote"
+  git rebase "$remote/$branch"
+}
+ 
+export PATH="$HOME/go/bin:$PATH"
+
+ulimit -n 65536 200000

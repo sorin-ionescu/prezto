@@ -43,6 +43,8 @@ fi
 #
 
 if [[ -n "$key_info" ]]; then
+  bindkey '^K' history-substring-search-up
+  bindkey '^L' history-substring-search-down
   # Emacs
   bindkey -M emacs "$key_info[Control]P" history-substring-search-up
   bindkey -M emacs "$key_info[Control]N" history-substring-search-down
@@ -59,3 +61,6 @@ if [[ -n "$key_info" ]]; then
 
   unset keymap
 fi
+
+
+set HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE
