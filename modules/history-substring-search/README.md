@@ -8,6 +8,13 @@ commands.
 If this module is used in conjunction with the [_`syntax-highlighting`_][3]
 module, this module must be loaded _after_ the _`syntax-highlighting`_ module.
 
+Additionally, if this module is used in conjunction with the
+[_`autosuggestions`_][4] module, this module must be loaded _before_ the
+_`autosuggestions`_ module.
+
+To elaborate, the relative order of loading the modules would be
+_`syntax-highlighting`_, _`history-substring-search`_ and _`autosuggestions`_.
+
 ## Contributors
 
 New features and bug fixes should be submitted to the
@@ -60,7 +67,7 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
 ## Authors
 
-_The authors of this module should be contacted via the [issue tracker][4]._
+_The authors of this module should be contacted via the [issue tracker][5]._
 
 - [Suraj N. Kurapati](https://github.com/sunaku)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
@@ -68,4 +75,5 @@ _The authors of this module should be contacted via the [issue tracker][4]._
 [1]: https://github.com/zsh-users/zsh-history-substring-search
 [2]: https://fishshell.com
 [3]: ../syntax-highlighting#readme
-[4]: https://github.com/sorin-ionescu/prezto/issues
+[4]: ../autosuggestions#readme
+[5]: https://github.com/sorin-ionescu/prezto/issues

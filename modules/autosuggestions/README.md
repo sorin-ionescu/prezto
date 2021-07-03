@@ -8,12 +8,12 @@ history and completions.
 If this module is used in conjunction with the [_`syntax-highlighting`_][3]
 module, this module must be loaded _after_ the _`syntax-highlighting`_ module.
 
-If this module is used in conjunction with the [_`history-substring-search`_][4]
-module, this module must be loaded _after_ the _`history-substring-search`_
-module.
+Additionally, if this module is used in conjunction with the
+[_`history-substring-search`_][4] module, this module must be loaded _after_ the
+_`history-substring-search`_ module as well.
 
 To elaborate, the relative order of loading the modules would be
-_`autosuggestions`_, _`syntax-highlighting`_ and _`history-substring-search`_.
+_`syntax-highlighting`_, _`history-substring-search`_ and _`autosuggestions`_.
 
 ## Contributors
 
