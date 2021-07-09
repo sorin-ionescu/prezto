@@ -38,7 +38,13 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" && "$TERM_PRO
   fi
 
   # Attach to the 'prezto' session or to the last session used. (detach first)
-  exec tmux $_tmux_iterm_integration attach-session -d
+  if (( $+commands[termux-info] )); then
+    # Simlate exec on Termux
+    tmux -f "$tmux_config" $_tmux_iterm_integration attach-session -d
+    exit "$?"
+  else
+    exec tmux $_tmux_iterm_integration attach-session -d
+  fi
 fi
 
 #
