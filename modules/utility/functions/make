@@ -5,16 +5,13 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function make {
-  if zstyle -t ':prezto:module:utility:make' color; then
-    if (( $+commands[colormake] )); then
-      colormake "$@"
-    else
-      command make "$@"
-    fi
-  else
-    command make "$@"
-  fi
-}
+# function make {
 
-make "$@"
+if zstyle -t ':prezto:module:utility:make' color \
+      && (( $+commands[colormake] )); then
+  command colormake "$@"
+else
+  command make "$@"
+fi
+
+# }

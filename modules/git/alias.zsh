@@ -8,25 +8,24 @@
 #
 # Settings
 #
-#
 
 # Log
 zstyle -s ':prezto:module:git:log:medium' format '_git_log_medium_format' \
-  || _git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
+    || _git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
 zstyle -s ':prezto:module:git:log:oneline' format '_git_log_oneline_format' \
-  || _git_log_oneline_format='%C(green)%h%C(reset) %s%C(red)%d%C(reset)%n'
+    || _git_log_oneline_format='%C(green)%h%C(reset) %s%C(red)%d%C(reset)%n'
 zstyle -s ':prezto:module:git:log:brief' format '_git_log_brief_format' \
-  || _git_log_brief_format='%C(green)%h%C(reset) %s%n%C(blue)(%ar by %an)%C(red)%d%C(reset)%n'
+    || _git_log_brief_format='%C(green)%h%C(reset) %s%n%C(blue)(%ar by %an)%C(red)%d%C(reset)%n'
 
 # Status
 zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_submodules' \
-  || _git_status_ignore_submodules='none'
+    || _git_status_ignore_submodules='none'
 
 #
 # Aliases
 #
 
-if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
+if ! zstyle -t ':prezto:module:git:alias' skip; then
   # Git
   alias g='git'
 
@@ -51,18 +50,18 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
 
   # Commit (c)
   alias gc='git commit --verbose'
+  alias gcS='git commit --verbose --gpg-sign'
   alias gca='git commit --verbose --all'
+  alias gcaS='git commit --verbose --all --gpg-sign'
   alias gcm='git commit --message'
-  alias gcS='git commit -S --verbose'
-  alias gcSa='git commit -S --verbose --all'
-  alias gcSm='git commit -S --message'
+  alias gcmS='git commit --message --gpg-sign'
   alias gcam='git commit --all --message'
   alias gco='git checkout'
   alias gcO='git checkout --patch'
   alias gcf='git commit --amend --reuse-message HEAD'
-  alias gcSf='git commit -S --amend --reuse-message HEAD'
+  alias gcfS='git commit --amend --reuse-message HEAD --gpg-sign'
   alias gcF='git commit --verbose --amend'
-  alias gcSF='git commit -S --verbose --amend'
+  alias gcFS='git commit --verbose --amend --gpg-sign'
   alias gcp='git cherry-pick --ff'
   alias gcP='git cherry-pick --no-commit'
   alias gcr='git revert'
@@ -70,8 +69,8 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gcs='git show'
   alias gcsS='git show --pretty=short --show-signature'
   alias gcl='git-commit-lost'
-  alias gcy='git cherry -v --abbrev'
-  alias gcY='git cherry -v'
+  alias gcy='git cherry --verbose --abbrev'
+  alias gcY='git cherry --verbose'
 
   # Conflict (C)
   alias gCl='git --no-pager diff --name-only --diff-filter=U'
@@ -183,15 +182,15 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gir='git reset'
   alias giR='git reset --patch'
   alias gix='git rm -r --cached'
-  alias giX='git rm -rf --cached'
+  alias giX='git rm -r --force --cached'
 
   # Log (l)
-  alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
-  alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
-  alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
-  alias glo='git log --topo-order --pretty=format:"${_git_log_oneline_format}"'
-  alias glg='git log --topo-order --graph --pretty=format:"${_git_log_oneline_format}"'
-  alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
+  alias gl='git log --topo-order --pretty=format:"$_git_log_medium_format"'
+  alias gls='git log --topo-order --stat --pretty=format:"$_git_log_medium_format"'
+  alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"$_git_log_medium_format"'
+  alias glo='git log --topo-order --pretty=format:"$_git_log_oneline_format"'
+  alias glg='git log --topo-order --graph --pretty=format:"$_git_log_oneline_format"'
+  alias glb='git log --topo-order --pretty=format:"$_git_log_brief_format"'
   alias glc='git shortlog --summary --numbered'
   alias glS='git log --show-signature'
 
@@ -253,24 +252,24 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gSl='git submodule status'
   alias gSm='git-submodule-move'
   alias gSs='git submodule sync'
-  alias gSu='git submodule foreach git pull origin master'
+  alias gSu='git submodule update --remote --recursive'
   alias gSx='git-submodule-remove'
 
   # Tag (t)
   alias gt='git tag'
-  alias gtl='git tag -l'
-  alias gts='git tag -s'
+  alias gtl='git tag --list'
+  alias gts='git tag --sign'
   alias gtv='git verify-tag'
 
   # Working Copy (w)
-  alias gws='git status --ignore-submodules=${_git_status_ignore_submodules} --short'
-  alias gwS='git status --ignore-submodules=${_git_status_ignore_submodules}'
+  alias gws='git status --ignore-submodules=$_git_status_ignore_submodules --short'
+  alias gwS='git status --ignore-submodules=$_git_status_ignore_submodules'
   alias gwd='git diff --no-ext-diff'
   alias gwD='git diff --no-ext-diff --word-diff'
   alias gwr='git reset --soft'
   alias gwR='git reset --hard'
-  alias gwc='git clean -n'
-  alias gwC='git clean -f'
+  alias gwc='git clean --dry-run'
+  alias gwC='git clean --force'
   alias gwx='git rm -r'
-  alias gwX='git rm -rf'
+  alias gwX='git rm -r --force'
 fi

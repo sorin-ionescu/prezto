@@ -15,6 +15,9 @@ if zstyle -T ':prezto:module:utility' correct; then
   setopt CORRECT
 fi
 
+# Load 'run-help' function.
+autoload -Uz run-help-{ip,openssl,sudo}
+
 #
 # Aliases
 #
@@ -61,19 +64,19 @@ alias sa='alias | grep -i'
 alias type='type -a'
 
 # Safe ops. Ask the user before doing anything destructive.
-alias rmi="${aliases[rm]:-rm} -i"
-alias mvi="${aliases[mv]:-mv} -i"
 alias cpi="${aliases[cp]:-cp} -i"
 alias lni="${aliases[ln]:-ln} -i"
+alias mvi="${aliases[mv]:-mv} -i"
+alias rmi="${aliases[rm]:-rm} -i"
 if zstyle -T ':prezto:module:utility' safe-ops; then
-  alias rm="${aliases[rm]:-rm} -i"
-  alias mv="${aliases[mv]:-mv} -i"
   alias cp="${aliases[cp]:-cp} -i"
   alias ln="${aliases[ln]:-ln} -i"
+  alias mv="${aliases[mv]:-mv} -i"
+  alias rm="${aliases[rm]:-rm} -i"
 fi
 
 # ls
-if is-callable 'dircolors'; then
+if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
   # GNU Core Utilities
 
   if zstyle -T ':prezto:module:utility:ls' dirs-first; then
@@ -81,12 +84,13 @@ if is-callable 'dircolors'; then
   fi
 
   if zstyle -t ':prezto:module:utility:ls' color; then
-    # Call dircolors to define colors if they're missing
-    if [[ -z "$LS_COLORS" ]]; then
-      if [[ -s "$HOME/.dir_colors" ]]; then
-        eval "$(dircolors --sh "$HOME/.dir_colors")"
+    # Define colors for GNU ls if they're not already defined
+    if (( ! $+LS_COLORS )); then
+      # Try dircolors when available
+      if is-callable 'dircolors'; then
+        eval "$(dircolors --sh $HOME/.dir_colors(.N))"
       else
-        eval "$(dircolors --sh)"
+        export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
       fi
     fi
 
@@ -96,15 +100,11 @@ if is-callable 'dircolors'; then
   fi
 else
   # BSD Core Utilities
+
   if zstyle -t ':prezto:module:utility:ls' color; then
     # Define colors for BSD ls if they're not already defined
-    if [[ -z "$LSCOLORS" ]]; then
+    if (( ! $+LSCOLORS )); then
       export LSCOLORS='exfxcxdxbxGxDxabagacad'
-    fi
-
-    # Define colors for the completion system if they're not already defined
-    if [[ -z "$LS_COLORS" ]]; then
-      export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
     fi
 
     alias ls="${aliases[ls]:-ls} -G"
@@ -118,17 +118,20 @@ alias ll='ls -lh'        # Lists human readable sizes.
 alias lr='ll -R'         # Lists human readable sizes, recursively.
 alias la='ll -A'         # Lists human readable sizes, hidden files.
 alias lm='la | "$PAGER"' # Lists human readable sizes, hidden files through pager.
-alias lx='ll -XB'        # Lists sorted by extension (GNU only).
 alias lk='ll -Sr'        # Lists sorted by size, largest last.
 alias lt='ll -tr'        # Lists sorted by date, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls'            # I often screw this up.
+alias sl='ls'            # Correction for common spelling error.
+
+if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
+  alias lx='ll -XB'      # Lists sorted by extension (GNU only).
+fi
 
 # Grep
 if zstyle -t ':prezto:module:utility:grep' color; then
-  export GREP_COLOR='37;45'           # BSD.
-  export GREP_COLORS="mt=$GREP_COLOR" # GNU.
+  export GREP_COLOR=${GREP_COLOR:-'37;45'}            # BSD.
+  export GREP_COLORS=${GREP_COLORS:-"mt=$GREP_COLOR"} # GNU.
 
   alias grep="${aliases[grep]:-grep} --color=auto"
 fi
@@ -160,11 +163,21 @@ alias pbc='pbcopy'
 alias pbp='pbpaste'
 
 # File Download
-if (( $+commands[curl] )); then
-  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
-elif (( $+commands[wget] )); then
-  alias get='wget --continue --progress=bar --timestamping'
+zstyle -s ':prezto:module:utility:download' helper '_download_helper' || _download_helper='curl'
+
+typeset -A _download_helpers=(
+  aria2c  'aria2c --continue --remote-time --max-tries=0'
+  curl    'curl --continue-at - --location --progress-bar --remote-name --remote-time'
+  wget    'wget --continue --progress=bar --timestamping'
+)
+
+if (( $+commands[$_download_helper] && $+_download_helpers[$_download_helper] )); then
+  alias get="$_download_helpers[$_download_helper]"
+elif (( $+commands[curl] )); then
+  alias get="$_download_helpers[curl]"
 fi
+
+unset _download_helper{,s}
 
 # Resource Usage
 alias df='df -kh'
@@ -181,10 +194,15 @@ fi
 # Miscellaneous
 
 # Serves a directory via HTTP.
-if (( $+commands[python3] )); then
-  alias http-serve='python3 -m http.server'
-else
-  alias http-serve='python -m SimpleHTTPServer'
+if (( $#commands[(i)python(|[23])] )); then
+  autoload -Uz is-at-least
+  if is-at-least 3 ${"$(python --version 2>&1)"[(w)2]}; then
+    alias http-serve='python -m http.server'
+  elif (( $+commands[python3] )); then
+    alias http-serve='python3 -m http.server'
+  else
+    alias http-serve='$commands[(i)python(|2)] -m SimpleHTTPServer'
+  fi
 fi
 
 #
