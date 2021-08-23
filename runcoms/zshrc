@@ -11,3 +11,27 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/Users/least/.go/bin
+export PATH=$PATH:/Users/least/Library/Python/3.8/bin
+export GOPATH="${HOME}/.go"
+# export GOROOT="$(brew --prefix golang)/libexec"
+export GOROT="/opt/homebrew/opt/go/libexec"
+
+
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+alias ls='lsd'
+
+# vi mode
+bindkey -v
+
+export EDITOR='vim'
+export VISUAL='vim'
+alias alass="alass-cli"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
+eval "$(starship init zsh)"
