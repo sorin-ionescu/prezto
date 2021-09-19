@@ -63,6 +63,12 @@ _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
 ```sh
 zstyle ':prezto:module:history-substring-search' globbing-flags ''
+
+To set the search matched against the start of each history entry, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' prefixed 'yes'
 ```
 
 ### Fuzzy search
