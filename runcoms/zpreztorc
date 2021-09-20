@@ -115,6 +115,9 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Retrieve only unique results (removes duplicates)
 # zstyle ':prezto:module:history-substring-search' ensure-unique 'yes'
 
+# Set the search prefixed.
+# zstyle ':prezto:module:history-substring-search' prefixed 'yes'
+
 #
 # macOS
 #
