@@ -8,8 +8,8 @@
 #
 
 # Possible lookup locations for manually installed rbenv and rvm.
-local_rbenv_paths=({$RBENV_ROOT,{$XDG_CONFIG_HOME/,$HOME/.}rbenv}/bin/rbenv(N))
-local_rvm_paths=({$RVM_DIR,{$XDG_CONFIG_HOME/,$HOME/.}rvm}/scripts/rvm(N))
+local_rbenv_paths=({$RBENV_PATH,{$RBENV_ROOT,{$XDG_CONFIG_HOME/,$HOME/.}rbenv}/bin/rbenv}(N))
+local_rvm_paths=({$RVM_PATH,{$RVM_DIR,{$XDG_CONFIG_HOME/,$HOME/.}rvm}/scripts/rvm}(N))
 
 # Load manually installed or package manager installed rbenv into the shell
 # session.
