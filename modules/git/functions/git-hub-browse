@@ -47,7 +47,7 @@ file="$3"
 if [[ -n "$url" ]]; then
   url="$url/tree/$reference/$file"
 
-  if [[ -z "$BROWSER" ]]; then
+  if [[ -n "$BROWSER" ]]; then
     "$BROWSER" "$url"
     return 0
   else
