@@ -54,6 +54,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   ${HOME}/bin
+  ${HOME}/.cargo/bin
   /usr/local/{bin,sbin,heroku/bin}
   /Developer/NVIDIA/CUDA-8.0/bin
   $path

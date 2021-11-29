@@ -28,9 +28,9 @@ zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_subm
 
 if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   # If the `hub` command exists, use that in place of git
-  if (( $+commands[hub] )); then
-    alias git='hub'
-  fi
+  # if (( $+commands[hub] )); then
+  #   alias git='hub'
+  # fi
 
   # Git
   alias g='git'
