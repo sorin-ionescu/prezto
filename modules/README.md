@@ -1,206 +1,166 @@
-Modules
-=======
+# Modules
 
-Load modules in *zpreztorc*. The order matters.
+Load modules in _`${ZDOTDIR:-$HOME}/.zpreztorc`_. The order matters.
 
 ```sh
 zstyle ':prezto:load' pmodule 'environment' 'terminal'
 ```
 
-Archive
--------
+## Archive
 
 Provides functions to list and extract archives.
 
-Autosuggestions
----------------
+## Autosuggestions
 
 Integrates zsh-autosuggestions into Prezto.
 
-Command-Not-Found
------------------
+## Command-Not-Found
 
 Loads the command-not-found tool on macOS or Debian-based distributions.
 
-Completion
-----------
+## Completion
 
-Loads and configures tab completion and provides additional completions from
-the zsh-completions project.
+Loads and configures <kbd>TAB</kbd> completion and provides additional
+completions from the zsh-completions project.
 
-Directory
----------
+## Directory
 
 Sets directory options and defines directory aliases.
 
-DNF
----
+## DNF
 
-Defines dnf aliases.
+Defines _dnf_ aliases.
 
-Dpkg
-----
+## Dpkg
 
-Defines dpkg aliases and functions.
+Defines _dpkg_ aliases and functions.
 
-Editor
-------
+## Editor
 
 Sets key bindings.
 
-Emacs
------
+## Emacs
 
 Enables Emacs dependency management.
 
-Environment
------------
+## Environment
 
 Sets general shell options and defines environment variables.
 
-Fasd
-----
+## Fasd
 
 Maintains a frequently used file and directory list for fast access.
 
-Git
----
+## Git
 
 Enhances the Git distributed version control system by providing aliases,
 functions and by exposing repository status information to prompts.
 
-GNU Utility
------------
+## GNU Utility
 
 Provides for the interactive use of GNU utilities on non-GNU systems.
 
-GPG
----
+## GPG
 
 Provides for an easier use of GPG by setting up gpg-agent.
 
-Haskell
--------
+## Haskell
 
 Enables local Haskell package installation.
 
-Helper
-------
+## Helper
 
 Provides helper functions for developing modules.
 
-History
--------
+## History
 
 Sets history options and defines history aliases.
 
-History Substring Search
-------------------------
+## History Substring Search
 
 Integrates zsh-history-substring-search into Prezto.
 
-Homebrew
---------
+## Homebrew
 
 Defines Homebrew aliases.
 
-MacPorts
---------
+## MacPorts
 
 Defines MacPorts aliases and adds MacPorts directories to path variables.
 
-Node.js
--------
+## Node.js
 
 Provides utility functions for Node.js and loads npm completion.
 
-OCaml
------
+## OCaml
 
 Initializes OCaml package management.
 
-OSX
----
+## OSX
 
 Defines macOS aliases and functions.
 
-Pacman
-------
+## Pacman
 
 Provides aliases and functions for the Pacman package manager and frontends.
 
-Perl
-----
+## Perl
 
 Enables local Perl module installation on macOS and defines alises.
 
-Prompt
-------
+## Prompt
 
 Loads prompt themes.
 
-Python
-------
+## Python
 
 Enables local Python and local Python package installation.
 
-Ruby on Rails
--------------
+## Ruby on Rails
 
 Defines Ruby on Rails aliases.
 
-Rsync
------
+## Rsync
 
 Defines rsync aliases.
 
-Ruby
-----
+## Ruby
 
 Configures Ruby local gem installation, loads version managers, and defines
 aliases.
 
-GNU Screen
-----------
+## GNU Screen
 
 Defines GNU Screen aliases and provides for auto launching it at start-up.
 
-Spectrum
---------
+## Spectrum
 
 Provides for easier use of 256 colors and effects.
 
-SSH
----
+## SSH
 
 Provides for an easier use of SSH by setting up ssh-agent.
 
-Syntax Highlighting
--------------------
+## Syntax Highlighting
 
 Integrates zsh-syntax-highlighting into Prezto.
 
-Terminal
---------
+## Terminal
 
 Sets terminal window and tab titles.
 
-Tmux
-----
+## Tmux
 
 Defines tmux aliases and provides for auto launching it at start-up.
 
-Utility
--------
+## Utility
 
 Defines general aliases and functions.
 
-Wake-on-LAN
------------
+## Wake-on-LAN
 
 This module provides a wrapper around the wakeonlan tool.
 
-Yum
----
+## Yum
 
 Defines yum aliases.

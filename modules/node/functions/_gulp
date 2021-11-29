@@ -1,0 +1,15 @@
+#compdef gulp
+#autoload
+
+#
+# Gulp completion, delegating to gulp to do all the completion work.
+#
+# Authors:
+#   Indrajit Raychaudhuri <irc@indrajit.com>
+#
+
+if (( $+commands[gulp] )); then
+  eval "$(gulp --completion=zsh)"
+
+  _gulp_completion "$@"
+fi

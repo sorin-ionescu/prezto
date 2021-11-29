@@ -1,53 +1,55 @@
-Completion
-==========
+# Completion
 
-Loads and configures tab completion and provides additional completions from
-the [zsh-completions][1] project.
+Loads and configures <kbd>TAB</kbd> completion and provides additional
+completions from the [zsh-completions][1] project.
 
-This module must be loaded **after** the *utility* module.
+This module must be loaded late _after_ the _`utility`_ module and all other
+modules that provide completion definitions.
 
-Options
--------
+## Options
 
-  - `COMPLETE_IN_WORD` complete from both ends of a word.
-  - `ALWAYS_TO_END` move cursor to the end of a completed word.
-  - `PATH_DIRS` perform path search even on command names with slashes.
-  - `AUTO_MENU` show completion menu on a successive tab press.
-  - `AUTO_LIST` automatically list choices on ambiguous completion.
-  - `AUTO_PARAM_SLASH` if completed parameter is a directory, add a trailing slash.
-  - `EXTENDED_GLOB` needed for file modification glob modifiers with compinit.
-  - `MENU_COMPLETE` do not autoselect the first completion entry.
-  - `FLOW_CONTROL` disable start/stop characters in shell editor.
+- `COMPLETE_IN_WORD` complete from both ends of a word.
+- `ALWAYS_TO_END` move cursor to the end of a completed word.
+- `PATH_DIRS` perform path search even on command names with slashes.
+- `AUTO_MENU` show completion menu on a successive <kbd>TAB</kbd> press.
+- `AUTO_LIST` automatically list choices on ambiguous completion.
+- `AUTO_PARAM_SLASH` if completed parameter is a directory, add a trailing
+  slash (`/`).
+- `EXTENDED_GLOB` needed for file modification glob modifiers with _compinit_.
+- `MENU_COMPLETE` do not autoselect the first completion entry.
+- `FLOW_CONTROL` disable start/stop characters in shell editor.
 
-Settings
---------
+## Variables
 
-### Ignore */etc/hosts* Entries
+- `LS_COLORS` used by default for Zsh [standard style][2] 'list-colors'.
 
-To ignore certain entries from static */etc/hosts* for host completion, add the
-following lines in *zpreztorc* with the IP addresses of the hosts as they
-appear in */etc/hosts*. Both IP address and the corresponding hostname will be
-ignored during host completion. However, some of the entries ignored from
-*/etc/hosts* still might appear during completion because of their presence in
-*ssh* configuration or history).
+## Settings
+
+### Ignore _`/etc/hosts`_ Entries
+
+To ignore certain entries from static _`/etc/hosts`_ for host completion, add
+the following lines in _`${ZDOTDIR:-$HOME}/.zpreztorc`_ with the IP addresses of
+the hosts as they appear in _`/etc/hosts`_. Both IP address and the associated
+hostname(s) will be ignored during host completion. However, some of the entries
+ignored from _`/etc/hosts`_ still might appear during completion because of
+their presence in _ssh_ configuration or history).
 
 ```sh
 zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
-  '0.0.0.0' '127.0.0.1'
+    '0.0.0.0' '127.0.0.1'
 ```
 
-Contributors
-------------
+## Contributors
 
-Completions should be submitted to the [zsh-completions][1] project according
-to its rules and regulations. This module will be synchronized against it.
+Completions should be submitted to the [zsh-completions][1] project according to
+its rules and regulations. This module will be synchronized against it.
 
-Authors
--------
+## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][3]._
 
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+- [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/zsh-users/zsh-completions
-[2]: https://github.com/sorin-ionescu/prezto/issues
+[2]: https://zsh.sourceforge.net/Doc/Release/Completion-System.html#Standard-Styles
+[3]: https://github.com/sorin-ionescu/prezto/issues

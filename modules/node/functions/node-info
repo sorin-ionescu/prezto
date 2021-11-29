@@ -15,12 +15,12 @@ local version_formatted
 unset node_info
 typeset -gA node_info
 
-if (( $+functions[nvm_version] )); then
-  version="${$(nvm_version)#v}"
-elif (( $+commands[nodenv] )); then
+if (( $+commands[nodenv] )); then
   version="${${$(nodenv version)#v}[(w)0]}"
+elif (( $+functions[nvm_version] )); then
+  version="${$(nvm_version)#v}"
 elif (( $+commands[node] )) ; then
-  version="${$(node -v)#v}"  
+  version="${$(node -v)#v}"
 fi
 
 if [[ "$version" != (none|system) ]]; then

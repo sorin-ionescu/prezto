@@ -1,16 +1,14 @@
-Spectrum
-========
+# Spectrum
 
 Provides for easier use of 256 colors and effects.
 
 To learn more about text formatting, read [A Guide to 256 Color Codes][1].
 
-Variables
----------
+## Variables
 
-  - `BG` provides background colors.
-  - `FG` provides foreground colors.
-  - `FX` provides effects.
+- `BG` provides background colors.
+- `FG` provides foreground colors.
+- `FX` provides effects.
 
 ### Background and Foreground
 
@@ -79,13 +77,12 @@ Though there are many effects, most terminals support at least bold formatting.
 
 Use `$BG[none]`, `$FG[none]`, or `$FX[none]` to turn off formatting.
 
-Authors
--------
+## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
-  - [P.C. Shyamshankar](https://github.com/sykora)
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+- [P.C. Shyamshankar](https://github.com/sykora)
+- [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://lucentbeing.com/writing/archives/a-guide-to-256-color-codes/
 [2]: https://github.com/sorin-ionescu/prezto/issues
