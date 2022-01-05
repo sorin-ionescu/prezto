@@ -19,7 +19,7 @@ if [[ -z "$url" || ! "$url" =~ ^https?:\/\/.*github.com\/ ]]; then
 fi
 
 if (( $+commands[curl] )); then
-  curl -s -i 'https://git.io' -F "url=$url" ${(s: :)code:+ -F "code=$code"} | sed -n 's/^Location: //p'
+  print "${${(@M)${(f)"$(curl -s -i 'https://git.io' -F "url=$url" ${(z)code:+ -F "code=$code"})"}:#Location: *}#Location: }"
 else
   print "$0: command not found: curl" >&2
   return 1

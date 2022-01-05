@@ -5,71 +5,77 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
 #   Patrick Bos <egpbos@gmail.com>
+#   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
-# Load dependencies
+# Load dependencies.
 pmodload 'helper'
 
-# Load manually installed pyenv into the path
-if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
-  path=("${PYENV_ROOT}/bin" $path)
-  eval "$(pyenv init - --no-rehash zsh)"
+# Load manually installed or package manager installed pyenv into the shell
+# session.
+if [[ -s "${local_pyenv::=${PYENV_ROOT:-$HOME/.pyenv}/bin/pyenv}" ]] \
+      || (( $+commands[pyenv] )); then
 
-# Load pyenv into the current python session
-elif (( $+commands[pyenv] )); then
-  eval "$(pyenv init - --no-rehash zsh)"
+  # Ensure manually installed pyenv is added to path when present.
+  [[ -s $local_pyenv ]] && path=($local_pyenv:h $path)
+
+  # pyenv 2+ requires shims to be added to path before being initialized.
+  autoload -Uz is-at-least
+  if is-at-least 2 ${"$(pyenv --version 2>&1)"[(w)2]}; then
+    eval "$(pyenv init --path zsh)"
+  fi
+
+  eval "$(pyenv init - zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
 # path can be overridden using PYTHONUSERBASE.
 else
   if [[ -n "$PYTHONUSERBASE" ]]; then
-    path=($PYTHONUSERBASE/bin $path)
+    path=($PYTHONUSERBASE/bin(N) $path)
   elif is-darwin; then
     path=($HOME/Library/Python/*/bin(N) $path)
   else
     # This is subject to change.
-    path=($HOME/.local/bin $path)
+    path=($HOME/.local/bin(N) $path)
   fi
 fi
 
+unset local_pyenv
+
 # Return if requirements are not found.
-if (( ! $+commands[python] && ! $+commands[pyenv] )); then
+if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
   return 1
 fi
 
 function _python-workon-cwd {
-  # Check if this is a Git repo
-  local GIT_REPO_ROOT=""
-  local GIT_TOPLEVEL="$(git rev-parse --show-toplevel 2> /dev/null)"
-  if [[ $? == 0 ]]; then
-    GIT_REPO_ROOT="$GIT_TOPLEVEL"
-  fi
-  # Get absolute path, resolving symlinks
-  local PROJECT_ROOT="${PWD:A}"
+  # Check if this is a Git repo.
+  local GIT_REPO_ROOT="$(git rev-parse --show-toplevel 2> /dev/null)"
+  # Get absolute path, resolving symlinks.
+  local PROJECT_ROOT="$PWD:A"
   while [[ "$PROJECT_ROOT" != "/" && ! -e "$PROJECT_ROOT/.venv" \
-            && ! -d "$PROJECT_ROOT/.git"  && "$PROJECT_ROOT" != "$GIT_REPO_ROOT" ]]; do
-    PROJECT_ROOT="${PROJECT_ROOT:h}"
+        && ! -d "$PROJECT_ROOT/.git"  && "$PROJECT_ROOT" != "$GIT_REPO_ROOT" ]]; do
+    PROJECT_ROOT="$PROJECT_ROOT:h"
   done
-  if [[ "$PROJECT_ROOT" == "/" ]]; then
+  if [[ $PROJECT_ROOT == "/" ]]; then
     PROJECT_ROOT="."
   fi
-  # Check for virtualenv name override
+  # Check for virtualenv name override.
   local ENV_NAME=""
   if [[ -f "$PROJECT_ROOT/.venv" ]]; then
-    ENV_NAME="$(cat "$PROJECT_ROOT/.venv")"
+    ENV_NAME="$(<$PROJECT_ROOT/.venv)"
   elif [[ -f "$PROJECT_ROOT/.venv/bin/activate" ]]; then
     ENV_NAME="$PROJECT_ROOT/.venv"
-  elif [[ "$PROJECT_ROOT" != "." ]]; then
-    ENV_NAME="${PROJECT_ROOT:t}"
+  elif [[ $PROJECT_ROOT != "." ]]; then
+    ENV_NAME="$PROJECT_ROOT:t"
   fi
   if [[ -n $CD_VIRTUAL_ENV && "$ENV_NAME" != "$CD_VIRTUAL_ENV" ]]; then
-    # We've just left the repo, deactivate the environment
-    # Note: this only happens if the virtualenv was activated automatically
+    # We've just left the repo, deactivate the environment.
+    # Note: this only happens if the virtualenv was activated automatically.
     deactivate && unset CD_VIRTUAL_ENV
   fi
-  if [[ "$ENV_NAME" != "" ]]; then
-    # Activate the environment only if it is not already active
+  if [[ $ENV_NAME != "" ]]; then
+    # Activate the environment only if it is not already active.
     if [[ "$VIRTUAL_ENV" != "$WORKON_HOME/$ENV_NAME" ]]; then
       if [[ -n "$WORKON_HOME" && -e "$WORKON_HOME/$ENV_NAME/bin/activate" ]]; then
         workon "$ENV_NAME" && export CD_VIRTUAL_ENV="$ENV_NAME"
@@ -80,17 +86,17 @@ function _python-workon-cwd {
   fi
 }
 
-# Load auto workon cwd hook
-if zstyle -t ':prezto:module:python:virtualenv' auto-switch 'yes'; then
-  # Auto workon when changing directory
+# Load auto workon cwd hook.
+if zstyle -t ':prezto:module:python:virtualenv' auto-switch; then
+  # Auto workon when changing directory.
   autoload -Uz add-zsh-hook
   add-zsh-hook chpwd _python-workon-cwd
 fi
 
 # Load virtualenvwrapper into the shell session, if pre-requisites are met
 # and unless explicitly requested not to
-if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
-  zstyle -T ':prezto:module:python:virtualenv' initialize ; then
+if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) \
+      && zstyle -T ':prezto:module:python:virtualenv' initialize ; then
   # Set the directory where virtual environments are stored.
   export WORKON_HOME="${WORKON_HOME:-$HOME/.virtualenvs}"
 
@@ -105,7 +111,7 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
   # can exist in 'pyenv' synthesized paths (e.g., '~/.pyenv/plugins') instead.
   local -a pyenv_plugins
   if (( $+commands[pyenv] )); then
-    pyenv_plugins=(${(@oM)${(f)"$(pyenv commands --no-sh 2>/dev/null)"}:#virtualenv*})
+    pyenv_plugins=(${(@oM)${(f)"$(pyenv commands --no-sh 2> /dev/null)"}:#virtualenv*})
   fi
 
   if (( $pyenv_plugins[(i)virtualenv-init] <= $#pyenv_plugins )); then
@@ -117,19 +123,10 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
       pyenv "$pyenv_plugins[(R)virtualenvwrapper(_lazy|)]"
     fi
   else
-    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper if available
-    # in '$path' or in an alternative location on a Debian based system.
-    #
-    # If homebrew is installed and the python location wasn't overridden via
-    # environment variable we fall back to python3 then python2 in that order.
-    # This is needed to fix an issue with virtualenvwrapper as homebrew no
-    # longer shadows the system python.
-    if [[ -z "$VIRTUALENVWRAPPER_PYTHON" ]] && (( $+commands[brew] )); then
-      if (( $+commands[python3] )); then
-        export VIRTUALENVWRAPPER_PYTHON=$commands[python3]
-      elif (( $+commands[python2] )); then
-        export VIRTUALENVWRAPPER_PYTHON=$commands[python2]
-      fi
+    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper if 'python' is
+    # available in '$path'.
+    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $#commands[(i)python[23]#] )); then
+      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[23]#]
     fi
 
     virtenv_sources=(
@@ -137,7 +134,7 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
       /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
     )
     if (( $#virtenv_sources )); then
-      source "${virtenv_sources[1]}"
+      source "$virtenv_sources[1]"
     fi
 
     unset virtenv_sources
@@ -146,38 +143,7 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
   unset pyenv_plugins
 fi
 
-# Load PIP completion.
-# Detect and use one available from among 'pip', 'pip2', 'pip3' variants
-if [[ -n "$PYENV_ROOT" ]]; then
-  for pip in pip{,2,3}; do
-    pip_command="$(pyenv which "$pip" 2>/dev/null)"
-    [[ -n "$pip_command" ]] && break
-  done
-  unset pip
-else
-  pip_command="$commands[(i)pip(|[23])]"
-fi
-if [[ -n "$pip_command" ]]; then
-  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/pip-cache.zsh"
-
-  if [[ "$pip_command" -nt "$cache_file" \
-        || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
-        || ! -s "$cache_file" ]]; then
-    mkdir -p "$cache_file:h"
-    # pip is slow; cache its output. And also support 'pip2', 'pip3' variants
-    "$pip_command" completion --zsh \
-      | sed -e "s/\(compctl -K [-_[:alnum:]]* pip\).*/\1{,2,3}{,.{0..9}}/" \
-      >! "$cache_file" \
-      2> /dev/null
-  fi
-
-  source "$cache_file"
-
-  unset cache_file
-fi
-unset pip_command
-
-# Load conda into the shell session, if requested
+# Load conda into the shell session, if requested.
 zstyle -T ':prezto:module:python' conda-init
 if (( $? && $+commands[conda] )); then
   if (( $(conda ..changeps1) )); then

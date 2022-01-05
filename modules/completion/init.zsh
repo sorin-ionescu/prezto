@@ -7,26 +7,44 @@
 #
 
 # Return if requirements are not found.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ $TERM == 'dumb' ]]; then
   return 1
 fi
 
 # Add zsh-completions to $fpath.
-fpath=("${0:h}/external/src" $fpath)
+fpath=(${0:h}/external/src $fpath)
+
+# Add completion for keg-only brewed curl when available.
+if (( $+commands[brew] )) \
+      && [[ -d "${curl_prefix::="$(brew --prefix 2> /dev/null)"/opt/curl}" ]]; then
+  fpath=($curl_prefix/share/zsh/site-functions $fpath)
+fi
+unset curl_prefix
 
 #
 # Options
 #
 
-setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
-setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
-setopt PATH_DIRS           # Perform path search even on command names with slashes.
-setopt AUTO_MENU           # Show completion menu on a successive tab press.
-setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
-setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
-setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
-unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
-unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+setopt ALWAYS_TO_END        # Move cursor to the end of a completed word.
+setopt PATH_DIRS            # Perform path search even on command names with slashes.
+setopt AUTO_MENU            # Show completion menu on a successive tab press.
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH     # If completed parameter is a directory, add a trailing slash.
+setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with compinit.
+unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
+unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
+
+#
+# Variables
+#
+
+# Standard style used by default for 'list-colors'
+LS_COLORS=${LS_COLORS:-'di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'}
+
+#
+# Initialization
+#
 
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
@@ -40,12 +58,18 @@ if [[ $_comp_path(#qNmh-20) ]]; then
 else
   mkdir -p "$_comp_path:h"
   compinit -i -d "$_comp_path"
+  # Keep $_comp_path younger than cache time even if it isn't regenerated.
+  touch "$_comp_path"
 fi
 unset _comp_path
 
 #
 # Styles
 #
+
+# Defaults.
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
@@ -69,7 +93,6 @@ zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
 zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
@@ -90,7 +113,6 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # Directories
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'

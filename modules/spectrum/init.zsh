@@ -49,7 +49,7 @@ FX=(
   font-fifth                "\e[15m"    no-font-fifth                "\e[10m"
   font-sixth                "\e[16m"    no-font-sixth                "\e[10m"
   font-seventh              "\e[17m"    no-font-seventh              "\e[10m"
-  font-eigth                "\e[18m"    no-font-eigth                "\e[10m"
+  font-eighth               "\e[18m"    no-font-eighth               "\e[10m"
   font-ninth                "\e[19m"    no-font-ninth                "\e[10m"
 )
 

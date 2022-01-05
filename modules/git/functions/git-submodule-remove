@@ -22,9 +22,9 @@ command git config --file "$(git-dir)/config" --remove-section "submodule.${1}" 
 command git config --file "$(git-root)/.gitmodules" --remove-section "submodule.${1}" &> /dev/null
 command git add .gitmodules
 
-command git rm --cached -rf "${1}"
-rm -rf "${1}"
-rm -rf "$(git-dir)/modules/${1}"
+command git rm --cached -rf "$1"
+rm -rf "$1"
+rm -rf "$(git-dir)/modules/$1"
 
 return 0
 
