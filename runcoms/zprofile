@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='emacs'
+export VISUAL='emacs'
 export PAGER='less'
 
 #
