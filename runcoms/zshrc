@@ -11,10 +11,27 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+if command -v direnv > /dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
+
+if command -v nodenv > /dev/null 2>&1; then
+    eval "$(nodenv init -)"
+fi
+
+if command -v rbenv > /dev/null 2>&1; then
+    eval "$(rbenv init -)"
+fi
+
+if command -v pyenv > /dev/null 2>&1; then
+    eval "$(pyenv init --path)"
+fi
+
 GOPATH=$(go env GOPATH)
 export PATH=$GOPATH/bin:$PATH
 export GOPATH=$GOPATH
 export GO111MODULE="on"
+
 # ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
 setopt hist_ignore_all_dups
 
@@ -29,8 +46,7 @@ setopt hist_no_store
 
 # history
 function peco-select-history() {
-  BUFFER=$(history -n 1 | tail -r | peco)
-  #BUFFER=$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)
+  BUFFER=$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)
   CURSOR=$#BUFFER
   zle reset-prompt
 }
@@ -50,13 +66,31 @@ function peco-src() {
 }
 zle -N peco-src
 
+function paws {
+  local profile=$(perl -nle 'print $1 if /^[[](?:profile\s+)?([^]]+)/' ~/.aws/config | peco)
+  if [ -n "$profile" ]; then
+    AWS_PROFILE=$profile
+    export AWS_PROFILE
+    echo "AWS_PROFILE is now $AWS_PROFILE"
+  fi
+}
+
+function penv {
+  local env=$(echo "development\nstaging\nproduction" | peco)
+  if [ -n "$env" ]; then
+    APP_ENV=$env
+    export APP_ENV
+    echo "APP_ENV is now $APP_ENV"
+  fi
+}
+
 # Activate SSH Agent
 if ! ssh-add -l > /dev/null 2>&1; then
-  ssh-add -K
+  ssh-add --apple-use-keychain
 fi
 
 # load local settings
-LOCAL_FILE="${HOME}/.zshrc_local"
+LOCAL_FILE="${HOME}/.zshrc.local"
 if [ -e $LOCAL_FILE ]; then
   source $LOCAL_FILE
 fi
