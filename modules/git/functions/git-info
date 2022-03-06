@@ -417,6 +417,11 @@ function git-info {
   if (( dirty > 0 )); then
     zstyle -s ':prezto:module:git:info:dirty' format 'dirty_format'
     zformat -f dirty_formatted "$dirty_format" "D:$dirty"
+    # Overwrite branch format to use dirty-branch format
+    zstyle -s ':prezto:module:git:info:dirty-branch' format 'branch_format'
+    if [[ -n "$branch" && -n "$branch_format" ]]; then
+      zformat -f branch_formatted "$branch_format" "b:$branch"
+    fi
   else
     zstyle -s ':prezto:module:git:info:clean' format 'clean_formatted'
   fi
