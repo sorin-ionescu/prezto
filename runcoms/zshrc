@@ -27,6 +27,8 @@ if command -v pyenv > /dev/null 2>&1; then
     eval "$(pyenv init --path)"
 fi
 
+export PATH=$PATH:~/bin
+
 GOPATH=$(go env GOPATH)
 export PATH=$GOPATH/bin:$PATH
 export GOPATH=$GOPATH
@@ -54,7 +56,6 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 
-bindkey '^]' peco-src
 function peco-src() {
   local base=$(ghq root)
   local src=$(ghq list | peco --query "$LBUFFER")
@@ -65,6 +66,7 @@ function peco-src() {
   zle -R -c
 }
 zle -N peco-src
+bindkey '^]' peco-src
 
 function paws {
   local profile=$(perl -nle 'print $1 if /^[[](?:profile\s+)?([^]]+)/' ~/.aws/config | peco)
