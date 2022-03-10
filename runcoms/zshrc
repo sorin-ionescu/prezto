@@ -44,4 +44,4 @@ gup () {
  
 export PATH="$HOME/go/bin:$PATH"
 
-ulimit -n 65536 200000
+MAVEN_OPTS="-Xms8G -Xmx24G -XX:+UseG1GC"
