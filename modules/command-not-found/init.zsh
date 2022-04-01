@@ -7,14 +7,14 @@
 #
 
 # Load command-not-found on Debian-based distributions.
-if [[ -s '/etc/zsh_command_not_found' ]]; then
-  source '/etc/zsh_command_not_found'
+if [[ -s /etc/zsh_command_not_found ]]; then
+  source /etc/zsh_command_not_found
 # Load command-not-found on Arch Linux-based distributions.
-elif [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
-  source '/usr/share/doc/pkgfile/command-not-found.zsh'
+elif [[ -s /usr/share/doc/pkgfile/command-not-found.zsh ]]; then
+  source /usr/share/doc/pkgfile/command-not-found.zsh
 # Load command-not-found on macOS when Homebrew tap is configured.
 elif (( $+commands[brew] )) \
-      && [[ -s "${hb_cnf_handler::="$(brew --repository 2> /dev/null)"/Library/Taps/homebrew/homebrew-command-not-found/handler.sh}" ]]; then
+      && [[ -s ${hb_cnf_handler::="${HOMEBREW_REPOSITORY:-$commands[brew]:A:h:h}/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"} ]]; then
   source "$hb_cnf_handler"
   unset hb_cnf_handler
 # Return if requirements are not found.
