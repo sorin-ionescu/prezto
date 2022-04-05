@@ -15,11 +15,19 @@ fi
 fpath=(${0:h}/external/src $fpath)
 
 # Add completion for keg-only brewed curl when available.
-if (( $+commands[brew] )) \
-      && [[ -d "${curl_prefix::="$(brew --prefix 2> /dev/null)"/opt/curl}" ]]; then
-  fpath=($curl_prefix/share/zsh/site-functions $fpath)
+if (( $+commands[brew] )); then
+  # 'brew --prefix' is slow; cache its output
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/brew-cache.zsh"
+  if [[ "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" || ! -s "$cache_file" ]]; then
+    mkdir -p "$cache_file:h"
+    echo "brew_prefix=$(brew --prefix 2> /dev/null)" >! "$cache_file"
+  fi
+  source "$cache_file"
+  if [[ -d "${curl_site_functions::=$brew_prefix/opt/curl/share/zsh/site-functions}" ]]; then
+    fpath=($curl_site_functions $fpath)
+  fi
+  unset cache_file brew_prefix curl_site_functions
 fi
-unset curl_prefix
 
 #
 # Options
