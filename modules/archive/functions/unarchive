@@ -41,7 +41,7 @@ else
 fi
 
 if (( $+commands[pixz] )); then
-  _xz_bin='pixz'
+  _xz_bin='pixz -d'
 else
   _xz_bin='xz'
 fi
