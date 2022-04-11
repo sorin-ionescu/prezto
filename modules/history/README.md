@@ -51,7 +51,7 @@ zstyle ':prezto:module:history' histfile "<file_name>"
 
 defaults to "${ZDOTDIR:-$HOME}/.zsh_history".
 
-## histsize
+### histsize
 
 ```sh
 zstyle ':prezto:module:history' histsize <number>
@@ -59,7 +59,7 @@ zstyle ':prezto:module:history' histsize <number>
 
 defaults to 10000.
 
-## savehist
+### savehist
 
 ```sh
 zstyle ':prezto:module:history' savehist <number>
