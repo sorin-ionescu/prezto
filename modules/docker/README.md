@@ -17,13 +17,16 @@ Defines [Docker][1] aliases and functions.
 - `dki` List images
 - `dkin` Return low-level information on a container, image or task
 - `dkk` Kill a running container
+- `dkkh` Send `kill -s HUP` signal to a running container
 - `dkl` Fetch the logs of a container
+- `dkL` Fetch and follow (`-f`) the logs of a container
 - `dkli` Log in to a Docker registry
 - `dklo` Log out from a Docker registry
 - `dkls` is alias for `dkps`
 - `dkp` Pause all processes within one or more containers
 - `dkP` Unpause all processes within one or more containers
 - `dkpl` Pull an image or a repository from a registry
+- `dkplI` Pull all tagged images
 - `dkph` Push an image or a repository to a registry
 - `dkps` List containers
 - `dkpsa` List all containers (default lists just running)
@@ -57,9 +60,11 @@ Defines [Docker][1] aliases and functions.
 - `dkCcp` Copy files/folders between a container and the local filesystem
 - `dkCd` Inspect changes on a container's filesystem
 - `dkCe` Run a command in a running container
+- `dkCE` Run an interactive command in a running container
 - `dkCin` Display detailed information on one or more containers
 - `dkCk` Kill one or more running containers
 - `dkCl` Fetch the logs of a container
+- `dkCL` Fetch and follow (`-f`) the logs of a container
 - `dkCls` List containers
 - `dkCp` Pause all processes within one or more containers
 - `dkCpr` Remove all stopped containers
@@ -164,6 +169,7 @@ Defines [Docker][1] aliases and functions.
 - `dkce` Execute a command in a running container
 - `dkck` Kill containers
 - `dkcl` View output from containers
+- `dkcL` View and follow (`-f`) output from containers
 - `dkcls` is alias for `dkcps`
 - `dkcp` Pause services
 - `dkcP` Unpause services
