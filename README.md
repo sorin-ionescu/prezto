@@ -24,14 +24,16 @@ version is 4.3.17.
      ```
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
-     provided:
-     Run ZSH, do not create a new profile (q)
+     provided. Run ZSH, do not create a new profile (q). Then, run the following
 
      ```sh
      setopt EXTENDED_GLOB
      for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
      done
+     
+     cd .zprezto
+     ./link.sh
      ```
 
      Note: If you already have any of the given config files, ln will error. In
@@ -39,7 +41,7 @@ version is 4.3.17.
      the bottom of your `.zshrc` to load prezto but keep your config intact. For
      more complicated setups, it is recommended that you back up your original
      configs and replace them with the provided prezto runcoms.
-
+  
   4. Set Zsh as your default shell:
 
      ```console
