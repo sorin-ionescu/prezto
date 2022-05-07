@@ -25,6 +25,7 @@ version is 4.3.17.
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:
+     Run ZSH, do not create a new profile (q)
 
      ```sh
      setopt EXTENDED_GLOB
