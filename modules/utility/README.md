@@ -181,6 +181,12 @@ In addition, the following aliases have been added:
 
 - `http-serve` serves a directory via HTTP.
 
+To disable `http-serve`, add the following to _`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:utility' http-serve 'no'
+```
+
 ## Functions
 
 ### General
