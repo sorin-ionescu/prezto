@@ -108,7 +108,7 @@ noremap L O
 map q: <nop>
 nnoremap Q <nop>
 
-if &term =~ '^xterm'
+if &term =~ '^xterm' || &term =~ '^screen'
 	" Cursor in terminal:
 	" Link: https://vim.fandom.com/wiki/Configuring_the_cursor
 	" 0 -> blinking block not working in wsl

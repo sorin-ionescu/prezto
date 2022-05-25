@@ -1,0 +1,9 @@
+bind branch D !git branch -D %(branch)
+bind branch O !git reset --hard origin/%(branch)
+bind status D !rm %(file)
+bind main V !git revert %(commit)
+bind main T !git reset --hard %(commit)
+bind main B !git rebase -i %(commit)
+
+bind generic e move-down
+bind generic o move-up
