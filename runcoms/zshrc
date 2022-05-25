@@ -405,3 +405,5 @@ fi
 
 alias sshnh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias scpnh="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+alias luamake=/home/cmaher/.emacs.d/.local/etc/lsp/lua-language-server/3rd/luamake/luamake

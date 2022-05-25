@@ -16,9 +16,10 @@ export GOPATH="$PROJECTS/golang"
 export PATH="$HOME/bin:$PROJECTS/dotfiles/bin:$GOPATH/bin:$HOME/.config/yarn/global/node_modules/.bin/:$HOME/Library/Python/3.7/bin:$PATH"
 export GDRIVE="$HOME/gdrive"
 export GIT_REMOTE="$GDRIVE/git"
-export EDITOR="nvim"
+export EDITOR="vim"
 export GIT_EDITOR="$EDITOR"
 export GPG_TTY=$(tty)
+export RUST_BACKTRACE=1
 
 export NVM_DIR="$HOME/.nvm"
 which pyenv > /dev/null && eval "$(pyenv init -)"
@@ -29,3 +30,4 @@ if [ -e "$HOME/.zshenv.local" ]; then
     source "$HOME/.zshenv.local"
 fi
 
+. "$HOME/.cargo/env"
