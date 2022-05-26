@@ -6,6 +6,10 @@
  '(safe-local-variable-values
    '((eval setq-local inferior-lisp-program
            (concat "love "
+                   (locate-dominating-file default-directory dir-locals-file)
+                   "/build"))
+     (eval setq-local inferior-lisp-program
+           (concat "love "
                    (locate-dominating-file default-directory dir-locals-file)))
      (inferior-lisp-program . "love ."))))
 (custom-set-faces

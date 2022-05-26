@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+powershell -command 'Get-Clipboard' | tr -d '\r'

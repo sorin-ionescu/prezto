@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+/mnt/c/Windows/System32/clip.exe $@

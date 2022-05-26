@@ -127,12 +127,31 @@
               "i" #'evil-window-right)
         )
 
+;(setq confirm-kill-emacs nil)
+(add-to-list 'safe-local-variable-values
+             '(inferior-lisp-program . "love ."))
+(add-to-list 'default-frame-alist '(width . 246))
+(add-to-list 'default-frame-alist '(height . 76))
+
+; wsl-copy
+(defun wsl-copy (start end)
+  (interactive "r")
+  (shell-command-on-region start end "clip")
+  (deactivate-mark))
+
+; wsl-paste
+(defun wsl-paste ()
+  (interactive)
+  (let ((clipboard
+          (shell-command-to-string "clip-paste 2> /dev/null")))
+    (setq clipboard (substring clipboard 0 -1)) ; Remove newline added by Powershell
+    (insert clipboard)))
+
 (map! :leader
       "w n" #'evil-window-left
       "w e" #'evil-window-down
       "w o" #'evil-window-up
-      "w i" #'evil-window-right)
-
-(setq confirm-kill-emacs nil)
-(add-to-list 'safe-local-variable-values
-             '(inferior-lisp-program . "love ."))
+      "w i" #'evil-window-right
+      "e y" #'wsl-copy
+      "e p" #'wsl-paste
+      "o l" #'run-lisp)
