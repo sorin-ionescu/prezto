@@ -11,9 +11,9 @@
 
 function +vi-git_status {
   # Check for untracked files or updated submodules since vcs_info does not.
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    hook_com[unstaged]='%F{red}o%f'
-  fi
+  #if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    #hook_com[unstaged]='%F{red}o%f'
+  #fi
 }
 
 function prompt_cmaher_precmd {
@@ -34,12 +34,14 @@ function prompt_cmaher_setup {
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git
-  zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' stagedstr '%F{green}o%f'
-  zstyle ':vcs_info:*' unstagedstr '%F{yellow}o%f'
-  zstyle ':vcs_info:*' formats "(%b|%c%u)"
-  zstyle ':vcs_info:*' actionformats "(%b|%c%u|%F{magenta}%a%f)"
-  zstyle ':vcs_info:git*+set-message:*' hooks git_status
+  zstyle ':vcs_info:*' check-for-changes false
+  #zstyle ':vcs_info:*' stagedstr '%F{green}o%f'
+  #zstyle ':vcs_info:*' unstagedstr '%F{yellow}o%f'
+  #zstyle ':vcs_info:*' formats "(%b|%c%u)"
+  #zstyle ':vcs_info:*' actionformats "(%b|%c%u|%F{magenta}%a%f)"
+  zstyle ':vcs_info:*' formats "(%b)"
+  zstyle ':vcs_info:*' actionformats "(%b)"
+  #zstyle ':vcs_info:git*+set-message:*' hooks git_status
 
   # set editor-info parameters
   zstyle ':prezto:module:editor:info:keymap:primary' format '»'

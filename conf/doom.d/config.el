@@ -154,4 +154,11 @@
       "w i" #'evil-window-right
       "e y" #'wsl-copy
       "e p" #'wsl-paste
-      "o l" #'run-lisp)
+      "o l" #'run-lisp
+
+      "l s" #'sp-forward-slurp-sexp
+      "l S" #'sp-backward-slurp-sexp
+      "l b" #'sp-forward-barf-sexp
+      "l B" #'sp-backward-barf-sexp)
+
+(add-hook 'fennel-mode-hook 'rainbow-delimiters-mode)
