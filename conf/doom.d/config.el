@@ -76,74 +76,74 @@
 
 ;; https://github.com/emacs-evil/evil/blob/master/evil-maps.el
 (after! evil
-        (map! :after evil
-              :map evil-normal-state-map
-              "n" #'evil-backward-char
-              "e" #'evil-next-line
-              "E" #'evil-join
-              "o" #'evil-previous-line
-              "i" #'evil-forward-char
-              "k" #'evil-forward-word-end
-              "K" #'evil-forward-WORD-end
-              "h" #'evil-insert
-              "H" #'evil-insert-line
-              "j" #'evil-search-next
-              "J" #'evil-search-previous
-              "l" #'evil-open-below
-              "L" #'evil-open-above)
-        (map! :after evil
-              :map evil-motion-state-map
-              "n" #'evil-backward-char
-              "e" #'evil-next-line
-              "o" #'evil-previous-line
-              "i" #'evil-forward-char
-              "k" #'evil-forward-word-end
-              "K" #'evil-forward-WORD-end
-              "h" #'evil-insert
-              "H" #'evil-insert-line
-              "j" #'evil-search-next
-              "J" #'evil-search-previous
-              "l" #'evil-open-below
-              "L" #'evil-open-above)
-        (map! :after evil
-              :map evil-visual-state-map
-              "n" #'evil-backward-char
-              "e" #'evil-next-line
-              "o" #'evil-previous-line
-              "i" #'evil-forward-char
-              "k" #'evil-forward-word-end
-              "K" #'evil-forward-WORD-end
-              "h" #'evil-insert-text-objects-map
-              "H" #'evil-insert
-              "j" #'evil-search-next
-              "J" #'evil-search-previous
-              "l" #'evil-open-below
-              "L" #'evil-open-above)
-        (map! :after evil
-              :map evil-window-map
-              "n" #'evil-window-left
-              "e" #'evil-window-down
-              "o" #'evil-window-up
-              "i" #'evil-window-right)
-        )
+  (map! :after evil
+        :map evil-normal-state-map
+        "n" #'evil-backward-char
+        "e" #'evil-next-line
+        "E" #'evil-join
+        "o" #'evil-previous-line
+        "i" #'evil-forward-char
+        "k" #'evil-forward-word-end
+        "K" #'evil-forward-WORD-end
+        "h" #'evil-insert
+        "H" #'evil-insert-line
+        "j" #'evil-ex-search-next
+        "J" #'evil-ex-search-previous
+        "l" #'evil-open-below
+        "L" #'evil-open-above)
+  (map! :after evil
+        :map evil-motion-state-map
+        "n" #'evil-backward-char
+        "e" #'evil-next-line
+        "o" #'evil-previous-line
+        "i" #'evil-forward-char
+        "k" #'evil-forward-word-end
+        "K" #'evil-forward-WORD-end
+        "h" #'evil-insert
+        "H" #'evil-insert-line
+        "j" #'evil-ex-search-next
+        "J" #'evil-ex-search-previous
+        "l" #'evil-open-below
+        "L" #'evil-open-above)
+  (map! :after evil
+        :map evil-visual-state-map
+        "n" #'evil-backward-char
+        "e" #'evil-next-line
+        "o" #'evil-previous-line
+        "i" #'evil-forward-char
+        "k" #'evil-forward-word-end
+        "K" #'evil-forward-WORD-end
+        "h" #'evil-insert-text-objects-map
+        "H" #'evil-insert
+        "j" #'evil-ex-search-next
+        "J" #'evil-ex-search-previous
+        "l" #'evil-open-below
+        "L" #'evil-open-above)
+  (map! :after evil
+        :map evil-window-map
+        "n" #'evil-window-left
+        "e" #'evil-window-down
+        "o" #'evil-window-up
+        "i" #'evil-window-right)
+  (evil-select-search-module 'evil-search-module 'evil-search))
 
-;(setq confirm-kill-emacs nil)
+                                        ;(setq confirm-kill-emacs nil)
 (add-to-list 'safe-local-variable-values
              '(inferior-lisp-program . "love ."))
 (add-to-list 'default-frame-alist '(width . 246))
 (add-to-list 'default-frame-alist '(height . 76))
 
-; wsl-copy
+                                        ; wsl-copy
 (defun wsl-copy (start end)
   (interactive "r")
   (shell-command-on-region start end "clip")
   (deactivate-mark))
 
-; wsl-paste
+                                        ; wsl-paste
 (defun wsl-paste ()
   (interactive)
   (let ((clipboard
-          (shell-command-to-string "clip-paste 2> /dev/null")))
+         (shell-command-to-string "clip-paste 2> /dev/null")))
     (setq clipboard (substring clipboard 0 -1)) ; Remove newline added by Powershell
     (insert clipboard)))
 
@@ -152,13 +152,25 @@
       "w e" #'evil-window-down
       "w o" #'evil-window-up
       "w i" #'evil-window-right
+
+      "o l" #'love-repl
+
       "e y" #'wsl-copy
       "e p" #'wsl-paste
-      "o l" #'run-lisp
+      "e c" #'comment-line
+      "e s" #'sp-forward-slurp-sexp
+      "e S" #'sp-backward-slurp-sexp
+      "e b" #'sp-forward-barf-sexp
+      "e B" #'sp-backward-barf-sexp)
 
-      "l s" #'sp-forward-slurp-sexp
-      "l S" #'sp-backward-slurp-sexp
-      "l b" #'sp-forward-barf-sexp
-      "l B" #'sp-backward-barf-sexp)
+(defun love-repl ()
+  (interactive)
+  (setq-local inferior-lisp-program (concat "love " (projectile-project-root)))
+  (run-lisp inferior-lisp-program))
 
 (add-hook 'fennel-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-data-mode-hook 'rainbow-delimiters-mode)
+
+(add-hook 'fennel-mode-hook 'parinfer-rust-mode)
+(add-hook 'emacs-lisp-hook 'parinfer-rust-mode)
+(add-hook 'lisp-data-mode-hook 'parinfer-rust-mode)
