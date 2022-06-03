@@ -96,7 +96,15 @@
         "g z ;" #'evil-mc-pause-cursors
         "g z :" #'evil-mc-resume-cursors
         "g z e" #'evil-mc-make-cursor-move-next-line
-        "g z o" #'evil-mc-make-cursor-move-prev-line)
+        "g z o" #'evil-mc-make-cursor-move-prev-line
+
+        "C-H" #'evil-window-split
+        "C-V" #'evil-window-vsplit
+        "C-W" #'evil-window-delete
+        "C-N" #'evil-window-left
+        "C-E" #'evil-window-down
+        "C-O" #'evil-window-up
+        "C-I" #'evil-window-right)
   (map! :after evil
         :map evil-motion-state-map
         "n" #'evil-backward-char
