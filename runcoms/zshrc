@@ -49,8 +49,8 @@ setopt PUSHD_TO_HOME
 
 #History stuff
 HISTFILE=~/.history
-SAVEHIST=10000
-HISTSIZE=10000
+SAVEHIST=100000
+HISTSIZE=100000
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
@@ -64,7 +64,7 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 
-unsetopt SHARE_HISTORY
+setopt SHARE_HISTORY
 unsetopt global_rcs
 
 # Customize to your needs...
@@ -171,7 +171,9 @@ alias ksp='kubectl describe pod'
 alias kss='kubectl describe service'
 alias ksn='kubectl describe namespace'
 alias ko='kubectl config'
-alias kou='kubectl config use-context'
+function kou() {
+  kubectl config use-context $(yaml2json < ~/.kube/configd/001-custom.yml | jq -r ".contexts[] | select(.name == \"$1\") | .context.cluster")
+}
 alias koum='kubectl config use-context minikube'
 alias kon='kubectl config set-context $(koc) --namespace'
 alias konm='kubectl config set-context minikube --namespace minikbue'
@@ -180,6 +182,8 @@ alias hic='helm install charts'
 alias kbusy='kubectl create -f ${HOME}/opt/k8s/busybox.yaml'
 alias cdko='cd $HOME/.kube/config'
 alias -g _kan='--all-namespaces'
+alias kdashtoken='kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep kubernetes-dashboard | awk '{print $1}' | grep -i token)'
+alias ist=istioctl
 
 function koc {
   kubectl config view | grep current-context | cut -d" " -f2
@@ -337,7 +341,12 @@ alias simplehttpserver='python3 -m http.server'
 
 alias lsh="zsh .local.sh"
 alias l="lsh"
-alias l.="source .local.sh"
+function l.() {
+  to_eval=$(zsh .local.sh $@)
+  echo $to_eval
+  eval $to_eval
+}
+
 function lsh-new() {
   if [ -e .local.sh ]; then
     echo .local.sh already exists
@@ -368,6 +377,10 @@ alias cdd='cd $DOWNLOADS'
 
 function catscript() {
   cat $(which $1)
+}
+
+function vsc() {
+  vim $(which $1)
 }
 
 funcion nvmenv() {
@@ -405,5 +418,4 @@ fi
 
 alias sshnh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias scpnh="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-
-alias luamake=/home/cmaher/.emacs.d/.local/etc/lsp/lua-language-server/3rd/luamake/luamake
+alias niluuid="echo 00000000-0000-0000-0000-000000000000"
