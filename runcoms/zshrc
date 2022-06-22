@@ -416,6 +416,11 @@ if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
 
+if [ -e "$HOME/.asdf/asdf.sh" ]; then
+  source "$HOME/.asdf/asdf.sh"
+fi
+
+alias lrock="luarocks --tree=./.luarocks"
 alias sshnh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias scpnh="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias niluuid="echo 00000000-0000-0000-0000-000000000000"

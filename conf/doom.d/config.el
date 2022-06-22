@@ -78,6 +78,8 @@
 (after! evil
   ;; enable evil movement in the ex commandline
   (setq evil-want-minibuffer t)
+  (evil-select-search-module 'evil-search-module 'evil-search)
+
   (map! :after evil
         :map evil-normal-state-map
         "n" #'evil-backward-char
@@ -132,8 +134,7 @@
         "n" #'evil-window-left
         "e" #'evil-window-down
         "o" #'evil-window-up
-        "i" #'evil-window-right)
-  (evil-select-search-module 'evil-search-module 'evil-search))
+        "i" #'evil-window-right))
 
 (map! :leader
       "w n" #'evil-window-left
@@ -144,8 +145,8 @@
       "o l" #'csm-love-repl
       "o t" #'csm-love-test
 
-      "e y" #'csm-wsl-copy
-      "e p" #'csm-wsl-paste
+      "e y" #'csm-copy-to-clipboard
+      "e p" #'csm-paste-from-clipboard
       "e c" #'comment-line
       "e s" #'sp-forward-slurp-sexp
       "e S" #'sp-backward-slurp-sexp
@@ -192,9 +193,6 @@
   ;; TODO make these only activate in fennel-mode
   (setq lispy-colon-p nil))
 
-(add-hook 'fennel-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'lisp-data-mode-hook 'rainbow-delimiters-mode)
-
 (defun csm-wsl-copy (start end)
   (interactive "r")
   (shell-command-on-region start end "clip")
@@ -207,15 +205,21 @@
     (setq clipboard (substring clipboard 0 -1)) ; Remove newline added by Powershell
     (insert clipboard)))
 
+(defun csm-paste-from-clipboard ()
+  (interactive)
+  (setq select-enable-clipboard t)
+  (yank)
+  (setq select-enable-clipboard nil))
+
+(defun csm-copy-to-clipboard()
+  (interactive)
+  (setq select-enable-clipboard t)
+  (kill-ring-save (region-beginning) (region-end))
+  (setq select-enable-clipboard nil))
+
 (defun csm-love-repl ()
   (interactive)
-  (setq-local inferior-lisp-program
-              (concat "love " (projectile-project-root) " --fennel --debug --console")
-              ;; (concat "/mnt/c/users/maher/opt/love/love.exe "
-              ;;         "C:\\\\Users\\\\maher\\\\projects\\\\bumper-boiz"
-              ;;         ;; (shell-command-to-string (concat "wslpath -w " (projectile-project-root)))
-              ;;         " --fennel --debug --console")
-              )
+  (setq-local inferior-lisp-program (concat "love " (projectile-project-root) " --fennel --debug --console"))
   (run-lisp inferior-lisp-program))
 
 (defun csm-love-test ()
@@ -234,6 +238,15 @@
 (defun csm-show-message-log ()
   (interactive)
   (switch-to-buffer " *Message-Log*"))
+
+(use-package! fennel-mode
+  :config
+  ;; modify syntax table to make * (evil-search-word-forward) delineate at table access
+  (modify-syntax-entry ?: ". 14" fennel-mode-syntax-table)
+  (modify-syntax-entry ?. ". 14" fennel-mode-syntax-table)
+
+  :hook
+  rainbow-delimiters-mode)
 
 ;;(add-hook 'fennel-mode-hook 'parinfer-rust-mode)
 ;;(add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
