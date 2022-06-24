@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 #
 # Creates archive file
 #
@@ -8,7 +7,7 @@
 
 # function archive {
 
-local archive_name path_to_archive _gzip_bin _bzip2_bin _xz_bin
+local archive_name path_to_archive _gzip_bin _bzip2_bin _xz_bin _zstd_bin
 
 if (( $# < 2 )); then
   cat >&2 <<EOF
@@ -16,7 +15,7 @@ usage: $0 [archive_name.zip] [/path/to/include/into/archive ...]
 
 Where 'archive.zip' uses any of the following extensions:
 
-.tar.gz, .tar.bz2, .tar.xz, .tar.lzma, .tar, .zip, .rar, .7z
+.tar.gz, .tar.bz2, .tar.xz, .tar.lzma, .tar.zst, .tar, .zip, .rar, .7z
 
 There is no '-v' switch; all operations are verbose.
 EOF
@@ -54,11 +53,14 @@ else
   _bzip2_bin='bzip2'
 fi
 
+_zstd_bin='zstd'
+
 case "${archive_name}" in
   (*.tar.gz|*.tgz) tar -cvf "${archive_name}" --use-compress-program="${_gzip_bin}" "${=path_to_archive}" ;;
   (*.tar.bz2|*.tbz|*.tbz2) tar -cvf "${archive_name}" --use-compress-program="${_bzip2_bin}" "${=path_to_archive}" ;;
   (*.tar.xz|*.txz) tar -cvf "${archive_name}" --use-compress-program="${_xz_bin}" "${=path_to_archive}" ;;
   (*.tar.lzma|*.tlz) tar -cvf "${archive_name}" --lzma "${=path_to_archive}" ;;
+  (*.tar.zst|*.tzst) tar -cvf "${archive_name}" --use-compress-program="${_zstd_bin}" "${=path_to_archive}" ;;
   (*.tar) tar -cvf "${archive_name}" "${=path_to_archive}" ;;
   (*.zip|*.jar) zip -r "${archive_name}" "${=path_to_archive}" ;;
   (*.rar) rar a "${archive_name}" "${=path_to_archive}" ;;

@@ -26,9 +26,13 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 # Variables
 #
 
-HISTFILE="${HISTFILE:-${ZDOTDIR:-$HOME}/.zhistory}"  # The path to the history file.
-HISTSIZE=10000                   # The maximum number of events to save in the internal history.
-SAVEHIST=10000                   # The maximum number of events to save in the history file.
+zstyle -s ':prezto:module:history' histfile '_pmh_histfile' || _pmh_histfile="${HISTFILE:-${ZDOTDIR:-$HOME}/.zsh_history}"
+zstyle -s ':prezto:module:history' histsize '_pmh_histsize' || _pmh_histsize=10000
+zstyle -s ':prezto:module:history' savehist '_pmh_savehist' || _pmh_savehist=${_pmh_histsize}
+HISTFILE="${_pmh_histfile}"  # The path to the history file.
+HISTSIZE="${_pmh_histsize}"  # The maximum number of events to save in the internal history.
+SAVEHIST="${_pmh_savehist}"  # The maximum number of events to save in the history file.
+unset _pmh_{hist{file,size},savehist}
 
 #
 # Aliases
@@ -36,3 +40,28 @@ SAVEHIST=10000                   # The maximum number of events to save in the h
 
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
+if [[ -s "${OLD_HISTFILE::=${HISTFILE:h}/.zhistory}" ]]; then
+
+  # New 'HISTFILE' doesn't exist yet, rename legacy one if available and notify.
+  if [[ ! -s "$HISTFILE" ]]; then
+    <<EON
+NOTICE: Default path of 'HISTFILE' has changed from '${OLD_HISTFILE/#$HOME/~}'
+        to '${HISTFILE/#$HOME/~}'.
+        Attempting to rename the existing 'HISTFILE' ...
+EON
+    command mv -v "$OLD_HISTFILE" "$HISTFILE"
+
+  # New 'HISTFILE' does exist and is older than legacy one, just warn.
+  elif [[ "$OLD_HISTFILE" -nt "$HISTFILE" ]]; then
+    <<EOW
+WARNING: Default path of 'HISTFILE' has changed from '${OLD_HISTFILE/#$HOME/~}'
+         to '${HISTFILE/#$HOME/~}'.
+         Either set 'HISTFILE' in '${${0:h}/#$HOME/~}'
+         or move previous history from '${OLD_HISTFILE/#$HOME/~}' to
+         '${HISTFILE/#$HOME/~}'.
+EOW
+  fi
+
+  unset OLD_HISTFILE
+fi

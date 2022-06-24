@@ -1,26 +1,24 @@
-Prompt
-======
+# Prompt
 
 Loads prompt [themes][1].
 
-Settings
---------
+## Settings
 
 ### Prompt Theme
 
-To select a prompt theme, add the following to *zpreztorc*, and replace **name**
-with the name of the theme you wish to load. Setting it to **random** will load
-a random theme.
+To select a prompt theme, add the following to _`${ZDOTDIR:-$HOME}/.zpreztorc`_,
+and replace `'<name>'` with the name of the theme you wish to load. Setting it
+to `'random'` will load a random theme every time.
 
 ```sh
-zstyle ':prezto:module:prompt' theme 'name'
+zstyle ':prezto:module:prompt' theme '<name>'
 ```
 
 ### Prompt Display Length
 
 To change working directory prompt display length from 'short', set the
-following to 'long' (without `~` expansion) or 'full' (with `~` expansion)
-in *zpreztorc*.
+following to 'long' (without `~` expansion) or 'full' (with `~` expansion) in
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
 ```sh
 zstyle ':prezto:module:prompt' pwd-length 'short'
@@ -35,22 +33,21 @@ this can be disabled with the following snippet.
 zstyle ':prezto:module:prompt' show-return-val 'no'
 ```
 
-Theming
--------
+## Theming
 
 A prompt theme is an autoloadable function file with a special name,
 `prompt_name_setup`, placed anywhere in `$fpath`, but for the purpose of this
-project, themes **should** be placed in the *modules/prompt/functions*
+project, themes **should** be placed in the _modules/prompt/functions_
 directory.
 
 ### Required Variables
 
 To ensure that your function works with the editor-info module you'll need to
-set the following variable:
+set the following variable in _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 
-```
-  # Tell prezto we can manage this prompt
-  zstyle ':prezto:module:prompt' managed 'yes'
+```sh
+# Tell prezto we can manage this prompt
+zstyle ':prezto:module:prompt' managed 'yes'
 ```
 
 This is to ensure compatibility with outside prompts, while allowing prezto
@@ -122,7 +119,7 @@ function prompt_name_preview {
 
 ### Hook Functions
 
-There are many Zsh [hook][2] functions, but mostly the *precmd* hook will be
+There are many Zsh [hook][2] functions, but mostly the _precmd_ hook will be
 used.
 
 #### `prompt_name_precmd`
@@ -134,7 +131,8 @@ When calling functions to get information to display in a prompt, do not assume
 that all the dependencies have been loaded. Always check for the availability of
 a function before you calling it.
 
-**Do not register hook functions. They will be registered by the `prompt` function.**
+**Do not register hook functions. They will be automatically registered by the
+`prompt` function.**
 
 The most basic example of this function can be seen below.
 
@@ -146,10 +144,9 @@ function prompt_name_precmd {
 }
 ```
 
-Troubleshooting
----------------
+## Troubleshooting
 
-### Fonts aren't displaying properly.
+### Fonts aren't displaying properly
 
 On most systems, themes which use special characters need to have a patched font
 installed and configured properly.
@@ -157,16 +154,14 @@ installed and configured properly.
 Powerline provides some information on [terminal support][4] and [how to install
 patched fonts][5] which should fix most font issues.
 
+## Authors
 
-Authors
--------
+_The authors of this module should be contacted via the [issue tracker][3]._
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+- [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
-
-[1]: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
-[2]: http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions
+[1]: https://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
+[2]: https://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions
 [3]: https://github.com/sorin-ionescu/prezto/issues
-[4]: http://powerline.readthedocs.io/en/master/usage.html#terminal-emulator-requirements
-[5]: http://powerline.readthedocs.io/en/latest/installation.html#fonts-installation
+[4]: https://powerline.readthedocs.io/en/master/usage.html#terminal-emulator-requirements
+[5]: https://powerline.readthedocs.io/en/latest/installation.html#fonts-installation
