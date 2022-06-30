@@ -181,7 +181,6 @@ unset _download_helper{,s}
 
 # Resource Usage
 alias df='df -kh'
-alias du='du -kh'
 
 if is-darwin || is-bsd; then
   alias topc='top -o cpu'

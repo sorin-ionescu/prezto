@@ -18,6 +18,7 @@ setopt SHARE_HISTORY # share command history data between sessions
 
 alias h="cd ~"
 alias p="cd ~/projects"
+alias j="fasd_cd -d"
 alias g="git"
 alias c="clear"
 alias gl="git log --oneline --graph --decorate --all"
