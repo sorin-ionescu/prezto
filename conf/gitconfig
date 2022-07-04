@@ -68,3 +68,5 @@
 	insteadOf = git://github.com/
 [credentaial]
 	helper = manager-core
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret

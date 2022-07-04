@@ -158,7 +158,8 @@
 
 (map!
  "C-S-h" #'evil-window-split
- "C-S-v" #'evil-window-vsplit
+ "C-S-v" #'csm-paste-from-clipboard
+ "C-S-s" #'evil-window-vsplit
  "C-S-w" #'evil-window-delete
  "C-S-n" #'evil-window-left
  "C-S-e" #'evil-window-down

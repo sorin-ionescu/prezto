@@ -1,0 +1,16 @@
+#!/bin/bash
+
+file=/tmp/last_active_window
+if [[ -s $file ]] ; then
+    wid=`cat $file`
+    xdotool windowmap $wid
+    xdotool windowsize 1719 1384
+    xdotool windowmove 88080391 1920 0
+    xdotool windowactivate $wid
+    cat /dev/null > $file
+else
+    wid=`xdotool search --name "/usr/bin/zsh"`
+    xdotool windowunmap $wid
+    echo $wid > $file
+fi
+
