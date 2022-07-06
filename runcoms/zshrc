@@ -12,27 +12,33 @@ fi
 
 # Customize to your needs...
 if command -v direnv > /dev/null 2>&1; then
-    eval "$(direnv hook zsh)"
+  eval "$(direnv hook zsh)"
 fi
 
 if command -v nodenv > /dev/null 2>&1; then
-    eval "$(nodenv init -)"
+  eval "$(nodenv init -)"
 fi
 
 if command -v rbenv > /dev/null 2>&1; then
-    eval "$(rbenv init -)"
+  eval "$(rbenv init -)"
 fi
 
 if command -v pyenv > /dev/null 2>&1; then
-    eval "$(pyenv init --path)"
+  eval "$(pyenv init --path)"
+fi
+
+if command -v aws > /dev/null 2>&1; then
+  complete -C '/usr/local/bin/aws_completer' aws
 fi
 
 export PATH=$PATH:~/bin
 
-GOPATH=$(go env GOPATH)
-export PATH=$GOPATH/bin:$PATH
-export GOPATH=$GOPATH
-export GO111MODULE="on"
+if command -v go > /dev/null 2>&1; then
+  GOPATH=$(go env GOPATH)
+  export PATH=$GOPATH/bin:$PATH
+  export GOPATH=$GOPATH
+  export GO111MODULE="on"
+fi
 
 # ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
 setopt hist_ignore_all_dups
@@ -90,6 +96,8 @@ function penv {
 if ! ssh-add -l > /dev/null 2>&1; then
   ssh-add --apple-use-keychain
 fi
+
+autoload bashcompinit && bashcompinit
 
 # load local settings
 LOCAL_FILE="${HOME}/.zshrc.local"
