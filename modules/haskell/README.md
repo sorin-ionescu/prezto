@@ -1,10 +1,8 @@
-Haskell
-=======
+# Haskell
 
 Enables local Haskell package installation.
 
-Per-user Package Installation
------------------------------
+## Per-user Package Installation
 
 [Cabal][1], the Haskell package manager, can install packages into per user
 directories.
@@ -17,12 +15,11 @@ documentation.
 
 Install packages into per user directories with `cabal install --user`.
 
-Authors
--------
+## Authors
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+_The authors of this module should be contacted via the [issue tracker][2]._
 
-  - [Sebastian Wiesner](https://github.com/lunaryorn)
+- [Sebastian Wiesner](https://github.com/lunaryorn)
 
-[1]: http://www.haskell.org/cabal/
+[1]: https://www.haskell.org/cabal/
 [2]: https://github.com/sorin-ionescu/prezto/issues

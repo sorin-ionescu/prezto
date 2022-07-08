@@ -20,14 +20,19 @@ pmodload 'helper'
 _rsync_cmd='rsync --verbose --progress --human-readable --compress --archive \
   --hard-links --one-file-system'
 
-if grep -q 'xattrs' <(rsync --help 2>&1); then
-  _rsync_cmd="${_rsync_cmd} --acls --xattrs"
-fi
+autoload -Uz is-at-least
+if is-at-least 3.1 ${"$(rsync --version 2>&1)"[(w)3]}; then
 
-# macOS and HFS+ Enhancements
-# https://bombich.com/kb/ccc5/credits
-if is-darwin && grep -q 'file-flags' <(rsync --help 2>&1); then
-  _rsync_cmd="${_rsync_cmd} --crtimes --fileflags --protect-decmpfs --force-change"
+  # ACL and extended attributes support
+  if grep -q 'xattrs' <(rsync --help 2>&1); then
+    _rsync_cmd="${_rsync_cmd} --acls --xattrs"
+  fi
+
+  # macOS Enhancements
+  # https://bombich.com/kb/ccc5/credits
+  if is-darwin && grep -q 'file-flags' <(rsync --help 2>&1); then
+    _rsync_cmd="${_rsync_cmd} --crtimes --fileflags --force-change"
+  fi
 fi
 
 alias rsync-copy="${_rsync_cmd}"

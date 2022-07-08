@@ -12,7 +12,7 @@ local success
 local file_name
 local file_path
 local extract_dir
-local _gzip_bin _bzip2_bin _xz_bin
+local _gzip_bin _bzip2_bin _xz_bin _zstd_bin
 
 if (( $# == 0 )); then
   cat >&2 <<EOF
@@ -34,25 +34,27 @@ fi
 # here, we check for dropin/multi-threaded replacements
 # this should eventually be moved to modules/archive/init.zsh
 # as a global alias
-if (( $+commands[pigz] )); then
-  _gzip_bin='pigz'
+if (( $+commands[unpigz] )); then
+  _gzip_bin='unpigz'
 else
-  _gzip_bin='gzip'
+  _gzip_bin='gunzip'
 fi
 
 if (( $+commands[pixz] )); then
-  _xz_bin='pixz'
+  _xz_bin='pixz -d'
 else
   _xz_bin='xz'
 fi
 
-if (( $+commands[lbzip2] )); then
-  _bzip2_bin='lbzip2'
-elif (( $+commands[pbzip2] )); then
-  _bzip2_bin='pbzip2'
+if (( $+commands[lbunzip2] )); then
+  _bzip2_bin='lbunzip2'
+elif (( $+commands[pbunzip2] )); then
+  _bzip2_bin='pbunzip2'
 else
-  _bzip2_bin='bzip2'
+  _bzip2_bin='bunzip2'
 fi
+
+_zstd_bin='zstd'
 
 while (( $# > 0 )); do
   if [[ ! -s "$1" ]]; then
@@ -72,6 +74,7 @@ while (( $# > 0 )); do
     (*.tar.zma|*.tlz) tar --lzma --help &> /dev/null \
       && tar --lzma -xvf "$1" \
       || lzcat "$1" | tar -xvf - ;;
+    (*.tar.zst|*.tzst) tar -xvf "$1" --use-compress-program="${_zstd_bin}" ;;
     (*.tar) tar -xvf "$1" ;;
     (*.gz) gunzip "$1" ;;
     (*.bz2) bunzip2 "$1" ;;
