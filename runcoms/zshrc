@@ -45,7 +45,6 @@ export PATH=$PATH:~/bin
 
 if command -v go > /dev/null 2>&1; then
   GOPATH=$(go env GOPATH)
-  export PATH=$GOPATH/bin:$PATH
   export GOPATH=$GOPATH
   export GO111MODULE="on"
 fi
