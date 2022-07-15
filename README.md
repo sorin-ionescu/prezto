@@ -31,7 +31,7 @@ version is 4.3.17.
      for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
      done
-     
+
      cd .zprezto
      ./link.sh
      ```
@@ -41,7 +41,7 @@ version is 4.3.17.
      the bottom of your `.zshrc` to load prezto but keep your config intact. For
      more complicated setups, it is recommended that you back up your original
      configs and replace them with the provided prezto runcoms.
-  
+
   4. Set Zsh as your default shell:
 
      ```console
@@ -49,6 +49,10 @@ version is 4.3.17.
      ```
 
   5. Open a new Zsh terminal window or tab.
+
+# Custom prompt
+
+Defined in `./modules/prompt/functions/prompt_cmaher_setup`
 
 ### Troubleshooting
 
