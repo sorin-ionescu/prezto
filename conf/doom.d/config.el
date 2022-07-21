@@ -141,8 +141,9 @@
        "w o" #'evil-window-up
        "w i" #'evil-window-right
 
-       "o l" #'csm-love-repl
-       "o t" #'csm-love-test
+       "l r" #'csm-love-repl
+       "l t" #'csm-love-test
+       "l s" #'csm-love-sync-all
 
        "e y" #'csm-copy-to-clipboard
        "e p" #'csm-paste-from-clipboard
@@ -151,6 +152,11 @@
        "e S" #'sp-backward-slurp-sexp
        "e b" #'sp-forward-barf-sexp
        "e B" #'sp-backward-barf-sexp
+
+       "b e" #'csm-switch-to-shell
+
+       ;; not sure why this was lost
+       "m e b" #'eval-buffer
 
        "b m" #'csm-show-message-log
        "=" 'csm-indent-buffer)
@@ -164,6 +170,12 @@
  "C-S-e" #'evil-window-down
  "C-S-o" #'evil-window-up
  "C-S-i" #'evil-window-right
+
+ "C-l C-e" #'csm-send-defun-to-shell
+ "C-l C-r" #'csm-send-region-to-shell
+ "C-l C-b" #'csm-send-buffer-to-shell
+ "C-l C-d" #'eval-defun
+ "C-l C-s" #'csm-fnl-hotswap-file
 
  "C-M-n" #'pop-tag-mark
  "C-/" #'comment-line)
@@ -202,6 +214,19 @@
    :hook
     rainbow-delimiters-mode)
 
+;;* Custom Function
+
+(defmacro ->> (&rest body)
+  (let ((result (pop body)))
+    (dolist (form body result)
+      (setq result (append form (list result))))))
+
+(defmacro -> (&rest body)
+  (let ((result (pop body)))
+    (dolist (form body result)
+      (setq result (append (list (car form) result)
+                           (cdr form))))))
+
 (defun csm-wsl-copy (start end)
   (interactive "r")
   (shell-command-on-region start end "clip")
@@ -235,12 +260,13 @@
     (untabify (point-min) (point-max))))
 
 (defun csm-show-message-log ()
+  "Show the message log bufffer. Print to log with (message ...)"
   (interactive)
   (switch-to-buffer " *Message-Log*"))
 
 ;; https://emacs.stackexchange.com/questions/48954/the-elisp-function-to-run-the-shell-command-in-specific-file-path/48968#48968?newreg=b86e9e5763734e37a1bee5a230d71551
 ;; Use "term /bin/zsh", *terminal* buffer and terminal process if you want to use zsh. It needs some work to be smooth though
-(defun csm-sh-send-command (command)
+(defun csm-sh-send-command (command &optional switch-buffer)
   "Send COMMAND to current shell process.
     Creates new shell process if none exists.
     See URL `https://stackoverflow.com/a/7053298/5065796'"
@@ -258,12 +284,51 @@
       (insert command-and-go)
       (move-marker (process-mark proc) (point)))
     (process-send-string proc command-and-go)
-    (switch-to-buffer "*shell*")))
+    (when switch-buffer
+      (switch-to-buffer "*shell*"))))
 
 (defun csm-love-repl ()
   (interactive)
-  (csm-sh-send-command (concat "cd " (projectile-project-root) " && make run")))
+  (csm-sh-send-command (concat "cd " (projectile-project-root) " && make run") t))
 
 (defun csm-love-test ()
   (interactive)
-  (csm-sh-send-command (concat "cd " (projectile-project-root) " && make test")))
+  (csm-sh-send-command (concat "cd " (projectile-project-root) " && make test") t))
+
+(defun csm-love-sync-all ()
+  (interactive)
+  (csm-sh-send-command "(love.game.sync-all)"))
+
+;;** Send to shell
+(defun csm-send-region-to-shell ()
+  (interactive)
+  (let ((sexp (buffer-substring-no-properties (region-beginning) (region-end))))
+    (csm-sh-send-command sexp)))
+
+(defun csm-send-defun-to-shell ()
+  (interactive)
+  (save-excursion
+    (mark-defun)
+    (csm-send-region-to-shell)))
+
+(defun csm-send-buffer-to-shell ()
+  (interactive)
+  (save-excursion
+    (mark-page)
+    (csm-send-region-to-shell)))
+
+(defun csm-fnl-hotswap-file ()
+  "Hotswaps the current buffer. Relies on a directory structure of src/?.fnl;src/?/init.fnl"
+  (interactive)
+  (save-buffer)
+  (let* ((modname (buffer-file-name))
+         (from-src-pos (string-match ".*/src/\\(.*\\).fnl" modname))
+         (modname (match-string 1 modname))
+         (modname (replace-regexp-in-string "\\/" "." modname))
+         (modname (replace-regexp-in-string ".init$" "" modname)))
+    (csm-sh-send-command (concat "(dbg.hot :" modname ")"))))
+
+
+(defun csm-switch-to-shell ()
+  (interactive)
+  (switch-to-buffer "*shell*"))
