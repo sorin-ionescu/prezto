@@ -30,3 +30,6 @@ if [ -e "$HOME/.zshenv.local" ]; then
     source "$HOME/.zshenv.local"
 fi
 
+if [ -d "$HOME/.cargo" ]; then
+  . "$HOME/.cargo/env"
+fi

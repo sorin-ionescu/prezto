@@ -5,8 +5,7 @@
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Christian Maher"
+(setq user-full-name "Christian Maher" ;; clients, file templates and snippets. It is optional.
       user-mail-address "maher.cs@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
@@ -81,85 +80,85 @@
   (evil-select-search-module 'evil-search-module 'evil-search)
 
   (map! :after evil
-        :map evil-normal-state-map
-        "n" #'evil-backward-char
-        "e" #'evil-next-line
-        "E" #'evil-join
-        "o" #'evil-previous-line
-        "i" #'evil-forward-char
-        "k" #'evil-forward-word-end
-        "K" #'evil-forward-WORD-end
-        "h" #'evil-insert
-        "H" #'evil-insert-line
-        "j" #'evil-ex-search-next
-        "J" #'evil-ex-search-previous
-        "l" #'evil-open-below
-        "L" #'evil-open-above
+         :map evil-normal-state-map
+          "n" #'evil-backward-char
+          "e" #'evil-next-line
+          "E" #'evil-join
+          "o" #'evil-previous-line
+          "i" #'evil-forward-char
+          "k" #'evil-forward-word-end
+          "K" #'evil-forward-WORD-end
+          "h" #'evil-insert
+          "H" #'evil-insert-line
+          "j" #'evil-ex-search-next
+          "J" #'evil-ex-search-previous
+          "l" #'evil-open-below
+          "L" #'evil-open-above
 
-        "g z ." #'evil-mc-make-cursor-here
-        "g z ;" #'evil-mc-pause-cursors
-        "g z :" #'evil-mc-resume-cursors
-        "g z e" #'evil-mc-make-cursor-move-next-line
-        "g z o" #'evil-mc-make-cursor-move-prev-line)
+          "g z ." #'evil-mc-make-cursor-here
+          "g z ;" #'evil-mc-pause-cursors
+          "g z :" #'evil-mc-resume-cursors
+          "g z e" #'evil-mc-make-cursor-move-next-line
+          "g z o" #'evil-mc-make-cursor-move-prev-line)
   (map! :after evil
-        :map evil-motion-state-map
-        "n" #'evil-backward-char
-        "e" #'evil-next-line
-        "o" #'evil-previous-line
-        "i" #'evil-forward-char
-        "k" #'evil-forward-word-end
-        "K" #'evil-forward-WORD-end
-        "j" #'evil-ex-search-next
-        "J" #'evil-ex-search-previous
-        "l" #'evil-open-below
-        "L" #'evil-open-above)
+         :map evil-motion-state-map
+          "n" #'evil-backward-char
+          "e" #'evil-next-line
+          "o" #'evil-previous-line
+          "i" #'evil-forward-char
+          "k" #'evil-forward-word-end
+          "K" #'evil-forward-WORD-end
+          "j" #'evil-ex-search-next
+          "J" #'evil-ex-search-previous
+          "l" #'evil-open-below
+          "L" #'evil-open-above)
   (map! :after evil
-        :map evil-visual-state-map
-        "n" #'evil-backward-char
-        "e" #'evil-next-line
-        "o" #'evil-previous-line
-        "i" #'evil-forward-char
-        "k" #'evil-forward-word-end
-        "K" #'evil-forward-WORD-end
-        "h w" #'evil-inner-word
-        "h W" #'evil-inner-WORD
-        "j" #'evil-ex-search-next
-        "J" #'evil-ex-search-previous
-        "l" #'evil-open-below
-        "L" #'evil-open-above
+         :map evil-visual-state-map
+          "n" #'evil-backward-char
+          "e" #'evil-next-line
+          "o" #'evil-previous-line
+          "i" #'evil-forward-char
+          "k" #'evil-forward-word-end
+          "K" #'evil-forward-WORD-end
+          "h w" #'evil-inner-word
+          "h W" #'evil-inner-WORD
+          "j" #'evil-ex-search-next
+          "J" #'evil-ex-search-previous
+          "l" #'evil-open-below
+          "L" #'evil-open-above
 
-        "." #'evil-repeat)
+          "." #'evil-repeat)
   (map! :after evil
-        :map evil-window-map
-        "n" #'evil-window-left
-        "e" #'evil-window-down
-        "o" #'evil-window-up
-        "i" #'evil-window-right))
+         :map evil-window-map
+          "n" #'evil-window-left
+          "e" #'evil-window-down
+          "o" #'evil-window-up
+          "i" #'evil-window-right))
 
 (map! :leader
-      "w n" #'evil-window-left
-      "w e" #'evil-window-down
-      "w o" #'evil-window-up
-      "w i" #'evil-window-right
+       "w n" #'evil-window-left
+       "w e" #'evil-window-down
+       "w o" #'evil-window-up
+       "w i" #'evil-window-right
 
-      "o l" #'csm-love-repl
-      "o t" #'csm-love-test
+       "o l" #'csm-love-repl
+       "o t" #'csm-love-test
 
-      "e y" #'csm-copy-to-clipboard
-      "e p" #'csm-paste-from-clipboard
-      "e c" #'comment-line
-      "e s" #'sp-forward-slurp-sexp
-      "e S" #'sp-backward-slurp-sexp
-      "e b" #'sp-forward-barf-sexp
-      "e B" #'sp-backward-barf-sexp
+       "e y" #'csm-copy-to-clipboard
+       "e p" #'csm-paste-from-clipboard
+       "e c" #'comment-line
+       "e s" #'sp-forward-slurp-sexp
+       "e S" #'sp-backward-slurp-sexp
+       "e b" #'sp-forward-barf-sexp
+       "e B" #'sp-backward-barf-sexp
 
-      "b m" #'csm-show-message-log
-      "=" 'csm-indent-buffer)
+       "b m" #'csm-show-message-log
+       "=" 'csm-indent-buffer)
 
 (map!
  "C-S-h" #'evil-window-split
- "C-S-v" #'csm-paste-from-clipboard
- "C-S-s" #'evil-window-vsplit
+ "C-S-p" #'csm-paste-from-clipboard
+ "C-S-v" #'evil-window-vsplit
  "C-S-w" #'evil-window-delete
  "C-S-n" #'evil-window-left
  "C-S-e" #'evil-window-down
@@ -194,6 +193,15 @@
   ;; TODO make these only activate in fennel-mode
   (setq lispy-colon-p nil))
 
+(use-package! fennel-mode
+  :config
+   ;; modify syntax table to make * (evil-search-word-forward) delineate at table access
+   (modify-syntax-entry ?: ". 14" fennel-mode-syntax-table)
+   (modify-syntax-entry ?. ". 14" fennel-mode-syntax-table)
+
+   :hook
+    rainbow-delimiters-mode)
+
 (defun csm-wsl-copy (start end)
   (interactive "r")
   (shell-command-on-region start end "clip")
@@ -218,16 +226,6 @@
   (kill-ring-save (region-beginning) (region-end))
   (setq select-enable-clipboard nil))
 
-(defun csm-love-repl ()
-  (interactive)
-  (setq-local inferior-lisp-program (concat "love " (projectile-project-root) " --fennel --debug --console"))
-  (run-lisp inferior-lisp-program))
-
-(defun csm-love-test ()
-  (interactive)
-  (setq-local inferior-lisp-program (concat "love " (projectile-project-root) " --fennel --test --debug --console"))
-  (run-lisp inferior-lisp-program))
-
 (defun csm-indent-buffer ()
   "Indents an entire buffer using the default intenting scheme."
   (interactive)
@@ -240,14 +238,32 @@
   (interactive)
   (switch-to-buffer " *Message-Log*"))
 
-(use-package! fennel-mode
-  :config
-  ;; modify syntax table to make * (evil-search-word-forward) delineate at table access
-  (modify-syntax-entry ?: ". 14" fennel-mode-syntax-table)
-  (modify-syntax-entry ?. ". 14" fennel-mode-syntax-table)
+;; https://emacs.stackexchange.com/questions/48954/the-elisp-function-to-run-the-shell-command-in-specific-file-path/48968#48968?newreg=b86e9e5763734e37a1bee5a230d71551
+;; Use "term /bin/zsh", *terminal* buffer and terminal process if you want to use zsh. It needs some work to be smooth though
+(defun csm-sh-send-command (command)
+  "Send COMMAND to current shell process.
+    Creates new shell process if none exists.
+    See URL `https://stackoverflow.com/a/7053298/5065796'"
+  (let ((proc (get-process "shell"))
+        pbuf)
+    (unless proc
+      (let ((currbuff (current-buffer)))
+        (shell)
+        (switch-to-buffer currbuff)
+        (setq proc (get-process "shell"))))
+    (setq pbuff (process-buffer proc))
+    (setq command-and-go (concat command "\n"))
+    (with-current-buffer pbuff
+      (goto-char (process-mark proc))
+      (insert command-and-go)
+      (move-marker (process-mark proc) (point)))
+    (process-send-string proc command-and-go)
+    (switch-to-buffer "*shell*")))
 
-  :hook
-  rainbow-delimiters-mode)
+(defun csm-love-repl ()
+  (interactive)
+  (csm-sh-send-command (concat "cd " (projectile-project-root) " && make run")))
 
-;;(add-hook 'fennel-mode-hook 'parinfer-rust-mode)
-;;(add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+(defun csm-love-test ()
+  (interactive)
+  (csm-sh-send-command (concat "cd " (projectile-project-root) " && make test")))

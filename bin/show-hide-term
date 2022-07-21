@@ -1,6 +1,11 @@
 #!/bin/bash
 
 file=/tmp/last_active_window
+
+# zsh for terminal
+# LOVE_DEBUG for love game
+win_name=$1
+
 if [[ -s $file ]] ; then
     wid=`cat $file`
     xdotool windowmap $wid
@@ -9,7 +14,7 @@ if [[ -s $file ]] ; then
     xdotool windowactivate $wid
     cat /dev/null > $file
 else
-    wid=`xdotool search --name "/usr/bin/zsh"`
+    wid=`xdotool search --name "$win_name"`
     xdotool windowunmap $wid
     echo $wid > $file
 fi
