@@ -2,9 +2,9 @@
 
 file=/tmp/last_active_window
 
-# zsh for terminal
+# zsh-term for terminal
 # LOVE_DEBUG for love game
-win_name=$1
+win_name="$1"
 
 if [[ -s $file ]] ; then
     wid=`cat $file`

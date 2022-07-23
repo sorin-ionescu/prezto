@@ -74,6 +74,12 @@
 ;; they are implemented.
 
 ;; https://github.com/emacs-evil/evil/blob/master/evil-maps.el
+
+
+;; Allow C-l as a prefix
+(define-prefix-command 'prefix-ctrl-l)
+(global-set-key (kbd "C-l") 'prefix-ctrl-l)
+
 (after! evil
   ;; enable evil movement in the ex commandline
   (setq evil-want-minibuffer t)
@@ -152,6 +158,8 @@
        "e S" #'sp-backward-slurp-sexp
        "e b" #'sp-forward-barf-sexp
        "e B" #'sp-backward-barf-sexp
+       ;; used to edit after exporting project search
+       "e e" #'wgrep-change-to-wgrep-mode
 
        "b e" #'csm-switch-to-shell
 
@@ -176,6 +184,7 @@
  "C-l C-b" #'csm-send-buffer-to-shell
  "C-l C-d" #'eval-defun
  "C-l C-s" #'csm-fnl-hotswap-file
+ "C-l C-m" #'mark-defun
 
  "C-M-n" #'pop-tag-mark
  "C-/" #'comment-line)
@@ -289,10 +298,12 @@
 
 (defun csm-love-repl ()
   (interactive)
+  (save-some-buffers t)
   (csm-sh-send-command (concat "cd " (projectile-project-root) " && make run") t))
 
 (defun csm-love-test ()
   (interactive)
+  (save-some-buffers t)
   (csm-sh-send-command (concat "cd " (projectile-project-root) " && make test") t))
 
 (defun csm-love-sync-all ()
@@ -309,13 +320,15 @@
   (interactive)
   (save-excursion
     (mark-defun)
-    (csm-send-region-to-shell)))
+    (csm-send-region-to-shell)
+    (pop-mark)))
 
 (defun csm-send-buffer-to-shell ()
   (interactive)
   (save-excursion
     (mark-page)
-    (csm-send-region-to-shell)))
+    (csm-send-region-to-shell)
+    (pop-mark)))
 
 (defun csm-fnl-hotswap-file ()
   "Hotswaps the current buffer. Relies on a directory structure of src/?.fnl;src/?/init.fnl"

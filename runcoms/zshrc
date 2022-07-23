@@ -425,9 +425,8 @@ alias sshnh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias scpnh="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias niluuid="echo 00000000-0000-0000-0000-000000000000"
 
-function kill-emacs() {
-  pid=`ps aux | grep "emacs --daemon" | grep -v grep | awk '{print $2}'`
-  if [ -n "$pid" ]; then
-    kill -9 $pid
-  fi
-}
+alias kill-emacs="emacsclient -e '(kill-emacs)"
+
+
+# Set a fixed title for terminal so that scripts can find it by name
+echo $'\033]30;'zsh-term$'\007'
