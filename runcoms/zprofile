@@ -67,3 +67,5 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"

@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# XDG_CONFIG_HOME
+export XDG_CONFIG_HOME=~/.config
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -21,10 +24,8 @@ autoload -U compinit  # 保管機能を有効化 -U...ビルトイン関数読�
 compinit # 実行する
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# bash_completion ... nvm の補完が効くようにする
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # typescript
 export PATH=$PATH:~/node_modules/typescript/bin
@@ -33,25 +34,19 @@ export PATH=$PATH:~/node_modules/typescript/bin
 export PATH="$HOME/.deno/bin:$PATH"
 
 # gvm
-export GVM_ROOT=/Users/tsuzukikuribayashi/.gvm
-. $GVM_ROOT/scripts/gvm-default
+# export GVM_ROOT=~/.gvm
+# . $GVM_ROOT/scripts/gvm-default
+# [[ -s "$GVM_ROOT/scripts/gvm" ]] && source "$GVM_ROOT/scripts/gvm"
 # golang
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-
-# homebrew
-# export PATH="/usr/local/bin:$PATH"
-# aleady added in .zprofile
 
 # init prezto
 source "${ZDOTDIR:-$HOME}/dotfiles/.zprezto/init.zsh"
 
 # mysql
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-
-# XDG_CONFIG_HOME
-export XDG_CONFIG_HOME=~/.config
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -74,3 +69,8 @@ zle -N peco-src
 
 # 重複パスを登録しない
 typeset -U path PATH
+
+export PATH=$HOME/miidas/miidas_docker/bin:$PATH
+
+[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
