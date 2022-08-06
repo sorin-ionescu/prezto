@@ -20,58 +20,12 @@ version is **4.3.11**.
 02. Clone the repository:
 
     ```console
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    git clone --recursive https://github.com/HJGreen/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
     ```
 
-    <details>
-      <summary><em>Optional: Installing in <code>$XDG_CONFIG_HOME</code></em></summary>
+03. Run the install script `./install.sh`
 
-      Optionally, if you already have `$XDG_CONFIG_HOME` configured (usually as
-      _`$HOME/.config`_ by default) and intend to install Prezto under
-      _`$XDG_CONFIG_HOME/zsh`_ instead, you can clone the repository there and
-      configure `$ZDOTDIR` separately if not already configured.
-
-      - Clone the repository:
-
-        ```console
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
-        ```
-
-      - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
-
-        ```sh
-        export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
-        export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
-        source "$ZDOTDIR/.zshenv"
-        ```
-
-    </details>
-
-03. Create a new Zsh configuration by copying/linking the Zsh configuration
-    files provided:
-
-    ```console
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-    ```
-
-    **Note:** If you already have any of the given configuration files, `ln` in
-    the above operation will cause an error. In simple cases, you can load
-    Prezto by adding the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
-    the bottom of your _`${ZDOTDIR:-$HOME}/.zshrc`_ and keep the rest of your
-    Zsh configuration intact. For more complicated setups, we recommend that you
-    back up your original configs and replace them with the provided Prezto
-    [_`runcoms`_][10].
-
-04. Set Zsh as your default shell:
-
-    ```console
-    chsh -s /bin/zsh
-    ```
-
-05. Open a new Zsh terminal window or tab.
+04. Open a new Zsh terminal window or tab.
 
 ### [Fig](https://fig.io)
 
