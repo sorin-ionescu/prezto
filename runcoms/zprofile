@@ -18,10 +18,10 @@ fi
 #
 
 if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nano'
+  export EDITOR='vim'
 fi
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
+  export VISUAL='vim'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
@@ -50,6 +50,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/{,s}bin(N)
+  $HOME/.local/{,s}bin(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
   $path
@@ -71,3 +72,18 @@ fi
 if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+#
+# Temporary Files
+#
+
+# if [[ ! -d "$TMPDIR" ]]; then
+#   export TMPDIR="/tmp/$LOGNAME"
+#   mkdir -p -m 700 "$TMPDIR"
+# fi
+
+# TMPPREFIX="${TMPDIR%/}/zsh"
+# Ubuntu make installation of Go Lang
+# PATH=/home/sam/.local/share/umake/go/go-lang/bin:$PATH
+# export GOROOT=/home/sam/.local/share/umake/go/go-lang
+

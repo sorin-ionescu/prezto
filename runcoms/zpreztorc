@@ -8,6 +8,8 @@
 #
 # General
 #
+source ~/.samrc
+# source ~/.discordrc
 
 # Set case-sensitivity for completion, history lookup, etc.
 # zstyle ':prezto:*:*' case-sensitive 'yes'
@@ -31,13 +33,16 @@ zstyle ':prezto:*:*' color 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
+  'directory' \
   'terminal' \
   'editor' \
+  'git' \
   'history' \
   'directory' \
   'spectrum' \
   'utility' \
   'completion' \
+  'syntax-highlighting' \
   'history-substring-search' \
   'prompt'
 
@@ -61,10 +66,10 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'emacs'
+# zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 # Allow the zsh prompt context to be shown.
 #zstyle ':prezto:module:editor' ps-context 'yes'
@@ -130,7 +135,8 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+#zstyle ':prezto:module:prompt' theme 'sorin'
+zstyle :prezto:module:prompt theme powerlevel10k
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
