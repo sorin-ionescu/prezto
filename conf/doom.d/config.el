@@ -84,6 +84,7 @@
   ;; enable evil movement in the ex commandline
   (setq evil-want-minibuffer t)
   (evil-select-search-module 'evil-search-module 'evil-search)
+  (define-key evil-motion-state-map "*" 'csm-evil-search-word-forward)
 
   (map! :after evil
          :map evil-normal-state-map
@@ -215,13 +216,17 @@
   (setq lispy-colon-p nil))
 
 (use-package! fennel-mode
-  :config
-   ;; modify syntax table to make * (evil-search-word-forward) delineate at table access
-   (modify-syntax-entry ?: ". 14" fennel-mode-syntax-table)
-   (modify-syntax-entry ?. ". 14" fennel-mode-syntax-table)
-
    :hook
     rainbow-delimiters-mode)
+
+(defun csm-evil-search-word-forward ()
+   (interactive)
+   (modify-syntax-entry ?: ". 14" fennel-mode-syntax-table)
+   (modify-syntax-entry ?. ". 14" fennel-mode-syntax-table)
+   (evil-search-word-forward)
+   (modify-syntax-entry ?: "w" fennel-mode-syntax-table)
+   (modify-syntax-entry ?. "w" fennel-mode-syntax-table))
+
 
 ;;* Custom Function
 
@@ -308,6 +313,7 @@
 
 (defun csm-love-sync-all ()
   (interactive)
+  (save-some-buffers t)
   (csm-sh-send-command "(love.game.sync-all)"))
 
 ;;** Send to shell
