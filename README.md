@@ -20,7 +20,7 @@ version is **4.3.11**.
 02. Clone the repository:
 
     ```console
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    git clone --recursive https://github.com/louis-clotman/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
     ```
 
     <details>
@@ -34,7 +34,7 @@ version is **4.3.11**.
       - Clone the repository:
 
         ```console
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+        git clone --recursive https://github.com/louis-clotman/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
         ```
 
       - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
