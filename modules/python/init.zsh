@@ -8,6 +8,12 @@
 #   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
+#
+# Options
+#
+
+setopt EXTENDED_GLOB
+
 # Load dependencies.
 pmodload 'helper'
 
