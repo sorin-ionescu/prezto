@@ -11,3 +11,27 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# Go
+export GOPATH=$HOME/code/go
+export PATH=$GOPATH/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+# Python
+alias python=python3
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
+# AWS
+alias ars='~/.local/bin/aws-role-switcher'
+
+# Android
+ANDROID_HOME="/home/$USER/android"
+export ANDROID_HOME
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
