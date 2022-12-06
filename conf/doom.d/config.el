@@ -84,7 +84,6 @@
   ;; enable evil movement in the ex commandline
   (setq evil-want-minibuffer t)
   (evil-select-search-module 'evil-search-module 'evil-search)
-  (define-key evil-motion-state-map "*" 'csm-evil-search-word-forward)
 
   (map! :after evil
          :map evil-normal-state-map
@@ -226,7 +225,6 @@
    (evil-search-word-forward)
    (modify-syntax-entry ?: "w" fennel-mode-syntax-table)
    (modify-syntax-entry ?. "w" fennel-mode-syntax-table))
-
 
 ;;* Custom Function
 
