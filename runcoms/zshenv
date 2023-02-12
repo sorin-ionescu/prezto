@@ -9,3 +9,13 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# Set environment variables for virtualenvwrapper
+export PROJECT_HOME="$HOME/src"
+export VIRTUALENVWRAPPER_PYTHON=$(whence python3)
+export VIRTUALENVWRAPPER_VIRTUALENV=$(whence virtualenv)
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
+export WORKON_HOME=$HOME/.virtualenvs
+
+# Disable Eternal Terminal telemtry
+export ET_NO_TELEMETRY=true
