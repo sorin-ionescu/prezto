@@ -10,6 +10,14 @@ if (( ! $+commands[ssh-agent] )); then
   return 1
 fi
 
+# Use the right flag on macOS
+if is-darwin; then
+  _apple_keychain="--apple-use-keychain"
+else
+  _apple_keychain=""
+fi
+
+
 # Set the path to the SSH directory.
 _ssh_dir="$HOME/.ssh"
 
@@ -52,9 +60,9 @@ if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   # program specified by SSH_ASKPASS and open an X11 window to read the
   # passphrase.
   if [[ -n "$DISPLAY" && -x "$SSH_ASKPASS" ]]; then
-    ssh-add ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} < /dev/null 2> /dev/null
+    ssh-add ${_apple_keychain} ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} < /dev/null 2> /dev/null
   else
-    ssh-add ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} 2> /dev/null
+    ssh-add ${_apple_keychain} ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} 2> /dev/null
   fi
 fi
 
