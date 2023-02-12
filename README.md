@@ -1,5 +1,7 @@
 # Prezto — Instantly Awesome Zsh
 
+This is a personal fork.  You probably shouldn't use it.
+
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
@@ -34,7 +36,7 @@ version is **4.3.11**.
       - Clone the repository:
 
         ```console
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+        git clone --recursive https://github.com/jeffcox/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
         ```
 
       - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
