@@ -17,7 +17,7 @@ fi
 # Auto Start
 #
 
-if ([[ "$TERM_PROGRAM" = 'iTerm.app' ]] && \
+if (([[ "$TERM_PROGRAM" = 'iTerm.app' ]] || [[ "$LC_TERMINAL" = 'iTerm2' ]]) && \
   zstyle -t ':prezto:module:tmux:iterm' integrate \
 ); then
   _tmux_iterm_integration='-CC'
@@ -25,7 +25,8 @@ fi
 
 if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" && "$TERM_PROGRAM" != "vscode" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
-  ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
+  ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) ||
+  ( [[ -n $ET_VERSION ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) \
 ); then
   tmux start-server
 
