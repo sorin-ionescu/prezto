@@ -17,6 +17,11 @@ else
   _apple_keychain=""
 fi
 
+# Set up completion for et
+if (( ${+commands[et]} )); then
+  compdef et=ssh
+fi
+
 
 # Set the path to the SSH directory.
 _ssh_dir="$HOME/.ssh"

@@ -45,7 +45,7 @@ alias kbr='kubectl run'
 alias wkb='watch -n 1 kubectl'
 
 kbn () {
-  kubectl config set-context $(kubectl config current-context) --namespace=$1
+  kubectl config set-context --current --namespace=$1
 }
 
 # name formatting
