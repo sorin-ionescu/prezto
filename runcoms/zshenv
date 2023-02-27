@@ -19,3 +19,9 @@ export WORKON_HOME=$HOME/.virtualenvs
 
 # Disable Eternal Terminal telemtry
 export ET_NO_TELEMETRY=true
+
+# awx things that change more often
+export TOWER_FORMAT=human
+export TOWER_HOST=https://awx
+export TOWER_VERIFY_SSL=true
+export TOWER_USERNAME=$USER

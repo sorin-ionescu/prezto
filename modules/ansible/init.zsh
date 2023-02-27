@@ -16,8 +16,4 @@ if (( ${+commands[awx]} )); then
 	if is-darwin; then
 			export CONTROLLER_TOKEN=$(security find-generic-password -a $USER -s awx_token -w login.keychain)
 	fi
-	export TOWER_FORMAT=human
-	export TOWER_HOST=https://awx
-	export TOWER_VERIFY_SSL=true
-	export TOWER_USERNAME=$USER
 fi
