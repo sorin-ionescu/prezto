@@ -3,6 +3,8 @@ if [[ $(whence dark-mode) ]]; then
   if [[ $(dark-mode status) == 'on' ]]; then
     darken
     return 0
+  else
+    brighten
   fi
 elif is-darwin; then
   if swift ${ZPREZTODIR}/modules/osx/dark_mode.swift; then
