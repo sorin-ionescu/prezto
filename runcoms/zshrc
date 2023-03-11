@@ -58,15 +58,9 @@ if [[ -f $HOME/.docker/init-zsh.sh ]]; then
 fi
 
 
-if [[ $(whence dark-mode) ]]; then
-  if [[ $(dark-mode status) == 'on' ]]; then
-    darken
-  fi
-elif is-darwin; then
-  if swift ${ZPREZTODIR}/modules/osx/dark_mode.swift; then
-    darken
-  fi
-fi
+aziz
+
+#thank you, Aziz
 
 
 
