@@ -1,0 +1,3 @@
+
+prompt statusline -d
+export BAT_THEME='Solarized (dark)'
