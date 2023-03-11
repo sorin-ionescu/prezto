@@ -58,8 +58,8 @@ if [[ -f $HOME/.docker/init-zsh.sh ]]; then
 fi
 
 
-if [[ $(whence dark_mode_true) ]]; then
-  if dark_mode_true; then
+if [[ $(whence dark-mode) ]]; then
+  if [[ $(dark-mode status) == 'on' ]]; then
     darken
   fi
 elif is-darwin; then
