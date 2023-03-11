@@ -57,12 +57,9 @@ if [[ -f $HOME/.docker/init-zsh.sh ]]; then
   source $HOME/.docker/init-zsh.sh || true
 fi
 
-
-aziz
+aziz #light!
 
 #thank you, Aziz
-
-
 
 # Uncomment for profiling startup time (2/2)
 # zprof

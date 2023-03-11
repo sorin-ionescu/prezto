@@ -1,3 +1,4 @@
 
 prompt statusline -d
 export BAT_THEME='Solarized (dark)'
+export vim_bg=dark
