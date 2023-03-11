@@ -22,3 +22,7 @@ alias cdf='cd "$(pfd)"'
 
 # Pushes directory to the current Finder directory.
 alias pushdf='pushd "$(pfd)"'
+
+# Kill the DNS process to really flush cache
+# Maybe replaced by dscacheutil -flushcache ?
+alias flushdns='sudo killall -HUP mDNSResponder'
