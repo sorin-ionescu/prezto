@@ -19,7 +19,9 @@ source "$HOME/.cask/etc/cask_completion.zsh" 2> /dev/null
 # Aliases
 #
 
-alias cai='cask install'
-alias cau='cask update'
-alias caI='cask init'
-alias cae='cask exec'
+if ! zstyle -t ':prezto:module:emacs:alias' skip; then
+  alias cai='cask install'
+  alias cau='cask update'
+  alias caI='cask init'
+  alias cae='cask exec'
+fi

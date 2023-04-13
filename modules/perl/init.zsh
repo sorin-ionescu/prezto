@@ -61,37 +61,39 @@ fi
 # Aliases
 #
 
-# General
-alias pl='perl'
-alias pld='perldoc'
-alias ple='perl -wlne'
+if ! zstyle -t ':prezto:module:perl:alias' skip; then
+  # General
+  alias pl='perl'
+  alias pld='perldoc'
+  alias ple='perl -wlne'
 
-# Perlbrew
-if (( $+commands[perlbrew] )); then
-  alias plb='perlbrew'
-  alias plba='perlbrew available'
-  alias plbi='perlbrew install'
-  alias plbl='perlbrew list'
-  alias plbo='perlbrew off'
-  alias plbO='perlbrew switch-off'
-  alias plbs='perlbrew switch'
-  alias plbu='perlbrew use'
-  alias plbx='perlbrew uninstall'
+  # Perlbrew
+  if (( $+commands[perlbrew] )); then
+    alias plb='perlbrew'
+    alias plba='perlbrew available'
+    alias plbi='perlbrew install'
+    alias plbl='perlbrew list'
+    alias plbo='perlbrew off'
+    alias plbO='perlbrew switch-off'
+    alias plbs='perlbrew switch'
+    alias plbu='perlbrew use'
+    alias plbx='perlbrew uninstall'
 
-elif (( $+commands[plenv] )); then
-  alias plv='plenv'
-  alias plvc='plenv commands'
-  alias plvl='plenv local'
-  alias plvg='plenv global'
-  alias plvs='plenv shell'
-  alias plvi='plenv install'
-  alias plvu='plenv uninstall'
-  alias plvr='plenv rehash'
-  alias plvv='plenv version'
-  alias plvV='plenv versions'
-  alias plvw='plenv which'
-  alias plvW='plenv whence'
-  alias plvm='plenv list-modules'
-  alias plvM='plenv migrate-modules'
-  alias plvI='plenv install-cpanm'
+  elif (( $+commands[plenv] )); then
+    alias plv='plenv'
+    alias plvc='plenv commands'
+    alias plvl='plenv local'
+    alias plvg='plenv global'
+    alias plvs='plenv shell'
+    alias plvi='plenv install'
+    alias plvu='plenv uninstall'
+    alias plvr='plenv rehash'
+    alias plvv='plenv version'
+    alias plvV='plenv versions'
+    alias plvw='plenv which'
+    alias plvW='plenv whence'
+    alias plvm='plenv list-modules'
+    alias plvM='plenv migrate-modules'
+    alias plvI='plenv install-cpanm'
+  fi
 fi

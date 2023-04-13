@@ -36,7 +36,9 @@ fi
 # Aliases
 #
 
-alias scr='screen'
-alias scrl='screen -list'
-alias scrn='screen -U -S'
-alias scrr='screen -a -A -U -D -R'
+if ! zstyle -t ':prezto:module:screen:alias' skip; then
+  alias scr='screen'
+  alias scrl='screen -list'
+  alias scrn='screen -U -S'
+  alias scrr='screen -a -A -U -D -R'
+fi
