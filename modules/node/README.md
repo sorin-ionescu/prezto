@@ -29,6 +29,13 @@ _`$XDG_CONFIG_HOME/nvm`_, _`~/.nvm`_, or is installed with homebrew.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:node:alias' skip 'yes'
+```
+
 ### npm
 
 - `npmi` install a package.

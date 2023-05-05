@@ -12,6 +12,13 @@ execution of `carton`.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:emacs:alias' skip 'yes'
+```
+
 ### Carton
 
 - `cai` installs dependencies.

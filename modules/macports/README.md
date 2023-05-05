@@ -4,6 +4,13 @@ Defines MacPorts aliases and adds MacPorts directories to path variables.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:macports:alias' skip 'yes'
+```
+
 - `portc` cleans the files used to build ports.
 - `porti` installs a port.
 - `ports` searches for a port.
