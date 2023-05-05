@@ -54,6 +54,13 @@ dependencies, with [Bundler][5].
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:ruby:alias' skip 'yes'
+```
+
 ### General
 
 - `rb` is short for `ruby`.

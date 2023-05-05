@@ -12,6 +12,13 @@ brew shellenv
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:homebrew:alias' skip 'yes'
+```
+
 ### Homebrew Core
 
 - `brewc` cleans outdated brews and their cached archives.

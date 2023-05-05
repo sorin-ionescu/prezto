@@ -17,6 +17,13 @@ Sets directory options and defines directory aliases.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:directory:alias' skip 'yes'
+```
+
 - `d` prints the contents of the directory stack.
 - `1 ... 9` changes the directory to the **n** previous one.
 
