@@ -21,6 +21,11 @@ fi
 source "${cache_file}"
 unset cache_file kubectl_command
 
+# Add krew to path if it's installed
+if [[ -d $HOME/.krew ]]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
 #
 # Aliases
 #
