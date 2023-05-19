@@ -109,6 +109,12 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the search globbing flags.
 # zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
+# Enable fuzzy search
+# zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
+
+# Retrieve only unique results (removes duplicates)
+# zstyle ':prezto:module:history-substring-search' ensure-unique 'yes'
+
 #
 # macOS
 #
