@@ -65,6 +65,24 @@ _`${ZDOTDIR:-$HOME}/.zpreztorc`_:
 zstyle ':prezto:module:history-substring-search' globbing-flags ''
 ```
 
+### Fuzzy search
+
+To enable fuzzy search add the following line to
+`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
+```
+
+### Unique results
+
+To retrieve only unique results (remove duplicates) add the following line to
+`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' ensure-unique 'yes'
+```
+
 ## Authors
 
 _The authors of this module should be contacted via the [issue tracker][5]._
