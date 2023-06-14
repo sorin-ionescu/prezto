@@ -19,6 +19,13 @@ instead of the bundled version.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:fasd:alias' skip 'yes'
+```
+
 - `j` changes the current working directory interactively.
 
 ## Completion

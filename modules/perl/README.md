@@ -40,6 +40,13 @@ The subcommands of _plenv_ is similar with _rbenv_.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:perl:alias' skip 'yes'
+```
+
 ### General
 
 - `pl` is short for `perl`.
