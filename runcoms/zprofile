@@ -13,12 +13,17 @@ if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
+# Set the list of directories that Zsh searches for programs.
+path=(
+  $HOME/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $path
+)
+
 #
 # Editors
 #
-if [[ -x $HOME/bin/subl ]]; then
-  export EDITOR='subl -w'
-fi
 
 if [[ -z "$EDITOR" ]]; then
   export EDITOR=$(whence vim nano vi | head -n 1)
@@ -67,13 +72,6 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
-# Set the list of directories that Zsh searches for programs.
-path=(
-  $HOME/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  $path
-)
 
 #
 # Time Zone

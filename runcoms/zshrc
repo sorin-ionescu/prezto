@@ -42,6 +42,11 @@ if [[ $(whence bat) ]]; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
+# Detect Sublime text and set it as EDITOR
+if (( $+commands[subl] )); then
+  export EDITOR='subl -w'
+fi
+
 # Detect VS code terminal and change $EDITOR
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   export EDITOR='code'
