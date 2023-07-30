@@ -13,7 +13,7 @@ fi
 export KEYTIMEOUT=1
 export PROJECTS="$HOME/projects"
 export GOPATH="$PROJECTS/golang"
-export PATH="$HOME/bin:$HOME/.config/emacs/bin:$GOPATH/bin:$HOME/.config/yarn/global/node_modules/.bin/:$HOME/Library/Python/3.7/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.config/emacs/bin:$GOPATH/bin:$HOME/.config/yarn/global/node_modules/.bin/:$PATH"
 export GDRIVE="$HOME/gdrive"
 export GIT_REMOTE="$GDRIVE/git"
 export EDITOR="vim"

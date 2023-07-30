@@ -328,14 +328,24 @@ function pyv {
   export PYTHONSTARTUP=$(pwd)/$PYDEVREPL
   if [[ $# -eq 0 ]]; then
     # create the virtual environment if it does not exist
-    if [[ ! -e "pyv" ]]; then
-      python3 -m venv pyv
+    if [[ ! -e ".pyv" ]]; then
+      python3 -m venv .pyv
     fi
-# source pyv/bin/activate  # commented out by conda initialize
+    source .pyv/bin/activate
   else
-    pyv/bin/$1 ${@:2}
+    .pyv/bin/$1 ${@:2}
   fi
 }
+
+function pip {
+  if [[ -e ".pyv/bin/pip" ]]; then
+    .pyv/bin/pip $@
+  else
+    python -m pip
+  fi
+}
+
+alias dj='python manage.py'
 
 alias simplehttpserver='python3 -m http.server'
 
@@ -430,19 +440,4 @@ alias kill-emacs="emacsclient -e '(kill-emacs)"
 
 # Set a fixed title for terminal so that scripts can find it by name
 echo $'\033]30;'zsh-term$'\007'
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/cmaher/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/cmaher/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/cmaher/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/cmaher/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
