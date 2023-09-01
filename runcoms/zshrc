@@ -27,10 +27,6 @@ setopt prompt_sp
 # Don't load ranger configs, they already exist in ~
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
-# Set up ARA
-# export ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)"
-# export ANSIBLE_ACTION_PLUGINS=$(python3 -m ara.setup.action_plugins)
-# export ANSIBLE_LOOKUP_PLUGINS=$(python3 -m ara.setup.lookup_plugins)
 
 # Statusline Setup
 _prompt_statusline_left_segments=(status user machine git-branch directory)
@@ -52,9 +48,6 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   export EDITOR='code'
 fi
 
-if [[ $(whence virtualenvwrapper_lazy.sh ) ]]; then
-  source $(whence virtualenvwrapper_lazy.sh)
-fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
@@ -62,7 +55,7 @@ if [[ -f $HOME/.docker/init-zsh.sh ]]; then
   source $HOME/.docker/init-zsh.sh || true
 fi
 
-aziz #light!
+# aziz too sleepy
 
 #thank you, Aziz
 

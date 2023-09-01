@@ -20,8 +20,13 @@ export WORKON_HOME=$HOME/.virtualenvs
 # Disable Eternal Terminal telemtry
 export ET_NO_TELEMETRY=true
 
+# ara
+ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)"
+ARA_API_CLIENT=http
+ARA_API_SERVER="https://ara"
+
 # awx things that change more often
 export TOWER_FORMAT=human
-export TOWER_HOST=https://awx
-export TOWER_VERIFY_SSL=true
+export TOWER_HOST="https://awx"
+export TOWER_VERIFY_SSL=false
 export TOWER_USERNAME=$USER
