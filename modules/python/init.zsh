@@ -50,7 +50,7 @@ fi
 unset local_pyenv
 
 # Return if requirements are not found.
-if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
+if (( ! $+commands[(i)python[0-9.]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
   return 1
 fi
 
@@ -136,8 +136,8 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) \
 
   if [[ $pyenv_virtualenvwrapper_plugin_found != "true" ]]; then
     # Fallback to standard 'virtualenvwrapper' if 'python' is available in '$path'.
-    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $#commands[(i)python[23]#] )); then
-      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[23]#]
+    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $+commands[(i)python[0-9.]#] )); then
+      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[0-9.]#]
     fi
 
     virtualenvwrapper_sources=(
@@ -171,6 +171,8 @@ fi
 # Aliases
 #
 
-alias py='python'
-alias py2='python2'
-alias py3='python3'
+if ! zstyle -t ':prezto:module:python:alias' skip; then
+  alias py='python'
+  alias py2='python2'
+  alias py3='python3'
+fi

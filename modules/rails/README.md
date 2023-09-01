@@ -4,6 +4,13 @@ Defines [Ruby on Rails][1] aliases.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:rails:alias' skip 'yes'
+```
+
 - `ror` is short for `rails`.
 - `rorc` starts the Rails console.
 - `rordc` starts the Rails console connected to the database.
