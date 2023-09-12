@@ -76,7 +76,7 @@ if zstyle -T ':prezto:module:utility' safe-ops; then
 fi
 
 # ls
-if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
+if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*(GNU|lsd) *} ]]; then
   # GNU Core Utilities
 
   if zstyle -T ':prezto:module:utility:ls' dirs-first; then
