@@ -52,9 +52,9 @@ if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   # program specified by SSH_ASKPASS and open an X11 window to read the
   # passphrase.
   if [[ -n "$DISPLAY" && -x "$SSH_ASKPASS" ]]; then
-    ssh-add ${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}} < /dev/null 2> /dev/null
+    ssh-add ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} < /dev/null 2> /dev/null
   else
-    ssh-add ${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}} 2> /dev/null
+    ssh-add ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} 2> /dev/null
   fi
 fi
 

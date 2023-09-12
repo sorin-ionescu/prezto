@@ -36,7 +36,43 @@ Alternately, you can set `HISTFILE` manually to _`${ZDOTDIR:-$HOME}/.zhistory`_.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:history:alias' skip 'yes'
+```
+
 - `history-stat` lists the ten most used commands
+
+## Settings
+
+### histfile
+
+Can be configured either by setting HISTFILE manually before loading this
+module or by using zstyle:
+
+```sh
+zstyle ':prezto:module:history' histfile "<file_name>"
+```
+
+defaults to "${ZDOTDIR:-$HOME}/.zsh_history".
+
+### histsize
+
+```sh
+zstyle ':prezto:module:history' histsize <number>
+```
+
+defaults to 10000.
+
+### savehist
+
+```sh
+zstyle ':prezto:module:history' savehist <number>
+```
+
+defaults to histsize
 
 ## Authors
 

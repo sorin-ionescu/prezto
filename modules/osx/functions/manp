@@ -9,7 +9,7 @@ function manp {
   local page
   if (( $# > 0 )); then
     for page in "$@"; do
-      man -t "$page" | open -f -a Preview
+      mandoc -T pdf "$(/usr/bin/man -w $page)" | open -fa Preview
     done
   else
     print 'What manual page do you want?' >&2

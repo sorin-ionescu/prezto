@@ -84,6 +84,19 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # zstyle ':prezto:module:gnu-utility' prefix 'g'
 
 #
+# History
+#
+
+# Set the file to save the history in when an interactive shell exits.
+# zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+
+# Set the maximum  number  of  events  stored  in  the  internal history list.
+# zstyle ':prezto:module:history' histsize 10000
+
+# Set the maximum number of history events to save in the history file.
+# zstyle ':prezto:module:history' savehist 10000
+
+#
 # History Substring Search
 #
 
@@ -98,6 +111,12 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Set the search prefixed.
 # zstyle ':prezto:module:history-substring-search' prefixed 'yes'
+
+# Enable fuzzy search
+# zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
+
+# Retrieve only unique results (removes duplicates)
+# zstyle ':prezto:module:history-substring-search' ensure-unique 'yes'
 
 #
 # macOS

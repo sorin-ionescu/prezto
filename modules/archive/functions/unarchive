@@ -34,24 +34,24 @@ fi
 # here, we check for dropin/multi-threaded replacements
 # this should eventually be moved to modules/archive/init.zsh
 # as a global alias
-if (( $+commands[pigz] )); then
-  _gzip_bin='pigz'
+if (( $+commands[unpigz] )); then
+  _gzip_bin='unpigz'
 else
-  _gzip_bin='gzip'
+  _gzip_bin='gunzip'
 fi
 
 if (( $+commands[pixz] )); then
-  _xz_bin='pixz'
+  _xz_bin='pixz -d'
 else
   _xz_bin='xz'
 fi
 
-if (( $+commands[lbzip2] )); then
-  _bzip2_bin='lbzip2'
-elif (( $+commands[pbzip2] )); then
-  _bzip2_bin='pbzip2'
+if (( $+commands[lbunzip2] )); then
+  _bzip2_bin='lbunzip2'
+elif (( $+commands[pbunzip2] )); then
+  _bzip2_bin='pbunzip2'
 else
-  _bzip2_bin='bzip2'
+  _bzip2_bin='bunzip2'
 fi
 
 _zstd_bin='zstd'

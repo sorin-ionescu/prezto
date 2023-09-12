@@ -8,6 +8,12 @@
 #   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
+#
+# Options
+#
+
+setopt EXTENDED_GLOB
+
 # Load dependencies.
 pmodload 'helper'
 
@@ -44,7 +50,7 @@ fi
 unset local_pyenv
 
 # Return if requirements are not found.
-if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
+if (( ! $+commands[(i)python[0-9.]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
   return 1
 fi
 
@@ -110,37 +116,42 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) \
   # look for plugins of interest. Scanning shell '$path' isn't enough as they
   # can exist in 'pyenv' synthesized paths (e.g., '~/.pyenv/plugins') instead.
   local -a pyenv_plugins
+  local pyenv_virtualenvwrapper_plugin_found
   if (( $+commands[pyenv] )); then
     pyenv_plugins=(${(@oM)${(f)"$(pyenv commands --no-sh 2> /dev/null)"}:#virtualenv*})
-  fi
 
-  if (( $pyenv_plugins[(i)virtualenv-init] <= $#pyenv_plugins )); then
-    # Enable 'virtualenv' with 'pyenv'.
-    eval "$(pyenv virtualenv-init - zsh)"
+    # Optionally activate 'virtualenv-init' plugin when available.
+    if (( $pyenv_plugins[(i)virtualenv-init] <= $#pyenv_plugins )); then
+      eval "$(pyenv virtualenv-init - zsh)"
+    fi
 
     # Optionally activate 'virtualenvwrapper' plugin when available.
     if (( $pyenv_plugins[(i)virtualenvwrapper(_lazy|)] <= $#pyenv_plugins )); then
       pyenv "$pyenv_plugins[(R)virtualenvwrapper(_lazy|)]"
-    fi
-  else
-    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper if 'python' is
-    # available in '$path'.
-    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $#commands[(i)python[23]#] )); then
-      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[23]#]
+      pyenv_virtualenvwrapper_plugin_found="true"
     fi
 
-    virtenv_sources=(
+    unset pyenv_plugins
+  fi
+
+  if [[ $pyenv_virtualenvwrapper_plugin_found != "true" ]]; then
+    # Fallback to standard 'virtualenvwrapper' if 'python' is available in '$path'.
+    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $+commands[(i)python[0-9.]#] )); then
+      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[0-9.]#]
+    fi
+
+    virtualenvwrapper_sources=(
       ${(@Ov)commands[(I)virtualenvwrapper(_lazy|).sh]}
       /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
     )
-    if (( $#virtenv_sources )); then
-      source "$virtenv_sources[1]"
+    if (( $#virtualenvwrapper_sources )); then
+      source "$virtualenvwrapper_sources[1]"
     fi
 
-    unset virtenv_sources
+    unset virtualenvwrapper_sources
   fi
 
-  unset pyenv_plugins
+  unset pyenv_virtualenvwrapper_plugin_found
 fi
 
 # Load conda into the shell session, if requested.
@@ -160,6 +171,8 @@ fi
 # Aliases
 #
 
-alias py='python'
-alias py2='python2'
-alias py3='python3'
+if ! zstyle -t ':prezto:module:python:alias' skip; then
+  alias py='python'
+  alias py2='python2'
+  alias py3='python3'
+fi

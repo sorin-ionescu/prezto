@@ -53,6 +53,13 @@ Read [iTerm2 and tmux Integration][7] for more information.
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:tmux:alias' skip 'yes'
+```
+
 - `tmuxa` attaches or switches to a tmux session.
 - `tmuxl` lists sessions managed by the tmux server.
 
