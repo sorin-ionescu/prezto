@@ -109,13 +109,16 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the search globbing flags.
 # zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
-# Enable fuzzy search
+# Enable search case-sensitivity.
+# zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
+
+# Enable search for fuzzy matches.
 # zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
 
-# Retrieve only unique results (removes duplicates)
-# zstyle ':prezto:module:history-substring-search' ensure-unique 'yes'
+# Enable search uniqueness.
+# zstyle ':prezto:module:history-substring-search' unique 'yes'
 
-# Set the search prefixed.
+# Enable prefixed search.
 # zstyle ':prezto:module:history-substring-search' prefixed 'yes'
 
 #

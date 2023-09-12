@@ -34,10 +34,6 @@ if zstyle -t ':prezto:module:history-substring-search' case-sensitive; then
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="${HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS//i}"
 fi
 
-if zstyle -t ':prezto:module:history-substring-search' prefixed; then
-  HISTORY_SUBSTRING_SEARCH_PREFIXED='true'
-fi
-
 if ! zstyle -t ':prezto:module:history-substring-search' color; then
   unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_{FOUND,NOT_FOUND}
 fi
@@ -46,8 +42,12 @@ if zstyle -t ':prezto:module:history-substring-search' fuzzy; then
   HISTORY_SUBSTRING_SEARCH_FUZZY=1
 fi
 
-if zstyle -t ':prezto:module:history-substring-search' ensure-unique; then
+if zstyle -t ':prezto:module:history-substring-search' unique; then
   HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+fi
+
+if zstyle -t ':prezto:module:history-substring-search' prefixed; then
+  HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 fi
 
 #
