@@ -29,9 +29,9 @@ if [[ -s "${local_pyenv::=${PYENV_ROOT:-$HOME/.pyenv}/bin/pyenv}" ]] \
   autoload -Uz is-at-least
   if is-at-least 2 ${"$(pyenv --version 2>&1)"[(w)2]}; then
     eval "$(pyenv init --path zsh)"
+  else
+    eval "$(pyenv init - zsh)"
   fi
-
-  eval "$(pyenv init - zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The
