@@ -25,12 +25,7 @@ if [[ -s "${local_pyenv::=${PYENV_ROOT:-$HOME/.pyenv}/bin/pyenv}" ]] \
   # Ensure manually installed pyenv is added to path when present.
   [[ -s $local_pyenv ]] && path=($local_pyenv:h $path)
 
-  # pyenv 2+ requires shims to be added to path before being initialized.
-  autoload -Uz is-at-least
-  if is-at-least 2 ${"$(pyenv --version 2>&1)"[(w)2]}; then
-    eval "$(pyenv init --path zsh)"
-  fi
-
+  # Load pyenv into the shell session.
   eval "$(pyenv init - zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
