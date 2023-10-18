@@ -142,6 +142,15 @@ zstyle ':prezto:module:utility' correct 'no'
 - `lu` lists sorted by date, most recent last, shows access time.
 - `sl` lists directory contents (correction for `ls`).
 
+To disable the correction of `sl` to `ls`, which conflicts with
+[sapling](https://github.com/facebook/sapling), add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:utility' slls 'no'
+```
+
+
 ### macOS Everywhere
 
 - `o` opens files and directories (`open` or `xdg-open`).
