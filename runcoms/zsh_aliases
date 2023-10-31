@@ -1,0 +1,1 @@
+alias rmig='git ls-files -io --exclude-from=.gitignore | xargs -d "\n" rm -rf'

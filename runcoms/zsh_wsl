@@ -1,0 +1,8 @@
+path+=(
+  '/mnt/c/Windows/System32'
+  '/mnt/c/Windows'
+  '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/'
+)
+
+alias xx='explorer.exe'
+alias vc='cmd.exe /c code . &'
