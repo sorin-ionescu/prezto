@@ -18,12 +18,8 @@ export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
 export WORKON_HOME=$HOME/.virtualenvs
 
 # Disable Eternal Terminal telemtry
+# MisterTea/EternalTerminal/src/terminal/TelemetryService.cpp
 export ET_NO_TELEMETRY=true
-
-# ara
-ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)"
-ARA_API_CLIENT=http
-ARA_API_SERVER="https://ara"
 
 # awx things that change more often
 export TOWER_FORMAT=human
