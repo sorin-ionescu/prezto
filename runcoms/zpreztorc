@@ -157,7 +157,7 @@ zstyle ':prezto:module:utility:ls' dirs-first 'no'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'statusline' -l
+zstyle ':prezto:module:prompt' theme 'statusline' -d
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
@@ -218,10 +218,11 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 #
 # Set syntax highlighting styles.
 zstyle ':prezto:module:syntax-highlighting' styles \
-  'path' 'fg=cyan'
-#   'builtin' 'bg=blue' \
-#   'command' 'bg=blue' \
-#   'function' 'bg=blue'
+  'path' 'fg=cyan' \
+  'function' 'fg=blue' \
+  'alias' 'fg=yellow' \
+  # 'builtin' 'fg=blue' \
+  # 'command' 'fg=blue'
 #
 # Set syntax pattern styles.
 # zstyle ':prezto:module:syntax-highlighting' pattern \
@@ -241,7 +242,7 @@ zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
 # Set the terminal multiplexer title format.
-zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
+# zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 #
 # Tmux
@@ -266,4 +267,4 @@ zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 # Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-# zstyle ':prezto:module:utility' safe-ops 'yes'
+zstyle ':prezto:module:utility' safe-ops 'no'
