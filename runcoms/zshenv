@@ -10,12 +10,8 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-# Set environment variables for virtualenvwrapper
-export PROJECT_HOME="$HOME/src"
-export VIRTUALENVWRAPPER_PYTHON=$(whence python3)
-export VIRTUALENVWRAPPER_VIRTUALENV=$(whence virtualenv)
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
-export WORKON_HOME=$HOME/.virtualenvs
+# Configure pyenv and friends
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Disable Eternal Terminal telemtry
 # MisterTea/EternalTerminal/src/terminal/TelemetryService.cpp
