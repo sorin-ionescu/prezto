@@ -12,7 +12,7 @@ Sets editor specific key bindings options and variables.
 
 ## Settings
 
-## Wordchars
+### Wordchars
 
 To change what characters are considered part of a word, add the following to
 _`${ZDOTDIR:-$HOME}/.zpreztorc`_.
