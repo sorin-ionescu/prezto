@@ -43,7 +43,7 @@ version is **4.3.11**.
 
         ```sh
         export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
-        export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
+        [[ -d $XDG_CONFIG_HOME/zsh ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
         source "$ZDOTDIR/.zshenv"
         ```
 

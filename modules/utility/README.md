@@ -140,7 +140,6 @@ zstyle ':prezto:module:utility' correct 'no'
 - `lt` lists sorted by date, most recent last.
 - `lc` lists sorted by date, most recent last, shows change time.
 - `lu` lists sorted by date, most recent last, shows access time.
-- `sl` lists directory contents (correction for `ls`).
 
 ### macOS Everywhere
 
