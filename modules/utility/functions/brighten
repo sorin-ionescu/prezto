@@ -1,4 +1,8 @@
 
-prompt statusline -l
-export BAT_THEME='Solarized (light)'
+prompt ${BRIGHT_PROMPT:-'statusline -l'}
+export BAT_THEME=${BRIGHT_BAT:-'Solarized (light)'}
 export vim_bg=light
+
+if [[ -x ${HOME}/.iterm2/it2profile ]]; then
+  ~/.iterm2/it2profile -s ${BRIGHT_TERM:-'Solarized Light'}
+fi

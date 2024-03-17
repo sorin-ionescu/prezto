@@ -1,4 +1,8 @@
 
-prompt statusline -d
-export BAT_THEME='Solarized (dark)'
+prompt ${DARK_PROMPT:-'statusline -d'}
+export BAT_THEME=${DARK_BAT:-'Solarized (dark)'}
 export vim_bg=dark
+
+if [[ -x ${HOME}/.iterm2/it2profile ]]; then
+  ~/.iterm2/it2profile -s ${DARK_TERM:-'Solarized Dark'}
+fi

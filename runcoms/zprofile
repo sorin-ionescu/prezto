@@ -78,3 +78,16 @@ typeset -gU cdpath fpath mailpath path
 #
 
 export TZ=America/Los_Angeles
+
+#
+# Fancy Colors
+#
+
+# Set variables that will be read by darken/brighten
+export BRIGHT_BAT='Solarized (light)'
+export BRIGHT_PROMPT='statusline -l'
+export BRIGHT_TERM='Solarized Light'
+
+export DARK_BAT='Solarized (dark)'
+export DARK_PROMPT='statusline -d'
+export DARK_TERM='Solarized Dark'
