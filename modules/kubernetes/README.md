@@ -3,6 +3,8 @@
 Enhances `Kubernetes` command line integration by providing aliases,
 functions and by exposing repository status information to prompts.
 
+You should load this module AFTER completion, it will call compdef.
+
 ## Aliases
 
 - `kb` is an alias for `kubectl`
