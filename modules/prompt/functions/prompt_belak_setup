@@ -1,0 +1,174 @@
+#
+# A simple theme that displays relevant, contextual information,
+# originally based on the sorin theme from prezto and the gentoo prompt
+# with as much unicode removed as possible.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Kaleb Elwert <belak@coded.io>
+#
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_belak_venv {
+  _prompt_belak_venv=""
+  if [[ -n $VIRTUAL_ENV ]]; then
+    _prompt_belak_venv=" [${VIRTUAL_ENV##*/}]"
+  fi
+}
+
+function prompt_belak_async_callback {
+  case $1 in
+    prompt_belak_async_git)
+      # Extract all the git-info which is being passed to us. We can safely split on
+      # ':' because it isn't allowed in ref names.
+      IFS=':' read \
+        _git_pre \
+        _git_action \
+        _git_ahead_behind \
+        _git_target <<<"$3"
+
+      # The target actually contains 3 space separated possibilities so we need to
+      # make sure we grab the first one.
+      _git_target=$(coalesce ${(@)${(z)_git_target}})
+
+      # Reset the prompt early if there's no git info
+      if [[ -z "$_git_target" ]]; then
+        if [[ -n "$_prompt_belak_git" ]]; then
+          _prompt_belak_git=''
+
+          # Redisplay prompt.
+          zle && zle reset-prompt
+        fi
+
+        break
+      fi
+
+      # The post_target section is what goes in the brackets after the branch
+      # name/commit hash.
+      _git_post_target=${_git_ahead_behind}
+      if [[ -n "$_git_post_target" ]]; then
+        _git_post_target=":${_git_post_target}"
+      fi
+
+      if [[ -n "$_git_action" ]]; then
+        _git_post_target=":${_git_action}"
+      fi
+
+      _prompt_belak_git="${_git_pre}[${_git_target}${_git_post_target}]"
+
+      zle && zle reset-prompt
+      ;;
+  esac
+}
+
+function prompt_belak_async_git {
+  cd -q "$1"
+  if (( $+functions[git-info] )); then
+    git-info
+    echo ${git_info[status]}
+  fi
+}
+
+function prompt_belak_async_tasks {
+  # Initialize async worker. This needs to be done here and not in
+  # prompt_belak_setup so the git formatting can be overridden by other prompts.
+  if (( !${prompt_belak_async_init:-0} )); then
+    async_start_worker prompt_belak -n
+    async_register_callback prompt_belak prompt_belak_async_callback
+    typeset -g prompt_belak_async_init=1
+  fi
+
+  # Kill the old process of slow commands if it is still running.
+  async_flush_jobs prompt_belak
+
+  # Compute slow commands in the background.
+  async_job prompt_belak prompt_belak_async_git "$PWD"
+}
+
+function prompt_belak_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Handle updating git data. We also clear the git prompt data if we're in a
+  # different git root now.
+  if (( $+functions[git-dir] )); then
+    local new_git_root="$(git-dir 2>/dev/null)"
+    if [[ $new_git_root != $_belak_cur_git_root ]]; then
+      _prompt_belak_git=''
+      _belak_cur_git_root=$new_git_root
+    fi
+  fi
+
+  # Kick off any background tasks which need to be run
+  prompt_belak_async_tasks
+
+  # Update anything else we need
+  _prompt_belak_pwd=$(prompt-pwd)
+  prompt_belak_venv
+}
+
+function prompt_belak_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent sp subst)
+
+  # Set editor-info parameters.
+  zstyle ':prezto:module:editor:info:completing' format '%B%F{7}...%f%b'
+
+  # Most of the formatting
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:added' format '%B%F{green}*%b%f'
+  zstyle ':prezto:module:git:info:deleted' format '%B%F{red}*%b%f'
+  zstyle ':prezto:module:git:info:modified' format '%B%F{yellow}*%b%f'
+  zstyle ':prezto:module:git:info:renamed' format '%B%F{blue}*%b%f'
+  zstyle ':prezto:module:git:info:untracked' format '%b%f*'
+  zstyle ':prezto:module:git:info:unmerged' format 'unmerged'
+  zstyle ':prezto:module:git:info:action' format '%B%F{red}%s%b%f'
+  zstyle ':prezto:module:git:info:branch' format '%B%F{green}%b%%b%f'
+  zstyle ':prezto:module:git:info:commit' format '%B%F{yellow}%.7c%b%f'
+  zstyle ':prezto:module:git:info:position' format '%B%F{magenta}%p%b%f'
+  zstyle ':prezto:module:git:info:ahead' format '%B%F{green}+%A%b%f'
+  zstyle ':prezto:module:git:info:behind' format '%%B%F{red}-%B%b%f'
+
+  # This is split into a number of sections:
+  # - pre-target
+  # - action
+  # - ahead/behind
+  # - branch/position/commit
+  zstyle ':prezto:module:git:info:keys' format \
+    'status' '%a%d%m%r%u:%s:%A%B:%b %p %c'
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz async && async
+
+  # Add hook for updating data before each command
+  add-zsh-hook precmd prompt_belak_precmd
+
+  # Define zsh-async worker
+  async_start_worker async_belak_git -n
+  async_register_callback async_belak_git prompt_belak_git_info
+
+  _belak_cur_git_root=''
+  _prompt_belak_pwd=''
+  _prompt_belak_venv=''
+  _prompt_belak_git=''
+
+  # Define prompts.
+  PROMPT='${SSH_TTY:+"%F{10}%n@%m%f "}%F{10}${_prompt_belak_pwd}%f${_prompt_belak_venv}%(!. %B%F{1}#%f%b.) %(?:%F{12}:%F{9})%#%f '
+  RPROMPT='${_prompt_belak_git}${editor_info[overwrite]}${VIM:+" %B%F{6}V%f%b"}'
+  SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
+}
+
+function prompt_belak_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2>/dev/null
+  prompt_preview_theme 'belak'
+}
+
+prompt_belak_setup "$@"

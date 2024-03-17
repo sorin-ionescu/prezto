@@ -44,13 +44,12 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'python' \
   'direnv' \
+  'ansible' \
   'completion' \
   'kubernetes' \
-  'ansible' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt' \
-  'k' \
   'deer' \
   'ssh' \
   'srg'

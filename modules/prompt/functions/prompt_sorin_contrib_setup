@@ -1,0 +1,124 @@
+# An extension of the existing sorin theme to add some contrib features.
+#
+# Authors:
+#   Jonathan Pigrée <jonathan.pigree@gmail.com>
+#
+# Screenshots:
+#   http://i.imgur.com/nrGV6pg.png
+#
+
+#
+# 16 Terminal Colors
+# -- ---------------
+#  0 black
+#  1 red
+#  2 green
+#  3 yellow
+#  4 blue
+#  5 magenta
+#  6 cyan
+#  7 white
+#  8 bright black
+#  9 bright red
+# 10 bright green
+# 11 bright yellow
+# 12 bright blue
+# 13 bright magenta
+# 14 bright cyan
+# 15 bright white
+#
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_sorin_contrib_async_callback {
+  case $1 in
+    prompt_sorin_contrib_async_k8s)
+      read _k8s_cluster _k8s_ns <<<"$3"
+
+      if [[ -z "$_k8s_cluster" ]]
+      then
+        _prompt_k8s=""
+        break
+      fi
+
+      _prompt_k8s="%B("
+
+      zstyle -s ':prezto:module:contrib-kubernetes' prod-clusters prod_regexp
+
+      if [[ -n "$prod_regexp" ]]
+      then
+        if [[ -n "$(echo "$_k8s_cluster" | grep -E "$prod_regexp")" ]]
+        then
+            _prompt_k8s+="%F{1}"
+        else
+            _prompt_k8s+="%F{7}"
+        fi
+      else
+        zstyle -s ':prezto:module:contrib-kubernetes' dev-clusters dev_regexp
+        if [[ -z "$dev_regexp" ]]
+        then
+          zstyle -s ':prezto:module:contrib-kubernetes' dev-clusters-default dev_regexp
+        fi
+
+        if [[ -n "$(echo "$_k8s_cluster" | grep -E "$dev_regexp")" ]]
+           then
+               _prompt_k8s+="%F{7}"
+           else
+               _prompt_k8s+="%F{1}"
+           fi
+        fi
+
+      _prompt_k8s+="$_k8s_cluster%f"
+      if [[ -n "$_k8s_ns" ]]
+      then
+        _prompt_k8s+="|%F{4}$_k8s_ns%p%f"
+      fi
+
+      _prompt_k8s+="%f)%b"
+      zle && zle reset-prompt
+  esac
+}
+
+function prompt_sorin_contrib_async_k8s {
+  print "$(kubectl config current-context) $(kubectl config view --minify -o jsonpath='{.contexts[0].context.namespace}')"
+}
+
+function prompt_sorin_contrib_async_tasks {
+  if (( !${prompt_prezto_contrib_async_init:-0} )); then
+    async_start_worker prompt_sorin_contrib -n
+    async_register_callback prompt_sorin_contrib prompt_sorin_contrib_async_callback
+    typeset -g prompt_prezto_contrib_async_init=1
+  fi
+
+  # Kill the old process of slow commands if it is still running.
+  async_flush_jobs prompt_sorin_contrib
+
+  if [[ -n "$(which kubectl)" ]]
+  then
+    async_job prompt_sorin_contrib prompt_sorin_contrib_async_k8s
+  fi
+}
+
+function prompt_sorin_contrib_precmd {
+  prompt_sorin_contrib_async_tasks
+}
+
+function prompt_sorin_contrib_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2> /dev/null
+  prompt_preview_theme 'sorin-contrib'
+}
+
+function prompt_sorin_contrib_setup {
+  prompt_sorin_setup "$@"
+
+  add-zsh-hook precmd prompt_sorin_contrib_precmd
+
+  RPROMPT+=' ${_prompt_k8s}'
+}
+
+prompt_sorin_contrib_setup "$@"

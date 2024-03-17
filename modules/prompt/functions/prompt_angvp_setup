@@ -1,0 +1,41 @@
+function prompt_angvp_precmd {
+  git-info
+}
+
+function prompt_angvp_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_angvp_precmd
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:branch' format '%F{blue}%b%f'
+  zstyle ':prezto:module:git:info:clean' format ' %F{green}✔%f'
+  zstyle ':prezto:module:git:info:dirty' format ' %F{red}✗%f'
+
+  zstyle ':prezto:module:git:info:keys' format \
+      'prompt' ' %F{green}(%f$(coalesce "%b" "%p" "%c")${git_info[rprompt]}%s%F{green})%f' \
+      'rprompt' '%A%B%S%C%D%U%u'
+
+  # Define prompts.
+
+  # Check the UID
+  if [[ $UID -ge 500 ]]; then # normal user
+      eval PR_USER='%F{blue}%n%f'
+      eval PR_USER_OP='%F{green}%#%f'
+  elif [[ $UID -eq 0 ]]; then # root
+      eval PR_USER='%F{red}%n%f'
+      eval PR_USER_OP='%F{red}%#%f'
+  fi
+
+  PROMPT="%F{cyan}[%f${PR_USER}%F{yellow}@%f%F{blue}%~%f%F{cyan}]%f${PR_USER_OP} "
+  RPROMPT=""'${(e)git_info[prompt]}'""
+}
+
+prompt_angvp_setup "$@"
