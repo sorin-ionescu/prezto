@@ -35,6 +35,3 @@
 [submodule "modules/deer/external"]
 	path = modules/deer/external
 	url = https://github.com/vifon/deer.git
-[submodule "modules/k/external"]
-	path = modules/k/external
-	url = https://github.com/jeffcox/k.git
