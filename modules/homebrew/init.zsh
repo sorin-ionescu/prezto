@@ -21,7 +21,20 @@ fi
 # Load 'HOMEBREW_' prefixed variables only. Avoid loading 'PATH' related
 # variables as they are already handled in standard zsh configuration.
 if (( $+commands[brew] )); then
-  eval "${(@M)${(f)"$(brew shellenv 2> /dev/null)"}:#export HOMEBREW*}"
+  cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/brew-shellenv-cache.zsh"
+  if [[ "${commands[brew]}" -nt "$cache_file" \
+      || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
+      || ( ! -n ${cache_file}(#qNmw-1) ) ]]; then
+    # Rebuild cache if either
+    # 1. brew is newer than the cache file
+    # 2. .zpreztorc is newer than the cache file
+    # 3. cache file doesn't exist
+    # 4. cache file is older than a week
+    mkdir -p "${cache_file:h}"
+    echo "${(@M)${(f)"$(brew shellenv 2> /dev/null)"}:#export HOMEBREW*}" >! "${cache_file}"
+  fi
+  source "${cache_file}"
+  unset cache_file
 fi
 
 #
