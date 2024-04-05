@@ -2,9 +2,6 @@
 
 Enables local Python and local Python package installation.
 
-This module must be loaded _before_ the _`completion`_ module so that the
-provided completion definitions are loaded.
-
 ## Settings
 
 This module supports virtual environments from conda and
