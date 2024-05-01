@@ -2,9 +2,6 @@
 
 Enables local Python and local Python package installation.
 
-This module must be loaded _before_ the _`completion`_ module so that the
-provided completion definitions are loaded.
-
 ## Settings
 
 This module supports virtual environments from conda and
@@ -13,7 +10,7 @@ disable _virtualenvwrapper_, add the following to
 _`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
 ```sh
-zstyle ':prezto:module:python' skip-virtualenvwrapper-init 'on'
+zstyle ':prezto:module:python:virtualenv' initialize 'no'
 ```
 
 Conda support can be enabled by adding the following to
