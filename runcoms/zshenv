@@ -9,16 +9,3 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-# Configure pyenv and friends
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-# Disable Eternal Terminal telemtry
-# MisterTea/EternalTerminal/src/terminal/TelemetryService.cpp
-export ET_NO_TELEMETRY=true
-
-# awx things that change more often
-export TOWER_FORMAT=human
-export TOWER_HOST="https://awx"
-export TOWER_VERIFY_SSL=false
-export TOWER_USERNAME=$USER

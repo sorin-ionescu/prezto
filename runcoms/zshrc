@@ -61,5 +61,8 @@ fi
 alias k='eza -l'
 alias ka='eza -l --git -a'
 
+# Disable the default python prompt modifications
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 # Uncomment for profiling startup time (2/2)
 # zprof

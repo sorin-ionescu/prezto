@@ -91,3 +91,13 @@ export BRIGHT_TERM='Solarized Light'
 export DARK_BAT='Solarized (dark)'
 export DARK_PROMPT='statusline -d'
 export DARK_TERM='Solarized Dark'
+
+# Disable Eternal Terminal telemtry
+# MisterTea/EternalTerminal/src/terminal/TelemetryService.cpp
+export ET_NO_TELEMETRY=true
+
+# awx things that change more often
+# export TOWER_FORMAT=human
+# export TOWER_HOST="https://awx"
+# export TOWER_VERIFY_SSL=false
+# export TOWER_USERNAME=$USER
