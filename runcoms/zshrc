@@ -17,7 +17,7 @@ fi
 
 # Change the default prompt_cr/prompt_sp back to <5.4.2
 # http://zsh.sourceforge.net/Doc/Release/Options.html#Prompting
-setopt prompt_sp
+# setopt prompt_sp
 
 # Metasploit embedded Postgres shutdown
 # if [[ -d /opt/metasploit-framework/ ]]; then
