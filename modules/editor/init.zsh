@@ -35,6 +35,8 @@ key_info=(
   'ControlPageDown' '\e[6;5~'
   'Escape'       '\e'
   'Meta'         '\M-'
+  'MetaLeft'     '\e\[1;3D'
+  'MetaRight'    '\e\[1;3C'
   'Backspace'    "^?"
   'Delete'       "^[[3~"
   'F1'           "$terminfo[kf1]"
@@ -274,10 +276,10 @@ bindkey -d
 # Emacs Key Bindings
 #
 
-for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[ControlLeft]}" \
+for key in "$key_info[Escape]"{B,b} "${(s: :)key_info[MetaLeft]}" \
   "${key_info[Escape]}${key_info[Left]}"
   bindkey -M emacs "$key" emacs-backward-word
-for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[ControlRight]}" \
+for key in "$key_info[Escape]"{F,f} "${(s: :)key_info[MetaRight]}" \
   "${key_info[Escape]}${key_info[Right]}"
   bindkey -M emacs "$key" emacs-forward-word
 
