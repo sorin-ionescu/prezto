@@ -172,7 +172,7 @@ zstyle ':prezto:module:utility:ls' dirs-first 'no'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'statusline' -d
+zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
@@ -235,8 +235,8 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 # Set syntax highlighting styles.
 zstyle ':prezto:module:syntax-highlighting' styles \
   'path' 'fg=cyan' \
-  'function' 'fg=blue' \
-  'alias' 'fg=yellow' \
+  # 'function' 'fg=blue' \
+  # 'alias' 'fg=yellow' \
   # 'builtin' 'fg=blue' \
   # 'command' 'fg=blue'
 #

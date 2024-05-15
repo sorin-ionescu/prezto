@@ -47,7 +47,7 @@ alias kbl='kubectl logs'
 alias kblf='kubectl logs --follow'
 alias kbr='kubectl run'
 
-alias wkb='watch -n 1 kubectl'
+alias wkb='watch -n 5 kubectl'
 
 kbn () {
   kubectl config set-context --current --namespace=$1
