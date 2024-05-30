@@ -1,10 +1,8 @@
-OCaml
-=====
+# OCaml
 
 Initializes [OCaml][1] package management.
 
-OPAM
-----
+## OPAM
 
 [OPAM][2] is a package manager for OCaml.
 
@@ -15,13 +13,12 @@ relevant path and OCaml variables.
 
 Install packages to your local package directory with `opam install`.
 
-Authors
--------
+## Authors
 
-*The authors of this module should be contacted via the [issue tracker][3].*
+_The authors of this module should be contacted via the [issue tracker][3]._
 
-  - [Sebastian Wiesner](https://github.com/lunaryorn)
+- [Sebastian Wiesner](https://github.com/lunaryorn)
 
-[1]: http://ocaml.org/
+[1]: https://ocaml.org/
 [2]: http://opam.ocamlpro.com/
 [3]: https://github.com/sorin-ionescu/prezto/issues

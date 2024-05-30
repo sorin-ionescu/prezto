@@ -1,35 +1,37 @@
-Directory
-=========
+# Directory
 
 Sets directory options and defines directory aliases.
 
-Options
--------
+## Options
 
-  - `AUTO_CD` auto changes to a directory without typing `cd`.
-  - `AUTO_PUSHD` pushes the old directory onto the stack on `cd`.
-  - `PUSHD_IGNORE_DUPS` does not store duplicates in the stack.
-  - `PUSHD_SILENT` does not print the directory stack after `pushd` or `popd`.
-  - `PUSHD_TO_HOME` pushes to the home directory when no argument is given.
-  - `CDABLE_VARS` changes directory to a path stored in a variable.
-  - `AUTO_NAME_DIRS` auto adds variable-stored paths to `~` list.
-  - `MULTIOS` writes to multiple descriptors.
-  - `EXTENDED_GLOB` uses extended globbing syntax.
-  - `CLOBBER` does not overwrite existing files with `>` and `>>`. Use `>!` and
-    `>>!` to bypass.
+- `AUTO_CD` auto changes to a directory without typing `cd`.
+- `AUTO_PUSHD` pushes the old directory onto the stack on `cd`.
+- `PUSHD_IGNORE_DUPS` does not store duplicates in the stack.
+- `PUSHD_SILENT` does not print the directory stack after `pushd` or `popd`.
+- `PUSHD_TO_HOME` pushes to the home directory when no argument is given.
+- `CDABLE_VARS` changes directory to a path stored in a variable.
+- `MULTIOS` writes to multiple descriptors.
+- `EXTENDED_GLOB` uses extended globbing syntax.
+- `CLOBBER` does not overwrite existing files with `>` and `>>`. Use `>!` and
+  `>>!` to bypass.
 
-Aliases
--------
+## Aliases
 
-  - `d` prints the contents of the directory stack.
-  - `1 ... 9` changes the directory to the **n** previous one.
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
-Authors
--------
+```sh
+zstyle ':prezto:module:directory:alias' skip 'yes'
+```
 
-*The authors of this module should be contacted via the [issue tracker][1].*
+- `d` prints the contents of the directory stack.
+- `1 ... 9` changes the directory to the **n** previous one.
 
-  - [James Cox](https://github.com/imajes)
-  - [Sorin Ionescu](https://github.com/sorin-ionescu)
+## Authors
+
+_The authors of this module should be contacted via the [issue tracker][1]._
+
+- [James Cox](https://github.com/imajes)
+- [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: https://github.com/sorin-ionescu/prezto/issues

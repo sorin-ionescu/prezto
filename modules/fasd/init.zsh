@@ -19,7 +19,7 @@ fi
 # Initialization
 #
 
-cache_file="${TMPDIR:-/tmp}/prezto-fasd-cache.$UID.zsh"
+cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/fasd-cache.zsh"
 if [[ "${commands[fasd]}" -nt "$cache_file" \
       || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
       || ! -s "$cache_file"  ]]; then
@@ -31,6 +31,7 @@ if [[ "${commands[fasd]}" -nt "$cache_file" \
     init_args+=(zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)
   fi
 
+  mkdir -p "$cache_file:h"
   # Cache init code.
   fasd --init "$init_args[@]" >! "$cache_file" 2> /dev/null
 fi
@@ -52,5 +53,7 @@ function fasd_cd {
 # Aliases
 #
 
-# Changes the current working directory interactively.
-alias j='fasd_cd -i'
+if ! zstyle -t ':prezto:module:fasd:alias' skip; then
+  # Changes the current working directory interactively.
+  alias j='fasd_cd -i'
+fi

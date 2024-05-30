@@ -9,7 +9,7 @@
 #   - The prompt is prefixed by a character sequence of your choice.
 #   - Only displays the current directory instead of the full path.
 #   - Displays the current branch when in a git project (this requires loading
-#     the git module before prompt in ~/.zpreztorc).
+#     the git module before prompt in ${ZDOTDIR:-$HOME}/.zpreztorc).
 #   - Displays a character at the end of the prompt when in a git project with
 #     "dirty" files.
 #
@@ -17,7 +17,7 @@
 #   This prompt's prefix symbol and colors are customizable:
 #     prompt cloud [<symbol>] [<color1>] [<color2>]
 #
-#   In ~/.zpreztorc:
+#   In ${ZDOTDIR:-$HOME}/.zpreztorc:
 #     zstyle ':prezto:module:prompt' theme 'cloud' \
 #       ['<symbol>'] \
 #       ['<color1>'] \
@@ -53,7 +53,7 @@ This prompt's prefix symbol and colors are customizable:
 
   prompt cloud [<symbol>] [<color1>] [<color2>]
 
-In ~/.zpreztorc:
+In ${ZDOTDIR:-$HOME}/.zpreztorc:
   zstyle ':prezto:module:prompt' theme 'cloud' ['<symbol>'] ['<color1>'] ['<color2>']
 
 If these options are not provided, the symbol defaults to ☁ with colors cyan
@@ -104,6 +104,9 @@ function prompt_cloud_setup {
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_cloud_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:dirty' format "%%B%F{$secondary_color}]%f%%b %F{yellow}⚡%f"
@@ -119,3 +122,4 @@ function prompt_cloud_setup {
 }
 
 prompt_cloud_setup "$@"
+# vim: ft=zsh

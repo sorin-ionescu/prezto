@@ -16,7 +16,7 @@
 [submodule "modules/prompt/external/agnoster"]
 	path = modules/prompt/external/agnoster
 	url = https://github.com/agnoster/agnoster-zsh-theme.git
-[submodule "modules/prompt/functions/pure"]
+[submodule "modules/prompt/external/pure"]
 	path = modules/prompt/external/pure
 	url = https://github.com/sindresorhus/pure.git
 [submodule "modules/fasd/external"]
@@ -25,6 +25,7 @@
 [submodule "modules/prompt/external/async"]
 	path = modules/prompt/external/async
 	url = https://github.com/mafredri/zsh-async.git
-[submodule "modules/prompt/external/powerlevel9k"]
-	path = modules/prompt/external/powerlevel9k
-	url = https://github.com/bhilburn/powerlevel9k.git
+[submodule "modules/prompt/external/powerlevel10k"]
+	path = modules/prompt/external/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+	shallow = true
