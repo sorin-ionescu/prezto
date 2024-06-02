@@ -34,7 +34,7 @@ _prompt_statusline_right_segments=(git-status history virtualenv clock)
 
 # Configure bat
 if [[ ${+commands[bat]} ]]; then
-  export BAT_THEME="Solarized (light)"
+  export BAT_THEME="Catppuccin Latte"
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 

@@ -84,13 +84,13 @@ export TZ=America/Los_Angeles
 #
 
 # Set variables that will be read by darken/brighten
-export BRIGHT_BAT='Solarized (light)'
-export BRIGHT_PROMPT='statusline -l'
-export BRIGHT_TERM='Solarized Light'
-
-export DARK_BAT='Solarized (dark)'
-export DARK_PROMPT='statusline -d'
-export DARK_TERM='Solarized Dark'
+# export BRIGHT_BAT='Solarized (light)'
+# export BRIGHT_PROMPT='statusline -l'
+# export BRIGHT_TERM='Solarized Light'
+#
+# export DARK_BAT='Solarized (dark)'
+# export DARK_PROMPT='statusline -d'
+# export DARK_TERM='Solarized Dark'
 
 # Disable Eternal Terminal telemtry
 # MisterTea/EternalTerminal/src/terminal/TelemetryService.cpp

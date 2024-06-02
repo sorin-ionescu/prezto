@@ -34,6 +34,10 @@ if (( $+commands[brew] )); then
   unset cache_file
 fi
 
+# Change stupid defaults
+export HOMEBREW_NO_INSTALL_CLEANUP=false
+
+
 #
 # Aliases
 #
