@@ -1,1 +1,1 @@
-../external/async/async.zsh
+source ${ZPREZTODIR}/modules/prompt/external/async/async.zsh

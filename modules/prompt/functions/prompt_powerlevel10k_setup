@@ -1,1 +1,1 @@
-../external/powerlevel10k/powerlevel10k.zsh-theme
+source ${ZPREZTODIR}/modules/prompt/external/powerlevel10k/powerlevel10k.zsh-theme

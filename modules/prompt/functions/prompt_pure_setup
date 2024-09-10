@@ -1,1 +1,1 @@
-../external/pure/pure.zsh
+source ${ZPREZTODIR}/modules/prompt/external/pure/pure.zsh

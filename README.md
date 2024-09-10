@@ -57,6 +57,30 @@ version is **4.3.11**.
     done
     ```
 
+    If you use **windows**, please use this command。
+    
+    ```bat
+    @echo off
+    setlocal enabledelayedexpansion
+    REM YOUR HOME DIR
+    set "HomeDir=%USERPROFILE%"
+    set "sourceDir=%HomeDir%\.zprezto\runcoms"
+    set "linkDir=%HomeDir%"
+    echo "sourceDir = %sourceDir%"
+    echo "linkDir = %linkDir%"
+    
+    if not exist "%linkDir%" mkdir "%linkDir%"
+    for /R "%sourceDir%" %%F in (*) do (
+        set "fileName=%%~nxF"
+        REM echo "filename=!fileName!"
+        REM echo "F=%%F"
+        REM pause
+        if /I not "!fileName!"=="README.md" (
+            mklink "%linkDir%\.!fileName!" "%%F"
+        )
+    )
+    ```
+    
     **Note:** If you already have any of the given configuration files, `ln` in
     the above operation will cause an error. In simple cases, you can load
     Prezto by adding the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
@@ -64,7 +88,7 @@ version is **4.3.11**.
     Zsh configuration intact. For more complicated setups, we recommend that you
     back up your original configs and replace them with the provided Prezto
     [_`runcoms`_][10].
-
+    
 04. Set Zsh as your default shell:
 
     ```console
