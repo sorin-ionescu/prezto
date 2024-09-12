@@ -56,7 +56,78 @@ version is **4.3.11**.
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
     ```
+    If you use windows, please use this command (save as `example.bat` and run it).
+    ```bat
+    @echo off
+    setlocal enabledelayedexpansion
+    REM Define Homedir
+    set "HomeDir=%USERPROFILE%"
+    set "sourceDir=%HomeDir%\.zprezto\runcoms"
+    set "linkDir=%HomeDir%"
+    echo "sourceDir = %sourceDir%"
+    echo "linkDir = %linkDir%"
 
+    REM Create Config Linking
+    if not exist "%linkDir%" mkdir "%linkDir%"
+    for /R "%sourceDir%" %%F in (*) do (
+        set "fileName=%%~nxF"
+        REM echo "filename=!fileName!"
+        REM echo "F=%%F"
+        REM pause
+        if /I not "!fileName!"=="README.md" (
+            mklink "%linkDir%\.!fileName!" "%%F"
+        )
+    )
+
+    REM Define 
+    set PROMPT_DIR="%HomeDir%\.zprezto\modules\prompt"
+    echo "PROMPT_DIR: %PROMPT_DIR%"
+    set array[0]="%PROMPT_DIR%\functions\async"
+    set array[1]="%PROMPT_DIR%\functions\prompt_agnoster_setup"
+    set array[2]="%PROMPT_DIR%\functions\prompt_powerlevel10k_setup"
+    set array[3]="%PROMPT_DIR%\functions\prompt_powerline_setup"
+    set array[4]="%PROMPT_DIR%\functions\prompt_pure_setup"
+
+    REM Del Prompt External Functions
+    for /l %%i in (0,1,4) do (
+        echo "!array[%%i]!"
+        del /f !array[%%i]!
+    )
+
+    REM Make Linking For External Functions
+    mklink "%PROMPT_DIR%\functions\async" "%PROMPT_DIR%\external\async\async.zsh"
+    mklink "%PROMPT_DIR%\functions\prompt_agnoster_setup" "%PROMPT_DIR%\external\agnoster\agnoster.zsh-theme"
+    mklink "%PROMPT_DIR%\functions\prompt_powerlevel10k_setup" "%PROMPT_DIR%\external\powerlevel10k\powerlevel10k.zsh-theme"
+    mklink "%PROMPT_DIR%\functions\prompt_powerline_setup" "%PROMPT_DIR%\external\powerline\prompt_powerline_setup"
+    mklink "%PROMPT_DIR%\functions\prompt_pure_setup" "%PROMPT_DIR%\external\pure\pure.zsh"
+
+    endlocal
+    ```
+
+    If you use **windows**, please use this command。
+    
+    ```bat
+    @echo off
+    setlocal enabledelayedexpansion
+    REM YOUR HOME DIR
+    set "HomeDir=%USERPROFILE%"
+    set "sourceDir=%HomeDir%\.zprezto\runcoms"
+    set "linkDir=%HomeDir%"
+    echo "sourceDir = %sourceDir%"
+    echo "linkDir = %linkDir%"
+    
+    if not exist "%linkDir%" mkdir "%linkDir%"
+    for /R "%sourceDir%" %%F in (*) do (
+        set "fileName=%%~nxF"
+        REM echo "filename=!fileName!"
+        REM echo "F=%%F"
+        REM pause
+        if /I not "!fileName!"=="README.md" (
+            mklink "%linkDir%\.!fileName!" "%%F"
+        )
+    )
+    ```
+    
     **Note:** If you already have any of the given configuration files, `ln` in
     the above operation will cause an error. In simple cases, you can load
     Prezto by adding the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
@@ -64,7 +135,7 @@ version is **4.3.11**.
     Zsh configuration intact. For more complicated setups, we recommend that you
     back up your original configs and replace them with the provided Prezto
     [_`runcoms`_][10].
-
+    
 04. Set Zsh as your default shell:
 
     ```console
