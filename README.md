@@ -60,7 +60,7 @@ version is **4.3.11**.
     ```bat
     @echo off
     setlocal enabledelayedexpansion
-    REM Define Homedir (If use zsh --login to use zsh please set HomeDir as the absolute path of /home/xxxx in your Windows (like C:/MSYS2/home/xxxx))
+    REM Define Homedir (If use zsh --login to use zsh please set HomeDir as the absolute path of /home/xxxx in your Windows (like C:\MSYS2\home\xxxx))
     set "HomeDir=%USERPROFILE%"
     set "sourceDir=%HomeDir%\.zprezto\runcoms"
     set "linkDir=%HomeDir%"
