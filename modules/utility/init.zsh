@@ -76,7 +76,7 @@ if zstyle -T ':prezto:module:utility' safe-ops; then
 fi
 
 # ls
-if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
+if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*(GNU|lsd) *} ]]; then
   # GNU Core Utilities
 
   if zstyle -T ':prezto:module:utility:ls' dirs-first; then
@@ -88,7 +88,7 @@ if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
     if (( ! $+LS_COLORS )); then
       # Try dircolors when available
       if is-callable 'dircolors'; then
-        eval "$(dircolors --sh $HOME/.dir_colors(.N))"
+        eval "$(dircolors --sh $HOME/.dir_colors(N))"
       else
         export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
       fi
@@ -122,7 +122,6 @@ alias lk='ll -Sr'        # Lists sorted by size, largest last.
 alias lt='ll -tr'        # Lists sorted by date, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls'            # Correction for common spelling error.
 
 if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
   alias lx='ll -XB'      # Lists sorted by extension (GNU only).

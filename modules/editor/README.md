@@ -12,6 +12,17 @@ Sets editor specific key bindings options and variables.
 
 ## Settings
 
+### Wordchars
+
+To change what characters are considered part of a word, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:editor' wordchars <chars>
+```
+
+Defaults to `*?_-.[]~&;!#$%^(){}<>`.
+
 ### Key bindings
 
 To enable key bindings, add the following to _`${ZDOTDIR:-$HOME}/.zpreztorc`_,

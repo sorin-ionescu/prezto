@@ -24,6 +24,13 @@ zstyle ':prezto:module:screen:auto-start' remote 'yes'
 
 ## Aliases
 
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:screen:alias' skip 'yes'
+```
+
 - `scr` is short for `screen`.
 - `scrl` lists sessions/socket directory.
 - `scrn` starts a new session.

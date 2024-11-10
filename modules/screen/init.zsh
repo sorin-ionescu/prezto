@@ -22,7 +22,7 @@ if [[ -z "$STY" && -z "$EMACS" && -z "$VIM" ]] && ( \
   session="$(
     screen -list 2> /dev/null \
       | sed '1d;$d' \
-      | awk '{print $1}' \
+      | awk '!/Dead/ {print $1}' \
       | head -1)"
 
   if [[ -n "$session" ]]; then
@@ -36,7 +36,9 @@ fi
 # Aliases
 #
 
-alias scr='screen'
-alias scrl='screen -list'
-alias scrn='screen -U -S'
-alias scrr='screen -a -A -U -D -R'
+if ! zstyle -t ':prezto:module:screen:alias' skip; then
+  alias scr='screen'
+  alias scrl='screen -list'
+  alias scrn='screen -U -S'
+  alias scrr='screen -a -A -U -D -R'
+fi

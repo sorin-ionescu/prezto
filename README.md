@@ -41,7 +41,7 @@ version is **4.3.11**.
 
         ```sh
         export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
-        export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
+        [[ -d $XDG_CONFIG_HOME/zsh ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
         source "$ZDOTDIR/.zshenv"
         ```
 
@@ -72,14 +72,6 @@ version is **4.3.11**.
     ```
 
 05. Open a new Zsh terminal window or tab.
-
-### [Fig](https://fig.io)
-
-Fig adds apps, shortcuts, and autocomplete to your existing terminal.
-
-Install `prezto` in just one click.
-
-<a href="https://fig.io/plugins/other/prezto" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
 
 ### Troubleshooting
 

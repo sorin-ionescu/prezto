@@ -25,12 +25,7 @@ if [[ -s "${local_pyenv::=${PYENV_ROOT:-$HOME/.pyenv}/bin/pyenv}" ]] \
   # Ensure manually installed pyenv is added to path when present.
   [[ -s $local_pyenv ]] && path=($local_pyenv:h $path)
 
-  # pyenv 2+ requires shims to be added to path before being initialized.
-  autoload -Uz is-at-least
-  if is-at-least 2 ${"$(pyenv --version 2>&1)"[(w)2]}; then
-    eval "$(pyenv init --path zsh)"
-  fi
-
+  # Load pyenv into the shell session.
   eval "$(pyenv init - zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
@@ -50,7 +45,7 @@ fi
 unset local_pyenv
 
 # Return if requirements are not found.
-if (( ! $#commands[(i)python[23]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
+if (( ! $+commands[(i)python[0-9.]#] && ! $+functions[pyenv] && ! $+commands[conda] )); then
   return 1
 fi
 
@@ -136,8 +131,8 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) \
 
   if [[ $pyenv_virtualenvwrapper_plugin_found != "true" ]]; then
     # Fallback to standard 'virtualenvwrapper' if 'python' is available in '$path'.
-    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $#commands[(i)python[23]#] )); then
-      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[23]#]
+    if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $+commands[(i)python[0-9.]#] )); then
+      VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[0-9.]#]
     fi
 
     virtualenvwrapper_sources=(
@@ -171,6 +166,8 @@ fi
 # Aliases
 #
 
-alias py='python'
-alias py2='python2'
-alias py3='python3'
+if ! zstyle -t ':prezto:module:python:alias' skip; then
+  alias py='python'
+  alias py2='python2'
+  alias py3='python3'
+fi
