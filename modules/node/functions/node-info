@@ -16,7 +16,8 @@ typeset -gA node_info
 if (( $+commands[nodenv] )); then
   version="${${$(nodenv version)#v}[(w)0]}"
 elif (( $+commands[volta] )); then
-  version="${${$(volta list node | grep 'default')#⚡ }[(w)2]}"
+  # Parse Volta output format: "runtime node@22.12.0 (default)"
+  version="${${$(volta list node | grep 'default')#*@}%% *}"
 elif (( $+functions[nvm_version] )); then
   version="${$(nvm_version)#v}"
 elif (( $+commands[node] )) ; then
