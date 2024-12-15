@@ -8,18 +8,22 @@
 #   Indrajit Raychaudhuri <irc@indrajit.com>
 #
 
-# Possible lookup locations for manually installed nodenv and nvm.
+# Possible lookup locations for manually installed version managers
 local_nodenv_paths=({$NODENV_ROOT,{$XDG_CONFIG_HOME/,$HOME/.}nodenv}/bin/nodenv(N))
 local_nvm_paths=({$NVM_DIR,{$XDG_CONFIG_HOME/,$HOME/.}nvm}/nvm.sh(N))
+local_volta_paths=({$VOLTA_HOME,$HOME/.volta}/bin/volta(N))
 
 # Load manually installed or package manager installed nodenv into the shell
 # session.
 if (( $#local_nodenv_paths || $+commands[nodenv] )); then
-
   # Ensure manually installed nodenv is added to path when present.
   [[ -s $local_nodenv_paths[1] ]] && path=($local_nodenv_paths[1]:h $path)
-
   eval "$(nodenv init - zsh)"
+
+# Use volta if it's installed
+elif (( $#local_volta_paths || $+commands[volta] )); then
+  export VOLTA_HOME="${VOLTA_HOME:-$HOME/.volta}"
+  path=("$VOLTA_HOME/bin" $path)
 
 # Load manually installed nvm into the shell session.
 elif (( $#local_nvm_paths )); then
@@ -31,7 +35,7 @@ elif (( $+commands[brew] )) \
   source "$nvm_path/nvm.sh" --no-use
 fi
 
-unset local_n{odenv,vm}_paths nvm_path
+unset local_{nodenv,nvm,volta}_paths nvm_path
 
 # Return if requirements are not found.
 if (( ! $+commands[node] && ! $#functions[(i)n(odenv|vm)] )); then
@@ -64,4 +68,12 @@ if ! zstyle -t ':prezto:module:node:alias' skip; then
   alias npmci='npm ci'
   alias npmcit='npm cit'
   alias npmit='npm it'
+
+  # Add Volta-specific aliases if Volta is installed
+  if (( $+commands[volta] )); then
+    alias vl='volta list'
+    alias vla='volta list all'
+    alias vi='volta install'
+    alias vp='volta pin'
+  fi
 fi
