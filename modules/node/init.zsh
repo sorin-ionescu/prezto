@@ -38,7 +38,7 @@ fi
 unset local_{nodenv,nvm,volta}_paths nvm_path
 
 # Return if requirements are not found.
-if (( ! $+commands[node] && ! $#functions[(i)n(odenv|vm)] )); then
+if (( ! $+commands[node] && ! $#functions[(i)n(odenv|vm)] && ! $+commands[volta] )); then
   return 1
 fi
 
