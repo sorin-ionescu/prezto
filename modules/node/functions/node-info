@@ -6,8 +6,6 @@
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
 #
 
-# function node-info {
-
 local version
 local version_format
 local version_formatted
@@ -17,6 +15,8 @@ typeset -gA node_info
 
 if (( $+commands[nodenv] )); then
   version="${${$(nodenv version)#v}[(w)0]}"
+elif (( $+commands[volta] )); then
+  version="${${$(volta list node | grep 'default')#⚡ }[(w)2]}"
 elif (( $+functions[nvm_version] )); then
   version="${$(nvm_version)#v}"
 elif (( $+commands[node] )) ; then
@@ -28,5 +28,3 @@ if [[ "$version" != (none|system) ]]; then
   zformat -f version_formatted "$version_format" "v:$version"
   node_info[version]="$version_formatted"
 fi
-
-# }
