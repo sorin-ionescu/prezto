@@ -71,7 +71,7 @@ function _python-workon-cwd {
     ENV_NAME="$PROJECT_ROOT:t"
   fi
   if [[ -n $CD_VIRTUAL_ENV && "$ENV_NAME" != "$CD_VIRTUAL_ENV" ]]; then
-    # We've just left the repo, deactivate the environment.
+    # Weve just left the repo, deactivate the environment.
     # Note: this only happens if the virtualenv was activated automatically.
     deactivate && unset CD_VIRTUAL_ENV
   fi
@@ -170,4 +170,10 @@ if ! zstyle -t ':prezto:module:python:alias' skip; then
   alias py='python'
   alias py2='python2'
   alias py3='python3'
+  alias pip='function _pip(){
+      if [ $1 = "search" ]; then
+          pip_search "$2";
+      else pip "$@";
+      fi;
+  };_pip'
 fi

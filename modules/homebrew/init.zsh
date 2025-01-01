@@ -35,7 +35,7 @@ if (( $+commands[brew] )); then
 fi
 
 # Change stupid defaults
-export HOMEBREW_NO_INSTALL_CLEANUP=false
+export HOMEBREW_NO_INSTALL_CLEANUP=1
 
 
 #
