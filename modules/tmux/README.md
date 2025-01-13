@@ -31,6 +31,17 @@ You can change the default session name with:
 zstyle ':prezto:module:tmux:session' name '<YOUR DEFAULT SESSION NAME>'
 ```
 
+A session name may also be specified in an environment variable before ZSH runs.
+
+```sh
+env tmux_session='<SESSION NAME>' zsh
+```
+
+This can be useful for example to connect to a specific remote session
+connecting via SSH (note that OpenSSH needs to be configured to pass on that
+environment variable). It can also be used with window managers to set keybindings
+that launch terminals with specific sessions.
+
 With `auto-start` enabled, you may want to control how multiple sessions are
 managed. The `destroy-unattached` option of tmux controls if the unattached
 sessions must be kept alive, making sessions available for later use, configured
