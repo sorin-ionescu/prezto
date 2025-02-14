@@ -23,6 +23,57 @@ version is **4.3.11**.
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
     ```
 
+    If you use `windows` with `msys2`,use this command.
+    
+    ```console
+    export MSYS="winsymlinks:lnk"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+    ```
+
+    If you use windows without msys2, you need git clone first and use this command to solve `no such file or directory: ../external/async/async.zsh`(save as `example.bat` and run it).
+    
+    ```bat
+    @echo off
+    setlocal enabledelayedexpansion
+    REM Define Homedir (If use zsh --login to use zsh please set HomeDir as the absolute path of /home/xxxx in your Windows (like C:\msys64\home\xxxx))
+    set "HomeDir=C:\msys64\home\xxxx"
+    set "sourceDir=%HomeDir%\.zprezto\runcoms"
+    set "linkDir=%HomeDir%"
+    echo "sourceDir = %sourceDir%"
+    echo "linkDir = %linkDir%"
+    REM Create Config Linking
+    if not exist "%linkDir%" mkdir "%linkDir%"
+    for /R "%sourceDir%" %%F in (*) do (
+        set "fileName=%%~nxF"
+        REM echo "filename=!fileName!"
+        REM echo "F=%%F"
+        REM pause
+        if /I not "!fileName!"=="README.md" (
+            mklink "%linkDir%\.!fileName!" "%%F"
+        )
+    )
+    REM Define
+    set PROMPT_DIR="%HomeDir%\.zprezto\modules\prompt"
+    echo "PROMPT_DIR: %PROMPT_DIR%"
+    set array[0]="%PROMPT_DIR%\functions\async"
+    set array[1]="%PROMPT_DIR%\functions\prompt_agnoster_setup"
+    set array[2]="%PROMPT_DIR%\functions\prompt_powerlevel10k_setup"
+    set array[3]="%PROMPT_DIR%\functions\prompt_powerline_setup"
+    set array[4]="%PROMPT_DIR%\functions\prompt_pure_setup"
+    REM Del Prompt External Functions
+    for /l %%i in (0,1,4) do (
+        echo "!array[%%i]!"
+        del /f !array[%%i]!
+    )
+    REM Make Linking For External Functions
+    mklink "%PROMPT_DIR%\functions\async" "%PROMPT_DIR%\external\async\async.zsh"
+    mklink "%PROMPT_DIR%\functions\prompt_agnoster_setup" "%PROMPT_DIR%\external\agnoster\agnoster.zsh-theme"
+    mklink "%PROMPT_DIR%\functions\prompt_powerlevel10k_setup" "%PROMPT_DIR%\external\powerlevel10k\powerlevel10k.zsh-theme"
+    mklink "%PROMPT_DIR%\functions\prompt_powerline_setup" "%PROMPT_DIR%\external\powerline\prompt_powerline_setup"
+    mklink "%PROMPT_DIR%\functions\prompt_pure_setup" "%PROMPT_DIR%\external\pure\pure.zsh"
+    endlocal
+    ```
+
     <details>
       <summary><em>Optional: Installing in <code>$XDG_CONFIG_HOME</code></em></summary>
 
@@ -36,56 +87,7 @@ version is **4.3.11**.
         ```console
         git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
         ```
-
-        If you use `windows` with `msys2`,use this command.
-        ```console
-        export MSYS="winsymlinks:lnk"
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
-        ```
-        If you use windows without msys2, you need git clone first and use this command to solve `no such file or directory: ../external/async/async.zsh`(save as `example.bat` and run it).
-        ```bat
-        @echo off
-        setlocal enabledelayedexpansion
-        REM Define Homedir (If use zsh --login to use zsh please set HomeDir as the absolute path of /home/xxxx in your Windows (like C:\msys64\home\xxxx))
-        set "HomeDir=C:\msys64\home\xxxx"
-        set "sourceDir=%HomeDir%\.zprezto\runcoms"
-        set "linkDir=%HomeDir%"
-        echo "sourceDir = %sourceDir%"
-        echo "linkDir = %linkDir%"
-        REM Create Config Linking
-        if not exist "%linkDir%" mkdir "%linkDir%"
-        for /R "%sourceDir%" %%F in (*) do (
-            set "fileName=%%~nxF"
-            REM echo "filename=!fileName!"
-            REM echo "F=%%F"
-            REM pause
-            if /I not "!fileName!"=="README.md" (
-                mklink "%linkDir%\.!fileName!" "%%F"
-            )
-        )
-        REM Define
-        set PROMPT_DIR="%HomeDir%\.zprezto\modules\prompt"
-        echo "PROMPT_DIR: %PROMPT_DIR%"
-        set array[0]="%PROMPT_DIR%\functions\async"
-        set array[1]="%PROMPT_DIR%\functions\prompt_agnoster_setup"
-        set array[2]="%PROMPT_DIR%\functions\prompt_powerlevel10k_setup"
-        set array[3]="%PROMPT_DIR%\functions\prompt_powerline_setup"
-        set array[4]="%PROMPT_DIR%\functions\prompt_pure_setup"
-        REM Del Prompt External Functions
-        for /l %%i in (0,1,4) do (
-            echo "!array[%%i]!"
-            del /f !array[%%i]!
-        )
-        REM Make Linking For External Functions
-        mklink "%PROMPT_DIR%\functions\async" "%PROMPT_DIR%\external\async\async.zsh"
-        mklink "%PROMPT_DIR%\functions\prompt_agnoster_setup" "%PROMPT_DIR%\external\agnoster\agnoster.zsh-theme"
-        mklink "%PROMPT_DIR%\functions\prompt_powerlevel10k_setup" "%PROMPT_DIR%\external\powerlevel10k\powerlevel10k.zsh-theme"
-        mklink "%PROMPT_DIR%\functions\prompt_powerline_setup" "%PROMPT_DIR%\external\powerline\prompt_powerline_setup"
-        mklink "%PROMPT_DIR%\functions\prompt_pure_setup" "%PROMPT_DIR%\external\pure\pure.zsh"
-        endlocal
-        ```
-
-
+        
       - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
 
         ```sh
