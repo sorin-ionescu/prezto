@@ -18,10 +18,10 @@ fi
 #
 
 if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nano'
+  export EDITOR='vim'
 fi
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
+  export VISUAL='vim'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
