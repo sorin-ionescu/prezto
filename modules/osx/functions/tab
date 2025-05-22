@@ -7,50 +7,24 @@
 
 # function tab {
 
-local command="cd \\\"$PWD\\\""
-(( $# > 0 )) && command="${command}; $*"
+  local command="cd $(printf %q "$PWD")${*:+; $*}"
 
-the_app=$(
-  osascript 2> /dev/null <<EOF
-    tell application "System Events"
-      name of first item of (every process whose frontmost is true)
-    end tell
-EOF
-)
+  local the_app=$(osascript -e 'tell app "System Events" to name of first process whose frontmost is true' 2>/dev/null)
 
-[[ "$the_app" == 'Terminal' ]] && {
-  osascript 2> /dev/null <<EOF
-    tell application "System Events"
-      tell process "Terminal" to keystroke "t" using command down
-      tell application "Terminal" to do script "${command}" in front window
-    end tell
-EOF
-}
-
-[[ "$the_app" == 'iTerm' ]] && {
-  osascript 2> /dev/null <<EOF
-    tell application "iTerm"
-      set current_terminal to current terminal
-      tell current_terminal
-        launch session "Default Session"
-        set current_session to current session
-        tell current_session
-          write text "${command}"
-        end tell
-      end tell
-    end tell
-EOF
-}
-
-[[ "$the_app" == 'iTerm2' ]] && {
-  osascript 2> /dev/null <<EOF
-    tell application "iTerm2"
-      tell current window
-        create tab with default profile
-        tell current session to write text "${command}"
-      end tell
-    end tell
-EOF
-}
-
+  case "$the_app" in
+    Terminal)
+      osascript -e 'tell app "System Events" to tell process "Terminal" to keystroke "t" using command down' \
+                -e 'delay 0.5' \
+                -e 'tell app "Terminal" to do script "'"${command}"'" in front window' 2>/dev/null
+      ;;
+    iTerm|iTerm2)
+      osascript -e 'tell app "'"$the_app"'"' \
+                -e 'tell current window' \
+                -e 'create tab with default profile' \
+                -e 'delay 0.5' \
+                -e 'tell current session to write text "'"${command}"'"' \
+                -e 'end tell' \
+                -e 'end tell' 2>/dev/null
+      ;;
+  esac
 # }
