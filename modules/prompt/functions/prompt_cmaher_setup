@@ -49,7 +49,7 @@ function prompt_cmaher_setup {
   zstyle ':prezto:module:editor:info:keymap:alternate' format '«'
 
   # Define prompts.
-  PROMPT='%F{cyan}${PWD##*/}%f ${vcs_info_msg_0_} %F{red}${editor_info[keymap]}%f '
+  PROMPT='%F{cyan}${PWD##*/}%f${vcs_info_msg_0_}%F{red}${editor_info[keymap]}%f '
   RPROMPT=''
 }
 

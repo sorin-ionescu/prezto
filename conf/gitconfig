@@ -8,6 +8,7 @@
 [alias]
 	co = checkout
   c = commit
+  com = checkout master
   ca = commit --amend
   sh = stash
   shp = stash pop
@@ -64,8 +65,8 @@
 	smudge = git-media-smudge %f
 [hub]
 	protocol = ssh
-[url "https://github.com/"]
-	insteadOf = git://github.com/
+#[url "https://github.com/"]
+  #insteadOf = git://github.com/
 [credentaial]
 	helper = manager-core
 [credential]

@@ -131,7 +131,7 @@ function drmip {
 }
 
 alias d="docker"
-alias dc="docker-compose"
+alias dc="docker compose"
 alias dkillall='docker kill $(docker ps -q)'
 alias drmall='docker rm -f $(docker ps -aq)'
 alias drmx='drmp Exited'
@@ -277,7 +277,16 @@ function mkservice() {
   fi
 }
 
-alias m='make'
+function m() {
+  if [ -f Makefile ]; then
+    make $@
+  elif [ -f ../Makefile ]; then
+    pushd ..
+    make $@
+    popd
+  fi
+}
+
 function gr() {
   if [ -f gradlew ]; then
     ./gradlew $@
@@ -306,6 +315,7 @@ function jqq {
 
 alias jsclean='npm cache clean; rm -r ~/.npm'
 alias psed='perl -pe'
+alias npr='npm run'
 
 function awkc {
   fields=()
@@ -337,13 +347,7 @@ function pyv {
   fi
 }
 
-function pip {
-  if [[ -e ".pyv/bin/pip" ]]; then
-    .pyv/bin/pip $@
-  else
-    python -m pip
-  fi
-}
+alias python=python3
 
 alias dj='python manage.py'
 
@@ -441,3 +445,5 @@ alias kill-emacs="emacsclient -e '(kill-emacs)"
 # Set a fixed title for terminal so that scripts can find it by name
 echo $'\033]30;'zsh-term$'\007'
 
+
+. "$HOME/.local/bin/env"
