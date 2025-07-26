@@ -173,7 +173,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
 fi
 
 # Disable color and theme in dumb terminals.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ $TERM == dumb ]]; then
   zstyle ':prezto:*:*' color 'no'
   zstyle ':prezto:module:prompt' theme 'off'
 fi
