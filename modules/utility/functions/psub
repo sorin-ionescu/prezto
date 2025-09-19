@@ -9,8 +9,7 @@
 
 local usage pattern replacement modifiers
 
-usage="$(
-cat <<EOF
+usage="$(<<EOF
 usage: $0 [-option ...] [--] pattern replacement [file ...]
 
 options:
