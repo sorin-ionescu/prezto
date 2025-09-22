@@ -17,6 +17,20 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 unset min_zsh_version
 
+# Change the resolution of the SECONDS variable to be more useful for debugging.
+typeset -F SECONDS
+
+# logging convenience, mostly meant for debugging performance issues.
+function pdebuglog {
+  if ! zstyle -t ":prezto" debug; then
+    return
+  fi
+
+  local format="$1"
+  shift
+  printf "[%f] $format\n" $SECONDS "$@"
+}
+
 # zprezto convenience updater
 # The function is surrounded by ( ) instead of { } so it starts in a subshell
 # and won't affect the environment of the calling shell
@@ -94,7 +108,9 @@ function pmodload {
 
   # Load Prezto modules.
   for pmodule in "$pmodules[@]"; do
+    pdebuglog "Started loading %q" $pmodule
     if zstyle -t ":prezto:module:$pmodule" loaded 'yes' 'no'; then
+      pdebuglog "Module %q already loaded" $pmodule
       continue
     else
       locations=(${pmodule_dirs:+${^pmodule_dirs}/$pmodule(-/FN)})
@@ -134,6 +150,7 @@ function pmodload {
 
       if (( $? == 0 )); then
         zstyle ":prezto:module:$pmodule" loaded 'yes'
+        pdebuglog "Module %q loaded" $pmodule
       else
         # Remove the $fpath entry.
         fpath[(r)${pmodule_location}/functions]=()
@@ -151,6 +168,7 @@ function pmodload {
           done
         }
 
+        pdebuglog "Module %q failed to load" $pmodule
         zstyle ":prezto:module:$pmodule" loaded 'no'
       fi
     fi
