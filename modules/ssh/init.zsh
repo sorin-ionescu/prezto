@@ -35,7 +35,6 @@ fi
 if [[ -S "$SSH_AUTH_SOCK" && "$SSH_AUTH_SOCK" != "$_ssh_agent_sock" ]]; then
   mkdir -p "$_ssh_agent_sock:h"
   ln -sf "$SSH_AUTH_SOCK" "$_ssh_agent_sock"
-  export SSH_AUTH_SOCK="$_ssh_agent_sock"
 fi
 
 # Load identities.
