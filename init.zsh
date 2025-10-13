@@ -29,7 +29,7 @@ function zprezto-update {
       printf "running\ncd '%s' and then\n'git pull' " "${ZPREZTODIR}"
       printf "to manually pull and possibly merge in changes\n"
     }
-    cd -q -- "${ZPREZTODIR}" || return 7
+    builtin cd -q -- "${ZPREZTODIR}" || return 7
     local orig_branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
     if [[ "$orig_branch" == "master" ]]; then
       git fetch || return "$?"
