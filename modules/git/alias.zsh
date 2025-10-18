@@ -272,4 +272,12 @@ if ! zstyle -t ':prezto:module:git:alias' skip; then
   alias gwC='git clean --force'
   alias gwx='git rm -r'
   alias gwX='git rm -r --force'
+
+  # Worktree management (W)
+  alias gWa='git worktree add'
+  alias gWl='git worktree list'
+  alias gWx='git worktree remove'
+  alias gWX='git worktree remove --force'
+  alias gWm='git worktree move'
+  alias gWc='git worktree prune'
 fi
