@@ -7,13 +7,22 @@
 
 function manp {
   local page
-  if (( $# > 0 )); then
-    for page in "$@"; do
-      mandoc -T pdf "$(/usr/bin/man -w $page)" | open -fa Preview
-    done
-  else
-    print 'What manual page do you want?' >&2
+  local path
+
+  if (( $# == 0 )); then
+    return 1
   fi
+
+  for page in "$@"; do
+    path="$(/usr/bin/man -w -- "$page" 2>/dev/null)"
+
+    if [[ -z "$path" || ! -f "$path" ]]; then
+      print "No manual entry for $page" >&2
+      continue
+    fi
+
+    mandoc -T pdf -- "$path" | open -fa Preview
+  done
 }
 
 manp "$@"
