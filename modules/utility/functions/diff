@@ -8,8 +8,10 @@
 # function diff {
 
 if zstyle -t ':prezto:module:utility:diff' color \
+      && [[ -t 1 ]] \
       && (( $+commands[colordiff] )); then
   command diff "$@" | colordiff
+  return "${pipestatus[1]}"
 else
   command diff "$@"
 fi
