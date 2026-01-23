@@ -9,7 +9,8 @@
 
 if zstyle -t ':prezto:module:utility:diff' color \
       && (( $+commands[colordiff] )); then
-  command diff "$@" | colordiff
+  command diff "$@" | colordiff --color-term-output-only=yes
+  return "${pipestatus[1]}"
 else
   command diff "$@"
 fi
