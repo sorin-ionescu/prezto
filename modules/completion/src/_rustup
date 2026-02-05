@@ -15,15 +15,15 @@ _rustup() {
 
     local context curcontext="$curcontext" state line
     _arguments "${_arguments_options[@]}" : \
-'(-q --quiet)-v[Set log level to '\''DEBUG'\'' if '\''RUSTUP_LOG'\'' is unset]' \
-'(-q --quiet)--verbose[Set log level to '\''DEBUG'\'' if '\''RUSTUP_LOG'\'' is unset]' \
-'(-v --verbose)-q[Disable progress output, set log level to '\''WARN'\'' if '\''RUSTUP_LOG'\'' is unset]' \
-'(-v --verbose)--quiet[Disable progress output, set log level to '\''WARN'\'' if '\''RUSTUP_LOG'\'' is unset]' \
+'-v[Enable verbose output]' \
+'--verbose[Enable verbose output]' \
+'(-v --verbose)-q[Disable progress output]' \
+'(-v --verbose)--quiet[Disable progress output]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
 '--version[Print version]' \
-'::+toolchain -- Release channel (e.g. +stable) or custom toolchain to set override:_default' \
+'::+toolchain -- release channel (e.g. +stable) or custom toolchain to set override:_default' \
 ":: :_rustup_commands" \
 "*::: :->rustup" \
 && ret=0
@@ -33,136 +33,10 @@ _rustup() {
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:rustup-command-$line[2]:"
         case $line[2] in
-            (install)
-_arguments "${_arguments_options[@]}" : \
-'--profile=[]:PROFILE:(minimal default complete)' \
-'*-c+[Comma-separated list of components to be added on installation]:COMPONENT:_default' \
-'*--component=[Comma-separated list of components to be added on installation]:COMPONENT:_default' \
-'*-t+[Comma-separated list of targets to be added on installation]:TARGET:_default' \
-'*--target=[Comma-separated list of targets to be added on installation]:TARGET:_default' \
-'--no-self-update[Don'\''t perform self update when running the \`rustup toolchain install\` command]' \
-'--force[Force an update, even if some components are missing]' \
-'--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
-'--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
-'-h[Print help]' \
-'--help[Print help]' \
-'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
-&& ret=0
-;;
-(uninstall)
+            (dump-testament)
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
-&& ret=0
-;;
-(dump-testament)
-_arguments "${_arguments_options[@]}" : \
-'-h[Print help]' \
-'--help[Print help]' \
-&& ret=0
-;;
-(toolchain)
-_arguments "${_arguments_options[@]}" : \
-'-h[Print help]' \
-'--help[Print help]' \
-":: :_rustup__toolchain_commands" \
-"*::: :->toolchain" \
-&& ret=0
-
-    case $state in
-    (toolchain)
-        words=($line[1] "${words[@]}")
-        (( CURRENT += 1 ))
-        curcontext="${curcontext%:*:*}:rustup-toolchain-command-$line[1]:"
-        case $line[1] in
-            (list)
-_arguments "${_arguments_options[@]}" : \
-'-v[Enable verbose output with toolchain information]' \
-'--verbose[Enable verbose output with toolchain information]' \
-'(-v --verbose)-q[Force the output to be a single column]' \
-'(-v --verbose)--quiet[Force the output to be a single column]' \
-'-h[Print help]' \
-'--help[Print help]' \
-&& ret=0
-;;
-(install)
-_arguments "${_arguments_options[@]}" : \
-'--profile=[]:PROFILE:(minimal default complete)' \
-'*-c+[Comma-separated list of components to be added on installation]:COMPONENT:_default' \
-'*--component=[Comma-separated list of components to be added on installation]:COMPONENT:_default' \
-'*-t+[Comma-separated list of targets to be added on installation]:TARGET:_default' \
-'*--target=[Comma-separated list of targets to be added on installation]:TARGET:_default' \
-'--no-self-update[Don'\''t perform self update when running the \`rustup toolchain install\` command]' \
-'--force[Force an update, even if some components are missing]' \
-'--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
-'--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
-'-h[Print help]' \
-'--help[Print help]' \
-'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
-&& ret=0
-;;
-(uninstall)
-_arguments "${_arguments_options[@]}" : \
-'-h[Print help]' \
-'--help[Print help]' \
-'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
-&& ret=0
-;;
-(link)
-_arguments "${_arguments_options[@]}" : \
-'-h[Print help]' \
-'--help[Print help]' \
-':toolchain -- Custom toolchain name:_default' \
-':path -- Path to the directory:_files' \
-&& ret=0
-;;
-(help)
-_arguments "${_arguments_options[@]}" : \
-":: :_rustup__toolchain__help_commands" \
-"*::: :->help" \
-&& ret=0
-
-    case $state in
-    (help)
-        words=($line[1] "${words[@]}")
-        (( CURRENT += 1 ))
-        curcontext="${curcontext%:*:*}:rustup-toolchain-help-command-$line[1]:"
-        case $line[1] in
-            (list)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(install)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(uninstall)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(link)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(help)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-        esac
-    ;;
-esac
-;;
-        esac
-    ;;
-esac
-;;
-(default)
-_arguments "${_arguments_options[@]}" : \
-'--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
-'-h[Print help]' \
-'--help[Print help]' \
-'::toolchain -- '\''none'\'', a toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
 && ret=0
 ;;
 (show)
@@ -237,6 +111,24 @@ esac
     ;;
 esac
 ;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+'--profile=[]: :(minimal default complete)' \
+'--no-self-update[Don'\''t perform self-update when running the \`rustup install\` command]' \
+'--force[Force an update, even if some components are missing]' \
+'--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
+&& ret=0
+;;
 (update)
 _arguments "${_arguments_options[@]}" : \
 '--no-self-update[Don'\''t perform self update when running the \`rustup update\` command]' \
@@ -252,6 +144,106 @@ _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
+;;
+(default)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::toolchain -- '\''none'\'', a toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
+&& ret=0
+;;
+(toolchain)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_rustup__toolchain_commands" \
+"*::: :->toolchain" \
+&& ret=0
+
+    case $state in
+    (toolchain)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rustup-toolchain-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+'-v[Enable verbose output with toolchain information]' \
+'--verbose[Enable verbose output with toolchain information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+'--profile=[]: :(minimal default complete)' \
+'*-c+[Add specific components on installation]: :_default' \
+'*--component=[Add specific components on installation]: :_default' \
+'*-t+[Add specific targets on installation]: :_default' \
+'*--target=[Add specific targets on installation]: :_default' \
+'--no-self-update[Don'\''t perform self update when running the\`rustup toolchain install\` command]' \
+'--force[Force an update, even if some components are missing]' \
+'--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
+'--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
+&& ret=0
+;;
+(link)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':toolchain -- Custom toolchain name:_default' \
+':path -- Path to the directory:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_rustup__toolchain__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rustup-toolchain-help-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(link)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
 ;;
 (target)
 _arguments "${_arguments_options[@]}" : \
@@ -269,17 +261,15 @@ _arguments "${_arguments_options[@]}" : \
         case $line[1] in
             (list)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
 '--installed[List only installed targets]' \
-'-q[Force the output to be a single column]' \
-'--quiet[Force the output to be a single column]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
 ;;
 (add)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::target -- List of targets to install; "all" installs all available targets:_default' \
@@ -287,7 +277,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (remove)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::target -- List of targets to uninstall:_default' \
@@ -345,18 +335,16 @@ _arguments "${_arguments_options[@]}" : \
         case $line[1] in
             (list)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
 '--installed[List only installed components]' \
-'-q[Force the output to be a single column]' \
-'--quiet[Force the output to be a single column]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
 ;;
 (add)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
-'--target=[]:TARGET:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
+'--target=[]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::component:_default' \
@@ -364,8 +352,8 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (remove)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
-'--target=[]:TARGET:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
+'--target=[]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::component:_default' \
@@ -429,7 +417,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (set)
 _arguments "${_arguments_options[@]}" : \
-'--path=[Path to the directory]:PATH:_files' \
+'--path=[Path to the directory]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 ':toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see `rustup help toolchain`:_default' \
@@ -437,7 +425,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (unset)
 _arguments "${_arguments_options[@]}" : \
-'--path=[Path to the directory]:PATH:_files' \
+'--path=[Path to the directory]: :_default' \
 '--nonexistent[Remove override toolchain for all nonexistent directories]' \
 '-h[Print help]' \
 '--help[Print help]' \
@@ -490,7 +478,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (which)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', '\''1.8.0'\'', or a custom toolchain name. For more information see \`rustup help toolchain\`]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 ':command:_default' \
@@ -498,16 +486,13 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (doc)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
 '--path[Only print the path to the documentation]' \
 '--alloc[The Rust core allocation and collections library]' \
 '--book[The Rust Programming Language book]' \
 '--cargo[The Cargo Book]' \
-'--clippy[The Clippy Documentation]' \
 '--core[The Rust Core Library]' \
 '--edition-guide[The Rust Edition Guide]' \
-'--embedded-book[The Embedded Rust Book]' \
-'--error-codes[The Rust Error Codes Index]' \
 '--nomicon[The Dark Arts of Advanced and Unsafe Rust Programming]' \
 '--proc_macro[A support library for macro authors when defining new macros]' \
 '--reference[The Rust Reference]' \
@@ -515,9 +500,9 @@ _arguments "${_arguments_options[@]}" : \
 '--rustc[The compiler for the Rust programming language]' \
 '--rustdoc[Documentation generator for Rust projects]' \
 '--std[Standard library API documentation]' \
-'--style-guide[The Rust Style Guide]' \
 '--test[Support code for rustc'\''s built in unit-test and micro-benchmarking framework]' \
 '--unstable-book[The Unstable Book]' \
+'--embedded-book[The Embedded Rust Book]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '::topic -- Topic such as '\''core'\'', '\''fn'\'', '\''usize'\'', '\''eprintln!'\'', '\''core\:\:arch'\'', '\''alloc\:\:format!'\'', '\''std\:\:fs'\'', '\''std\:\:fs\:\:read_dir'\'', '\''std\:\:io\:\:Bytes'\'', '\''std\:\:iter\:\:Sum'\'', '\''std\:\:io\:\:error\:\:Result'\'' etc...:_default' \
@@ -525,7 +510,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (man)
 _arguments "${_arguments_options[@]}" : \
-'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
+'--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 ':command:_default' \
@@ -625,21 +610,14 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-'::profile_name:(minimal default complete)' \
+':profile-name:(minimal default complete)' \
 && ret=0
 ;;
 (auto-self-update)
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-'::auto_self_update_mode:(enable disable check-only)' \
-&& ret=0
-;;
-(auto-install)
-_arguments "${_arguments_options[@]}" : \
-'-h[Print help]' \
-'--help[Print help]' \
-'::auto_install_mode:(enable disable)' \
+':auto-self-update-mode:(enable disable check-only)' \
 && ret=0
 ;;
 (help)
@@ -666,10 +644,6 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
-(auto-install)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
 (help)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -686,7 +660,7 @@ esac
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-':shell:(bash elvish fish powershell zsh)' \
+'::shell:(bash elvish fish powershell zsh)' \
 '::command:(rustup cargo)' \
 && ret=0
 ;;
@@ -702,7 +676,39 @@ _arguments "${_arguments_options[@]}" : \
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:rustup-help-command-$line[1]:"
         case $line[1] in
-            (install)
+            (dump-testament)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+":: :_rustup__help__show_commands" \
+"*::: :->show" \
+&& ret=0
+
+    case $state in
+    (show)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rustup-help-show-command-$line[1]:"
+        case $line[1] in
+            (active-toolchain)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(home)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(profile)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(install)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -710,7 +716,15 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
-(dump-testament)
+(update)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(check)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(default)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -745,46 +759,6 @@ _arguments "${_arguments_options[@]}" : \
         esac
     ;;
 esac
-;;
-(default)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(show)
-_arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__show_commands" \
-"*::: :->show" \
-&& ret=0
-
-    case $state in
-    (show)
-        words=($line[1] "${words[@]}")
-        (( CURRENT += 1 ))
-        curcontext="${curcontext%:*:*}:rustup-help-show-command-$line[1]:"
-        case $line[1] in
-            (active-toolchain)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(home)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(profile)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-        esac
-    ;;
-esac
-;;
-(update)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
-(check)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
 ;;
 (target)
 _arguments "${_arguments_options[@]}" : \
@@ -938,10 +912,6 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
-(auto-install)
-_arguments "${_arguments_options[@]}" : \
-&& ret=0
-;;
         esac
     ;;
 esac
@@ -966,14 +936,14 @@ esac
 (( $+functions[_rustup_commands] )) ||
 _rustup_commands() {
     local commands; commands=(
-'install:Install or update the given toolchains, or by default the active toolchain' \
-'uninstall:Uninstall the given toolchains' \
 'dump-testament:Dump information about the build' \
-'toolchain:Install, uninstall, or list toolchains' \
-'default:Set the default toolchain' \
 'show:Show the active and installed toolchains or profiles' \
+'install:Update Rust toolchains' \
+'uninstall:Uninstall Rust toolchains' \
 'update:Update Rust toolchains and rustup' \
 'check:Check for updates to Rust toolchains and rustup' \
+'default:Set the default toolchain' \
+'toolchain:Modify or query the installed toolchains' \
 'target:Modify a toolchain'\''s supported targets' \
 'component:Modify a toolchain'\''s installed components' \
 'override:Modify toolchain overrides for directories' \
@@ -1071,14 +1041,14 @@ _rustup__dump-testament_commands() {
 (( $+functions[_rustup__help_commands] )) ||
 _rustup__help_commands() {
     local commands; commands=(
-'install:Install or update the given toolchains, or by default the active toolchain' \
-'uninstall:Uninstall the given toolchains' \
 'dump-testament:Dump information about the build' \
-'toolchain:Install, uninstall, or list toolchains' \
-'default:Set the default toolchain' \
 'show:Show the active and installed toolchains or profiles' \
+'install:Update Rust toolchains' \
+'uninstall:Uninstall Rust toolchains' \
 'update:Update Rust toolchains and rustup' \
 'check:Check for updates to Rust toolchains and rustup' \
+'default:Set the default toolchain' \
+'toolchain:Modify or query the installed toolchains' \
 'target:Modify a toolchain'\''s supported targets' \
 'component:Modify a toolchain'\''s installed components' \
 'override:Modify toolchain overrides for directories' \
@@ -1190,8 +1160,8 @@ _rustup__help__run_commands() {
 _rustup__help__self_commands() {
     local commands; commands=(
 'update:Download and install updates to rustup' \
-'uninstall:Uninstall rustup' \
-'upgrade-data:Upgrade the internal data format' \
+'uninstall:Uninstall rustup.' \
+'upgrade-data:Upgrade the internal data format.' \
     )
     _describe -t commands 'rustup help self commands' commands "$@"
 }
@@ -1216,14 +1186,8 @@ _rustup__help__set_commands() {
 'default-host:The triple used to identify toolchains when not specified' \
 'profile:The default components installed with a toolchain' \
 'auto-self-update:The rustup auto self update mode' \
-'auto-install:The auto toolchain install mode' \
     )
     _describe -t commands 'rustup help set commands' commands "$@"
-}
-(( $+functions[_rustup__help__set__auto-install_commands] )) ||
-_rustup__help__set__auto-install_commands() {
-    local commands; commands=()
-    _describe -t commands 'rustup help set auto-install commands' commands "$@"
 }
 (( $+functions[_rustup__help__set__auto-self-update_commands] )) ||
 _rustup__help__set__auto-self-update_commands() {
@@ -1292,8 +1256,8 @@ _rustup__help__target__remove_commands() {
 _rustup__help__toolchain_commands() {
     local commands; commands=(
 'list:List installed toolchains' \
-'install:Install or update the given toolchains, or by default the active toolchain' \
-'uninstall:Uninstall the given toolchains' \
+'install:Install or update a given toolchain' \
+'uninstall:Uninstall a toolchain' \
 'link:Create a custom toolchain by symlinking to a directory' \
     )
     _describe -t commands 'rustup help toolchain commands' commands "$@"
@@ -1407,8 +1371,8 @@ _rustup__run_commands() {
 _rustup__self_commands() {
     local commands; commands=(
 'update:Download and install updates to rustup' \
-'uninstall:Uninstall rustup' \
-'upgrade-data:Upgrade the internal data format' \
+'uninstall:Uninstall rustup.' \
+'upgrade-data:Upgrade the internal data format.' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'rustup self commands' commands "$@"
@@ -1417,8 +1381,8 @@ _rustup__self_commands() {
 _rustup__self__help_commands() {
     local commands; commands=(
 'update:Download and install updates to rustup' \
-'uninstall:Uninstall rustup' \
-'upgrade-data:Upgrade the internal data format' \
+'uninstall:Uninstall rustup.' \
+'upgrade-data:Upgrade the internal data format.' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'rustup self help commands' commands "$@"
@@ -1464,15 +1428,9 @@ _rustup__set_commands() {
 'default-host:The triple used to identify toolchains when not specified' \
 'profile:The default components installed with a toolchain' \
 'auto-self-update:The rustup auto self update mode' \
-'auto-install:The auto toolchain install mode' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'rustup set commands' commands "$@"
-}
-(( $+functions[_rustup__set__auto-install_commands] )) ||
-_rustup__set__auto-install_commands() {
-    local commands; commands=()
-    _describe -t commands 'rustup set auto-install commands' commands "$@"
 }
 (( $+functions[_rustup__set__auto-self-update_commands] )) ||
 _rustup__set__auto-self-update_commands() {
@@ -1490,15 +1448,9 @@ _rustup__set__help_commands() {
 'default-host:The triple used to identify toolchains when not specified' \
 'profile:The default components installed with a toolchain' \
 'auto-self-update:The rustup auto self update mode' \
-'auto-install:The auto toolchain install mode' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'rustup set help commands' commands "$@"
-}
-(( $+functions[_rustup__set__help__auto-install_commands] )) ||
-_rustup__set__help__auto-install_commands() {
-    local commands; commands=()
-    _describe -t commands 'rustup set help auto-install commands' commands "$@"
 }
 (( $+functions[_rustup__set__help__auto-self-update_commands] )) ||
 _rustup__set__help__auto-self-update_commands() {
@@ -1639,8 +1591,8 @@ _rustup__target__remove_commands() {
 _rustup__toolchain_commands() {
     local commands; commands=(
 'list:List installed toolchains' \
-'install:Install or update the given toolchains, or by default the active toolchain' \
-'uninstall:Uninstall the given toolchains' \
+'install:Install or update a given toolchain' \
+'uninstall:Uninstall a toolchain' \
 'link:Create a custom toolchain by symlinking to a directory' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
@@ -1650,8 +1602,8 @@ _rustup__toolchain_commands() {
 _rustup__toolchain__help_commands() {
     local commands; commands=(
 'list:List installed toolchains' \
-'install:Install or update the given toolchains, or by default the active toolchain' \
-'uninstall:Uninstall the given toolchains' \
+'install:Install or update a given toolchain' \
+'uninstall:Uninstall a toolchain' \
 'link:Create a custom toolchain by symlinking to a directory' \
 'help:Print this message or the help of the given subcommand(s)' \
     )

@@ -3,8 +3,8 @@
 #
 # ZSH Completion for conda (http://conda.pydata.org/)
 #
-# Author: Valentin Haenel <valentin@haenel.co>  (https://github.com/esc/)
-# Licence: WTFPL (http://sam.zoy.org/wtfpl/)
+# Authors: The conda-zsh-completion contributors
+# Licence: BSD-3-Clause (https://opensource.org/license/BSD-3-clause)
 # Version: 0.11
 # Homepage: https://github.com/conda-incubator/conda-zsh-completion
 # Demo: https://asciinema.org/a/16516
