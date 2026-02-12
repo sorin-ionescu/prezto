@@ -35,3 +35,4 @@ jest/
 .gradle/
 lscratch*
 *.iml
+lnotes/

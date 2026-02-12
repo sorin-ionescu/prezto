@@ -79,65 +79,65 @@
 (global-set-key (kbd "C-l") 'prefix-ctrl-l)
 
 (after! evil
-        ;; enable evil movement in the ex commandline
-        (setq evil-want-minibuffer t)
-        (evil-select-search-module 'evil-search-module 'evil-search)
+  ;; enable evil movement in the ex commandline
+  (setq evil-want-minibuffer t)
+  (evil-select-search-module 'evil-search-module 'evil-search)
 
-        (map! :after evil
-              :map evil-normal-state-map
-              "n" #'evil-backward-char
-              "e" #'evil-next-line
-              "E" #'evil-join
-              "o" #'evil-previous-line
-              "i" #'evil-forward-char
-              "k" #'evil-forward-word-end
-              "K" #'evil-forward-WORD-end
-              "h" #'evil-insert
-              "H" #'evil-insert-line
-              "j" #'evil-ex-search-next
-              "J" #'evil-ex-search-previous
-              "l" #'evil-open-below
-              "L" #'evil-open-above
+  (map! :after evil
+        :map evil-normal-state-map
+        "n" #'evil-backward-char
+        "e" #'evil-next-line
+        "E" #'evil-join
+        "o" #'evil-previous-line
+        "i" #'evil-forward-char
+        "k" #'evil-forward-word-end
+        "K" #'evil-forward-WORD-end
+        "h" #'evil-insert
+        "H" #'evil-insert-line
+        "j" #'evil-ex-search-next
+        "J" #'evil-ex-search-previous
+        "l" #'evil-open-below
+        "L" #'evil-open-above
 
-              "g z ." #'evil-mc-make-cursor-here
-              "g z ;" #'evil-mc-pause-cursors
-              "g z :" #'evil-mc-resume-cursors
-              "g z e" #'evil-mc-make-cursor-move-next-line
-              "g z o" #'evil-mc-make-cursor-move-prev-line)
-        (map! :after evil
-              :map evil-motion-state-map
-              "n" #'evil-backward-char
-              "e" #'evil-next-line
-              "o" #'evil-previous-line
-              "i" #'evil-forward-char
-              "k" #'evil-forward-word-end
-              "K" #'evil-forward-WORD-end
-              "j" #'evil-ex-search-next
-              "J" #'evil-ex-search-previous
-              "l" #'evil-open-below
-              "L" #'evil-open-above)
-        (map! :after evil
-              :map evil-visual-state-map
-              "n" #'evil-backward-char
-              "e" #'evil-next-line
-              "o" #'evil-previous-line
-              "i" #'evil-forward-char
-              "k" #'evil-forward-word-end
-              "K" #'evil-forward-WORD-end
-              "h w" #'evil-inner-word
-              "h W" #'evil-inner-WORD
-              "j" #'evil-ex-search-next
-              "J" #'evil-ex-search-previous
-              "l" #'evil-open-below
-              "L" #'evil-open-above
+        "g z ." #'evil-mc-make-cursor-here
+        "g z ;" #'evil-mc-pause-cursors
+        "g z :" #'evil-mc-resume-cursors
+        "g z e" #'evil-mc-make-cursor-move-next-line
+        "g z o" #'evil-mc-make-cursor-move-prev-line)
+  (map! :after evil
+        :map evil-motion-state-map
+        "n" #'evil-backward-char
+        "e" #'evil-next-line
+        "o" #'evil-previous-line
+        "i" #'evil-forward-char
+        "k" #'evil-forward-word-end
+        "K" #'evil-forward-WORD-end
+        "j" #'evil-ex-search-next
+        "J" #'evil-ex-search-previous
+        "l" #'evil-open-below
+        "L" #'evil-open-above)
+  (map! :after evil
+        :map evil-visual-state-map
+        "n" #'evil-backward-char
+        "e" #'evil-next-line
+        "o" #'evil-previous-line
+        "i" #'evil-forward-char
+        "k" #'evil-forward-word-end
+        "K" #'evil-forward-WORD-end
+        "h w" #'evil-inner-word
+        "h W" #'evil-inner-WORD
+        "j" #'evil-ex-search-next
+        "J" #'evil-ex-search-previous
+        "l" #'evil-open-below
+        "L" #'evil-open-above
 
-              "." #'evil-repeat)
-        (map! :after evil
-              :map evil-window-map
-              "n" #'evil-window-left
-              "e" #'evil-window-down
-              "o" #'evil-window-up
-              "i" #'evil-window-right))
+        "." #'evil-repeat)
+  (map! :after evil
+        :map evil-window-map
+        "n" #'evil-window-left
+        "e" #'evil-window-down
+        "o" #'evil-window-up
+        "i" #'evil-window-right))
 
 (map! :leader
       ;; "w n" #'evil-window-left
@@ -148,6 +148,8 @@
       "e y" #'csm-copy-to-clipboard
       "e p" #'csm-paste-from-clipboard
       "e c" #'comment-line
+
+      "e t" #'csm-term
       ;; "e s" #'sp-forward-slurp-sexp
       ;; "e S" #'sp-backward-slurp-sexp
       ;; "e b" #'sp-forward-barf-sexp
@@ -158,7 +160,10 @@
       ;; "b e" #'csm-switch-to-shell
 
       "b L" #'csm-show-message-log
-      "=" 'csm-indent-buffer)
+      "=" #'csm-indent-buffer
+
+      "s R" #'projectile-replace-regexp)
+
 
 (map!
  "C-S-h" #'evil-window-split
@@ -181,26 +186,30 @@
  "C-/" #'comment-line)
 
 (defun csm-paste-from-clipboard ()
-       (interactive)
-       (setq select-enable-clipboard t)
-       (yank)
-       (setq select-enable-clipboard nil))
+  (interactive)
+  (setq select-enable-clipboard t)
+  (yank)
+  (setq select-enable-clipboard nil))
 
 (defun csm-copy-to-clipboard()
-       (interactive)
-       (setq select-enable-clipboard t)
-       (kill-ring-save (region-beginning) (region-end))
-       (setq select-enable-clipboard nil))
+  (interactive)
+  (setq select-enable-clipboard t)
+  (kill-ring-save (region-beginning) (region-end))
+  (setq select-enable-clipboard nil))
 
 (defun csm-indent-buffer ()
-       "Indents an entire buffer using the default intenting scheme."
-       (interactive)
-       (save-excursion
-        (delete-trailing-whitespace)
-        (indent-region (point-min) (point-max) nil)
-        (untabify (point-min) (point-max))))
+  "Indents an entire buffer using the default intenting scheme."
+  (interactive)
+  (save-excursion
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)
+    (untabify (point-min) (point-max))))
 
 (defun csm-show-message-log ()
-       "Show the message log bufffer. Print to log with (message ...)"
-       (interactive)
-       (switch-to-buffer " *Message-Log*"))
+  "Show the message log bufffer. Print to log with (message ...)"
+  (interactive)
+  (switch-to-buffer " *Message-Log*"))
+
+(defun csm-term ()
+  (interactive)
+  (term "/bin/zsh"))

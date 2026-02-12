@@ -131,7 +131,7 @@ function drmip {
 }
 
 alias d="docker"
-alias dc="docker compose"
+alias dc="docker-compose"
 alias dkillall='docker kill $(docker ps -q)'
 alias drmall='docker rm -f $(docker ps -aq)'
 alias drmx='drmp Exited'
@@ -277,16 +277,7 @@ function mkservice() {
   fi
 }
 
-function m() {
-  if [ -f Makefile ]; then
-    make $@
-  elif [ -f ../Makefile ]; then
-    pushd ..
-    make $@
-    popd
-  fi
-}
-
+alias m='make'
 function gr() {
   if [ -f gradlew ]; then
     ./gradlew $@
@@ -315,7 +306,6 @@ function jqq {
 
 alias jsclean='npm cache clean; rm -r ~/.npm'
 alias psed='perl -pe'
-alias npr='npm run'
 
 function awkc {
   fields=()
@@ -334,20 +324,19 @@ alias octave='octave --no-gui'
 
 # initiate pyenv
 function pyv {
-  #export PTHYONPATH=$(pwd)
-  export PYTHONSTARTUP=$(pwd)/$PYDEVREPL
-  if [[ $# -eq 0 ]]; then
-    # create the virtual environment if it does not exist
-    if [[ ! -e ".pyv" ]]; then
-      python3 -m venv .pyv
-    fi
-    source .pyv/bin/activate
-  else
-    .pyv/bin/$1 ${@:2}
+  if [[ ! -e ".pyv" ]]; then
+    python3 -m venv .pyv
   fi
+  source .pyv/bin/activate  # commented out by conda initialize
 }
 
-alias python=python3
+function pip {
+  if [[ -e ".pyv/bin/pip" ]]; then
+    .pyv/bin/pip $@
+  else
+    python -m pip $@
+  fi
+}
 
 alias dj='python manage.py'
 
@@ -430,10 +419,6 @@ if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
 
-if [ -e "$HOME/.asdf/asdf.sh" ]; then
-  source "$HOME/.asdf/asdf.sh"
-fi
-
 alias lrock="luarocks --tree=./.luarocks"
 alias sshnh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias scpnh="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
@@ -445,5 +430,3 @@ alias kill-emacs="emacsclient -e '(kill-emacs)"
 # Set a fixed title for terminal so that scripts can find it by name
 echo $'\033]30;'zsh-term$'\007'
 
-
-. "$HOME/.local/bin/env"

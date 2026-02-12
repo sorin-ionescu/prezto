@@ -7,6 +7,8 @@
 	quotepath = false
 [alias]
 	co = checkout
+  com = checkout master
+  cob = checkout -b
   c = commit
   com = checkout master
   ca = commit --amend
@@ -72,4 +74,4 @@
 [credential]
 	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 [init]
-	defaultBranch = main
+	defaultBranch = master
