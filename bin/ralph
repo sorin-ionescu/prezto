@@ -6,6 +6,7 @@
 
 """Ralph: Ralph Wiggum loop for Claude Code."""
 
+import re
 import subprocess
 import tomllib
 from pathlib import Path
@@ -66,6 +67,21 @@ def load_config(ralphdir: Path) -> dict[str, Any]:
     return deep_merge(global_cfg, local_cfg)
 
 
+def expand_shorthands(text: str, expansions: dict[str, str]) -> str:
+    """Expand @sigil tokens in text using the expansions dict.
+
+    Only expands known sigils. Unknown @words are left as-is.
+    No recursive expansion.
+    """
+    def replacer(match: re.Match) -> str:
+        name = match.group(1)
+        if name in expansions:
+            return expansions[name].strip()
+        return match.group(0)  # leave unknown @words as-is
+
+    return re.sub(r"@(\w+)", replacer, text)
+
+
 @click.group()
 @click.option("--ralphdir", default=None, help="Override RALPHDIR path.")
 @click.pass_context
@@ -95,10 +111,25 @@ def init(ctx):
 
 
 @cli.command()
+@click.argument("plan_file", required=False)
 @click.pass_context
-def expand(ctx):
+def expand(ctx, plan_file):
     """Preview the expanded prompt."""
-    click.echo("ralph expand: not yet implemented")
+    ralphdir = ctx.obj["ralphdir"]
+    cfg = ctx.obj["config"]
+
+    if plan_file is None:
+        plan_file = ralphdir / "plan.md"
+    else:
+        plan_file = Path(plan_file)
+
+    if not plan_file.exists():
+        click.echo(f"Plan file not found: {plan_file}", err=True)
+        raise SystemExit(1)
+
+    text = plan_file.read_text()
+    expanded = expand_shorthands(text, cfg.get("expansions", {}))
+    click.echo(expanded)
 
 
 @cli.command()
