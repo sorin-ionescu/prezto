@@ -35,7 +35,9 @@ ln -sf "$SCRIPT_DIR/doom" "$HOME/.config/doom"
 
 # Claude settings and skills
 mkdir -p "$HOME/.claude/skills"
-ln -sf "$SCRIPT_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+if [[ ! -f "$HOME/.claude/settings.json" ]]; then
+  cp "$SCRIPT_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+fi
 for d in "$SCRIPT_DIR"/claude/skills/*/; do
   ln -sf "$d" "$HOME/.claude/skills/$(basename "$d")"
 done
