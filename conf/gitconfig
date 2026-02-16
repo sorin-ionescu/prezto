@@ -69,9 +69,7 @@
 	protocol = ssh
 #[url "https://github.com/"]
   #insteadOf = git://github.com/
-[credentaial]
-	helper = manager-core
-[credential]
-	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+[include]
+	path = ~/.gitconfig-local
 [init]
 	defaultBranch = master

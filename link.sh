@@ -1,12 +1,41 @@
 #!/usr/bin/env bash
 
-for f in `ls conf`; do
-  ln -sf $(pwd)/conf/$f $HOME/.$f
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Source local overrides if present
+# See zpreztoconf.example for available options
+if [[ -f "$HOME/.zpreztoconf" ]]; then
+  source "$HOME/.zpreztoconf"
+fi
+
+# Link conf files as dotfiles, applying any CONF_<name> overrides
+for f in "$SCRIPT_DIR"/conf/*; do
+  name="$(basename "$f")"
+  override_var="CONF_${name}"
+  if [[ -n "${!override_var}" ]]; then
+    ln -sf "$SCRIPT_DIR/${!override_var}" "$HOME/.$name"
+  else
+    ln -sf "$f" "$HOME/.$name"
+  fi
 done
 
-ln -sf $(pwd)/doom $HOME/.config/doom
+# Bin scripts
+mkdir -p "$HOME/bin"
+for f in "$SCRIPT_DIR"/bin/*; do
+  ln -sf "$f" "$HOME/bin/$(basename "$f")"
+done
 
-mkdir -p "$HOME/.claude/commands"
-for f in `ls claude-commands`; do
-  ln -sf $(pwd)/claude-commands/$f $HOME/.claude/commands/$f
+# Neovim (link vimrc as init.vim)
+mkdir -p "$HOME/.config/nvim"
+ln -sf "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+
+# Doom emacs
+mkdir -p "$HOME/.config"
+ln -sf "$SCRIPT_DIR/doom" "$HOME/.config/doom"
+
+# Claude settings and skills
+mkdir -p "$HOME/.claude/skills"
+ln -sf "$SCRIPT_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+for d in "$SCRIPT_DIR"/claude/skills/*/; do
+  ln -sf "$d" "$HOME/.claude/skills/$(basename "$d")"
 done

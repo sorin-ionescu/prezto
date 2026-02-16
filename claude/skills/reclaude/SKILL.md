@@ -1,4 +1,6 @@
-Update relevant CLAUDE.md files based on the changes made on the current branch.
+---
+description: Update relevant CLAUDE.md files based on the changes made on the current branch.
+---
 
 ## Instructions
 

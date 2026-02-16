@@ -1,0 +1,52 @@
+{
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.rs)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(git checkout:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git config:*)",
+      "Bash(git mv:*)",
+      "Bash(git rm:*)",
+      "Bash(git reset:*)",
+      "Bash(git branch:*)",
+      "Bash(git stash:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run watch:*)",
+      "Bash(gh api:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(curl:*)",
+      "Bash(chmod:*)",
+      "Bash(brew:*)",
+      "Bash(mise:*)",
+      "Bash(uv:*)",
+      "Bash(python3:*)",
+      "mcp__code-index-mcp__set_project_path",
+      "mcp__code-index-mcp__get_file_summary",
+      "mcp__code-index-mcp__build_deep_index",
+      "mcp__code-index-mcp__search_code_advanced",
+      "mcp__code-index-mcp__refresh_index",
+      "mcp__code-index-mcp__find_files"
+    ]
+  }
+}

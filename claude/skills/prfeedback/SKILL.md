@@ -1,4 +1,6 @@
-Address PR review comments for the current branch.
+---
+description: Address PR review comments for the current branch.
+---
 
 ## Instructions
 

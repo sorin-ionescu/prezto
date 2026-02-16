@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-xclip -sel clip
+if [[ "$(uname)" == "Darwin" ]]; then
+  /usr/bin/pbcopy "$@"
+else
+  xclip -sel clip "$@"
+fi

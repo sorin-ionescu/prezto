@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/Users/cmaher/.zsh/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 #
 # Executes commands at the start of an interactive session.
 
@@ -425,6 +432,8 @@ alias scpnh="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias niluuid="echo 00000000-0000-0000-0000-000000000000"
 
 alias kill-emacs="emacsclient -e '(kill-emacs)"
+alias npr="npm run"
+alias cdz="cd $HOME/.zprezto"
 
 
 # Set a fixed title for terminal so that scripts can find it by name

@@ -1,0 +1,7 @@
+# ~/.zpreztoconf — machine-local overrides for link.sh
+#
+# Override any conf file by setting CONF_<filename> to a path relative to .zprezto.
+# The default keyboard layout is workman. For qwerty:
+
+# CONF_vimrc=keyboards/qwerty/vimrc
+# CONF_ideavimrc=keyboards/qwerty/ideavimrc
