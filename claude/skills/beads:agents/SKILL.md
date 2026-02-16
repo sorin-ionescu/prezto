@@ -60,7 +60,8 @@ Constraints:
 
 When done:
 1. Close the issue: `bd close <id> -r "reason"`
-2. Return ONLY a 1-2 sentence summary of what you did and any key values/paths the next task might need
+2. Do NOT add bead IDs to commit messages — `bd sync` handles this
+3. Return ONLY a 1-2 sentence summary of what you did and any key values/paths the next task might need
 ```
 
 ## Common Mistakes

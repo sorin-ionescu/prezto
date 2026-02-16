@@ -103,5 +103,6 @@ If not present, do NOT use bd commands — tell the user beads isn't set up in t
 8. **Run `bd doctor` regularly** — it diagnoses issues, runs migrations, and updates configuration. Run it daily or after upgrades.
 9. **Upgrade frequently** — beads gets frequent bug fixes. Run `bd upgrade` at least every week or two.
 10. **Use short issue prefixes** — 2-3 character prefixes (e.g., `bd-`, `vc-`, `ef-`) keep output readable. Change with `bd` commands if needed.
+11. **Don't add bead IDs to commit messages** — `bd sync` handles the association between commits and issues automatically. No need for `Closes: bd-123` trailers or similar references in commits.
 
 $ARGUMENTS
