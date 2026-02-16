@@ -1,0 +1,46 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["click>=8.0"]
+# ///
+
+"""Ralph: Ralph Wiggum loop for Claude Code."""
+
+import click
+
+
+@click.group()
+def cli():
+    """Ralph Wiggum loop for Claude Code.
+
+    Repeatedly runs Claude Code with fresh context until a task is complete.
+    """
+    pass
+
+
+@cli.command()
+def run():
+    """Run the ralph loop."""
+    click.echo("ralph run: not yet implemented")
+
+
+@cli.command()
+def init():
+    """Initialize RALPHDIR with template plan and config."""
+    click.echo("ralph init: not yet implemented")
+
+
+@cli.command()
+def expand():
+    """Preview the expanded prompt."""
+    click.echo("ralph expand: not yet implemented")
+
+
+@cli.command()
+def expansions():
+    """List defined expansions."""
+    click.echo("ralph expansions: not yet implemented")
+
+
+if __name__ == "__main__":
+    cli()
