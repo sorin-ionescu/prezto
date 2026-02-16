@@ -6,40 +6,115 @@
 
 """Ralph: Ralph Wiggum loop for Claude Code."""
 
+import subprocess
+import tomllib
+from pathlib import Path
+from typing import Any
+
 import click
 
 
+DONE_MARKER = "<promise>DONE</promise>"
+DEFAULT_RALPHDIR_NAME = "openspec/ralph"
+GLOBAL_CONFIG_PATH = Path.home() / ".config" / "ralph" / "config.toml"
+
+
+def find_git_root() -> Path | None:
+    """Find the root of the current git repository."""
+    result = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        return Path(result.stdout.strip())
+    return None
+
+
+def find_ralphdir(override: str | None = None) -> Path:
+    """Resolve RALPHDIR: explicit override > git repo default."""
+    if override:
+        return Path(override)
+    git_root = find_git_root()
+    if git_root:
+        return git_root / DEFAULT_RALPHDIR_NAME
+    return Path.cwd() / DEFAULT_RALPHDIR_NAME
+
+
+def load_toml(path: Path) -> dict[str, Any]:
+    """Load a TOML file, returning empty dict if it doesn't exist."""
+    if not path.exists():
+        return {}
+    with open(path, "rb") as f:
+        return tomllib.load(f)
+
+
+def deep_merge(base: dict, override: dict) -> dict:
+    """Merge override into base, recursively for nested dicts."""
+    result = base.copy()
+    for key, value in override.items():
+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+            result[key] = deep_merge(result[key], value)
+        else:
+            result[key] = value
+    return result
+
+
+def load_config(ralphdir: Path) -> dict[str, Any]:
+    """Load and merge global + local config."""
+    global_cfg = load_toml(GLOBAL_CONFIG_PATH)
+    local_cfg = load_toml(ralphdir / "config.toml")
+    return deep_merge(global_cfg, local_cfg)
+
+
 @click.group()
-def cli():
+@click.option("--ralphdir", default=None, help="Override RALPHDIR path.")
+@click.pass_context
+def cli(ctx, ralphdir):
     """Ralph Wiggum loop for Claude Code.
 
     Repeatedly runs Claude Code with fresh context until a task is complete.
     """
-    pass
+    ctx.ensure_object(dict)
+    rd = find_ralphdir(ralphdir)
+    ctx.obj["ralphdir"] = rd
+    ctx.obj["config"] = load_config(rd)
 
 
 @cli.command()
-def run():
+@click.pass_context
+def run(ctx):
     """Run the ralph loop."""
     click.echo("ralph run: not yet implemented")
 
 
 @cli.command()
-def init():
+@click.pass_context
+def init(ctx):
     """Initialize RALPHDIR with template plan and config."""
     click.echo("ralph init: not yet implemented")
 
 
 @cli.command()
-def expand():
+@click.pass_context
+def expand(ctx):
     """Preview the expanded prompt."""
     click.echo("ralph expand: not yet implemented")
 
 
 @cli.command()
-def expansions():
+@click.pass_context
+def expansions(ctx):
     """List defined expansions."""
-    click.echo("ralph expansions: not yet implemented")
+    cfg = ctx.obj["config"]
+    exps = cfg.get("expansions", {})
+    if not exps:
+        click.echo("No expansions defined.")
+        return
+    for name, value in sorted(exps.items()):
+        preview = value.strip().replace("\n", " ")
+        if len(preview) > 70:
+            preview = preview[:67] + "..."
+        click.echo(f"  @{name} -> {preview}")
 
 
 if __name__ == "__main__":
