@@ -6,8 +6,11 @@
 
 """Ralph: Ralph Wiggum loop for Claude Code."""
 
+__version__ = "0.1.0"
+
 import re
 import subprocess
+import sys
 import tomllib
 from pathlib import Path
 from typing import Any
@@ -17,7 +20,7 @@ import click
 
 DONE_MARKER = "<promise>DONE</promise>"
 DEFAULT_RALPHDIR_NAME = "openspec/ralph"
-GLOBAL_CONFIG_PATH = Path.home() / ".config" / "ralph" / "config.toml"
+GLOBAL_CONFIG_PATH = Path.home() / ".ralph.toml"
 
 
 def find_git_root() -> Path | None:
@@ -29,16 +32,6 @@ def find_git_root() -> Path | None:
     if result.returncode == 0:
         return Path(result.stdout.strip())
     return None
-
-
-def find_ralphdir(override: str | None = None) -> Path:
-    """Resolve RALPHDIR: explicit override > git repo default."""
-    if override:
-        return Path(override)
-    git_root = find_git_root()
-    if git_root:
-        return git_root / DEFAULT_RALPHDIR_NAME
-    return Path.cwd() / DEFAULT_RALPHDIR_NAME
 
 
 def load_toml(path: Path) -> dict[str, Any]:
@@ -60,11 +53,56 @@ def deep_merge(base: dict, override: dict) -> dict:
     return result
 
 
-def load_config(ralphdir: Path) -> dict[str, Any]:
-    """Load and merge global + local config."""
+def find_local_config() -> Path | None:
+    """Find .ralph.toml at git root or cwd."""
+    git_root = find_git_root()
+    if git_root:
+        p = git_root / ".ralph.toml"
+        if p.exists():
+            return p
+    p = Path.cwd() / ".ralph.toml"
+    if p.exists():
+        return p
+    return None
+
+
+def load_config() -> tuple[dict[str, Any], Path | None]:
+    """Load and merge global (~/.ralph.toml) + local (.ralph.toml) config.
+
+    Returns (merged_config, ralphdir_base) where ralphdir_base is the
+    directory to resolve a relative ralphdir path against.
+    """
     global_cfg = load_toml(GLOBAL_CONFIG_PATH)
-    local_cfg = load_toml(ralphdir / "config.toml")
-    return deep_merge(global_cfg, local_cfg)
+    local_path = find_local_config()
+    local_cfg = load_toml(local_path) if local_path else {}
+
+    # Track which config file defines ralphdir (local wins)
+    ralphdir_base = None
+    if "ralphdir" in local_cfg and local_path:
+        ralphdir_base = local_path.parent
+    elif "ralphdir" in global_cfg:
+        ralphdir_base = GLOBAL_CONFIG_PATH.parent
+
+    merged = deep_merge(global_cfg, local_cfg)
+    return merged, ralphdir_base
+
+
+def find_ralphdir(override: str | None, config: dict, config_base: Path | None) -> Path:
+    """Resolve RALPHDIR: CLI override > config > git repo default.
+
+    Config ralphdir paths are relative to the config file that defined them.
+    """
+    if override:
+        return Path(override)
+    if "ralphdir" in config and config_base:
+        rd = Path(config["ralphdir"])
+        if not rd.is_absolute():
+            rd = config_base / rd
+        return rd
+    git_root = find_git_root()
+    if git_root:
+        return git_root / DEFAULT_RALPHDIR_NAME
+    return Path.cwd() / DEFAULT_RALPHDIR_NAME
 
 
 def expand_shorthands(text: str, expansions: dict[str, str]) -> str:
@@ -82,7 +120,67 @@ def expand_shorthands(text: str, expansions: dict[str, str]) -> str:
     return re.sub(r"@(\w+)", replacer, text)
 
 
+def build_bead_prompt(bead_id: str) -> str:
+    """Build a prompt for bead mode."""
+    return (
+        f"Resolve bead `{bead_id}` and all its child issues.\n"
+        f"Use `bd show {bead_id}` to see the bead details.\n"
+        f"Use `bd ready` to find available child tasks.\n"
+        f"Work through them one at a time.\n"
+        f"When all tasks are complete, output {DONE_MARKER} on its own line."
+    )
+
+
+def run_claude_streaming(prompt: str, allowed_tools: str | None, max_turns: int | None) -> tuple[int, str]:
+    """Run claude -p, streaming output to terminal and capturing it.
+
+    Returns (return_code, captured_stdout).
+    """
+    cmd = ["claude", "-p", prompt]
+    if allowed_tools:
+        cmd.extend(["--allowedTools", allowed_tools])
+    if max_turns:
+        cmd.extend(["--max-turns", str(max_turns)])
+
+    captured = []
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=None, text=True)
+
+    for line in proc.stdout:
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        captured.append(line)
+
+    proc.wait()
+    return proc.returncode, "".join(captured)
+
+
+TEMPLATE_CONFIG = """\
+# ralphdir = "openspec/ralph"  # relative to this file
+
+[defaults]
+max_iterations = 20
+# max_turns = 10
+# allowed_tools = "Bash,Read,Edit,Write,Glob,Grep"
+
+[expansions]
+done = "When all tasks are complete, output <promise>DONE</promise> on its own line."
+beads = \"\"\"
+Use the beads (`bd`) issue tracker to manage tasks.
+Run `bd ready` to find available work.
+\"\"\"
+"""
+
+TEMPLATE_PLAN = """\
+# Plan
+
+@done
+
+Describe what you want Claude to accomplish here.
+"""
+
+
 @click.group()
+@click.version_option(__version__, prog_name="ralph")
 @click.option("--ralphdir", default=None, help="Override RALPHDIR path.")
 @click.pass_context
 def cli(ctx, ralphdir):
@@ -91,23 +189,104 @@ def cli(ctx, ralphdir):
     Repeatedly runs Claude Code with fresh context until a task is complete.
     """
     ctx.ensure_object(dict)
-    rd = find_ralphdir(ralphdir)
+    cfg, ralphdir_base = load_config()
+    rd = find_ralphdir(ralphdir, cfg, ralphdir_base)
     ctx.obj["ralphdir"] = rd
-    ctx.obj["config"] = load_config(rd)
+    ctx.obj["config"] = cfg
 
 
 @cli.command()
+@click.argument("plan_file", required=False)
+@click.option("-b", "--bead", default=None, help="Run in bead mode with the given bead ID.")
+@click.option("--max-iterations", type=int, default=None, help="Max loop iterations.")
+@click.option("--max-turns", type=int, default=None, help="Max Claude turns per iteration.")
+@click.option("--allowed-tools", default=None, help="Tools to auto-approve (passed to claude).")
+@click.option("--dry-run", is_flag=True, help="Print expanded prompt and exit.")
+@click.option("--verbose", is_flag=True, help="Show iteration details.")
 @click.pass_context
-def run(ctx):
+def run(ctx, plan_file, bead, max_iterations, max_turns, allowed_tools, dry_run, verbose):
     """Run the ralph loop."""
-    click.echo("ralph run: not yet implemented")
+    ralphdir = ctx.obj["ralphdir"]
+    cfg = ctx.obj["config"]
+    defaults = cfg.get("defaults", {})
+
+    max_iterations = max_iterations or defaults.get("max_iterations", 20)
+    max_turns = max_turns or defaults.get("max_turns", None)
+    allowed_tools = allowed_tools or defaults.get("allowed_tools", None)
+    expansions = cfg.get("expansions", {})
+
+    # Build the prompt
+    if bead:
+        prompt = build_bead_prompt(bead)
+        prompt = expand_shorthands(prompt, expansions)
+    else:
+        if plan_file is None:
+            plan_path = ralphdir / "plan.md"
+        else:
+            plan_path = Path(plan_file)
+
+        if not plan_path.exists():
+            click.echo(f"Plan file not found: {plan_path}", err=True)
+            click.echo(f"Run 'ralph init' to create one, or specify a file.", err=True)
+            raise SystemExit(1)
+
+        prompt = plan_path.read_text()
+        prompt = expand_shorthands(prompt, expansions)
+
+    if dry_run:
+        click.echo(prompt)
+        return
+
+    # The loop
+    for iteration in range(1, max_iterations + 1):
+        if verbose:
+            click.echo(f"\n{'='*60}")
+            click.echo(f"Ralph iteration {iteration}/{max_iterations}")
+            click.echo(f"{'='*60}\n")
+
+        returncode, output = run_claude_streaming(prompt, allowed_tools, max_turns)
+
+        if returncode != 0:
+            click.echo(f"\nClaude exited with code {returncode}", err=True)
+
+        if DONE_MARKER in output:
+            click.echo(f"\nDone! Completed in {iteration} iteration(s).")
+            return
+
+        if verbose:
+            click.echo(f"\nIteration {iteration}: no done marker, restarting with fresh context.")
+
+    click.echo(f"\nReached max iterations ({max_iterations}). Stopping.")
 
 
 @cli.command()
 @click.pass_context
 def init(ctx):
-    """Initialize RALPHDIR with template plan and config."""
-    click.echo("ralph init: not yet implemented")
+    """Initialize .ralph.toml and RALPHDIR with template files."""
+    ralphdir = ctx.obj["ralphdir"]
+
+    # Create .ralph.toml at git root (or cwd)
+    git_root = find_git_root()
+    config_dir = git_root if git_root else Path.cwd()
+    config_path = config_dir / ".ralph.toml"
+    if not config_path.exists():
+        config_path.write_text(TEMPLATE_CONFIG)
+        click.echo(f"Created {config_path}")
+    else:
+        click.echo(f"Skipped {config_path} (already exists)")
+
+    # Create ralphdir with plan.md
+    ralphdir.mkdir(parents=True, exist_ok=True)
+
+    plan_path = ralphdir / "plan.md"
+    if not plan_path.exists():
+        plan_path.write_text(TEMPLATE_PLAN)
+        click.echo(f"Created {plan_path}")
+    else:
+        click.echo(f"Skipped {plan_path} (already exists)")
+
+    click.echo(f"\nInitialized ralph in {config_dir}")
+    click.echo("Edit plan.md with your task, then run: ralph run")
 
 
 @cli.command()
