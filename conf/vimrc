@@ -84,7 +84,7 @@ noremap N H
 noremap e j
 noremap E J
 noremap o k
-noremap O <nop>
+noremap O M
 noremap i l
 noremap I L
 

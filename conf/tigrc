@@ -4,6 +4,7 @@ bind status D !rm %(file)
 bind main V !git revert %(commit)
 bind main T !git reset --hard %(commit)
 bind main B !git rebase -i %(commit)
+bind main P !git push origin %(branch)
 
 bind generic e move-down
 bind generic o move-up

@@ -12,24 +12,14 @@ fi
 
 export KEYTIMEOUT=1
 export PROJECTS="$HOME/projects"
-export GOPATH="$PROJECTS/golang"
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.config/emacs/bin:$GOPATH/bin:$HOME/.config/yarn/global/node_modules/.bin/:$PATH"
 export GDRIVE="$HOME/gdrive"
 export GIT_REMOTE="$GDRIVE/git"
 export EDITOR="vim"
 export GIT_EDITOR="$EDITOR"
-export GPG_TTY=$(tty)
 export RUST_BACKTRACE=1
-
-export NVM_DIR="$HOME/.nvm"
-which pyenv > /dev/null && eval "$(pyenv init -)"
 
 # LAST OF ALL
 #Load any local config
 if [ -e "$HOME/.zshenv.local" ]; then
     source "$HOME/.zshenv.local"
-fi
-
-if [ -d "$HOME/.cargo" ]; then
-  . "$HOME/.cargo/env"
 fi

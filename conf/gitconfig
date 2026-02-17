@@ -11,6 +11,7 @@
   cob = checkout -b
   c = commit
   com = checkout master
+  remaster = "! git symbolic-ref refs/heads/master refs/heads/main; git symbolic-ref refs/remotes/origin/master refs/remotes/origin/main"
   ca = commit --amend
   sh = stash
   shp = stash pop
@@ -35,7 +36,7 @@
   rebranch = "! f() { \
     BRANCH=$(git curbranch); \
     git checkout $1 && \
-      git pull && \
+      git pull origin $1 && \
       git checkout $BRANCH && \
       git rebase -i $1; \
     }; f"
@@ -67,8 +68,6 @@
 	smudge = git-media-smudge %f
 [hub]
 	protocol = ssh
-#[url "https://github.com/"]
-  #insteadOf = git://github.com/
 [include]
 	path = ~/.gitconfig-local
 [init]

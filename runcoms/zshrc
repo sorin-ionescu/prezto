@@ -1,10 +1,3 @@
-# OPENSPEC:START
-# OpenSpec shell completions configuration
-fpath=("/Users/cmaher/.zsh/completions" $fpath)
-autoload -Uz compinit
-compinit
-# OPENSPEC:END
-
 #
 # Executes commands at the start of an interactive session.
 
@@ -13,6 +6,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Extra source of zshenv, to give us access to variables in the zshrc.
 source ~/.zshenv
 
 unalias rm
@@ -82,7 +76,7 @@ alias ez="vim $HOME/.zshrc"
 alias ezl="vim $HOME/.zshrc.local"
 alias eze="vim $HOME/.zshenv"
 alias ezel="vim $HOME/.zshenv.local"
-alias sz="source $HOME/.zshrc; source $HOME/.zshenv"
+alias sz="source $HOME/.zshrc"
 
 #list open listen sockects
 alias listensocks="lsof -i -P | grep -i listen"
@@ -179,7 +173,8 @@ alias kss='kubectl describe service'
 alias ksn='kubectl describe namespace'
 alias ko='kubectl config'
 function kou() {
-  kubectl config use-context $(yaml2json < ~/.kube/configd/001-custom.yml | jq -r ".contexts[] | select(.name == \"$1\") | .context.cluster")
+  kubectl config use-context $1
+  #kubectl config use-context $(yaml2json < ~/.kube/configd/001-custom.yml | jq -r ".contexts[] | select(.name == \"$1\") | .context.cluster")
 }
 alias koum='kubectl config use-context minikube'
 alias kon='kubectl config set-context $(koc) --namespace'
@@ -382,10 +377,19 @@ function workman() {
   mv ~/ideavimrc.bak ~/.ideavimrc
 }
 
-alias cdt="cd $HOME/tmp"
 alias cdd='cd $DOWNLOADS'
 
-function catscript() {
+function cdt() {
+  mkdir -p ~/tmp/$(date -I)
+  cd ~/tmp/$(date -I)
+}
+
+function tdir() {
+  echo -n $HOME/tmp/$(date -I)
+}
+
+
+function catsc() {
   cat $(which $1)
 }
 
@@ -396,7 +400,6 @@ function vsc() {
 funcion nvmenv() {
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 }
-alias ng='nocorrect ng'
 
 function dotimes() {
   times=$1
@@ -438,4 +441,5 @@ alias cdz="cd $HOME/.zprezto"
 
 # Set a fixed title for terminal so that scripts can find it by name
 echo $'\033]30;'zsh-term$'\007'
+
 

@@ -34,5 +34,8 @@ jest/
 *.iws
 .gradle/
 lscratch*
-*.iml
 lnotes/
+*.iml
+.cursorignore
+CLAUDE.md
+context/
