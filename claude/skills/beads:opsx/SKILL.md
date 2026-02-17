@@ -46,17 +46,17 @@ Before creating anything: `bd search "keywords"` for each major task to avoid fi
 
 ### 3. Create Epics
 
-Each numbered section in `tasks.md` becomes a beads epic:
+Each `## N. Section Title` header in `tasks.md` becomes a beads epic. Include a link to the relevant spec file(s) in the description:
 
 ```bash
-bd create "Section title" -d "Description referencing proposal/specs" -l "epic,<change-name>"
+bd create "Section title" -d "Description. Spec: openspec/changes/<name>/specs/<spec-file>" -l "epic,<change-name>"
 ```
 
 Label every issue with the change name for easy filtering later.
 
 ### 4. Create Issues
 
-Each checkbox item becomes a beads issue under its epic:
+Each `- [ ]` checkbox item becomes a beads issue linked to its section's epic:
 
 ```bash
 bd create "Task title" --parent <epic-id> -d "description" -l "<change-name>"

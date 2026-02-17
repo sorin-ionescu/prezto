@@ -9,7 +9,7 @@ description: Commit and push changes to a branch.
    - If already on a feature branch, check for a closed/merged PR (see step 4 pre-check below). If one exists, create a new branch off the main branch instead — derive the name from the changes, cherry-pick or re-apply the commits, and proceed on the new branch.
    - Otherwise, stay on the current feature branch.
 
-2. **Commit**: Stage and commit the changes without asking for confirmation. Follow the repository's commit message conventions based on recent `git log`. Summarize all staged changes accurately.
+2. **Commit**: Stage and commit the changes without asking for confirmation. Follow the repository's commit message conventions based on recent `git log`. Summarize all staged changes accurately. If the project uses beads (`bd`), check `bd list --status open` for issues related to the changes and reference their IDs (e.g., `BD-123`) in the commit message.
 
 3. **Push**: Push the branch to `origin` with `-u` to set upstream tracking.
 

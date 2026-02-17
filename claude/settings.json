@@ -1,8 +1,4 @@
 {
-  "enabledPlugins": {
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
-  },
   "permissions": {
     "allow": [
       "WebSearch",
@@ -48,5 +44,10 @@
       "mcp__code-index-mcp__refresh_index",
       "mcp__code-index-mcp__find_files"
     ]
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "beads@beads-marketplace": true
   }
 }
