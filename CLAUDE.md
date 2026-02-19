@@ -15,3 +15,8 @@ This is a personal fork of [sorin-ionescu/prezto](https://github.com/sorin-iones
   - `~/.zshenv.local` - machine-specific env vars and PATH
   - `~/.zshrc.local` - machine-specific shell functions and aliases
   - `~/.gitconfig-local` - machine-specific git settings (signing key, gpg, lfs, url rewrites)
+
+## Tools
+
+- **`multi-ls`**: Use `multi-ls dir1 dir2 ...` (via Bash) instead of chaining `ls && echo --- && ls` when listing the contents of multiple directories.
+- **`multi-find`**: Use `multi-find <head_count> [find_opts...] path1 [path2 ...]` (via Bash) instead of chaining `find ... | head && echo --- && find ... | head` when finding files across multiple directories.
