@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Git operations relative to the merge base of the current branch
+set -euo pipefail
+
+usage() {
+  echo "Usage: branch-tools <command> [base-branch] [args...]"
+  echo ""
+  echo "Git operations relative to the merge base of the current branch."
+  echo "Default base branch: master"
+  echo ""
+  echo "Commands:"
+  echo "  log   Show commits since diverging from base branch"
+  echo "  diff  Show diff vs base branch (accepts git-diff flags)"
+  echo "  ls    List files at merge base (accepts -- path...)"
+  echo ""
+  echo "Examples:"
+  echo "  branch-tools log"
+  echo "  branch-tools diff"
+  echo "  branch-tools diff --stat"
+  echo "  branch-tools diff develop"
+  echo "  branch-tools ls -- src/"
+  echo "  branch-tools ls develop -- lib/"
+}
+
+cmd="${1:-}"
+shift 2>/dev/null || true
+
+case "$cmd" in
+  log)
+    base="${1:-master}"
+    exec git log --oneline "$(git merge-base HEAD "$base")..HEAD"
+    ;;
+  diff)
+    base="${1:-master}"
+    shift 2>/dev/null || true
+    exec git diff "$(git merge-base HEAD "$base")..HEAD" "$@"
+    ;;
+  ls)
+    base="${1:-master}"
+    if [[ "${1:-}" && "$1" != "--" ]]; then
+      shift
+    fi
+    exec git ls-tree --name-only "$(git merge-base HEAD "$base")" "$@"
+    ;;
+  -h|--help|"")
+    usage
+    ;;
+  *)
+    echo "Unknown command: $cmd" >&2
+    echo "" >&2
+    usage >&2
+    exit 1
+    ;;
+esac

@@ -1,0 +1,43 @@
+#!/bin/sh
+# Find files in multiple directories with labeled, truncated output.
+# Usage: multi-find <head_count> [find_opts...] path1 [path2 ...]
+#
+# Paths are detected as arguments that exist on the filesystem.
+# Everything else between head_count and the first path is passed as find options.
+#
+# Examples:
+#   multi-find 20 -type f dir1 dir2
+#   multi-find 10 -name '*.json' dir1 dir2 dir3
+
+if [ $# -lt 2 ]; then
+  echo "Usage: multi-find <head_count> [find_opts...] path1 [path2 ...]" >&2
+  exit 1
+fi
+
+head_count="$1"
+shift
+
+# Split args into find opts and paths.
+# Scan from the end to find where paths start.
+find_opts=""
+paths=""
+for arg in "$@"; do
+  if [ -e "$arg" ]; then
+    paths="$paths
+$arg"
+  else
+    find_opts="$find_opts $arg"
+  fi
+done
+
+if [ -z "$paths" ]; then
+  echo "Error: no valid paths found" >&2
+  exit 1
+fi
+
+echo "$paths" | while IFS= read -r target; do
+  [ -z "$target" ] && continue
+  echo "==> $target <=="
+  eval find \""$target"\" $find_opts 2>&1 | head -"$head_count"
+  echo "---"
+done
