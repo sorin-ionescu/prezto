@@ -323,14 +323,14 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 - `gwX` removes files from the working tree and from the index recursively and
   forcefully.
 
-### Worktree management (W)
+### Working tree (W)
 
-- `gWa` add a new working tree.
-- `gWl` list all working trees.
+- `gWa` adds a new working tree.
+- `gWl` lists all working trees.
 - `gWx` removes a working tree.
-- `gWX` removes a working tree and forcefully.
+- `gWX` removes a working tree forcefully.
 - `gWm` moves a working tree to a new location.
-- `gWc` prunes all the working trees.
+- `gWc` prunes stale worktrees and their administrative data.
 
 ### Shadows
 
