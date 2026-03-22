@@ -56,14 +56,18 @@ FX=(
 FG[none]="$FX[none]"
 BG[none]="$FX[none]"
 colors=(black red green yellow blue magenta cyan white)
-for color in {0..255}; do
-  if (( $color >= 0 )) && (( $color < $#colors )); then
-    index=$(( $color + 1 ))
-    FG[$colors[$index]]="\e[38;5;${color}m"
-    BG[$colors[$index]]="\e[48;5;${color}m"
-  fi
 
+# Named ANSI colors (0–7) have both numeric and name keys.
+for color in {0..7}; do
+  FG[$colors[color+1]]="\e[38;5;${color}m"
+  BG[$colors[color+1]]="\e[48;5;${color}m"
   FG[$color]="\e[38;5;${color}m"
   BG[$color]="\e[48;5;${color}m"
 done
-unset color{s,} index
+
+# Remaining 256-color indices have only numeric keys.
+for color in {8..255}; do
+  FG[$color]="\e[38;5;${color}m"
+  BG[$color]="\e[48;5;${color}m"
+done
+unset color{s,}
