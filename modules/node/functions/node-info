@@ -6,8 +6,6 @@
 #   Zeh Rizzatti <zehrizzatti@gmail.com>
 #
 
-# function node-info {
-
 local version
 local version_format
 local version_formatted
@@ -15,18 +13,25 @@ local version_formatted
 unset node_info
 typeset -gA node_info
 
-if (( $+commands[nodenv] )); then
-  version="${${$(nodenv version)#v}[(w)0]}"
-elif (( $+functions[nvm_version] )); then
-  version="${$(nvm_version)#v}"
-elif (( $+commands[node] )) ; then
-  version="${$(node -v)#v}"
-fi
-
-if [[ "$version" != (none|system) ]]; then
+# Only proceed if we're in a Node.js project
+if [[ -f "package.json" || -f ".nvmrc" || -f ".node-version" ]]; then
+  # Get the format 
   zstyle -s ':prezto:module:node:info:version' format 'version_format'
-  zformat -f version_formatted "$version_format" "v:$version"
-  node_info[version]="$version_formatted"
-fi
 
-# }
+  if [[ -n "$version_format" ]]; then
+    if (( $+commands[nodenv] )); then
+      version="${${$(nodenv version)#v}[(w)0]}"
+    elif (( $+commands[volta] )); then
+      version="${${$(volta list node | grep 'default')#*@}%% *}"
+    elif (( $+functions[nvm_version] )); then
+      version="${$(nvm_version)#v}"
+    elif (( $+commands[node] )) ; then
+      version="${$(node -v)#v}"
+    fi
+
+    if [[ -n "$version" && "$version" != "system" ]]; then
+      zformat -f version_formatted "$version_format" "v:$version"
+      node_info[version]="$version_formatted"
+    fi
+  fi
+fi

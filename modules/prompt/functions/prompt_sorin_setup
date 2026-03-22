@@ -31,6 +31,7 @@
 
 # Load dependencies.
 pmodload 'helper'
+pmodload 'node'
 
 function prompt_sorin_async_callback {
   case $1 in
@@ -57,7 +58,7 @@ function prompt_sorin_async_callback {
     "[async]")
       # Code is 1 for corrupted worker output and 2 for dead worker.
       if [[ $2 -eq 2 ]]; then
-	  # Our worker died unexpectedly.
+        # Our worker died unexpectedly.
           typeset -g prompt_prezto_async_init=0
       fi
       ;;
@@ -110,6 +111,11 @@ function prompt_sorin_precmd {
     python-info
   fi
 
+  # Run node info
+  if (( $+functions[node-info] )); then
+    node-info
+  fi
+
   prompt_sorin_async_tasks
 }
 
@@ -155,6 +161,9 @@ function prompt_sorin_setup {
   # Set python-info parameters.
   zstyle ':prezto:module:python:info:virtualenv' format '%f%F{3}(%v)%F{7} '
 
+  # Set node-info parameters
+  zstyle ':prezto:module:node:info:version' format ' %F{2}⬡ %v%f'
+
   # Set up non-zero return value display
   local show_return="✘ "
   # Default is to show the return value
@@ -170,7 +179,7 @@ function prompt_sorin_setup {
 
   # Define prompts.
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
-  RPROMPT='$python_info[virtualenv]${editor_info[overwrite]}%(?:: %F{1}'
+  RPROMPT='$python_info[virtualenv]${node_info[version]} ${editor_info[overwrite]}%(?:: %F{1}'
   RPROMPT+=${show_return}
   RPROMPT+='%f)${VIM:+" %B%F{6}V%f%b"}${_prompt_sorin_git}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
