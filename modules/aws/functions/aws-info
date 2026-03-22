@@ -1,0 +1,54 @@
+#
+# Exposes information about the AWS environment via the $aws_info associative
+# array.
+#
+# Authors:
+#   David Tagatac <david@tagatac.net>
+#
+
+# function aws-info {
+
+local profile
+local profile_format
+local profile_formatted
+local region
+local region_format
+local region_formatted
+
+# Clean up previous $aws_info.
+unset aws_info
+typeset -gA aws_info
+
+zstyle -s ':prezto:module:aws:info:profile' format 'profile_format'
+zstyle -s ':prezto:module:aws:info:region' format 'region_format'
+
+# Format profile.
+if [[ -n "$profile_format" ]]; then
+  profile="$AWS_PROFILE"
+  # Fall back to 'default' if the default profile exists in the config file.
+  if [[ -z "$profile" ]]; then
+    local config_file="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+    if [[ -r "$config_file" ]] && grep -q '^\[default\]' "$config_file"; then
+      profile='default'
+    fi
+  fi
+  if [[ -n "$profile" ]]; then
+    zformat -f profile_formatted "$profile_format" "p:$profile"
+    aws_info[profile]="$profile_formatted"
+  fi
+fi
+
+# Format region.
+if [[ -n "$region_format" ]]; then
+  region="${AWS_REGION:-$AWS_DEFAULT_REGION}"
+  # Fall back to the config file value for the active profile.
+  if [[ -z "$region" ]]; then
+    region="$(aws configure get region 2>/dev/null)"
+  fi
+  if [[ -n "$region" ]]; then
+    zformat -f region_formatted "$region_format" "r:$region"
+    aws_info[region]="$region_formatted"
+  fi
+fi
+
+# }
