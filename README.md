@@ -23,6 +23,13 @@ version is **4.3.11**.
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
     ```
 
+    If you use `windows` with `msys2`,use this command.
+
+    ```console
+    export MSYS="winsymlinks:lnk"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    ```
+
     <details>
       <summary><em>Optional: Installing in <code>$XDG_CONFIG_HOME</code></em></summary>
 
@@ -47,8 +54,10 @@ version is **4.3.11**.
 
     </details>
 
-03. Create a new Zsh configuration by copying/linking the Zsh configuration
+3.  Create a new Zsh configuration by copying/linking the Zsh configuration
     files provided:
+
+    if you use windows with `msys2`, you should run the following command before `export MSYS="winsymlinks:lnk"`
 
     ```console
     setopt EXTENDED_GLOB
@@ -65,13 +74,13 @@ version is **4.3.11**.
     back up your original configs and replace them with the provided Prezto
     [_`runcoms`_][10].
 
-04. Set Zsh as your default shell:
+4.  Set Zsh as your default shell:
 
     ```console
     chsh -s /bin/zsh
     ```
 
-05. Open a new Zsh terminal window or tab.
+5.  Open a new Zsh terminal window or tab.
 
 ### Troubleshooting
 
