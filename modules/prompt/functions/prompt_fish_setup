@@ -1,0 +1,126 @@
+#
+# Prompt that emulates the default prompt from Fish as closely as possible.
+#
+# https://github.com/fish-shell/fish-shell/blob/76457bdc4e/share/tools/web_config/sample_prompts/classic_vcs.fish
+#
+# Features:
+#   - One line.
+#   - Customizable suffixes
+#   - Length of the cwd is configurable with pwd-length.
+#   - Shows the exit status of failed commands, configurable with show-return-val.
+#   - Shows if logged in as root and/or as remote shell.
+#
+# Screenshots:
+#   http://i.imgur.com/6tHWlwS.png
+#
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_fish_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Format PWD.
+  _prompt_fish_pwd=$(prompt-pwd)
+
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+      git-info
+  fi
+}
+
+function prompt_fish_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent sp subst)
+
+  # Test to see if user is root
+  if [[ $EUID == 0 ]]; then
+    local cwd_color='1' # red
+    local suffix="${2:-#}"
+  else
+    local cwd_color='2' # green
+    local suffix="${1:->}"
+  fi
+
+  # Test to see if shell is run under ssh
+  if [[ -n "$SSH_CLIENT" || -n "$SSH2_CLIENT" ]]; then
+    local host_color='3' # yellow
+  else
+    local host_color='default'
+  fi
+
+  # Default is to show the return value
+  if zstyle -T ':prezto:module:prompt' show-return-val; then
+    local prompt_status='%(?.. %F{1}[%B%?%b]%f)'
+  else
+    local prompt_status=''
+  fi
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_fish_precmd
+
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:branch' format "%b"
+  zstyle ':prezto:module:git:info:action' format "|%s"
+  # (having all actions match as well might be a bit much)
+  zstyle ':prezto:module:git:info:action:apply' format 'AM'
+  zstyle ':prezto:module:git:info:action:rebase' format 'REBASE'
+  zstyle ':prezto:module:git:info:action:rebase-interactive' format 'REBASE-i'
+  zstyle ':prezto:module:git:info:action:rebase-merge' format 'REBASE-m'
+  zstyle ':prezto:module:git:info:action:merge' format 'MERGING'
+  zstyle ':prezto:module:git:info:action:cherry-pick-sequence' format 'CHERRY-PICKING'
+  zstyle ':prezto:module:git:info:action:cherry-pick' format 'CHERRY-PICKING'
+  zstyle ':prezto:module:git:info:action:revert-sequence' format 'REVERTING'
+  zstyle ':prezto:module:git:info:action:revert' format 'REVERTING'
+  zstyle ':prezto:module:git:info:action:bisect' format 'BISECTING'
+  zstyle ':prezto:module:git:info:keys' format 'prompt' ' (%b%s)'
+
+  # Define prompts.
+  PROMPT="%F{10}%n%f@%F{$host_color}%m%f %F{$cwd_color}"'${_prompt_fish_pwd}%f${git_info:+${(e)git_info[prompt]}}'"$prompt_status$suffix "
+  RPROMPT=''
+
+  # Set the EOL marker to match fish as well.
+  PROMPT_EOL_MARK='%F{8}⏎%f' # bright black, aka. gray
+}
+
+function prompt_fish_help {
+  cat <<EOF
+This prompt's suffix symbols are customizable:
+
+  prompt fish [<symbol>] [<symbol>]
+
+In ${ZDOTDIR:-$HOME}/.zpreztorc:
+  zstyle ':prezto:module:prompt' theme 'fish' ['<symbol>'] ['<symbol>']
+
+The first and second symbol are used for non-root and root users respectively.
+If these options are not provided, the symbol defaults to '>' and '#' to match Fish's.
+EOF
+}
+
+function prompt_fish_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+  local +h PROMPT_EOL_MARK=''
+
+  if (( $# > 0 )); then
+    prompt_preview_theme 'fish' "$@"
+  else
+    prompt_preview_theme 'fish'
+    print
+    # Would add " #" as well if the preview signature didn't merge parameters together
+    prompt_preview_theme 'fish' " $"
+  fi
+}
+
+prompt_fish_setup "$@"
+# vim: ft=zsh
