@@ -105,7 +105,7 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) \
   # pure prompt because there's some additional logic in that prompt which tries
   # to figure out if a user set this variable and disable the python portion of
   # that prompt based on it which is the exact opposite of what we want to do.
-  export VIRTUAL_ENV_DISABLE_PROMPT=12
+  export VIRTUAL_ENV_DISABLE_PROMPT=20
 
   # Create a sorted array of available virtualenv related 'pyenv' commands to
   # look for plugins of interest. Scanning shell '$path' isn't enough as they
