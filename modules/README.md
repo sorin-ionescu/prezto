@@ -27,6 +27,10 @@ completions from the zsh-completions project.
 
 Sets directory options and defines directory aliases.
 
+## Dir-Nav
+
+Provides browser-style directory navigation bound to Alt+Arrow keys.
+
 ## DNF
 
 Defines _dnf_ aliases.
