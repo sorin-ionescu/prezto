@@ -60,10 +60,11 @@ path=(
 #
 
 # Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X to enable it.
+# We used '-X' to disable screen capturing, which disabled termcap init and
+# deinit, instead now we use --redraw-on-quit to make the contents persist,
+# while still supporting mouse-wheel scrolling.
 if [[ -z "$LESS" ]]; then
-  export LESS='-g -i -M -R -S -w -X -z-4'
+  export LESS='-g -i -M -R -S -w -z-4 --redraw-on-quit'
 fi
 
 # Set the Less input preprocessor.
