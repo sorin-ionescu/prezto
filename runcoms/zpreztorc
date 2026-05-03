@@ -21,6 +21,11 @@ zstyle ':prezto:*:*' color 'yes'
 # Allow module overrides when pmodule-dirs causes module name collisions
 # zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
+# Precompile init files to wordcode (.zwc) for faster startup. Compilation
+# happens in the background from zlogin; the current shell does not benefit
+# from its own compile. Set to 'no' to disable.
+# zstyle ':prezto:load' zcompile 'no'
+
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
 
