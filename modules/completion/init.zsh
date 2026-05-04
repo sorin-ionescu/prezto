@@ -21,7 +21,7 @@ if (( $+commands[brew] )); then
   # /usr/local when $HOMEBREW_REPOSITORY is /usr/local/Homebrew.
   # https://github.com/Homebrew/brew/blob/2a850e02d8f2dedcad7164c2f4b95d340a7200bb/bin/brew#L66-L69
   [[ $brew_prefix == '/usr/local/Homebrew' ]] && brew_prefix=$brew_prefix:h
-  fpath=($brew_prefix/opt/curl/share/zsh/site-functions(/N) $fpath)
+  fpath=($brew_prefix/opt/curl/share/zsh/site-functions(/N) $brew_prefix/share/zsh/site-functions(/N) $fpath)
   unset brew_prefix
 fi
 
