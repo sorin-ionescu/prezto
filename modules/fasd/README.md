@@ -40,7 +40,7 @@ _The authors of this module should be contacted via the [issue tracker][6]._
 - [Wei Dai](https://github.com/clvv)
 - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/clvv/fasd
+[1]: https://github.com/whjvenyl/fasd
 [2]: https://github.com/joelthelion/autojump
 [3]: https://github.com/rupa/z
 [4]: https://github.com/rupa/v

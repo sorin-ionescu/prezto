@@ -1,0 +1,13 @@
+#
+# Escapes a string for safe use in ${(e)...} parameter expansion.
+#
+# Authors:
+#   Trey Keown <trey@crystalpeaksecurity.com>
+#
+
+# function escape-eval {
+
+setopt LOCAL_OPTIONS EXTENDED_GLOB
+print -r -- "${1//(#m)[\\\$\`]/\\$MATCH}"
+
+# }

@@ -83,8 +83,8 @@ zle -N edit-command-line
 # Runs bindkey but for all of the keymaps. Running it with no arguments will
 # print out the mappings for all of the keymaps.
 function bindkey-all {
-  local keymap=''
-  for keymap in $(bindkey -l); do
+  local keymap
+  for keymap in "${(@f)$(bindkey -l)}"; do
     [[ "$#" -eq 0 ]] && printf "#### %s\n" "${keymap}" 1>&2
     bindkey -M "${keymap}" "$@"
   done

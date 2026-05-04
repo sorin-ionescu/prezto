@@ -192,7 +192,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip; then
   alias glg='git log --topo-order --graph --pretty=format:"$_git_log_oneline_format"'
   alias glb='git log --topo-order --pretty=format:"$_git_log_brief_format"'
   alias glc='git shortlog --summary --numbered'
-  alias glS='git log --show-signature'
+  alias glS='git log --topo-order --show-signature --pretty=format:"${_git_log_medium_format}"'
 
   # Merge (m)
   alias gm='git merge'
@@ -269,7 +269,15 @@ if ! zstyle -t ':prezto:module:git:alias' skip; then
   alias gwr='git reset --soft'
   alias gwR='git reset --hard'
   alias gwc='git clean --dry-run'
-  alias gwC='git clean --force'
+  alias gwC='git clean -d --force'
   alias gwx='git rm -r'
   alias gwX='git rm -r --force'
+
+  # Worktree management (W)
+  alias gWa='git worktree add'
+  alias gWl='git worktree list'
+  alias gWx='git worktree remove'
+  alias gWX='git worktree remove --force'
+  alias gWm='git worktree move'
+  alias gWc='git worktree prune'
 fi
