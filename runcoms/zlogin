@@ -10,12 +10,52 @@
   # Compile the completion dump to increase startup speed.
   zcompdump="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompdump"
   if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+    # Sweep a stale lock left by a killed shell so compilation can retry.
+    for _stale in "${zcompdump}.zwc.lock"(N/mm+5); do
+      command rmdir "$_stale" 2>/dev/null
+    done
+    unset _stale
     if command mkdir "${zcompdump}.zwc.lock" 2>/dev/null; then
       zcompile "$zcompdump"
       command rmdir  "${zcompdump}.zwc.lock" 2>/dev/null
     fi
   fi
 } &!
+
+# Compile Prezto's init files so subsequent shells load wordcode instead of
+# reparsing source. The current shell does not benefit from its own compile;
+# the next shell reads the .zwc produced here.
+if zstyle -T ':prezto:load' zcompile; then
+  {
+    zctargets=( "$ZPREZTODIR/init.zsh" )
+    zstyle -a ':prezto:load' pmodule-dirs 'zcuser_dirs'
+    for zcdir in "$ZPREZTODIR/modules" "$ZPREZTODIR/contrib" "${zcuser_dirs[@]}"; do
+      [[ -d "$zcdir" ]] || continue
+      for zcmod in "$zcdir"/*(/N); do
+        zstyle -t ":prezto:module:${zcmod:t}" loaded 'yes' || continue
+        # Match pmodload's resolution order: init.zsh, then <module>.plugin.zsh.
+        if [[ -s "$zcmod/init.zsh" ]]; then
+          zctargets+=( "$zcmod/init.zsh" )
+        elif [[ -s "$zcmod/${zcmod:t}.plugin.zsh" ]]; then
+          zctargets+=( "$zcmod/${zcmod:t}.plugin.zsh" )
+        fi
+      done
+    done
+    for zcfile in "${zctargets[@]}"; do
+      if [[ ! -s "${zcfile}.zwc" || "$zcfile" -nt "${zcfile}.zwc" ]]; then
+        # Sweep a stale lock left by a killed shell so compilation can retry.
+        for _stale in "${zcfile}.zwc.lock"(N/mm+5); do
+          command rmdir "$_stale" 2>/dev/null
+        done
+        unset _stale
+        if command mkdir "${zcfile}.zwc.lock" 2>/dev/null; then
+          zcompile "$zcfile"
+          command rmdir "${zcfile}.zwc.lock" 2>/dev/null
+        fi
+      fi
+    done
+  } &!
+fi
 
 # Execute code only if STDERR is bound to a TTY.
 if [[ -o INTERACTIVE && -t 2 ]]; then
