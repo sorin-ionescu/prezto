@@ -50,11 +50,11 @@ function prompt_paradox_build_prompt {
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
 
   if [[ -n "$git_info" ]]; then
-    prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
+    prompt_paradox_start_segment green black '$(escape-eval "${(e)git_info[ref]}${(e)git_info[status]}")'
   fi
 
   if [[ -n "$python_info" ]]; then
-    prompt_paradox_start_segment white black '${(e)python_info[virtualenv]}'
+    prompt_paradox_start_segment white black '$(escape-eval "${(e)python_info[virtualenv]}")'
   fi
 
   prompt_paradox_end_segment

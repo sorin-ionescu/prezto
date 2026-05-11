@@ -62,7 +62,7 @@ function prompt_damoekri_setup {
 
   # Define prompts.
   PROMPT='%F{cyan}${_prompt_damoekri_pwd}%f${editor_info[keymap]} '
-  RPROMPT='${git_info:+${(e)git_info[rprompt]}}${ruby_info:+${ruby_info[version]}}'
+  RPROMPT='${git_info:+$(escape-eval "${(e)git_info[rprompt]}")}${ruby_info:+$(escape-eval "${(e)ruby_info[version]}")}'
 }
 
 prompt_damoekri_setup "$@"

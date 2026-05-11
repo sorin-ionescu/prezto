@@ -19,7 +19,7 @@ if (( $#local_nodenv_paths || $+commands[nodenv] )); then
   # Ensure manually installed nodenv is added to path when present.
   [[ -s $local_nodenv_paths[1] ]] && path=($local_nodenv_paths[1]:h $path)
 
-  eval "$(nodenv init - zsh)"
+  eval "$(nodenv init - --no-rehash zsh)"
 
 # Load manually installed nvm into the shell session.
 elif (( $#local_nvm_paths )); then

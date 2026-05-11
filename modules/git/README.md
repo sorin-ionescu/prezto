@@ -318,10 +318,19 @@ zstyle ':prezto:module:git:alias' skip 'yes'
   index nor the working tree.
 - `gwR` resets the current HEAD, index and working tree to the specified state.
 - `gwc` removes untracked files from the working tree (dry-run).
-- `gwC` removes untracked files from the working tree.
+- `gwC` removes untracked files and directories from the working tree.
 - `gwx` removes files from the working tree and from the index recursively.
 - `gwX` removes files from the working tree and from the index recursively and
   forcefully.
+
+### Working tree (W)
+
+- `gWa` adds a new working tree.
+- `gWl` lists all working trees.
+- `gWx` removes a working tree.
+- `gWX` removes a working tree forcefully.
+- `gWm` moves a working tree to a new location.
+- `gWc` prunes stale worktrees and their administrative data.
 
 ### Shadows
 

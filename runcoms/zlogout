@@ -14,6 +14,6 @@ SAYINGS=(
 )
 
 # Print a randomly-chosen message:
-echo $SAYINGS[$(($RANDOM % ${#SAYINGS} + 1))]
+echo $SAYINGS[$(($RANDOM % $#SAYINGS + 1))]
 
 } >&2

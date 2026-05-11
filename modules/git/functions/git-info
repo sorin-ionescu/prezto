@@ -246,7 +246,7 @@ function git-info {
   fi
 
   # Get the branch.
-  branch="${$(command git symbolic-ref HEAD 2> /dev/null)#refs/heads/}"
+  branch="$(escape-eval "${$(command git symbolic-ref HEAD 2> /dev/null)#refs/heads/}")"
 
   # Format branch.
   zstyle -s ':prezto:module:git:info:branch' format 'branch_format'
@@ -257,7 +257,7 @@ function git-info {
   # Format position.
   zstyle -s ':prezto:module:git:info:position' format 'position_format'
   if [[ -z "$branch" && -n "$position_format" ]]; then
-    position="$(command git describe --contains --all HEAD 2> /dev/null)"
+    position="$(escape-eval "$(command git describe --contains --all HEAD 2> /dev/null)")"
     if [[ -n "$position" ]]; then
       zformat -f position_formatted "$position_format" "p:$position"
     fi
@@ -268,7 +268,7 @@ function git-info {
   if [[ -n "$branch" && -n "$remote_format" ]]; then
     # Gets the remote name.
     remote_cmd='command git rev-parse --symbolic-full-name --verify HEAD@{upstream}'
-    remote="${$(${(z)remote_cmd} 2> /dev/null)##refs/remotes/}"
+    remote="$(escape-eval "${$(${(z)remote_cmd} 2> /dev/null)##refs/remotes/}")"
     if [[ -n "$remote" ]]; then
       zformat -f remote_formatted "$remote_format" "R:$remote"
     fi
