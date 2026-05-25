@@ -26,7 +26,7 @@ case "$1" in
     zcat $(ls -rt /var/log/dpkg*)
   ;;
   (*)
-    cat >&2 <<EOF
+    >&2 <<EOF
 Commands:
     install - List installed packages
     upgrade - List upgraded packages

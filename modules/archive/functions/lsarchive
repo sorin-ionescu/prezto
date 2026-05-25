@@ -10,7 +10,7 @@
 local verbose
 
 if (( $# == 0 )); then
-  cat >&2 <<EOF
+  >&2 <<EOF
 usage: $0 [-option] [file ...]
 
 options:
