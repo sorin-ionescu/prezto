@@ -24,10 +24,11 @@ if (( $+commands[brew] )); then
   cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/brew-shellenv-cache.zsh"
   if [[ "$commands[brew]" -nt "$cache_file" \
       || "${ZDOTDIR:-$HOME}/.zpreztorc" -nt "$cache_file" \
-      || ! -s "$cache_file" ]]; then
+      || ! -s "$cache_file" \
+      || -z "$(<"$cache_file")" ]]; then
     mkdir -p "$cache_file:h"
-    # Cache the result.
-    echo "${(@M)${(f)"$(brew shellenv 2> /dev/null)"}:#export HOMEBREW*}" >! "$cache_file" 2> /dev/null
+    # Cache the result (with brew off $PATH to always get the full output).
+    echo "${(@M)${(f)"$(PATH='/usr/bin:/bin' "$commands[brew]" shellenv 2> /dev/null)"}:#export HOMEBREW*}" >! "$cache_file" 2> /dev/null
   fi
 
   source "$cache_file"
